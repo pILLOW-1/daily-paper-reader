@@ -1,56 +1,12 @@
 {
-  "generated_at": "2026-06-02T06:50:32.564227+00:00",
-  "updated_date": "20260504-20260602",
+  "generated_at": "2026-06-02T22:31:49.202056+00:00",
+  "updated_date": "20260602",
   "carryover_days": 9,
   "tag_states": {
     "self-improve": {
-      "updated_date": "20260504-20260602",
+      "updated_date": "20260602",
       "carryover_days": 9,
       "items": [
-        {
-          "id": "2605.07164v1",
-          "source": "arxiv",
-          "title": "Rethinking Experience Utilization in Self-Evolving Language Model Agents",
-          "abstract": "Self-evolving agents improve by accumulating and reusing experience from past interactions. Existing work has largely focused on how experience is constructed, represented, and updated, while paying less attention to how experience should be used during runtime decision-making. As a result, most agents rely on rigid usage strategies, either injecting experience once at initialization or at every step, without considering whether it is needed for the current decision. This paper studies experience utilization as a critical design dimension of self-evolving agents. We ask whether agents benefit from interweaving experience use with decision-making, so that experience is invoked only when additional guidance is needed. To examine this question, we introduce {ExpWeaver}, a lightweight instantiation that leaves experience construction unchanged and modifies only runtime utilization by exposing experience as an optional resource during reasoning. Across four representative frameworks, seven LLM backbones, and three types of environments, ExpWeaver consistently achieves the best performance among different utilization strategies. Reinforcement learning experiments further show that this behavior can be amplified through training. Usage-pattern, causal ablation, and entropy-based analyses reveal that ExpWeaver enables agents to invoke experience selectively, at beneficial decision points, and under higher reasoning uncertainty. Overall, our findings call for a shift from merely studying \\emph{what} experience to store toward understanding \\emph{how} and \\emph{when} experience should enter decision-making.",
-          "authors": [
-            "Weixiang Zhao",
-            "Yingshuo Wang",
-            "Yichen Zhang",
-            "Yanyan Zhao",
-            "Yu Zhang",
-            "Yang Wu",
-            "Dandan Tu",
-            "Bing Qin",
-            "Ting Liu"
-          ],
-          "primary_category": "cs.CL",
-          "categories": [
-            "cs.CL"
-          ],
-          "published": "2026-05-08T02:48:49+00:00",
-          "link": "https://arxiv.org/pdf/2605.07164v1",
-          "tags": [
-            "keyword:self-improve",
-            "query:self-improve"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "studies experience utilization in self-evolving agents",
-          "llm_evidence_cn": "研究自我进化智能体的经验利用策略",
-          "llm_evidence": "研究自我进化智能体的经验利用策略",
-          "canonical_evidence": "研究自我进化智能体的经验利用策略",
-          "llm_tldr_en": "This paper examines how self-evolving agents should use accumulated experience during runtime, proposing dynamic invocation strategies over static ones for better performance.",
-          "llm_tldr_cn": "自我进化智能体通过积累和重用经验来改进，但现有工作多关注经验的构建和更新，忽略了运行时使用策略。本文系统研究经验利用这一关键设计维度，提出根据决策需要动态调用经验的方法，在多个环境实验中发现动态策略优于固定策略。",
-          "llm_tldr": "自我进化智能体通过积累和重用经验来改进，但现有工作多关注经验的构建和更新，忽略了运行时使用策略。本文系统研究经验利用这一关键设计维度，提出根据决策需要动态调用经验的方法，在多个环境实验中发现动态策略优于固定策略。",
-          "llm_tags": [
-            "query:self-improve"
-          ],
-          "matched_query_tag": "query:self-improve",
-          "matched_query_text": "self-improving agent learning",
-          "matched_requirement_id": "req-3",
-          "selection_source": "carryover_cache",
-          "paper_id": "2605.07164v1",
-          "carry_days": 1
-        },
         {
           "id": "2605.22885v1",
           "source": "arxiv",
@@ -93,88 +49,6 @@
           "carry_days": 1
         },
         {
-          "id": "2605.14211v1",
-          "source": "arxiv",
-          "title": "ASH: Agents that Self-Hone via Embodied Learning",
-          "abstract": "Long-horizon embodied tasks remain a fundamental challenge in AI, as current methods rely on hand-engineered rewards or action-labeled demonstrations, neither of which scales. We introduce ASH, an agentic system that learns an embodied policy from unlabeled, noisy internet video, without reward shaping or expert annotation. ASH follows a self-improvement loop; when it gets stuck, ASH learns an Inverse Dynamics Model (IDM) from its own trajectories, and uses its IDM to extract supervision from relevant internet video. ASH uses unsupervised learning to identify key moments from large-scale internet video and retains them as long-term memory -- allowing it to tackle long-horizon problems. We evaluate ASH on two complementary environments demanding multi-hour planning: Pokemon Emerald, a turn-based RPG, and The Legend of Zelda: The Minish Cap, a real-time action-adventure game. In both games, behavioral cloning, retrieval-augmented and zero-shot foundation-model baselines plateau, while ASH sustains progression across our 8-hour evaluation. ASH reaches an average of $11.2/12$ milestones in Pokemon Emerald and $9.9/12$ in Legend of Zelda, while the strongest baseline gets stuck in both environments at an average of $6.5/12$ and $6.0/12$ milestones, respectively. We demonstrate that self-improving agents are a scalable recipe for long-horizon embodied learning.",
-          "authors": [
-            "Benjamin Schneider",
-            "Xavier Schneider",
-            "Victor Zhong",
-            "Sun Sun"
-          ],
-          "primary_category": "cs.AI",
-          "categories": [
-            "cs.AI",
-            "cs.LG"
-          ],
-          "published": "2026-05-14T00:10:12+00:00",
-          "link": "https://arxiv.org/pdf/2605.14211v1",
-          "tags": [
-            "keyword:self-improve",
-            "query:self-improve"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "self-honing loop using unlabeled video and inverse dynamics",
-          "llm_evidence_cn": "使用未标注视频和逆动力学模型的自打磨循环",
-          "llm_evidence": "使用未标注视频和逆动力学模型的自打磨循环",
-          "canonical_evidence": "使用未标注视频和逆动力学模型的自打磨循环",
-          "llm_tldr_en": "ASH introduces a self-improvement loop where agents learn from unlabeled internet video via inverse dynamics models, enabling long-horizon embodied tasks without rewards.",
-          "llm_tldr_cn": "长时域具身任务依赖人工奖励或标注，难以扩展。本文提出ASH，智能体通过自改进循环：卡住时从自身轨迹学习逆动力学模型，再从互联网视频提取监督。在宝可梦等环境中验证了多小时规划能力。",
-          "llm_tldr": "长时域具身任务依赖人工奖励或标注，难以扩展。本文提出ASH，智能体通过自改进循环：卡住时从自身轨迹学习逆动力学模型，再从互联网视频提取监督。在宝可梦等环境中验证了多小时规划能力。",
-          "llm_tags": [
-            "query:self-improve"
-          ],
-          "matched_query_tag": "query:self-improve",
-          "matched_query_text": "agent self-improvement techniques",
-          "matched_requirement_id": "req-1",
-          "selection_source": "carryover_cache",
-          "paper_id": "2605.14211v1",
-          "carry_days": 1
-        },
-        {
-          "id": "2605.08693v1",
-          "source": "arxiv",
-          "title": "SkillMaster: Toward Autonomous Skill Mastery in LLM Agents",
-          "abstract": "Skills provide an effective mechanism for improving LLM agents on complex tasks, yet in existing agent frameworks, their creation, refinement, and selection are typically governed by external teachers, hand-designed rules, or auxiliary modules. As a result, skills remain external resources to be invoked, rather than capabilities that agents can develop, adapt, and internalize through experience. To endow LLM agents with autonomous skill mastery, we propose SkillMaster, a training framework that teaches agents to create new skills, refine existing skills, and select accumulated skills during task solving. This capability is achieved through three key designs. First, we train agents through trajectory-informed skill review, teaching agents to propose, update, or retain skills based on evidence from completed episodes. Second, each candidate skill edit is designed to be evaluated by its counterfactual utility on related probe tasks, providing a direct learning signal for training skill-editing decisions. Third, we introduce DualAdv-GRPO, which separately estimates advantages for task-solving actions and skill-editing decisions, stabilizing joint training across task solving and skill management. Experiments on ALFWorld and WebShop show that SkillMaster improves the overall success rate over state-of-the-art baselines by 8.8% and 9.3%, respectively, achieving the best performance among all compared methods. Further analysis reveals a marked shift in agent capability: agents trained with SkillMaster can identify skill failures, refine procedural knowledge from trajectory evidence, and transfer improvements to future tasks with limited skill-bank edits. Overall, SkillMaster moves LLM agents beyond mere skill use toward self-improving agents capable of developing, adapting, and applying their own skill repertoires.",
-          "authors": [
-            "Min Yang",
-            "Jinghua Piao",
-            "Xu Xia",
-            "Xiaochong Lan",
-            "Jiaju Chen",
-            "Yongshun Gong",
-            "Yong Li"
-          ],
-          "primary_category": "cs.AI",
-          "categories": [
-            "cs.AI"
-          ],
-          "published": "2026-05-09T05:03:00+00:00",
-          "link": "https://arxiv.org/pdf/2605.08693v1",
-          "tags": [
-            "keyword:self-improve",
-            "query:self-improve"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "autonomous skill creation, refinement, and selection for self-improvement",
-          "llm_evidence_cn": "自主技能创建、优化和选择用于自我改进",
-          "llm_evidence": "自主技能创建、优化和选择用于自我改进",
-          "canonical_evidence": "自主技能创建、优化和选择用于自我改进",
-          "llm_tldr_en": "SkillMaster enables LLM agents to autonomously create, refine, and select skills via trajectory-informed skill review, achieving self-improvement without external teachers.",
-          "llm_tldr_cn": "现有框架中技能创建、优化和选择依赖外部教师。本文提出SkillMaster，通过轨迹驱动的技能回顾训练智能体自主管理技能。实验表明智能体能够有效积累和改进技能，提升复杂任务表现。",
-          "llm_tldr": "现有框架中技能创建、优化和选择依赖外部教师。本文提出SkillMaster，通过轨迹驱动的技能回顾训练智能体自主管理技能。实验表明智能体能够有效积累和改进技能，提升复杂任务表现。",
-          "llm_tags": [
-            "query:self-improve"
-          ],
-          "matched_query_tag": "query:self-improve",
-          "matched_query_text": "Methods for agent self improvement",
-          "matched_requirement_id": "req-7",
-          "selection_source": "carryover_cache",
-          "paper_id": "2605.08693v1",
-          "carry_days": 1
-        },
-        {
           "id": "2605.17448v1",
           "source": "arxiv",
           "title": "Self-Improving CAD Generation Agents with Finite Element Analysis as Feedback",
@@ -212,85 +86,6 @@
           "matched_requirement_id": "req-1",
           "selection_source": "carryover_cache",
           "paper_id": "2605.17448v1",
-          "carry_days": 1
-        },
-        {
-          "id": "2605.08904v1",
-          "source": "arxiv",
-          "title": "OPT-BENCH: Evaluating the Iterative Self-Optimization of LLM Agents in Large-Scale Search Spaces",
-          "abstract": "Large Language Models (LLMs) have demonstrated remarkable capabilities in reasoning and tool use. However, the fundamental cognitive faculties essential for problem solving, including perception, reasoning, and memory, remain the stable core of intelligence. Unlike memorizing specific patterns, humans succeed in novel environments by applying these intrinsic faculties to adapt and optimize. Yet, whether LLMs possess this essential capacity, namely the ability to continuously refine solutions in response to dynamic environmental feedback, remains underexplored. To address this challenge, we introduce OPT-BENCH, a benchmark for evaluating self-improvement capabilities in large-scale search spaces. By combining 20 machine learning tasks with 10 classic NP-hard problems, OPT-BENCH provides a rigorous setting to assess whether agents can adapt through intrinsic self-reflection rather than rote tool application. We further propose OPT-Agent, a framework that emulates human-like cognitive adaptation. It operates through a general perception, memory, and reasoning loop, iteratively refining solutions based on environmental feedback. Through extensive experiments on 19 LLMs from 7 model families, including reasoning models, general models, and open-source models ranging from 3B to 235B parameters, we demonstrate that stronger models are more effective at leveraging feedback signals for self-improvement. However, this upper-bound adaptability remains fundamentally constrained by the models' base capacity, and even the most advanced LLMs still fall short of human expert performance.",
-          "authors": [
-            "Xiaozhe Li",
-            "Jixuan Chen",
-            "Xinyu Fang",
-            "Shengyuan Ding",
-            "Haodong Duan",
-            "Qingwen Liu",
-            "Kai Chen"
-          ],
-          "primary_category": "cs.AI",
-          "categories": [
-            "cs.AI"
-          ],
-          "published": "2026-05-09T11:51:34+00:00",
-          "link": "https://arxiv.org/pdf/2605.08904v1",
-          "tags": [
-            "keyword:self-improve",
-            "query:self-improve"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "benchmark for evaluating iterative self-optimization of LLM agents",
-          "llm_evidence_cn": "评估LLM代理迭代自我优化的基准",
-          "llm_evidence": "评估LLM代理迭代自我优化的基准",
-          "canonical_evidence": "评估LLM代理迭代自我优化的基准",
-          "llm_tldr_en": "OPT-BENCH evaluates the iterative self-optimization capacity of LLM agents in large-scale search spaces, combining 20 ML tasks to test refinement from feedback.",
-          "llm_tldr_cn": "LLM是否具备持续根据环境反馈优化解决方案的能力尚未被充分探索。OPT-BENCH通过结合20个机器学习任务构建大规模搜索空间基准，专门评估代理的迭代自我优化能力。该基准揭示了当前模型在自我优化方面的不足，为未来研究提供了标准化测试平台。",
-          "llm_tldr": "LLM是否具备持续根据环境反馈优化解决方案的能力尚未被充分探索。OPT-BENCH通过结合20个机器学习任务构建大规模搜索空间基准，专门评估代理的迭代自我优化能力。该基准揭示了当前模型在自我优化方面的不足，为未来研究提供了标准化测试平台。",
-          "llm_tags": [
-            "query:self-improve"
-          ],
-          "matched_query_tag": "query:self-improve",
-          "matched_query_text": "iterative self-improvement agent",
-          "matched_requirement_id": "req-4",
-          "selection_source": "carryover_cache",
-          "paper_id": "2605.08904v1",
-          "carry_days": 1
-        },
-        {
-          "id": "2605.14831v1",
-          "source": "arxiv",
-          "title": "Interestingness as an Inductive Heuristic for Future Compression Progress",
-          "abstract": "One of the bottlenecks on the way towards recursively self-improving systems is the challenge of interestingness: the ability to prospectively identify which tasks or data hold the potential for future progress. We formalize interestingness as an inductive heuristic for future compression progress and investigate its predictability using tools from Kolmogorov Complexity and Algorithmic Statistics. By analyzing complexity-runtime profiles under Length, Algorithmic, and Speed priors, we demonstrate that the inductive property of interestingness -- the capacity for past progress to signal future discovery -- is theoretically viable and empirically supported. We prove that expected future progress depends exponentially on the recency of the last observed breakthrough. Furthermore, we show that the Algorithmic Prior is significantly more optimistic than the Length Prior, yielding a quadratic increase in expected discovery for the same observed profile. These findings are experimentally confirmed across three diverse universal computational paradigms.",
-          "authors": [
-            "Vincent Herrmann",
-            "Jürgen Schmidhuber"
-          ],
-          "primary_category": "cs.AI",
-          "categories": [
-            "cs.AI",
-            "cs.LG"
-          ],
-          "published": "2026-05-14T13:36:14+00:00",
-          "link": "https://arxiv.org/pdf/2605.14831v1",
-          "tags": [
-            "keyword:self-improve"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "Recursively self-improving systems and interestingness as inductive heuristic",
-          "llm_evidence_cn": "递归自我改进系统及其中的有趣性归纳启发式",
-          "llm_evidence": "递归自我改进系统及其中的有趣性归纳启发式",
-          "canonical_evidence": "递归自我改进系统及其中的有趣性归纳启发式",
-          "llm_tldr_en": "Formalizes interestingness as an inductive heuristic for future compression progress in recursively self-improving systems, proving its theoretical viability.",
-          "llm_tldr_cn": "递归自我改进系统的关键瓶颈在于如何前瞻性地识别有潜力的任务或数据，即有趣性问题。本文利用Kolmogorov复杂度和算法统计工具将有趣性形式化为面向未来压缩进展的归纳启发式，证明了基于过去进展信号预测未来发现的理论可行性。该工作为递归自我改进提供了理论基础。",
-          "llm_tldr": "递归自我改进系统的关键瓶颈在于如何前瞻性地识别有潜力的任务或数据，即有趣性问题。本文利用Kolmogorov复杂度和算法统计工具将有趣性形式化为面向未来压缩进展的归纳启发式，证明了基于过去进展信号预测未来发现的理论可行性。该工作为递归自我改进提供了理论基础。",
-          "llm_tags": [
-            "query:self-improve"
-          ],
-          "matched_query_tag": "query:self-improve",
-          "matched_query_text": "recursive self-improvement methods",
-          "matched_requirement_id": "req-2",
-          "selection_source": "carryover_cache",
-          "paper_id": "2605.14831v1",
           "carry_days": 1
         },
         {
@@ -415,6 +210,89 @@
           "matched_requirement_id": "req-5",
           "selection_source": "carryover_cache",
           "paper_id": "2605.15224v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2606.01830v1",
+          "source": "arxiv",
+          "title": "CAPF: Guiding Search-Agent Rollouts with Credit-Attenuated Privileged Feedback",
+          "abstract": "Recent LLM search agents use reinforcement learning with verifiable rewards (RLVR) to learn search-augmented reasoning from outcome rewards. On hard problems, these agents rarely sample end-to-end successful rollouts, leaving outcome-only RLVR with few positive-reward trajectories. We argue that improving learning on such problems requires additional guidance during training, and RLVR already contains verifier-side information that can provide it. This information can identify errors or omissions in the agent's submitted answer and guide revision within the rollout. We propose a training-time mechanism called \\textbf{Credit-Attenuated Privileged Feedback} (CAPF), which makes this verifier-side information available through a Privileged Feedback call during training. CAPF lets the policy revise zero-reward attempts into positive-reward repair trajectories and attenuates credit for the feedback call and earlier actions to accommodate deployment without this call. Empirical research demonstrates that CAPF improves Qwen3-4B's average exact-match score from 44.7% under outcome-only RLVR to 48.5% on seven open-domain QA benchmarks.",
+          "authors": [
+            "Bin Chen",
+            "Xinye Liao",
+            "Yiming Liu",
+            "Xin Liao",
+            "Chonghan Liu"
+          ],
+          "primary_category": "cs.AI",
+          "categories": [
+            "cs.AI"
+          ],
+          "published": "2026-06-01T07:44:24+00:00",
+          "link": "https://arxiv.org/pdf/2606.01830v1",
+          "tags": [
+            "keyword:self-improve",
+            "query:self-improve"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Improves RL training with privileged feedback for agent self-improvement",
+          "llm_evidence_cn": "利用特权反馈改进强化学习训练，实现智能体自我改进",
+          "llm_evidence": "利用特权反馈改进强化学习训练，实现智能体自我改进",
+          "canonical_evidence": "利用特权反馈改进强化学习训练，实现智能体自我改进",
+          "llm_tldr_en": "CAPF provides credit-attenuated privileged feedback from verifier to improve search-agent RL training on hard problems with sparse rewards.",
+          "llm_tldr_cn": "针对强化学习智能体在困难问题上成功轨迹稀疏的问题，提出CAPF机制，利用验证器的特权信息（如错误定位）提供信用衰减的反馈，引导智能体在展开中修正，从而提升学习效率。实验证明该方法在多个推理任务上显著改善性能。",
+          "llm_tldr": "针对强化学习智能体在困难问题上成功轨迹稀疏的问题，提出CAPF机制，利用验证器的特权信息（如错误定位）提供信用衰减的反馈，引导智能体在展开中修正，从而提升学习效率。实验证明该方法在多个推理任务上显著改善性能。",
+          "llm_tags": [
+            "query:self-improve"
+          ],
+          "matched_query_tag": "query:self-improve",
+          "matched_query_text": "reinforcement learning agent self improvement",
+          "matched_requirement_id": "req-5",
+          "selection_source": "carryover_cache",
+          "paper_id": "2606.01830v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2606.01041v1",
+          "source": "arxiv",
+          "title": "ExpWeaver: LLM Agents Learn from Experience via Latent RAG",
+          "abstract": "Experience learning has achieved promising results in enhancing LLM agent planning and reasoning by integrating past interactions as reusable knowledge. However, existing methods remain confined to explicit text space, retrieving experiences via semantic similarity and concatenating them into the context window, leading to substantial token overhead and a decoupled architecture that separates retrieval from generation. To address these limitations, we propose ExpWeaver, a framework that enables LLM agents to learn from experience via latent retrieval-augmented generation, without requiring a separate RAG module. ExpWeaver encodes experiences using the LLM's own hidden states, retrieves relevant experiences directly in latent space at each decoding step, and integrates them through cross-attention aggregation and gated residual mechanisms. The entire pipeline is optimized end-to-end with reinforcement learning, supporting both generative and ranking tasks. We evaluate ExpWeaver on 13 diverse tasks spanning question answering, reasoning, coding, scientific prediction, and recommendation. Results demonstrate that ExpWeaver achieves state-of-the-art performance on 12 out of 13 tasks, outperforming the strongest baseline by over 6.8%; maintains token efficiency comparable to non-retrieval baselines while text-based retrieval methods require 1.5 to 2 times more tokens; and exhibits superior cross-domain generalization, outperforming the strongest baseline by 16.32% under zero-shot transfer and 15.21% under few-shot transfer. Our code for ExpWeaver is released at https://github.com/ulab-uiuc/ExpWeaver.",
+          "authors": [
+            "Tao Feng",
+            "Tianyang Luo",
+            "Jingjun Xu",
+            "Zhigang Hua",
+            "Yan Xie",
+            "Shuang Yang",
+            "Ge Liu",
+            "Jiaxuan You"
+          ],
+          "primary_category": "cs.CL",
+          "categories": [
+            "cs.CL"
+          ],
+          "published": "2026-05-31T06:11:07+00:00",
+          "link": "https://arxiv.org/pdf/2606.01041v1",
+          "tags": [
+            "keyword:self-improve",
+            "query:self-improve"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Agent learns from past experience via latent retrieval",
+          "llm_evidence_cn": "智能体通过潜在检索从过去经验中学习",
+          "llm_evidence": "智能体通过潜在检索从过去经验中学习",
+          "canonical_evidence": "智能体通过潜在检索从过去经验中学习",
+          "llm_tldr_en": "ExpWeaver enables LLM agents to learn from experience via latent retrieval-augmented generation, without separate RAG module.",
+          "llm_tldr_cn": "针对现有经验学习方法依赖显式文本检索导致令牌开销和架构分离的问题，提出ExpWeaver，将经验编码为LLM的隐藏状态，在解码时从潜在空间直接检索相关经验，无需独立RAG模块。在规划推理任务上显著提升效率和质量。",
+          "llm_tldr": "针对现有经验学习方法依赖显式文本检索导致令牌开销和架构分离的问题，提出ExpWeaver，将经验编码为LLM的隐藏状态，在解码时从潜在空间直接检索相关经验，无需独立RAG模块。在规划推理任务上显著提升效率和质量。",
+          "llm_tags": [
+            "query:self-improve"
+          ],
+          "matched_query_tag": "query:self-improve",
+          "matched_query_text": "Methods for agent self improvement",
+          "matched_requirement_id": "req-7",
+          "selection_source": "carryover_cache",
+          "paper_id": "2606.01041v1",
           "carry_days": 1
         }
       ]

@@ -1,0 +1,714 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-02T22:31:49.200486+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 18,
+    "deep_cap": 6,
+    "deep_selected": 6,
+    "quick_candidates": 23,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2606.01314v1",
+      "source": "arxiv",
+      "title": "SkillSmith: Co-Evolving Skills and Tools for Self-Improving Agent Systems",
+      "abstract": "Recent self-evolving agents have shown that skills can be discovered, refined, and accumulated through execution. However, existing skill-evolution frameworks typically assume a fixed tool layer and evaluate each skill independently, limiting their ability to repair tool-level failures or reason about interactions among skills. We propose SkillSmith, a synergy-aware skill-tool co-evolution framework. SkillSmith introduces a unified proposal space in which reflection produces atomic bundles that jointly modify skills and tools, allowing tools to be wrapped, edited, composed, split, or retired when skill evolution identifies a reusable capability gap. To guide this joint search, SkillSmith maintains an ecological utility model inspired by Lotka-Volterra dynamics, where an interaction matrix estimated from execution traces captures pairwise complementarity and conflict among skills and provides pressure signals for retrieval, mutation prioritization, and retirement. Furthermore, SkillSmith records anti-patterns, including failure signatures, causal attributions, and remedies, to accelerate diagnosis and veto proposals that repeat known mistakes. Experiments on three benchmarks, including WildClawBench, and five Qwen3.5 model scales show that SkillSmith consistently outperforms strong baselines, with gains that amplify as task complexity and multi-skill co-activation increase.",
+      "authors": [
+        "Yangbo Wei",
+        "Zhen Huang",
+        "Shaoqiang Lu",
+        "Junhong Qian",
+        "Qifan Wang",
+        "Chen Wu",
+        "Lei He"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-05-31T16:01:19+00:00",
+      "link": "https://arxiv.org/pdf/2606.01314v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "co-evolves skills and tools for self-improving agent systems",
+      "llm_evidence_cn": "技能与工具共同演进以实现自我改进的智能体系统",
+      "llm_evidence": "技能与工具共同演进以实现自我改进的智能体系统",
+      "canonical_evidence": "技能与工具共同演进以实现自我改进的智能体系统",
+      "llm_tldr_en": "SkillSmith co-evolves skills and tools for self-improving agents, using a unified proposal space and ecological utility model to guide joint search, enabling synergistic agent improvement.",
+      "llm_tldr_cn": "针对现有自我改进方法中技能和工具分离的问题，SkillSmith提出了技能与工具共同演进的框架，通过统一提案空间和生态效用模型指导联合搜索，实现了智能体系统层面上的协同自我改进。",
+      "llm_tldr": "针对现有自我改进方法中技能和工具分离的问题，SkillSmith提出了技能与工具共同演进的框架，通过统一提案空间和生态效用模型指导联合搜索，实现了智能体系统层面上的协同自我改进。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "iterative self-improvement agent",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.25430v1",
+      "source": "arxiv",
+      "title": "CODESKILL: Learning Self-Evolving Skills for Coding Agents",
+      "abstract": "Coding agents produce rich trajectories while solving software-engineering tasks. To enable agent self-evolution, these trajectories can be distilled into reusable procedural skills that compactly encode experience to guide future behavior. However, existing skill construction and maintenance methods often rely on fixed prompts and heuristic update rules, leaving it unclear how knowledge should be selected, abstracted, and maintained to best serve downstream agents. We propose CODESKILL, an LLM-based framework that reformulates skill extraction and skill-bank maintenance as a learnable management policy. CODESKILL extracts multi-granularity procedural skills from coding-agent trajectories, evolves skills with new experience, and maintains a compact skill bank for future task solving. We train CODESKILL with reinforcement learning, using a hybrid reward that combines dense rubric-based skill-quality feedback with sparse verifiable execution feedback from the frozen downstream agent. Experiments on EnvBench, SWE-Bench Verified, and Terminal-Bench 2 show that CODESKILL improves average pass rate by 9.69 over the no-skill baseline and by 4.01 over the strongest prompt-based or memory baseline, while maintaining the skill bank at a stable size during iterative construction.",
+      "authors": [
+        "Yanzhou Li",
+        "Yiran Zhang",
+        "Xiaoyu Zhang",
+        "Xiaoxia Liu",
+        "Yang Liu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-05-25T05:12:49+00:00",
+      "link": "https://arxiv.org/pdf/2605.25430v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Self-evolving skills extraction from trajectories for agent improvement",
+      "llm_evidence_cn": "从轨迹中提取自演化技能以改进智能体",
+      "llm_evidence": "从轨迹中提取自演化技能以改进智能体",
+      "canonical_evidence": "从轨迹中提取自演化技能以改进智能体",
+      "llm_tldr_en": "CODESKILL reformulates skill extraction and maintenance as a learnable policy for coding agents to self-evolve from experience.",
+      "llm_tldr_cn": "针对现有技能构建依赖固定提示和启发式规则的问题，提出CODESKILL框架，将技能提取和技能库维护转化为可学习的管理策略，从编码智能体的轨迹中提取多粒度程序技能，并随新经验演化，保持技能库紧凑有效。实验表明自演化技能显著提升了编码智能体的持续改进能力。",
+      "llm_tldr": "针对现有技能构建依赖固定提示和启发式规则的问题，提出CODESKILL框架，将技能提取和技能库维护转化为可学习的管理策略，从编码智能体的轨迹中提取多粒度程序技能，并随新经验演化，保持技能库紧凑有效。实验表明自演化技能显著提升了编码智能体的持续改进能力。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "self-improving agent learning",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.27760v1",
+      "source": "arxiv",
+      "title": "SkillGrad: Optimizing Agent Skills Like Gradient Descent",
+      "abstract": "Agent skills provide a lightweight way to adapt LLM agents to specialized domains by storing reusable procedural knowledge in structured files. However, whether downloaded from third parties or self-generated, these skills are often unreliable, incomplete, or outdated. Existing skill-evolution methods often address these deficiencies through heuristic reflections without an explicit optimization formulation. In this paper, we propose SkillGrad, a gradient-descent-inspired framework for optimizing agent skills. SkillGrad treats the skill package as a structured parameter to optimize in a gradient descent fashion: task executions provide trajectory-level loss evidence, automatic diagnoses then provide text-based gradients that indicate the correction directions. To stabilize optimization across iterations, a momentum agent accumulates recurring diagnostic patterns into a persistent memory overlay. Finally, an LLM-based patcher executes the parameter update by applying layer-aware edits to the skill package. Evaluated on SpreadsheetBench Verified and WikiTableQuestions, SkillGrad consistently outperforms training-based skill evolution baselines across two backbone LLMs, improving over the strongest training-based baseline by $6.7$ percentage points on average. Ablations further show that momentum and contrastive diagnosis both contribute to the final skill quality.",
+      "authors": [
+        "Hanyu Wang",
+        "Yifan Lan",
+        "Bochuan Cao",
+        "Lu Lin",
+        "Jinghui Chen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-05-26T23:18:43+00:00",
+      "link": "https://arxiv.org/pdf/2605.27760v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "gradient-descent-inspired skill optimization for agent self-improvement",
+      "llm_evidence_cn": "类梯度下降的技能优化用于智能体自我改进",
+      "llm_evidence": "类梯度下降的技能优化用于智能体自我改进",
+      "canonical_evidence": "类梯度下降的技能优化用于智能体自我改进",
+      "llm_tldr_en": "SkillGrad treats agent skills as parameters optimized via gradient descent, using execution loss and text gradients to improve skills.",
+      "llm_tldr_cn": "当前技能进化方法依赖启发式反思而无显式优化。SkillGrad将技能包视为结构化参数，采用类似梯度下降的框架：任务执行提供轨迹级损失证据，自动诊断生成文本梯度指示修正方向。实验证明该方法能系统地提升技能质量，实现智能体的持续自我改进。",
+      "llm_tldr": "当前技能进化方法依赖启发式反思而无显式优化。SkillGrad将技能包视为结构化参数，采用类似梯度下降的框架：任务执行提供轨迹级损失证据，自动诊断生成文本梯度指示修正方向。实验证明该方法能系统地提升技能质量，实现智能体的持续自我改进。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.28390v1",
+      "source": "arxiv",
+      "title": "You Live More Than Once: Towards Hierarchical Skill Meta-Evolving",
+      "abstract": "Test-time skill evolving is regarded as a new paradigm for enhancing deployed agentic systems. Existing works mainly focus on hard-coded skill evolving strategies or parametric learning that rely on expensive parameter updates in the underlying LLMs. In this paper, we demonstrate that test-time refinement of the skill evolving framework itself is necessary for continuous improvement of the agent systems in different downstream scenarios, and lightweight algorithmic adaptation is feasible. Specifically, we propose HiSME, a lightweight hierarchical skill meta-evolving solution that jointly optimizes skills and the skill evolving strategy by learning meta-skills from agents' task execution traces. Experiments on diverse agentic benchmarks show that meta-evolving can produce a higher-quality skill library than pure skill evolving and can derive diverse meta-skills for different scenarios, thereby facilitating future continual experience learning. Our code is temporarily public at https://anonymous.4open.science/r/HiSME-BD45.",
+      "authors": [
+        "Xujun Li",
+        "Kehan Zheng",
+        "Mingyuan Zhao",
+        "Yize Geng",
+        "Jinfeng Zhou",
+        "Qi Zhu",
+        "Fei Mi",
+        "Lifeng Shang",
+        "Minlie Huang",
+        "Hongning Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-05-27T12:26:49+00:00",
+      "link": "https://arxiv.org/pdf/2605.28390v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "hierarchical skill meta-evolving for continuous improvement",
+      "llm_evidence_cn": "层次化技能元进化实现持续改进",
+      "llm_evidence": "层次化技能元进化实现持续改进",
+      "canonical_evidence": "层次化技能元进化实现持续改进",
+      "llm_tldr_en": "HiSME proposes hierarchical skill meta-evolving that jointly optimizes skills and the evolving strategy via meta-skills from execution traces, enabling continuous agent improvement.",
+      "llm_tldr_cn": "现有测试时技能进化方法依赖硬编码策略或昂贵的参数更新，无法适应不同场景持续改进。HiSME提出轻量层次化技能元进化方案，从任务执行轨迹中学习元技能，同时优化技能库和技能进化策略本身，实现智能体系统的连续自我改进。在多个智能体基准上的实验表明，元进化机制显著提升了任务完成质量。",
+      "llm_tldr": "现有测试时技能进化方法依赖硬编码策略或昂贵的参数更新，无法适应不同场景持续改进。HiSME提出轻量层次化技能元进化方案，从任务执行轨迹中学习元技能，同时优化技能库和技能进化策略本身，实现智能体系统的连续自我改进。在多个智能体基准上的实验表明，元进化机制显著提升了任务完成质量。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "recursive self-improvement methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.01619v1",
+      "source": "arxiv",
+      "title": "ReSkill: Reconciling Skill Creation with Policy Optimization in Agentic RL",
+      "abstract": "Agentic reinforcement learning (RL) enables LLM agents to improve continuously from environment rewards, yet the resulting policies do not systematically accumulate reusable strategies that generalize across tasks. Modular skills can provide such reusable strategies, yet existing skill-augmented RL methods decouple skill creation from policy optimization, risking adopting skills that conflict with the evolving policy. Inspired by Anthropic's Skill Creator, we introduce ReSkill, an RL-in-the-loop skill creation framework that reconciles skill evolution with policy learning. ReSkill exploits the group-wise structure of GRPO to naturally embed three mechanisms with only marginal additional overhead: (1) an assertion-driven skill creator that diagnoses failures from past experience and proposes conditional, trigger-based skill revisions; (2) within-group rollout sampling that enables controlled comparison of skill versions, capturing which version best supports the policy's ongoing learning; and (3) Thompson Sampling with adaptive discounting to balance exploration and exploitation in skill version selection as the policy evolves. Across several domains, ReSkill consistently outperforms existing memory and skill-based RL methods, with the largest gains on unseen tasks. Analysis of the skill lifecycle shows skills being automatically created, tested, refined, and pruned as the policy improves, demonstrating reconciled skill-policy co-evolution.",
+      "authors": [
+        "Zelin He",
+        "Haotian Lin",
+        "Boran Han",
+        "Wei Zhu",
+        "Haoyang Fang",
+        "Bernie Wang",
+        "Xuan Zhu",
+        "Runze Li",
+        "Matthew Reimherr"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "stat.ML"
+      ],
+      "published": "2026-06-01T03:12:05+00:00",
+      "link": "https://arxiv.org/pdf/2606.01619v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "skill creation reconcile with policy optimization for agent self-improvement",
+      "llm_evidence_cn": "技能创建与策略优化协调用于智能体自我改进",
+      "llm_evidence": "技能创建与策略优化协调用于智能体自我改进",
+      "canonical_evidence": "技能创建与策略优化协调用于智能体自我改进",
+      "llm_tldr_en": "ReSkill reconciles skill creation with policy optimization in agentic RL, enabling agents to continuously improve by accumulating reusable skills without conflict.",
+      "llm_tldr_cn": "现有强化学习智能体在持续改进时，往往无法系统积累可跨任务泛化的可重用策略。ReSkill通过将技能创建过程融入策略优化循环，利用GRPO的组结构嵌入断言驱动技能创建、技能-策略对齐等机制，使得技能库随策略共同进化，在不引入冲突的前提下实现智能体的持续自我改进。实验表明该方法在多个任务上提升了泛化能力。",
+      "llm_tldr": "现有强化学习智能体在持续改进时，往往无法系统积累可跨任务泛化的可重用策略。ReSkill通过将技能创建过程融入策略优化循环，利用GRPO的组结构嵌入断言驱动技能创建、技能-策略对齐等机制，使得技能库随策略共同进化，在不引入冲突的前提下实现智能体的持续自我改进。实验表明该方法在多个任务上提升了泛化能力。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.01801v1",
+      "source": "arxiv",
+      "title": "MetaForge: A Self-Evolving Multimodal Agent that Retrieves, Adapts, and Forges Tools On Demand",
+      "abstract": "Multimodal agents have achieved notable progress on complex reasoning tasks through tool use, yet remain limited by two issues: statically predefined tool inventories fail to generalize to unseen scenarios, and indiscriminate tool invocation incurs redundant cost and noise-induced errors. We propose MetaForge, a multimodal agent framework that learns when to invoke tools and how to evolve its toolset on demand. MetaForge factorizes agentic behavior into four coupled stages: Decide (judging whether tool use is warranted), Retrieve (selecting suitable tools), Adapt (grounding tool parameters in task context), and Forge (synthesizing new skills online and recycling them into the tool library for reuse), forming a closed judge-retrieve-adapt-forge-recycle loop. A unified orchestration policy enables the agent to choose among answering directly, reusing existing tools, or forging new ones. We jointly optimize invocation necessity, retrieval accuracy, execution effectiveness, and forged-skill reusability via reinforcement learning, with an explicit invocation-cost penalty discouraging redundant calls. Across 12 benchmarks, MetaForge consistently surpasses 16 baselines in accuracy, efficiency, and generalization, validating a paradigm shift from static tool inventories to on-demand self-evolution.",
+      "authors": [
+        "Shouang Wei",
+        "Houcheng Min",
+        "Xinpeng Dong",
+        "Xin Lin",
+        "Sen Cui",
+        "Bo Jiang",
+        "Zhongxiang Dai",
+        "Kun Kuang",
+        "Guandong Xu",
+        "Fei Wu",
+        "Min Zhang"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-06-01T07:18:40+00:00",
+      "link": "https://arxiv.org/pdf/2606.01801v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-evolving multimodal agent that forges tools on demand",
+      "llm_evidence_cn": "自我演进的多模态智能体，按需锻造工具",
+      "llm_evidence": "自我演进的多模态智能体，按需锻造工具",
+      "canonical_evidence": "自我演进的多模态智能体，按需锻造工具",
+      "llm_tldr_en": "MetaForge is a self-evolving multimodal agent that dynamically decides when to use tools, retrieves, adapts, and forges new tools on demand, closing the loop for continual self-improvement.",
+      "llm_tldr_cn": "针对预定义工具库无法应对新场景的问题，MetaForge提出了一种自我演进的多模态智能体框架，通过判断、检索、适应和锻造四个阶段动态演化工具集，实现了智能体按需自我改进。",
+      "llm_tldr": "针对预定义工具库无法应对新场景的问题，MetaForge提出了一种自我演进的多模态智能体框架，通过判断、检索、适应和锻造四个阶段动态演化工具集，实现了智能体按需自我改进。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "self-improving agent learning",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2605.07164v1",
+      "source": "arxiv",
+      "title": "Rethinking Experience Utilization in Self-Evolving Language Model Agents",
+      "abstract": "Self-evolving agents improve by accumulating and reusing experience from past interactions. Existing work has largely focused on how experience is constructed, represented, and updated, while paying less attention to how experience should be used during runtime decision-making. As a result, most agents rely on rigid usage strategies, either injecting experience once at initialization or at every step, without considering whether it is needed for the current decision. This paper studies experience utilization as a critical design dimension of self-evolving agents. We ask whether agents benefit from interweaving experience use with decision-making, so that experience is invoked only when additional guidance is needed. To examine this question, we introduce {ExpWeaver}, a lightweight instantiation that leaves experience construction unchanged and modifies only runtime utilization by exposing experience as an optional resource during reasoning. Across four representative frameworks, seven LLM backbones, and three types of environments, ExpWeaver consistently achieves the best performance among different utilization strategies. Reinforcement learning experiments further show that this behavior can be amplified through training. Usage-pattern, causal ablation, and entropy-based analyses reveal that ExpWeaver enables agents to invoke experience selectively, at beneficial decision points, and under higher reasoning uncertainty. Overall, our findings call for a shift from merely studying \\emph{what} experience to store toward understanding \\emph{how} and \\emph{when} experience should enter decision-making.",
+      "authors": [
+        "Weixiang Zhao",
+        "Yingshuo Wang",
+        "Yichen Zhang",
+        "Yanyan Zhao",
+        "Yu Zhang",
+        "Yang Wu",
+        "Dandan Tu",
+        "Bing Qin",
+        "Ting Liu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-05-08T02:48:49+00:00",
+      "link": "https://arxiv.org/pdf/2605.07164v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "studies experience utilization in self-evolving agents",
+      "llm_evidence_cn": "研究自我进化智能体的经验利用策略",
+      "llm_evidence": "研究自我进化智能体的经验利用策略",
+      "canonical_evidence": "研究自我进化智能体的经验利用策略",
+      "llm_tldr_en": "This paper examines how self-evolving agents should use accumulated experience during runtime, proposing dynamic invocation strategies over static ones for better performance.",
+      "llm_tldr_cn": "自我进化智能体通过积累和重用经验来改进，但现有工作多关注经验的构建和更新，忽略了运行时使用策略。本文系统研究经验利用这一关键设计维度，提出根据决策需要动态调用经验的方法，在多个环境实验中发现动态策略优于固定策略。",
+      "llm_tldr": "自我进化智能体通过积累和重用经验来改进，但现有工作多关注经验的构建和更新，忽略了运行时使用策略。本文系统研究经验利用这一关键设计维度，提出根据决策需要动态调用经验的方法，在多个环境实验中发现动态策略优于固定策略。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "self-improving agent learning",
+      "matched_requirement_id": "req-3",
+      "selection_source": "carryover_cache",
+      "paper_id": "2605.07164v1",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2605.26952v1",
+      "source": "arxiv",
+      "title": "Efficient Agentic Reinforcement Learning with On-Policy Intrinsic Knowledge Boundary Enhancement",
+      "abstract": "Agentic reinforcement learning (RL) has proven effective for training LLM-based agents with external tool-use capabilities. However, we identify that agentic RL training induces increasing redundant tool calls and blurs the model's intrinsic knowledge boundary, where the model fails to distinguish when tools are needed versus when parametric knowledge suffices. Existing solutions based on reward shaping create coarse-grained optimization targets that tend to incentivize indiscriminate tool-call suppression, leading to reward hacking. In this paper, we propose AKBE (Agentic Knowledge Boundary Enhancement), an on-policy method that dynamically probes the model's intrinsic knowledge boundary through dual-path (with-tool and no-tool) rollouts during training. We define the knowledge boundary as the per-instance determination of whether tools are required and the minimum tool calls necessary. By comparing correctness across paths, AKBE categorizes trajectories and constructs targeted supervisory signals that guide efficient tool-use patterns for each question. These signals are integrated seamlessly into the agentic RL training loop. Experiments on seven QA benchmarks demonstrate that AKBE improves task accuracy by +1.85 on average and reduces tool calls by 18% over standard agentic RL, yielding 25% higher tool productivity without any accuracy-efficiency trade-off. Further analysis suggests its plug-and-play compatibility across different RL algorithms and the mechanism of each signal category. Our code is available at https://github.com/CuSO4-Chen/AKBE.",
+      "authors": [
+        "Dingwei Chen",
+        "Zefang Zong",
+        "Zhipeng Ma",
+        "Leo Luo",
+        "Yang Li",
+        "Chengming Li",
+        "Peng Chen",
+        "Jie Jiang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-05-26T12:42:23+00:00",
+      "link": "https://arxiv.org/pdf/2605.26952v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "RL-based self-improvement by probing knowledge boundary",
+      "llm_evidence_cn": "通过动态探测知识边界的RL自我改进",
+      "llm_evidence": "通过动态探测知识边界的RL自我改进",
+      "canonical_evidence": "通过动态探测知识边界的RL自我改进",
+      "llm_tldr_en": "AKBE uses on-policy RL to enhance agent knowledge boundary, reducing redundant tool calls and improving self-improvement efficiency.",
+      "llm_tldr_cn": "智能体RL训练导致冗余工具调用，模糊内在知识边界。本文提出AKBE，一种基于策略的方法，通过双路径（带工具和不带工具）动态探测模型知识边界，增强智能体自我认知，在不牺牲准确度下减少冗余调用。",
+      "llm_tldr": "智能体RL训练导致冗余工具调用，模糊内在知识边界。本文提出AKBE，一种基于策略的方法，通过双路径（带工具和不带工具）动态探测模型知识边界，增强智能体自我认知，在不牺牲准确度下减少冗余调用。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2605.29796v1",
+      "source": "arxiv",
+      "title": "SAAS: Self-Aware Reinforcement Learning for Over-Search Mitigation in Agentic Search",
+      "abstract": "Agentic search enables LLMs to solve complex multi-hop questions through iterative reasoning and external search. Despite the effectiveness, these systems often suffer from a critical limitation in practice: agents fail to recognize their own knowledge boundaries, blindly triggering searches when internal knowledge suffices and failing to terminate search even when adequate evidence has been collected. The lack of self-awareness leads to severe \\textbf{over-search}, incurring substantial inference latency and prohibitive computational cost. To this end, we propose SAAS, a novel RL framework designed to cultivate dynamic self-awareness that precisely regulates search behavior without compromising accuracy. SAAS introduces three key components: (i) a search boundary modeling mechanism, which identifies the search boundary under the evolving policy by contrasting search-disabled and search-enabled rollouts; (ii) a boundary-aware reward module, which translates this boundary awareness into trajectory-level penalties, suppressing unnecessary and redundant searches; and (iii) a stage-wise optimization strategy, which leverages a sequential curriculum to prioritize reasoning over search regularization, thereby avoiding reward hacking. Extensive experiments demonstrate that SAAS substantially reduces over-search, while maintaining accuracy. Our code is anonymously released at https://github.com/XMUDeepLIT/SAAS.",
+      "authors": [
+        "Yunbo Tang",
+        "Chengyi Yang",
+        "Shiyu Liu",
+        "Zhishang Xiang",
+        "Zerui Chen",
+        "Qinggang Zhang",
+        "Jinsong Su"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-05-28T11:45:45+00:00",
+      "link": "https://arxiv.org/pdf/2605.29796v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "uses RL to cultivate self-awareness in agents for performance improvement",
+      "llm_evidence_cn": "使用强化学习培养智能体自我意识以提升性能",
+      "llm_evidence": "使用强化学习培养智能体自我意识以提升性能",
+      "canonical_evidence": "使用强化学习培养智能体自我意识以提升性能",
+      "llm_tldr_en": "Proposes SAAS, an RL framework that trains agents to self-regulate search behavior, reducing over-search and improving efficiency.",
+      "llm_tldr_cn": "该论文提出SAAS框架，通过强化学习培养智能体的动态自我意识，使其能够精确调节搜索行为，避免过度搜索导致的延迟和计算开销。实验表明该方法在保持准确性的同时显著降低了推理成本，为智能体的自我改进提供了新思路。",
+      "llm_tldr": "该论文提出SAAS框架，通过强化学习培养智能体的动态自我意识，使其能够精确调节搜索行为，避免过度搜索导致的延迟和计算开销。实验表明该方法在保持准确性的同时显著降低了推理成本，为智能体的自我改进提供了新思路。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.08693v1",
+      "source": "arxiv",
+      "title": "SkillMaster: Toward Autonomous Skill Mastery in LLM Agents",
+      "abstract": "Skills provide an effective mechanism for improving LLM agents on complex tasks, yet in existing agent frameworks, their creation, refinement, and selection are typically governed by external teachers, hand-designed rules, or auxiliary modules. As a result, skills remain external resources to be invoked, rather than capabilities that agents can develop, adapt, and internalize through experience. To endow LLM agents with autonomous skill mastery, we propose SkillMaster, a training framework that teaches agents to create new skills, refine existing skills, and select accumulated skills during task solving. This capability is achieved through three key designs. First, we train agents through trajectory-informed skill review, teaching agents to propose, update, or retain skills based on evidence from completed episodes. Second, each candidate skill edit is designed to be evaluated by its counterfactual utility on related probe tasks, providing a direct learning signal for training skill-editing decisions. Third, we introduce DualAdv-GRPO, which separately estimates advantages for task-solving actions and skill-editing decisions, stabilizing joint training across task solving and skill management. Experiments on ALFWorld and WebShop show that SkillMaster improves the overall success rate over state-of-the-art baselines by 8.8% and 9.3%, respectively, achieving the best performance among all compared methods. Further analysis reveals a marked shift in agent capability: agents trained with SkillMaster can identify skill failures, refine procedural knowledge from trajectory evidence, and transfer improvements to future tasks with limited skill-bank edits. Overall, SkillMaster moves LLM agents beyond mere skill use toward self-improving agents capable of developing, adapting, and applying their own skill repertoires.",
+      "authors": [
+        "Min Yang",
+        "Jinghua Piao",
+        "Xu Xia",
+        "Xiaochong Lan",
+        "Jiaju Chen",
+        "Yongshun Gong",
+        "Yong Li"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-05-09T05:03:00+00:00",
+      "link": "https://arxiv.org/pdf/2605.08693v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "autonomous skill creation, refinement, and selection for self-improvement",
+      "llm_evidence_cn": "自主技能创建、优化和选择用于自我改进",
+      "llm_evidence": "自主技能创建、优化和选择用于自我改进",
+      "canonical_evidence": "自主技能创建、优化和选择用于自我改进",
+      "llm_tldr_en": "SkillMaster enables LLM agents to autonomously create, refine, and select skills via trajectory-informed skill review, achieving self-improvement without external teachers.",
+      "llm_tldr_cn": "现有框架中技能创建、优化和选择依赖外部教师。本文提出SkillMaster，通过轨迹驱动的技能回顾训练智能体自主管理技能。实验表明智能体能够有效积累和改进技能，提升复杂任务表现。",
+      "llm_tldr": "现有框架中技能创建、优化和选择依赖外部教师。本文提出SkillMaster，通过轨迹驱动的技能回顾训练智能体自主管理技能。实验表明智能体能够有效积累和改进技能，提升复杂任务表现。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "Methods for agent self improvement",
+      "matched_requirement_id": "req-7",
+      "selection_source": "carryover_cache",
+      "paper_id": "2605.08693v1",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2605.27899v1",
+      "source": "arxiv",
+      "title": "SKILLC: Learning Autonomous Skill Internalization in LLM Agents via Contrastive Credit Assignment",
+      "abstract": "Structured skill prompts improve exploration in long-horizon agentic reinforcement learning (RL). Skill-augmented RL methods retain external skills at inference, while skill-internalization RL methods withdraw them during training to enable autonomous performance. However, existing internalization approaches only use skill-helpfulness contrast for curriculum control, leaving the policy update unchanged and unable to distinguish skill-dependent from autonomous success. We propose SkillC, a framework based on Contrastive Skill Credit Assignment (CSCA) that converts this contrast into a direct learning signal for internalization. \\textsc{SkillC} samples paired skill-injected and skill-free rollouts for tasks from active skill types within the same policy update, and injects their task-level contrast into optimization via a dual-stream advantage estimator that preserves global ranking while applying a one-sided correction toward skill-free success. A smoothed validation-level signal further drives an adaptive curriculum over attribution strength, rollout allocation, and monotonic active-set pruning. Experiments on ALFWorld and WebShop show that, without runtime skill access, SkillC surpasses the strongest prior skill-internalization RL baseline by 5.5\\% and 4.4\\%, respectively, while remaining competitive with skill-augmented RL methods.",
+      "authors": [
+        "Hongxiang Lin",
+        "Zhirui Kuai",
+        "Erpeng Xue",
+        "Lei Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-05-27T03:21:19+00:00",
+      "link": "https://arxiv.org/pdf/2605.27899v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "uses contrastive credit assignment in RL to internalize skills for self-improvement",
+      "llm_evidence_cn": "在强化学习中使用对比信用分配内化技能以促进自我改进",
+      "llm_evidence": "在强化学习中使用对比信用分配内化技能以促进自我改进",
+      "canonical_evidence": "在强化学习中使用对比信用分配内化技能以促进自我改进",
+      "llm_tldr_en": "SkillC uses contrastive credit assignment to internalize skills in LLM agents via RL, enabling autonomous performance without external skill prompts at inference.",
+      "llm_tldr_cn": "针对现有技能内化方法无法区分技能依赖和自主成功的问题，SKILLC提出了对比技能信用分配框架，通过配对采样技能注入和无技能回滚将对比转化为直接学习信号，实现了智能体在自我改进中的技能自主内化。",
+      "llm_tldr": "针对现有技能内化方法无法区分技能依赖和自主成功的问题，SKILLC提出了对比技能信用分配框架，通过配对采样技能注入和无技能回滚将对比转化为直接学习信号，实现了智能体在自我改进中的技能自主内化。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.00590v1",
+      "source": "arxiv",
+      "title": "Critic-R: Improving Agentic Search using Instruction-tuned Retrievers with Natural Language Introspective Feedback",
+      "abstract": "Agentic search systems iteratively interact with retrieval models to answer complex queries. Despite substantial progress, optimizing retrievers for agentic search remains challenging, often requiring heavy co-training or gold-standard annotations that limit real-world applicability. We propose Critic-R, a framework that explicitly closes the feedback loop between the reasoning agent and the retrieval model during both inference and training. Critic-R introduces a critic model that evaluates the agent's introspective reasoning trace after consuming retrieved evidence to determine whether the retrieved context sufficiently supports the next reasoning step. Critic-R has two complementary mechanisms: Critic-R-Zero, an inference-time query refinement loop that iteratively rewrites queries and retrieval instructions, and Critic-Embed, an optimization approach for retrieval models that leverages successful and failed refinement trajectories as automatic supervision without requiring manual relevance annotation. We evaluate Critic-R on HotpotQA, 2WikiMultihopQA, MuSiQue, and Bamboogle. Results show that Critic-R significantly improves both retrieval quality and downstream answer accuracy.",
+      "authors": [
+        "Md Zarif Ul Alam",
+        "Alireza Salemi",
+        "Hamed Zamani"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "published": "2026-05-30T07:42:22+00:00",
+      "link": "https://arxiv.org/pdf/2606.00590v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Closed feedback loop between agent and retriever improves search",
+      "llm_evidence_cn": "智能体与检索器之间的闭环反馈改进搜索",
+      "llm_evidence": "智能体与检索器之间的闭环反馈改进搜索",
+      "canonical_evidence": "智能体与检索器之间的闭环反馈改进搜索",
+      "llm_tldr_en": "Critic-R uses a critic model to evaluate agent reasoning and provide introspective feedback to improve retriever in agentic search.",
+      "llm_tldr_cn": "针对智能体搜索中检索器优化困难的问题，提出Critic-R框架，引入批评模型评估智能体内省推理轨迹，决定检索上下文是否充分，并通过两种机制（零样本和微调）优化检索器，提升搜索成功率。",
+      "llm_tldr": "针对智能体搜索中检索器优化困难的问题，提出Critic-R框架，引入批评模型评估智能体内省推理轨迹，决定检索上下文是否充分，并通过两种机制（零样本和微调）优化检索器，提升搜索成功率。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.08904v1",
+      "source": "arxiv",
+      "title": "OPT-BENCH: Evaluating the Iterative Self-Optimization of LLM Agents in Large-Scale Search Spaces",
+      "abstract": "Large Language Models (LLMs) have demonstrated remarkable capabilities in reasoning and tool use. However, the fundamental cognitive faculties essential for problem solving, including perception, reasoning, and memory, remain the stable core of intelligence. Unlike memorizing specific patterns, humans succeed in novel environments by applying these intrinsic faculties to adapt and optimize. Yet, whether LLMs possess this essential capacity, namely the ability to continuously refine solutions in response to dynamic environmental feedback, remains underexplored. To address this challenge, we introduce OPT-BENCH, a benchmark for evaluating self-improvement capabilities in large-scale search spaces. By combining 20 machine learning tasks with 10 classic NP-hard problems, OPT-BENCH provides a rigorous setting to assess whether agents can adapt through intrinsic self-reflection rather than rote tool application. We further propose OPT-Agent, a framework that emulates human-like cognitive adaptation. It operates through a general perception, memory, and reasoning loop, iteratively refining solutions based on environmental feedback. Through extensive experiments on 19 LLMs from 7 model families, including reasoning models, general models, and open-source models ranging from 3B to 235B parameters, we demonstrate that stronger models are more effective at leveraging feedback signals for self-improvement. However, this upper-bound adaptability remains fundamentally constrained by the models' base capacity, and even the most advanced LLMs still fall short of human expert performance.",
+      "authors": [
+        "Xiaozhe Li",
+        "Jixuan Chen",
+        "Xinyu Fang",
+        "Shengyuan Ding",
+        "Haodong Duan",
+        "Qingwen Liu",
+        "Kai Chen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-05-09T11:51:34+00:00",
+      "link": "https://arxiv.org/pdf/2605.08904v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "benchmark for evaluating iterative self-optimization of LLM agents",
+      "llm_evidence_cn": "评估LLM代理迭代自我优化的基准",
+      "llm_evidence": "评估LLM代理迭代自我优化的基准",
+      "canonical_evidence": "评估LLM代理迭代自我优化的基准",
+      "llm_tldr_en": "OPT-BENCH evaluates the iterative self-optimization capacity of LLM agents in large-scale search spaces, combining 20 ML tasks to test refinement from feedback.",
+      "llm_tldr_cn": "LLM是否具备持续根据环境反馈优化解决方案的能力尚未被充分探索。OPT-BENCH通过结合20个机器学习任务构建大规模搜索空间基准，专门评估代理的迭代自我优化能力。该基准揭示了当前模型在自我优化方面的不足，为未来研究提供了标准化测试平台。",
+      "llm_tldr": "LLM是否具备持续根据环境反馈优化解决方案的能力尚未被充分探索。OPT-BENCH通过结合20个机器学习任务构建大规模搜索空间基准，专门评估代理的迭代自我优化能力。该基准揭示了当前模型在自我优化方面的不足，为未来研究提供了标准化测试平台。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "iterative self-improvement agent",
+      "matched_requirement_id": "req-4",
+      "selection_source": "carryover_cache",
+      "paper_id": "2605.08904v1",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2605.29697v1",
+      "source": "arxiv",
+      "title": "Beyond Trajectory Rewards: Step-level Credit Assignment for Agentic Search via Graph Modeling",
+      "abstract": "In Agentic Search, trajectory-level outcome rewards fail to quantify the behavioral contributions of individual steps, while existing step-level reward methods typically rely on costly tree sampling. We view world knowledge as a latent world graph and each IS task as search within a latent task graph, where effective steps should make graph progress toward the answer node. Based on this prior, we propose Graph-Distance Contribution Reward (GDCR), a step-level process reward that scores newly-retrieved and newly-cited entities by their distance to the answer node in a training-time Entity-Relation (ER) graph. We further propose Step Advantage Policy Optimization (SAPO), which converts GDCR into step-level advantages and combines them with trajectory-level outcome advantages. Experiments on four challenging benchmarks validate the effectiveness of our method.",
+      "authors": [
+        "Yuchen Liu",
+        "Yingjie Feng",
+        "Lixiong Qin",
+        "Jiasi Chen",
+        "Jianing Yu",
+        "Sheng Gao",
+        "Sheng Yang",
+        "Weiran Xu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-05-28T09:57:12+00:00",
+      "link": "https://arxiv.org/pdf/2605.29697v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "step-level reward for agentic RL improvement",
+      "llm_evidence_cn": "步骤级奖励用于智能体强化学习改进",
+      "llm_evidence": "步骤级奖励用于智能体强化学习改进",
+      "canonical_evidence": "步骤级奖励用于智能体强化学习改进",
+      "llm_tldr_en": "GDCR provides step-level process reward for agentic search, enabling more effective policy optimization for agent self-improvement via reinforcement learning.",
+      "llm_tldr_cn": "在智能体搜索中，轨迹级奖励无法量化各步骤贡献，而现有步骤级方法成本高昂。本文提出基于图距离的步骤级奖励GDCR，将世界知识建模为潜在世界图，根据步骤与答案节点的距离评分，并设计步骤优势策略优化SAPO。该方法在无需树采样的情况下实现细粒度信用分配，提升了智能体的学习效率和最终性能。",
+      "llm_tldr": "在智能体搜索中，轨迹级奖励无法量化各步骤贡献，而现有步骤级方法成本高昂。本文提出基于图距离的步骤级奖励GDCR，将世界知识建模为潜在世界图，根据步骤与答案节点的距离评分，并设计步骤优势策略优化SAPO。该方法在无需树采样的情况下实现细粒度信用分配，提升了智能体的学习效率和最终性能。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2605.14211v1",
+      "source": "arxiv",
+      "title": "ASH: Agents that Self-Hone via Embodied Learning",
+      "abstract": "Long-horizon embodied tasks remain a fundamental challenge in AI, as current methods rely on hand-engineered rewards or action-labeled demonstrations, neither of which scales. We introduce ASH, an agentic system that learns an embodied policy from unlabeled, noisy internet video, without reward shaping or expert annotation. ASH follows a self-improvement loop; when it gets stuck, ASH learns an Inverse Dynamics Model (IDM) from its own trajectories, and uses its IDM to extract supervision from relevant internet video. ASH uses unsupervised learning to identify key moments from large-scale internet video and retains them as long-term memory -- allowing it to tackle long-horizon problems. We evaluate ASH on two complementary environments demanding multi-hour planning: Pokemon Emerald, a turn-based RPG, and The Legend of Zelda: The Minish Cap, a real-time action-adventure game. In both games, behavioral cloning, retrieval-augmented and zero-shot foundation-model baselines plateau, while ASH sustains progression across our 8-hour evaluation. ASH reaches an average of $11.2/12$ milestones in Pokemon Emerald and $9.9/12$ in Legend of Zelda, while the strongest baseline gets stuck in both environments at an average of $6.5/12$ and $6.0/12$ milestones, respectively. We demonstrate that self-improving agents are a scalable recipe for long-horizon embodied learning.",
+      "authors": [
+        "Benjamin Schneider",
+        "Xavier Schneider",
+        "Victor Zhong",
+        "Sun Sun"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-05-14T00:10:12+00:00",
+      "link": "https://arxiv.org/pdf/2605.14211v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "self-honing loop using unlabeled video and inverse dynamics",
+      "llm_evidence_cn": "使用未标注视频和逆动力学模型的自打磨循环",
+      "llm_evidence": "使用未标注视频和逆动力学模型的自打磨循环",
+      "canonical_evidence": "使用未标注视频和逆动力学模型的自打磨循环",
+      "llm_tldr_en": "ASH introduces a self-improvement loop where agents learn from unlabeled internet video via inverse dynamics models, enabling long-horizon embodied tasks without rewards.",
+      "llm_tldr_cn": "长时域具身任务依赖人工奖励或标注，难以扩展。本文提出ASH，智能体通过自改进循环：卡住时从自身轨迹学习逆动力学模型，再从互联网视频提取监督。在宝可梦等环境中验证了多小时规划能力。",
+      "llm_tldr": "长时域具身任务依赖人工奖励或标注，难以扩展。本文提出ASH，智能体通过自改进循环：卡住时从自身轨迹学习逆动力学模型，再从互联网视频提取监督。在宝可梦等环境中验证了多小时规划能力。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "carryover_cache",
+      "paper_id": "2605.14211v1",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2605.31509v1",
+      "source": "arxiv",
+      "title": "Skill Reuse as Compression in Agentic RL",
+      "abstract": "Large language model agents trained with reinforcement learning (RL) often learn brittle, task-specific shortcuts. We hypothesize that agents generalize better when their successful trajectories are structurally compressible, decomposed into a small set of reusable abstract patterns. To formalize this, we introduce ReuseRL, which grounds agentic RL in the Minimum Description Length (MDL) principle. ReuseRL extracts a shared skill dictionary from successful trajectories and augments the RL objective with a segmentation cost, explicitly penalizing idiosyncratic behaviors that encode poorly. We prove a PAC-Bayes generalization bound for this compression penalty. Across ALFWorld, TextWorld-Cooking, and Countdown-Stepwise, ReuseRL improves in- and out-of-distribution success over vanilla GRPO and strong round-length baselines.",
+      "authors": [
+        "Zhikun Xu",
+        "Yu Feng",
+        "Jacob Dineen",
+        "Taiwei Shi",
+        "Jieyu Zhao",
+        "Ben Zhou"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-05-29T16:28:34+00:00",
+      "link": "https://arxiv.org/pdf/2605.31509v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Skill extraction and reuse for generalization in RL",
+      "llm_evidence_cn": "提取技能并重用以提高强化学习泛化能力",
+      "llm_evidence": "提取技能并重用以提高强化学习泛化能力",
+      "canonical_evidence": "提取技能并重用以提高强化学习泛化能力",
+      "llm_tldr_en": "ReuseRL extracts reusable skill dictionary from trajectories and uses MDL penalty to improve agent generalization in RL.",
+      "llm_tldr_cn": "针对强化学习智能体学到的任务特定捷径泛化差的问题，提出ReuseRL，基于最小描述长度原则从成功轨迹中提取共享技能词典，并添加分割成本惩罚异常行为，引导智能体学习可压缩结构。在ALFWorld等环境中显著提升了分布内和分布外的成功率。",
+      "llm_tldr": "针对强化学习智能体学到的任务特定捷径泛化差的问题，提出ReuseRL，基于最小描述长度原则从成功轨迹中提取共享技能词典，并添加分割成本惩罚异常行为，引导智能体学习可压缩结构。在ALFWorld等环境中显著提升了分布内和分布外的成功率。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "self-improving agent learning",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2605.14831v1",
+      "source": "arxiv",
+      "title": "Interestingness as an Inductive Heuristic for Future Compression Progress",
+      "abstract": "One of the bottlenecks on the way towards recursively self-improving systems is the challenge of interestingness: the ability to prospectively identify which tasks or data hold the potential for future progress. We formalize interestingness as an inductive heuristic for future compression progress and investigate its predictability using tools from Kolmogorov Complexity and Algorithmic Statistics. By analyzing complexity-runtime profiles under Length, Algorithmic, and Speed priors, we demonstrate that the inductive property of interestingness -- the capacity for past progress to signal future discovery -- is theoretically viable and empirically supported. We prove that expected future progress depends exponentially on the recency of the last observed breakthrough. Furthermore, we show that the Algorithmic Prior is significantly more optimistic than the Length Prior, yielding a quadratic increase in expected discovery for the same observed profile. These findings are experimentally confirmed across three diverse universal computational paradigms.",
+      "authors": [
+        "Vincent Herrmann",
+        "Jürgen Schmidhuber"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-05-14T13:36:14+00:00",
+      "link": "https://arxiv.org/pdf/2605.14831v1",
+      "tags": [
+        "keyword:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Recursively self-improving systems and interestingness as inductive heuristic",
+      "llm_evidence_cn": "递归自我改进系统及其中的有趣性归纳启发式",
+      "llm_evidence": "递归自我改进系统及其中的有趣性归纳启发式",
+      "canonical_evidence": "递归自我改进系统及其中的有趣性归纳启发式",
+      "llm_tldr_en": "Formalizes interestingness as an inductive heuristic for future compression progress in recursively self-improving systems, proving its theoretical viability.",
+      "llm_tldr_cn": "递归自我改进系统的关键瓶颈在于如何前瞻性地识别有潜力的任务或数据，即有趣性问题。本文利用Kolmogorov复杂度和算法统计工具将有趣性形式化为面向未来压缩进展的归纳启发式，证明了基于过去进展信号预测未来发现的理论可行性。该工作为递归自我改进提供了理论基础。",
+      "llm_tldr": "递归自我改进系统的关键瓶颈在于如何前瞻性地识别有潜力的任务或数据，即有趣性问题。本文利用Kolmogorov复杂度和算法统计工具将有趣性形式化为面向未来压缩进展的归纳启发式，证明了基于过去进展信号预测未来发现的理论可行性。该工作为递归自我改进提供了理论基础。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "recursive self-improvement methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "carryover_cache",
+      "paper_id": "2605.14831v1",
+      "quick_tier": "8plus"
+    }
+  ]
+}
