@@ -1,0 +1,1015 @@
+Title: V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+URL Source: https://arxiv.org/pdf/2605.29471v1
+
+Published Time: Fri, 29 May 2026 01:07:05 GMT
+
+Number of Pages: 35
+
+Markdown Content:
+2026-5-29 
+
+# V2XCrafter: Learning to Generate Driving Scene Across Agents 
+
+Yihang Tao 1,2, ∗, Yu Guo 1,2, ∗, Senkang Hu 1,2 , Yanan Ma 1,2 , Zihan Fang 1,2 , Sam Tak Wu Kwong 3, Yuguang Fang 1,2 1 Hong Kong JC STEM Lab of Smart City, 2 City University of Hong Kong, 3 Lingnan University CAV 1                                        
+
+> CAV 2
+> Cross-Agent Background Consistency Cross-Agent Object Consistency
+> CAV 1
+> CAV 2
+> 3D Box BEV
+> CAV 1 CAV 2 Text
+> Conditions Generated Data 1 Generated Data 2 (Replace text only)
+> …twilight …high-speed …blur …modern buildings …traffic lights glowing ….…mid-day …tree-lined urban …sunny …modern low-rise buildings ….
+> 3D Box BEV
+> CAV 1 CAV 2 Text …sunlit daytime …low-rise apartments …verdant trees …carpark ….…daytime …multi-lane urban …sunny …multi-story office …tree ….
+> CAV 1
+> CAV 2
+> CAV 1
+> CAV 2
+
+Figure 1: We present V2XCrafter , a driving scene generation framework across agents. It is capable of generating consistent content for both foreground objects (orange ellipses) and background appearance (red rectangles) across multiple agent perspectives (left), and can perform controllable generation via text commands (right). 
+
+## Abstract 
+
+Collaborative driving systems leverage vehicle-to-everything (V2X) communication for multi-agent collaborative perception to enhance driving safety, yet they remain constrained by scarce annotated real-world V2X driving datasets and limited generalization across diverse driving conditions. While image generation technology offers a feasible solution for data augmentation, existing methods tailored for single-vehicle multi-view scenarios face two fundamental challenges in multi-agent driving settings: (1) the expansion of the learning objective degrades generation quality, and (2) the highly dynamic variations across agents hinder the modeling of consistency for physical attributes (e.g., color, category) in jointly observed objects. To bridge this gap, we propose V2XCrafter , the first framework for generating controllable and realistic collaborative driving scene across agents’ camera views. For effective learning, we develop a progressive multi-agent diffusion model based on a single-agent backbone, using neighboring agents’ latent states as reference signals to progressively guide the single-to-multi diffusion. To address cross-vehicle inconsistency, we propose a cross-agent attention module that leverages a collaboration view graph and learnable jointly observed object representation to model the dynamic cross-agent camera view relationships. Experiments have shown that V2XCrafter can generate high-fidelity and controllable street views with consistency across agents, thereby effectively enhancing the downstream collaborative 3D object detection tasks. 
+
+> ∗
+
+These authors contributed equally. 
+
+> arXiv:2605.29471v1 [cs.CV] 28 May 2026 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+## 1. Introduction 
+
+Collaborative driving systems enhance driving safety by leveraging Vehicle-to-Everything (V2X) communi-cation for Collaborative Perception (CP) among multiple vehicles (agents) [ 23 , 5 , 43 , 39 , 15 , 25 , 38 , 37 ]. While deep learning-based CP models have advanced rapidly, their generalization ability is still heavily constrained by the scale and diversity of available annotated training data. Specifically, the acquisition and annotation process is costly and labor-intensive. Different from single-vehicle scenarios [ 32 ], data collection from multiple connected vehicles requires more significant operational resources for sensor calibration, data synchronization, and precise spatiotemporal alignment, resulting in datasets that are orders of magnitude scarcer [ 46 ]. This inherent scarcity is further exacerbated by the substantial labor required for annotating 3D scenes from multiple viewpoints. Furthermore, existing datasets exhibit large disparities in training difficulty across multiple attributes, including different traffic scenarios, weather conditions, and object distri-butions. Stemming from skewed sample distributions and systematic data collection biases, these imbalances compromise the model’s ability to generalize to rare and complex collaborative driving conditions. To address these challenges, current efforts in connected and autonomous driving domain have primarily relied on data augmentation with simulation platforms [ 45 , 23 , 27 , 6 ]. These methods programmatically generate new training scenarios by altering parameters such as agent poses and communication conditions within the simulator like CARLA [ 4]. However, these approaches are constrained to virtual environments and thus suffer from a persistent sim-to-real domain gap. Building upon recent advancements in diffusion models for autonomous driving street-view generation [ 7, 42 ], another feasible solution is image generation-driven data augmentation. Such methods typically condition the generation process on camera poses and their adjacency relationships, as well as layout information such as bounding boxes and road maps [ 21 , 51 ]. By applying a joint initial noise across multiple views, they learn to denoise all perspectives simultaneously to generate a coherent, multi-view scene. Despite this impressive progress, the transfer of these single-agent methods to multi-agent settings poses challenges due to inherent differences in system complexity. The primary obstacles for such an extension are twofold. ❶ First, the expansion of the learning objective. The increased number of views from multiple agents makes it more difficult to converge (see Appendix A), as the shared-noise, one-shot denoising process becomes difficult to optimize when conditioned on a large and variable number of distinct multi-agent viewpoints, leading to degraded generation quality. ❷ Second, the highly dynamic variations across vehicles (agents). Existing models are designed for a fixed intra-agent camera view pairs and are unable to model the dynamic cross-agent camera view relationships that change as vehicles (agents) move. This inability to enforce consistency across a dynamic connection of agents makes it impossible to generate a coherent global scene, which is critical for collaborative driving systems. In response to the challenges outlined, we introduce V2XCrafter , the first framework for realistic and controllable collaborative driving scene generation across multiple vehicles (agents). Instead of learning to denoise all views from multiple agents at once, we propose a progressive multi-agent diffusion model built upon a shared single-agent diffusion backbone. This approach overcomes the challenges on the expansion of the learning objective by reformulating the generation as a two-stage progressive process: it first masters single-agent scene generation and then uses the latent states of neighboring collaborative agents as reference signals to progressively guide the diffusion from a single-agent to a multi-agent context. To further enhance cross-agent consistency, we design a novel cross-agent attention module. This module effectively models the dynamic spatial relationships between agents by leveraging a collaboration view graph and learnable jointly observed object representation, ensuring that the generated views are coherent across agents. Representative results are shown in Fig. 1. 
+
+> 2/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+The main contributions of this work are threefold: 
+
+• We propose V2XCrafter , the first framework dedicated to realistic and controllable multi-agent driving scene generation with consistent cross-agent camera views. 
+
+• We introduce a novel multi-agent driving diffusion model for effective single-to-multi-agent expansion, along with a cross-agent attention module that ensures consistency across dynamic cross-agent camera views. 
+
+• Experiments have shown that our method generates high-fidelity and coherent collaborative driving scenes, and effectively boosts the performance of downstream collaborative 3D object detection tasks. 
+
+## 2. Related Work 
+
+Diffusion Models for Conditional Generation. Diffusion models have demonstrated strong cross-modal generation capabilities, particularly in Text-to-Image (T2I) synthesis [ 19 , 49 , 31 ]. Pioneering works like DALL-E 2 [ 29 ] and Imagen [ 31 ] leveraged text encoders, while Stable Diffusion [ 30 ] improved efficiency via latent space compression. However, text alone is insufficient for specifying precise geometric relationships (e.g., object positions and orientations). To address this, Layout-to-Image (L2I) methods integrate explicit structural constraints. Techniques such as LayoutDiff [ 51 ], GLIGEN [ 21 ], and Neptune-X [ 10 ] incorporated bounding boxes or masks for precise, instance-level control. However, these approaches treat observers independently, overlooking complex multi-observer relationships. Beyond synthesis, diffusion models demonstrate that synthetically generated data from geometric annotations can benefit downstream perception tasks like 2D object detection [ 3, 10 ]. Building on this, our work focuses on L2I diffusion for multi-agent collaborative driving scenes to enhance downstream 3D collaborative object detection. 
+
+Data Augmentation for V2X Collaborative Driving. To enhance collaborative driving robustness under diverse environments, existing works have explored approaches to augment multi-agent collaborative driving datasets. V2XP-ASG [ 45 ] introduced the first framework to automatically generate challenging scenarios for collaborative driving. The approach perturbs multiple agents’ LiDAR poses in adversarial yet physically plausible manners, with the perturbed configurations serving as inputs to the CARLA simulator for generating synthetic datasets. Similarly, V2Xverse [ 23 ] enabled comprehensive robustness evaluation by supporting dynamic editing of communication parameters within CARLA-based simulations, facilitating systematic assessment against practical challenges such as communication latency and pose estimation errors. Most recently, TYP [27 ] explored generative models for collaborative perception. However, it targets sparse LiDAR point clouds and relies on simulation datasets (created by CARLA) to learn perspective transfer from single-vehicle data. Despite these advances, current techniques rely exclusively on simulation-based environments or focus on sparse geometric data, largely ignoring the challenge of augmenting real-world collaborative driving datasets with dense, photorealistic multi-agent camera images. 
+
+Multi-Camera Street View Generation. For outdoor driving scenes, several methods have explored the gen-eration of realistic and consistent surround-view image. For example, BEVGen [ 33 ] utilized an auto-regressive transformer with cross-view attention to ensure visual consistency. Building on this, BEVControl [ 48 ] intro-duced cross-view and cross-object attention to further augment multi-view generation consistency. More recently, MagicDrive [ 7] and MagicDrive-v2 [ 8 ] enhanced performance by injecting cross-view attention directly into UNet block or DiT blocks. Yet, these designs are fundamentally for single-agent contexts, enforcing consistency across camera pairs with fixed and static overlaps, which is ill-suited for multi-agent scenarios characterized by dynamic and unstructured cross-agent camera view relationships. Furthermore, a challenge in achieving training convergence arises from jointly denoising a large and variable number of views when considering multi-agent driving scene generation problem. 
+
+> 3/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+## 3. Problem Formulation 
+
+Collaborative Driving Scene Representation. We model a collaborative driving scene with N agents as A = {A1, . . . , AN }. Each agent Ai has a global position Li and is equipped with a set of cameras 
+
+Ci = {Ci,1 , . . . , Ci,Mi }. Each camera Ci,j has a pose Pi,j = [ Ki,j, Ri,j, ti,j], where Ki,j is the intrinsic matrix, and 
+
+(Ri,j, ti,j) are the extrinsic parameters (rotation and translation). The shared environment is described by 
+
+S = {O , L} , where O represents the set of 3D objects (each with bounding box and semantic class) visible in the scene, and L contains global attributes like weather and street background. To manage the complex spatial relationships among cameras, we define a collaboration view graph G = ( V, E ). The vertices 
+
+V =⋃︀ Ni=1 Ci are the set of all cameras, and the edges E connect any two cameras with overlapping fields of view. We perform an edge-disjoint 2-decomposition 1 of the graph G into an intra-agent view graph Gin and a cross-agent view graph Gcr . The overall goal is to train a generative model G that synthesizes a set of realistic and consistent images {Ii,j} for all cameras, conditioned on this comprehensive scene representation. 
+
+Progressive Single-to-multi-agent Training. Instead of directly learning multi-agent multi-camera image denoising, we decompose the problem into a two-stage progressive process. This involves first learning single-agent multi-camera denoising, and then learning to guide this process with cross-agent context. This decomposition is realized through a two-stage progressive training process with a unified objective representation: 
+
+L = Ezi,0 ,ϵ,t
+
+⎡⎢⎣|| ϵ − ϵθ (zi,t, t, {S , Pi, Gin (i)}
+
+⏟ ⏞
+
+> Intra-Agent Info.
+
+, κref 
+
+⏟ ⏞ 
+
+> C.A. Ref.
+
+)|| 2
+
+⎤⎥⎦ , (1) where zi,t is the noisy latent for agent Ai’s views. The training has two stages: 
+
+Stage I: Intra-agent Multi-conditional Diffusion. The model is first trained using a simplified version of the objective where the cross-agent reference (C.A. Ref.) term κref is set to ∅. In this stage, the network learns single-agent multi-camera view generation based solely on its own information: camera poses ( Pi), geometric conditions (including text descriptions, 3D bounding boxes, road map, etc.), and the intra-agent view graph (Gin (i)). This ensures generating coherent multi-view images based on basic conditions for an individual agent. 
+
+Stage II: Cross-agent Context-guided Diffusion. Building upon the pre-trained model, this stage uses the full objective shown above, introducing the cross-agent reference κref = {H ref (i), Gcr (i)}. This term consists of the latent states of collaborative agents ( Href (i)) and the cross-agent view graph ( Gcr (i)). Crucially, the latent states are obtained by encoding the neighbors’ data using the model pre-trained in Stage I . This stage adapts the model to generate consistent views across multiple agents by conditioning on both the neighbors’ latent states and their spatial connections. A detailed analysis of why this progressive decomposition improves trainability is provided in Appendix A. 
+
+## 4. V2XCrafter 
+
+The architecture of our proposed V2XCrafter is illustrated in Fig. 2. It features a two-stage progressive learning framework and a cross-agent attention module for realistic and controllable multi-agent driving scene generation. This section details the key components of our approach. 
+
+> 1In graph theory, an edge-disjoint k-decomposition of a graph is the partitioning of its edges into k edge-disjoint subgraphs. Here, k=2.
+
+4/35 V2XCrafter: Learning to Generate Driving Scene Across Agents CAV 1 Outputs CAV 2 Outputs Cam 1 Image Tokens Left Cam Right Cam ... Cam 1 Image Tokens Left Cam Right Cam ...        
+
+> BEV Condition Camera Condition
+> CAV 2 CAV 1
+> …
+> Cam 1
+> ...
+> Cam 1 Cam N
+> ...
+> Cam N
+> Intrinsic Matrix Rotation Matrix Translation Matrix
+> CAV 2 CAV 1
+> …
+> Person 1 Car 1
+> Car 1
+> Object Condition
+> Bus 1
+> ... ... Jointly Observed Object
+> Learnable Modifier
+> 3D Box Obj Class
+> Text Condition Sunny day at an urban campus area
+> 2D FPV Mask
+> Coordinate Projection
+> Generation Results
+> Zero Conv FPV-BEV Joint Encoder ... ... ... ...
+> (a) Multi-Agent Geometric Conditions Encoding Hierarchical Fusion Embedding
+> Text Tokens Cam 2 Tokens Cam 1 Tokens Obj 2 Tokens Obj 1 Tokens
+> ControlNet Encoder SD Encoder SD Decoder Zero Conv
+> (b) V2XCrafter Generation Pipeline
+> × N Denoising Random Sampled Noise
+> New Modules Injection
+> New SD Basic Block
+> Frozen Module Stage I: Trainable Module Stage II: Trainable Module
+> (c) Ego-view Attn (d) Cross-agent Attn
+> Clone CAV 1 Inputs CAV 2 Inputs Residual Block SelfAttn Cross Attn
+> Ego-view Attn Cross-agent Attn
+> Fourier Embedder CLIP Encoder FFN Reshape Linear CAV 1 Outputs CAV 2 Outputs CAV 1 Prior CAV 2 Inputs Reshape
+> Jointly Observed Background
+> Zero Init Zero Init
+> V*
+> Reshape Linear CAV 2 Cam 1 CAV 1 Cam 1 CAV 1 Cam 2 ...
+> qk, v qk, v
+> Attention Bias Matrix FFN ...
+> qk, v
+> Masking Collaborative View Graph
+> Jointly Observed Object Jointly Observed Background V* V*
+> ROI Masks Object Background
+> Tokens
+> High Mid Low Reshape Linear CAV 1 CAV 2
+
+Figure 2: Architecture of our V2XCrafter . (a) Multi-agent geometric conditions encoding with hierarchical FPV-BEV fusion and learnable modifier V∗ for jointly observed objects. (b) Two-stage progressive training pipeline. (c) Ego-view attention for intra-agent consistency. (d) Cross-agent attention with collaboration view graph and ROI masking for cross-agent consistency. 
+
+4.1. Multi-agent Geometric Conditions Encoding 
+
+As shown in Fig. 2a, the multi-agent geometric condition encoding strategy is used to help the model better understand the complexities of collaborative driving. For scene-level encoding, we retain strategies similar to those in single-agent autonomous driving. Specifically, we use the CLIP encoder for text descriptions and represent camera poses ( P) using Fourier features to provide global context. However, to respond to the unique challenges of the multi-agent setting, we introduce two additional designs. 
+
+Shared Object Encoding with Learnable Modifier. For each agent i, we represent the object condition as a sequence Oi = {(bk, lk)}Ki
+
+k=1, where bk ∈ R8×3 encodes the 3D bounding box corners and lk is the semantic class. To explicitly distinguish jointly observed objects (the same 3D object observed by multiple agents at the same time), we introduce a learnable modifier embedding V∗ ∈ Rd that is additively combined with class embeddings of jointly observed objects. Let Ak denote the set of agents observing object k, the enriched class embedding becomes: 
+
+˜lk = lk + 1|A k |>1 · V∗, (2) where lk is the CLIP-initialized class embedding and 1|A k |>1 is an indicator function for jointly observed objects. The final object token is computed as ek = MLP ([ F (bk); ˜ lk]) , where F denotes Fourier positional encoding [ 16 ]. We embed V∗ as a learnable parameter within the trainable bounding box encoder of the ControlNet module [ 49 ]. These object tokens are then concatenated with text and camera embeddings to form the encoder hidden states, which are injected into the frozen UNet via its cross-attention layers, as shown in Fig. 2b. Unlike textual inversion [ 18 ] requiring trainable cross-attention parameters, our approach enables V∗ to be optimized through backpropagation as gradients flow from the generation loss through the frozen cross-attention layers back to the trainable bounding box encoder. This design allows V∗ to modulate jointly observed object representations while maintaining full compatibility with the frozen Stable Diffusion backbone, providing semantic-level control that complements the spatial-level guidance introduced below. 
+
+Hierarchical FPV-BEV Joint Encoder. Implicit 3D box encoding with Bird’s-Eye-View (BEV) maps [ 7 ] suffers from limited precision in object localization and poor convergence under data-constrained settings, making it less suitable for our multi-agent driving scenarios. To address this, we introduce explicit per-camera First-Person-View (FPV) semantic masks that provide direct spatial supervision and work jointly with global BEV maps in a hierarchical encoding scheme. For each camera Ci,j, we generate FPV masks by projecting 
+
+5/35 V2XCrafter: Learning to Generate Driving Scene Across Agents 
+
+object bounding boxes onto the image plane. Given a 3D box b = ( p, s, θ) with center p ∈ R3, size s ∈ R3,and yaw θ, its corner points {vk}8 
+
+> k=1
+
+are projected to 2D coordinates uk = [ x1/x3, x2/x3]⊤ using camera intrinsics Ki,j and extrinsics [Ri,j|ti,j], where the homogeneous coordinates are calculated as: 
+
+[x1, x2, x3]⊤ = Ki,j(Ri,jvk + ti,j). (3) The resulting vector [x1, x2, x3]⊤ represents the point in homogeneous image coordinates, where x1, x2 are the pixel coordinates and x3 is the depth. The projected polygon is rasterized using convex hull operations 2
+
+to form a per-camera mask Mi,j ∈ RH×W , where each pixel encodes the object semantic class. To integrate complementary information from global road structure and local object placement, we employ dual encoders EBEV and EFPV that extract features at different semantic levels. Let B ∈ RCb ×Hb ×Wb denote the BEV map and M = {Mi,j} denote the set of all per-camera masks: 
+
+FBEV = EBEV (B), FFPV = EFPV (M). (4) The encoded features are then fused via a weighted residual connection: 
+
+Fcond = FFPV + η · FBEV , (5) where η is a weight parameter that balances the importance of FPV and BEV features. Rather than directly summing raw signals, the two encoders first map FPV masks and BEV layouts into a shared latent space, where FPV mainly governs precise object placement and BEV supplements global road topology. We provide an ablation on η in Appendix C, showing that a small residual weight yields the best trade-off. This hierarchical fusion is then injected into the UNet decoder blocks 3.
+
+4.2. Ego-view Attention 
+
+In the Stage I training, we establish a robust single-agent multi-camera synthesis model, as shown in Fig. 2c. This model leverages the ego-agent’s camera arrangement, which defines a static intra-agent view graph 
+
+Gin (i) = ( Vi, Ein ). Here, Vi = Ci are the camera vertices, and the edges Ein ⊆ V i × V i encode the fixed spatial adjacency based on field-of-view overlap. For each target camera c ∈ V i, its neighborhood is defined by the graph structure: Nin (c) = {c′ ∈ V i | (c, c′) ∈ E in }. Given the latent feature representation fc ∈ RL×D for camera c, we perform a static message passing process via a neighbor attention mechanism to facilitate information flow. The feature aggregation for camera c is formulated as: 
+
+f′ 
+
+> c
+
+= fc +∑︁ 
+
+> j∈N in (c)
+
+A(c, j) ⊙ ϕV (fj), (6) where ϕV : RL×D → RL×D is a learnable value projection, and the attention coefficient A(c, j) ∈ RL×L is computed via: 
+
+A(c, j) = Softmax (︃ ϕQ(fc) · ϕK (fj)⊤
+
+√dk)︃ , (7) with ϕQ, ϕK : RL×D → RL×dk being query and key projections, respectively. This design enables a static information flow along the fixed edges of Gin , enforcing spatial coherence across neighboring views. The pre-defined sparse connectivity ensures computation efficiency while capturing the essential geometric 
+
+> 2The convex hull of a set of points is the smallest convex polygon containing them.
+> 3This ensures robust multi-scale geometric guidance and prevents feature interference through ControlNet residual connections.
+
+6/35 V2XCrafter: Learning to Generate Driving Scene Across Agents 
+
+constraints of the single-agent setup. The updated features {f′
+
+> c
+
+}c∈V i are then processed by the UNet decoder to generate multi-view images for agent i.
+
+4.3. Cross-agent Attention Dynamic Collaboration View Graph Construction. The complete collaboration view graph G = ( V, E )
+
+comprises two disjoint subgraphs: the static intra-agent view graph Gin (used in the ego-view attention) and the dynamic cross-agent view graph Gcr , where V =⋃︀ Ni=1 Ci and E = Ein ∪ E cr . To enable our cross-agent attention, we first construct Gcr = ( V, Ecr ) where Ecr ⊆ V × V captures inter-agent spatial relationships. Let A(c) denote the agent owning camera c, and Oc the set of visible object IDs in c. We define auxiliary predicates: ∆(ci, cj) := 1A(ci )̸ =A(cj ) for cross-agent constraint, and Ω(ci, cj) := 1|F ci ∩F cj |>0 for geometric overlap where Fc denotes camera c’s frustum footprint on the BEV plane. We construct Ecr through two steps: 
+
+Step I: Object-based Connectivity Analysis. We first establish connections between cameras that share at least one jointly observed object, as these views explicitly exhibit strong semantic correlation and spatial overlap. This stage leverages object ID annotations commonly available in collaborative driving datasets to identify camera pairs that observe the same physical entities: 
+
+Eobj = {(ci, cj) | ∆(ci, cj) · 1Oci ∩O cj̸ =∅ = 1}. (8) 
+
+Step II: Geometric Overlap Reasoning. For camera pairs not connected in Step I, we perform geometric reasoning by projecting their viewing frustums onto the BEV plane. This stage captures spatial relationships between cameras that may not observe common objects but still have overlapping fields of view, which is crucial for maintaining global spatial coherence: 
+
+Egeo = {(ci, cj) /∈ Eobj | ∆(ci, cj) · Ω(ci, cj) = 1}. (9) The final edge set is Ecr = Eobj ∪ Egeo , yielding adjacency matrix W ∈ { 0, 1 }|V |×|V | with Wij = 1(ci ,cj )∈E cr .
+
+Shared-visibility ROI Masking. To enforce object-level consistency for jointly observed entities, we introduce a structured attention bias that guides cross-agent feature fusion. For each connected camera pair (ci, cj) ∈ E cr ,we partition the token space into three categories based on their spatial correspondence to 3D bounding boxes and object visibility: (1) V∗ object tokens corresponding to the shared objects marked by the learnable modifier V∗, which require strict cross-agent appearance consistency; (2) non-V∗ object tokens representing vehicle-specific objects visible only to one agent; and (3) background tokens covering road, buildings, and sky regions. We construct a dual-component attention bias matrix Mji ∈ RL×L that differentially regulates attention flow across token types: 
+
+Mji = α · Sji + β · Bji , (10) where Sji and Bji serve different roles, respectively: Sji uses strong suppression ( −τo) to isolate V∗ objects, ensuring each shared object only attends to its corresponding instance in other vehicles while blocking attention to unrelated objects; Bji applies weaker suppression ( −τb) to regularize background and non-V∗
+
+tokens. We define the following indicator functions: 1s(k, l) indicates whether tokens k and l represent the same shared object instance; 1v(k) indicates V∗ membership; 1d(k, l) indicates whether tokens k and l correspond to different objects or spatial regions (i.e., they should not strongly attend to each other); and 1v⊕(k, l) = 
+
+> 7/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+1v(k) ⊕ 1v(l) (XOR operation) captures the mixed V∗/non-V∗ pairs. The attention bias components are: 
+
+S(k,l) 
+
+> ji
+
+= −τo · [1v⊕(k, l) + 1v(k)1v(l)( 1 − 1s(k, l))] , (11) 
+
+B(k,l) 
+
+> ji
+
+= −τb · (1 − 1v(k))( 1 − 1v(l)) 1d(k, l), (12) where τo ≫ τb > 0 ensures V∗ objects receive stronger attention control than background regions. The term 1v⊕(k, l) creates a bidirectional barrier preventing information leakage between V∗ and non-V∗ tokens, while the term 1v(k)1v(l)( 1 − 1s(k, l)) blocks attention between different V∗ objects. The learnable scalars 
+
+α, and β balance the object-level consistency and the scene-level coherence. 
+
+Cross-agent Masked Attention. To account for the evolving cross-agent camera view relationships, we perform dynamic message passing on the graph Gcr . For an ego agent’s camera cj with features fj ∈ RL×D,we aggregate information from its dynamically-determined cross-agent neighbors Ncr (cj) = {ci | (cj, ci) ∈Ecr } using a masked attention mechanism: 
+
+f′′  
+
+> j
+
+=∑︁  
+
+> i∈N cr (cj)
+
+Softmax (︃ ϕQ(fj) · ϕK (fi)⊤
+
+√dk
+
++ Mji )︃ ϕV (fi). (13) The attention bias Mji modulates the attention distribution to prioritize tokens corresponding to shared objects (associated with V∗ tokens at the semantic level), thereby establishing a multi-level consistency enforcement mechanism: the V∗ token modulates object semantics through cross-attention in the UNet, while the ROI mask guides spatial feature alignment in the graph attention layer. The enhanced features f′′ 
+
+> j
+
+are then refined through a feed-forward network: 
+
+˜fj = FFN (LayerNorm (fj + f′′  
+
+> j
+
+)) , (14) enabling the model to synthesize views that are geometrically and semantically consistent across agents. The overall process of this attention is shown in Fig. 2d. 
+
+4.4. Model Training and Data Selection 
+
+Our training strategy progressively operationalizes the unified objective function defined in Section 3. Specifically, we first train the denoising model ϵθ with only the Ego-view Attention module activated. After convergence, we freeze the pre-trained ego-centric layers and finetune the model with the Cross-agent Attention Module, guided by the added cross-agent reference condition κref . To further enhance generation quality, we employ a high-quality data selection strategy to prioritize challenging training samples and a selective classifier-free guidance mechanism to balance the appearance flexibility with layout fidelity. See Appendix B for details. 
+
+## 5. Experiments 
+
+5.1. Experimental Setup Dataset. Our model is trained and evaluated on V2X-Real dataset [ 46 ]. We filtered the scene to include at least two connected and autonomous vehicles (CAVs), resulting in 11,808 training and 2,624 validation samples. We additionally generated BEV maps using OpenCOOD [ 47 ] and text descriptions via Qwen2.5-VL-7B-Instruct [1]. For details on data preprocessing, see Appendix F.       
+
+> 8/35 V2XCrafter: Learning to Generate Driving Scene Across Agents Target join tly observed objects Delete all the jointly observed objects
+> (a) Original V2XCrafter Generation (b) Shared Foreground Removal
+> (c) Shared Foreground Reposition
+> Rotate the V* Car 180 degree
+> (d) Shared Foreground Insertion
+> Add a new jointl yobserved V* Van
+> CAV 1
+> CAV 2
+> CAV 1
+> CAV 2
+> CAV 1
+> CAV 2
+> CAV 1
+> CAV 2
+
+Figure 3: Cross-agent controllability of V2XCrafter . We show the generation results under different jointly observed object conditions. 
+
+Implementation Details and Baselines. Our model builds upon Stable Diffusion v1.5 and is trained on 8 NVIDIA A800 GPUs for 150 epochs. We use a learning rate of 1e-4, a batch size of 4 per GPU, and a CFG scale of 1.5. For multi-agent camera image generation, we adapt MagicDrive-V2 [ 8 ], MagicDrive [ 7 ], and BEVControl [ 48 ] by extending them for one-shot multi-agent view generation with static intra-agent cross-view attention, denoted as MagicDrive-V2 (V2X), MagicDrive (V2X), and BEVControl (V2X). For the downstream collaborative 3D object detection task, we employ BEVFusion [ 24 ] as the base detector and AttnFuse [ 47 ] for multi-agent feature fusion. For BEV detection, we follow the dataset’s default Camera-LiDAR fusion setting, ensuring robust detection performance by leveraging multi-modal cues. For data augmentation experiments, we additionally evaluate V2VNet [ 41 ] and Late Fusion [ 14 ]. More details are in Appendix B. (b) MagicDrive (V2X) (a) BEVControl (V2X)  
+
+> (c) Ground Truth (d) V2XCrafter (Ours)
+> CAV 1
+> CAV 2
+> CAV 1
+> CAV 2
+> CAV 1
+> CAV 2
+> CAV 1
+> CAV 2
+
+Figure 4: Qualitative comparison on V2X-Real dataset. Baselines fail to keep appearance consistency for jointly observed objects (highlighted regions). In contrast, our V2XCrafter ensures coherent appearance and geometry for jointly observed objects. 
+
+Evaluation Metrics. We use Fréchet Inception Distance (FID) to measure generation realism, and mean Average Precision ( mAP 30 and mAP 50 ) to assess both layout controllability and data augmentation utility. To quantify cross-agent consistency of jointly observed objects, we report three retrieval-based metrics on CLIP (ViT-B/32) crops [ 28 ]: CLIP Similarity measures pairwise appearance agreement, Mean Reciprocal Rank (MRR) evaluates how highly the correct cross-agent match is ranked among all shared instances, and Top-1 Accuracy measures whether the correct match is retrieved at rank 1. For more details of the metrics, see 
+
+9/35 V2XCrafter: Learning to Generate Driving Scene Across Agents 
+
+Appendix D. (d) V2XCrafter (full version) (a) V2XCrafter (w/o FPV Mask Encoding) (b) V2XCrafter (w/o Cross-Agent Attention) 
+
+> (c) V2XCrafter (w/o progressive training)
+> Position Drift Object Missing
+> CAV 1
+> CAV 2
+> CAV 1
+> CAV 2
+> CAV 1
+> CAV 2
+> CAV 1
+> CAV 2
+
+Figure 5: Qualitative ablation study on key components. Green circles/boxes denote correctly generated objects/backgrounds, red or yellow circles indicate wrong object generation, and red boxes indicate inconsis-tent backgrounds. 
+
+5.2. Image Generation Results Cross-agent Shared Foreground Control. Beyond basic scene-level controls shown in Fig. 1, V2XCrafter 
+
+provides fine-grained control over shared foreground objects with cross-agent consistency. As shown in Fig. 3, we demonstrate four capabilities: (a) consistent generation of jointly observed objects; (b) removal of jointly observed objects while maintaining background coherence; (c) repositioning jointly observed objects by modifying their 3D bounding boxes; and (d) inserting new jointly observed objects at specified locations. These capabilities are enabled by our shared-visibility ROI masking mechanism, which enforces object-level correspondence during cross-agent attention. This controllability further facilitates targeted data augmentation for collaborative perception. For instance, by strategically increasing the proportion of jointly observed objects during augmentation, we observe performance gains in downstream collaborative object detection tasks. 
+
+Diversity under Random Seeds and Text-Free Conditions. By changing random seeds or removing text prompts, our V2XCrafter can generate more diverse collaborative driving scenes while preserving cross-agent consistency on shared objects. Figure 6 shows that varying seeds changes foreground attributes and background appearance across CAV 1 and CAV 2, yet jointly observed objects marked by V∗ still maintain identical appearance across agent perspectives. Figure 7 further demonstrates text-free conditional generation: even without text prompts, the model still synthesizes diverse object appearances and scene backgrounds under fixed geometric conditions. More supplementary comparisons and video generation results are provided in Appendix D and Appendix E. 
+
+Baseline Comparison. To assess image quality and control accuracy, we replace real validation images with synthesized ones aligned with annotations and evaluate a collaborative perception system utilizing BEVFusion as the detector and AttnFuse for feature fusion, pre-trained on real data. Qualitatively (Fig. 4), baselines exhibit inconsistent appearances for jointly observed objects. Quantitatively (Table 1), V2XCrafter achieves the best consistency across all three retrieval-based metrics (0.836/0.586/0.406 for Sim./MRR/Top-1) and outperforms the best baseline by 58.0% in jointly observed mAP 50 , evidencing superior cross-agent consistency. Meanwhile, the lowest FID (17.46) and a 7.5% gain in overall mAP 50 demonstrate its high-fidelity image generation quality. 
+
+10/35 V2XCrafter: Learning to Generate Driving Scene Across Agents V* Car CAV 1 CAV 2 mid -day tree -lined urban sunny modern low -rise buildings . V* Car 
+
+Figure 6: Visualization of generated images with different random seeds. With fixed text prompts and 3D bounding box conditions, varying random seeds produces diverse foreground object attributes and background appearance across CAV 1 and CAV 2. However, jointly observed objects marked by V∗ (yellow and green boxes) consistently maintain identical visual appearance across agent perspectives. CAV 2 None CAV 1 V* Bus  V* Bus 
+
+Figure 7: Text-free conditional generation results. By removing text prompts while keeping geometric conditions (3D boxes, BEV maps, camera poses), the model generates diverse appearances for both foreground objects (yellow boxes highlight the jointly observed V∗ bus) and background scenes across two vehicles’ multi-view observations, demonstrating the model’s capability to synthesize varied physical attributes under identical layout constraints. 
+
+11/35 V2XCrafter: Learning to Generate Driving Scene Across Agents 
+
+Table 1: Quantitative comparison of generation quality and cross-agent consistency. Jointly Obs. denotes detection performance on jointly observed objects. Consistency reports CLIP Similarity / MRR / Top-1 Accuracy on shared object crops across agents. The best is in bold , and the second-best is underlined .Relative gains compared to the best baseline are marked in green. Gray rows indicate results from real data (GT) for reference. 
+
+Method FID ↓ Consistency (Sim./MRR/Top-1) ↑
+
+CoDet. (Overall) CoDet. (Jointly Obs.) mAP 30 ↑ mAP 50 ↑ mAP 30 ↑ mAP 50 ↑
+
+Real GT Ref. – 0.813 / 0.656 / 0.512 38.60 32.18 47.85 40.12 Gen. BEVControl (V2X) 22.06 0.621 / 0.265 / 0.062 34.61 28.53 28.48 22.84 MagicDrive (V2X) 18.41 0.649 / 0.348 / 0.131 35.82 29.81 30.22 24.53 MagicDrive-V2 (V2X) 20.91 0.654 / 0.370 / 0.161 35.21 29.12 31.53 25.21 
+
+V2XCrafter (Ours) 17.46 0.836 / 0.586 / 0.406 38.45 +7.3% 32.05 +7.5% 47.53 +50.7% 39.82 +58.0% 
+
+Table 2: Impact of data augmentation with V2XCrafter on collaborative perception. The best results are in bold , and relative improvements over baselines (without generated data) are marked in green. 
+
+Method Overall 0-30m 30-50m 50-100m mAP 30 ↑ mAP 50 ↑ mAP 30 ↑ mAP 50 ↑ mAP 30 ↑ mAP 50 ↑ mAP 30 ↑ mAP 50 ↑
+
+AttnFuse 38.60 32.18 47.85 40.25 30.92 25.18 17.64 15.82 
+
++Gen Data 41.71 +8.1% 34.27 +6.5% 50.14 +4.8% 42.08 +4.5% 34.86 +12.7% 27.53 +9.3% 21.75 +23.3% 18.29 +15.6% 
+
+V2VNet 44.15 38.45 54.82 46.53 35.41 29.54 20.23 19.52 
+
++Gen Data 46.02 +4.2% 39.21 +2.0% 56.19 +2.5% 47.08 +1.2% 37.72 +6.5% 30.56 +3.5% 22.65 +12.0% 20.69 +6.0% 
+
+Late Fusion 29.84 20.75 37.12 25.53 23.94 16.52 13.53 10.51 
+
++Gen Data 33.48 +12.2% 22.77 +9.7% 39.91 +7.5% 27.19 +6.5% 28.37 +18.5% 18.84 +14.0% 17.86 +32.0% 13.14 +25.0% 
+
+The substantial performance gap reveals two fundamental issues in baseline approaches, which are particu-larly detrimental to multi-modal collaborative perception. First, geometric mismatch induces modality conflict. Lacking precise spatial control, baseline-generated objects frequently exhibit positional drift. This visual misalignment contradicts the precise geometric signals from depth sensors (e.g., LiDAR), causing the fusion encoder to reject the mismatched image features as noise, thus degrading detection performance. 
+
+Second, semantic inconsistency hinders collaborative fusion. Collaborative algorithms aggregate features based on semantic correspondence. When baselines render the same object with inconsistent appearances (e.g., varying textures or types) across agents, the resulting feature conflict prevents effective information aggregation. V2XCrafter addresses these root causes by enforcing strict geometric alignment and semantic coherence, producing data that is not only visually realistic but also “perceptually consistent” for down-stream fusion models. Additional quantitative results and video generation demonstrations are provided in Appendix D and Appendix E, respectively. 
+
+5.3. Data Augmentation Results 
+
+To evaluate V2XCrafter ’s utility for downstream tasks, we augment the V2X-Real training set with synthetic scenes (details in Appendix B) and measure the impact on collaborative perception. As shown in Table 2, augmenting with synthetic data consistently improves Camera-LiDAR fusion performance across all methods (+12.2%). Specifically, the significant improvement in the 50-100m range (+23.3%) highlights the efficacy 
+
+12/35 V2XCrafter: Learning to Generate Driving Scene Across Agents 
+
+Table 3: Ablation study on key components and training strategy. The best is in bold , and the second-best is underlined . Relative gains compared to the “w/o CA-Attn.” variant are marked in green. Gray rows indicate results from real data (GT) for reference. For the additional “w/o V∗” variant, FID is unavailable and thus marked as “–”.                                                                  
+
+> Method Prog. Training FPV Mask V∗CA-Attn. FID ↓CLIP Sim ↑CoDet. (Overall) CoDet. (Jointly Obs.) mAP 30 ↑mAP 50 ↑mAP 30 ↑mAP 50 ↑
+> GT Ref. (Real) –––––0.8132 38.60 32.18 47.85 40.12
+> V2XCrafter (Gen.)
+> ✓✓✓×18.01 0.6239 35.48 29.78 31.53 25.21
+> ✓✓×✓17.88 0.8154 37.25 31.92 43.25 33.68
+> ✓×✓✓28.26 0.5823 26.53 21.24 30.51 24.52
+> ×✓✓✓20.33 0.6589 35.12 29.54 44.18 37.54
+> ✓✓✓✓17.46 0.8369 38.45 +8.4% 32.05 +7.6% 47.53 +50.7% 39.82 +58.0%
+
+of our approach in addressing LiDAR sparsity. For distant objects where LiDAR point clouds are sparse, the detector relies heavily on camera features. Our generated images provide diverse and high-quality semantic cues (e.g., clear object boundaries under varying lighting) that align perfectly with the sparse LiDAR points, boosting long-range detection. Additionally, for collaborative perception feature fusion methods like AttnFuse, our cross-agent consistent generation ensures that features of jointly observed objects from different agents are semantically compatible, enabling more effective feature aggregation than inconsistent baselines. This indicates that while LiDAR provides precise geometric information, our generated images contribute complementary semantic richness (e.g., diverse object appearances and lighting conditions), which helps the model generalize better to complex scenarios. 
+
+5.4. Ablation Study Effectiveness of Key Modules. We first analyze the impact of our two core modules. As shown in Fig. 5 and Table 3, without the FPV mask , the model must rely on implicit 3D box encoding for object placement control, resulting in poor object generation and potential positional drift. This leads to a high FID of 28.26 and a significant drop in collaborative BEV detection performance (21.24% Overall mAP 50 ). This is because severely degraded or hallucinated images (Fig. 5) generate features that conflict with accurate LiDAR returns, confusing the fusion module and suppressing true positives. Fig. 5 visually confirms that objects are either distorted or misplaced. Removing the Cross-agent Attention (CA-Attn.) is equivalent to independent single-agent generation. While performing reasonably well in terms of FID (18.01), it fails to enforce consistency for jointly observed objects, resulting in a low CLIP similarity (0.6239) and poor detection performance on jointly observed objects (25.21% mAP 50 ). As seen in Fig. 5, this leads to incoherent appearances for the same object viewed by different agents. When CA-Attn. remains enabled but the learnable shared-object modifier 
+
+V∗ is removed, the model still preserves basic alignment, yet consistency and jointly observed detection both decline (CLIP Sim. 0.8154, jointly observed mAP 50 33.68). This indicates that CA-Attn. serves as the primary spatial alignment mechanism, while V∗ acts as an auxiliary semantic tag that further helps the model identify and align shared instances across agents. 
+
+Effectiveness of Progressive Training. We then evaluate our core training strategy. The setting “w/o Prog. Training” means the model is trained one-shot to generate all 8 views for two agents simultaneously. As shown in Table 3, this approach yields suboptimal performance (FID of 20.33) and lower detection accuracy (29.54% Overall mAP 50 ). This demonstrates that directly scaling up the generation task is difficult to optimize, validating the necessity of our progressive approach. More ablation studies on key hyperparameters including different CFG scales and data augmentation scales, are provided in Appendix C. 
+
+> 13/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+## 6. Conclusion 
+
+In this paper, we have introduced V2XCrafter , the first framework for collaborative driving scene generation across agents’ camera views. Our proposed two-stage progressive training strategy effectively addresses the expansion challenge of learning objective. Furthermore, the novel cross-agent attention mechanism ensures perceptual consistency for shared visibility across agent viewpoints. Experiments have confirmed that V2XCrafter generates high-fidelity, coherent scenes that boost downstream collaborative perception tasks. 
+
+Limitations and Future Work. Despite these advances, our work still has two main limitations. First, generation is confined to weather conditions seen during training. Second, Vehicle-to-Infrastructure (V2I) generation is not yet supported, primarily due to the limited view diversity of fixed RoadSide Units (RSUs) in current datasets. Future work will focus on extending the framework to these out-of-distribution conditions and incorporating V2I generation. 
+
+> 14/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+## References 
+
+[1] Shuai Bai, Keqin Chen, Xuejing Liu, Jialin Wang, Wenbin Ge, Sibo Song, Kai Dang, Peng Wang, Shijie Wang, Jun Tang, Humen Zhong, Yuanzhi Zhu, Mingkun Yang, Zhaohai Li, Jianqiang Wan, Pengfei Wang, Wei Ding, Zheren Fu, Yiheng Xu, Jiabo Ye, Xi Zhang, Tianbao Xie, Zesen Cheng, Hang Zhang, Zhibo Yang, Haiyang Xu, and Junyang Lin. Qwen2.5-vl technical report. arXiv preprint arXiv:2502.13923 ,2025. URL https://arxiv.org/abs/2502.13923 .
+
+[2] Holger Caesar, Varun Bankiti, Alex H. Lang, Sourabh Vora, Venice Erin Liong, Qiang Xu, Anush Krishnan, Yu Pan, Giancarlo Baldan, and Oscar Beijbom. nuscenes: A multimodal dataset for autonomous driving. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , June 2020. 
+
+[3] Kai Chen, Enze Xie, Zhe Chen, Yibo Wang, Lanqing HONG, Zhenguo Li, and Dit-Yan Yeung. Geodiffu-sion: Text-prompted geometric control for object detection data generation. In The Twelfth Interna-tional Conference on Learning Representations , 2024. URL https://openreview.net/forum?id= xBfQZWeDRH .
+
+[4] Alexey Dosovitskiy, German Ros, Felipe Codevilla, Antonio Lopez, and Vladlen Koltun. CARLA: An Open Urban Driving Simulator. In Proceedings of the 1st Annual Conference on Robot Learning (CoRL) ,pages 1–16, 2017. 
+
+[5] Zhengru Fang, Senkang Hu, Haonan An, Yuang Zhang, Jingjing Wang, Hangcheng Cao, Xianhao Chen, and Yuguang Fang. PACP: Priority-Aware Collaborative Perception for Connected and Autonomous Vehicles. IEEE Transactions on Mobile Computing , 23(12):15003–15018, 2024. 
+
+[6] Zhengru Fang, Yu Guo, Fei Liu, Yuang Zhang, Yihang Tao, Senkang Hu, Wenbo Ding, and Yuguang Fang. Agent-centric visual reinforcement learning under dynamic perturbations. arXiv preprint arXiv:2604.24661 , 2026. URL https://arxiv.org/abs/2604.24661 .
+
+[7] Ruiyuan Gao, Kai Chen, Enze Xie, Lanqing Hong, Zhenguo Li, Dit-Yan Yeung, and Qiang Xu. MagicDrive: Street view generation with diverse 3d geometry control. In International Conference on Learning Representations , 2024. 
+
+[8] Ruiyuan Gao, Kai Chen, Bo Xiao, Lanqing Hong, Zhenguo Li, and Qiang Xu. MagicDrive-V2: High-resolution long video generation for autonomous driving with adaptive control. In Proceedings of the IEEE/CVF International Conference on Computer Vision , 2025. 
+
+[9] Yu Guo, Yuan Gao, Yuxu Lu, Huilin Zhu, Ryan Wen Liu, and Shengfeng He. Onerestore: A universal restoration framework for composite degradation. In European conference on computer vision , pages 255–272. Springer, 2024. 
+
+[10] Yu Guo, Shengfeng He, Yuxu Lu, Haonan An, Yihang Tao, Huilin Zhu, Jingxian Liu, and Yuguang Fang. Neptune-x: Active x-to-maritime generation for universal maritime object detection. In Annual Conference on Neural Information Processing Systems , 2025. 
+
+[11] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition , pages 770–778, 2016. 
+
+[12] Martin Heusel, Hubert Ramsauer, Thomas Unterthiner, Bernhard Nessler, and Sepp Hochreiter. Gans trained by a two time-scale update rule converge to a local nash equilibrium. In Proceedings of the 31st 
+
+> 15/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+International Conference on Neural Information Processing Systems , NIPS’17, pages 6629–6640, Red Hook, NY, USA, 2017. Curran Associates Inc. ISBN 9781510860964. 
+
+[13] Jonathan Ho, Ajay Jain, and Pieter Abbeel. Denoising diffusion probabilistic models. In Proceedings of the 34th International Conference on Neural Information Processing Systems , NIPS ’20, Red Hook, NY, USA, 2020. Curran Associates Inc. ISBN 9781713829546. 
+
+[14] Senkang Hu, Zhengru Fang, Yiqin Deng, Xianhao Chen, and Yuguang Fang. Collaborative perception for connected and autonomous driving: Challenges, possible solutions and opportunities. IEEE Wireless Communications , 32(5):228–234, 2025. doi: 10.1109/MWC.002.2400348. 
+
+[15] Senkang Hu, Yihang Tao, Guowen Xu, Yiqin Deng, Xianhao Chen, Yuguang Fang, and Sam Kwong. CP-Guard: Malicious agent detection and defense in collaborative bird’s eye view perception. Proceedings of the AAAI Conference on Artificial Intelligence , 39(22):23203–23211, Apr. 2025. 
+
+[16] Ermo Hua, Che Jiang, Xingtai Lv, Kaiyan Zhang, Youbang Sun, Yuchen Fan, Xuekai Zhu, Biqing Qi, Ning Ding, and Bowen Zhou. Fourier position embedding: Enhancing attention’s periodic extension for length generalization. In Forty-second International Conference on Machine Learning , 2025. URL 
+
+https://openreview.net/forum?id=ZfDNDkg7Dh .
+
+[17] Varun Kanade, Patrick Rebeschini, and Tomasz Vaškevičiu. Exponential tail local rademacher complexity risk bounds without the bernstein condition. J. Mach. Learn. Res. , 25(1), January 2024. ISSN 1532-4435. 
+
+[18] Nupur Kumari, Bingliang Zhang, Richard Zhang, Eli Shechtman, and Jun-Yan Zhu. Multi-concept customization of text-to-image diffusion. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , 2023. 
+
+[19] Bowen Li, Xiaojuan Qi, Thomas Lukasiewicz, and Philip Torr. Controllable text-to-image gen-eration. In H. Wallach, H. Larochelle, A. Beygelzimer, F. d 'Alché-Buc, E. Fox, and R. Gar-nett, editors, Advances in Neural Information Processing Systems , volume 32. Curran Associates, Inc., 2019. URL https://proceedings.neurips.cc/paper_files/paper/2019/file/ 1d72310edc006dadf2190caad5802983-Paper.pdf .
+
+[20] Junhang Li, Yu Guo, Chuhua Xian, and Shengfeng He. Instruct2see: Learning to remove any obstructions across distributions. arXiv preprint arXiv:2505.17649 , 2025. URL https://arxiv.org/abs/2505. 17649 .
+
+[21] Yuheng Li, Haotian Liu, Qingyang Wu, Fangzhou Mu, Jianwei Yang, Jianfeng Gao, Chunyuan Li, and Yong Jae Lee. Gligen: Open-set grounded text-to-image generation. CVPR , 2023. 
+
+[22] Bo Liu, Xingchao Liu, Xiaojie Jin, Peter Stone, and Qiang Liu. Conflict-averse gradient descent for multi-task learning. In M. Ranzato, A. Beygelzimer, Y. Dauphin, P.S. Liang, and J. Wortman Vaughan, editors, Advances in Neural Information Processing Systems , volume 34, pages 18878–18890. Curran As-sociates, Inc., 2021. URL https://proceedings.neurips.cc/paper_files/paper/2021/ file/9d27fdf2477ffbff837d73ef7ae23db9-Paper.pdf .
+
+[23] Genjia Liu, Yue Hu, Chenxin Xu, Weibo Mao, Junhao Ge, Zhengxiang Huang, Yifan Lu, Yinda Xu, Junkai Xia, Yafei Wang, and Siheng Chen. Toward collaborative autonomous driving: Simulation platform and end-to-end system. IEEE Transactions on Pattern Analysis and Machine Intelligence , 47(8): 6566–6584, 2025. doi: 10.1109/TPAMI.2025.3560327. 
+
+> 16/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+[24] Zhijian Liu, Haotian Tang, Alexander Amini, Xingyu Yang, Huizi Mao, Daniela Rus, and Song Han. Bev-fusion: Multi-task multi-sensor fusion with unified bird’s-eye view representation. In IEEE International Conference on Robotics and Automation (ICRA) , 2023. 
+
+[25] Yanan Ma, Senkang Hu, Zhengru Fang, Yun Ji, Yiqin Deng, and Yuguang Fang. Sense4fl: Vehic-ular crowdsensing enhanced federated learning for object detection in autonomous driving. IEEE Transactions on Mobile Computing , pages 1–15, 2026. doi: 10.1109/TMC.2026.3674333. 
+
+[26] Chen Min, Dawei Zhao, Liang Xiao, Jian Zhao, Xinli Xu, Zheng Zhu, Lei Jin, Jianshu Li, Yulan Guo, Junliang Xing, Liping Jing, Yiming Nie, and Bin Dai. Driveworld: 4d pre-trained scene understanding via world models for autonomous driving. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pages 15522–15533, June 2024. 
+
+[27] Tai-Yu Pan, Sooyoung Jeon, Mengdi Fan, Jinsu Yoo, Zhenyang Feng, Mark Campbell, Kilian Q. Wein-berger, Bharath Hariharan, and Wei-Lun Chao. Transfer your perspective: Controllable 3d generation from any viewpoint in a driving scene. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pages 12027–12036, June 2025. 
+
+[28] Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, Gretchen Krueger, and Ilya Sutskever. Learning transferable visual models from natural language supervision. In Marina Meila and Tong Zhang, editors, 
+
+Proceedings of the 38th International Conference on Machine Learning , volume 139 of Proceedings of Machine Learning Research , pages 8748–8763. PMLR, 18–24 Jul 2021. URL https://proceedings. mlr.press/v139/radford21a.html .
+
+[29] Aditya Ramesh, Prafulla Dhariwal, Alex Nichol, Casey Chu, and Mark Chen. Hierarchical text-conditional image generation with clip latents. arXiv preprint arXiv:2204.06125 , 2022. URL 
+
+https://arxiv.org/abs/2204.06125 .
+
+[30] Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, and Björn Ommer. High-resolution image synthesis with latent diffusion models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pages 10684–10695, June 2022. 
+
+[31] Chitwan Saharia, William Chan, Saurabh Saxena, Lala Li, Jay Whang, Emily L Denton, Kamyar Ghasemipour, Raphael Gontijo Lopes, Burcu Karagol Ayan, Tim Salimans, Jonathan Ho, David J Fleet, and Mohammad Norouzi. Photorealistic text-to-image diffusion models with deep language understanding. In S. Koyejo, S. Mohamed, A. Agarwal, D. Belgrave, K. Cho, and A. Oh, editors, 
+
+Advances in Neural Information Processing Systems , volume 35, pages 36479–36494. Curran Asso-ciates, Inc., 2022. URL https://proceedings.neurips.cc/paper_files/paper/2022/ file/ec795aeadae0b7d230fa35cbaf04c041-Paper-Conference.pdf .
+
+[32] Pei Sun, Henrik Kretzschmar, Xerxes Dotiwalla, Aurelien Chouard, Vijaysai Patnaik, Paul Tsui, James Guo, Yin Zhou, Yuning Chai, Benjamin Caine, Vijay Vasudevan, Wei Han, Jiquan Ngiam, Hang Zhao, Aleksei Timofeev, Scott Ettinger, Maxim Krivokon, Amy Gao, Aditya Joshi, Yu Zhang, Jonathon Shlens, Zhifeng Chen, and Dragomir Anguelov. Scalability in perception for autonomous driving: Waymo open dataset. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) ,June 2020. 
+
+[33] Alexander Swerdlow, Runsheng Xu, and Bolei Zhou. Street-view image generation from a bird’s-eye view layout. IEEE Robotics and Automation Letters , 9(4):3578–3585, 2024. doi: 10.1109/LRA.2024.3368234. 
+
+> 17/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+[34] Yihang Tao, Jun Wu, Xi Lin, Shahid Mumtaz, and Soumaya Cherkaoui. Digital twin and drl-driven semantic dissemination for 6g autonomous driving service. In GLOBECOM 2023 - 2023 IEEE Global Com-munications Conference , pages 2075–2080, 2023. doi: 10.1109/GLOBECOM54140.2023.10437455. 
+
+[35] Yihang Tao, Jun Wu, Xi Lin, and Wu Yang. Drl-driven digital twin function virtualization for adaptive service response in 6g networks. IEEE Networking Letters , 5(2):125–129, 2023. doi: 10.1109/LNET. 2023.3269766. 
+
+[36] Yihang Tao, Jun Wu, Qianqian Pan, Ali Kashif Bashir, and Marwan Omar. O-ran-based digital twin function virtualization for sustainable iov service response: An asynchronous hierarchical reinforcement learning approach. IEEE Transactions on Green Communications and Networking , 8(3):1049–1060, 2024. doi: 10.1109/TGCN.2024.3435796. 
+
+[37] Yihang Tao, Senkang Hu, Zhengru Fang, and Yuguang Fang. Directed-cp: Directed collaborative perception for connected and autonomous vehicles via proactive attention. In 2025 IEEE International Conference on Robotics and Automation (ICRA) , pages 7004–7010, 2025. doi: 10.1109/ICRA55743. 2025.11127818. 
+
+[38] Yihang Tao, Senkang Hu, Haonan An, Zhengru Fang, Hangcheng Cao, and Yuguang Fang. Learning mutual view information graph for adaptive adversarial collaborative perception. arXiv preprint arXiv:2602.19596 , 2026. URL https://arxiv.org/abs/2602.19596 .
+
+[39] Yihang Tao, Senkang Hu, Yue Hu, Haonan An, Hangcheng Cao, and Yuguang Fang. Gcp: Guarded collaborative perception with spatial-temporal aware malicious agent detection. IEEE Transactions on Dependable and Secure Computing , pages 1–14, 2026. doi: 10.1109/TDSC.2026.3693684. 
+
+[40] Runqi Wang, Linlin Yang, Baochang Zhang, Wentao Zhu, David Doermann, and Guodong Guo. Con-fidence dimension for deep learning based on hoeffding inequality and relative evaluation. arXiv preprint arXiv:2203.09082 , 2022. URL https://arxiv.org/abs/2203.09082 .
+
+[41] Tsun-Hsuan Wang, Sivabalan Manivasagam, Ming Liang, Bin Yang, Wenyuan Zeng, and Raquel Urtasun. V2VNet: Vehicle-to-Vehicle Communication for Joint Perception and Prediction. In European Conference on Computer Vision (ECCV) , pages 605–621, 2020. 
+
+[42] Xiaofeng Wang, Zheng Zhu, Guan Huang, Xinze Chen, Jiagang Zhu, and Jiwen Lu. Drive-dreamer: Towards real-world-drive world models for autonomous driving. In Computer Vision -ECCV 2024: 18th European Conference, Milan, Italy, September 29-October 4, 2024, Proceedings, Part XLVIII , pages 55–72, Berlin, Heidelberg, 2024. Springer-Verlag. ISBN 978-3-031-73194-5. doi: 10.1007/978-3-031-73195-2_4. URL https://doi.org/10.1007/978-3-031-73195-2_4 .
+
+[43] Yuxi Wei, Zi Wang, Yifan Lu, Chenxin Xu, Changxing Liu, Hao Zhao, Siheng Chen, and Yanfeng Wang. Editable scene simulation for autonomous driving via collaborative llm-agents. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , June 2024. 
+
+[44] Jay Zhangjie Wu, Yixiao Ge, Xintao Wang, Stan Weixian Lei, Yuchao Gu, Yufei Shi, Wynne Hsu, Ying Shan, Xiaohu Qie, and Mike Zheng Shou. Tune-a-video: One-shot tuning of image diffusion models for text-to-video generation. In Proceedings of the IEEE/CVF International Conference on Computer Vision ,pages 7623–7633, 2023. 
+
+[45] Hao Xiang, Runsheng Xu, Xin Xia, Zhaoliang Zheng, Bolei Zhou, and Jiaqi Ma. V2xp-asg: Generating adversarial scenes for vehicle-to-everything perception. In 2023 IEEE International Conference on Robotics and Automation (ICRA) , pages 3584–3591, 2023. doi: 10.1109/ICRA48891.2023.10161384. 
+
+> 18/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+[46] Hao Xiang, Zhaoliang Zheng, Xin Xia, Runsheng Xu, Letian Gao, Zewei Zhou, Xu Han, Xinkai Ji, Mingxi Li, Zonglin Meng, Li Jin, Mingyue Lei, Zhaoyang Ma, Zihang He, Haoxuan Ma, Yunshuang Yuan, Yingqian Zhao, and Jiaqi Ma. V2x-real: A largs-scale dataset for vehicle-to-everything cooperative perception. In Computer Vision - ECCV 2024: 18th European Conference, Milan, Italy, September 29-October 4, 2024, Proceedings, Part LII , pages 455–470, Berlin, Heidelberg, 2024. Springer-Verlag. ISBN 978-3-031-72942-3. 
+
+[47] Runsheng Xu, Hao Xiang, Xin Xia, Xu Han, Jinlong Li, and Jiaqi Ma. OPV2V: An Open Benchmark Dataset and Fusion Pipeline for Perception with Vehicle-to-Vehicle Communication. In 2022 Interna-tional Conference on Robotics and Automation (ICRA) , pages 2583–2589, Philadelphia, PA, USA, May 2022. IEEE. 
+
+[48] Kairui Yang, Enhui Ma, Jibin Peng, Qing Guo, Di Lin, and Kaicheng Yu. Bevcontrol: Accurately controlling street-view elements with multi-perspective consistency via bev sketch layout. arXiv preprint arXiv:2308.01661 , 2023. URL https://arxiv.org/abs/2308.01661 .
+
+[49] Lvmin Zhang, Anyi Rao, and Maneesh Agrawala. Adding conditional control to text-to-image diffusion models. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) , pages 3836–3847, October 2023. 
+
+[50] Wenliang Zhao, Lujia Bai, Yongming Rao, Jie Zhou, and Jiwen Lu. Unipc: A unified predictor-corrector framework for fast sampling of diffusion models. NeurIPS , 2023. 
+
+[51] Guangcong Zheng, Xianpan Zhou, Xuewei Li, Zhongang Qi, Ying Shan, and Xi Li. Layoutdiffusion: Controllable diffusion model for layout-to-image generation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pages 22490–22499, June 2023. 
+
+[52] Yupeng Zheng, Pengxuan Yang, Zebin Xing, Qichao Zhang, Yuhang Zheng, Yinfeng Gao, Pengfei Li, Teng Zhang, Zhongpu Xia, Peng Jia, XianPeng Lang, and Dongbin Zhao. World4drive: End-to-end autonomous driving via intention-aware physical latent world model. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) , pages 28632–28642, October 2025. 
+
+> 19/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+# V2XCrafter: Learning to Generate Driving Scene Across Agents 
+
+Supplementary Material 
+
+Contents A Analysis of Training Strategy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20 
+
+A.1 Challenges of Joint Multi-Agent Denoising . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21 A.2 Progressive Two-Stage Decomposition . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23 
+
+B More Implementation Details . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24 
+
+B.1 Implementation Details . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24 B.2 Baseline Implementation Details . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24 B.3 Data Selection Strategy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24 B.4 Classifier-Free Guidance (CFG) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25 B.5 Data Augmentation Details . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25 
+
+C More Ablation Studies . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25 
+
+C.1 Ablation on CFG Scale . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25 C.2 Ablation on Data Augmentation Scale . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26 C.3 Ablation on FPV-BEV Fusion Weight . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26 C.4 Competitor Utility Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26 
+
+D Experimental Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26 
+
+D.1 Evaluation Metrics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .26 D.2 More Generation Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .27 D.3 More Results on Collaborative Detection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28 
+
+E Extension to Video Generation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31 F More Details of Data Preprocessing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32 
+
+F.1 Scene Filtering . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .32 F.2 FPV Mask Generation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32 F.3 BEV Map Generation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33 F.4 Driving Scene Description Generation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33 
+
+G More Discussion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34 
+
+## A. Analysis of Training Strategy 
+
+We analyze why our progressive two-stage training strategy improves trainability compared to directly learning multi-agent multi-view generation. We first provide empirical evidence demonstrating the training convergence failure of naive multi-agent extension, then present a theoretical analysis showing how decom-posing the joint denoising problem into sequential conditional optimizations significantly reduces training difficulty in the DDPM framework. 
+
+> 20/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+A.1. Challenges of Joint Multi-Agent Denoising Empirical Evidence. We train MagicDrive [ 7] with identical hyperparameters on two V2X-Real variants: (i) single-agent dataset with N = 1 (1 ×4 views), derived by masking CAV2 data, and (ii) dual-agent dataset with N = 2 (2 ×4 views), using complete V2X-Real. As shown in Figure 8, single-agent training converges by epoch 150, producing high-quality street-view images with clear object boundaries and consistent multi-view geometry. In contrast, dual-agent training exhibits severe convergence failure: generated images remain blurry with fragmented objects and inconsistent cross-agent appearance even after 150 epochs. This empirical evidence confirms that naive joint multi-agent multi-view generation faces fundamental optimization difficulties. Ground Truth   
+
+> MagicDrive (V2X) [2×4 views ]
+> Epoch = 75 Epoch = 150
+> MagicDrive [1×4 views ]
+> Epoch = 0
+> Training Step
+> CAV 1
+> CAV 2
+> CAV 1
+
+Figure 8: Empirical evidence of training convergence failure in naive multi-agent extension. While MagicDrive trained on single-agent data (left) converges well, the same model trained on dual-agent data (right) fails to produce coherent results, demonstrating the necessity of a progressive training strategy. 
+
+Theoretical Analysis. Joint training optimizes over all N agents simultaneously. For N agents with M
+
+cameras each, the DDPM objective is: 
+
+Ljoint = Ez1: N,0 ,ϵ,t[︃ 
+
+> N
+
+∑︁ 
+
+> i=1
+
+|| ϵi − ϵθ (z1: N,t, t, S, P1: N , G)|| 2]︃ , (15) where z1: N,t = {z1, t, . . . , zN,t} are noisy latents for all N × M views at timestep t.
+
+Decomposition of View Relationships. Multi-agent scenes contain two types of view relationships: (1) intra-agent relationships Rin between cameras on the same vehicle (static, frame-invariant), and (2) cross-agent 
+
+21/35 V2XCrafter: Learning to Generate Driving Scene Across Agents 
+
+relationships Rcr between cameras on different vehicles (dynamic, frame-varying). Following the principle of additive noise decomposition in denoising diffusion models [ 13 ], the predicted noise can be decomposed as: 
+
+ϵθ (z, Rin , Rcr ) = ϵRin  
+
+> θ
+
+(z, Rin ) + ϵRcr  
+
+> θ
+
+(z, Rcr ) + ϵres , (16) where ϵRin  
+
+> θ
+
+captures noise conditioned on static intra-agent consistency, ϵRcr  
+
+> θ
+
+captures noise conditioned on dynamic cross-agent correlations, and ϵres represents residual interactions. In joint training, the network implicitly learns all three terms simultaneously, where ϵres encodes the coupling between static and dynamic relationships. 
+
+Challenge 1: Entangled Relationship Learning. We quantify learning complexity using the Rademacher complexity framework [17]. For a view relationship graph R with edge set E, define complexity as: 
+
+C(R) = |E | · Eframes [Var (E )] , (17) where |E | measures model capacity requirements and Var (E ) measures the variance of edge patterns across frames. For intra-agent relationships, Var (Rin ) ≈ 0 (fixed camera configurations), while for cross-agent relationships, Var (Rcr ) ≫ 0 (varying agent positions). By the law of total variance, joint learning complexity is: 
+
+C(Ljoint ) = C(Rin ) + C(Rcr ) + 2√︁ C(Rin ) · C (Rcr )
+
+⏟ ⏞
+
+> Ccouple >0
+
+, (18) where the coupling term Ccouple arises from learning interactions between static and dynamic patterns. Since 
+
+Ccouple scales with √N (number of agents), joint training becomes increasingly difficult as the fleet size grows. 
+
+Challenge 2: Gradient Interference. The gradient aggregates signals from all agents: 
+
+∇θ Ljoint =
+
+> N
+
+∑︁ 
+
+> i=1
+
+E[︀ ∇θ || ϵi − ϵθ (z1: N,t, · · · )|| 2]︀ . (19) To analyze gradient conflicts, we define idealized gradient components: let ¯gin = 1
+
+> N
+
+∑︀ Ni=1 ∇θ LRin  
+
+> i
+
+represent the average gradient if training focused solely on intra-agent relationships, and ¯gcr = 1
+
+> N
+
+∑︀ Ni=1 ∇θ LRcr  
+
+> i
+
+for cross-agent relationships. Following multi-task learning theory [ 22 ], gradients are considered conflicting if their cosine similarity is low or negative: 
+
+cos ( ¯gin , ¯ gcr ) = ⟨ ¯gin , ¯ gcr ⟩∥ ¯gin ∥ · ∥ ¯gcr ∥ ≈ 0 or < 0. (20) When cos ( ¯gin , ¯ gcr ) ≤ 0, the two objectives push parameters in orthogonal or opposite directions. In this case, the effective gradient magnitude becomes: 
+
+∥ ¯gin + ¯gcr ∥2 = ∥ ¯gin ∥2 + ∥ ¯gcr ∥2 + 2⟨ ¯gin , ¯ gcr ⟩ ≤ ∥ ¯gin ∥2 + ∥ ¯gcr ∥2, (21) which is significantly smaller than the case where gradients align ( ⟨ ¯gin , ¯ gcr ⟩ > 0). For multi-agent driving scenes, gradient conflict arises because: (1) static intra-agent patterns (fixed camera overlap) dominate early training, producing large ∥ ¯gin ∥, while (2) dynamic cross-agent patterns (frame-varying visibility) require different parameter updates, producing ¯gcr that conflicts with ¯gin . This results in oscillating updates where progress on one objective degrades performance on the other, as empirically observed in Figure 8. 
+
+22/35 V2XCrafter: Learning to Generate Driving Scene Across Agents 
+
+A.2. Progressive Two-Stage Decomposition 
+
+We decompose Ljoint into sequential optimizations that learn Rin and Rcr separately. 
+
+Stage 1: Learning Static Intra-Agent View Relationships. Train on single agents: 
+
+Lstage1 = Ezi,0 ,ϵ,t[︀ || ϵ − ϵθ1 (zi,t, t, S, Pi, Gin (i)) || 2]︀ . (22) The gradient simplifies to: 
+
+∇θ1 Lstage1 = E[︀ ∇θ1 || ϵ − ϵθ1 (zi,t, · · · )|| 2]︀ , (23) eliminating inter-agent gradient interference ( gcr = 0 in Stage 1). By Hoeffding’s inequality [ 40 ], since 
+
+Gin (i) is frame-invariant (bounded variance), the gradient variance is bounded: Var (∇θ1 Lstage1 ) ≤ σ2
+
+B , where σ2 = E[∥ϵ − ϵθ1 ∥2], (24) and B is batch size. This is significantly lower than joint training: Var (∇θ1 Lstage1 ) ≪ Var (∇θ Ljoint ), ensuring stable convergence. 
+
+Stage 2: Learning Dynamic Cross-Agent View Relationships. Freeze θ1 and train cross-agent attention ϕ:
+
+Lstage2 = Ezi,0 ,ϵ,t[︀ || ϵ − ϵθ1,ϕ(zi,t, · · · , h−i, Gcr (i)) || 2]︀ , (25) where h−i = Enc θ1 (z−i,0 ) with frozen θ1. Following residual learning theory [ 11 ], this models a refinement: 
+
+ϵθ1,ϕ(zi,t, · · · , h−i) = ϵθ1 (zi,t, · · · )
+
+⏟ ⏞
+
+> fixed intra-agent
+
++ ∆ϵϕ(h−i, Gcr (i)) 
+
+⏟ ⏞
+
+> learnable cross-agent
+
+, (26) where ∆ϵϕ captures only cross-agent correlations without re-learning Rin . Since θ1 is frozen, ∂ϵ θ1 
+
+> ∂ϕ
+
+= 0,ensuring gradient orthogonality: 
+
+∇ϕLstage2 = E[︀ ∇ϕ∥∆ϵϕ(h−i, Gcr )∥2]︀ , Cov (gθ1 , gϕ) = 0. (27) This eliminates gradient interference between static and dynamic relationship learning. 
+
+Complexity Reduction. The two-stage approach achieves complexity reduction through decoupling. From Eq. (18), joint training has: 
+
+C(Ljoint ) = C(Rin ) + C(Rcr ) + 2√︁ C(Rin ) · C (Rcr ). (28) In contrast, sequential training satisfies: 
+
+C(Lstage1 ) + C(Lstage2 ) = C(Rin ) + C(Rcr ), (29) since the coupling term vanishes: Ccouple = 0 (orthogonal parameter spaces). Define the relative complexity reduction ratio as: 
+
+ρreduce := C(Ljoint ) − [C(Lstage1 ) + C(Lstage2 )] 
+
+C(Ljoint ) = 2√︀ C(Rin ) · C (Rcr )
+
+C(Rin ) + C(Rcr ) + 2√︀ C(Rin ) · C (Rcr ) , (30) where ρreduce measures the fraction of learning complexity eliminated by decoupling. This ratio approaches 
+
+23/35 V2XCrafter: Learning to Generate Driving Scene Across Agents 
+
+50% when C(Rin ) ≈ C (Rcr ). Additionally, from Eq. (27), gradient orthogonality ensures: Tr (Cov (gθ1 , gϕ)) = 0, (31) eliminating gradient interference ( βinterf = 0). This transforms implicit joint learning into explicit conditional generation with clear supervision from frozen neighbor features h−i, as validated by Figure 8. 
+
+## B. More Implementation Details 
+
+B.1. Implementation Details 
+
+Our model initializes its weights from the pre-trained Stable Diffusion v1.5 [ 30 ] and only trains the newly added parameters. V2XCrafter was trained on a server equipped with 2 Intel(R) Xeon(R) Platinum 8200C CPUs and 8 NVIDIA A800-SXM4-80GB GPUs. We set the learning rate to 1e-4 and used a batch size of 4 per GPU. The model was trained for 150 epochs (100 for stage I and 50 for stage II), which took approximately 38 hours to complete. The output image resolution for each of the 8 camera views (from 2 CAVs) is 272x480. For inference, we use a CFG guidance scale of 1.5 and 50 diffusion steps. For the downstream collaborative 3D object detection task, we employ BEVFusion [ 24 ] as the base detector for each vehicle and use AttnFuse [47 ] for multi-agent feature fusion. For data augmentation experiments, we additionally evaluate V2VNet [41 ] and Late Fusion [ 14 ] baselines, testing both camera-only (C) and camera-LiDAR (C+L) configurations. 
+
+B.2. Baseline Implementation Details 
+
+To the best of our knowledge, no prior work has addressed the task of multi-agent collaborative driving scene generation. Therefore, we establish baselines by adapting state-of-the-art single-agent driving scene generation models. We select three representative methods, MagicDrive [ 7 ], MagicDrive-V2 [ 8], and BEVControl [ 48 ], which are originally designed for single-vehicle six-view generation on Nuscenes dataset [ 2 ]. We retain their original single-vehicle cross-view attention with fixed neighbor camera view pairs and extend them to generate eight views from two vehicles simultaneously. We denote these adapted versions as MagicDrive (V2X), MagicDrive-V2 (V2X), and BEVControl (V2X), respectively, and retrain them on our processed V2X-Real dataset. Note that MagicDrive and MagicDrive-V2 originally do not use FPV mask encoding as an explicit control signal. However, we found that without FPV masks, these models completely fail to converge on the V2X-Real dataset. For fair comparison, we augment them with explicit FPV mask conditioning using the same masks generated in our preprocessing pipeline (see Appendix F.2). 
+
+B.3. Data Selection Strategy 
+
+To ensure training data quality, we adopt a filtering and selection pipeline inspired by [ 10 ]. We evaluate generated samples from two perspectives: semantic consistency by computing CLIP similarity between generated images and text descriptions, and layout accuracy by using a pre-trained ResNet classifier to verify object categories within bounding boxes. We then employ an active sampling strategy to prioritize challenging samples with higher training difficulty across multiple attributes including viewpoint, location, and environment. For multi-agent multi-view generation, we aggregate difficulty scores across all cameras from all vehicles to select top-k instances that most effectively improve cross-agent consistency. 
+
+> 24/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+B.4. Classifier-Free Guidance (CFG) 
+
+We employ a selective CFG strategy where scene-level conditions such as camera poses and text descriptions are randomly dropped during training at rate γ, while object-level conditions including 3D bounding boxes, BEV maps, and FPV masks are always retained. This ensures flexible control over scene appearance while maintaining strict spatial layout accuracy. 
+
+B.5. Data Augmentation Details Camera-Only Augmentation. For camera-only (C) data augmentation, we generate synthetic samples by randomly recombining and modifying control conditions from the original training set. Specifically, we randomly sample text prompts, BEV maps, camera poses, and 3D bounding boxes from different frames and combine them to create diverse driving scenarios. We also introduce controlled variations to these conditions, such as adjusting object positions, modifying lighting and weather descriptions in text prompts, and changing scene layouts. This strategy significantly increases scene diversity and is particularly effective for camera-only perception, which benefits from expanded visual coverage and varied environmental conditions. 
+
+Camera-LiDAR Augmentation. For camera-LiDAR (C+L) data augmentation, downstream collaborative detection models require strict geometric alignment between generated RGB images and the original LiDAR point clouds. To maintain this alignment, we fix the 3D bounding box conditions to match the original LiDAR data, ensuring that object positions and sizes remain consistent. However, we still modify other control signals, including text prompts (to change weather, lighting), to introduce visual variation while preserving geometric layouts. This approach generates appearance-diverse training data that maintains geometric compatibility with the original LiDAR measurements, enabling effective multi-modal training without breaking sensor fusion constraints. 
+
+## C. More Ablation Studies 
+
+C.1. Ablation on CFG Scale (a) Effect of Different CFG Scales 
+
+> (b) Effect of Different Data Augmentation Scales
+
+Figure 9: Ablation studies on key hyperparameters. We conduct ablation studies to investigate two key hyperparameters: CFG scale and data augmenta-tion scale. Results are shown in Figure 9. For CFG scale (Figure 9(a)), we evaluate FID for image qual-ity and mAP for layout controllability. As observed, a CFG scale of 1.5 achieves the highest mAP scores (11.11 for mAP@30 and 9.15 for mAP@50), in-dicating optimal adherence to input layout condi-tions. While a scale of 2.0 yields slightly better FID (17.31 vs. 17.46), its mAP is lower. Increasing the scale beyond 2.0 degrades both metrics, suggesting overly strong guidance harms diversity and quality. Therefore, we select CFG scale of 1.5 for our main experiments. 
+
+25/35 V2XCrafter: Learning to Generate Driving Scene Across Agents 
+
+C.2. Ablation on Data Augmentation Scale 
+
+For data augmentation scale (Figure 9(b)), we vary the ratio of generated synthetic data size relative to the original training set size. The default ratio is 1.0, meaning the synthetic data equals the original training data in size. Results show that increasing augmentation scale consistently improves collaborative perception performance. At scale 1.5, mAP@30 reaches 14.62% (+29.8% relative improvement) and mAP@50 reaches 12.92%, demonstrating the value of large-scale synthetic data. Beyond scale 1.5, performance continues to improve but with diminishing returns. This saturation phenomenon suggests that the model has already learned relevant features from existing samples, and further increasing data volume alone provides limited additional information. To achieve further improvements, more effective sample selection strategies that prioritize diverse and challenging scenarios would be needed, which presents an interesting direction for future work. 
+
+C.3. Ablation on FPV-BEV Fusion Weight 
+
+As discussed in Section 4.1, FPV masks and BEV maps provide complementary geometric cues: FPV primarily governs precise object placement, while BEV supplies global road topology. We therefore ablate the residual fusion weight η in Eq. (5) to study how these two signals should be balanced. As shown in Table 4, η = 0.1 
+
+achieves the best trade-off between image realism and cross-agent consistency. When η = 0, the model underuses global road context; when η becomes too large, coarse BEV layouts begin to overwhelm the more precise local guidance from FPV masks, degrading both FID and CLIP similarity. 
+
+Table 4: Ablation on the FPV-BEV fusion weight η in Eq. (5). 
+
+η Value 0.0 0.05 0.1 (Ours ) 0.5 1.0
+
+FID ↓ / CLIP Sim. ↑ 17.94 / 0.835 17.62 / 0.821 17.46 / 0.836 18.52 / 0.798 19.35 / 0.764 
+
+C.4. Competitor Utility Analysis 
+
+Generation quality can strongly affect downstream augmentation utility. To examine this effect, we augment the AttnFuse detector with synthetic data produced by three adapted baselines and a degraded internal variant (“w/o CA&V*”), then compare them against our full model. As shown in Table 5, only the full model yields clear positive gains, while lower-quality synthetic data provides negligible benefit or even degrades detection performance. This suggests that cross-agent appearance inconsistency and geometric misalignment can act as semantic noise during collaborative fusion training. 
+
+## D. Experimental Results 
+
+D.1. Evaluation Metrics 
+
+This section describes the metrics employed to evaluate our generation quality, including mean Average Pre-cision (mAP) for object detection evaluation, Fréchet Inception Distance (FID) for image realism assessment, and three retrieval-based consistency metrics for jointly observed objects across agents. 
+
+Mean Average Precision (mAP): mAP is a standard metric for evaluating object detection performance. The computation follows these steps: First, predicted bounding boxes are classified as True Positives (TP) or False Positives (FP) by comparing their Intersection-over-Union (IoU) with ground truth boxes against a predefined threshold. Second, predictions are ranked by confidence scores to construct the Precision-Recall 
+
+> 26/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+Table 5: Impact of different generated data sources on downstream collaborative perception utility.                       
+
+> Augmentation Data None Inferior Competitors / Variants Full Model
+> + BEVControl (V2X) + MagicDrive (V2X) + MagicDrive-V2 (V2X) + w/o CA&V* (Ours) Overall mAP 30/50 ↑38.60 / 32.18 36.82 / 30.43 38.15 / 31.74 38.31 / 31.85 38.84 / 31.92 41.71 /34.27 Relative ∆–-1.78 / -1.75 -0.45 / -0.44 -0.29 / -0.33 +0.24 / -0.26 +3.11 / +2.09
+
+(P-R) curve. Third, the Average Precision (AP) for each object class is computed as the area under its P-R curve. Finally, mAP is obtained by averaging AP values across all classes. In our experiments with V2X-Real dataset, we report two variants: mAP 50 uses a single IoU threshold of 0.5, following the PASCAL VOC convention, while mAP 30 uses a threshold of 0.3, which is more suitable for collaborative perception scenarios where localization requirements may be relaxed due to communication constraints. These metrics reflect both the detection accuracy across object categories and the localization precision of the generated scenes. 
+
+Fréchet Inception Distance (FID): FID [ 12 ] is a widely adopted metric for evaluating generative models by measuring the statistical distribution discrepancy between generated and real images in feature space. The computation involves two stages: feature extraction and distribution distance calculation. First, FID extracts deep feature representations fgen , fgt from generated and ground truth images using a pre-trained Inception-v3 network. Then, it computes the mean {μgen , μgt } and covariance matrices {Σgen , Σgt } of these features. The FID score is calculated as: FID = ∥μgen − μgt ∥2 + Tr (︁ Σgen + Σgt − 2(Σgen Σgt )1/2 )︁ , (32) where ∥ · ∥ 2 denotes the squared Euclidean norm and Tr (·) is the matrix trace operator. Lower FID values indicate better generation quality with closer distribution alignment to real data. 
+
+CLIP Similarity: To evaluate the semantic consistency of jointly observed objects across different agents, we first extract image crops of the shared objects using projected 2D bounding boxes, then encode these crops with the pre-trained CLIP ViT-B/32 model [ 28 ]. CLIP Similarity is computed as the cosine similarity between the averaged embeddings of the same object from two agents. Higher values indicate better cross-agent appearance consistency. 
+
+Mean Reciprocal Rank (MRR): CLIP Similarity only measures pairwise agreement for matched object pairs. To further evaluate whether the correct cross-agent correspondence can be distinguished from all other shared objects in the same scene, we formulate a retrieval task. For each shared object crop from Agent A, we rank all shared object crops from Agent B by CLIP cosine similarity, and record the reciprocal rank of the true match. MRR averages this reciprocal rank over all shared objects. A higher MRR means the correct cross-agent match is ranked closer to the top more consistently. 
+
+Top-1 Accuracy: Based on the same retrieval protocol as MRR, Top-1 Accuracy measures the fraction of queries for which the correct cross-agent object is ranked first among all candidate shared objects from the other agent. Compared with CLIP Similarity and MRR, Top-1 is a stricter metric, since it requires exact rank-1 retrieval rather than just high similarity or near-top ranking. Higher Top-1 Accuracy indicates more reliable instance-level consistency across agents. 
+
+D.2. More Generation Results More Baseline Comparison. We supplement the main paper (Figure 4) with qualitative comparisons against MagicDrive-V2 (V2X) in Figure 10. Note that MagicDrive-V2 is originally designed for video generation. We adapt it for single-frame synthesis by removing temporal layers while preserving its spatial control capabilities, 
+
+27/35 V2XCrafter: Learning to Generate Driving Scene Across Agents 
+
+ensuring the same generation resolution as our method. Although MagicDrive-V2 (V2X) generates plausible scenes, it fails to maintain cross-agent consistency for jointly observed objects, leading to conflicting semantic features. This visual discrepancy aligns with its lower CLIP similarity (0.6541) in Table 1, further validating the necessity of our cross-agent attention for coherent multi-agent generation. 
+
+Figure 10: Qualitative results of MagicDrive-V2 (V2X). The model fails to ensure appearance consistency for jointly observed objects across agents. 
+
+D.3. More Results on Collaborative Detection Camera-Only Results. As discussed in the main paper, we primarily target Camera+LiDAR (C+L) mode for BEV object Detection and collaborative perception, adhering to the V2X-Real dataset’s default configuration where minimal overlap of 4 surrounding cameras each vehicle makes multi-modal fusion essential. To ensure experimental completeness, we provide additional results using the Camera-only (C) setting here. Table 6 presents the generation quality with pretrained camera-only BEVFusion model, while Table 7 details the ablation study. Moreover, Table 8 reports fine-grained camera-only augmentation results on Easy / Moderate / Hard subsets. Specifically, we reorganize the V2X-Real validation set into Easy (28.9%), Moderate (24.4%), and Hard (46.7%) subsets according to 3D pose estimation difficulty, mainly considering factors such as object distance, occlusion level, and road slope. The results show that V2XCrafter -generated data consistently benefits camera-only collaborative perception across different difficulty levels. These results follow similar trends to the C+L setting, further validating the effectiveness of our method. 
+
+Table 6: Quantitative comparison of generation quality in C mode. The best is in bold , and the second-best is underlined . Relative gains compared to the best baseline are marked in green. Gray rows indicate results from real data (GT) for reference.   
+
+> Method Views FID
+
+↓ CoDetection (Camera-only) 
+
+> mAP 30
+
+↑ mAP 50 ↑      
+
+> Real GT Ref. ––11.48 9.77 Gen. BEVControl (V2X) 1
+
+×6 → 2×4 22.06 8.45 7.45 MagicDrive (V2X) 1×6 → 2×4 18.41 9.78 8.52 MagicDrive-V2 (V2X) 1×6 → 2×4 20.91 9.02 7.92  
+
+> V2XCrafter (Ours) 2
+
+×4 17.46 11.11 +13.6% 9.15 +7.4% 
+
+Detailed Analysis on Collaborative Detection. To understand how our V2XCrafter -generated data impacts collaborative perception across object categories, we present per-class performance analysis using AttFuse on V2X-Real. Tables 10 and 11 compare training with real data only versus augmenting with 
+
+> 28/35
+
+V2XCrafter: Learning to Generate Driving Scene Across Agents 
+
+Table 7: Ablation study on key components and training strategy in camera-only mode. The best is in bold ,and the second-best is underlined . Relative gains compared to the best variant are marked in green. Gray rows indicate results from real data (GT) for reference. 
+
+Method Prog. Training FPV Mask V∗ CA-Attn. FID ↓ CoDetection (Camera-only) 
+
+mAP 30 ↑ mAP 50 ↑
+
+GT Ref. (Real) – – – – – 11.48 9.77 
+
+V2XCrafter (Gen.) 
+
+✓ ✓ ✓ × 18.01 9.92 8.53 
+
+✓ ✓ × ✓ 17.88 10.83 9.11 
+
+✓ × ✓ ✓ 28.26 7.02 6.53 
+
+× ✓ ✓ ✓ 20.33 8.15 7.24 
+
+✓ ✓ ✓ ✓ 17.46 11.11 +12.0% 9.15 +7.3% 
+
+Table 8: Fine-grained camera-only collaborative perception results on Easy / Moderate / Hard subsets. The V2X-Real validation set is reorganized according to 3D pose estimation difficulty following our rebuttal protocol. Green numbers indicate improvements, while red numbers indicate degradations.                                                           
+
+> Method Vehicle (AP@30/50) Overall (mAP@30/50) Easy Moderate Hard Easy Moderate Hard
+> AttnFuse 34.21/16.48 16.89/14.33 14.67/12.44 29.18/13.57 12.54/10.04 9.58/7.21
+> + Ours 38.68/19.84 (+4.47/+3.36) 19.83/17.59 (+2.94/+3.26) 16.21 /11.66 (+1.54)/(-0.78) 32.74/16.12 (+3.56/+2.55) 14.97/12.18 (+2.43/+2.14) 10.11/8.93 (+0.53/+1.72) V2VNet 37.86/18.23 18.21/15.16 16.43/13.88 31.64/15.22 13.42/10.61 10.71/8.04
+> + Ours 42.17/22.49 (+4.31/+4.26) 21.82/18.67 (+3.61/+3.51) 18.39/14.51 (+1.96/+0.63) 35.27/17.94 (+3.63/+2.72) 16.98/13.74 (+3.56/+3.13) 9.98/ 8.71 (-0.73)/(+0.67) Late Fusion 25.19/14.56 13.53/11.89 11.27/10.13 20.63/10.47 9.88/8.31 7.61/6.28
+> + Ours 29.81/18.63 (+4.62/+4.07) 15.86/13.61 (+2.33/+1.72) 10.86/ 10.69 (-0.41)/(+0.56) 24.36/13.58 (+3.73/+3.11) 12.11/10.05 (+2.23/+1.74) 8.19/6.11 (+0.58)/(-0.17)
+
+synthetic data for camera-only and camera-LiDAR configurations. Comparing baseline performance across sensor configurations, we observe that LiDAR fusion benefits categories asymmetrically. Car achieves 3.87 ×
+
+improvement when adding LiDAR, increasing from 15.28% to 59.18% at IoU 0.3, while Truck only sees 1.75 ×
+
+gain, from 15.28% to 26.74%. This disparity arises because large vehicles achieve reasonable performance with cameras alone due to their distinctive visual features, whereas smaller cars critically depend on LiDAR’s precise depth information for accurate localization. 
+
+Table 9: Impact of jointly observed object ratio on collaborative perception performance in C mode. 
+
+Training Data mAP 30 ↑ mAP 50 ↑
+
+Real Only 11.48 9.77 +Gen Data (2.1%) 14.38 12.61 +Gen Data (4.2%) 14.59 12.82 +Gen Data (6.3%) 15.02 13.10 
+
+The results reveal an interesting pattern regarding data augmentation effects. Underrepresented categories such as Van, Bus, and Truck benefit more significantly from synthetic data, with improvements ranging from +3.3% to +5.8%, while well-represented categories like Car and Pedestrian show modest gains between +1.5% and +3.1%. This is because baseline models have already learned rich features for Car and Pedestrian from abun-dant training samples, reaching saturated performance where additional data provides diminishing returns. For underrepresented classes with limited samples, baseline models suffer from insufficient learning, making them more receptive to synthetic data diversity. Overall, V2XCrafter consistently improves detection perfor-mance across all major categories, demonstrating its effectiveness for multi-agent collaborative perception data augmentation. 
+
+Jointly Observed Object Augmentation. In the original V2X-Real training set, only 4.2% of objects are 
+
+29/35 V2XCrafter: Learning to Generate Driving Scene Across Agents 
+
+Table 10: Per-class performance comparison with AttFuse (Camera-only) for 3D object detection on V2X-Real validation set. Results show AP (%) at IoU thresholds 0.3 and 0.5 for major categories.                                                      
+
+> Data Overall Car Van Bus Truck Pedestrian mAP 30 mAP 50 AP 30 AP 50 AP 30 AP 50 AP 30 AP 50 AP 30 AP 50 AP 30 AP 50
+> Real Only 11.48 9.77 15.28 13.52 6.82 5.45 8.73 7.28 15.28 13.12 10.24 8.74 +V2XCrafter 14.59 12.82 18.42 16.48 10.95 9.18 13.18 11.52 21.04 18.47 13.18 11.64
+> Difference +3.11 +3.05 +3.14 +2.96 +4.13 +3.73 +4.45 +4.24 +5.76 +5.35 +2.94 +2.90
+
+Table 11: Per-class performance comparison with AttFuse (Camera+LiDAR) for 3D object detection on V2X-Real validation set. Results show AP (%) at IoU thresholds 0.3 and 0.5 for major categories.                                                      
+
+> Data Overall Car Van Bus Truck Pedestrian mAP 30 mAP 50 AP 30 AP 50 AP 30 AP 50 AP 30 AP 50 AP 30 AP 50 AP 30 AP 50
+> Real Only 38.60 32.18 59.18 55.82 19.35 16.48 24.52 21.17 26.74 23.18 32.64 18.35 +V2XCrafter 41.71 34.27 61.24 57.74 23.18 19.74 28.15 24.52 30.12 26.48 34.18 19.82
+> Difference +3.11 +2.09 +2.06 +1.92 +3.83 +3.26 +3.63 +3.35 +3.38 +3.30 +1.54 +1.47
+
+jointly observed by multiple agents, with 19,815 jointly observed objects out of 472,555 total objects. To investigate whether increasing the proportion of jointly observed objects could further improve collaborative perception, we conduct additional experiments where we manipulate this ratio during data augmentation by randomly inserting or removing jointly observed boxes in each frame, while keeping the total number of training samples constant. Table 9 presents the results using AttFuse (C), compared against the real-only baseline. Increasing the jointly observed ratio from 2.1% to 6.3% yields consistent improvements, with the 6.3% ratio achieving 15.02% mAP@30, representing a +30.9% relative gain over the real-only baseline. 
+
+Figure 11: Distribution of jointly observed objects in V2X-Real training set. This finding is particularly noteworthy when com-pared with the data augmentation scale ablation in Section C.2. While simply increasing data scale from 1.0 × to 1.5 × shows diminishing returns with only +0.03% absolute gain (14.59% to 14.62%), fine-grained augmentation that increases the jointly observed ratio from 4.2% to 6.3% achieves +0.43% improvement without adding more training sam-ples. This demonstrates that strategically increas-ing jointly observed objects provides more valuable learning signals for collaborative perception models than naively scaling up data volume. The underly-ing reason is that collaborative perception relies on cross-agent feature fusion modules (e.g., spatial attention or graph neural networks) to aggregate complemen-tary information from multiple agents. Jointly observed objects serve as natural correspondence anchors in the feature spaces of different agents: they provide explicit supervision for the fusion module to learn how to align and aggregate features representing the same physical entity observed from different viewpoints. When such objects are scarce in training data, the fusion module receives insufficient guidance to establish robust cross-agent feature correspondences, limiting its ability to effectively leverage multi-agent information. By increasing the proportion of jointly observed objects, we provide richer training signals that explicitly teach 
+
+> 30/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+the fusion module to recognize and combine features of the same objects across agents, thereby improving collaborative detection performance. Overall, these results highlight V2XCrafter ’s ability to generate controllable collaborative driving scenarios with targeted characteristics, making it particularly effective for addressing specific training requirements in multi-agent perception systems. Frame = 0 (Key Frame) Frame = 1 Frame = 2 Frame = 3 Frame = 4 (Key Frame)  
+
+> CAV 1 CAV 2
+
+Figure 12: The video generation results of V2XCrafter . We show the generation results of V2XCrafter 
+
+on the V2X-Real dataset. The first and last frames are provided with 3D bounding box annotations, and the intermediate frames are generated by the model. The cross-agent co-visible objects are highlighted with the same color. 
+
+## E. Extension to Video Generation 
+
+Inspired by recent works on extending street view generation to driving videos [ 7, 8 ], V2XCrafter can be extended to multi-agent driving scene video generation as well. The key challenge lies in maintaining cross-agent consistency not only spatially within each frame, but also temporally across the video sequence. We address this by incorporating temporal modeling while preserving our core cross-agent consistency mechanisms. 
+
+Temporal Attention with Cross-Agent Awareness. To enable video generation, we augment the architecture with temporal attention layers. We replace the standard self-attention in ego-view attention (Section 4.2) with spatio-temporal attention (ST-Attn) [ 44 ], allowing each camera to aggregate information from its own historical frames. Meanwhile, the cross-agent attention module (Section 4) operates at keyframes where collaboration view graphs Gcr and shared-visibility ROI masks are provided, ensuring that jointly observed objects maintain consistent appearance across vehicles. 
+
+Keyframe-Guided Temporal Interpolation. Unlike single-agent scenarios where only temporal coherence is required, multi-agent video generation must preserve cross-vehicle consistency throughout the temporal sequence. We achieve this by injecting our multi-agent geometric conditions (3D boxes, collaboration graphs, and ROI masks) at keyframes, while the temporal attention mechanism learns to interpolate intermediate frames. The learnable modifier V∗ (Section 4.1) marks co-visible objects at keyframes, creating semantic anchors that guide the temporal interpolation to maintain object consistency across both agents and time. 
+
+Video Training on Top of Two-Stage Framework. Building upon our two-stage progressive training framework (Section 4), we add a third video fine-tuning stage. We fine-tune the model on 5-frame clips (chosen due to the training data size limitation) from V2X-Real with geometric conditions provided only at the first and last frames. During training, we sample initial noise independently for each frame and perform 50-step denoising using the UniPC sampler [ 50 ]. As shown in Figure 12, this enables V2XCrafter 
+
+to generate temporally coherent multi-agent videos while leveraging the spatial consistency mechanisms 
+
+31/35 V2XCrafter: Learning to Generate Driving Scene Across Agents 
+
+learned in the previous stages. 
+
+## F. More Details of Data Preprocessing 
+
+The V2X-Real dataset [ 46 ] contains multi-view images from both connected vehicles and roadside units. To prepare the data for training V2XCrafter , we perform four main preprocessing steps: (1) scene filtering to select high-quality multi-vehicle scenarios, (2) FPV mask generation for fine-grained object-level control, (3) BEV map generation from LiDAR point clouds using OpenCOOD [ 47 ], and (4) text description generation via Qwen2.5-VL-7B-Instruct [ 1]. This section provides detailed technical descriptions of each preprocessing component. 
+
+F.1. Scene Filtering 
+
+We focus exclusively on Vehicle-to-Vehicle (V2V) data and exclude views from stationary RoadSide Units (RSUs), as RSU perspectives exhibit limited diversity and do not align with our multi-agent collaborative driving scenario. To ensure meaningful cross-agent generation, we filter the dataset to retain only frames where at least two connected autonomous vehicles (CAVs) are present and actively communicating. Our filtering pipeline operates at two levels. First, at the scene level, we identify scenes containing multiple vehicles by checking for valid vehicle directories (folders named “1” and “2”) in the dataset structure. Second, at the frame level, we verify that each frame contains valid sensor data (cameras and LiDAR) from both vehicles, and that the annotation files (YAML format) are complete and correctly formatted. We also apply temporal consistency checks using a load interval parameter to ensure continuous sequences, discarding isolated frames that lack sufficient context. After filtering, our dataset comprises 14,432 samples collected from 68 unique street scenes. We partition this data into training and validation sets using a scene-based 4.5:1 split ratio to prevent data leakage, resulting in 11,808 training samples (from 56 scenes) and 2,624 validation samples (from 12 scenes). 
+
+F.2. FPV Mask Generation 
+
+To enable fine-grained control over jointly observed objects, we generate camera-specific object masks for each vehicle’s four cameras through precise 3D-to-2D projection. 
+
+3D Bounding Box Projection. For each annotated object, we generate precise camera-specific masks through a multi-step projection pipeline. Starting from the CARLA coordinate system annotations (location, center offset, extent, and rotation angles), we first construct the eight corner points of each 3D bounding box in world coordinates. Following CARLA conventions, we apply rotation matrices in the order of yaw-pitch-roll. We then transform these world coordinates to each camera’s view space through a composition of transformations: world → LiDAR → camera. The LiDAR-to-camera transformation is provided by the dataset’s extrinsic matrix, while the world-to-LiDAR transformation is computed from the vehicle’s 6-DOF pose. Finally, we project the transformed 3D points to 2D image coordinates using the camera’s intrinsic matrix, applying appropriate scaling to match our target resolution of 480 ×272 pixels. 
+
+Mask Rasterization. After obtaining 2D corner coordinates, we use OpenCV’s convexHull and fillPoly 
+
+functions to create pixel-accurate masks. Each object is assigned a unique class ID, and we rasterize its convex hull onto a single-channel mask image. For each vehicle, we generate a 4-channel mask array where each channel corresponds to one camera view. This multi-channel representation allows the model to efficiently process all camera masks simultaneously during training. 
+
+> 32/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+F.3. BEV Map Generation 
+
+The original V2X-Real dataset does not provide BEV semantic maps required for spatial layout control. We generate these maps by rendering LiDAR point clouds and 3D bounding box annotations into bird’s-eye view representations using tools from OpenCOOD [47]. 
+
+Coordinate System Transformation. The generation process begins with transforming 3D point clouds from the vehicle’s local coordinate frame to a standardized BEV coordinate system. Given a LiDAR point cloud P = {pi ∈ R3} and the vehicle’s 6-DOF pose (x, y, z, roll , yaw , pitch ), we first construct the LiDAR-to-world transformation matrix TL2W ∈ SE (3) by composing rotation matrices for yaw, pitch, and roll with the translation vector. The world-to-BEV transformation then projects points onto the ground plane while centering the coordinate system at the ego vehicle’s position. 
+
+Spatial Discretization. We adopt a 200 ×200 pixel BEV grid covering a spatial range of [-50m, 50m] in both X and Y directions, yielding a resolution of 0.5m per pixel. For each LiDAR point pi = ( xi, yi, zi), we compute its grid coordinates as: 
+
+ui = ⌊(xi − xmin )/∆⌋, vi = ⌊(yi − ymin )/∆⌋, (33) where xmin = ymin = −50 m and ∆ = 0.5 m is the spatial resolution. 
+
+BEV Rendering. We render the BEV map using the OpenCOOD visualization utilities with offline rendering to ensure consistent quality. Specifically, we use the visualize_single_sample_dataloader function to process LiDAR points and 3D bounding boxes into Open3D geometries. The rendering pipeline includes: (1) colorizing point clouds based on intensity values or height information via the color_mode parameter, (2) projecting 3D bounding boxes onto the ground plane as wireframe line sets, and (3) rendering the scene from a top-down view using either Open3D’s OffscreenRenderer (with camera positioned at [0, 0, 50] looking down at [0, 0, 0]) or matplotlib’s scatter plot backend for headless server environments. The final output is a 200 ×200 RGB image where point clouds appear as colored dots and vehicle bounding boxes as red wireframes, providing clear spatial layout information for the diffusion model. 
+
+F.4. Driving Scene Description Generation 
+
+To provide rich textual context for our generative model, we developed a sophisticated pipeline to create hierarchical driving scene descriptions for the V2X-Real dataset. We employ the powerful Qwen2.5-VL-7B-Instruct model to generate two distinct types of descriptions: fine-grained frame-level descriptions and holistic scene-level summaries. This hierarchical approach allows us to capture both dynamic and static elements of a driving scene. Frame-level descriptions provide detailed, real-time information about objects and their interactions, which can change rapidly. However, since many stylistic aspects like weather, time of day, and road environment are consistent across a scene, we generate a single, overarching scene-level description to capture this overall style. During training, we combine both descriptions to create a comprehensive text prompt. 
+
+Frame-Level Description Generation. To capture the dynamic elements of the scene, we generate a description for each frame that focuses on the specific objects present and their immediate context. The model is provided with images from all available cameras for a given frame, along with a list of detected objects. The prompt, shown in Figure 13 (top), directs the model to produce a fine-grained description of these objects and their immediate traffic situation, strictly adhering to a 20-25 word limit. An example of a frame-level description is: “ A white SUV is turning left at an intersection while a red sedan waits at the traffic light and several pedestrians are crossing the street. ” This ensures that the model has precise, time-sensitive 
+
+> 33/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+information about the entities within the scene. 
+
+Scene-Level Description Generation. Since overarching characteristics such as weather, time of day, and the general road environment remain largely constant throughout a single driving scene, we generate a single scene-level description to capture this stylistic context. This avoids redundancy and provides a stable, high-level narrative. The model receives a set of sampled images from across the scene to form a holistic impression. The prompt, shown in Figure 13 (bottom), guides the model to summarize these static, stylistic elements within a strict 25-30 word limit. An example of a scene-level description is: “ A daytime scene on a multi-lane urban road under clear, sunny skies, surrounded by modern high-rise buildings. ” This description serves as the foundational layer of context. To provide a comprehensive understanding, we create the final text prompt by concatenating scene-level with frame-level description using the template: "{scene_description} {frame_description}" .For instance, a complete prompt might be: “ A daytime scene on a multi-lane urban road under clear, sunny skies, surrounded by modern high-rise buildings. In this scene, a white SUV is turning left at an intersection while a red sedan waits at the traffic light and several pedestrians are crossing the street. ” This combined approach ensures the final prompt has a consistent structure and length (typically 45-55 words), providing both high-level context and specific, time-sensitive details. 
+
+## G. More Discussion 
+
+G.1. Future Extensions 
+
+Our current study mainly focuses on the V2V setting, where existing datasets provide richer multi-agent interaction patterns and more diverse viewpoints. Looking forward, extending the framework to V2I is a natural next step, since our core designs are fundamentally agent-agnostic and can be readily adapted once suitable datasets with sufficient RSU view diversity become available. Meanwhile, the generation quality of V2XCrafter can be further improved by integrating stronger restora-tion and obstruction-removal modules, such as [ 9, 20 ], although the current generation quality is already sufficient to provide effective augmentation gains for downstream collaborative perception. 
+
+G.2. Potential Applications 
+
+Beyond data augmentation, V2XCrafter opens up several broader application directions. 
+
+Realistic V2X Driving Simulator: V2XCrafter serves as a high-fidelity neural rendering engine bridging lightweight simulators (e.g., CARLA) and reality. It synthesizes photo-realistic, spatially consistent multi-vehicle observations, enabling controllable and cost-effective simulation for complex collaborative driving scenarios involving interactions between multiple connected vehicles. 
+
+Training Generalizable Feedforward 3DGS for V2X. V2XCrafter ’s ability to generate cross-agent con-sistent observations is uniquely suited for V2X-based 3D reconstruction. By synthesizing synchronized multi-view images from spatially distributed vehicles, it provides dense scene coverage that effectively resolves occlusions common in single-agent views. This consistent multi-agent data serves as high-quality supervision for training generalizable feedforward 3D Gaussian Splatting (3DGS) models, facilitating the reconstruction of large-scale, holistic collaborative driving environments. 
+
+V2X World Models for Collaborative Planning. V2XCrafter can be extended to predictive digital twin and world models [ 35 , 34 , 36 , 26 , 52 ] for collaborative driving. By generating future multi-agent observations 
+
+> 34/35 V2XCrafter: Learning to Generate Driving Scene Across Agents
+
+conditioned on joint planned trajectories, it supports anticipatory planning and decision-making, allowing vehicles to simulate and evaluate cooperative maneuvers in complex traffic environments. 
+
+Frame-Level Description Prompt 
+
+Describe the visible objects and their immediate traffic situation in this frame from vehicle {vehicle_id}. Focus on the actions and positions of cars, trucks, and pedestrians. Generate a description of exactly 20-25 English words. 
+
+Objects detected : {context_info} Write one sentence describing the key objects and their current actions .
+
+Example : "A white SUV is turning left at an intersection while a red sedan waits at the traffic light and several pedestrians are crossing the street." 
+
+Your description :
+
+Scene-Level Description Prompt 
+
+Describe the overall style of this traffic scene in exactly 25-30 English words, based on the provided images from different times. Summarize the general road type , weather conditions , time of day , and surrounding environment .
+
+Example : "A daytime scene on a multi-lane urban road under clear, sunny skies, surrounded by modern high-rise buildings." 
+
+Your description :
+
+Figure 13: The structured prompts used for generating frame-level (top) and scene-level (bottom) descrip-tions. These prompts guide the Qwen2.5-VL-7B-Instruct model to produce consistent and relevant textual data.

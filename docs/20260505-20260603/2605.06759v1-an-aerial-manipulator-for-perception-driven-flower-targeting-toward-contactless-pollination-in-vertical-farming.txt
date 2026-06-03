@@ -1,0 +1,214 @@
+Title: An Aerial Manipulator for Perception-Driven Flower Targeting Toward Contactless Pollination in Vertical Farming
+
+URL Source: https://arxiv.org/pdf/2605.06759v1
+
+Published Time: Mon, 11 May 2026 00:09:59 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+# An Aerial Manipulator for Perception-Driven Flower Targeting Toward Contactless Pollination in Vertical Farming 
+
+# Chenzhe Jin 
+
+Department of Computer Science University College London London, United Kingdom 
+
+# Zhuohang Wu 
+
+Department of Computer Science University College London London, United Kingdom 
+
+# Yifan Cai 
+
+Department of Computer Science University College London London, United Kingdom 
+
+# Xiangqi Li 
+
+Department of Computer Science University College London London, United Kingdom 
+
+# Jan Ming Kevin Tan 
+
+Department of Computer Science University College London London, United Kingdom 
+
+# Narsimlu Kemsaram 
+
+Department of Artificial Intelligence University of Malaya Kuala Lumpur, Malaysia 
+
+# Valerio Modugno 
+
+Department of Computer Science University College London London, United Kingdom 
+
+Figure 1: Conceptual illustration of pollination mechanisms: (A) Natural pollination by bees, and (B) An aerial manipulation platform toward future contactless pollination in vertical farming environments. 
+
+## ABSTRACT 
+
+The decline of natural pollinators has created a major challenge for crop production in controlled indoor agriculture, particularly in vertical farming environments where natural insect pollination is absent. This motivates the development of robotic systems capable of performing precise flower-targeting tasks while minimizing phys-ical interference with delicate floral structures. This paper presents an aerial manipulator platform for perception-driven flower detec-tion, localization, and approach in vertical farming environments. The proposed system integrates onboard RGB-D-based perception, model predictive path integral (MPPI)-based unmanned aerial ve-hicle (UAV) control on a PX4 platform, and a lightweight 2-DoF manipulator for precise end-effector positioning. The platform is evaluated in both MuJoCo simulation and UAV lab experiments using a flower-targeting testbed. The experimental results demon-strate stable UAV flight, reliable flower localization, and centimeter-level end-effector positioning accuracy. In simulation, the proposed controller achieves consistent trajectory convergence and accurate target alignment. In the real-world UAV lab environment, the inte-grated perception–control–manipulation framework enables stable flower-targeted positioning and end-effector alignment under con-strained aerial operation. These results validate the proposed aerial manipulator as a robust robotic carrier and positioning framework for future contactless pollination systems. While the current study focuses on perception-guided targeting and positioning, the de-veloped platform provides a practical foundation for integrating advanced contactless end-effectors, including acoustic-based pollen manipulation modules, in future work. 
+
+> arXiv:2605.06759v1 [cs.RO] 7 May 2026 Chenzhe Jin, Zhuohang Wu, Yifan Cai, Xiangqi Li, Jan Ming Kevin Tan, Narsimlu Kemsaram, and Valerio Modugno
+
+## CCS CONCEPTS 
+
+• Computer systems organization → Embedded systems ; Re-dundancy ; Robotics; • Networks → Network reliability. 
+
+## KEYWORDS 
+
+Aerial manipulator, contactless pollination, deep learning, flower detection, unmanned aerial vehicles, vertical farming. 
+
+## 1 INTRODUCTION 
+
+The global decline of natural pollinators poses a significant threat to agricultural productivity and food security [ 1]. With the global population projected to reach nearly 10 billion by 2050, modern agriculture must adopt innovative technologies to ensure stable crop yields [ 2], [ 3]. Vertical farming has emerged as a promising solution, offering controlled environments for year-round produc-tion. However, the lack of natural insect pollination in these indoor facilities necessitates the development of autonomous robotic al-ternatives [ 4 ]. Existing robotic pollination methods primarily rely on physical contact, such as mechanical brushes, vibrating sticks, or micro-drones equipped with ionic liquid gels [ 5], [ 6 ]. While functional, these "contact-based" approaches carry a high risk of damaging delicate floral structures, such as petals and stigmas, which can paradoxically reduce the overall crop quality. To address these challenges, there is a growing demand for high-precision robotic systems capable of navigating the confined, dense canopies of vertical farms and delivering pollination agents with minimal physical interference (see Figure 1). In this paper, we present an aerial manipulator platform for perception-driven flower detection, localization, and approach in vertical farming environments. The system integrates onboard RGB-D perception, MPPI-based UAV control, and a lightweight 2-DoF manipulator to achieve stable flight and centimeter-level end-effector positioning near flower targets. It also establishes a practical platform for future integration of contactless pollination end-effectors. The core of our platform lies in its integrated percep-tion and control framework. We combine a real-time deep learning model for precise flower localization with a feedback MPPI con-troller [ 7 ]. This synergy ensures stable flight dynamics and precise trajectory tracking even in the presence of the aerodynamic distur-bances common in indoor farming. While the platform is designed to support various pollination tools, we demonstrate its potential through a prototype interface that paves the way for contactless acoustic manipulation—a promising technique to be explored in our future research to eliminate physical contact entirely via acoustic radiation pressure [8], [9], [10]. The main contributions of this work are three-fold: 1) System de-sign: We designed a lightweight, high-precision aerial-manipulator platform optimized for the constrained spatial requirements of ver-tical farms, 2) Integrated control: We developed a robust control pipeline that leverages deep-learning-based perception and an ad-vanced MPPI controller to achieve stable and accurate end-effector positioning near floral targets, and 3) Experimental validation: We conducted comprehensive evaluations in both MuJoCo simulations and UAV lab environments, demonstrating that the platform pro-vides a reliable and scalable framework for future contactless polli-nation methods. The remainder of this paper is organized as follows. Section 2 reviews related work. Section 3 presents the proposed aerial ma-nipulator platform and overall architecture. Section 4 describes the system design, modeling, and control framework. Section 5 intro-duces the ROS 2-based system implementation. Section 6 presents simulation and real-world experimental evaluation. Finally, Section 7 concludes the paper and outlines future research directions. 
+
+## 2 LITERATURE REVIEW 
+
+This section reviews literature on vertical farming, its challenges, and robotic and drone-based pollination methods. These studies establish the context and highlight the research gap this paper aims to address. 
+
+## 2.1 Vertical Farming 
+
+The proposal of the vertical agriculture mode aims to increase agricultural land area through "upward construction", thereby max-imizing yield [ 11 ]. It performs well in terms of water consumption and is attractive in countries with severe pollution and poor soil conditions [ 12 ]. These systems often utilize automatic irrigation and nutrient supply mechanisms [ 13 ]. Its typical features include: innovative use of recycled water, supplemented by rainwater or water from seawater desalination plants, automatic air temperature and humidity control, solar panel lighting and heating, and ad-justable 24-hour LED lighting [ 12 ]. In addition, vertical agriculture is beneficial for growing various crops, including exotic and spe-cial plants that may not grow in traditional outdoor environments [ 14 ]. These multiple responses not only meet the market demand for characteristics, but also promote agricultural biodiversity. The cultivation of various crops in a vertical stacking system is crucial for long-term food security and the ability to resist the impacts of disease and climate change [ 15 ]. However, vertical agriculture currently faces many challenges, such as pollination. It is the most tedious process in agriculture. More than 85% of flowering plants rely on biological pollination, mainly through insect transmission, while the rest rely on non biological pollen transmission, mainly through wind pollination [ 16 ]. For example, as mentioned in [ 13 ], crops that require insect pollination are at a disadvantage and re-quire workers to spend time and effort on manual pollination. The introduction of modern agricultural technology, including sensor technology, robot technology, artificial intelligence, etc., has pro-moted the development of agriculture and improved crop yield and quality. For example, robot technology has enhanced the ability of skilled labor, greatly improving overall productivity in crop picking, weeding, sowing, and other areas [17]. 
+
+## 2.2 Drone-based and Robotic Pollination 
+
+The pollination process is a relatively tedious step in agricultural cultivation [ 18 ]. The new application of drones as pollination media deserves attention [ 19 ]. Compared with other robot technologies, the entry threshold for drone technology is lower [ 20 ]. The oper-ation and movement of UAVs are controlled directly by pilots or autonomously moved through methods such as 3D environment modeling [ 21 ]. Due to the different pollination methods required for crops, the application of pollination techniques for different drones also varies [ 22 ]. It can be roughly divided into the following An Aerial Manipulator for Perception-Driven Flower Targeting Toward Contactless Pollination in Vertical Farming 
+
+categories: For example, the sowing type pollination adopted in the form of dry pollination for manual pollination of walnuts [ 23 ], the liquid drop spray type adopted in the form of a water carrier for pollination of almonds and pears [ 24 ], the airflow disturbance type shaken off by the built-in vibrator when pollinating tomatoes and strawberries [ 25 ], and the contact type delivered by a precision gun when pollinating sunflowers [26]. By bridging these gaps in robotic pollination, our system offers an integrated aerial platform for supporting contactless pollination. In this system, we combine a real-time custom-trained deep learn-ing model for precise flower localization with a MPPI controller. This controller ensures stable flight dynamics and precise trajec-tory tracking even in the presence of the aerodynamic disturbances common in indoor farming. 
+
+## 3 PROPOSED SYSTEM 
+
+The proposed system is an aerial manipulator platform designed for perception-driven flower targeting in vertical farming environ-ments. It combines real-time visual perception, UAV flight control, and a lightweight manipulator to enable stable target approach and precise end-effector alignment near flowers. The current implemen-tation focuses on positioning and alignment, while the modular end-effector interface supports future integration of contactless pollination mechanisms. 
+
+## 3.1 System Overview 
+
+The platform is built on a lightweight quadrotor UAV integrated with onboard RGB-D perception, a lightweight 2-DoF manipula-tor, and a control stack based on the open-source PX4 autopilot. The system operates autonomously, with mission-level decisions driven by onboard perception and control algorithms that coordi-nate flower detection, target-relative positioning, and end-effector alignment, as shown in Figure 2. 
+
+## 3.2 System Architecture 
+
+The proposed system architecture adopts a modular design that enables real-time coordination among sensing, perception, local-ization, UAV control, and manipulator alignment components, as illustrated in Figure 3. The architecture is organized into three tightly coupled modules: Sensing, Perception & Localization , UAV Control & Navigation , and Manipulator & End-Effector .
+
+3.2.1 Sensing, Perception & Localization. This module performs real-time flower sensing, detection, and localization using an on-board RGB-D camera system. The sensing layer first acquires RGB image frames and depth measurements, while camera calibration and frame transformation information are used to maintain geo-metric consistency between the camera, UAV, and global reference frames. A lightweight deep learning detector, such as a YOLO-based flower detector trained on sunflower datasets, processes incoming image frames to identify flower regions in real time. The detected flower observations are then combined with depth measurements and UAV pose information through a depth-association and pose-fusion process. This enables the computation of the target 3D posi-tion first in the UAV frame and subsequently in the global frame. These target position estimates provide the spatial information 
+
+Figure 2: System overview of the proposed UAV aerial manip-ulator platform, integrating RGB-D-based flower detection, MPPI-based control on a PX4-enabled UAV, and a lightweight 2-DoF manipulator for precise end-effector positioning near target flowers in vertical farming environments. 
+
+required by the downstream control and manipulation modules for accurate aerial positioning and end-effector alignment near the flower [27]. 
+
+3.2.2 UAV Control and Navigation. This module is responsible for guiding the aerial platform to a stable standoff position near the detected flower. It receives IMU measurements, odometry, and PX4 state feedback, which are fused in the state estimation block to provide robust localization and motion feedback during indoor flight. At the mission level, a finite-state machine governs the task progression through the main operational states, including search, detection, approach, alignment, and mission continuation. Once the flower target position is available from the perception and localization module, the system computes a desired UAV standoff pose that keeps the aerial platform at a safe operating distance from the flower while preserving the target within the sensing and manipulation workspace. To realize this motion, the UAV uses an MPPI controller that generates closed-loop control actions under nonlinear dynamics and indoor disturbances. These commands are transmitted through the PX4 offboard interface to the PX4 autopilot, which executes the corresponding low-level flight control actions. As a result, the UAV achieves stable hover near the flower, thereby providing a reliable aerial base for the manipulator to perform precise local alignment [28]. 
+
+3.2.3 Manipulator and End-Effector. This module performs local positioning refinement once the UAV has reached a stable hover near the target flower. The desired end-effector pose is determined from the target pose, UAV pose, and manipulator kinematics, en-abling accurate local adjustment relative to the flower. A lightweight Chenzhe Jin, Zhuohang Wu, Yifan Cai, Xiangqi Li, Jan Ming Kevin Tan, Narsimlu Kemsaram, and Valerio Modugno 
+
+Figure 3: Modular system architecture of the proposed UAV aerial manipulator platform. 
+
+2-DoF manipulator mounted beneath the UAV performs fine po-sitioning corrections that complement the global mobility of the aerial platform. While the UAV provides coarse positioning and standoff stabilization, the manipulator improves targeting precision through local fine adjustment. This coordinated operation allows the system to achieve accurate end-effector alignment near the flower without requiring aggressive UAV maneuvers in constrained vertical farming environments. The aligned end-effector is con-nected through a modular end-effector interface , which is part of the current platform design and allows future integration of different pollination mechanisms. In the present implementation, the system focuses on perception-guided targeting, UAV standoff control, and precise end-effector positioning. Future extensions will incorpo-rate contactless pollination end-effectors, including acoustic-based pollen manipulation modules. 
+
+## 4 DESIGN, MODEL, AND CONTROL 
+
+This section describes the mechanical design, system modeling, and control algorithms of the proposed aerial manipulator platform. It focuses on achieving stable aerial positioning and precise end-effector alignment in constrained vertical farming environments. 
+
+## 4.1 Mechanical Design 
+
+The core objective of this mechanical design is to support precise flower-targeted positioning in vertical farming, enabling the UAV to carry sensing and manipulation components from detection to target alignment. Instead of relying on direct contact, the platform uses a modular end-effector interface to support future study of contactless pollination mechanisms. Sunflower pollination is cross-pollination, so traditional methods often use mechanical vibrators or brush-based contact. In contrast, this work explores a contact-less approach using acoustic pollen transfer to the pistil stigma. To support this functionality, we designed a custom L-shaped mount-ing structure to integrate the sensing and actuation components with the UAV platform. The bracket securely attaches the RGB-D camera and a modular end-effector interface beneath the drone, ensuring proper alignment with the target flower during operation. One end of the bracket is rigidly connected to the UAV frame. The other end provides a stable mounting point for the camera and the phased array as an end-effector. The design emphasizes light-weight construction, structural stability, and minimal interference with UAV aerodynamics. It enables accurate positioning of sensing and actuation components relative to the target while maintaining flight stability. Figure 4 shows the mechanical configuration and integration of the bracket with the UAV platform. 
+
+## 4.2 UAV and Robotic Arm Modeling 
+
+We designed a 2-DoF robotic arm integrated with the UAV plat-form to enable precise end-effector positioning near target flowers. The perception sensor (RGB-D camera) and a modular end-effector (phased-array) interface are mounted at the end of the manipulator, An Aerial Manipulator for Perception-Driven Flower Targeting Toward Contactless Pollination in Vertical Farming 
+
+Figure 4: Mechanical design of the proposed UAV–manipulator platform, showing the custom L-shaped bracket for mounting the RGB-D camera and modular end-effector (phased array), enabling stable sensor alignment and precise positioning near target flowers. 
+
+providing flexibility for integrating different actuation mechanisms in future extensions. The robotic arm is designed with a lightweight structure and is rigidly mounted beneath the UAV. While the ma-nipulator itself provides only 2-DoF, the UAV provides full 6-DoF, enabling the combined system to achieve sufficient reachability and positioning capability within the workspace. This design balances mechanical simplicity and control effectiveness, allowing the ma-nipulator to perform fine local adjustments while the UAV handles global positioning. To model the system, the UAV–manipulator combination is treated as a coupled aerial manipulation system. The overall dynamics depend on the mass distribution, center of mass, and inertial properties of both the UAV and the attached arm. Key parameters considered in the model include the center of mass of the drone, the mass and geometry of the manipulator, joint angle limits, and the placement of the sensing and end-effector modules. To ensure stable flight and accurate positioning, constraints are imposed on the manipulator motion, including limits on joint an-gles and actuation range. These constraints help maintain system stability by preventing excessive shifts in the UAV’s center of mass and minimizing disturbances during operation. Additionally, the manipulator’s influence on the UAV’s attitude and torque is ac-counted for in the control design, enabling coordinated motion between the UAV and the robotic arm. 
+
+4.2.1 UAV Dynamics. The UAV is modeled as a rigid-body quadro-tor with 6-DoF. The translational and rotational dynamics are given by: 
+
+𝑚 ¥𝑝 = 𝑅𝑓 𝑇 − 𝑚𝑔 (1) 
+
+𝐽 ¤𝜔 = 𝜏 − 𝜔 × ( 𝐽𝜔 ) (2) where, 𝑝 ∈ R3 is the UAV position in the inertial frame, and ¤𝑝 
+
+and ¥𝑝 denote the velocity and acceleration, respectively. 𝑅 ∈ 𝑆𝑂 (3)
+
+is the rotation matrix from the body frame to the inertial frame, and 𝑓 𝑇 ∈ R3 is the total thrust vector expressed in the body frame. The parameter 𝑚 denotes the mass of the UAV, and 𝑔 = [0, 0, 𝑔 ]𝑇 
+
+represents the gravitational acceleration vector with 𝑔 = 9.81 m/s2.In the rotational dynamics, 𝜔 ∈ R3 is the angular velocity ex-pressed in the body frame, 𝐽 ∈ R3×3 is the inertia matrix, and 
+
+𝜏 ∈ R3 is the control torque vector generated by the propellers. The operator × denotes the vector cross product. 
+
+4.2.2 UAV-Manipulator Coupling. The addition of the manipulator introduces dynamic coupling between the UAV body and the robotic arm motion. The overall system can be modeled as: 
+
+𝑀 (𝑞 ) ¥ 𝑞 + 𝐶 (𝑞, ¤𝑞 ) ¤ 𝑞 + 𝐺 (𝑞 ) = 𝑢 (3) where 𝑞 ∈ R𝑛 represents the combined state vector of the UAV and manipulator, including UAV position, orientation, and ma-nipulator joint angles. 𝑀 (𝑞 ) ∈ R𝑛 ×𝑛 denotes the inertia matrix, 
+
+𝐶 (𝑞, ¤𝑞 ) ¤ 𝑞 ∈ R𝑛 represents Coriolis and centrifugal effects, 𝐺 (𝑞 ) ∈ R𝑛 
+
+is the gravity vector, and 𝑢 ∈ R𝑛 is the control input vector. To reduce computational complexity, the manipulator is treated as a quasi-static subsystem, assuming relatively slow joint mo-tion compared to UAV dynamics. This approximation enables a decoupled control strategy while maintaining sufficient accuracy for positioning and alignment tasks. 
+
+4.2.3 End-Effector Kinematics. The position of the end-effector is computed using forward kinematics: 
+
+𝑥 𝑒 = 𝑝 UAV + 𝑅 UAV 𝑝 arm (4) where 𝑥 𝑒 ∈ R3 is the end-effector position in the inertial frame, 
+
+𝑝 UAV ∈ R3 is the UAV position, and 𝑅 UAV ∈ 𝑆𝑂 (3) is the rotation matrix of the UAV. The vector 𝑝 arm ∈ R3 denotes the position of the end-effector relative to the UAV body frame, which is determined by the manipulator joint angles through forward kinematics. This formulation enables precise mapping between UAV pose, manipulator configuration, and the target flower position, facilitat-ing accurate end-effector alignment during operation. 
+
+## 4.3 UAV and Robotic Arm Control 
+
+To execute feedback control for the UAV-manipulator system along the planned (or implicit) trajectory, we employ a MPPI control strategy [7]. 
+
+4.3.1 MPPI-Based UAV Control. The UAV control is implemented using a MPPI controller, which enables robust trajectory track-ing under nonlinear dynamics and disturbances. At each control step, MPPI samples multiple control trajectories and minimizes the expected cost: 
+
+u∗ = arg min E
+
+" 𝑇 ∑︁ 
+
+> 𝑡 =0
+
+ℓ (x𝑡 , u𝑡 )
+
+#
+
+(5) where, the cost function ℓ (·) penalizes: i) position error relative to the target, ii) velocity deviation, and iii) control effort. The MPPI controller generates smooth control inputs that are sent to the PX4 autopilot through an offboard control interface. 
+
+4.3.2 Robotic Arm Control. The control objective is to maintain a stable UAV pose while aligning the end-effector with the desired flower position. Chenzhe Jin, Zhuohang Wu, Yifan Cai, Xiangqi Li, Jan Ming Kevin Tan, Narsimlu Kemsaram, and Valerio Modugno 
+
+The desired UAV position is computed as: 
+
+p𝑑𝑒𝑠 = p𝑡𝑎𝑟𝑔𝑒𝑡 + d𝑜 𝑓 𝑓 𝑠𝑒𝑡 (6) where, d𝑜 𝑓 𝑓 𝑠𝑒𝑡 ensures a safe standoff distance from the flower (p𝑡𝑎𝑟𝑔𝑒𝑡 ). The manipulator performs fine adjustments to compensate for residual positioning errors, improving targeting precision without requiring aggressive UAV motion. The control pipeline integrates perception, planning, and actuation: i) flower position is estimated by the perception module, ii) target coordinates are transformed to the UAV reference frame, iii) MPPI generates optimal UAV control inputs, iv) the manipulator adjusts end-effector alignment, and v) the system updates continuously based on feedback. This hierar-chical control strategy enables stable operation in cluttered indoor environments. 
+
+## 5 DEVELOPMENT 
+
+The proposed system is implemented in ROS 2, enabling modular, real-time communication among sensing, perception, control, and manipulation components, as shown in Figure 5. The software stack consists of: i) sensor driver and state bridge nodes for RGB-D data and UAV feedback, ii) a perception and target-localization pipeline for flower detection and target estimation in the UAV frame, iii) a mission manager and MPPI-based control pipeline for trajectory generation and closed-loop UAV positioning through PX4, iv) a manipulator and end-effector interface pipeline for fine adjustment and alignment, and v) logging and visualization nodes for experiment monitoring and replay. The architecture is designed to support both MuJoCo simulation and the real-world PX4-based UAV platform using consistent ROS 2 interfaces, and future contactless actuation modules can be integrated through the modular end-effector interface. All modules were implemented in Ubuntu 22.04 with ROS 2 Humble and deployed across both the MuJoCo simulation stack and the PX4-based experimental platform using unified launch files and parameter configurations. Hence, this design for MuJuCo simulation and the real-world PX4 environment preserves identical publishers, subscribers, nodes, and topics. As a result, algorithms proven in simulation are deployed to the real world by simply switching launch files and parameter YAMLs, while maintaining deterministic timing and safety behavior. For more information on the modules developed, please refer to the GitHub repository 1.
+
+## 6 EVALUATION, RESULTS, AND DISCUSSIONS 
+
+This section evaluates the performance of the proposed aerial ma-nipulator platform through both simulation and real-world exper-iments. The evaluation focuses on system stability, perception-guided positioning, and end-effector alignment accuracy in con-trolled environments. The goal is to validate the platform as a reliable testbed for future contactless pollination research. 
+
+## 6.1 Simulation Experiments in MuJoCo 
+
+We first evaluate the system in a physics-based MuJoCo simula-tion environment to assess control performance and positioning accuracy under idealized conditions. The UAV aerial manipulator 
+
+> 1https://github.com/Headmaster218/SkyGrip
+
+system is modeled at a 1:1 scale, including accurate geometry, mass distribution, and onboard sensing components. The simulation repli-cates the perception-to-control pipeline described in Section III and IV, enabling closed-loop evaluation of UAV motion and manipula-tor positioning. The primary evaluation metric is the end-effector position error relative to the target flower. Orientation error is not modeled separately, as the current control objective prioritizes spatial alignment. A task is considered successfully aligned when the end-effector distance error is within 5 cm. Simulation results demonstrate that the MPPI-based control framework enables stable trajectory tracking and consistent convergence toward the target position. The UAV maintains a stable hover while the manipula-tor performs fine adjustments, resulting in accurate end-effector placement across multiple trials (as shown in Figure 6). 
+
+## 6.2 Real-World Experiments in UAV Lab 
+
+6.2.1 Experimental Setup. Real-world experiments are conducted in a laboratory environment that mimics a vertical farming setup. The testbed is a 6 × 6 m indoor space, with sunflower targets ar-ranged on vertical stands to replicate indoor vertical farm condi-tions. The UAV operates autonomously using onboard perception and MPPI-based control on the PX4 platform. During operation, the UAV maintains a safe standoff distance of approximately 10–30 cm from the flower while aligning the end-effector with the target, as shown in Figure 7. To evaluate positioning performance, PhaseS-pace motion capture markers and drivers are attached to both the end-effector and the target flowers, enabling accurate measurement of position and orientation deviations. 
+
+6.2.2 Experimental Results. The real-world experiments validate the feasibility of the proposed platform for perception-driven aerial positioning and manipulation tasks: i) Perception and alignment: The perception module successfully detects and localizes flower targets in real time, enabling reliable alignment of the end-effector, ii) Positioning accuracy: The ∼40 mm difference along the X-axis matches the +40 mm forward standoff specified by the controller, showing the system was intentionally positioned in front of the flower as planned. Discrepancies in Y and Z reflect the lateral and vertical standoffs, as well as a slight axis misalignment between the coordinate frames, 3) Orientation error: Minor deviations in orien-tation are observed, which can be attributed to lighting conditions and sensing noise, and iv) Trajectory Stability: The MPPI controller enables smooth and stable UAV motion, even in the presence of minor disturbances. The UAV maintains hover stability while the manipulator performs local adjustments, demonstrating effective coordination between aerial and manipulator subsystems. Qualitative results from the experiments are shown in Figure 7, illustrating stable UAV positioning and accurate end-effector alignment near the target flowers. 
+
+## 6.3 Discussion 
+
+The experimental results demonstrate that the proposed aerial ma-nipulator platform provides a stable and accurate system for flower-targeted positioning in vertical farming environments. The simula-tion and real-world evaluations confirm that: i) MPPI-based control framework enables robust aerial positioning, ii) perception system supports reliable flower localization, and iii) manipulator improves An Aerial Manipulator for Perception-Driven Flower Targeting Toward Contactless Pollination in Vertical Farming 
+
+Figure 5: ROS 2-based software architecture of the proposed UAV aerial manipulator platform. RGB-D sensing, PX4 state feedback, and TF/calibration feed the perception, localization, control, and manipulator pipelines. The dashed node denotes an optional future contactless actuation extension. 
+
+Figure 6: MuJoCo simulation for the UAV aerial manipulator system: A) simulation environment, B) UAV–manipulator interaction with a flower target. 
+
+fine alignment accuracy without destabilizing the UAV. Importantly, this work focuses on validating the robotic aerial manipulator and positioning framework, which is a critical prerequisite for future contactless pollination systems. While the current implementation demonstrates precise positioning near flower targets, integrating contactless actuation mechanisms, such as acoustic-based pollen manipulation using GS-PAT (Gerchberg-Saxton for Phased Arrays of Transducers) algorithm [ 29 ], remains an important direction for 
+
+Figure 7: Real-world evaluation of the proposed UAV aerial manipulator platform: (A) indoor laboratory testbed repli-cating a vertical farming environment, (B) UAV–manipulator system performing flower-targeted positioning, (C) end-effector trajectory during approach, and (D) positioning ac-curacy relative to the target in 3D space. 
+
+future research. Future work will investigate: i) improved percep-tion robustness under varying lighting conditions, ii) enhanced calibration between sensing and actuation modules, and iii) inte-gration of contactless end-effectors for controlled pollen delivery. Chenzhe Jin, Zhuohang Wu, Yifan Cai, Xiangqi Li, Jan Ming Kevin Tan, Narsimlu Kemsaram, and Valerio Modugno 
+
+## 7 CONCLUSION 
+
+This paper presented an aerial manipulator platform for perception-driven flower targeting and precise end-effector positioning in vertical farming environments. The proposed system integrates onboard vision-based perception, MPPI-based UAV control, and a lightweight robotic manipulator to enable accurate and stable posi-tioning under aerial mobility constraints. The system was evaluated through MuJoCo simulations and real-world UAV lab experiments. The results show that the platform achieves stable flight, reliable flower localization, and centimeter-level end-effector positioning. These findings validate the effectiveness of the integrated percep-tion–control–manipulation framework and highlight the feasibility of deploying aerial robotic systems in constrained agricultural envi-ronments. Importantly, this work focuses on establishing a robust robotic carrier and positioning framework, which serves as a foun-dation for future contactless pollination technologies. While the cur-rent implementation emphasizes precise targeting and alignment, it provides the necessary infrastructure for integrating advanced end-effectors, such as acoustic-based pollen manipulation systems. Future work will focus on improving perception robustness under varying environmental conditions [ 30 ], enhancing calibration be-tween sensing and actuation modules, and integrating contactless actuation mechanisms for controlled pollen delivery. These devel-opments will further advance the realization of fully autonomous, contactless robotic pollination systems for sustainable indoor agri-culture. 
+
+## REFERENCES 
+
+[1] Andrew Simpson, Richard Harvey, and Charles Fox. A review of adaptable technologies for robotic urban horticulture. Frontiers in Sustainable Food Systems ,9:1605107, 2025. [2] United Nations, Department of Economic and Social Affairs, Population Division. World population prospects 2022: Summary of results. Technical Report UN DESA/POP/2022/TR/No. 3, United Nations, New York, 2022. [3] Alisher Mirzabaev, Rachel Bezner Kerr, Toshihiro Hasegawa, Prajal Pradhan, Anita Wreford, Maria Cristina Tirado von der Pahlen, and Helen Gurney-Smith. Severe climate change risks to food security and nutrition. Climate Risk Man-agement , 39, 2023. [4] FAO and UN-Water. Progress on the level of water stress: Mid-term status of SDG indicator 6.4.2 and acceleration needs, with special focus on food security and climate change, 2024. [5] Svetlana A. Chechetka, Yue Yu, Masayoshi Tange, and Eijiro Miyako. Materially engineered artificial pollinators. Chem , 2(2):224–239, 2017. [6] Melissa A. Broussard, Michael Coates, and Paul Martinsen. Artificial pollination technologies: A review. Agronomy , 13(5):1351, 2023. [7] Tommaso Belvedere, Michael Ziegltrum, Giulio Turrisi, and Valerio Modugno. Feedback-MPPI: Fast sampling-based MPC via rollout differentiation—adios low-level controllers. arXiv preprint , 2025. [8] Narsimlu Kemsaram, James Hardwick, Jincheng Wang, Bonot Gautam, Ceylan Be-sevli, Giorgos Christopoulos, Sourabh Dogra, Lei Gao, Akin Delibasi, Diego Mar-tinez Plasencia, et al. Acoustobots: A swarm of robots for acoustophoretic multimodal interactions. Frontiers in Robotics and AI , 12:1537101, 2025. [9] Ceylan Beşevli, Lei Gao, Narsimlu Kemsaram, Giada Brianza, Orestis Georgiou, Sriram Subramanian, and Marianna Obrist. Sonarios: A design futuring-driven exploration of acoustophoresis. In Proceedings of the 2025 ACM Designing Inter-active Systems Conference , pages 740–753, 2025. [10] Narsimlu Kemsaram, Akin Delibasi, James Hardwick, Bonot Gautam, Diego Mar-tinez Plasencia, and Sriram Subramanian. A cooperative contactless object transport with acoustic robots. In 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) , pages 18043–18050. IEEE, 2025. [11] Gabriel M Ahlfeldt, Nathaniel Baum-Snow, and Remi Jedwab. The skyscraper revolution: Global economic development and land savings. 2023. [12] Kurt Benke and Bruce Tomkins. Future food-production systems: vertical farming and controlled-environment agriculture. Sustainability: Science, Practice and Policy , 13(1):13–26, 2017. [13] A. S. Chole, A. R. Jadhav, and V. Shinde. Vertical farming: Controlled environment agriculture. Just Agric , 1:249–256, 2021. [14] Mohd Salim Mir, Nasir Bashir Naikoo, Raihana Habib Kanth, FA Bahar, M Anwar Bhat, Aijaz Nazir, S Sheraz Mahdi, Zakir Amin, Lal Singh, Waseem Raja, et al. Vertical farming: The future of agriculture: A review. The Pharma Innovation Journal , 11(2):1175–1195, 2022. [15] Subhra Debdas, Srikanta Mohapatra, Neha Bajpayee, Ayesha Mohanty, Dhruv Bhargava, et al. IoT enabled: Airflow controlled pollination system in vertical farming. In 2024 IEEE 9th International Conference for Convergence in Technology (I2CT) , pages 1–6. IEEE, 2024. [16] Jeff Ollerton, Rachael Winfree, and Sam Tarrant. How many flowering plants are pollinated by animals? Oikos , 120(3):321–326, 2011. [17] Søren Marcus Pedersen, S. Fountas, and S. Blackmore. Agricultural robots— applications and economic perspectives. In Service Robot Applications . Inte-chOpen, 2008. [18] M Faisal Nadeem, Ahmed Khalil, IA Sajjad, Amir Raza, Muhammad Qasim Iqbal, Rui Bo, Waqas ur Rehman, et al. Review of flower pollination algorithm: Applications and variants. In 2020 International Conference on Engineering and Emerging Technologies (ICEET) , pages 1–6. IEEE, 2020. [19] RAJMEET SINGH, Manveen Kaur, Appaso M Gadade, and Irfan Hussain. Yolov8-pnp fusion architecture for non-contact robotic pollination: A 6d pose estimation approach for autonomous greenhouse operations. Frontiers in Plant Science ,17:1771732. [20] Simon G Potts, Peter Neumann, Bernard Vaissière, and Nicolas J Vereecken. Robotic bees for crop pollination: Why drones cannot replace biodiversity. Science of the total environment , 642:665–667, 2018. [21] Takefumi Hiraguri, Hiroyuki Shimizu, Tomotaka Kimura, Takahiro Matsuda, Kazuki Maruta, Yoshihiro Takemura, Takeshi Ohya, and Takuma Takanashi. Autonomous drone-based pollination system using ai classifier to replace bees for greenhouse tomato cultivation. IEEE Access , 11:99352–99364, 2023. [22] Panliang Wu, Xiaohui Lei, Jin Zeng, Yannan Qi, Quanchun Yuan, Wanxi Huang, Zhengbao Ma, Qiyang Shen, and Xiaolan Lyu. Research progress in mecha-nized and intelligentized pollination technologies for fruit and vegetable crops. 
+
+International Journal of Agricultural and Biological Engineering , 17(6):11–21, 2024. [23] Dilan Ahı Koşar, Eküle Sönmez, Adem Argaç, and Umran Ertürk. An unmanned aerial vehicle based artificial pollination in a frost-affected walnut (Juglans regia L.) orchard. Journal of Agricultural Sciences , 29(3):765–776, 2023. [24] XAG. Saving bees with drones: How XAG harnesses “electronic bees” to fight against pollination crisis?, 2022. Accessed: 2022-05-15. [25] Takefumi Hiraguri, Hiroyuki Shimizu, Tomotaka Kimura, Takahiro Matsuda, Kazuki Maruta, Yoshihiro Takemura, Takeshi Ohya, and Takuma Takanashi. Autonomous drone-based pollination system using AI classifier to replace bees for greenhouse tomato cultivation. IEEE Access , 11:99352–99364, 2023. [26] Dries Hulens, Wiebe Van Ranst, Ying Cao, and Toon Goedemé. Autonomous visual navigation for a flower pollination drone. Machines , 10(5):364, 2022. [27] Huamin Zhao, Shengpeng Xu, Weiqi Yan, Defang Xu, Yongzhuo Zhang, Linjun Jiang, Yabo Zheng, Erkang Zeng, and Rui Ren. Design and optimization of target detection and 3d localization models for intelligent muskmelon pollination robots. 
+
+Horticulturae , 11(8):905, 2025. [28] Riccardo Enrico, Mauro Mancini, and Elisa Capello. Comparison of nmpc and gpu-parallelized mppi for real-time uav control on embedded hardware. Applied Sciences , 15(16):9114, 2025. [29] Diego Martinez Plasencia, Ryuji Hirayama, Roberto Montano-Murillo, and Sriram Subramanian. GS-PAT: High-speed multi-point sound-fields for phased arrays of transducers. ACM Transactions on Graphics (TOG) , 39(4):138:1–138:12, 2020. [30] Marvin Cheng and Ashlee Cheng. Pollination process with collaborative robotic platform. 2025.

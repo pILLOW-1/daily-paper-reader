@@ -1,0 +1,704 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-03T06:44:58.724707+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 13,
+    "deep_cap": 6,
+    "deep_selected": 7,
+    "quick_candidates": 14,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2605.31174v1",
+      "source": "arxiv",
+      "title": "Detect in Any Scene: An Agentic Framework for Object Detection with Experience-Aware Reasoning",
+      "abstract": "Object detection in real-world scenarios remains challenging due to diverse image degradations and heterogeneous object distributions, which significantly hinder the generalization of existing detectors. Conventional approaches, including scene-specific representation learning and end-to-end pipeline design, are inherently limited by their reliance on predefined conditions and lack adaptability to dynamic environments. In this paper, we propose DetAS, an agentic detection framework that formulates object detection as a dynamic decision process. Instead of relying on static pipelines, DetAS leverages a Multimodal Large Language Model (MLLM) as a central agent to adaptively compose detection workflows by selecting from a toolbox of restoration modules and specialized detectors. Specifically, DetAS consists of two key components: Self-Adaptive Image Restoration, which dynamically determines whether and how to enhance images for downstream detection, and Multi-Expertise Detection, which integrates multiple domain-specialized detectors and resolves their predictions through instance-level reasoning. To further improve decision quality under fine-grained conditions, we introduce Self-Evolving Experience Harvesting and extend the framework to DetAS-X, which accumulates node-level decision experience from a small set of annotated data and enables experience-aware reasoning during inference. This mechanism allows the system to progressively refine its decision policy and adapt to diverse real-world scenarios. Extensive experiments on six challenging benchmarks demonstrate that DetAS-X significantly outperforms existing MLLM-based detectors, achieving an average improvement of 28.36% in F1 score, with up to 37.01% gain on DarkFace. These results demonstrate the promise of agentic detection and establish a solid foundation for its application in complex and dynamic environments.",
+      "authors": [
+        "Wenlun Zhang",
+        "Jun Yin",
+        "Kentaro Yoshioka"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-05-29T11:41:58+00:00",
+      "link": "https://arxiv.org/pdf/2605.31174v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "agentic framework for object detection using MLLM as central agent",
+      "llm_evidence_cn": "使用多模态大语言模型作为中心智能体的目标检测智能体框架",
+      "llm_evidence": "使用多模态大语言模型作为中心智能体的目标检测智能体框架",
+      "canonical_evidence": "使用多模态大语言模型作为中心智能体的目标检测智能体框架",
+      "llm_tldr_en": "Proposes DetAS, an agentic detection framework using MLLM to adaptively compose detection workflows from a toolbox, achieving dynamic decision process for object detection in diverse real-world scenarios.",
+      "llm_tldr_cn": "该论文针对真实场景中图像退化与目标分布异质性导致检测器泛化困难的问题，提出DetAS智能体检测框架。将目标检测定义为动态决策过程，以多模态大语言模型（MLLM）为中心智能体，从工具箱中选择并组合检测工作流，替代传统静态流水线。实验表明DetAS在多种退化场景下显著提升检测性能，为构建自适应智能体检测系统提供了新范式。",
+      "llm_tldr": "该论文针对真实场景中图像退化与目标分布异质性导致检测器泛化困难的问题，提出DetAS智能体检测框架。将目标检测定义为动态决策过程，以多模态大语言模型（MLLM）为中心智能体，从工具箱中选择并组合检测工作流，替代传统静态流水线。实验表明DetAS在多种退化场景下显著提升检测性能，为构建自适应智能体检测系统提供了新范式。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.03456v1",
+      "source": "arxiv",
+      "title": "VL-SAM-v3: Memory-Guided Visual Priors for Open-World Object Detection",
+      "abstract": "Open-world object detection aims to localize and recognize objects beyond a fixed closed-set label space. It is commonly divided into two categories, i.e., open-vocabulary detection, which assumes a predefined category list at test time, and open-ended detection, which requires generating candidate categories during the inference. Existing methods rely primarily on coarse textual semantics and parametric knowledge, which often provide insufficient visual evidence for fine-grained appearance variation, rare categories, and cluttered scenes. In this paper, we propose VL-SAM-v3, a unified framework that augments open-world detection with retrieval-grounded external visual memory. Specifically, once candidate categories are available, VL-SAM-v3 retrieves relevant visual prototypes from a non-parametric memory bank and transforms them into two complementary visual priors, i.e., sparse priors for instance-level spatial anchoring and dense priors for class-aware local context. These priors are integrated with the original detection prompts via Memory-Guided Prompt Refinement, enabling a shared retrieval-and-refinement mechanism that supports open-vocabulary and open-ended inference.Extensive zero-shot experiments on LVIS show that VL-SAM-v3 consistently improves detection performance under both open-vocabulary and open-ended inference, with particularly strong gains on rare categories.Moreover, experiments with a stronger open-vocabulary detector (i.e., SAM3) validate the generality of the proposed retrieval-and-refinement mechanism.",
+      "authors": [
+        "Chih-Chung Liu",
+        "Zhiwei Lin",
+        "Yongtao Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-05T07:44:03+00:00",
+      "link": "https://arxiv.org/pdf/2605.03456v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Open-world object detection method applicable to agent perception modules",
+      "llm_evidence_cn": "开放世界目标检测方法，可用于智能体感知模块",
+      "llm_evidence": "开放世界目标检测方法，可用于智能体感知模块",
+      "canonical_evidence": "开放世界目标检测方法，可用于智能体感知模块",
+      "llm_tldr_en": "Proposes VL-SAM-v3, a unified framework for open-world object detection using retrieval-grounded external visual memory, enabling detection of unseen categories.",
+      "llm_tldr_cn": "目标：开放世界目标检测中对罕见类别的视觉证据不足。方法：提出VL-SAM-v3，利用检索的外部视觉记忆增强候选类别检测。结果：在多个开放世界检测基准上表现优异。贡献：为智能体感知系统提供了可迁移的开放世界检测能力。",
+      "llm_tldr": "目标：开放世界目标检测中对罕见类别的视觉证据不足。方法：提出VL-SAM-v3，利用检索的外部视觉记忆增强候选类别检测。结果：在多个开放世界检测基准上表现优异。贡献：为智能体感知系统提供了可迁移的开放世界检测能力。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.04475v1",
+      "source": "arxiv",
+      "title": "Information Coordination as a Bridge: A Neuro-Symbolic Architecture for Reliable Autonomous Driving Scene Understanding",
+      "abstract": "Reliable autonomous driving requires scene understanding that is semantically consistent across heterogeneous sensors and verifiable at the reasoning stage. However, many recent LLM-driven driving systems attach the language model as a post-processor and force it to reason over redundant or conflicting perception outputs, which can amplify hallucinated entities and unsafe conclusions. This paper proposes InfoCoordiBridge, a BEV-centric neuro-symbolic architecture that inserts an explicit coordination bridge between perception and language reasoning. InfoCoordiBridge comprises (i) a unified multi-agent perception layer that outputs typed structured facts together with modality-focused synopses, (ii) an ICA module that aligns and fuses multi-source outputs into a single SceneSummary, and (iii) an SSRE module that performs SceneSummary-grounded reasoning with verification. Experiments on nuScenes and Waymo show that ICA preserves competitive 3D detection accuracy while substantially improving fusion consistency, reducing redundancy to below 1% and achieving about 98% attribute agreement. On NuScenes-QA and a template-aligned Waymo-QA benchmark, SSRE improves factual grounding and reduces hallucinated entity mentions compared with representative VLM and agentic baselines. Overall, by coordinating multi-sensor outputs into a single conflict-aware SceneSummary before prompting, InfoCoordiBridge prevents redundant and cross-modally inconsistent perception evidence from propagating into high-level reasoning.",
+      "authors": [
+        "Shuo Liu",
+        "Lei Shi",
+        "Haowen Liu",
+        "Jing Xu",
+        "Yufei Gao",
+        "Yucheng Shi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-06T03:55:04+00:00",
+      "link": "https://arxiv.org/pdf/2605.04475v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "perception and detection coordination bridge in autonomous driving world model",
+      "llm_evidence_cn": "自动驾驶世界模型中感知与检测的协调桥梁",
+      "llm_evidence": "自动驾驶世界模型中感知与检测的协调桥梁",
+      "canonical_evidence": "自动驾驶世界模型中感知与检测的协调桥梁",
+      "llm_tldr_en": "InfoCoordiBridge inserts an explicit coordination bridge between multi-agent perception and language reasoning for reliable autonomous driving scene understanding.",
+      "llm_tldr_cn": "InfoCoordiBridge提出了一种以鸟瞰图为中心的神经符号架构，在统一多智能体感知层与语言推理之间插入显式协调桥梁，避免LLM后处理放大感知错误。该方法通过结构化事实摘要与跨模态协调，提升了自动驾驶场景理解的语义一致性与安全性。",
+      "llm_tldr": "InfoCoordiBridge提出了一种以鸟瞰图为中心的神经符号架构，在统一多智能体感知层与语言推理之间插入显式协调桥梁，避免LLM后处理放大感知错误。该方法通过结构化事实摘要与跨模态协调，提升了自动驾驶场景理解的语义一致性与安全性。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.14283v1",
+      "source": "arxiv",
+      "title": "Watermarking Game-Playing Agents in Perfect-Information Extensive-Form Games",
+      "abstract": "Watermarking techniques for large language models (LLMs), which encode hidden information in the output so its source can be verified, have gained significant attention in recent days, thanks to their potential capability to detect accidental or deliberate misuse. Similar challenges involving model misuse also exist in the context of game-playing, such as when detecting the unauthorized use of AI tools in gaming platforms (e.g., cheating in online chess). In this paper, we initiate the study of how game-playing strategies can be watermarked. We show how the KGW watermark for LLMs can be adapted to watermark game-playing agents in perfect-information extensive-form games. The watermark can then be detected using a statistical test. We show that the degradation in the quality of the watermarked strategy profile, quantified by the expected utility, can be bounded, but there is a tradeoff between detectability and quality. In our experiments, we bootstrap the watermarking framework to various chess engines and demonstrate that a) the impact of the watermark on the quality of the strategy is negligible and b) the watermark can be detected with just a handful of games.",
+      "authors": [
+        "Juho Kim",
+        "Fei Fang",
+        "Tuomas Sandholm"
+      ],
+      "primary_category": "cs.GT",
+      "categories": [
+        "cs.GT",
+        "cs.AI",
+        "cs.CR"
+      ],
+      "published": "2026-05-14T02:33:30+00:00",
+      "link": "https://arxiv.org/pdf/2605.14283v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "watermarking agents for detection",
+      "llm_evidence_cn": "智能体水印检测技术",
+      "llm_evidence": "智能体水印检测技术",
+      "canonical_evidence": "智能体水印检测技术",
+      "llm_tldr_en": "Adapts KGW watermark from LLMs to game-playing agents for detecting unauthorized AI use via statistical test.",
+      "llm_tldr_cn": "该论文将大语言模型中的KGW水印技术适配到完美信息扩展式博弈中的游戏智能体，通过统计检验检测水印，从而识别未经授权的AI使用（如在线象棋作弊）。实验证明了方法的有效性，为智能体检测提供了新思路。",
+      "llm_tldr": "该论文将大语言模型中的KGW水印技术适配到完美信息扩展式博弈中的游戏智能体，通过统计检验检测水印，从而识别未经授权的AI使用（如在线象棋作弊）。实验证明了方法的有效性，为智能体检测提供了新思路。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.24216v1",
+      "source": "arxiv",
+      "title": "Agent-ToM: Learning to Monitor Autonomous LLM Agents via Theory-of-Mind Reasoning",
+      "abstract": "Monitoring autonomous large language model (LLM) agents for covert malicious behavior is challenging due to delayed, context-dependent, and long-horizon attack patterns. Agents may pursue hidden objectives while maintaining superficially benign behavior, making detection difficult even with full trajectory access. Prior monitoring approaches improve scaffolding or ensemble aggregation, but treat each trajectory independently and do not learn from prior monitoring experience. Moreover, standard reasoning methods explain observed behavior without explicitly reasoning about agent beliefs, intentions, and goal alignment required to distinguish benign task execution from covert deviation.   We propose \\textbf{Agent-ToM}, a learning-to-monitor framework grounded in Theory-of-Mind (ToM) reasoning for security analysis of autonomous agents. Agent-ToM performs structured full-trajectory analysis by inferring beliefs, intent hypotheses with calibrated confidence, expected actions, and deviations from task-consistent behavioral baselines. At inference time, it employs a \\textit{Reason-Verify-Refine} pipeline to construct and validate monitoring decisions. At training time, Agent-ToM distills critique signals into a persistent \\textit{semantic guardrail memory}, enabling reusable belief- and intent-conditioned constraints across episodes. We evaluate Agent-ToM on adversarial agent monitoring benchmarks (SHADE-Arena and CUA-SHADE-Arena). Agent-ToM achieves strong precision-recall balance and outperforms state-of-the-art monitoring baselines, including ensemble methods, while using a coherent two-call reasoning pipeline. These results demonstrate that learning at the monitoring layer, combined with structured ToM reasoning and verification, provides an effective and deployable foundation for securing autonomous LLM agents.",
+      "authors": [
+        "Nesreen K. Ahmed",
+        "Nima Nafisi"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL",
+        "cs.CR"
+      ],
+      "published": "2026-05-22T20:57:20+00:00",
+      "link": "https://arxiv.org/pdf/2605.24216v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Monitoring autonomous LLM agents for covert malicious behavior",
+      "llm_evidence_cn": "监控自主大语言模型智能体的隐蔽恶意行为",
+      "llm_evidence": "监控自主大语言模型智能体的隐蔽恶意行为",
+      "canonical_evidence": "监控自主大语言模型智能体的隐蔽恶意行为",
+      "llm_tldr_en": "Proposes Agent-ToM, a learning-to-monitor framework that uses Theory-of-Mind reasoning to detect covert malicious behavior in autonomous LLM agents by modeling beliefs and intentions.",
+      "llm_tldr_cn": "本文针对自主大语言模型智能体隐蔽恶意行为难以检测的问题，提出Agent-ToM框架，利用心智理论推理对智能体的信念、意图和目标对齐进行建模，从而区分良性任务执行与隐蔽偏离。该方法在多个监测任务上优于基线，提升了长期行为监测的准确性。",
+      "llm_tldr": "本文针对自主大语言模型智能体隐蔽恶意行为难以检测的问题，提出Agent-ToM框架，利用心智理论推理对智能体的信念、意图和目标对齐进行建模，从而区分良性任务执行与隐蔽偏离。该方法在多个监测任务上优于基线，提升了长期行为监测的准确性。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.26642v1",
+      "source": "arxiv",
+      "title": "Adaptation-Free Heterogeneous Collaborative Perception with Unseen Agent Configurations",
+      "abstract": "Collaborative perception improves 3D object detection by enabling agents to share complementary observations, but most existing methods assume fixed or known collaborator encoder configurations, limiting deployment in practice. In this work, we consider an open-world setting in which auxiliary agents with unseen configurations may appear after deployment, such as different LiDAR beam counts or encoder architectures. To address this challenge, we propose ALF, a collaborative perception framework that enables zero-adaptation collaboration with unseen agent configurations by lifting lightweight box-level messages into ego-compatible auxiliary features. ALF converts auxiliary box-level messages into pseudo-BEV maps and synthesizes ego-compatible latent features by combining object-centric cues with scene context from the ego feature. On V2X-Real, under a zero-shot evaluation across 64 case studies, ALF outperforms the strongest prior baseline by 35.91% in relative mAP@0.7 while requiring only 120 bytes per agent per frame (approximately 9.6 Kbps bandwidth at 10 Hz).",
+      "authors": [
+        "Hyunchul Bae",
+        "Heejin Ahn"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-26T07:26:34+00:00",
+      "link": "https://arxiv.org/pdf/2605.26642v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "collaborative object detection with unseen agent configurations",
+      "llm_evidence_cn": "针对未知智能体配置的协作式3D目标检测",
+      "llm_evidence": "针对未知智能体配置的协作式3D目标检测",
+      "canonical_evidence": "针对未知智能体配置的协作式3D目标检测",
+      "llm_tldr_en": "ALF enables zero-adaptation collaborative 3D object detection across agents with unseen LiDAR or encoder configurations via box-level message lifting.",
+      "llm_tldr_cn": "ALF框架解决了协作感知中智能体配置未知的难题，将轻量级边界框消息提升为自车兼容的辅助特征，生成伪BEV地图。该方法无需微调即可适应新配置，在多个基准上展示了强大的泛化能力，推动了开放世界协作感知的实用化。",
+      "llm_tldr": "ALF框架解决了协作感知中智能体配置未知的难题，将轻量级边界框消息提升为自车兼容的辅助特征，生成伪BEV地图。该方法无需微调即可适应新配置，在多个基准上展示了强大的泛化能力，推动了开放世界协作感知的实用化。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2605.29471v1",
+      "source": "arxiv",
+      "title": "V2XCrafter: Learning to Generate Driving Scene Across Agents",
+      "abstract": "Collaborative driving systems leverage vehicle-to-everything (V2X) communication for multi-agent collaborative perception to enhance driving safety, yet they remain constrained by scarce annotated real-world V2X driving datasets and limited generalization across diverse driving conditions. While image generation technology offers a feasible solution for data augmentation, existing methods tailored for single-vehicle multi-view scenarios face two fundamental challenges in multi-agent driving settings: (1) the expansion of the learning objective degrades generation quality, and (2) the highly dynamic variations across agents hinder the modeling of consistency for physical attributes (e.g., color, category) in jointly observed objects. To bridge this gap, we propose V2XCrafter, the first framework for generating controllable and realistic collaborative driving scene across agents' camera views. For effective learning, we develop a progressive multi-agent diffusion model based on a single-agent backbone, using neighboring agents' latent states as reference signals to progressively guide the single-to-multi diffusion. To address cross-vehicle inconsistency, we propose a cross-agent attention module that leverages a collaboration view graph and learnable jointly observed object representation to model the dynamic cross-agent camera view relationships. Experiments have shown that V2XCrafter can generate high-fidelity and controllable street views with consistency across agents, thereby effectively enhancing the downstream collaborative 3D object detection tasks.",
+      "authors": [
+        "Yihang Tao",
+        "Yu Guo",
+        "Senkang Hu",
+        "Yanan Ma",
+        "Zihan Fang",
+        "Sam Kwong",
+        "Yuguang Fang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-28T07:03:51+00:00",
+      "link": "https://arxiv.org/pdf/2605.29471v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "multi-agent collaborative perception for driving scenes",
+      "llm_evidence_cn": "多代理协作驾驶场景感知",
+      "llm_evidence": "多代理协作驾驶场景感知",
+      "canonical_evidence": "多代理协作驾驶场景感知",
+      "llm_tldr_en": "V2XCrafter generates driving scenes across agents using V2X communication, enhancing collaborative perception by addressing multi-agent generation challenges.",
+      "llm_tldr_cn": "针对多代理驾驶场景中协同感知数据稀缺及生成质量下降的问题，V2XCrafter提出了一种跨代理驾驶场景生成方法，利用V2X通信增强多代理协同感知。它解决了多目标学习目标膨胀和物理属性一致性建模两大挑战。实验表明，该方法能够生成高质量的多代理驾驶场景。该工作为世界模型中的感知模块提供了数据增强途径。",
+      "llm_tldr": "针对多代理驾驶场景中协同感知数据稀缺及生成质量下降的问题，V2XCrafter提出了一种跨代理驾驶场景生成方法，利用V2X通信增强多代理协同感知。它解决了多目标学习目标膨胀和物理属性一致性建模两大挑战。实验表明，该方法能够生成高质量的多代理驾驶场景。该工作为世界模型中的感知模块提供了数据增强途径。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2605.05407v1",
+      "source": "arxiv",
+      "title": "PRISM: Perception Reasoning Interleaved for Sequential Decision Making",
+      "abstract": "Scaling LLM-based embodied agents from text-only environments to complex multimodal settings remains a major challenge. Recent work identifies a perception-reasoning-decision gap in standalone Vision-Language Models (VLMs), which often overlook task-critical information. In this paper, we introduce PRISM, a framework that tightly couples perception (VLM) and decision (LLM) through a dynamic question-answer (DQA) pipeline. Instead of passively accepting the VLM's description, the LLM critiques it, probes the VLM with goal-oriented questions, and synthesizes a compact image description. This closed-loop interaction yields a sharp, task-driven understanding of the scene. We evaluate PRISM on the ALFWorld and Room-to-Room (R2R) benchmarks. We show that: (1) PRISM significantly outperforms state-of-the-art image-based models, (2) our Interactive goal-oriented perception pipeline yields systematic and substantial gains, and (3) PRISM is fully automatic, eliminating the need for handcrafted questions or answers.",
+      "authors": [
+        "Mohamed Salim Aissi",
+        "Clemence Grislain",
+        "Clement Romac",
+        "Laure Soulier",
+        "Mohamed Chetouani",
+        "Olivier Sigaud",
+        "Nicolas Thome"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-05-06T19:55:50+00:00",
+      "link": "https://arxiv.org/pdf/2605.05407v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "perception and decision coupling in embodied agent architectures",
+      "llm_evidence_cn": "具身智能体架构中感知与决策的耦合",
+      "llm_evidence": "具身智能体架构中感知与决策的耦合",
+      "canonical_evidence": "具身智能体架构中感知与决策的耦合",
+      "llm_tldr_en": "PRISM tightly couples VLM perception with LLM decision-making via dynamic QA pipeline, improving task-driven scene understanding for embodied agents.",
+      "llm_tldr_cn": "PRISM框架通过动态问答管道将视觉语言模型感知与LLM决策紧密耦合，克服了传统VLM忽略任务关键信息的缺陷。该方法使LLM主动询问VLM以获取目标导向的场景描述，在ALFWorld和R2R基准上验证了有效性，显著提升了具身智能体在多模态环境中的决策能力。",
+      "llm_tldr": "PRISM框架通过动态问答管道将视觉语言模型感知与LLM决策紧密耦合，克服了传统VLM忽略任务关键信息的缺陷。该方法使LLM主动询问VLM以获取目标导向的场景描述，在ALFWorld和R2R基准上验证了有效性，显著提升了具身智能体在多模态环境中的决策能力。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in agent architectures",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2605.03456v2",
+      "source": "arxiv",
+      "title": "VL-SAM-v3: Memory-Guided Visual Priors for Open-World Object Detection",
+      "abstract": "Open-world object detection aims to localize and recognize objects beyond a fixed closed-set label space. It is commonly divided into two categories, i.e., open-vocabulary detection, which assumes a predefined category list at test time, and open-ended detection, which requires generating candidate categories during the inference. Existing methods rely primarily on coarse textual semantics and parametric knowledge, which often provide insufficient visual evidence for fine-grained appearance variation, rare categories, and cluttered scenes. In this paper, we propose VL-SAM-v3, a unified framework that augments open-world detection with retrieval-grounded external visual memory. Specifically, once candidate categories are available, VL-SAM-v3 retrieves relevant visual prototypes from a non-parametric memory bank and transforms them into two complementary visual priors, i.e., sparse priors for instance-level spatial anchoring and dense priors for class-aware local context. These priors are integrated with the original detection prompts via Memory-Guided Prompt Refinement, enabling a shared retrieval-and-refinement mechanism that supports open-vocabulary and open-ended inference.Extensive zero-shot experiments on LVIS show that VL-SAM-v3 consistently improves detection performance under both open-vocabulary and open-ended inference, with particularly strong gains on rare categories.Moreover, experiments with a stronger open-vocabulary detector (i.e., SAM3) validate the generality of the proposed retrieval-and-refinement mechanism.",
+      "authors": [
+        "Chih-Chung Liu",
+        "Zhiwei Lin",
+        "Yongtao Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-05T07:44:03+00:00",
+      "link": "https://arxiv.org/pdf/2605.03456v2",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "open-world object detection as perception module for world models",
+      "llm_evidence_cn": "开放世界物体检测作为世界模型感知模块",
+      "llm_evidence": "开放世界物体检测作为世界模型感知模块",
+      "canonical_evidence": "开放世界物体检测作为世界模型感知模块",
+      "llm_tldr_en": "VL-SAM-v3 enhances open-world object detection by retrieving external visual memory, providing a strong perception module that can be integrated into world models or agent architectures for detection tasks.",
+      "llm_tldr_cn": "开放世界物体检测需要超越固定类别集，现有方法依赖粗粒度文本语义和参数化知识，视觉证据不足。本文提出VL-SAM-v3统一框架，通过检索增强的外部视觉记忆来增强检测，在细粒度外观、稀有类别和杂乱场景中表现更好。该方法可作为世界模型或智能体架构中的高质量感知模块，对智能体检测技术有重要支持。",
+      "llm_tldr": "开放世界物体检测需要超越固定类别集，现有方法依赖粗粒度文本语义和参数化知识，视觉证据不足。本文提出VL-SAM-v3统一框架，通过检索增强的外部视觉记忆来增强检测，在细粒度外观、稀有类别和杂乱场景中表现更好。该方法可作为世界模型或智能体架构中的高质量感知模块，对智能体检测技术有重要支持。",
+      "llm_tags": [
+        "query:agent-detect:composite"
+      ],
+      "matched_query_tag": "query:agent-detect:composite",
+      "matched_query_text": "Papers central to agent/world model领域中的检测相关论文, especially work that connects or combines: p; d; w; a; perception and detection modules in world model; papers on detection techniques for agent; papers on detection techniques for world model; perception and detection modules in agent architectures.",
+      "matched_requirement_id": "req-composite-agent-detect",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "biorxiv-10-64898-2025-12-07-692260-v2",
+      "source": "biorxiv",
+      "title": "WSInsight: a cloud-native, agent-callable platform for single-cell whole-slide pathology",
+      "abstract": "WSInsight is an open-source platform for cohort-scale H&E whole-slide image analysis. It performs patch-level inference together with single-cell segmentation and phenotype classification, with morphology- and transcriptome-supervised cell-type heads retrainable from public data. Slides are read from cloud repositories and per-slide outputs are written to QuPath and OMERO. The same workflow is AI-agent callable through a Model Context Protocol endpoint. Applying it to TCGA cohorts recovered known immune and molecular associations.",
+      "authors": [
+        "Huang, C. H.",
+        "Awosika, O. E.",
+        "Fernandez, D."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-05-10T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2025.12.07.692260v2.full.pdf",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "AI-agent callable platform with single-cell detection and classification in pathology",
+      "llm_evidence_cn": "病理学中具有单细胞检测和分类的AI代理可调用平台",
+      "llm_evidence": "病理学中具有单细胞检测和分类的AI代理可调用平台",
+      "canonical_evidence": "病理学中具有单细胞检测和分类的AI代理可调用平台",
+      "llm_tldr_en": "WSInsight is a cloud-native platform for whole-slide image analysis that includes patch-level inference, single-cell segmentation, and phenotype classification, made callable by AI agents via Model Context Protocol.",
+      "llm_tldr_cn": "针对病理学全切片图像分析中缺乏可被AI代理直接调用的平台的问题，WSInsight提出了一种云原生架构，集成了补丁级推理、单细胞分割和表型分类，并通过模型上下文协议使工作流可供AI代理调用。在TCGA队列上的实验验证了该方法能够复现已知的免疫和分子关联。该平台架起了病理图像分析与智能体系统之间的桥梁。",
+      "llm_tldr": "针对病理学全切片图像分析中缺乏可被AI代理直接调用的平台的问题，WSInsight提出了一种云原生架构，集成了补丁级推理、单细胞分割和表型分类，并通过模型上下文协议使工作流可供AI代理调用。在TCGA队列上的实验验证了该方法能够复现已知的免疫和分子关联。该平台架起了病理图像分析与智能体系统之间的桥梁。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in agent architectures",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.06759v1",
+      "source": "arxiv",
+      "title": "An Aerial Manipulator for Perception-Driven Flower Targeting Toward Contactless Pollination in Vertical Farming",
+      "abstract": "The decline of natural pollinators has created a major challenge for crop production in controlled indoor agriculture, particularly in vertical farming environments where natural insect pollination is absent. This motivates the development of robotic systems capable of performing precise flower targeting tasks while minimizing physical interference with delicate floral structures. This paper presents an aerial manipulator platform for perception driven flower detection, localization, and approach in vertical farming environments. The proposed system integrates onboard RGBD based perception, model predictive path integral (MPPI) based unmanned aerial vehicle (UAV) control on a PX4 platform, and a lightweight 2DoF manipulator for precise end effector positioning. The platform is evaluated in both MuJoCo simulation and UAV lab experiments using a flower targeting testbed. The experimental results demonstrate stable UAV flight, reliable flower localization, and centimeter level end effector positioning accuracy. In simulation, the proposed controller achieves consistent trajectory convergence and accurate target alignment. In the real world UAV lab environment, the integrated perception control manipulation framework enables stable flower targeted positioning and end effector alignment under constrained aerial operation. These results validate the proposed aerial manipulator as a robust robotic carrier and positioning framework for future contactless pollination systems. While the current study focuses on perception guided targeting and positioning, the developed platform provides a practical foundation for integrating advanced contactless end effectors, including acoustic based pollen manipulation modules, in future work.",
+      "authors": [
+        "Chenzhe Jin",
+        "Zhuohang Wu",
+        "Yifan Cai",
+        "Xiangqi Li",
+        "Jan Ming Kevin Tan",
+        "Narsimlu Kemsaram",
+        "Valerio Modugno"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-05-07T16:58:28+00:00",
+      "link": "https://arxiv.org/pdf/2605.06759v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "aerial manipulator with perception-driven flower detection, aligning with perception and detection modules in agent architectures",
+      "llm_evidence_cn": "空中机械臂结合感知驱动的花朵检测，符合智能体架构中的感知与检测模块",
+      "llm_evidence": "空中机械臂结合感知驱动的花朵检测，符合智能体架构中的感知与检测模块",
+      "canonical_evidence": "空中机械臂结合感知驱动的花朵检测，符合智能体架构中的感知与检测模块",
+      "llm_tldr_en": "Proposes an aerial manipulator that uses onboard RGBD perception and MPPI control for contactless flower detection and targeting in vertical farming, demonstrating a full agent architecture with integrated detection.",
+      "llm_tldr_cn": "针对垂直农业中自然传粉者缺失的问题，该论文提出了一种空中机械臂平台，集成RGBD感知与模型预测路径积分控制，实现无接触的花朵检测与定位。系统将感知、检测与控制模块紧密结合，在真实环境中展示了有效的智能体架构，为精密农业机器人提供了可行的解决方案。",
+      "llm_tldr": "针对垂直农业中自然传粉者缺失的问题，该论文提出了一种空中机械臂平台，集成RGBD感知与模型预测路径积分控制，实现无接触的花朵检测与定位。系统将感知、检测与控制模块紧密结合，在真实环境中展示了有效的智能体架构，为精密农业机器人提供了可行的解决方案。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in agent architectures",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2605.03456v3",
+      "source": "arxiv",
+      "title": "VL-SAM-v3: Memory-Guided Visual Priors for Open-World Object Detection",
+      "abstract": "Open-world object detection aims to localize and recognize objects beyond a fixed closed-set label space. It is commonly divided into two categories, i.e., open-vocabulary detection, which assumes a predefined category list at test time, and open-ended detection, which requires generating candidate categories during the inference. Existing methods rely primarily on coarse textual semantics and parametric knowledge, which often provide insufficient visual evidence for fine-grained appearance variation, rare categories, and cluttered scenes. In this paper, we propose VL-SAM-v3, a unified framework that augments open-world detection with retrieval-grounded external visual memory. Specifically, once candidate categories are available, VL-SAM-v3 retrieves relevant visual prototypes from a non-parametric memory bank and transforms them into two complementary visual priors, i.e., sparse priors for instance-level spatial anchoring and dense priors for class-aware local context. These priors are integrated with the original detection prompts via Memory-Guided Prompt Refinement, enabling a shared retrieval-and-refinement mechanism that supports open-vocabulary and open-ended inference. Extensive zero-shot experiments on LVIS show that VL-SAM-v3 consistently improves detection performance under both open-vocabulary and open-ended inference, with particularly strong gains on rare categories. Moreover, experiments with a stronger open-vocabulary detector (i.e., SAM3) validate the generality of the proposed retrieval-and-refinement mechanism.",
+      "authors": [
+        "Chih-Chung Liu",
+        "Zhiwei Lin",
+        "Yongtao Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-05T07:44:03+00:00",
+      "link": "https://arxiv.org/pdf/2605.03456v3",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "open-world object detection method",
+      "llm_evidence_cn": "开放世界目标检测方法",
+      "llm_evidence": "开放世界目标检测方法",
+      "canonical_evidence": "开放世界目标检测方法",
+      "llm_tldr_en": "Proposes VL-SAM-v3, a unified framework that augments open-world detection with retrieval-grounded external visual memory to handle fine-grained appearance variation and rare categories.",
+      "llm_tldr_cn": "针对开放世界目标检测中粗粒度文本语义和参数知识难以处理细粒度外观变化和稀有类别的问题，提出了VL-SAM-v3统一框架，通过检索外部视觉记忆增强检测能力。实验表明该方法在多种场景下显著提升了检测性能，为开放世界检测提供了新的解决思路。",
+      "llm_tldr": "针对开放世界目标检测中粗粒度文本语义和参数知识难以处理细粒度外观变化和稀有类别的问题，提出了VL-SAM-v3统一框架，通过检索外部视觉记忆增强检测能力。实验表明该方法在多种场景下显著提升了检测性能，为开放世界检测提供了新的解决思路。",
+      "llm_tags": [
+        "query:agent-detect:composite"
+      ],
+      "matched_query_tag": "query:agent-detect:composite",
+      "matched_query_text": "Papers central to agent/world model领域中的检测相关论文, especially work that connects or combines: p; d; w; a; perception and detection modules in world model; papers on detection techniques for agent; papers on detection techniques for world model; perception and detection modules in agent architectures.",
+      "matched_requirement_id": "req-composite-agent-detect",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "biorxiv-10-64898-2025-12-07-692260-v3",
+      "source": "biorxiv",
+      "title": "WSInsight: a cloud-native, agent-callable platform for single-cell whole-slide pathology",
+      "abstract": "WSInsight is an open-source platform for cohort-scale H&E whole-slide image analysis. It performs patch-level inference together with single-cell segmentation and phenotype classification, with morphology- and transcriptome-supervised cell-type heads retrainable from public data. Slides are read from cloud repositories and per-slide outputs are written to QuPath and OMERO. The same workflow is AI-agent callable through a Model Context Protocol endpoint. Applying it to TCGA cohorts recovered known immune and molecular associations.",
+      "authors": [
+        "Huang, C. H.",
+        "Awosika, O. E.",
+        "Fernandez, D."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-05-17T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2025.12.07.692260v3.full.pdf",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "agent-callable platform for pathology image detection",
+      "llm_evidence_cn": "可被智能体调用的病理图像检测平台",
+      "llm_evidence": "可被智能体调用的病理图像检测平台",
+      "canonical_evidence": "可被智能体调用的病理图像检测平台",
+      "llm_tldr_en": "WSInsight is a cloud-native platform for whole-slide image analysis that is AI-agent callable via a Model Context Protocol endpoint, performing patch inference and single-cell segmentation.",
+      "llm_tldr_cn": "针对病理图像分析中平台可调用性问题，提出了WSInsight云原生平台，支持全切片图像分析，并通过模型上下文协议端点实现AI智能体调用。在TCGA数据集上恢复了已知免疫和分子关联，展示了检测模块在智能体架构中的集成潜力。",
+      "llm_tldr": "针对病理图像分析中平台可调用性问题，提出了WSInsight云原生平台，支持全切片图像分析，并通过模型上下文协议端点实现AI智能体调用。在TCGA数据集上恢复了已知免疫和分子关联，展示了检测模块在智能体架构中的集成潜力。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in agent architectures",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.12497v1",
+      "source": "arxiv",
+      "title": "From Web to Pixels: Bringing Agentic Search into Visual Perception",
+      "abstract": "Visual perception connects high-level semantic understanding to pixel-level perception, but most existing settings assume that the decisive evidence for identifying a target is already in the image or frozen model knowledge. We study a more practical yet harder open-world case where a visible object must first be resolved from external facts, recent events, long-tail entities, or multi-hop relations before it can be localized. We formalize this challenge as Perception Deep Research and introduce WebEye, an object-anchored benchmark with verifiable evidence, knowledge-intensive queries, precise box/mask annotations, and three task views: Search-based Grounding, Search-based Segmentation, and Search-based VQA. WebEyes contains 120 images, 473 annotated object instances, 645 unique QA pairs, and 1,927 task samples. We further propose Pixel-Searcher, an agentic search-to-pixel workflow that resolves hidden target identities and binds them to boxes, masks, or grounded answers. Experiments show that Pixel-Searcher achieves the strongest open-source performance across all three task views, while failures mainly arise from evidence acquisition, identity resolution, and visual instance binding.",
+      "authors": [
+        "Bokang Yang",
+        "Xinyi Sun",
+        "Kaituo Feng",
+        "Xingping Dong",
+        "Dongming Wu",
+        "Xiangyu Yue"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-12T17:59:51+00:00",
+      "link": "https://arxiv.org/pdf/2605.12497v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "agentic search integrated into visual perception for open-world object detection",
+      "llm_evidence_cn": "将智能体搜索融入视觉感知以进行开放世界目标检测",
+      "llm_evidence": "将智能体搜索融入视觉感知以进行开放世界目标检测",
+      "canonical_evidence": "将智能体搜索融入视觉感知以进行开放世界目标检测",
+      "llm_tldr_en": "Proposes WebEye benchmark for Perception Deep Research, where visible objects must be resolved via external knowledge before localization; introduces Search-based Grounding, Segmentation, and VQA tasks.",
+      "llm_tldr_cn": "该论文指出传统视觉感知假设判断目标所需证据已在图像中，但现实开放世界需要从外部事实、长尾实体等获取知识才能进行定位。为此提出了WebEye基准，包含120张图片和473个精细标注物体，定义了搜索式定位、搜索式分割和搜索式VQA三种任务。核心贡献是将智能体搜索融入视觉感知过程，实现了知识依赖的开放世界目标检测，为智能体感知与检测模块的设计提供了新思路和评估基准。",
+      "llm_tldr": "该论文指出传统视觉感知假设判断目标所需证据已在图像中，但现实开放世界需要从外部事实、长尾实体等获取知识才能进行定位。为此提出了WebEye基准，包含120张图片和473个精细标注物体，定义了搜索式定位、搜索式分割和搜索式VQA三种任务。核心贡献是将智能体搜索融入视觉感知过程，实现了知识依赖的开放世界目标检测，为智能体感知与检测模块的设计提供了新思路和评估基准。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2605.03642v1",
+      "source": "arxiv",
+      "title": "The Detector Teaches Itself: Lightweight Self-Supervised Adaptation for Open-Vocabulary Object Detection",
+      "abstract": "Open-vocabulary object detection aims to recognize objects from an open set of categories, which leverages vision-language models (VLMs) pre-trained on large-scale image-text data. The cooperative paradigm combines an object detector with a VLM to achieve zero-shot recognition of novel objects. However, VLMs pre-trained on full images often struggle to capture local object details, limiting their effectiveness when applied to region-level detection. We present Decoupled Adaptivity Training (DAT), a self-supervised fine-tuning approach to improve VLMs for cooperative model-based object detection. Given a cooperative model consists of a closed-set detector and a VLM, we first construct a region-aware pseudo-labeled dataset using a pre-trained closed-set object detector, in which regions corresponding to novel objects may be present but remain unlabeled or mislabeled. We then fine-tune the visual backbone of the VLM in a decoupled manner, which enhances local feature alignment while preserving global semantic knowledge via weight interpolation. DAT is a plug-and-play module that requires no inference overhead and fine-tunes less than 0.8M parameters. Experiments on the COCO and LVIS datasets show that DAT consistently improves detection performance on both novel and known categories, establishing a new state of the art in cooperative open-vocabulary detection.",
+      "authors": [
+        "Yazhe Wan",
+        "Changjae Oh"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-05-05T11:14:30+00:00",
+      "link": "https://arxiv.org/pdf/2605.03642v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "self-supervised adaptation for open-vocabulary object detection",
+      "llm_evidence_cn": "自监督自适应开放词汇目标检测",
+      "llm_evidence": "自监督自适应开放词汇目标检测",
+      "canonical_evidence": "自监督自适应开放词汇目标检测",
+      "llm_tldr_en": "Presents Decoupled Adaptivity Training (DAT), a self-supervised fine-tuning approach to improve vision-language models for cooperative open-vocabulary object detection.",
+      "llm_tldr_cn": "针对开放词汇目标检测中视觉语言模型难以捕捉局部细节的问题，提出了解耦自适应训练（DAT），通过自监督微调提升协同检测性能。实验证明DAT有效增强了区域级检测能力，在多个数据集上达到先进水平。",
+      "llm_tldr": "针对开放词汇目标检测中视觉语言模型难以捕捉局部细节的问题，提出了解耦自适应训练（DAT），通过自监督微调提升协同检测性能。实验证明DAT有效增强了区域级检测能力，在多个数据集上达到先进水平。",
+      "llm_tags": [
+        "query:agent-detect:composite"
+      ],
+      "matched_query_tag": "query:agent-detect:composite",
+      "matched_query_text": "Papers central to agent/world model领域中的检测相关论文, especially work that connects or combines: p; d; w; a; perception and detection modules in world model; papers on detection techniques for agent; papers on detection techniques for world model; perception and detection modules in agent architectures.",
+      "matched_requirement_id": "req-composite-agent-detect",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-05-19-726254-v1",
+      "source": "biorxiv",
+      "title": "NanoCortex: A Unified Agentic System for Nanopore Sequencing Analysis",
+      "abstract": "Nanopore sequencing has enabled various layers of information about DNA and RNA sequence isoforms and chemical modifications. Yet, the archipelago of disjoint nanopore analysis tools makes navigating among these a significant challenge for the nanopore user. We present NanoCortex, a unified autonomous agentic framework designed to bridge this shortcoming by providing end-to-end data processing which ranges from raw signal basecalling to biological interpretation. Built upon Gemini API services that incur usage-based API costs and orchestrated through the Gemini Agent Development Kit (ADK), the system utilizes a multi-agent architecture to autonomously perform task parsing, code generation, iterative code-level self-correction of code, and scientific interpretation. Following code generation, the code can be used offline. Benchmarking reveals that NanoCortex achieves significantly higher usability across complex analytical tasks compared to general-purpose large language models. The framework seamlessly integrates experimental data with meta-analysis of publicly available, biological databases to facilitate the extraction of biologically meaningful insights from sequencing data without cumbersome computational steps.",
+      "authors": [
+        "Xia, Q.",
+        "Wang, Z.",
+        "Shokoufandeh, M.",
+        "Rouhanifard, S. H.",
+        "Wanunu, M."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-05-21T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.05.19.726254v1.full.pdf",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multi-agent system with iterative code-level self-correction for nanopore analysis",
+      "llm_evidence_cn": "具有迭代代码级自校正的多智能体纳米孔分析系统",
+      "llm_evidence": "具有迭代代码级自校正的多智能体纳米孔分析系统",
+      "canonical_evidence": "具有迭代代码级自校正的多智能体纳米孔分析系统",
+      "llm_tldr_en": "NanoCortex is a multi-agent system for nanopore sequencing analysis that autonomously parses tasks, generates code, and performs iterative self-correction, using Gemini API.",
+      "llm_tldr_cn": "针对纳米孔测序分析工具分散、使用复杂的问题，NanoCortex提出了一个统一的多智能体框架，集成从原始信号碱基调用到生物学解释的端到端处理。系统利用Gemini API和ADK，自主进行任务解析、代码生成、迭代代码级自校正和科学解释。实验展示了其在多种纳米孔数据分析任务中的有效性。该工作将智能体自我改进应用于实际生物信息学场景。",
+      "llm_tldr": "针对纳米孔测序分析工具分散、使用复杂的问题，NanoCortex提出了一个统一的多智能体框架，集成从原始信号碱基调用到生物学解释的端到端处理。系统利用Gemini API和ADK，自主进行任务解析、代码生成、迭代代码级自校正和科学解释。实验展示了其在多种纳米孔数据分析任务中的有效性。该工作将智能体自我改进应用于实际生物信息学场景。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2605.16551v1",
+      "source": "arxiv",
+      "title": "PQR: A Framework to Generate Diverse and Realistic User Queries that Elicit QA Agent Failures",
+      "abstract": "Evaluating LLM-based agents remains challenging because identifying meaningful failure cases often requires substantial human effort to design realistic test scenarios. Prior works primarily focus on automatically discovering agent failures induced by adversarial users, while overlooking queries with real user intents that also trigger agent failures. We introduce PQR, a framework that not only surfaces agent failures with respect to specific objectives (e.g., helpfulness, safety, etc.) but also resembles real users' intents. PQR operates through an iterative interaction between two complementary modules. The query refinement module performs rewrites to explore diverse query variations, while the prompt refinement module uses prior feedback to derive new objective-violating strategies and realism policies for refining prompts, which in turn generate failure-triggering yet realistic queries. We evaluate PQR on detecting an e-commerce QA agent's unhelpful responses. Our method uncovers 23% - 78% more unhelpful responses, and our generated queries are more diverse and realistic compared to previous methods.",
+      "authors": [
+        "Yunan Lu",
+        "Luigi Liu",
+        "Omar Yahia",
+        "Arpit Sharma",
+        "Zhou Yu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-05-15T18:50:43+00:00",
+      "link": "https://arxiv.org/pdf/2605.16551v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Framework to elicit QA agent failures via diverse queries",
+      "llm_evidence_cn": "通过多样化查询发现问答智能体失败案例的框架",
+      "llm_evidence": "通过多样化查询发现问答智能体失败案例的框架",
+      "canonical_evidence": "通过多样化查询发现问答智能体失败案例的框架",
+      "llm_tldr_en": "Introduces PQR, a framework that iteratively refines user queries to surface realistic failures in LLM-based agents, addressing the challenge of manual test design.",
+      "llm_tldr_cn": "本文针对LLM智能体评估中人工设计测试场景耗时的问题，提出PQR框架，通过查询精化与提示精化模块的迭代交互自动生成多样化且贴近真实用户意图的查询，从而揭示智能体在有用性、安全性等目标上的失败案例，显著降低评估成本。",
+      "llm_tldr": "本文针对LLM智能体评估中人工设计测试场景耗时的问题，提出PQR框架，通过查询精化与提示精化模块的迭代交互自动生成多样化且贴近真实用户意图的查询，从而揭示智能体在有用性、安全性等目标上的失败案例，显著降低评估成本。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2605.29496v1",
+      "source": "arxiv",
+      "title": "On Asymmetric Optimization of Reasoning and Perception in Vision-Language Model Post-Training",
+      "abstract": "Post-training has greatly improved reasoning in frontier vision-language models, yet its gains for perception remain comparatively limited, creating a bottleneck for end-to-end visual reasoning. To investigate this gap, we introduce a controlled diagnostic framework with two synthetic tasks that disentangle perception from reasoning. Our analysis reveals a consistent perception-reasoning asymmetry: posttraining improves reasoning more substantially than perception, though the underlying mechanism differs by training paradigm. For supervised fine-tuning (SFT), this asymmetry stems from token imbalance in chain-of-thought supervision, where perception occupies fewer tokens and thus receives a weaker training signal. Dynamically reweighting the loss mitigates this imbalance and boosts end-to-end performance by up to 18.2. For reinforcement learning (RL), the asymmetry instead arises from reward coupling: outcome rewards correlate more strongly with reasoning than with perception, weakening the signal for perception learning. Adding a perception-aware reward alleviates the imbalance and improves end-to-end accuracy by up to 6.0; even without groundtruth perception rewards, a reliable surrogate reward provide useful signal, yielding gains of 3.2 points. Together, our results comprehensively diagnose asymmetric optimization and suggest concrete interventions to balance perception and reasoning.",
+      "authors": [
+        "Xueqing Wu",
+        "Yu-Chi Lin",
+        "Kai-Wei Chang",
+        "Nanyun Peng"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.CV"
+      ],
+      "published": "2026-05-28T07:20:49+00:00",
+      "link": "https://arxiv.org/pdf/2605.29496v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "analysis of perception-reasoning asymmetry in VLM post-training",
+      "llm_evidence_cn": "视觉语言模型后训练中感知与推理不对称性的分析",
+      "llm_evidence": "视觉语言模型后训练中感知与推理不对称性的分析",
+      "canonical_evidence": "视觉语言模型后训练中感知与推理不对称性的分析",
+      "llm_tldr_en": "This paper studies the perception-reasoning asymmetry in VLM post-training, finding that reasoning improves more than perception due to token imbalance in SFT, and proposes dynamic reweighting to balance them.",
+      "llm_tldr_cn": "针对视觉语言模型后训练中感知能力提升有限的问题，本文引入了一个诊断框架，揭示了感知-推理不对称性：后训练更大幅度提升推理而非感知。对于监督微调，这种不对称源于链式思维监督中的token不平衡，感知token较少导致训练信号弱。提出动态重新加权方法以平衡两者。该研究为世界模型中的感知模块优化提供了理论基础。",
+      "llm_tldr": "针对视觉语言模型后训练中感知能力提升有限的问题，本文引入了一个诊断框架，揭示了感知-推理不对称性：后训练更大幅度提升推理而非感知。对于监督微调，这种不对称源于链式思维监督中的token不平衡，感知token较少导致训练信号弱。提出动态重新加权方法以平衡两者。该研究为世界模型中的感知模块优化提供了理论基础。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

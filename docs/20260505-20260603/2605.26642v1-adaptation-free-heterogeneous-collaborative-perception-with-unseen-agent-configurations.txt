@@ -1,0 +1,607 @@
+Title: Adaptation-Free Heterogeneous Collaborative Perception with Unseen Agent Configurations
+
+URL Source: https://arxiv.org/pdf/2605.26642v1
+
+Published Time: Wed, 27 May 2026 00:50:28 GMT
+
+Number of Pages: 23
+
+Markdown Content:
+# Adaptation-Free Heterogeneous Collaborative Perception with Unseen Agent Configurations 
+
+Hyunchul Bae Heejin Ahn ∗
+
+School of Electrical Engineering Korea Advanced Institute of Science and Technology (KAIST) Daejeon, Korea 34141 {bhc2675, heejin.ahn}@kaist.ac.kr 
+
+## Abstract 
+
+Collaborative perception improves 3D object detection by enabling agents to share complementary observations, but most existing methods assume fixed or known collaborator encoder configurations, limiting deployment in practice. In this work, we consider an open-world setting in which auxiliary agents with unseen configurations may appear after deployment, such as different LiDAR beam counts or encoder architectures. To address this challenge, we propose ALF, a collaborative perception framework that enables zero-adaptation collaboration with unseen agent configurations by lifting lightweight box-level messages into ego-compatible auxiliary features. ALF converts auxiliary box-level messages into pseudo-BEV maps and synthesizes ego-compatible latent features by combining object-centric cues with scene context from the ego feature. On V2X-Real, under a zero-shot evaluation across 64 case studies, ALF outperforms the strongest prior baseline by 35.91% in relative mAP@0.7 while requiring only 120 bytes per agent per frame ( ≈ 9.6 Kbps bandwidth at 10 Hz). 
+
+## 1 Introduction 
+
+Collaborative perception enables multiple agents to exchange information and jointly reason about a scene beyond the sensing limits of any individual agent. By aggregating complementary observations, it improves spatial coverage and reduces uncertainty caused by occlusion and limited sensing range [ 12 , 8 , 4]. Autonomous driving is a prominent application of this paradigm, where vehicles and infrastructure communicate to jointly perceive the environment [22, 2, 5]. Collaborative perception frameworks are commonly categorized as early, intermediate, and late fusion, depending on the type of information exchanged: raw sensor data, latent feature representations, and object-level predictions. Among these, intermediate fusion strikes a balance between communication cost and representational fidelity [ 21 , 26 , 10 , 18 , 30 ]. It preserves richer scene context than late fusion while avoiding the bandwidth overhead of early fusion. However, its central challenge is representation heterogeneity: features from auxiliary agents may be incompatible with the ego representation due to differences in agent configurations . We define an agent configuration as the combination of sensor specifications and encoder configurations, covering hardware-dependent properties such as LiDAR beam count and model-dependent choices such as backbone architecture, voxelization settings, and feature resolution. In realistic deployments, heterogeneity must be handled in an open-world setting, where an ego agent must collaborate with previously unseen auxiliary agents whose agent configurations were not observed during training. We refer to this scenario as configuration-agnostic heterogeneity . This setting is challenging because independently developed agents do not, in general, share a common 
+
+> ∗Corresponding author. Preprint.
+> arXiv:2605.26642v1 [cs.CV] 26 May 2026
+
+Figure 1: Comparison of strategies for integrating an unseen auxiliary agent (A UX 2) in heterogeneous collaborative perception, after fine-tuning with a seen auxiliary agent (A UX 1): (a) requires training additional adaptors for A UX 2, (b) requires updating the shared codebook and code encoder/decoder, (c) requires training the message extractor of A UX 2, while (d) requires no additional training. latent interface. In contrast, most prior work addresses heterogeneity only within a closed set of agent configurations observed during training or fine-tuning, which we refer to as configuration-specific heterogeneity .Prior heterogeneous intermediate-fusion methods mainly rely on adaptation [ 19 , 28 , 23 , 20 , 6], reconstruction [ 11 ], or generation [ 31 ], as illustrated in Fig. 1. These approaches typically require additional training to accommodate previously unseen auxiliary encoder configurations. This need for repeated per-agent retraining limits scalability and can degrade fusion performance when received representations fall outside the training distribution. We propose Adaptation-Free Late-to-Intermediate Fusion (ALF) , a new route to collaborative perception that avoids transmitting configuration-dependent latent features. Instead, each auxiliary agent sends a compact box-level message derived from its predicted 3D boxes, and the ego agent synthesizes an ego-compatible feature from this object-centric cue before fusion (Fig. 1(d)). The key idea of ALF is to decouple communication and fusion: auxiliary information is communicated through a late-fusion-style interface, yet fused in an intermediate-fusion manner. Box-level messages provide a stable communication interface across heterogeneous auxiliary agents. However, direct late fusion is limited, as such detections can only be used at the final decision stage. ALF therefore lifts these object-centric cues into a compatible latent representation. This lifting is guided by the ego latent feature, which provides scene context to transform object-centric cues into a fusion-ready representation. In this way, ALF recovers the pre-detection interaction benefits of intermediate fusion without requiring alignment of arbitrary auxiliary latent spaces. As a result, ALF enables plug-and-play collaboration with heterogeneous auxiliary agents—including those with previously unseen agent configurations—under a sub-1KB communication budget, as validated on V2X-Real [24]. We summarize our contributions as follows. • We propose ALF, an adaptation-free late-to-intermediate fusion framework that lifts box-level messages into ego-compatible latent features using ego latent features, enabling plug-and-play collaboration with heterogeneous auxiliary agents. • We solve configuration-agnostic heterogeneity, an open-world setting in which unseen auxiliary agent configurations may appear at inference time. • We demonstrate that ALF outperforms the strongest prior baseline on V2X-Real under unseen agent configurations, while requiring only a sub-1KB communication budget without any configuration-specific adaptation. 22 Related Work 
+
+Collaborative Perception Methods Intermediate fusion has been the main focus in collabora-tive perception due to its favorable accuracy-bandwidth trade-off. F-Cooper [ 3] uses maxout-based feature aggregation. V2X-ViT [ 26 ] introduces heterogeneous multi-agent attention and multi-scale window attention. CoBEVT [ 21 ] adopts fused axial attention for efficient local-global aggregation. Where2comm [ 10 ] reduces communication cost by transmitting sparse foreground regions. MRC-Net [ 9 ] further improves robustness in noisy environments through motion-aware communication. A related line uses bounding boxes together with intermediate fusion in two ways. Some methods use boxes as geometric anchors for feature alignment, as in CoAlign [ 18 ] and RoCo [ 13 ], which correct relative poses from matched object detections before feature fusion. Others use boxes as auxiliary signals, as in CoSDH [ 25 ], which applies confidence-aware late fusion on detection boxes to refine intermediate-fusion results under low bandwidth. In contrast, ALF uses compact box-level messages as the primary collaboration interface and lifts them into ego-compatible latent representations, enabling feature-level fusion without relying on configuration-dependent intermediate features. 
+
+Heterogeneity Handling Methods Heterogeneous encoders introduce a domain gap between ego and auxiliary features, making direct intermediate fusion challenging. Existing approaches can be broadly categorized into three types. The first is the adaptation- or interpretation-based approach, as shown in Fig. 1(a). This approach learns mappings either to the ego feature domain or to a shared semantic space. For example, MPDA [ 28 ] learns a feature resizer and a sparse cross-domain transformer. HEAL [ 19 ] builds a unified collaboration space and performs backward alignment by freezing the ego-side fusion and detection head. PnPDA [ 20 ] and STAMP [ 6] emphasize non-intrusive and scalable alignment. PolyInter [ 23 ] uses a prompt-driven interpreter. The second is the reconstruction-based approach, as shown in Fig. 1(b). Rather than transmitting latent features, methods such as CodeFilling [ 11 ] send compact code indices and reconstruct latent features from a shared codebook. The third is the generation-based approach, as shown in Fig. 1(c). Methods such as GenComm [ 31 ] generate collaborator-aligned features from spatial cues, requiring only lightweight extractor tuning for newly introduced agents. In contrast, ALF is distinct from all three categories. ALF adopts a synthesis-based design that lifts auxiliary box-level messages into the ego-compatible feature by leveraging ego latent features. The resulting representations are directly compatible for fusion, eliminating the need for retraining when new auxiliary agents are introduced. 
+
+## 3 Methodology 
+
+3.1 Problem Formulation 
+
+We consider collaborative 3D object detection with one ego agent and a time-varying set of auxiliary agents. Throughout this paper, we reserve the index 1 for the ego agent. The ego agent observes sensor data P1 and extracts an ego latent feature F1. Each auxiliary agent i ∈ A aux has its own agent configuration ci ∈ C and sends a message Mi→1 to the ego agent. Here, an agent configuration refers to the attributes that determine the latent feature domain, including sensor specifications and encoder configurations. Let Cseen ⊂ C denote the set of auxiliary agent configurations observed during training. We study an open-world deployment setting in which the auxiliary agent configuration set is not fixed after training. The deployment-time auxiliary set Aaux includes unseen agent configurations, i.e., there exists an agent i ∈ A aux such that ci /∈ C seen .Our goal is to learn a heterogeneity-handling module Hθ that resolves configuration-agnostic hetero-geneity while maintaining strong detection performance under a communication budget. Given the ego latent feature F1 and the auxiliary messages {M i→1}i∈A aux , we formulate the problem as 
+
+θ⋆ = arg max  
+
+> θ
+
+J (B⋆ 
+
+> 1
+
+, CP (F1, Hθ ({M i→1}i∈A aux ))) 
+
+subject to X
+
+> i∈A aux
+
+b(Mi→1) ≤ B, ∃ i ∈ A aux such that ci /∈ C seen .
+
+where B⋆ 
+
+> 1
+
+denotes the ground-truth 3D bounding boxes, J denotes a 3D object detection evaluation function, such as average precision (AP), CP denotes the collaborative perception detector, which 3Figure 2: Overall architecture of ALF. (a) The box-level message is converted into a pseudo-BEV map by the Box-to-BEV Rasterizer (B2BR). (b) The Ego-compatible Feature Synthesizer (EFS) lifts the sparse pseudo-BEV cue into an ego-compatible latent feature using the ego latent feature. consists of a feature fusion module and a detection head and produces the final prediction, b(·)
+
+measures communication cost, and B is the communication budget. 
+
+3.2 Method Overview 
+
+ALF enables late-fusion-style communication and intermediate-style feature fusion for open-world heterogeneous collaborative perception. Instead of exchanging configuration-dependent intermediate features, each auxiliary agent sends a compact box-level message, which the ego agent lifts into the ego latent space. This design preserves the interoperability and low communication cost of late fusion while enabling pre-detection interaction within a frozen ego-stack. The overall pipeline has three stages. First, each auxiliary agent converts its local detections into a compact box-level message Mi→1 through field selection and quantization. Second, the ego agent dequantizes and transforms the received message into the ego frame using the relative pose 
+
+Ti→1 and converts it into a high-resolution pseudo-BEV cue Xi with the Box-to-BEV Rasterizer (B2BR). Third, the Ego-compatible Feature Synthesizer (EFS) integrates Xi with the ego latent feature F1 ∈ RH×W ×C to lift a fusion-ready collaborative feature ˆFi ∈ RH×W ×C .The heterogeneity-handling module Hθ introduced in Section 3.1 is instantiated as a sequential composition of dequantization, coordinate transformation, B2BR, and EFS: 
+
+ˆFi = Hθ (Mi→1; Ti→1, F1) = fEFS ,θ (fB2BR (T (D(Mi→1) , T i→1)) , F1) ,
+
+where fEFS ,θ denotes the EFS, fB2BR denotes the B2BR, T denotes transformation into the ego frame using Ti→1, and D denotes dequantization. After synthesizing the ego-compatible feature ˆFi,the final 3D bounding boxes ˆB1are predicted through the collaborative perception model CP :
+
+ˆB1 = CP 
+
+
+
+F1, { ˆFi}i∈A aux 
+
+
+
+.
+
+Fig. 2 summarizes the full pipeline. 
+
+3.3 Box-Level Message Compaction 
+
+ALF communicates through box-level messages rather than configuration-dependent latent features. This choice is central to our open-world setting, where auxiliary agents may use unseen agent configurations and therefore cannot be assumed to share a compatible latent space with the ego agent. Each auxiliary agent i ∈ A aux sends a message defined as Mi→1 = {mi,k }Kmax  
+
+> k=1
+
+where Kmax 
+
+denotes the maximum number of prediction boxes and mi,k contains the BEV-relevant fields of a 4prediction box. In particular, we define mi,k = (˜ xi,k , ˜yi,k , ˜wi,k , ˜ℓi,k , ˜ψi,k , ˜si,k ) where ˜xi,k and ˜yi,k 
+
+denote the box center in the local BEV plane, ˜wi,k and ˜ℓi,k denote the box width and length, ˜ψi,k 
+
+denotes the yaw angle, and ˜si,k denotes the confidence score. Here, ˜(·) indicates quantized values. Quantization details are provided in Appendix A.1. If the detector produces fewer than Kmax boxes, the remaining entries are zero-padded. If it pro-duces more, we retain the top-Kmax boxes ranked by confidence. This compact representation preserves essential object evidence for collaboration while reducing communication cost compared to conventional late fusion. 
+
+3.4 Box-to-BEV Rasterizer 
+
+We now convert the compact box-level message into a pseudo-BEV representation. After transmission, the ego agent first dequantizes the received message and transforms the spatial fields (position, size, orientation) into the ego frame using relative pose Ti→1, yielding a processed message M′
+
+> i
+
+. We then convert M′ 
+
+> i
+
+into a pseudo-BEV map Xi with the B2BR: 
+
+Xi = fB2BR (M′
+
+> i
+
+) ∈ RHbev ×Wbev ×1,
+
+where Hbev and Wbev denote the height and width of the BEV grid. This pseudo-BEV representation Xi serves two purposes. First, it preserves the spatial footprint of auxiliary detections in a shared representation that is independent of the auxiliary agent configuration. Second, it provides a high-resolution object-centric cue that can be lifted into the ego latent space by the subsequent synthesizer. Additional details of B2BR, including the exact definitions of Hbev and 
+
+Wbev , are provided in Appendix A.2. 
+
+3.5 Ego-compatible Feature Synthesizer 
+
+The pseudo-BEV map Xi is a sparse representation of object-level information. To achieve intermediate-fusion-style interaction, we introduce the EFS to lift the pseudo-BEV representation into the ego latent space: 
+
+ˆFi = fEFS ,θ (Xi, F1) ∈ RH×W ×C .
+
+Here, “ego-compatible” means compatibility with the latent space expected by the frozen ego fusion and detection modules, rather than reconstruction of the auxiliary agent’s native feature space. EFS consists of three blocks: 
+
+Oi = Φ OCE (Xi), (Z′(1)  
+
+> i
+
+, Z′(2)  
+
+> i
+
+) = Φ EIM (Oi, F1), ˆFi = Φ ELR 
+
+
+
+[Oi, Z′(1)  
+
+> i
+
+, Z′(2)  
+
+> i
+
+]
+
+
+
+.
+
+The Object-centric Cue Encoder (OCE) (blue region in Fig. 2(b)) converts the pseudo-BEV map 
+
+Xi into a compact object-centric feature Oi. It reduces spatial resolution while increasing the channel dimension to match the scale of the ego latent feature. At the same time, it extracts object-level information from the pseudo-BEV map, making Oi suitable for subsequent synthesis: 
+
+Oi = Enc L(Expand( Xi)) ∈ RH×W ×C/ 2,
+
+where Expand( ·) denotes shallow channel expansion of the pseudo-BEV map Xi to the channel dimension of 64 in our setting. Enc L(·) denotes an L-stage encoder built from Conv–BN–SiLU blocks, which progressively reduces the spatial resolution while gradually increasing the channel dimension. The Ego-context Injection Module (EIM) (yellow region in Fig. 2(b)) enriches the object-centric feature Oi with the ego latent feature F1, which provides scene geometry and semantics. EIM follows a two-stage pyramid-style design that enables multi-scale context integration. In the first stage, the ego latent feature is added to Oi before downsampling. In the second stage, the ego latent feature is added again to the first-stage feature before a further downsampling step. The resulting two-stage features are then upsampled to the resolution of F1, yielding 
+
+Z′(1)  
+
+> i
+
+= Up 1(Down 1(Oi + AvgPool( F1))) ∈ RH×W ×C/ 2,
+
+Z′(2)  
+
+> i
+
+= Up 2(Down 2(Down 1(Oi) + AvgPool( F1))) ∈ RH×W ×C/ 2.
+
+5Here, AvgPool( ·) denotes average pooling of F1 to match the spatial resolution of the feature it is added to. Down 1(·) and Down 2(·) denote the first- and second-stage downsampling operators, respectively, while Up 1(·) and Up 2(·) denote the corresponding upsampling operators that first restore spatial resolution via bilinear upsampling and then apply Conv–BN–SiLU blocks. The Ego-compatible Latent Refiner (ELR) (gray region in Fig. 2(b)) synthesizes the final fusion-ready feature by aggregating the object-centric feature Oi with the ego-enriched features Z′(1)  
+
+> i
+
+and 
+
+Z′(2)  
+
+> i
+
+. Although these inputs provide complementary local information and broader scene context, they are not yet aligned with the latent space expected by the ego fusion module. ELR first projects the concatenated feature to channel dimension C using two convolutional blocks, and then refines the projected feature with three residual blocks while preserving the backbone resolution. The final output is the ego-compatible latent feature ˆFi:
+
+˜Fi = Proj 
+
+
+
+[Oi, Z′(1)  
+
+> i
+
+, Z′(2)  
+
+> i
+
+]
+
+
+
+∈ RH×W ×C , ˆFi = ResBlock 3
+
+ ˜Fi
+
+
+
+∈ RH×W ×C .
+
+Here, Proj( ·) denotes projection to channel dimension C, and ResBlock 3(·) denotes a stack of three residual blocks that refines the latent representation. Detailed architectural configurations are provided in Appendix A.3. 
+
+3.6 Loss 
+
+We train ALF using two objectives: a standard ego detection loss Ldet and an auxiliary feature-alignment loss Lalign . The overall objective is 
+
+L = αdet Ldet + αalign 
+
+1
+
+|A aux |
+
+X
+
+> i∈A aux
+
+L(i)align .
+
+The detection loss supervises the final output using the same objective as the frozen ego detector: 
+
+Ldet = αcls Lcls + αreg Lreg , where Lcls is the focal classification loss [16] and Lreg is the Smooth L1 box regression loss [7]. For each auxiliary agent i, we align the synthesized feature ˆFi to an ego-domain teacher feature F⋆i .This teacher feature is obtained by transforming the auxiliary observation into the ego frame and encoding it with the frozen ego encoder. Since foreground objects occupy only a small fraction of the BEV space, a global alignment would be dominated by background areas. To address this, we compute the alignment loss separately for object and background regions: 
+
+L(i)align = αobj Lcos ( ˆFi, F⋆i ; Ωobj  
+
+> i
+
+) + αbg Lcos ( ˆFi, F⋆i ; Ωbg  
+
+> i
+
+),
+
+where Ωobj  
+
+> i
+
+and Ωbg  
+
+> i
+
+denote the object and background masks, respectively. Given a region mask Ω,the region-weighted cosine alignment loss is defined as 
+
+Lcos ( ˆFi, F⋆i ; Ω) = 1max(1 , ∥Ω∥1)
+
+> H
+
+X
+
+> u=1
+> W
+
+X
+
+> v=1
+
+Ω(u, v )
+
+
+
+1 − cos 
+
+ ˆFi(u, v ), F⋆i (u, v )
+
+ 
+
+.
+
+This objective encourages the synthesized feature to match the ego-space teacher while ensuring that object-level information is preserved despite the dominance of background regions. Detailed constructions of the teacher features and masks are provided in Appendix A.4 and A.5, respectively. 
+
+3.7 Training Strategy and Adaptation-Free Deployment 
+
+ALF is trained in a single fine-tuning stage. During training, only the parameters θ of EFS are opti-mized, while the pretrained ego encoder, fusion module, and detection head remain frozen. Auxiliary agents are treated as fixed black-box detectors. Once trained, EFS remains fixed during deployment. When auxiliary agents with unseen agent configurations are encountered at inference time, ALF re-quires no additional fine-tuning or retraining. Instead, any auxiliary agent can immediately participate in collaboration by providing a box-level message Mi→1 and relative pose Ti→1.Because ALF interfaces with auxiliary agents exclusively through this universal box-level message format, it enables plug-and-play, adaptation-free deployment in open-world settings. 64 Experiments 
+
+4.1 Experiments Setup Dataset, metrics, and baselines. We evaluate ALF on V2X-Real [ 24 ], a large-scale real-world V2X cooperative perception dataset. Performance is measured by Average Precision (AP) for each superclass, and we report the mean Average Precision (mAP) across all superclasses. Specifically, we report mAP@0.5 and mAP@0.7, corresponding to IoU thresholds of 0.5 and 0.7, respectively. To evaluate ALF under heterogeneous settings, we compare it with representative baselines, including E2E, MPDA [ 28 ], CodeFilling [ 11 ], and GenComm [ 31 ]. Here, E2E denotes an end-to-end baseline that jointly trains all parameters, including the ego encoder, auxiliary encoders, fusion module, and detection head. To assess generality across fusion architectures, we evaluate each method across various fusion backbones, including AttnFuse [ 27 ], CoBEVT [ 21 ], V2X-ViT [ 26 ], and ParCon [ 1 ]. Detailed descriptions of the dataset, metrics, and implementation details are provided in Appendix B.1, B.2, and B.4, respectively. 
+
+Experiment Design. We define the ego and auxiliary agent configurations separately. The ego agent is fixed to using a 128-beam LiDAR and a PointPillar backbone with voxel size [0 .4, 0.4, 30] 
+
+along the x, y, and z axes, respectively. For auxiliary agents, we consider two LiDAR specifications, 128-beam and 64-beam LiDARs, combined with four encoder configurations: two voxel-resolution variants of PointPillar [ 15 ] and two voxel-resolution variants of SECOND [ 29 ], as summarized in Appendix B.3. This yields eight auxiliary agent configurations. We define three evaluation protocols, where E GO denotes the ego agent configuration (PP4 with a 128-beam LiDAR), A UX 1 denotes a seen auxiliary agent configuration, and A UX 2 denotes an unseen 
+
+auxiliary agent configuration: (1) Seen-pair evaluation. The model is trained and evaluated on the same (E GO +AUX 1) pair. (2) Zero-shot unseen evaluation. The model is trained on (E GO +AUX 1) but evaluated on (E GO +AUX 2) without additional training. (3) Unseen adaptation evaluation. The model is further fine-tuned on (E GO +AUX 1+AUX 2) and evaluated on (E GO +AUX 2). Results are reported in Appendix B.8. Protocol-specific application details are provided in Appendix B.5. 
+
+4.2 Quantitative Analysis Seen-Pair Evaluation. Fig. 3 reports the results of the baseline methods under the seen-pair evaluation protocol and ALF for comparison. Despite its adaptation-free design, ALF remains competitive with SOTA methods that require pair-specific fine-tuning to handle heterogeneity. As shown in Fig. 3 (b), ALF achieves the highest mAP@0.5 and mAP@0.7 in 8 and 11 out of 16 cases, respectively. These results are particularly significant considering ALF communicates sub-1KB box-level messages, whereas feature-based SOTAs rely on dense, high-bandwidth representations. 
+
+Communication Bandwidth. The last row of Fig. 3(b) reports the payload bitrate of each method at 10 Hz. The transmitted message size of the baselines varies with the feature size determined by each agent configuration, leading to variable and often high communication costs. In contrast, ALF achieves a fixed and minimal bitrate because its message size is determined only by the fixed box schema and Kmax , not by the auxiliary feature size. Each message contains Kmax = 20 
+
+boxes, with six INT8-quantized values per box, resulting in a fixed payload of 6 × 20 × 8 = 960 
+
+bits, i.e., 120 bytes per frame. At a 10 Hz operating frequency, this corresponds to a bandwidth of only 9.6 kbps ( 0.0096 Mbps), representing several orders of magnitude reduction compared to feature-based collaboration. Although CodeFilling and GenComm transmit compact intermediate-derived messages, their communication cost remains tied to the BEV feature grid. In contrast, ALF communicates through fixed-size box-level messages, making its payload independent of the auxiliary feature-map resolution. 
+
+Zero-Shot Unseen Evaluation. Fig. 4 reports zero-shot unseen evaluation results for ALF and the baselines under two sources of heterogeneity: encoder configuration and LiDAR specification. 7(a) Grouped bar chart for seen-pair evaluation                      
+
+> Method E2E MPDA CodeFilling GenComm ALF (Ours)
+> # Best@0.7 120211
+> # Best@0.5 25018
+> Bandwidth@10Hz (Mbps) ↓503–1845 503–1845 1.475–2.703 3.932–7.209 0.0096
+
+(b) Summary of the number of best-performing cases in terms of mAP@0.7 and mAP@0.5, together with bandwidth. Bandwidth is reported as a range because it varies across PP6, PP8, SD2, and SD3. Figure 3: Comparison of detection accuracy under seen-pair evaluation. In this setting, both E GO and AUX 1 use 128-beam LiDARs. Full results are provided in Appendix B.6. 
+
+Figure 4: Comparison of detection accuracy under zero-shot unseen evaluation with two sources of heterogeneity: (a) encoder configuration and (b) sensor specification. In (a), both E GO and A UX 1 use 128-beam LiDARs. In (b), E GO uses a 128-beam LiDAR, while A UX 1 uses a 64-beam LiDAR. Full results are provided in Appendix B.7. As shown in Fig. 4(a), ALF consistently outperforms all baselines under encoder-configuration heterogeneity. Fig. 4(b) further shows that ALF achieves the best performance in most LiDAR-specification heterogeneity cases. These results demonstrate ALF’s ability to handle unseen auxiliary configurations without additional adaptation. Moreover, ALF maintains stable performance across both heterogeneity types and the individual unseen cases within each type. By contrast, E2E, MPDA, and CodeFilling show failure-prone cases, with mAP@0.7 dropping below 0.1. These failures indicate that configuration-specific baselines can be risky in open-world deployment. Although GenComm avoids such a dramatic drop, its performance is sensitive to the fusion method; under V2X-ViT and ParCon, it remains substantially below ALF. 
+
+4.3 Qualitative Analysis 
+
+Fig. 5 visualizes the pseudo-BEV map Xi, the synthesized feature ˆFi, the teacher feature F⋆i , and the ego-agent’s feature F1. We also provide the single-agent detection results { ˆBi}i∈A aux and the final collaborated ego-centric detection ˆB1. Using EFS, the ego agent transforms object-centric cues from the pseudo-BEV map into ego-compatible latent features by leveraging the geometric and semantic context of F1. Consequently, the synthesized feature ˆFi integrates the auxiliary object-centric cue with ego scene context, yielding a fusion-ready representation in the ego latent space. 8Figure 5: Visualization results of ALF using AttFuse. The 3D bounding boxes shown in red, green and yellow denote the predicted, ground-truth, and filtered out bounding boxes, respectively. 
+
+Figure 6: Ablation study on quantization schemes, and maximum number of transmitted boxes Kmax .Table 1: Ablation study on EFS using different combinations of its submodules.                  
+
+> OCE EIM ELR mAP@0.5 mAP@0.7 0.452 0.298
+> ✓0.470 0.305
+> ✓✓0.483 0.313
+> ✓✓0.487 0.318
+> ✓✓✓0.485 0.333
+
+4.4 Ablation Study 
+
+All ablation studies are conducted under the homogeneous encoder setting PP4 with a 128-beam LiDAR. Fig. 6 shows detection performance under different communication bandwidth settings. The blue curve compares quantization precisions (INT4, INT8, INT16, and FP32). Quantizing the transmitted data to INT4 causes a clear drop in mAP@0.7 , indicating substantial information loss. By contrast, increasing precision beyond INT8 yields only marginal gains. This suggests that INT8 provides the best trade-off between communication efficiency and detection performance. The yellow curve shows the effect of varying the maximum number of transmitted bounding boxes 
+
+Kmax . When Kmax is 0, corresponding to no fusion, the mAP@0.7 is 0.295. Increasing the limit to 20 improves the performance to 0.333. However, transmitting more than 20 boxes degrades performance. This suggests that additional low-confidence boxes provide little information and may hurt detection. Tab. 1 presents an ablation study of EFS. Directly using the pseudo-BEV map without EFS gives the worst performance, indicating that the object-centric cue cannot be consumed by the ego latent space as-is. The full EFS achieves the best performance, showing that OCE, EIM, and ELR are complementary for synthesizing ego-compatible latent features. 
+
+## 5 Conclusion 
+
+We study configuration-agnostic heterogeneity in cooperative 3D object detection, where auxiliary agents may have unseen sensor specifications or encoder configurations. In open-world deployment, such auxiliary agents may appear after training, and the ego agent must collaborate with them without further adaptation. To address this challenge, we propose ALF, a late-to-intermediate fusion framework that converts lightweight box-level messages into pseudo-BEV map and synthesizes ego-compatible auxiliary features using ego-scene context. Experiments on V2X-Real show that ALF handles unseen auxiliary configurations under zero-shot evaluation while maintaining low communication cost. These results suggest that ego-side synthesis from compact box-level messages provides a practical and scalable interface for heterogeneous collaborative perception. 
+
+Limitations and Future Work. To isolate the effect of configuration heterogeneity, we do not consider additional open-world deployment factors such as sensor noise, communication noise, localization error, or latency. Future work will extend ALF to such realistic deployment settings. 9References 
+
+[1] H. Bae, M. Kang, and H. Ahn. ParCon: Noise-robust collaborative perception via multi-module parallel connection. arXiv preprint arXiv:2407.11546 , 2024. [2] H. Bae, M. Kang, M. Song, and H. Ahn. Rethinking the role of infrastructure in collaborative perception. In Proceedings of the European Conference on Computer Vision Workshops (ECCVW) , 2024. [3] Q. Chen, X. Ma, S. Tang, J. Guo, Q. Yang, and S. Fu. F-cooper: Feature based cooperative perception for autonomous vehicle edge computing system using 3d point clouds. In Proceedings of the 4th ACM/IEEE Symposium on Edge Computing (SEC) , pages 88–100, 2019. [4] X. Gao, X. Zhang, Y. Lu, Y. Huang, L. Yang, Y. Xiong, and P. Liu. A survey of collaborative perception in intelligent vehicles at intersections. IEEE Transactions on Intelligent Vehicles ,2024. [5] X. Gao, Z. Tu, et al. Airv2x: Unified air–ground/vehicle-to-everything collaboration for perception. arXiv preprint arXiv:2506.19283 , 2025. [6] X. Gao, R. Xu, J. Li, Z. Wang, Z. Fan, and Z. Tu. STAMP: Scalable task- and model-agnostic collaborative perception. In Proceedings of the International Conference on Learning Repre-sentations (ICLR) , 2025. [7] R. Girshick. Fast r-cnn. In Proceedings of the IEEE International Conference on Computer Vision (ICCV) , pages 1440–1448, 2015. [8] Y. Han, H. Zhang, H. Li, Y. Jin, C. Lang, and Y. Li. Collaborative perception in autonomous driving: Methods, datasets, and challenges. IEEE Intelligent Transportation Systems Magazine ,2023. [9] S. Hong, Y. Liu, Z. Li, S. Li, and Y. He. Multi-agent collaborative perception via motion-aware robust communication network. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pages 15301–15310, 2024. [10] Y. Hu, S. Fang, Z. Lei, Y. Zhong, and S. Chen. Where2comm: Communication-efficient collaborative perception via spatial confidence maps. In Proceedings of the Annual Conference on Neural Information Processing Systems (NeurIPS) , pages 4874–4886, 2022. [11] Y. Hu, J. Peng, S. Liu, J. Ge, S. Liu, and S. Chen. Communication-efficient collaborative perception via information filling with codebook. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR) , pages 15481–15490, 2024. [12] T. Huang, J. Liu, X. Zhou, D. C. Nguyen, M. R. Azghadi, Y. Xia, Q.-L. Han, and S. Sun. Vehicle-to-everything cooperative perception for autonomous driving. Proceedings of the IEEE ,2025. [13] Z. Huang, S. Wang, Y. Wang, W. Li, D. Li, and L. Wang. Roco: Robust cooperative perception by iterative object matching and pose adjustment. In Proceedings of the ACM International Conference on Multimedia (ACM MM) , pages 7833–7842, 2024. [14] D. P. Kingma and J. Ba. Adam: A method for stochastic optimization. In Proceedings of the International Conference on Learning Representations (ICLR) , 2015. [15] A. H. Lang, S. Vora, H. Caesar, L. Zhou, J. Yang, and O. Beijbom. Pointpillars: Fast encoders for object detection from point clouds. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR) , 2019. [16] T.-Y. Lin, P. Goyal, R. Girshick, K. He, and P. Dollár. Focal loss for dense object detection. In Proceedings of the IEEE International Conference on Computer Vision (ICCV) , pages 2980–2988, 2017. [17] I. Loshchilov and F. Hutter. Decoupled weight decay regularization. In Proceedings of the International Conference on Learning Representations (ICLR) , 2019. 10 [18] Y. Lu, Q. Li, B. Liu, M. Dianati, C. Feng, S. Chen, and Y. Wang. Robust collaborative 3d object detection in presence of pose errors. In Proceedings of the IEEE International Conference on Robotics and Automation (ICRA) , pages 4812–4818, 2023. [19] Y. Lu, Y. Hu, Y. Zhong, D. Wang, S. Chen, and Y. Wang. An extensible framework for open heterogeneous collaborative perception. In Proceedings of the International Conference on Learning Representations (ICLR) , 2024. [20] T. Luo, Q. Yuan, G. Luo, Y. Xia, Y. Yang, and J. Li. Plug and play: A representation enhanced domain adapter for collaborative perception. In Proceedings of the European Conference on Computer Vision (ECCV) , pages 287–303, 2024. [21] H. X. W. S. B. Z. J. M. Runsheng Xu, Zhengzhong Tu. Cobevt: Cooperative bird’s eye view semantic segmentation with sparse transformers. In Proceedings of the Conference on Robot Learning (CoRL) , 2022. [22] B. Wang, X. Li, Q. Xu, W. Zhu, Y. Du, H. Che, Z. Xu, and B. Li. Vicooper: Communication-efficient vehicle-infrastructure cooperative 3d object detection leveraging roadside hd point cloud background map priors. IEEE Internet of Things Journal , 2025. [23] Y. Xia, Q. Yuan, G. Luo, X. Fu, Y. Li, X. Zhu, T. Luo, S. Chen, and J. Li. One is plenty: A polymorphic feature interpreter for immutable heterogeneous collaborative perception. In 
+
+Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR) ,pages 1592–1601, 2025. [24] H. Xiang, Z. Zheng, X. Xia, R. Xu, L. Gao, Z. Zhou, X. Han, X. Ji, M. Li, Z. Meng, et al. V2x-real: a largs-scale dataset for vehicle-to-everything cooperative perception. In Proceedings of the European Conference on Computer Vision (ECCV) , pages 455–470, 2024. [25] J. Xu, Y. Zhang, Z. Cai, and D. Huang. Cosdh: communication-efficient collaborative perception via supply-demand awareness and intermediate-late hybridization. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pages 6834–6843, 2025. [26] R. Xu, H. Xiang, Z. Tu, X. Xia, M.-H. Yang, and J. Ma. V2X-ViT: Vehicle-to-everything cooperative perception with vision transformer. In Proceedings of the European Conference on Computer Vision (ECCV) , 2022. [27] R. Xu, H. Xiang, X. Xia, X. Han, J. Li, and J. Ma. Opv2v: An open benchmark dataset and fusion pipeline for perception with vehicle-to-vehicle communication. In Proceedings of the IEEE International Conference on Robotics and Automation (ICRA) , pages 2583–2589, 2022. [28] R. Xu, J. Li, X. Dong, H. Yu, and J. Ma. Bridging the domain gap for multi-agent perception. In 
+
+Proceedings of the IEEE International Conference on Robotics and Automation (ICRA) , pages 6035–6042, 2023. [29] Y. Yan, Y. Mao, and B. Li. SECOND: Sparsely embedded convolutional detection. Sensors , 18 (10):3337, 2018. [30] J. Zhang, K. Yang, Y. Wang, H. Wang, P. Sun, and L. Song. Ermvp: Communication-efficient and collaboration-robust multi-vehicle perception in challenging environments. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR) , pages 12575–12584, 2024. [31] J. Zhou, P. Dai, Q. Wei, B. Liu, X. Wu, and J. Wang. Pragmatic heterogeneous collaborative perception via generative communication mechanism. In Proceedings of the Conference on Neural Information Processing Systems (NeurIPS) , 2025. 11 A Method Details 
+
+A.1 Quantization Details 
+
+For each scalar field v, we apply b-bit zero-point quantization: 
+
+˜v = clip 
+
+ vsv
+
+
+
++ zv , q min , q max 
+
+
+
+, sv = vmax − vmin 
+
+qmax − qmin 
+
+, zv =
+
+
+
+qmin − vmin 
+
+sv
+
+
+
+, (1) where qmin = 0 and qmax = 2 b − 1.
+
+A.2 Details of the Box-to-BEV Rasterizer Dequantization and Ego-Frame Transformation. Upon reception, the ego agent dequantizes each field via 
+
+vdq = sv (˜ v − zv ), (2) and transforms (xdq , y dq , ψ dq ) to the ego frame using Ti→1.
+
+Rasterization Details. B2BR converts the processed box message into a single-channel pseudo-BEV map by rasterizing box footprints on the BEV grid. Each box contributes a confidence-weighted occupancy pattern, and the final map stores the occupied cells after rasterization. The grid resolution is determined by the ego agent’s BEV detection range [xmin , x max ] × [ymin , y max ]
+
+and the voxel size (vx, v y ):
+
+Hbev =
+
+ xmax − xmin 
+
+vx
+
+
+
+, Wbev =
+
+ ymax − ymin 
+
+vy
+
+
+
+.
+
+For a transformed box parameterized by (x, y, ℓ, w, ψ ) on the BEV plane, we test whether each grid cell center lies inside the rotated box footprint. Let (xg,u , y g,v ) denote the center of grid cell (u, v ).We first translate the cell center to the box center and then rotate it into the box-local coordinate frame: 
+
+δx = xg,u − x, δy = yg,v − y, (3) 
+
+x′
+
+y′
+
+
+
+=
+
+ cos ψ sin ψ
+
+− sin ψ cos ψ
+
+  δx δy 
+
+
+
+. (4) The cell is marked as occupied if 
+
+|x′| ≤ ℓ
+
+2 , |y′| ≤ w
+
+2 . (5) If multiple boxes overlap in the same cell, we assign the maximum confidence score among them. This produces a sparse pseudo-BEV map that preserves the spatial footprint of auxiliary detections while remaining independent of the auxiliary encoder configuration. 
+
+A.3 Detailed Architecture of the Ego-compatible Feature Synthesizer Basic operators. We denote a 2D convolution with kernel size k and stride s by Conv k,s , batch normalization by BN , and the Sigmoid Linear Unit by SiLU . We define 
+
+CBA k,s (·) ≜ Conv k,s → BN → SiLU , (6) 
+
+Bilinear ×m(·) ≜ bilinear interpolation by a factor of m. (7) We further use a residual block 
+
+RB( x) ≜ x + BN(Conv 3,1(SiLU(BN(Conv 3,1(x))))) . (8) 12 Object-centric Cue Encoder (OCE). The operator Expand( ·) performs channel-wise expansion by replication: 
+
+Expand( Xi) = [ Xi, . . . , Xi]
+
+| {z } 
+
+> C0times
+
+∈ RHbev ×Wbev ×C0 , (9) where C0 = 64 in our implementation. This operation introduces no learnable parameters and simply duplicates the single-channel input along the channel dimension. The encoder Enc L(·) consists of L stages: 
+
+O(ℓ) 
+
+> i
+
+= CBA 3,1
+
+
+
+CBA 3,2
+
+
+
+O(ℓ−1) 
+
+> i
+
+ 
+
+, ℓ = 1 , . . . , L, (10) with O(0)  
+
+> i
+
+= Expand( Xi). Here, CBA 3,2 reduces spatial resolution by a factor of 2, while CBA 3,1
+
+refines features at the same scale. Across the L stages, the spatial resolution is reduced by a factor of 
+
+2L, while the channel dimension is progressively increased to reach the output dimension of Oi.
+
+Ego-context Injection Module (EIM). The ego feature is first spatially aligned by average pooling: 
+
+¯F1 = AvgPool( F1), (11) where AvgPool( ·) denotes adaptive average pooling whose output spatial resolution matches that of the feature to which it is added. The downsampling operators are defined as 
+
+Down k(x) = CBA 3,2(x), k ∈ { 1, 2}. (12) The upsampling operators restore resolution via bilinear interpolation followed by refinement: 
+
+Up k(x) = CBA 3,1(Bilinear ×sk (x)) , (13) where s1 = 2 and s2 = 4 .Thus, the two ego-enriched features are instantiated as 
+
+Z′(1)  
+
+> i
+
+= Up 1(Down 1(Oi + AvgPool( F1))) , (14) 
+
+Z′(2)  
+
+> i
+
+= Up 2(Down 2(Down 1(Oi) + AvgPool( F1))) . (15) 
+
+Ego-compatible Latent Refiner (ELR). The projection operator is defined as 
+
+Proj( x) = CBA 3,1
+
+ CBA 3,1(x), (16) which maps the concatenated feature to channel dimension C.The refinement operator is defined as 
+
+ResBlock 3(x) = (RB ◦ RB ◦ RB)( x), (17) which applies three residual blocks while preserving spatial resolution. 
+
+A.4 Teacher Feature Construction 
+
+For each auxiliary agent i, we define a teacher feature F⋆i as the latent feature produced by the frozen ego encoder when the auxiliary observation is expressed in the ego coordinate frame. Specifically, let Pi denote the auxiliary observation and let Ti→1 denote the relative pose from agent i to the ego agent. We first transform Pi into the ego frame and denote the transformed observation by ˜Pi→1. The teacher feature is then obtained by encoding ˜Pi→1 with the frozen ego encoder. This construction differs from using the auxiliary agent’s native latent feature. Instead, it defines the supervisory target directly in the latent space expected by the ego fusion and detection stack. As a result, the alignment objective encourages the synthesized feature to be compatible with the ego latent domain while preserving the foreground structure induced by the auxiliary observation. 13 Table 2: Encoder Configurations. Performance is evaluated using single-agent detectors without fusion (no fusion).                                                            
+
+> Backbone Architecture Encoder Configuration Voxel Size (vx, v y, v z)2D / 3D CNN Layers Detection Range
+> ([ xmin , x max ]×[ymin , y max ])
+> Feature Size (H×W×C)PointPillar PP4 0.4, 0.4, 30 21 / 0 [-102.4, 102.4] ×[-38.4, 38.4] 48 ×128 ×256
+> PP6 0.6, 0.6, 30 21 / 0 [-105.6, 105.6] ×[-38.4, 38.4] 64 ×176 ×256
+> PP8 0.8, 0.8, 30 21 / 0 [-102.4, 102.4] ×[-38.4, 38.4] 48 ×128 ×256
+> SECOND SD2 0.2, 0.2, 0.1 12 / 12 [-102.4, 102.4] ×[-38.4, 38.4] 48 ×128 ×512
+> SD3 0.3, 0.3, 0.1 12 / 12 [-105.6, 105.6] ×[-38.4, 38.4] 64 ×176 ×512
+
+A.5 Pseudo-BEV-Based Mask Construction for Region-Aware Alignment 
+
+We provide implementation details for constructing masks derived from the pseudo-BEV map. Let 
+
+Xi ∈ RHbev ×Wbev ×1 denote the pseudo-BEV map for auxiliary agent i. We downsample Xi to the target spatial resolution (H, W ) of the ego latent feature using max pooling: 
+
+¯Xi = MaxPool( Xi; H, W ). (18) We first obtain a foreground occupancy mask by thresholding the downsampled map: 
+
+Ωfg  
+
+> i
+
+= 1[ ¯Xi > τ ]. (19) Because this mask is often too sparse, we further expand it using morphological dilation to obtain the object-region mask used in the main loss: 
+
+Ωobj  
+
+> i
+
+= Dilate( Ωfg  
+
+> i
+
+; dr ), (20) where dr denotes the dilation radius, and the corresponding kernel size is 2dr + 1 . The background mask is then defined as the complement of the object-region mask: 
+
+Ωbg  
+
+> i
+
+= 1 − Ωobj  
+
+> i
+
+. (21) This construction allows the alignment loss to emphasize not only object-occupied regions but also their surrounding context. In all experiments, we set τ = 0 , use max pooling for spatial downsampling, and set the dilation radius to dr = 2 .
+
+## B Experiments details 
+
+B.1 Dataset 
+
+We evaluate all methods on V2X-Real, a large-scale real-world V2X cooperative perception dataset collected with two connected automated vehicles and two smart infrastructure units, each equipped with LiDAR and multi-view cameras. It contains 33K LiDAR frames and 171K camera images with over 1.2M annotated 3D bounding boxes across 10 categories, and provides four subsets (vehicle-centric, infrastructure-centric, V2V, and I2I) to evaluate diverse collaboration modes. 
+
+B.2 Metrics 
+
+We group the 10 annotated categories into three superclasses: car, pedestrian, and truck. For each IoU threshold, we compute the Average Precision (AP) for each superclass and report the mean Average Precision (mAP) as mAP = 13 (AP car + AP ped + AP truck ). We denote mAP@0.5 and mAP@0.7 for thresholds of 0.5 and 0.7, respectively. 
+
+B.3 Encoder Configurations 
+
+We define five encoder configurations based on backbone architecture and voxel size, as summarized in Tab. 2. PP4 is used only for the ego agent, while the remaining four encoder configurations are used for auxiliary agents. 14 B.4 Training Details 
+
+Our training procedure consists of encoder pretraining followed by separate fine-tuning protocols for ALF and baselines. All models are trained and evaluated on an RTX 4090 GPU. 
+
+Encoder Pretraining. For each agent configuration, we pretrain three types of checkpoints: (1) single-agent detectors, which are used for late fusion; (2) homogeneous intermediate-fusion models, where all agents share the same encoder configuration; and (3) GenComm [31] stage-1 models. For the standalone single-agent detectors used in late fusion, we train each model for 200 epochs using AdamW [ 17 ] with an initial learning rate of 3×10 −4 and weight decay of 1×10 −2. We adopt cosine annealing with warm-up. The warm-up lasts for the first 40 epochs, starts from a learning rate of 2×10 −4, and the minimum learning rate is set to 2×10 −5.For the homogeneous intermediate-fusion models and GenComm stage-1 models, we use the same optimizer and scheduler, but train for 40 epochs with warm-up during the first 10 epochs. 
+
+ALF Fine-tuning. For ALF, we fine-tune the EFS parameters only once, while keeping all other components frozen, using the initialization described in Sec. 3.7. The maximum number of transmitted bounding boxes Kmax is set to 60 during training and 20 during inference. All transmitted data are quantized from FP32 to INT8. The loss weights are set to αcls = 1 .0, αreg = 2 .0, αobj = 1 .0,
+
+αbg = 0 .5, αdet = 1 .0, and αalign = 1 .0.
+
+Baseline-specific Fine-tuning. During baseline fine-tuning, E2E, MPDA, and CodeFilling initialize the ego and auxiliary branches from the homogeneous intermediate-fusion checkpoints of their corresponding agent configurations, while GenComm initializes from the corresponding stage-1 checkpoints. Each baseline is fine-tuned for 10 epochs using Adam [ 14 ] with an initial learning rate of 1×10 −3, ϵ=1 ×10 −10 , and weight decay of 1×10 −4. We use a multi-step decay schedule with decay factor γ=0 .1 and a milestone at epoch 5. During baseline-specific fine-tuning, we follow the freezing strategy of each method. E2E is trained end-to-end without freezing any layers. MPDA and CodeFilling keep the ego and auxiliary encoders frozen, while GenComm updates only the DME and freezes all remaining layers. Unlike ALF, which fine-tunes the EFS only once and reuses it across agent configurations, the baselines must be fine-tuned separately for each agent configuration. 
+
+B.5 Protocol-Specific Evaluation Details 
+
+Below, we describe how the evaluated models are defined and applied under each protocol. • Baselines. For the baselines, protocols (1)–(3) in Sec. 4.1 correspond to protocol-dependent training and evaluation under different auxiliary agent configurations. In the zero-shot unseen setting, to apply a model trained with A UX 1 to A UX 2, we align the output representation of AUX 2 to the auxiliary feature shape used with A UX 1 (Tab. 2). Specifically, we match the channel dimension using a frozen 1×1 convolution with orthogonally initialized weights, and resample the BEV spatial resolution with bilinear interpolation. • ALF. ALF does not require protocol-specific training or feature-shape alignment when the auxiliary encoder changes. Therefore, its results are determined only by the auxiliary agent configuration used at inference and are invariant to the protocol label. 
+
+B.6 Full Results of Seen-Pair Evaluation 
+
+Tab. 3 provides the full quantitative results corresponding to Fig. 3. 
+
+B.7 Full Results of Zero-Shot Unseen Evaluation 
+
+Tab. 4 presents the full quantitative results for the heterogeneous encoder configurations shown in Fig. 4(a). 15 Table 3: Seen-pair Evaluation (E GO +A UX 1). The best performance is highlighted in bold, and the second-best is underlined. In this setting, both E GO and A UX 1 use 128-beam LiDARs.                                                                                               
+
+> Fusion Module AUX 1E2E MPDA CodeFilling GenComm AFL (Ours) mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 PP6 0.425 / 0.266 0.471 / 0.305 0.428 / 0.279 0.448 / 0.284 0.479 / 0.327 AttnFuse PP8 0.444 / 0.272 0.493 / 0.323 0.435 / 0.271 0.507 / 0.329 0.472 / 0.317 SD2 0.461 / 0.293 0.516 / 0.335 0.425 / 0.276 0.496 / 0.316 0.496 / 0.327 SD3 0.442 / 0.282 0.459 / 0.304 0.440 / 0.282 0.427 / 0.272 0.479 / 0.316 PP6 0.453 / 0.281 0.445 / 0.236 0.421 / 0.234 0.405 / 0.224 0.452 / 0.266 CoBEVT PP8 0.445 / 0.269 0.469 / 0.245 0.406 / 0.219 0.447 / 0.282 0.458 / 0.261 SD2 0.473 / 0.268 0.486 / 0.306 0.415 / 0.238 0.478 / 0.286 0.475 / 0.275 SD3 0.437 / 0.249 0.443 / 0.250 0.406 / 0.224 0.396 / 0.223 0.461 / 0.268 PP6 0.457 / 0.281 0.452 / 0.291 0.415 / 0.268 0.406 / 0.241 0.482 / 0.328 V2X-ViT PP8 0.492 / 0.320 0.483 / 0.301 0.430 / 0.273 0.429 / 0.262 0.477 / 0.322 SD2 0.501 / 0.307 0.507 / 0.329 0.430 / 0.275 0.471 / 0.293 0.498 / 0.330 SD3 0.446 / 0.271 0.429 / 0.276 0.414 / 0.261 0.410 / 0.252 0.485 / 0.322 PP6 0.459 / 0.295 0.464 / 0.292 0.432 / 0.267 0.441 / 0.221 0.503 / 0.352 ParCon PP8 0.475 / 0.314 0.484 / 0.319 0.464 / 0.297 0.493 / 0.309 0.501 / 0.347 SD2 0.517 / 0.331 0.525 / 0.348 0.513 / 0.339 0.508 / 0.299 0.520 / 0.357 SD3 0.482 / 0.296 0.462 / 0.308 0.436 / 0.276 0.407 / 0.213 0.516 / 0.355
+
+B.8 Full Results of Unseen Adaptation Evaluation 
+
+Fig. 7 and Fig. 8 compare ALF with baseline methods in the unseen adaptation setting under encoder-configuration heterogeneity and LiDAR beam-count heterogeneity, respectively. Under encoder-configuration heterogeneity, although ALF remains fixed after a single training stage, it still outperforms the adapted versions of E2E, MPDA, CodeFilling, and GenComm in 46, 43, 48, and 42 out of 48 A UX 1–A UX 2–fusion-module combinations, respectively. We further examine whether adapting to A UX 2 preserves performance on the original seen configura-tion, A UX 1. Across the 48 evaluated A UX 1–A UX 2–fusion-module combinations, the unseen-adapted versions of E2E, MPDA, CodeFilling, and GenComm perform worse than their seen-pair counter-parts in 33, 39, 29, and 32 cases, with maximum drops of 15.95%, 14.70%, 14.01%, and 6.84%, respectively. Under LiDAR beam-count heterogeneity, ALF still outperforms the adapted versions of E2E, MPDA, CodeFilling, and GenComm in 14, 10, 15, and 12 out of 16 A UX 1–A UX 2–fusion-module combina-tions, respectively. However, unlike the results under encoder-configuration heterogeneity, adaptation to the joint EGO +A UX 1+A UX 2 setting is often beneficial in this case. Across the 16 evaluated A UX 1–A UX 2– fusion-module combinations, the unseen-adapted versions of E2E, MPDA, CodeFilling, and Gen-Comm perform worse than their seen-pair counterparts in only 2, 5, 9, and 11 cases, with maximum drops of 18.82%, 14.55%, 6.61%, and 18.69%, respectively. This trend suggests that, compared with the encoder-configuration heterogeneity setting, fine-tuning is more often beneficial under LiDAR beam-count heterogeneity, particularly for E2E and MPDA. Tab. 6 and Tab. 7 report the full quantitative results for Fig. 7, while Tab. 8 and Tab. 9 report those for Fig. 8. 16 Table 4: Zero-shot unseen evaluation on (E GO +A UX 2). Models trained/fine-tuned on (E GO +A UX 1) are directly evaluated on (E GO +A UX 2) without additional training. To enable transfer from A UX 1to AUX 2, the output representation of A UX 2 is aligned to the auxiliary feature size used with A UX 1. The best performance is highlighted in bold. In this setting, E GO , A UX 1, and A UX 2 are all equipped with 128-beam LiDARs. 
+
+Fusion AUX 1 AUX 2 E2E MPDA CodeFilling GenComm ALF (Ours) Method mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 PP8 0.052 / 0.005 0.379 / 0.240 0.395 / 0.258 0.435 / 0.283 0.472 / 0.317 PP6 SD2 0.407 / 0.245 0.443 / 0.284 0.433 / 0.283 0.429 / 0.277 0.496 / 0.327 SD3 0.406 / 0.249 0.444 / 0.283 0.435 / 0.284 0.429 / 0.277 0.479 / 0.316 PP6 0.079 / 0.011 0.103 / 0.073 0.079 / 0.053 0.437 / 0.284 0.479 / 0.327 PP8 SD2 0.404 / 0.248 0.451 / 0.301 0.444 / 0.282 0.435 / 0.283 0.496 / 0.327 AttnFuse SD3 0.399 / 0.250 0.457 / 0.310 0.444 / 0.282 0.434 / 0.282 0.479 / 0.316 PP6 0.257 / 0.110 0.014 / 0.006 0.446 / 0.289 0.428 / 0.281 0.479 / 0.327 SD2 PP8 0.182 / 0.064 0.444 / 0.282 0.446 / 0.285 0.426 / 0.280 0.472 / 0.317 SD3 0.413 / 0.259 0.448 / 0.289 0.284 / 0.194 0.425 / 0.278 0.479 / 0.316 PP6 0.284 / 0.094 0.004 / 0.002 0.441 / 0.283 0.426 / 0.281 0.479 / 0.327 SD3 PP8 0.168 / 0.058 0.448 / 0.280 0.440 / 0.283 0.426 / 0.281 0.472 / 0.317 SD2 0.409 / 0.264 0.374 / 0.247 0.444 / 0.285 0.428 / 0.284 0.496 / 0.327 PP8 0.008 / 0.001 0.277 / 0.134 0.129 / 0.064 0.338 / 0.191 0.458 / 0.261 PP6 SD2 0.266 / 0.140 0.352 / 0.172 0.325 / 0.162 0.342 / 0.200 0.475 / 0.275 SD3 0.274 / 0.161 0.351 / 0.188 0.314 / 0.154 0.346 / 0.203 0.461 / 0.268 PP6 0.007 / 0.001 0.354 / 0.201 0.130 / 0.073 0.376 / 0.227 0.452 / 0.266 PP8 SD2 0.229 / 0.110 0.347 / 0.198 0.250 / 0.144 0.354 / 0.209 0.475 / 0.275 CoBEVT SD3 0.215 / 0.117 0.349 / 0.199 0.280 / 0.162 0.352 / 0.210 0.461 / 0.268 PP6 0.004 / 0.001 0.330 / 0.174 0.242 / 0.164 0.352 / 0.205 0.452 / 0.266 SD2 PP8 0.009 / 0.001 0.303 / 0.157 0.187 / 0.107 0.350 / 0.202 0.458 / 0.261 SD3 0.267 / 0.166 0.374 / 0.211 0.398 / 0.228 0.278 / 0.121 0.461 / 0.268 PP6 0.007 / 0.001 0.263 / 0.078 0.269 / 0.150 0.346 / 0.201 0.452 / 0.266 SD3 PP8 0.013 / 0.001 0.317 / 0.174 0.151 / 0.072 0.377 / 0.224 0.458 / 0.261 SD2 0.244 / 0.144 0.367 / 0.210 0.389 / 0.200 0.314 / 0.153 0.475 / 0.275 PP8 0.395 / 0.248 0.372 / 0.238 0.435 / 0.300 0.387 / 0.245 0.477 / 0.322 PP6 SD2 0.444 / 0.265 0.441 / 0.274 0.399 / 0.244 0.378 / 0.225 0.498 / 0.330 SD3 0.428 / 0.289 0.450 / 0.284 0.409 / 0.250 0.379 / 0.216 0.485 / 0.322 PP6 0.287 / 0.172 0.446 / 0.259 0.442 / 0.306 0.375 / 0.225 0.482 / 0.328 PP8 SD2 0.425 / 0.265 0.450 / 0.268 0.414 / 0.277 0.368 / 0.218 0.498 / 0.330 V2X-ViT SD3 0.418 / 0.262 0.450 / 0.270 0.426 / 0.285 0.388 / 0.242 0.485 / 0.322 PP6 0.234 / 0.151 0.129 / 0.052 0.273 / 0.179 0.357 / 0.220 0.482 / 0.328 SD2 PP8 0.309 / 0.198 0.425 / 0.285 0.393 / 0.269 0.366 / 0.220 0.477 / 0.322 SD3 0.407 / 0.283 0.435 / 0.297 0.344 / 0.218 0.380 / 0.225 0.485 / 0.322 PP6 0.376 / 0.223 0.285 / 0.178 0.034 / 0.019 0.371 / 0.221 0.482 / 0.328 SD3 PP8 0.344 / 0.205 0.419 / 0.257 0.042 / 0.023 0.372 / 0.224 0.477 / 0.322 SD2 0.381 / 0.225 0.425 / 0.273 0.068 / 0.035 0.395 / 0.257 0.498 / 0.330 PP8 0.333 / 0.210 0.310 / 0.197 0.129 / 0.064 0.336 / 0.190 0.501 / 0.347 PP6 SD2 0.308 / 0.191 0.262 / 0.117 0.325 / 0.162 0.338 / 0.202 0.520 / 0.357 SD3 0.315 / 0.201 0.333 / 0.221 0.314 / 0.154 0.339 / 0.207 0.516 / 0.355 PP6 0.343 / 0.218 0.147 / 0.039 0.130 / 0.073 0.372 / 0.229 0.503 / 0.352 PP8 SD2 0.317 / 0.206 0.403 / 0.282 0.250 / 0.144 0.370 / 0.235 0.520 / 0.357 ParCon SD3 0.341 / 0.220 0.401 / 0.282 0.280 / 0.162 0.359 / 0.222 0.516 / 0.355 PP6 0.387 / 0.250 0.358 / 0.227 0.242 / 0.164 0.358 / 0.220 0.503 / 0.352 SD2 PP8 0.368 / 0.228 0.418 / 0.289 0.187 / 0.107 0.333 / 0.204 0.501 / 0.347 SD3 0.344 / 0.225 0.440 / 0.287 0.398 / 0.228 0.328 / 0.204 0.516 / 0.355 PP6 0.332 / 0.204 0.370 / 0.250 0.269 / 0.150 0.322 / 0.196 0.503 / 0.352 SD3 PP8 0.341 / 0.193 0.203 / 0.116 0.151 / 0.072 0.328 / 0.192 0.501 / 0.347 SD2 0.309 / 0.174 0.414 / 0.274 0.389 / 0.200 0.315 / 0.186 0.520 / 0.357 
+
+17 Table 5: Zero-shot unseen evaluation on (E GO +A UX 2) with LiDAR beam-count heterogeneity. Models trained/fine-tuned on (E GO +A UX 1) are directly evaluated on (E GO +A UX 2) without additional training. To enable transfer from A UX 1to A UX 2, the output representation of A UX 2 is aligned to the auxiliary feature size used with A UX 1. The best performance is highlighted in bold. In this setting, EGO and A UX 1 use 128-beam LiDAR, whereas A UX 2 uses 64-beam LiDAR. 
+
+Fusion AUX 1 AUX 2 E2E MPDA CodeFilling GenComm ALF (Ours) Method mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 PP6 PP6 0.071 / 0.023 0.378 / 0.261 0.201 / 0.143 0.431 / 0.279 0.446 / 0.299 AttnFuse PP8 PP8 0.047 / 0.020 0.008 / 0.005 0.116 / 0.077 0.432 / 0.282 0.447 / 0.298 SD2 SD2 0.413 / 0.251 0.443 / 0.291 0.441 / 0.285 0.425 / 0.280 0.466 / 0.307 SD3 SD3 0.414 / 0.272 0.433 / 0.276 0.440 / 0.282 0.426 / 0.281 0.464 / 0.309 PP6 PP6 0.007 / 0.001 0.175 / 0.041 0.232 / 0.106 0.339 / 0.201 0.426 / 0.238 CoBEVT PP8 PP8 0.030 / 0.009 0.352 / 0.196 0.172 / 0.097 0.361 / 0.213 0.408 / 0.234 SD2 SD2 0.313 / 0.188 0.381 / 0.227 0.431 / 0.250 0.375 / 0.222 0.473 / 0.257 SD3 SD3 0.348 / 0.184 0.368 / 0.212 0.409 / 0.235 0.363 / 0.205 0.475 / 0.242 PP6 PP6 0.369 / 0.214 0.364 / 0.221 0.448 / 0.307 0.386 / 0.246 0.412 / 0.291 V2X-ViT PP8 PP8 0.391 / 0.252 0.360 / 0.212 0.443 / 0.308 0.385 / 0.223 0.410 / 0.271 SD2 SD2 0.431 / 0.287 0.437 / 0.293 0.424 / 0.278 0.389 / 0.238 0.441 / 0.324 SD3 SD3 0.437 / 0.278 0.430 / 0.277 0.398 / 0.246 0.352 / 0.206 0.433 / 0.318 PP6 PP6 0.229 / 0.134 0.276 / 0.179 0.426 / 0.285 0.354 / 0.221 0.468 / 0.323 ParCon PP8 PP8 0.362 / 0.224 0.416 / 0.273 0.429 / 0.282 0.351 / 0.213 0.464 / 0.319 SD2 SD2 0.409 / 0.258 0.442 / 0.284 0.440 / 0.290 0.332 / 0.199 0.499 / 0.349 SD3 SD3 0.390 / 0.248 0.433 / 0.291 0.436 / 0.276 0.346 / 0.208 0.488 / 0.336 
+
+18 Figure 7: Comparison of mAP@0.7 under seen-pair and unseen-adaptation evaluation with encoder configuration heterogeneity. In this setting, E GO , A UX 1, and A UX 2 are all equipped with 128-beam LiDARs. 19 Table 6: Unseen adaptation evaluation on (E GO +A UX 2) with encoder configuration heterogeneity. Models trained/fine-tuned on (E GO +A UX 1) are further trained/fine-tuned on (E GO +A UX 1+A UX 2) and then evaluated on (E GO +A UX 2). The best performance is highlighted in bold. In this setting, EGO , A UX 1, and A UX 2 are all equipped with 128-beam LiDARs. 
+
+Fusion AUX1 AUX2 E2E MPDA CodeFilling GenComm ALF (Ours) Method mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 PP8 0.433 / 0.271 0.479 / 0.312 0.432 / 0.277 0.489 / 0.307 0.472 / 0.317 PP6 SD2 0.460 / 0.276 0.511 / 0.337 0.426 / 0.275 0.482 / 0.301 0.496 / 0.327 SD3 0.424 / 0.263 0.451 / 0.307 0.436 / 0.285 0.407 / 0.261 0.479 / 0.316 PP6 0.427 / 0.261 0.455 / 0.310 0.435 / 0.279 0.440 / 0.281 0.479 / 0.327 PP8 SD2 0.467 / 0.294 0.500 / 0.326 0.421 / 0.270 0.484 / 0.317 0.496 / 0.327 AttnFuse SD3 0.407 / 0.249 0.441 / 0.299 0.443 / 0.282 0.422 / 0.270 0.479 / 0.316 PP6 0.445 / 0.297 0.455 / 0.307 0.441 / 0.289 0.442 / 0.283 0.479 / 0.327 SD2 PP8 0.445 / 0.284 0.483 / 0.304 0.446 / 0.291 0.493 / 0.316 0.472 / 0.317 SD3 0.433 / 0.265 0.444 / 0.290 0.440 / 0.284 0.419 / 0.268 0.479 / 0.316 PP6 0.427 / 0.274 0.458 / 0.291 0.442 / 0.289 0.446 / 0.283 0.479 / 0.327 SD3 PP8 0.440 / 0.264 0.482 / 0.312 0.445 / 0.288 0.488 / 0.310 0.472 / 0.317 SD2 0.457 / 0.281 0.500 / 0.330 0.434 / 0.280 0.467 / 0.302 0.496 / 0.327 PP8 0.437 / 0.252 0.477 / 0.264 0.405 / 0.201 0.437 / 0.277 0.458 / 0.261 PP6 SD2 0.497 / 0.273 0.492 / 0.272 0.417 / 0.220 0.464 / 0.290 0.475 / 0.275 SD3 0.431 / 0.240 0.464 / 0.250 0.400 / 0.226 0.392 / 0.221 0.461 / 0.268 PP6 0.468 / 0.276 0.437 / 0.258 0.405 / 0.215 0.402 / 0.230 0.452 / 0.266 PP8 SD2 0.477 / 0.259 0.486 / 0.289 0.405 / 0.203 0.464 / 0.286 0.475 / 0.275 CoBEVT SD3 0.432 / 0.234 0.427 / 0.247 0.420 / 0.227 0.399 / 0.228 0.461 / 0.268 PP6 0.415 / 0.249 0.432 / 0.232 0.408 / 0.229 0.407 / 0.224 0.452 / 0.266 SD2 PP8 0.450 / 0.267 0.440 / 0.244 0.421 / 0.239 0.444 / 0.277 0.458 / 0.261 SD3 0.406 / 0.240 0.423 / 0.254 0.400 / 0.221 0.389 / 0.224 0.461 / 0.268 PP6 0.426 / 0.243 0.425 / 0.232 0.413 / 0.226 0.399 / 0.227 0.452 / 0.266 SD3 PP8 0.441 / 0.236 0.446 / 0.240 0.395 / 0.213 0.438 / 0.279 0.458 / 0.261 SD2 0.428 / 0.224 0.500 / 0.288 0.421 / 0.245 0.467 / 0.277 0.475 / 0.275 PP8 0.472 / 0.276 0.460 / 0.288 0.438 / 0.277 0.432 / 0.261 0.477 / 0.322 PP6 SD2 0.502 / 0.317 0.492 / 0.316 0.416 / 0.269 0.455 / 0.279 0.498 / 0.330 SD3 0.451 / 0.284 0.457 / 0.307 0.421 / 0.269 0.410 / 0.253 0.485 / 0.322 PP6 0.460 / 0.284 0.447 / 0.294 0.444 / 0.282 0.415 / 0.251 0.482 / 0.328 PP8 SD2 0.475 / 0.295 0.500 / 0.307 0.443 / 0.283 0.451 / 0.280 0.498 / 0.330 V2X-ViT SD3 0.428 / 0.279 0.442 / 0.292 0.412 / 0.263 0.415 / 0.248 0.485 / 0.322 PP6 0.449 / 0.278 0.452 / 0.283 0.430 / 0.271 0.412 / 0.247 0.482 / 0.328 SD2 PP8 0.439 / 0.275 0.461 / 0.298 0.432 / 0.274 0.430 / 0.264 0.477 / 0.322 SD3 0.418 / 0.266 0.446 / 0.294 0.406 / 0.259 0.421 / 0.256 0.485 / 0.322 PP6 0.452 / 0.286 0.423 / 0.270 0.430 / 0.273 0.410 / 0.249 0.482 / 0.328 SD3 PP8 0.462 / 0.292 0.470 / 0.292 0.428 / 0.269 0.427 / 0.257 0.477 / 0.322 SD2 0.471 / 0.297 0.488 / 0.307 0.412 / 0.261 0.461 / 0.284 0.498 / 0.330 PP8 0.450 / 0.294 0.479 / 0.315 0.440 / 0.261 0.489 / 0.314 0.501 / 0.347 PP6 SD2 0.518 / 0.332 0.515 / 0.329 0.407 / 0.246 0.495 / 0.294 0.520 / 0.357 SD3 0.475 / 0.289 0.470 / 0.302 0.437 / 0.249 0.420 / 0.221 0.516 / 0.355 PP6 0.454 / 0.285 0.455 / 0.297 0.387 / 0.236 0.434 / 0.217 0.503 / 0.352 PP8 SD2 0.527 / 0.330 0.508 / 0.339 0.425 / 0.256 0.499 / 0.298 0.520 / 0.357 ParCon SD3 0.460 / 0.286 0.481 / 0.305 0.418 / 0.246 0.424 / 0.220 0.516 / 0.355 PP6 0.452 / 0.270 0.465 / 0.286 0.435 / 0.271 0.435 / 0.223 0.503 / 0.352 SD2 PP8 0.466 / 0.289 0.475 / 0.311 0.422 / 0.265 0.492 / 0.315 0.501 / 0.347 SD3 0.455 / 0.278 0.454 / 0.294 0.425 / 0.271 0.417 / 0.218 0.516 / 0.355 PP6 0.447 / 0.298 0.431 / 0.282 0.411 / 0.252 0.431 / 0.221 0.503 / 0.352 SD3 PP8 0.476 / 0.309 0.471 / 0.303 0.430 / 0.267 0.478 / 0.301 0.501 / 0.347 SD2 0.515 / 0.322 0.501 / 0.345 0.441 / 0.269 0.494 / 0.296 0.520 / 0.357 
+
+20 Table 7: Unseen adaptation evaluation on (E GO +A UX 1) with encoder configuration heterogeneity. Models trained/fine-tuned on (E GO +A UX 1) are further trained/fine-tuned on (E GO +A UX 1+A UX 2) and then evaluated on (E GO +A UX 1). The best performance is highlighted in bold. In this setting, EGO , A UX 1, and A UX 2 are all equipped with 128-beam LiDARs. 
+
+Fusion AUX1 AUX2 E2E MPDA CodeFilling GenComm ALF (Ours) Method mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 PP8 0.410 / 0.257 0.456 / 0.293 0.430 / 0.276 0.438 / 0.273 0.472 / 0.317 PP6 SD2 0.400 / 0.252 0.452 / 0.298 0.433 / 0.277 0.448 / 0.279 0.496 / 0.327 SD3 0.391 / 0.247 0.455 / 0.306 0.441 / 0.289 0.449 / 0.290 0.479 / 0.316 PP6 0.454 / 0.287 0.486 / 0.310 0.419 / 0.266 0.496 / 0.319 0.479 / 0.327 PP8 SD2 0.458 / 0.277 0.486 / 0.298 0.438 / 0.277 0.492 / 0.315 0.496 / 0.327 AttnFuse SD3 0.428 / 0.275 0.495 / 0.305 0.445 / 0.282 0.495 / 0.320 0.479 / 0.316 PP6 0.473 / 0.302 0.515 / 0.329 0.429 / 0.283 0.487 / 0.301 0.479 / 0.327 SD2 PP8 0.476 / 0.304 0.506 / 0.301 0.435 / 0.286 0.491 / 0.310 0.472 / 0.317 SD3 0.476 / 0.308 0.511 / 0.334 0.424 / 0.273 0.488 / 0.303 0.479 / 0.316 PP6 0.445 / 0.260 0.454 / 0.291 0.434 / 0.283 0.418 / 0.260 0.479 / 0.327 SD3 PP8 0.451 / 0.245 0.448 / 0.299 0.439 / 0.285 0.409 / 0.259 0.472 / 0.317 SD2 0.434 / 0.263 0.452 / 0.296 0.434 / 0.280 0.404 / 0.253 0.496 / 0.327 PP8 0.444 / 0.252 0.459 / 0.247 0.424 / 0.225 0.403 / 0.231 0.458 / 0.261 PP6 SD2 0.442 / 0.268 0.428 / 0.244 0.417 / 0.222 0.401 / 0.227 0.475 / 0.275 SD3 0.424 / 0.236 0.447 / 0.233 0.423 / 0.241 0.403 / 0.225 0.461 / 0.268 PP6 0.472 / 0.270 0.452 / 0.247 0.400 / 0.188 0.433 / 0.271 0.452 / 0.266 PP8 SD2 0.437 / 0.262 0.475 / 0.269 0.419 / 0.204 0.445 / 0.278 0.475 / 0.275 CoBEVT SD3 0.474 / 0.261 0.465 / 0.238 0.397 / 0.193 0.442 / 0.276 0.461 / 0.268 PP6 0.475 / 0.267 0.502 / 0.269 0.443 / 0.245 0.470 / 0.277 0.452 / 0.266 SD2 PP8 0.465 / 0.238 0.492 / 0.284 0.405 / 0.224 0.476 / 0.275 0.458 / 0.261 SD3 0.437 / 0.235 0.474 / 0.270 0.423 / 0.239 0.470 / 0.285 0.461 / 0.268 PP6 0.447 / 0.238 0.423 / 0.213 0.407 / 0.244 0.390 / 0.215 0.452 / 0.266 SD3 PP8 0.436 / 0.221 0.430 / 0.258 0.398 / 0.226 0.390 / 0.217 0.458 / 0.261 SD2 0.450 / 0.256 0.445 / 0.230 0.414 / 0.230 0.395 / 0.217 0.475 / 0.275 PP8 0.464 / 0.268 0.433 / 0.287 0.415 / 0.273 0.406 / 0.245 0.477 / 0.322 PP6 SD2 0.425 / 0.268 0.443 / 0.291 0.411 / 0.267 0.411 / 0.253 0.498 / 0.330 SD3 0.445 / 0.285 0.471 / 0.296 0.415 / 0.268 0.411 / 0.251 0.485 / 0.322 PP6 0.486 / 0.307 0.472 / 0.301 0.425 / 0.263 0.430 / 0.264 0.482 / 0.328 PP8 SD2 0.444 / 0.284 0.453 / 0.278 0.430 / 0.265 0.432 / 0.258 0.498 / 0.330 V2X-ViT SD3 0.449 / 0.290 0.462 / 0.291 0.438 / 0.266 0.440 / 0.263 0.485 / 0.322 PP6 0.483 / 0.295 0.491 / 0.303 0.434 / 0.276 0.469 / 0.290 0.482 / 0.328 SD2 PP8 0.480 / 0.297 0.499 / 0.320 0.435 / 0.275 0.465 / 0.287 0.477 / 0.322 SD3 0.467 / 0.288 0.498 / 0.317 0.422 / 0.260 0.476 / 0.292 0.485 / 0.322 PP6 0.452 / 0.280 0.418 / 0.264 0.428 / 0.277 0.410 / 0.252 0.482 / 0.328 SD3 PP8 0.462 / 0.278 0.439 / 0.289 0.420 / 0.271 0.414 / 0.246 0.477 / 0.322 SD2 0.432 / 0.269 0.431 / 0.274 0.414 / 0.271 0.419 / 0.258 0.498 / 0.330 PP8 0.444 / 0.282 0.436 / 0.278 0.442 / 0.257 0.437 / 0.223 0.501 / 0.347 PP6 SD2 0.465 / 0.296 0.423 / 0.255 0.431 / 0.269 0.438 / 0.229 0.520 / 0.357 SD3 0.477 / 0.301 0.457 / 0.291 0.443 / 0.243 0.428 / 0.216 0.516 / 0.355 PP6 0.484 / 0.303 0.482 / 0.319 0.443 / 0.278 0.486 / 0.305 0.503 / 0.352 PP8 SD2 0.495 / 0.326 0.475 / 0.311 0.450 / 0.271 0.489 / 0.297 0.520 / 0.357 ParCon SD3 0.462 / 0.304 0.472 / 0.292 0.465 / 0.292 0.487 / 0.308 0.516 / 0.355 PP6 0.492 / 0.290 0.507 / 0.329 0.479 / 0.307 0.492 / 0.299 0.503 / 0.352 SD2 PP8 0.499 / 0.317 0.481 / 0.313 0.470 / 0.297 0.503 / 0.298 0.501 / 0.347 SD3 0.501 / 0.320 0.509 / 0.345 0.463 / 0.293 0.496 / 0.296 0.516 / 0.355 PP6 0.458 / 0.290 0.455 / 0.298 0.418 / 0.258 0.411 / 0.218 0.503 / 0.352 SD3 PP8 0.471 / 0.301 0.458 / 0.303 0.432 / 0.273 0.418 / 0.218 0.501 / 0.347 SD2 0.472 / 0.294 0.457 / 0.285 0.442 / 0.269 0.412 / 0.212 0.520 / 0.357 
+
+21 Figure 8: Comparison of mAP@0.7 under seen-pair and unseen-adaptation evaluation with LiDAR beam-count heterogeneity. In this setting, E GO and A UX 1 use 128-beam LiDAR, whereas A UX 2uses 64-beam LiDAR. 22 Table 8: Unseen adaptation evaluation on (E GO +A UX 2) with LiDAR beam-count heterogeneity. Models trained/fine-tuned on (E GO +A UX 1) are further trained/fine-tuned on (E GO +A UX 1+A UX 2) and then evaluated on (E GO +A UX 2). The best performance is highlighted in bold. In this setting, EGO and A UX 1 use 128-beam LiDAR, whereas A UX 2 uses 64-beam LiDAR. 
+
+Fusion AUX1 AUX2 E2E MPDA CodeFilling GenComm ALF (Ours) Method mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 PP6 PP6 0.459 / 0.288 0.450 / 0.281 0.429 / 0.277 0.439 / 0.276 0.446 / 0.299 AttnFuse PP8 PP8 0.427 / 0.274 0.456 / 0.290 0.437 / 0.270 0.473 / 0.297 0.447 / 0.298 SD2 SD2 0.451 / 0.282 0.492 / 0.328 0.443 / 0.282 0.481 / 0.319 0.466 / 0.307 SD3 SD3 0.419 / 0.267 0.470 / 0.295 0.444 / 0.290 0.455 / 0.286 0.464 / 0.309 PP6 PP6 0.408 / 0.229 0.408 / 0.233 0.375 / 0.192 0.381 / 0.227 0.412 / 0.238 CoBEVT PP8 PP8 0.424 / 0.256 0.402 / 0.226 0.369 / 0.199 0.416 / 0.241 0.410 / 0.234 SD2 SD2 0.409 / 0.231 0.484 / 0.276 0.389 / 0.225 0.445 / 0.265 0.441 / 0.257 SD3 SD3 0.377 / 0.235 0.414 / 0.244 0.403 / 0.229 0.373 / 0.226 0.433 / 0.242 PP6 PP6 0.436 / 0.285 0.468 / 0.307 0.338 / 0.196 0.386 / 0.239 0.426 / 0.291 V2X-ViT PP8 PP8 0.460 / 0.292 0.462 / 0.309 0.453 / 0.295 0.442 / 0.291 0.408 / 0.271 SD2 SD2 0.479 / 0.302 0.490 / 0.324 0.435 / 0.285 0.437 / 0.275 0.473 / 0.324 SD3 SD3 0.436 / 0.281 0.456 / 0.300 0.416 / 0.277 0.405 / 0.262 0.475 / 0.318 PP6 PP6 0.439 / 0.289 0.477 / 0.316 0.446 / 0.280 0.404 / 0.229 0.468 / 0.323 ParCon PP8 PP8 0.444 / 0.287 0.475 / 0.310 0.456 / 0.298 0.444 / 0.231 0.464 / 0.319 SD2 SD2 0.467 / 0.291 0.485 / 0.307 0.475 / 0.305 0.451 / 0.259 0.499 / 0.349 SD3 SD3 0.430 / 0.283 0.446 / 0.291 0.432 / 0.273 0.406 / 0.239 0.488 / 0.336 
+
+Table 9: Unseen adaptation evaluation on (E GO +A UX 1) with LiDAR beam-count heterogeneity. Models trained/fine-tuned on (E GO +A UX 1) are further trained/fine-tuned on (E GO +A UX 1+A UX 2) and then evaluated on (E GO +A UX 1). The best performance is highlighted in bold. In this setting, EGO , A UX 1, and A UX 2 are all equipped with 128-beam LiDARs. 
+
+Fusion AUX1 AUX2 E2E MPDA CodeFilling GenComm ALF (Ours) Method mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 mAP@0.5/0.7 PP6 PP6 0.455 / 0.290 0.453 / 0.298 0.439 / 0.280 0.449 / 0.279 0.446 / 0.299 AttnFuse PP8 PP8 0.490 / 0.309 0.486 / 0.312 0.433 / 0.267 0.495 / 0.323 0.447 / 0.298 SD2 SD2 0.502 / 0.319 0.507 / 0.330 0.429 / 0.275 0.503 / 0.325 0.466 / 0.307 SD3 SD3 0.475 / 0.306 0.481 / 0.302 0.445 / 0.291 0.431 / 0.259 0.464 / 0.309 PP6 PP6 0.461 / 0.291 0.412 / 0.242 0.389 / 0.199 0.402 / 0.239 0.412 / 0.238 CoBEVT PP8 PP8 0.466 / 0.275 0.451 / 0.253 0.409 / 0.210 0.445 / 0.283 0.410 / 0.234 SD2 SD2 0.487 / 0.286 0.498 / 0.292 0.423 / 0.256 0.475 / 0.294 0.441 / 0.257 SD3 SD3 0.454 / 0.270 0.431 / 0.239 0.400 / 0.231 0.400 / 0.207 0.433 / 0.242 PP6 PP6 0.463 / 0.305 0.447 / 0.301 0.444 / 0.287 0.406 / 0.235 0.426 / 0.291 V2X-ViT PP8 PP8 0.479 / 0.312 0.470 / 0.304 0.436 / 0.273 0.440 / 0.271 0.408 / 0.271 SD2 SD2 0.502 / 0.318 0.507 / 0.326 0.448 / 0.282 0.476 / 0.304 0.473 / 0.324 SD3 SD3 0.479 / 0.322 0.454 / 0.297 0.435 / 0.289 0.412 / 0.260 0.475 / 0.318 PP6 PP6 0.454 / 0.299 0.477 / 0.301 0.476 / 0.296 0.432 / 0.210 0.468 / 0.323 ParCon PP8 PP8 0.469 / 0.307 0.517 / 0.337 0.497 / 0.322 0.489 / 0.303 0.464 / 0.319 SD2 SD2 0.543 / 0.346 0.508 / 0.324 0.512 / 0.340 0.506 / 0.301 0.499 / 0.349 SD3 SD3 0.492 / 0.311 0.465 / 0.298 0.433 / 0.273 0.414 / 0.213 0.488 / 0.336 
+
+23
