@@ -1,217 +1,12 @@
 {
-  "generated_at": "2026-06-03T06:44:58.726442+00:00",
-  "updated_date": "20260505-20260603",
+  "generated_at": "2026-06-03T22:01:31.525668+00:00",
+  "updated_date": "20260603",
   "carryover_days": 9,
   "tag_states": {
     "self-improve": {
-      "updated_date": "20260602",
+      "updated_date": "20260603",
       "carryover_days": 9,
       "items": [
-        {
-          "id": "2605.22885v1",
-          "source": "arxiv",
-          "title": "ImProver 2: Iteratively Self-Improving LMs for Neurosymbolic Proof Optimization",
-          "abstract": "Formal mathematics libraries are rapidly expanding, creating a growing need to refactor verified proofs for maintainability and to improve training data quality for neural provers. However, scalable proof optimization is hindered by heterogeneous and heuristically specified objectives, scarce data, and high training and inference costs. To overcome these challenges, we introduce ImProver 2, a neurosymbolic framework for automated proof optimization in Lean 4. ImProver 2 combines a data-efficient expert-iteration pipeline with a scaffold that exposes formal structure alongside lightweight informal abstractions. We further introduce a suite of metrics capturing structural proof properties. Using ImProver 2, we train a 7B-parameter model that outperforms orders-of-magnitude larger models within the same model family, and is competitive with mid-tier frontier models across metrics. We additionally demonstrate that our neurosymbolic scaffold significantly improves performance across both small and frontier models. We show that with proper scaffolding and training, small models can effectively restructure research-level proofs over complex and varied metrics, matching substantially larger systems and establishing proof optimization as a scalable, learnable task.",
-          "authors": [
-            "Riyaz Ahuja",
-            "Tate Rowney",
-            "Jeremy Avigad",
-            "Sean Welleck"
-          ],
-          "primary_category": "cs.AI",
-          "categories": [
-            "cs.AI",
-            "cs.CL",
-            "cs.LG",
-            "cs.LO"
-          ],
-          "published": "2026-05-21T02:20:26+00:00",
-          "link": "https://arxiv.org/pdf/2605.22885v1",
-          "tags": [
-            "keyword:self-improve"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "iteratively self-improving LMs for proof optimization",
-          "llm_evidence_cn": "迭代自我改进语言模型用于证明优化",
-          "llm_evidence": "迭代自我改进语言模型用于证明优化",
-          "canonical_evidence": "迭代自我改进语言模型用于证明优化",
-          "llm_tldr_en": "ImProver 2 uses iterative expert iteration and neurosymbolic scaffolding to self-improve LM-based proof optimization in Lean 4.",
-          "llm_tldr_cn": "形式数学库的扩增需要自动化的证明优化。ImProver 2结合数据高效的专家迭代管道和利用形式结构的脚手架，训练7B参数模型在证明优化上超越先前方法。通过迭代自我改进，模型不断优化自身生成的证明。",
-          "llm_tldr": "形式数学库的扩增需要自动化的证明优化。ImProver 2结合数据高效的专家迭代管道和利用形式结构的脚手架，训练7B参数模型在证明优化上超越先前方法。通过迭代自我改进，模型不断优化自身生成的证明。",
-          "llm_tags": [
-            "query:self-improve"
-          ],
-          "matched_query_tag": "query:self-improve",
-          "matched_query_text": "iterative self-improvement agent",
-          "matched_requirement_id": "req-4",
-          "selection_source": "carryover_cache",
-          "paper_id": "2605.22885v1",
-          "carry_days": 1
-        },
-        {
-          "id": "2605.17448v1",
-          "source": "arxiv",
-          "title": "Self-Improving CAD Generation Agents with Finite Element Analysis as Feedback",
-          "abstract": "Computer-aided design (CAD) is the backbone of modern industrial design, yet learned CAD generators still fall short of real engineering pipelines: they neither iterate like engineers nor evaluate what engineering requires. Prior work has treated CAD generation as two disjoint steps, part synthesis and assembly, where the former is graded by proximity to a gold reference and the latter, when handled at all, is reduced to a separate constraint solving step. In this work, we introduce a more industry-native task formulation that requires a model to produce a fully assembled multi-part STEP file from a free-form engineering brief, which is then validated via finite element analysis (FEA). FEA validation reveals that Codex (GPT-5.5) and Claude Code (Opus-4.7) agents do not produce a single strict-passing artifact in the main first-attempt sweep, with the best configuration meeting only about 20% of typed requirements on average. Moreover, we introduce two additional supervision signals, a novel text-only blueprint schema and a 21-view image renderer that aids the agent's visual inspection, that better align the generation loop with how engineers iterate in practice. On S2O and Fusion360, the same feedback tools improve geometric reconstruction, with GPT-5.5/xhigh rising from 0.444 to 0.592 Box-IoU on S2O and from 0.397 to 0.505 on Fusion360. Together these signals move CAD programs toward artifacts that are not only visually plausible but also checked against physical and structural requirements.",
-          "authors": [
-            "Guijin Son",
-            "Jehyun Park",
-            "Seyeon Park",
-            "Sunghee Ahn",
-            "Youngjae Yu"
-          ],
-          "primary_category": "cs.GR",
-          "categories": [
-            "cs.GR",
-            "cs.CL"
-          ],
-          "published": "2026-05-17T13:47:38+00:00",
-          "link": "https://arxiv.org/pdf/2605.17448v1",
-          "tags": [
-            "keyword:self-improve"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "self-improving CAD generation using FEA feedback",
-          "llm_evidence_cn": "使用有限元分析反馈的自我改进CAD生成",
-          "llm_evidence": "使用有限元分析反馈的自我改进CAD生成",
-          "canonical_evidence": "使用有限元分析反馈的自我改进CAD生成",
-          "llm_tldr_en": "This paper introduces a self-improving CAD agent that iteratively generates designs and refines them using finite element analysis feedback.",
-          "llm_tldr_cn": "CAD生成模型缺乏迭代改进和工程评估。本文提出自我改进的CAD智能体，从工程需求生成装配体，利用有限元分析反馈优化设计。在工业级数据集上展示了自我改进能力。",
-          "llm_tldr": "CAD生成模型缺乏迭代改进和工程评估。本文提出自我改进的CAD智能体，从工程需求生成装配体，利用有限元分析反馈优化设计。在工业级数据集上展示了自我改进能力。",
-          "llm_tags": [
-            "query:self-improve"
-          ],
-          "matched_query_tag": "query:self-improve",
-          "matched_query_text": "agent self-improvement techniques",
-          "matched_requirement_id": "req-1",
-          "selection_source": "carryover_cache",
-          "paper_id": "2605.17448v1",
-          "carry_days": 1
-        },
-        {
-          "id": "2605.20477v1",
-          "source": "arxiv",
-          "title": "Training Language Agents to Learn from Experience",
-          "abstract": "Language agents can adapt from experience in interactive environments, but current reflection-based methods can only self-correct within a single task instance. Whether such experience can be distilled into reusable lessons that improve performance on future unseen tasks remains unclear. We address this problem by introducing the In-context Training (ICT) task, a framework for evaluating cross-task self-improvement in language agents. In ICT, a reflector model observes trajectories collected by an actor model and generates system prompts intended to improve the actor's performance on future unseen tasks. We then propose an RL-based training pipeline for learning such reflections directly from experience, without human-provided examples. Across ALFWorld and MiniHack, our trained reflectors outperform an untrained baseline on most held-out task families, showing that the ability to learn from experience can itself be learned. In some cases, we observe generalisation beyond the benchmark on which the reflector was trained, to substantially different environments. Finally, we introduce MetaGym, a generic Python library for constructing meta-environments, enabling future research on self-improving language agents.",
-          "authors": [
-            "Yuval Shalev",
-            "Zifeng Ding",
-            "Mateja Jamnik"
-          ],
-          "primary_category": "cs.LG",
-          "categories": [
-            "cs.LG",
-            "cs.AI",
-            "cs.CL"
-          ],
-          "published": "2026-05-19T20:41:12+00:00",
-          "link": "https://arxiv.org/pdf/2605.20477v1",
-          "tags": [
-            "keyword:self-improve",
-            "query:self-improve"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "RL-based training for cross-task self-improvement in language agents",
-          "llm_evidence_cn": "基于强化学习的跨任务语言智能体自我改进训练",
-          "llm_evidence": "基于强化学习的跨任务语言智能体自我改进训练",
-          "canonical_evidence": "基于强化学习的跨任务语言智能体自我改进训练",
-          "llm_tldr_en": "Introduces In-context Training (ICT) task and an RL training pipeline for language agents to learn cross-task self-improvement from experience without human examples.",
-          "llm_tldr_cn": "现有语言智能体仅能单实例内自我修正，无法跨任务复用经验。本文提出ICT任务和强化学习训练流程：反射器模型从演员模型的轨迹中学习生成系统提示，提升演员在未见任务上的表现。在ALFWorld和MiniHack上的实验表明，该方法实现了有效的跨任务自我改进，且无需人工示例。",
-          "llm_tldr": "现有语言智能体仅能单实例内自我修正，无法跨任务复用经验。本文提出ICT任务和强化学习训练流程：反射器模型从演员模型的轨迹中学习生成系统提示，提升演员在未见任务上的表现。在ALFWorld和MiniHack上的实验表明，该方法实现了有效的跨任务自我改进，且无需人工示例。",
-          "llm_tags": [
-            "query:self-improve"
-          ],
-          "matched_query_tag": "query:self-improve",
-          "matched_query_text": "reinforcement learning agent self improvement",
-          "matched_requirement_id": "req-5",
-          "selection_source": "carryover_cache",
-          "paper_id": "2605.20477v1",
-          "carry_days": 1
-        },
-        {
-          "id": "2605.16883v1",
-          "source": "arxiv",
-          "title": "SE-GA: Memory-Augmented Self-Evolution for GUI Agents",
-          "abstract": "Autonomous Graphical User Interface (GUI) agents often struggle with multi-step tasks due to constrained context windows and static policies that fail to adapt to dynamic environments. To address these limitations, this work proposes the Self-Evolving GUI Agent (SE-GA), a novel framework that integrates hierarchical memory structures with an iterative self-improvement mechanism. At the core of our approach is Test-Time Memory Extension (TTME), which facilitates long-term planning by dynamically retrieving episodic, semantic, and experiential memories to provide salient contexts during inference. To ensure continuous learning, we introduce Memory-Augmented Self-Evolution (MASE), which is a training pipeline that adopts the data collected by TTME to stabilize and enhance the agent's foundational policy. Extensive evaluations across both offline and online benchmarks demonstrate SE-GA achieves state-of-the-art performance, reaching success rates of 89.0\\% on ScreenSpot and 75.8\\% on the challenging AndroidControl-High dataset. Furthermore, significant improvements on the AndroidWorld benchmark highlight the superior generalization to dynamic environments. Open source code: https://github.com/jinshilong-dev/SE-GA",
-          "authors": [
-            "Shilong Jin",
-            "Lanjun Wang",
-            "Zhuosheng Zhang"
-          ],
-          "primary_category": "cs.LG",
-          "categories": [
-            "cs.LG"
-          ],
-          "published": "2026-05-16T08:51:57+00:00",
-          "link": "https://arxiv.org/pdf/2605.16883v1",
-          "tags": [
-            "keyword:self-improve",
-            "query:self-improve"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "iterative self-improvement mechanism for GUI agents",
-          "llm_evidence_cn": "面向GUI代理的迭代自我改进机制",
-          "llm_evidence": "面向GUI代理的迭代自我改进机制",
-          "canonical_evidence": "面向GUI代理的迭代自我改进机制",
-          "llm_tldr_en": "Proposes SE-GA, a self-evolving GUI agent with hierarchical memory and an iterative self-improvement pipeline (MASE) for continuous adaptation.",
-          "llm_tldr_cn": "GUI代理在多步任务中常受限于固定策略和有限上下文。本文提出SE-GA，一种自进化GUI代理框架，核心包括测试时记忆扩展（TTME）和记忆增强自进化（MASE）训练流水线。TTME动态检索情景、语义和经验记忆以提供上下文，MASE利用收集的数据进行迭代自我改进。实验证明SE-GA在复杂GUI任务上显著优于静态基线。",
-          "llm_tldr": "GUI代理在多步任务中常受限于固定策略和有限上下文。本文提出SE-GA，一种自进化GUI代理框架，核心包括测试时记忆扩展（TTME）和记忆增强自进化（MASE）训练流水线。TTME动态检索情景、语义和经验记忆以提供上下文，MASE利用收集的数据进行迭代自我改进。实验证明SE-GA在复杂GUI任务上显著优于静态基线。",
-          "llm_tags": [
-            "query:self-improve"
-          ],
-          "matched_query_tag": "query:self-improve",
-          "matched_query_text": "iterative self-improvement agent",
-          "matched_requirement_id": "req-4",
-          "selection_source": "carryover_cache",
-          "paper_id": "2605.16883v1",
-          "carry_days": 1
-        },
-        {
-          "id": "2605.15224v1",
-          "source": "arxiv",
-          "title": "ICRL: Learning to Internalize Self-Critique with Reinforcement Learning",
-          "abstract": "Large language model-based agents make mistakes, yet critique can often guide the same model toward correct behavior. However, when critique is removed, the model may fail again on the same query, indicating that it has not internalized the critique's guidance into its underlying capability. Meanwhile, a frozen critic cannot improve its feedback quality over time, limiting the potential for iterative self-improvement. To address this, we propose learning to internalize self-critique with reinforcement learning(ICRL), a novel framework that jointly trains a solver and a critic from a shared backbone to convert critique-induced success into unassisted solver ability. The critic is rewarded based on the solver's subsequent performance gain, incentivizing actionable feedback. To address the distribution shift between critique-conditioned and critique-free behavior, ICRL introduces a distribution-calibration re-weighting ratio that selectively transfers critique-guided improvements compatible with the solver's own prompt distribution. Additionally, a role-wise group advantage estimation stabilizes joint optimization across the two roles. Together, these mechanisms ensure that the solver learns to improve itself without external critique, rather than becoming dependent on critique-conditioned behavior. We evaluate ICRL on diverse benchmarks spanning agentic and mathematical reasoning tasks, using Qwen3-4B and Qwen3-8B as backbones. Results show consistent improvements, with average gains of 6.4 points over GRPO on agentic tasks, and 7.0 points on mathematical reasoning. Notably, the learned 8B critic is comparable to 32B critics while using substantially fewer tokens. The code is available at https://github.com/brick-pid/ICRL.",
-          "authors": [
-            "Jianbo Lin",
-            "Xiaomin Yu",
-            "Yi Xin",
-            "Yifu Guo",
-            "Zhuosong Jiang",
-            "Zhongqi Yue",
-            "Weishi Wang",
-            "Heqing Zou",
-            "Chengwei Qin",
-            "Hui Xiong"
-          ],
-          "primary_category": "cs.AI",
-          "categories": [
-            "cs.AI",
-            "cs.MA"
-          ],
-          "published": "2026-05-13T08:50:05+00:00",
-          "link": "https://arxiv.org/pdf/2605.15224v1",
-          "tags": [
-            "keyword:self-improve",
-            "query:self-improve"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "RL-based internalization of self-critique for iterative improvement",
-          "llm_evidence_cn": "基于强化学习的内化自我批评实现迭代改进",
-          "llm_evidence": "基于强化学习的内化自我批评实现迭代改进",
-          "canonical_evidence": "基于强化学习的内化自我批评实现迭代改进",
-          "llm_tldr_en": "Proposes ICRL, a framework that jointly trains a solver and critic via RL to internalize critique into the solver's capability, enabling iterative self-improvement without external feedback.",
-          "llm_tldr_cn": "大模型代理在批评指导下能修正错误，但移除批评后可能再次失败，且批评者自身无法改进。本文提出ICRL框架，通过强化学习联合训练求解器和批评者（共享骨干），将批评引导的成功转化为求解器的自主能力。批评者根据求解器的后续表现获得奖励，从而动态提升批评质量。实验表明ICRL实现了持续的迭代自我改进。",
-          "llm_tldr": "大模型代理在批评指导下能修正错误，但移除批评后可能再次失败，且批评者自身无法改进。本文提出ICRL框架，通过强化学习联合训练求解器和批评者（共享骨干），将批评引导的成功转化为求解器的自主能力。批评者根据求解器的后续表现获得奖励，从而动态提升批评质量。实验表明ICRL实现了持续的迭代自我改进。",
-          "llm_tags": [
-            "query:self-improve"
-          ],
-          "matched_query_tag": "query:self-improve",
-          "matched_query_text": "reinforcement learning agent self improvement",
-          "matched_requirement_id": "req-5",
-          "selection_source": "carryover_cache",
-          "paper_id": "2605.15224v1",
-          "carry_days": 1
-        },
         {
           "id": "2606.01830v1",
           "source": "arxiv",
@@ -250,7 +45,7 @@
           "matched_requirement_id": "req-5",
           "selection_source": "carryover_cache",
           "paper_id": "2606.01830v1",
-          "carry_days": 1
+          "carry_days": 2
         },
         {
           "id": "2606.01041v1",
@@ -293,52 +88,287 @@
           "matched_requirement_id": "req-7",
           "selection_source": "carryover_cache",
           "paper_id": "2606.01041v1",
+          "carry_days": 2
+        },
+        {
+          "id": "2606.02132v1",
+          "source": "arxiv",
+          "title": "Learning When Not to Act: Mitigating Tool Abuse in Agentic Reinforcement Learning",
+          "abstract": "Agentic reinforcement learning can induce tool abuse, where models overuse external tools even for queries solvable by internal reasoning. Existing approaches mitigate this issue with uniform tool-use penalties or hard limits, which reduce tool frequency but may also suppress useful tool-assisted exploration. We propose EAPO, an Efficient Agentic Policy Optimization framework that learns selective tool use. EAPO introduces tool-free trajectories into each rollout group, applies difficulty-aware reward shaping to penalize redundant tool calls mainly on easier queries, and uses confidence-aware token reweighting to improve policy learning. Across nine mathematical and knowledge-intensive reasoning benchmarks, EAPO consistently improves the accuracy efficiency trade-off on Qwen2.5-3B, Qwen2.5-7B, and Llama3.1-8B. Compared with GRPO, EAPO improves average performance by 10.45%, 7.27%, and 9.69%, while reducing average tool calls by 18.33%, 18.33%, and 24.59%, respectively. These results show that agents can learn when not to use tools without compromising tool-integrated reasoning.",
+          "authors": [
+            "Liuji Chen",
+            "Dianxing Tang",
+            "Xing Shi",
+            "Dingshuo Chen",
+            "Qiang Liu",
+            "Shu Wu",
+            "Liang Wang"
+          ],
+          "primary_category": "cs.AI",
+          "categories": [
+            "cs.AI"
+          ],
+          "published": "2026-06-01T11:58:55+00:00",
+          "link": "https://arxiv.org/pdf/2606.02132v1",
+          "tags": [
+            "keyword:self-improve",
+            "query:agent-detect",
+            "query:self-improve"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "agentic RL with difficulty-aware reward shaping to reduce tool abuse",
+          "llm_evidence_cn": "提出EAPO框架优化智能体强化学习中的工具使用",
+          "llm_evidence": "提出EAPO框架优化智能体强化学习中的工具使用",
+          "canonical_evidence": "提出EAPO框架优化智能体强化学习中的工具使用",
+          "llm_tldr_en": "EAPO framework learns selective tool use in agentic RL via difficulty-aware reward shaping and confidence-aware token reweighting, improving accuracy across nine benchmarks.",
+          "llm_tldr_cn": "论文针对智能体强化学习中工具滥用问题，提出EAPO框架，通过引入无工具轨迹、难度感知奖励塑造和置信度感知令牌重加权，使智能体学会选择性使用工具。在九个数学和知识推理基准上，该方法一致提升了准确率，并有效抑制了冗余工具调用。",
+          "llm_tldr": "论文针对智能体强化学习中工具滥用问题，提出EAPO框架，通过引入无工具轨迹、难度感知奖励塑造和置信度感知令牌重加权，使智能体学会选择性使用工具。在九个数学和知识推理基准上，该方法一致提升了准确率，并有效抑制了冗余工具调用。",
+          "llm_tags": [
+            "query:self-improve"
+          ],
+          "matched_query_tag": "query:self-improve",
+          "matched_query_text": "reinforcement learning agent self improvement",
+          "matched_requirement_id": "req-5",
+          "selection_source": "carryover_cache",
+          "paper_id": "2606.02132v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2606.03762v1",
+          "source": "arxiv",
+          "title": "Tool-Aware Optimization with Entropy Guidance for Efficient Agentic Reinforcement Learning",
+          "abstract": "Agentic reinforcement learning (RL) equips large language models (LLMs) with tool-use capabilities that substantially improve reasoning on complex tasks. However, integrating external tools often destabilizes training: over-reliance on tools can induce input distribution shift, while overly conservative tool use limits effective exploration. To address this issue, we propose a unified framework TAO-RL that couples tool-aware trajectory filtering with entropy-guided exploration for efficient policy optimization. Specifically, at the data level, TAO-RL filters rollout trajectories along two criteria: discarding those where all tool invocations fail to execute, and removing those where all rollouts are either correct or incorrect, as both cases yield degenerate advantage estimates that contribute no discriminative learning signal. This joint filtering retains data that are both tool-capable and informative, establishing a high-quality training distribution. At the algorithmic level, we introduce a tool-aware entropy-guided bonus that reshapes the advantage function at post-tool-call tokens, encouraging the policy to explore more diverse reasoning paths at critical decision points. These two components are mutually reinforcing: trajectory filtering establishes a clean and informative training foundation, while entropy-guided exploration drives stronger reasoning behaviors at critical tool-interaction junctures. Extensive experiments on 7 challenging reasoning benchmarks across 3 model scales demonstrate the superiority of TAO-RL over existing methods.",
+          "authors": [
+            "Hongye Cao",
+            "Nuo Yan",
+            "Haoyuan Deng",
+            "Ziwei Wang",
+            "Tianpei Yang",
+            "Jing Huo",
+            "Yuyao Zhang",
+            "Yang Gao"
+          ],
+          "primary_category": "cs.LG",
+          "categories": [
+            "cs.LG",
+            "cs.AI"
+          ],
+          "published": "2026-06-02T15:16:12+00:00",
+          "link": "https://arxiv.org/pdf/2606.03762v1",
+          "tags": [
+            "keyword:agent-detect",
+            "keyword:self-improve",
+            "query:agent-detect",
+            "query:self-improve"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Agentic RL with tool-aware optimization and entropy guidance",
+          "llm_evidence_cn": "代理强化学习中的工具感知优化与熵引导",
+          "llm_evidence": "代理强化学习中的工具感知优化与熵引导",
+          "canonical_evidence": "代理强化学习中的工具感知优化与熵引导",
+          "llm_tldr_en": "TAO-RL proposes a unified framework coupling tool-aware trajectory filtering with entropy-guided exploration for efficient policy optimization in agentic RL.",
+          "llm_tldr_cn": "TAO-RL提出了一种统一的代理强化学习框架，通过工具感知的轨迹过滤和熵引导探索来稳定训练过程。它解决了工具使用带来的分布偏移和探索受限问题，在数据层面过滤无用或偏置轨迹，在策略层面引导探索。实验表明该方法能显著提升工具使用效率和任务性能，为智能体通过RL自我改进提供了有效工具。",
+          "llm_tldr": "TAO-RL提出了一种统一的代理强化学习框架，通过工具感知的轨迹过滤和熵引导探索来稳定训练过程。它解决了工具使用带来的分布偏移和探索受限问题，在数据层面过滤无用或偏置轨迹，在策略层面引导探索。实验表明该方法能显著提升工具使用效率和任务性能，为智能体通过RL自我改进提供了有效工具。",
+          "llm_tags": [
+            "query:self-improve"
+          ],
+          "matched_query_tag": "query:self-improve",
+          "matched_query_text": "reinforcement learning agent self improvement",
+          "matched_requirement_id": "req-5",
+          "selection_source": "carryover_cache",
+          "paper_id": "2606.03762v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2606.00183v1",
+          "source": "arxiv",
+          "title": "Agentic Transformers Provably Learn to Search via Reinforcement Learning",
+          "abstract": "Tree search is a central abstraction behind many language-agent reasoning and decision-making tasks: agents must explore actions, remember failures, and backtrack toward promising alternatives. Yet, we lack a theoretical understanding of how transformer-based policies acquire such search capabilities from the training dynamics of reinforcement learning (RL). We study this question in a stochastic $k$-ary tree environment, where an agentic transformer observes only its trajectory history through interaction and receives a terminal reward for reaching a hidden leaf goal node. We first construct a two-head transformer that implements randomized depth-first search (DFS): one head tracks previous actions, while the other detects failure outcomes and triggers backtracking. We then analyze the training dynamics of policy gradient under a depth-wise curriculum, showing that this same DFS mechanism emerges in stages from sparse reinforcement feedback without expert demonstrations. The resulting policy exhibits depth generalization: after training only on depth-$1$ and depth-$2$ trees, it succeeds on deeper full trees. We further show that, under imbalanced goal distributions, discounting the return leads to a ranked DFS policy that prioritizes higher-probability branches. Overall, our results identify a mechanistic normal form for transformer-based search, in which attention heads specialize and cooperate to extract decision-relevant traces from context and convert them into agentic action selection via RL training.",
+          "authors": [
+            "Tong Yang",
+            "Yu Huang",
+            "Yingbin Liang",
+            "Yuejie Chi"
+          ],
+          "primary_category": "cs.LG",
+          "categories": [
+            "cs.LG",
+            "cs.AI",
+            "math.OC",
+            "stat.ML"
+          ],
+          "published": "2026-05-29T14:58:03+00:00",
+          "link": "https://arxiv.org/pdf/2606.00183v1",
+          "tags": [
+            "keyword:self-improve",
+            "query:agent-detect",
+            "query:self-improve"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "theoretical study of how transformers learn search through RL, enabling agent self-improvement",
+          "llm_evidence_cn": "基于强化学习研究Transformer如何学会搜索，为智能体自我改进提供理论基础",
+          "llm_evidence": "基于强化学习研究Transformer如何学会搜索，为智能体自我改进提供理论基础",
+          "canonical_evidence": "基于强化学习研究Transformer如何学会搜索，为智能体自我改进提供理论基础",
+          "llm_tldr_en": "Agentic Transformers analyzes how transformer policies acquire search capabilities from RL training dynamics, constructing a two-head transformer that implements randomized DFS.",
+          "llm_tldr_cn": "该文从理论上探究具身Transformer策略如何从强化学习训练动态中获得搜索能力。在随机k叉树环境中，构造了一个双头Transformer实现随机深度优先搜索，一个头追踪历史动作，另一个检测失败并触发回溯。证明了RL训练能使Transformer内化搜索行为，为智能体通过强化学习实现递归自我改进提供理论支撑。",
+          "llm_tldr": "该文从理论上探究具身Transformer策略如何从强化学习训练动态中获得搜索能力。在随机k叉树环境中，构造了一个双头Transformer实现随机深度优先搜索，一个头追踪历史动作，另一个检测失败并触发回溯。证明了RL训练能使Transformer内化搜索行为，为智能体通过强化学习实现递归自我改进提供理论支撑。",
+          "llm_tags": [
+            "query:self-improve"
+          ],
+          "matched_query_tag": "query:self-improve",
+          "matched_query_text": "reinforcement learning agent self improvement",
+          "matched_requirement_id": "req-5",
+          "selection_source": "carryover_cache",
+          "paper_id": "2606.00183v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2605.27361v1",
+          "source": "arxiv",
+          "title": "Natural Language Query to Configuration for Retrieval Agents",
+          "abstract": "Modern retrieval agents expose many configuration choices -- LLM, retriever, number of documents, number of hops, and synthesis strategy -- each shaping both answer quality and serving cost. Today, these pipelines are typically hand-tuned once per workload, leaving substantial per-query optimization untapped. We formulate the problem: given a natural-language query and either an accuracy or a budget target, select from a predefined pipeline catalog the configuration that minimizes cost or maximizes accuracy at inference time. We propose **BRANE**, which uses an LLM to convert each query into workload-specific characteristics, then trains a lightweight per-configuration predictor that estimates whether the pipeline will answer the query correctly. At inference time, **BRANE** selects the configuration that maximizes predicted correctness penalized by cost, exposing a tunable cost-quality tradeoff without retraining. Across MuSiQue, BrowseComp-Plus, and FinanceBench, **BRANE** consistently pushes the cost-quality Pareto frontier, matches the best fixed configuration's accuracy at up to 89% lower cost, and outperforms LLM-routing, rule-based, and fine-tuned Qwen3-4B baselines. These results show that per-query configuration of the full retrieval pipeline is a practical alternative to static workload-level tuning.",
+          "authors": [
+            "Melissa Z. Pan",
+            "Negar Arabzadeh",
+            "Mathew Jacob",
+            "Fiodar Kazhamiaka",
+            "Esha Choukse",
+            "Matei Zaharia"
+          ],
+          "primary_category": "cs.AI",
+          "categories": [
+            "cs.AI",
+            "eess.SY"
+          ],
+          "published": "2026-05-26T17:58:47+00:00",
+          "link": "https://arxiv.org/pdf/2605.27361v1",
+          "tags": [
+            "keyword:agent-detect",
+            "keyword:self-improve",
+            "query:agent-detect",
+            "query:self-improve"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "per-query agent configuration optimization for self-improvement",
+          "llm_evidence_cn": "按查询优化代理配置实现自我改进",
+          "llm_evidence": "按查询优化代理配置实现自我改进",
+          "canonical_evidence": "按查询优化代理配置实现自我改进",
+          "llm_tldr_en": "Proposes BRANE, which uses an LLM to characterize each query and train lightweight predictors to select optimal agent pipeline configuration per query, enabling per-query cost/accuracy optimization.",
+          "llm_tldr_cn": "针对检索代理配置一次性手工调优难以适应每查询差异的问题，本文提出BRANE方法。它利用大语言模型将自然语言查询转化为工作负载特征，再训练轻量级预测器来为每个查询选择最优管道配置。该方法能够在推理时根据精度或预算目标动态选择配置，显著提升检索代理的性能与成本效率，是智能体自我优化的一种具体实现。",
+          "llm_tldr": "针对检索代理配置一次性手工调优难以适应每查询差异的问题，本文提出BRANE方法。它利用大语言模型将自然语言查询转化为工作负载特征，再训练轻量级预测器来为每个查询选择最优管道配置。该方法能够在推理时根据精度或预算目标动态选择配置，显著提升检索代理的性能与成本效率，是智能体自我优化的一种具体实现。",
+          "llm_tags": [
+            "query:self-improve"
+          ],
+          "matched_query_tag": "query:self-improve",
+          "matched_query_text": "agent self-improvement techniques",
+          "matched_requirement_id": "req-1",
+          "selection_source": "carryover_cache",
+          "paper_id": "2605.27361v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2605.26646v1",
+          "source": "arxiv",
+          "title": "UnityMAS-O: A General RL Optimization Framework for LLM-Based Multi-Agent Systems",
+          "abstract": "LLM-based multi-agent systems decompose complex tasks into interacting roles, but most remain manually orchestrated by prompts, tools, and control rules, while agents are rarely optimized through a unified reinforcement learning interface. Existing RL post-training frameworks mainly target single-policy optimization and lack abstractions for user-defined multi-agent workflows, structured interaction, role-specific credit assignment, and configurable parameter sharing.   We present UnityMAS-O, a general RL optimization framework for LLM-based multi-agent systems. UnityMAS-O treats the complete workflow as the optimization unit, rather than a single response or policy trajectory. It represents workflows through four first-class objects: logical agent roles, graph trajectories, user-defined rewards, and agent--model mappings. This decouples logical agents from physical model parameters, supporting full sharing, full separation, and partial sharing, with rewards assigned at role, turn, and trajectory levels.   UnityMAS-O extends verl with a Ray-based star-topology runtime. A central controller executes workflows, invokes tools, records structured trajectories, and assembles rewards; model-local worker groups handle rollout, buffering, advantage computation, and distributed PPO-style updates. Users can define agents, workflows, model mappings, and rewards without rewriting the optimization infrastructure.   We instantiate UnityMAS-O on retrieval-augmented QA, iterative agentic search, and reflective code generation. Across Natural Questions, HotpotQA, and held-out code tasks, multi-agent RL improves manually specified workflows after optimization, with especially large gains for smaller models and strict code all-passed metrics. These results show that UnityMAS-O can serve as a reusable substrate for converting diverse LLM-based multi-agent workflows into trainable multi-agent RL systems.",
+          "authors": [
+            "Yiqun Chen",
+            "Wei Yang",
+            "Erhan Zhang",
+            "Shijie Wang",
+            "Qi Liu",
+            "Zechun Niu",
+            "Bin Zhang",
+            "Haitao Li",
+            "Rui Li",
+            "Lingyong Yan",
+            "Jinyuan Feng",
+            "Biqing Qi",
+            "Xiaochi Wei",
+            "Yan Gao",
+            "Yi Wu",
+            "Yao Hu",
+            "Jiaxin Mao"
+          ],
+          "primary_category": "cs.AI",
+          "categories": [
+            "cs.AI",
+            "cs.CL",
+            "cs.MA"
+          ],
+          "published": "2026-05-26T07:30:03+00:00",
+          "link": "https://arxiv.org/pdf/2605.26646v1",
+          "tags": [
+            "keyword:self-improve",
+            "query:agent-detect",
+            "query:self-improve"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "general RL optimization framework for LLM-based multi-agent systems",
+          "llm_evidence_cn": "用于基于LLM的多智能体系统的通用强化学习优化框架",
+          "llm_evidence": "用于基于LLM的多智能体系统的通用强化学习优化框架",
+          "canonical_evidence": "用于基于LLM的多智能体系统的通用强化学习优化框架",
+          "llm_tldr_en": "UnityMAS-O provides a unified RL interface for optimizing entire multi-agent workflows, addressing single-policy limitations.",
+          "llm_tldr_cn": "针对基于LLM的多智能体系统大多手动编排且缺乏统一优化接口的问题，提出UnityMAS-O通用强化学习优化框架。该框架将完整工作流作为优化单元，通过四个第一类对象表示工作流，支持角色分配和参数共享。实验表明，UnityMAS-O有效提升了多智能体系统的整体性能，为多智能体自我改进提供了系统方法。",
+          "llm_tldr": "针对基于LLM的多智能体系统大多手动编排且缺乏统一优化接口的问题，提出UnityMAS-O通用强化学习优化框架。该框架将完整工作流作为优化单元，通过四个第一类对象表示工作流，支持角色分配和参数共享。实验表明，UnityMAS-O有效提升了多智能体系统的整体性能，为多智能体自我改进提供了系统方法。",
+          "llm_tags": [
+            "query:self-improve"
+          ],
+          "matched_query_tag": "query:self-improve",
+          "matched_query_text": "reinforcement learning agent self improvement",
+          "matched_requirement_id": "req-5",
+          "selection_source": "carryover_cache",
+          "paper_id": "2605.26646v1",
           "carry_days": 1
         }
       ]
     },
     "agent-detect": {
-      "updated_date": "20260505-20260603",
+      "updated_date": "20260603",
       "carryover_days": 9,
       "items": [
         {
-          "id": "2605.24008v1",
+          "id": "2606.02282v1",
           "source": "arxiv",
-          "title": "CAFD: Concept-Aware DNN Fault Detection using VLMs",
-          "abstract": "Fault detection for Deep Neural Networks (DNNs) has received increasing attention in recent years. While more advanced hybrid approaches have been proposed to combine multiple sources of information and outperform earlier techniques, they often incur substantial computational overhead, limiting scalability and practicality in real-world settings. In this paper, we introduce Concept-Aware Fault Detection (CAFD), a learning-based approach that achieves superior fault detection performance by effectively integrating multiple information sources while maintaining practical efficiency. Specifically, CAFD is trained using a carefully selected set of informative features, including model-based signals derived from the DNN's outputs, distance-based features, and a novel concept-based feature, called Concept Failure Ratio (CFR). CFR leverages Vision-Language Models (VLMs) to extract textual concepts from images and quantify the likelihood that their presence is associated with DNN failures. By incorporating this feature, CAFD benefits from complementary semantic information, enabling more effective fault detection. Our results demonstrate that CFR serves as an effective indicator for DNN fault detection. We conduct an extensive empirical evaluation of CAFD, comparing it against five state-of-the-art baselines across three subject DNN models and datasets, including ImageNet. Across a wide range of constrained selection budgets, CAFD consistently outperforms all baselines in Fault Detection Rate (FDR), achieving average FDR improvements of 18.3% across all investigated subjects and budget sizes.",
+          "title": "POIROT: Interrogating Agents for Failure Detection in Multi-Agent Systems",
+          "abstract": "Orchestrating Large Language Models into Multi-Agent Systems (LLM-MAS) has unlocked remarkable reasoning capabilities, yet emergent failures and hallucinations that resist characterisation block their deployment in safety-critical domains -- a gap made legally untenable by emerging AI regulation. Existing evaluation paradigms share a common flaw: centralised judgment creates single points of failure and demands domain-specific expertise. Here we present POIROT, a protocol that repurposes a system's own agents as its diagnostic layer, leveraging the epistemic diversity already present in the architecture. Across evaluated settings, POIROT outperforms single-LLM evaluator baselines, with gains that scale with problem complexity (OR = 1.60, $p = 0.008$), agent count, and fault dimensionality, persisting under compound fault conditions. These results demonstrate that safety oversight need not be externalised: the agents executing a role carry sufficient collective intelligence to audit it. We release POIROT as an open-source library alongside BLAME, a benchmark for fault attribution in safety-critical multi-agent systems.",
           "authors": [
-            "Amin Abbasishahkoo",
-            "Mahboubeh Dadkhah",
-            "Lionel Briand"
+            "Iñaki Dellibarda Varela",
+            "R. Sendra-Arranz",
+            "Pablo Romero-Sorozabal",
+            "J. M. Valverde-García",
+            "Annemarie F. Laudanski",
+            "Álvaro Gutiérrez",
+            "Eduardo Rocon",
+            "Manuel Cebrian"
           ],
-          "primary_category": "cs.LG",
+          "primary_category": "cs.AI",
           "categories": [
-            "cs.LG",
-            "cs.CV",
-            "cs.SE"
+            "cs.AI"
           ],
-          "published": "2026-05-19T16:14:13+00:00",
-          "link": "https://arxiv.org/pdf/2605.24008v1",
+          "published": "2026-06-01T14:05:35+00:00",
+          "link": "https://arxiv.org/pdf/2606.02282v1",
           "tags": [
-            "keyword:agent-detect",
-            "query:agent-detect"
+            "keyword:self-improve",
+            "query:agent-detect",
+            "query:self-improve"
           ],
           "llm_score": 8.0,
-          "llm_evidence_en": "DNN fault detection using concept-aware VLMs",
-          "llm_evidence_cn": "使用概念感知VLM的DNN故障检测",
-          "llm_evidence": "使用概念感知VLM的DNN故障检测",
-          "canonical_evidence": "使用概念感知VLM的DNN故障检测",
-          "llm_tldr_en": "Proposes CAFD, a learning-based DNN fault detection method that combines model-based, distance-based, and concept-based features for efficient and scalable fault detection.",
-          "llm_tldr_cn": "本文针对深度神经网络故障检测计算开销大的问题，提出概念感知故障检测方法CAFD，通过集成模型信号、距离特征和概念瓶颈特征实现高效检测，在保持实用性的同时显著提升故障检测性能。",
-          "llm_tldr": "本文针对深度神经网络故障检测计算开销大的问题，提出概念感知故障检测方法CAFD，通过集成模型信号、距离特征和概念瓶颈特征实现高效检测，在保持实用性的同时显著提升故障检测性能。",
+          "llm_evidence_en": "failure detection methods for agents",
+          "llm_evidence_cn": "智能体故障检测方法",
+          "llm_evidence": "智能体故障检测方法",
+          "canonical_evidence": "智能体故障检测方法",
+          "llm_tldr_en": "POIROT repurposes multi-agent system's own agents as a diagnostic layer for failure detection, outperforming single-LLM evaluators. It leverages epistemic diversity to detect emergent failures and hallucinations, scaling with problem complexity.",
+          "llm_tldr_cn": "现有多智能体系统面临涌现故障和幻觉难以表征的问题，且集中式评估存在单点故障和领域专业知识依赖。本文提出POIROT协议，将系统自身的智能体重用为诊断层，利用架构中已有的认知多样性进行故障检测。实验表明POIROT在多种设置下优于单LLM评估器基线，且性能随问题复杂度提升而增长。该工作为安全关键领域提供了一种无需外部专家的可扩展故障检测方案。",
+          "llm_tldr": "现有多智能体系统面临涌现故障和幻觉难以表征的问题，且集中式评估存在单点故障和领域专业知识依赖。本文提出POIROT协议，将系统自身的智能体重用为诊断层，利用架构中已有的认知多样性进行故障检测。实验表明POIROT在多种设置下优于单LLM评估器基线，且性能随问题复杂度提升而增长。该工作为安全关键领域提供了一种无需外部专家的可扩展故障检测方案。",
           "llm_tags": [
             "query:agent-detect"
           ],
           "matched_query_tag": "query:agent-detect",
           "matched_query_text": "papers on detection techniques for agent",
-          "matched_requirement_id": "req-6",
+          "matched_requirement_id": "req-13",
           "selection_source": "carryover_cache",
-          "paper_id": "2605.24008v1",
+          "paper_id": "2606.02282v1",
           "carry_days": 1
         }
       ]
