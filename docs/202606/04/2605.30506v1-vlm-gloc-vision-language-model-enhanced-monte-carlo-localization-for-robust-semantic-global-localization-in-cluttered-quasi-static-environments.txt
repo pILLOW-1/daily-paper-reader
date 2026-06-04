@@ -1,0 +1,320 @@
+Title: VLM-GLoc: Vision-Language Model Enhanced Monte Carlo Localization for Robust Semantic Global Localization in Cluttered Quasi-Static Environments
+
+URL Source: https://arxiv.org/pdf/2605.30506v1
+
+Published Time: Mon, 01 Jun 2026 00:19:13 GMT
+
+Number of Pages: 15
+
+Markdown Content:
+# VLM-GLoc: Vision-Language Model Enhanced Monte Carlo Localization for Robust Semantic Global Localization in Cluttered Quasi-Static Environments 
+
+Shivendra Agrawal Bradley Hayes 
+
+University of Colorado Boulder Boulder, Colorado, USA 
+
+{shivendra.agrawal, bradley.hayes }@colorado.edu 
+
+Abstract: Global localization in geometrically aliased, quasi-static environments such as grocery stores, offices, schools, and hospitals poses a significant challenge for mobile robots. Grocery stores with parallel aisles and a long-tailed distri-bution of products, as well as offices and labs with repetitive furniture such as chairs, desks, monitors, and doors, exemplify common indoor environments that present geometric and even semantic ambiguity. Traditional approaches rely either on distinct geometric features or on domain-specific vision pipelines that strug-gle with long-tail semantic distributions and transient visual clutter. We present VLM-GLoc, a method for hierarchical semantic Monte Carlo Localization (MCL) that leverages open-vocabulary Vision-Language Models (VLMs) as a unified se-mantic observation front-end. We hypothesize a three-fold benefit from VLMs: (1) extracting highly discriminative rich text features, (2) implicit quality filter-ing of blurry or dynamic objects, and (3) permanence reasoning for targeted data augmentation. We introduce an inverse semantic proposal mechanism that seeds particles via text-to-map retrieval. Evaluated across two real-world environments with different characteristics and two different platforms: a 3,500 sq. ft. grocery store with a cellphone and a 3,700 sq. ft. lab space with a quadruped, VLM-GLoc achieves 70% and 74% global localization success respectively, substantially out-performing traditional geometry-only and domain-specific baselines. 
+
+Keywords: VLM, Localization, Semantics, Real-World, Particle Filter 
+
+# 1 Introduction 
+
+Global localization (recovering a robot’s pose within a known map) is a prerequisite for true au-tonomy. While classical Adaptive Monte Carlo Localization (AMCL) is the de facto standard in robotics, it frequently fails in geometrically aliased environments. In spaces like grocery store aisles, office corridors, or repetitive laboratory cubicles, the local occupancy structure is nearly identical across different global regions. Semantic information offers a natural solution: humans distinguish locations not by wall geometry, but by what they see . However, existing semantic lo-calization systems [1, 2] typically rely on top-level class vectors requiring domain-specific object detectors. This proves brittle against long-tail distributions. In repetitive offices and labs, a generic “chair”, “monitor”, or “cabinet” label lacks the granularity needed for disambiguation. We present VLM-GLoc , a hierarchical Monte Carlo Localization framework that replaces rigid vi-sual pipelines with a unified Vision-Language Model (VLM) interface. Rather than asking the VLM to directly regress metric coordinates, VLM-GLoc uses it as a rich semantic observation generator. These natural-language observations are embedded by a lightweight sentence encoder and compared against a pre-built semantic map via cosine similarity. Our central hypothesis is that VLMs provide a critical three-fold advantage for probabilistic localization: 1. Rich Text Features: Moving be-yond simple class labels to highly discriminative descriptions (e.g., from “cabinet” to “yellow metal 
+
+> arXiv:2605.30506v1 [cs.RO] 28 May 2026
+
+flammables cabinet”). 2. Implicit Quality Filtering: The ability to label and suppress noisy detec-tions, transient objects (e.g., jacket, cup), and dynamic actors (e.g., people, cart). 3. Permanence Reasoning & Augmentation: Classifying items as static, quasi-static, or dynamic, which enables targeted training data augmentation (semantic dropout) without physically altering the scene. To exploit these advantages without suffering premature geometric collapse, VLM-GLoc employs a hierarchical tracking strategy. We introduce an inverse semantic proposal mechanism where a single query image is inverted into a sparse set of likely pose hypotheses to seed the particle filter. Semantics are used first to narrow down the global search space, while geometry (lidar/depth) is utilized as a consistency signal to lock in precision once spatial convergence is detected. 
+
+The contributions of this work are: (1) A VLM-based semantic MCL method that uses open-vocabulary text embeddings as an observation model rather than for direct pose regression; and (2) An inverse semantic proposal mechanism and hierarchical fusion strategy to resolve geometric aliasing. Both are validated within two real-world domains: a 3,500 sq. ft. grocery store and a 3,700 sq. ft. laboratory, demonstrating that a single language interface substantially outperforms both geometry-only and domain-specific baselines. 
+
+# 2 Related Work 
+
+Probabilistic and geometric global localization. Particle-filter localization remains a standard for-mulation for start-anytime robot pose estimation because it represents multi-modal beliefs and natu-rally fuses motion and sensor likelihoods. KLD-sampling and AMCL made this family of methods practical for robot navigation [3, 4]. Depth-camera and lidar localization can be accurate when the environment has distinctive geometry [5, 6], but recent surveys emphasize that global lidar local-ization still struggles under perceptual aliasing, dynamics, and map change [7]. Learned implicit or area-graph representations address some of these challenges [8, 9], but they still depend primar-ily on geometric structure. VLM-GLoc keeps the probabilistic strengths of MCL while adding a language-rich observation channel for places where geometry alone admits many plausible modes. 
+
+Semantic and long-term localization. Semantic localization augments geometry with object, text, or layout cues. Semantic SLAM and floor-plan alignment methods use objects and room structure to localize in prior indoor maps [10, 1]. Other work exploits text spotting and named landmarks for robust onboard localization [11], or models object existence probabilistically to support long-term localization under change [12]. These approaches show that semantic information can break geometric symmetries, but their representations are often fixed to a detector vocabulary or a specific landmark type. VLM-GLoc instead uses natural-language scene descriptions, preserving attributes such as color, material, readable text, packaging, and object state. 
+
+Retail and mobile localization. Grocery stores pose unique localization challenges due to repeti-tive shelving geometry and a massive, dynamic semantic space. While prior work [2] demonstrates that fixed-class shelf semantics support mobile localization, relying on predefined category vectors inherently limits the representation. VLM-GLoc expands this paradigm by fusing open-vocabulary product descriptions with a generalized particle filter. By moving beyond fixed ontologies, our approach capitalizes on the highly discriminative value of specific product names, brands, and pack-aging to resolve global ambiguity. 
+
+Open-vocabulary maps and learned visual localization. Recent foundation-model systems build open-vocabulary 3D scene graphs for perception and planning [13]. Vision-and-language navigation studies language-conditioned movement and route following [14, 15, 16], but generally assumes known localization rather than solving it within a fixed prior map. Recent work pushes toward direct localization, utilizing VLMs for 3D reasoning and point-cloud grounding [17, 18]. These methods show that language-conditioned foundation models can support spatial grounding. VLM-GLoc takes a complementary robotics view: the VLM never outputs coordinates. It produces semantic evidence for a probabilistic filter, while multi-modal belief maintenance, odometry fusion, hierarchical lidar consistency, and recovery from dynamic or quasi-static scene changes remain inside MCL. 2Figure 1: VLM-GLoc online localization pipeline. Evaluated across two domains (quadruped & cellphone), RGB images are VLM-annotated and encoded via a MiniLM that is LoRA-finetuned with quasi-static dropout augmentation for temporal robustness. Comparing this against the semantic map seeds initial particles via inverse proposal. A hierarchical filter then fuses odometry, semantics, and range data to predict the final pose. 
+
+# 3 Problem Formulation 
+
+We assume a prior 2D occupancy map. First, VLM-GLoc builds an offline semantic map. At test time, the robot receives an RGB-D observation, an odometry increment, and optionally lidar measurements. The goal is global localization: estimate the robot pose xt = ( xt, y t, θ t) in the prior map, without assuming a known initial pose. Let M = {(pi, ei)}Ni=1 be a semantic map over discrete pose cells pi. Each ei is the normalized text embedding of the VLM description expected from that pose. Given a query image It, a VLM front end produces a structured text observation 
+
+Tt, and a text encoder produces a normalized query embedding et. The semantic likelihood for a particle x is computed by comparing et to the expected map embedding visible from x: ssem (xt) = cos ( et, E M(xt)) where EM(xt) is obtained by lookup or ray-casting on the semantic map. 
+
+# 4 VLM-GLoc 
+
+VLM-GLoc has an offline semantic mapping stage and an online localization stage. 
+
+4.1 Offline Semantic Map Construction 
+
+To build the offline map, VLM-GLoc first extracts objects from a mapping traversal. For each frame, it extracts bounding boxes in normalized coordinates and uses a VLM (gemini-3-flash-preview ) to generate natural-language labels (5-10 words detailing color, ma-terial, object type, and visible text). The VLM also outputs a detection confidence score, following prior work on verbalized uncertainty estimation in VLMs [19, 20, 21] and a permanence classifica-tion: [Static] for structural elements, [Quasi-Static] for movable furniture, and [Dynamic] 
+
+for transient objects. Low-confidence detections ( < 0.3) and [Dynamic] items are filtered out. Next, for each discretized free-space pose pi = ( xi, y i, θ i), VLM-GLoc raycasts the camera field of view into the occupancy map up to a maximum range rmax . All VLM-annotated objects visible from that pose are aggregated with their descriptions concatenated into a unified scene string and encoded via a sentence transformer fϕ (a LoRA fine-tuned MiniLM) to produce the embedding ei ∈ R384 ,yielding a discrete semantic map Mtext = {(pi, T i, ei)}Ni=1 .The pose discretization differs by domain (Appendix A). While the algorithmic interface is identical across domains, the low-level perception adapts to different platforms. In the lab domain, we use a Unitree Go1 quadruped (Figure 3) with an Intel RealSense D455 and Velodyne VLP-16, relying on the VLM to segment and describe repetitive furniture/equipment. In the grocery domain, we use a consumer-grade smartphone and pre-propose shelf items using a YOLO-V9 detector [22] fine-tuned on SKU-110K [23], using the VLM to extract product names, brands, and packaging details. 
+
+4.2 Quasi-Static Data Augmentation 
+
+3Figure 2: Semantic maps. [Left] Lab map with repeated classes such as chairs, monitors, and desks. [Right] Grocery map with long-tail products. 
+
+The base sentence encoder is a frozen MiniLM-L6, a 22M-parameter model well-suited for resource-constrained computing platforms. We train a LoRA fine-tuned adapter using triplet loss on pose pairs generated from the offline semantic map. During the lab domain mapping, we queried the VLM twice per pose to obtain varied descriptions of the same scene, which served as positive pairs. Conversely, scenes separated by a distance greater than a threshold T were utilized as negative pairs. For the grocery do-main, we observed that the frozen MiniLM and the LoRA-finetuned model yield similar perfor-mance because the products naturally provide strong, distinct long-tail semantics. The lab, however, heavily benefits from fine-tuning because many regions share repeated object classes; the discrimi-native signal being subtle scene attributes and relative spatial arrangements. To ensure the model remains robust against common environmental changes, we augment the pos-itive text description pairs during fine-tuning using targeted dropouts. A quasi-static dropout simu-lates temporal change by removing transient items such as jackets, mugs, backpacks, and movable chairs, from the descriptions. These augmentations effectively simulate month-scale scene dynamics without requiring any physical rearrangement of the lab space. 
+
+4.3 Online Localization 
+
+Figure 1 summarizes the online localization pipeline, detailed step-by-step in Appendix D. 
+
+VLM Observation Generation. At test time, live semantic frames undergo the identical extraction, filtering, and concatenation process described in the offline mapping stage. The resulting scene string is passed through fϕ to produce the query embedding equery , ensuring the live observation and the prior map share a unified, highly discriminative feature space (e.g., precisely matching a “yellow metal flammables storage cabinet” rather than a generic “cabinet”). 
+
+Inverse Semantic Pose Proposal. The online algorithm begins with an inverse semantic observa-tion proposal, which generates rich semantic pose candidates to quickly narrow the global search space. We compare the query embedding et against all map embeddings and retain the top K pose modes: Ht = TopK pi∈M cos( et, ei) These modes define a proposal distribution: q(xt | It) = 
+
+PKk=1 πkN (xt; μk, Σk) where μk is the pose of the retrieved map cell and πk ∝ exp( sk/τ ), with 
+
+sk = cos( et, ek). The temperature τ controls how sharply particles concentrate around the highest-scoring semantic matches. This proposal step replaces a fraction of the initially uniform particles with samples drawn near the strongest semantic modes. 
+
+Hierarchical Semantic MCL. After initialization, particles are propagated via odometry and reweighted using both semantic and range likelihoods: 
+
+x(n) 
+
+> t
+
+∼ p(xt|x(n)
+
+> t−1
+
+, u t), (1) 
+
+w(n) 
+
+> t
+
+∝ w(n)
+
+> t−1
+
+Lsem (It|x(n) 
+
+> t
+
+)αt Lrange (zt|x(n) 
+
+> t
+
+)βt . (2) This factorization assumes that, conditioned on the robot pose and the map, the semantic image observation It and the geometric range observation zt provide independent measurement evidence. The hierarchical nature of VLM-GLoc is controlled by scheduling the exponent weights αt and βt.During initial global localization, we enforce a strict semantic hierarchy ( αt ≫ βt). The semantic likelihoods remain sharp while geometry is kept deliberately soft, preventing premature convergence to incorrect poses in geometrically aliased regions (e.g., identical aisles or workstations). Once the 4particle cloud has spatially converged, the range weight βt is increased. We define this spatial con-vergence as the moment the median particle spread σt = median n(∥x(n) 
+
+> t
+
+− median( x(1: N ) 
+
+> t
+
+)∥2)
+
+falls below a threshold σconv = 3 .0 m . This allows local geometry and odometry to precisely track the pose and reject incorrect modes. The semantic likelihood is evaluated as temperature-scaled cosine similarity: Lsem (It|x(n) 
+
+> t
+
+) = exp 
+
+
+
+τ cos( et, E M(x(n) 
+
+> t
+
+)) 
+
+
+
+. The geometric likelihood evaluates a 2D range observation (derived from the depth camera or lidar) against a distance transform of the occupied map cells. Finally, to select the best multi-modal hypotheses, VLM-GLoc estimates the final tracked pose by clustering high-weight particles via DBSCAN and returning the dominant weighted mode. 
+
+# 5 Experimental Setup 
+
+> Figure 3: Go1 with RealSense D455 and Velodyne VLP-16.
+
+We collected 20 test trajectories per domain. To evaluate robust-ness against temporal changes, the lab domain trajectories we evaluate against were recorded one month after the initial map-ping. During this period, several items, including bikes, white-boards, robots, computer equipment, and chairs were moved or introduced, providing a realistic scenario for testing quasi-static resilience. Due to logistical constraints in the public retail space, the grocery trajectories were recorded later on the same day as the initial mapping. Key implementation parameters, including semantic encoder hyperparameters and particle filter configura-tions, are detailed in Appendix A. 
+
+Domain 1 (Lab): The 3,700 sq. ft. research facility is traversed by a Unitree Go1 quadruped (Figure 3). The environment is visually and geometrically repetitive, containing identical cubicles, desks, monitors, chairs, cabinets, and doors. Localization utilizes a SLAM Toolbox [24] occupancy map paired with our discrete semantic map. 
+
+Domain 2 (Grocery store): The grocery domain is a 3,500 sq. ft. international grocery store captured using a consumer-grade smartphone (RGB-D data). The store consists of parallel shelving units densely packed with long-tail products. The geometry is massively aliased, as multiple aisles produce nearly identical lidar range measurements. This means localization must rely entirely on the discriminative semantic fingerprints provided by product names, brands, and packaging. 
+
+Ground Truth. We utilize an offline map-aligned SLAM reference trajectory for both domains to ensure a high-fidelity baseline. We recorded exhaustive traversals achieving full map coverage. Because robust Iterative Closest Point (ICP) [25] alignment requires this extensive spatial overlap, we use it strictly offline to align these rebuilt environment maps against the prior mapping traversals, obtaining highly accurate translation and rotation matrices. We then chunked these aligned traversals with random starting points into the individual test trajectories used for evaluation. 
+
+Baselines. AMCL: The AMCL baseline uses the same particle-filter infrastructure but without semantic observations. It uses range likelihoods and odometry only. 
+
+FCS-MCL (Fixed-Class Semantic MCL): To evaluate fixed-class semantic localization, we imple-mented the ShelfAware [2] baseline (tailored for the grocery domain), which alongside Zimmerman et al. [1] represents the standard semantic paradigm. This categorical particle filter captures the spatial distribution of these classes (using predefined category counts, mean distances, and mean relative angles) to model high-level semantic layouts. Adapting a domain-specific vision front-end, the grocery state vector tracks 20 product categories (e.g., rice, lentils, spices). For the lab, it uses a vocabulary like chair, desk, monitor, sign, cabinet, door, and robot. 
+
+Metrics: Following established conventions in the literature [1, 11, 2], we define convergence as the estimated pose falling within 0.7 m translation and π/ 4 rad rotation of the ground truth. To decouple initial pose estimation from continuous state tracking, we evaluate VLM-GLoc via: 5Global localization success: A trial is successful if initial convergence occurs within the first 95% of the trajectory. 
+
+Global localization error (G-error): The absolute translation and rotation error measured at the initial convergence, capturing the accuracy of the system the moment global ambiguity is resolved. 
+
+Whole Trajectory ATE (W-ATE): The Absolute Trajectory Error (translation and rotation RMSE) computed from the moment of initial global convergence until the absolute end of the sequence. 
+
+Stable tracking success: A trial is successful if it contains a final tracking that begins before the 95% cutoff and remains strictly within the convergence threshold until the end of the sequence. 
+
+Stable Tracking ATE (T-ATE): The Absolute Trajectory Error (translation and rotation RMSE) computed over the successfully tracked trajectory. 
+
+# 6 Results 
+
+Hypothesis 1: Rich Text Features Resolve Aliasing: We first demonstrate that rich semantics resolve severe geometric aliasing better than both pure geometry and top-level class vectors across two distinct domains. We run each trajectory 5 times to account for stochasticity and report the mean. Table 1 reports the unseen lab data comparison against AMCL and FCS-MCL on the exact same trajectory chunks. AMCL succeeds on only 4% of the runs due to repeating cubicles. FCS-MCL succeeds on 10%; its class vector erases the specific details (material, text, color, state) that distinguish repeated lab objects. In contrast, VLM-GLoc reaches 74% global localization success. The tracking success numbers remain lower than global localization success. However, the lab tracking trajectories are often visually close even when some frames fail the threshold. When we evaluate tracking using an ATE threshold, meaning small trajectory violations are allowed as long as the mean error remains under the threshold, the stable tracking success improves from 46% to 60%. Table 1: Lab evaluation after one month of mapping. Metrics include Global Localization (Global %) and Tracking Success (Tracking %). All errors are reported as translation (m) / rotation (rad).                     
+
+> Method Global % G-error (t/r) W-ATE (t/r) Tracking % T-ATE (t/r) AMCL 4% 0.45 / 0.12 6.72 / 1.44 0% n/a FCS-MCL 10% 0.50 / 0.32 0.79 / 0.29 0% n/a VLM-GLoc 74% 0.51 / 0.23 0.66 / 0.20 46% 0.41 / 0.13
+
+Table 2 shows similar findings in the grocery domain. Even against a competitive class-vector base-line utilizing 20 grocery categories, VLM-GLoc improves global localization success from 30% to 70%. While the depth profiles of parallel aisles are identical, the long-tail language of product brands, packaging, and ingredient names provides a unique semantic fingerprint that allows the filter to converge reliably. While baselines occasionally report marginally lower tracking errors (T-ATE), this can be attributed to the fact that methods like AMCL and FCS-MCL succeed far less often. In contrast, VLM-GLoc maintains comparable RMSEs while successfully localizing on a vastly larger set, demonstrating a significant contribution to system reliability. Sensitivity analysis (Appendix E) reveals that minor relaxations of the spatial convergence thresholds boost VLM-GLoc’s global lo-calization success to 95%. Isolating translation error accounts for the mirrored semantic viewpoints prevalent in the grocery domain, yielding significant gains not observed in baseline methods. 
+
+Hypothesis 2: Implicit Quality Filtering: We hypothesize that VLMs act as cognitive filters, sup-pressing noisy visual evidence. To validate this, we conducted an ablation in the grocery domain where blurry or unreadable product crops were intentionally retained in both the map and the query text. These low-quality images are particularly prevalent in this domain due to the handheld cell-phone capture. As shown in Table 3, forcing the system to utilize these noisy observations degrades global localization by a 29% relative drop. Retaining unreadable items makes the semantics noisier, delays convergence, and prevents the filter from anchoring to reliable landmarks. 
+
+Hypothesis 3: Permanence Reasoning & Training Data Generation via Augmentation: Finally, we demonstrate within the lab domain that VLM-GLoc can characterize transient features to im-6prove localization. As highlighted in Table 3, relying on a frozen MiniLM encoder results in an 18.75% relative drop in global localization success compared to our LoRA finetuned adapter, which is explicitly trained with targeted text-dropout augmentation that removes quasi-static items (jack-ets, backpacks, movable chairs). Furthermore, entirely removing VLM-generated permanence and quality tags from the descriptions causes a measurable 8% relative drop in success, proving that reasoning over these cues yields richer semantics crucial for robust localization. Table 2: Grocery store evaluation over 20 trajectories in a 3,500 sq. ft. space.                           
+
+> Method Global % G-error (t/r) W-ATE (t/r) Track % T-ATE (t/r) AMCL 20% 0.50 / 0.10 2.08 / 0.59 5% 0.31 / 0.15
+> FCS-MCL 30% 0.30 / 0.26 0.82 / 0.39 25% 0.30 / 0.16 VLM-GLoc 70% 0.32 / 0.31 0.77 / 0.64 65% 0.31 / 0.18
+
+Table 3: Ablation impacts on global localization success across domains.      
+
+> Condition Global % ∆
+> Retained blurry crops (Quality Filtering) -29% (grocery) Removed permanence tags (Permanence Reasoning) -8% (lab) LoRA with Augmentation vs. Frozen MiniLM (No Fine-tuning) -18.75% (lab)
+
+# 7 Qualitative Analysis 
+
+Inverse Semantic Proposal. As shown in Figure 4, inverse semantic retrieval provides strong global pose estimates before temporal particle filtering. The qualitative results highlight the resilience of our semantic proposal against common real-world failure modes. For instance, while mirrored viewpoints induce some local orientation scatter, the semantic hypotheses still concentrate in the correct global region. Furthermore, under severe perceptual ambiguity, such as featureless areas with identical doors, the system degrades gracefully, proposing multiple plausible regions. VLM-GLoc handles month-scale quasi-static changes well. Although items shifted between mapping and testing, the unified scene descriptions maintain enough contextual overlap to retrieve the correct area, showing applicability to long-term deployment in active spaces. 
+
+Trajectory Examples. As a counterpart in the retail domain, Figure 5 illustrates example grocery trajectories with ground truth and VLM-GLoc pose estimates. In this domain, semantic convergence and tracking are usually aligned because product identities sharply disambiguate repeated aisles.   
+
+> Figure 4: Top-10 inverse semantic pose proposals. For each live RGB observation (left), orange markers denote the top-10 retrieved semantic pose hypotheses within the prior map (right), while the green marker indicates the ground truth pose. The underlying heatmap visualizes the dense semantic cosine similarity, with lighter (yellow) regions representing higher retrieval scores. The proposal mechanism successfully anchors the robot despite severe motion blur (b), geometrically aliased or mirrored viewpoints (c, f, g, h), repeated-door ambiguity (e), and month-scale scene changes such as relocated objects or new clutter (f, g).
+
+# 8 Discussion 
+
+VLMs provide more than object names. The primary value of the VLM front end lies beyond simple object categorization. It preserves fine-grained, open-vocabulary evidence: colors, materials, 7Figure 5: Example grocery trajectories with ground truth and VLM-GLoc pose estimates. Thinner to thicker correspond to the temporal progression of the trajectory. 
+
+readable text, packaging, and object state. It also filters low-quality evidence by characterizing noisy observations. This is why VLM-GLoc outperforms class-vector semantic baselines even though both rely on “semantics.” For example, a standard detector label such as ‘cabinet’ loses warning text and material context; ‘chair’ loses the mesh back and orange cushion details; and ‘sign’ loses the actual text. Appendix H provides high-similarity query/map description pairs demonstrating how this fine-grained evidence yields strong map retrieval scores. 
+
+Domain-general interface, domain-specific front ends. Both domains produce the exact same interface to the localizer: structured text and normalized embeddings. While previous baselines require a different class vocabulary and scoring vector engineered specifically for each domain, VLM-GLoc removes the need for a dedicated vision front end for each domain. 
+
+Hardware Accessibility and Form Factor. The grocery evaluation demonstrates that robust lo-calization can be achieved using a standard cellphone as the primary sensor suite. This lowers the hardware barrier to entry, making the framework applicable for lightweight mobile robots and cellphone-based assistive navigation technologies. 
+
+Runtime and Practical Deployment. While the cached particle filter runs at 8 Hz (with Go1 sen-sors) and 44 Hz (with cellphone sensors), live synchronous cloud-VLM API calls yield an effective online rate of roughly 0.21 Hz for the lab and 0.91 Hz for the grocery store (using a semantic update interval of 5 frames, which was standard across our experiments). This sparse update rate is practi-cal for resolving global ambiguity. During tracking, VLM-GLoc fuses these intermittent semantic observations with high-frequency geometric filtering and odometry to maintain smooth pose esti-mates. Full latency profiling is detailed in Appendix B. Despite the latency bottleneck introduced by cloud APIs, the resulting accuracy and unified semantic front-end make combining VLMs within a probabilistic framework highly promising. Notably, while the grocery pipeline still utilizes a generic product class detector at the front, VLM-GLoc entirely removes the need for domain-specific clus-tering, spatial aggregation rules, and dense feature extractors required by prior systems. 
+
+Limitations: Our method inherently relies on rich semantic features to disambiguate scenes, mean-ing performance degrades in visually barren environments. Furthermore, balancing particle conver-gence for smooth pose estimation against the need to explore new hypotheses remains challenging. When likelihoods drop, it is difficult to determine whether the cause is physical scene changes, a lack of local features, or if particles have drifted into an incorrect mode requiring global re-exploration. Finally, while the current cloud-based VLM latency restricts high-frequency semantic tracking, rapid advancements in lightweight, on-device VLMs promise to alleviate this constraint. 
+
+Conclusion: VLM-GLoc reframes VLMs as semantic observation generators for probabilistic robot localization, replacing brittle, domain-specific object detectors with a unified natural language in-terface. By converting query images into language-rich pose proposals and hierarchical semantic likelihoods, the system resolves severe global ambiguity in environments where geometry alone fails. Across vastly different domains: from repetitive laboratory cubicles navigated by a quadruped to dense retail aisles mapped via a consumer cellphone, the identical semantic MCL framework achieves robust global localization. Ultimately, VLM-GLoc demonstrates that rich open-vocabulary descriptions, implicit quality filtering, and targeted quasi-static reasoning offer a highly portable, hardware-agnostic solution for autonomous indoor navigation. 8References 
+
+[1] N. Zimmerman, T. Guadagnino, X. Chen, J. Behley, and C. Stachniss. Long-Term Localization Using Semantic Cues in Floor Plan Maps. IEEE Robotics and Automation Letters , 8(1):176– 183, Jan. 2023. doi:10.1109/LRA.2022.3223556. Conference Name: IEEE Robotics and Automation Letters. [2] S. Agrawal, J. Brawer, A. Naik, A. Roncone, and B. Hayes. Shelfaware: Real-time visual-inertial semantic localization in quasi-static environments with low-cost sensors. IEEE Robotics and Automation Letters , 2026. [3] D. Fox. KLD-Sampling: Adaptive Particle Filters. In Advances in Neural Information Pro-cessing Systems , volume 14. MIT Press, 2001. [4] AMCL nav2 documentation. https://docs.nav2.org/configuration/packages/ configuring-amcl.html . Accessed 2025-09-21. [5] J. Biswas and M. Veloso. Depth camera based indoor mobile robot localization and navigation. In 2012 IEEE International Conference on Robotics and Automation , pages 1697–1702, May 2012. doi:10.1109/ICRA.2012.6224766. ISSN: 1050-4729. [6] Y. Watanabe, K. R. Amaro, B. Ilhan, T. Kinoshita, T. Bock, and G. Cheng. Robust Local-ization with Architectural Floor Plans and Depth Camera. In 2020 IEEE/SICE International Symposium on System Integration (SII) , pages 133–138, Jan. 2020. doi:10.1109/SII46433. 2020.9025984. ISSN: 2474-2325. [7] H. Yin, X. Xu, S. Lu, X. Chen, R. Xiong, S. Shen, C. Stachniss, and Y. Wang. A Survey on Global LiDAR Localization: Challenges, Advances and Open Problems. International Journal of Computer Vision , 132(8):3139–3171, Aug. 2024. doi:10.1007/s11263-024-02019-5. [8] H. Kuang, X. Chen, T. Guadagnino, N. Zimmerman, J. Behley, and C. Stachniss. IR-MCL: Implicit Representation-Based Online Global Localization. IEEE Robotics and Automation Letters , 8(3), Mar. 2023. doi:10.1109/LRA.2023.3239318. Conference Name: IEEE Robotics and Automation Letters. [9] F. Xie and S. Schwertfeger. Robust Lifelong Indoor LiDAR Localization Using the Area Graph. IEEE Robotics and Automation Letters , Jan. 2024. doi:10.1109/LRA.2023.3334158. Conference Name: IEEE Robotics and Automation Letters. [10] R. G. Goswami, P. V. Amith, J. Hari, A. Dhaygude, P. Krishnamurthy, J. Rizzo, A. Tzes, and F. Khorrami. Efficient Real-Time Localization in Prior Indoor Maps Using Semantic SLAM. In 2023 9th International Conference on Automation, Robotics and Applications (ICARA) ,pages 299–303, Feb. 2023. doi:10.1109/ICARA56516.2023.10125919. ISSN: 2767-7745. [11] N. Zimmerman, L. Wiesmann, T. Guadagnino, T. L¨ abe, J. Behley, and C. Stachniss. Robust onboard localization in changing environments exploiting text spotting. In 2022 IEEE/RSJ international conference on intelligent robots and systems (IROS) , pages 917–924. IEEE, 2022. [12] A. Adkins, T. Chen, and J. Biswas. Probabilistic object maps for long-term robot localization. In 2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) , pages 931–938. IEEE, 2022. [13] Q. Gu, A. Kuwajerwala, S. Morin, K. M. Jatavallabhula, B. Sen, A. Agarwal, C. Rivera, W. Paul, K. Ellis, R. Chellappa, et al. Conceptgraphs: Open-vocabulary 3d scene graphs for perception and planning. In 2024 IEEE International Conference on Robotics and Automation (ICRA) , pages 5021–5028. IEEE, 2024. 9[14] P. Anderson, Q. Wu, D. Teney, J. Bruce, M. Johnson, N. S¨ underhauf, I. Reid, S. Gould, and A. van den Hengel. Vision-and-language navigation: Interpreting visually-grounded naviga-tion instructions in real environments. In Proceedings of the IEEE conference on computer vision and pattern recognition , pages 3674–3683, 2018. [15] J. Krantz, E. Wijmans, A. Majumdar, D. Batra, and S. Lee. Beyond the nav-graph: Vision-and-language navigation in continuous environments. In European Conference on Computer Vision , pages 104–120. Springer, 2020. [16] J. Chen, B. Lin, R. Xu, Z. Chai, X. Liang, and K.-Y. Wong. Mapgpt: Map-guided prompting with adaptive path planning for vision-and-language navigation. In Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) ,pages 9796–9810, 2024. [17] S. Kang, Y. Liao, P. Wang, W. Liao, Q. Zhang, B. Busam, X. Chen, and Y. Liu. Vlm-loc: Lo-calization in point cloud maps via vision-language models. arXiv preprint arXiv:2603.09826 ,2026. [18] K. Qu, H. Qi, M. Dusmanu, M. Rad, R. Wang, and M. Pollefeys. Loc3r-vlm: Language-based localization and 3d reasoning with vision-language models, 2026. URL https://arxiv. org/abs/2603.18002 .[19] W. Xuan, Q. Zeng, H. Qi, J. Wang, and N. Yokoya. Seeing is believing, but how much? a comprehensive analysis of verbalized calibration in vision-language models. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing , pages 1408– 1450, 2025. [20] M. Xiong, Z. Hu, X. Lu, Y. Li, J. Fu, J. He, and B. Hooi. Can llms express their uncertainty? an empirical evaluation of confidence elicitation in llms. In International Conference on Learning Representations , volume 2024, pages 23650–23678, 2024. [21] T. Groot and M. Valdenegro-Toro. Overconfidence is key: Verbalized uncertainty evaluation in large language and vision-language models. In Proceedings of the 4th Workshop on Trust-worthy Natural Language Processing (TrustNLP 2024) , pages 145–171, 2024. [22] C.-Y. Wang, I.-H. Yeh, and H.-Y. Mark Liao. Yolov9: Learning what you want to learn using programmable gradient information. In European conference on computer vision , pages 1–21. Springer, 2024. [23] E. Goldman, R. Herzig, A. Eisenschtat, J. Goldberger, and T. Hassner. Precise detection in densely packed scenes. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , pages 5227–5236, 2019. [24] S. Macenski and I. Jambrecic. Slam toolbox: Slam for the dynamic world. Journal of Open Source Software , 6(61):2783, 2021. [25] P. J. Besl and N. D. McKay. Method for registration of 3-d shapes. In Sensor fusion IV: control paradigms and data structures , volume 1611, pages 586–606. Spie, 1992. 10 Appendices A Implementation and Reproducibility Details 
+
+Table 4 records the main parameters for the headline runs. Table 4: Key implementation parameters. 
+
+Component Value Compute Dell G15 laptop (Intel Core i7-11800H (2.3 GHz); NVIDIA RTX 3060, 6GB VRAM; 32GB RAM) Lab semantic map SLAM Toolbox occupancy map at 0.05 m/px; semantic grid spacing 0.50 m; 24 heading bins; 80 .5◦ camera FOV; 10 m raycast; objects retained after ≥ 3
+
+mapping observations Grocery semantic map Occupancy map at 0.05 m/px; semantic grid spacing 0.50 m; 8 heading bins; 
+
+60 ◦ camera FOV; 6 m raycast Semantic encoder MiniLM-L6-v2 text encoder with 384-d embeddings; lab uses triplet LoRA; gro-cery uses the frozen encoder Lab LoRA training Triplet loss, margin 0.5; LoRA rank 16, alpha 32, module dropout 0.1; 30 epoch schedule; batch size 32; learning rate 2 × 10 −5; T = 3 m
+
+Lab text augmentation Positive-pair augmentation with quasi-static dropout, dynamic removal, item shuffle, subset-drop, composed perturbations, and exhaustive quasi-static vari-ants; quasi-static and subset dropout remove 1–2 items Lab localization Semantic update every 5 frame; top-400 semantic proposal; candidate temper-ature 10; semantic seed noise σxy = 0 .30 m, σθ = 0 .16 rad; DBSCAN pose estimate with ϵ = 1 .0 m; lidar weight 0.10 Grocery localization Semantic update every 5 frames; semantic temperature 10; adaptive depth/lidar cap 0.50; base lidar weight 0.10; DBSCAN pose estimate with ϵ = 1 .0 mSemantic/range weights Post-convergence schedule with αt = 1 . Before spatial convergence, βt = 0 ;after q50 < 3.0 m , βt = 0 .10 , where q50 is the median particle distance from the particle-cloud spatial median. For the lab headline setting, regular online range reweighting is disabled ( βt = 0 ); lidar is used instead for semantic-candidate reranking with βrerank = 1 .0 and top-k = 10 lidar pose estimation. Particle filter KLD-adaptive MCL with 1500-particle cap and 200-particle floor; motion noise 
+
+(0 .05 , 0.02 , 0.02 , 0.01) ; laser σhit = 0 .30 mVLM gemini-3-flash-preview (Temp: 0.3) Pose estimate Dominant DBSCAN-weighted particle mode over position and circular heading 
+
+# B Runtime and Latency Profiling 
+
+Table 5: Runtime summary. Cached particle filter (PF) Hz excludes live VLM annotation. Live annotation uses a semantic interval of 5 for both domains to estimate practical online Hz. 
+
+Domain Cached PF Hz Live VLM Mean Latency Est. Online Hz Lab 8.64 23.44 s 0.21 Grocery 44.27 5.36 s 0.91 
+
+# C Dominant-Mode Pose Estimate 
+
+The posterior of the particle filter can remain multi-modal. We therefore do not estimate pose by a global weighted mean over all particles. Instead, we cluster high-weight particles with DBSCAN over position and circular heading features and return the dominant weighted mode. This better matches the localization problem: the robot should report one coherent pose hypothesis, not the average of two different aisles or two mirrored lab regions. 11 D Online Localization Algorithm 
+
+Algorithm 1 VLM-GLoc Online Localization 
+
+Require: semantic map M, particles {x(n), w (n)},odometry ut, image It, range zt
+
+1: Propagate particles with odometry motion model p(xt|xt−1, u t)
+
+2: if semantic frame is available then 
+
+3: Tt ← VLMAnnotation( It)
+
+4: et ← TextEncoder( Tt)
+
+5: if not initialized then 
+
+6: Ht ← TopK pi∈M cos( et, ei)
+
+7: Seed a fraction of particles from q(xt|It) around Ht
+
+8: end if 
+
+9: Reweight particles by Lsem (It|xt)αt
+
+10: end if 
+
+11: if range observation is available then 
+
+12: Reweight or rerank particles by Lrange (zt|xt)βt
+
+13: end if 
+
+14: Normalize weights 15: Resample when effective particle count is low 16: ˆxt ← dominant DBSCAN weighted mode 17: return ˆxt
+
+# E Convergence Sensitivity Analysis 
+
+As discussed in Section 6, the strict π/ 4 rotation threshold occasionally penalizes valid localizations where particles observe the exact same semantic and range targets from mirrored viewpoints (a common occurrence in parallel grocery aisles). Table 6 demonstrates that when evaluating purely on translation, or when slightly relaxing the strict spatial threshold, VLM-GLoc’s success rate climbs significantly, whereas baselines fail to see similar improvements. Table 6: Sensitivity of grocery store localization and tracking success to relaxed spatial thresholds (0.7 m / 0.8 m / 0.9 m). The heading threshold is fixed at π/ 4 rad for Joint metrics. Table 2 shows results corresponding to the highlighted numbers and threshold. 
+
+Method Translation-Only (%) Joint Translation + Rotation (%) Global Success % Tracking Success % Global Success % Tracking Success % AMCL 30 / 30 / 30 10 / 15 / 15 20 / 20 / 20 5 / 10 / 10 FCS-MCL 35 / 35 / 35 20 / 30 / 30 30 / 30 / 30 25 / 25 / 25 VLM-GLoc 85 / 90 / 95 70 / 75 / 80 70 / 75 / 80 65 / 70 / 70 
+
+# F Ground Truth Acquisition Details 
+
+To establish ground truth, we initially evaluated a ceiling-mounted AprilTag constellation in the lab domain. However, disagreements among simultaneously visible tags produced systematic pose un-certainties on the order of 0.75 m, which is too high for rigorous evaluation. Furthermore, deploying such physical infrastructure in the public grocery store was logistically infeasible. Therefore, we utilized the offline map-aligned SLAM reference trajectories described in Section 5, which provided a highly accurate and consistent baseline across both domains without requiring physical environ-mental modifications. 12 G Rich VLM Description Examples 
+
+Table 7: Qualitative comparison between generic object classes and VLM-GLoc’s tagged, open-vocabulary descriptions. [Dynamic] [Blurry] objects are filtered before map/query embedding so they are not present in the following. 
+
+Domain Generic Object Class VLM Rich Description 
+
+Lab Chair [Quasi-Static] black mesh office chair with orange fabric seat cushion and wheels. Lab Cabinet [Quasi-Static] yellow metal JUSTRITE flammables storage cabi-net with warning labels. Lab Door [Static] light-brown wooden door with rectangular glass panel, sil-ver handle, and metal kick plate. Lab Whiteboard [Static] large whiteboard with checkerboard AprilTag markers and handwritten VLA notes. Lab Robot [Quasi-Static] white-blue mobile robot base beside a red robotic arm, blue cables. Grocery Lentils Swad Yellow Vatana (Peas), Swad, Lentils. Grocery Condiment Mother’s Recipe Mango Pickle, Mother’s Recipe, Condiments. Grocery Oil Jiva Organic Mustard Oil, Jiva, Oil. Grocery Spice MDH Pav Bhaji Masala, MDH, Spices. 
+
+13 H High-Similarity Description Pairs 
+
+Table 8: VLM description pairs from held-out lab queries and the semantic text map. The top rows are good semantic matches; rows below the separator are weaker/confusable pairs that share generic object classes but differ in fine-grained attributes or scene context. Similarity is cosine score from the lab LoRA encoder. For grocery product descriptions, blurry/unreadable and dynamic detections are filtered before embedding. 
+
+Query description excerpt Raycasted map description excerpt Sim. 
+
+[Quasi-Static] red fabric banner with white text WE DO THIS NOT BECAUSE IT IS EASY ; [Quasi-Static] yellow metal cabinet with JUSTRITE and FLAMMABLES la-bels; gray rolling cabinet . 
+
+[Quasi-Static] red fabric banner with matching white text; [Quasi-Static] yellow safety cabinet with FLAMMABLES KEEP FIRE AWAY ; nearby wall signs and wooden door . 0.813 
+
+[Static] brown wooden double doors with glass panels; [Quasi-Static] black refrig-erator with papers; [Quasi-Static] white emergency cabinet ; yellow cabinet . 
+
+[Quasi-Static] yellow flammables storage cabinet with warning labels; red banner; 
+
+[Static] light-brown door with metal kick plate; blue wall fixtures. 0.782 
+
+[Quasi-Static] tan plywood crate with latch; silver wire shelving; cardboard sheets; gray industrial cabinet ; [Static] light-brown door . 
+
+[Static] light-brown door with glass win-dow; [Quasi-Static] gray storage cabinet ; blue recycling bin; black storage bin; white-board/storage area. 0.768 Weaker pairs sharing generic object classes 
+
+[Static] light-brown wood-grain door with silver kick plate; dark metal door frame; 
+
+[Quasi-Static] cubicle partition and gray storage cabinet . 
+
+[Static] brown wooden door with blue-white sign; [Static] orange wooden door ; 
+
+[Static] fire-extinguisher cabinet ; repeated wall boards. 0.605 
+
+[Quasi-Static] wood and metal workbench ; gray storage cabinet ; red/yellow storage bins; black fabric office chair ; back-pack; fire-extinguisher cabinet . 
+
+[Quasi-Static] black monitor on aworkbench ; computer tower; gray storage cabinets ; black padded rolling stool ; yellow storage bin. 0.526 
+
+[Quasi-Static] large monitor on desk; gray cubicle desk; blue chair ; black computer tower; cardboard boxes; trash bin. 
+
+[Quasi-Static] black mesh chair with or-ange seat; gray storage cabinet ; black framed monitor ; wood desk edge; repeated worksta-tion objects. 0.430 
+
+# I Gemini Annotation Prompts 
+
+14 Lab / office object annotation prompt. 
+
+Detect all distinct objects in this lab/office image. For each object, provide: 1. A bounding box [ymin, xmin, ymax, xmax] in normalized 0-1000 coordinates 2. A SHORT label (5-15 words max): color + material + object type. Include any readable text. 3. Permanence: [S]=structural, [QS]=quasi-static furniture/equipment, [D]=dynamic people 4. Confidence (0.0-1.0): how certain you are this is a real, distinct object (not blur/shadow/artifact) Return as JSON array: [{"box": [y1, x1, y2, x2], "label": "brief identity", "perm": "S/QS/D", "conf": 0.9}] Rules: - Do NOT include position in image (left, right, foreground) - Do NOT include spatial relationships to other objects - Do NOT detect plain floor or plain ceiling - DO detect: walls with signs/text, distinctive fixtures, furniture, equipment, signs, monitors - Be SPECIFIC: not "chair" but "black mesh office chair with orange cushion" - Read and include any visible TEXT on signs, labels, room numbers - Ignore motion blur artifacts and infrared dot patterns; only detect clearly visible objects - conf should be LOW for blurry/unclear objects 
+
+Grocery product-crop annotation prompt. 
+
+You are analyzing a grid of {n} product images detected on shelves in an Indian grocery store. Each image is labeled with an ID (C0, C1, etc.) and is a crop from a shelf detector. For EACH product crop, identify it and provide: {"id": "C0", "product_name": "specific product name (brand + product if readable)", "brand": "brand name if visible, else null", "category": "e.g., Spices, Lentils, Beverages, Snacks, Oil, Tea, Rice, Flour, Condiments, Sweets, Frozen, Dairy, Personal Care, Household", "is_blurry": true or false }Rules: - Be specific: say "MDH Chana Masala" not just "spice". Say "Laxmi Moong Dal" not just "lentils". - If the crop is too blurry to identify the product, set is_blurry to true and still fill your best guess. - If there are NO identifiable products (e.g., empty shelf, wall, floor, ceiling), return: {"products": [], "suitable_for_localization": false} - Otherwise set "suitable_for_localization": true Return ONLY valid JSON with a "products" array and "suitable_for_localization" boolean. No markdown fences. 
+
+Figure 6: Gemini prompts used for VLM annotation in the lab and grocery domains. The lab prompt operates on full RGB frames and requests object boxes, rich labels, permanence tags, and confidence. The grocery prompt operates on YOLO-detected product crop grids and requests prod-uct identity, category, and blur filtering metadata. 15
