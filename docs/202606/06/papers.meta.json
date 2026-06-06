@@ -1,0 +1,54 @@
+{
+  "label": "2026-06-06",
+  "date": "2026-06-06",
+  "generated_at": "2026-06-06T21:20:04",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202606/06/2606.02871v1-adaptive-latent-agentic-reasoning",
+      "section": "quick",
+      "title_en": "Adaptive Latent Agentic Reasoning",
+      "authors": "Dongwon Jung, Peng Shi, Yi Zhang, Junshan Zhang, Muhao Chen",
+      "date": "2026-06-01",
+      "pdf": "https://arxiv.org/pdf/2606.02871v1",
+      "score": "7.0",
+      "evidence": "自适应潜在推理提升智能体效率，属于自我改进技术",
+      "tldr": "当前LLM agent在多轮决策中每步生成冗长的链式推理，且推理投入近乎均匀，导致效率低下。本文提出自适应潜在智能推理（ALAR），采用双模式框架：对常规步骤使用紧凑的潜在推理，仅在需要深入思考时切换为显式链式推理。ALAR以行动作为监督学习潜在推理，并优化决策何时使用哪种模式。在搜索和工具使用基准测试上，ALAR在保持或提升任务准确率的同时，分别减少高达43.6%和84.6%的生成token，显著改善了准确率-效率权衡。",
+      "tags": "query:self-improve",
+      "abstract_en": "Large reasoning models improve performance by generating extended chain-of-thought (CoT) reasoning, but this behavior becomes inefficient when applied to LLM agents. Current LLM agents often generate verbose textual reasoning at every decision step and allocate reasoning effort nearly uniformly across turns, leading to substantial inefficiency in multi-turn agentic trajectories. We propose Adaptive Latent Agentic Reasoning (ALAR), a dual-mode framework that uses compact latent reasoning for routine turns and selectively escalates to explicit chain-of-thought when deeper deliberation is needed. ALAR learns latent reasoning by using the agent's actions as supervision anchors and is further optimized to use latent reasoning when it is sufficient for task success and reserve explicit CoT for harder decisions. Experiments on agentic search and tool-use benchmarks show that ALAR maintains comparable or better task accuracy while substantially reducing generated tokens by up to 43.6% in search and 84.6% in tool use. These results demonstrate that ALAR improves the accuracy-efficiency trade-off of LLM agents by reducing unnecessary textual reasoning while preserving explicit deliberation for harder decision steps.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/06/biorxiv-10-64898-2026-06-03-729991-v1-predictive-learning-induces-bayesian-cognitive-maps-in-the-hippocampus",
+      "section": "quick",
+      "title_en": "Predictive learning induces Bayesian cognitive maps in the hippocampus",
+      "authors": "Kim, Y., Kang, Y. H.",
+      "date": "2026-06-05",
+      "pdf": "https://www.biorxiv.org/content/10.64898/2026.06.03.729991v1.full.pdf",
+      "score": "7.0",
+      "evidence": "通过贝叶斯推理进行世界模型中的感知与检测",
+      "tldr": "经典空间表征模型忽视感知不确定性，假设位置直接可观测。本文引入贝叶斯理想观察者，发现其对位置的信念更准确复现位置细胞活动特性。通过预测下一时刻自我中心输入的循环神经网络，学习到类似贝叶斯信念的表征，在熟悉与陌生环境均产生位置细胞样活动。结果表明海马回路可能通过预测性学习从经验中构建贝叶斯认知地图。",
+      "tags": "query:agent-detect",
+      "abstract_en": "Navigation requires perception: location must be inferred from noisy and ambiguous egocentric sensory inputs, as in visual estimation of distance. However, many classical models of spatial representation implicitly assume that allocentric location is directly observable, thereby neglecting perceptual uncertainty. Here, we compare such a model with a Bayesian ideal observer that explicitly incorporates perceptual inference. We find that the Bayesian observer's beliefs over location more accurately reproduce key properties of place cell activity, including place field width, area, and density, within and across environments. Using analytic arguments and numerical simulations, we show that recurrent neural networks trained to predict the next egocentric sensory input learn representations resembling Bayesian beliefs and yield place cell-like activity in both familiar and unfamiliar environments, outperforming autoencoders trained to reproduce the current input. Together, these results suggest that hippocampal circuits may construct Bayesian cognitive maps from experience through predictive perceptual learning.",
+      "source": "biorxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/06/2606.05342v1-sentinelbench-a-benchmark-for-long-running-monitoring-agents",
+      "section": "quick",
+      "title_en": "SentinelBench: A Benchmark for Long-Running Monitoring Agents",
+      "authors": "Matheus Kunzler Maldaner, Adam Fourney, Amanda Swearngin, Hussein Mozzanar, Gagan Bansal, Maya Murad, Rafah Hosn, Saleema Amershi",
+      "date": "2026-06-03",
+      "pdf": "https://arxiv.org/pdf/2606.05342v1",
+      "score": "6.0",
+      "evidence": "用于检测环境中事件的长时监测智能体基准",
+      "tldr": "现有AI代理默认持续行动，不适合需长时间监控的任务。SentinelBench提出基准，包含100个在10个合成网页环境中的时间演化监控任务，要求代理在状态变化时及时响应。实验表明，不同代理设计在任务完成、反应时间和资源使用上有显著差异。该基准为长时间监控代理的评估提供了标准化框架。",
+      "tags": "query:agent-detect",
+      "abstract_en": "AI agents are increasingly asked to carry out work that spans minutes, hours, or longer. Yet the default model of agent behavior is continuous action: issuing tool calls, refreshing pages, searching for alternatives, or otherwise trying to force progress. This is the wrong approach for many long-running tasks, which are better served by a strategy of sustained attention. Instead, agents should monitor an environment, notice when an external event makes progress possible, then respond promptly without wasting resources while waiting. To measure progress on this class of tasks, we introduce SentinelBench, an open-source benchmark for time-evolving monitoring tasks.   SentinelBench contains 100 tasks across 10 synthetic web environments, including email, calendars, finance, professional networking, and entertainment. Each environment exposes a live web interface and replays a scripted sequence of events, requiring agents to navigate and reason about web pages whose state shifts underfoot. SentinelBench measures task completion, reaction time, and resource use, exposing the tradeoff between responsiveness and cost. We report results across three models and two browser-agent harnesses, establishing performance baselines for future comparison and demonstrating how agent design choices can dramatically impact key metrics. Together, these results show that SentinelBench distinguishes meaningful differences in agent behavior.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

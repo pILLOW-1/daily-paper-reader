@@ -1,0 +1,139 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-06T21:18:48.256516+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 0,
+    "deep_cap": 7,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 12,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2606.02871v1",
+      "source": "arxiv",
+      "title": "Adaptive Latent Agentic Reasoning",
+      "abstract": "Large reasoning models improve performance by generating extended chain-of-thought (CoT) reasoning, but this behavior becomes inefficient when applied to LLM agents. Current LLM agents often generate verbose textual reasoning at every decision step and allocate reasoning effort nearly uniformly across turns, leading to substantial inefficiency in multi-turn agentic trajectories. We propose Adaptive Latent Agentic Reasoning (ALAR), a dual-mode framework that uses compact latent reasoning for routine turns and selectively escalates to explicit chain-of-thought when deeper deliberation is needed. ALAR learns latent reasoning by using the agent's actions as supervision anchors and is further optimized to use latent reasoning when it is sufficient for task success and reserve explicit CoT for harder decisions. Experiments on agentic search and tool-use benchmarks show that ALAR maintains comparable or better task accuracy while substantially reducing generated tokens by up to 43.6% in search and 84.6% in tool use. These results demonstrate that ALAR improves the accuracy-efficiency trade-off of LLM agents by reducing unnecessary textual reasoning while preserving explicit deliberation for harder decision steps.",
+      "authors": [
+        "Dongwon Jung",
+        "Peng Shi",
+        "Yi Zhang",
+        "Junshan Zhang",
+        "Muhao Chen"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-06-01T20:36:06+00:00",
+      "link": "https://arxiv.org/pdf/2606.02871v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "adaptive latent reasoning for efficient agent self-improvement",
+      "llm_evidence_cn": "自适应潜在推理提升智能体效率，属于自我改进技术",
+      "llm_evidence": "自适应潜在推理提升智能体效率，属于自我改进技术",
+      "canonical_evidence": "自适应潜在推理提升智能体效率，属于自我改进技术",
+      "llm_tldr_en": "ALAR enables agents to use compact latent reasoning for routine turns and escalate to explicit CoT when needed, improving efficiency.",
+      "llm_tldr_cn": "本文提出ALAR框架，使LLM智能体在常规回合使用紧凑的潜在推理，在需要深度思考时选择性地切换为显式链式推理。该方法通过动作监督学习潜在推理，并优化推理分配策略。实验表明，ALAR显著降低了多轮轨迹中的计算开销，同时保持任务性能，为智能体自我改进提供了高效方案。",
+      "llm_tldr": "本文提出ALAR框架，使LLM智能体在常规回合使用紧凑的潜在推理，在需要深度思考时选择性地切换为显式链式推理。该方法通过动作监督学习潜在推理，并优化推理分配策略。实验表明，ALAR显著降低了多轮轨迹中的计算开销，同时保持任务性能，为智能体自我改进提供了高效方案。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.05342v1",
+      "source": "arxiv",
+      "title": "SentinelBench: A Benchmark for Long-Running Monitoring Agents",
+      "abstract": "AI agents are increasingly asked to carry out work that spans minutes, hours, or longer. Yet the default model of agent behavior is continuous action: issuing tool calls, refreshing pages, searching for alternatives, or otherwise trying to force progress. This is the wrong approach for many long-running tasks, which are better served by a strategy of sustained attention. Instead, agents should monitor an environment, notice when an external event makes progress possible, then respond promptly without wasting resources while waiting. To measure progress on this class of tasks, we introduce SentinelBench, an open-source benchmark for time-evolving monitoring tasks.   SentinelBench contains 100 tasks across 10 synthetic web environments, including email, calendars, finance, professional networking, and entertainment. Each environment exposes a live web interface and replays a scripted sequence of events, requiring agents to navigate and reason about web pages whose state shifts underfoot. SentinelBench measures task completion, reaction time, and resource use, exposing the tradeoff between responsiveness and cost. We report results across three models and two browser-agent harnesses, establishing performance baselines for future comparison and demonstrating how agent design choices can dramatically impact key metrics. Together, these results show that SentinelBench distinguishes meaningful differences in agent behavior.",
+      "authors": [
+        "Matheus Kunzler Maldaner",
+        "Adam Fourney",
+        "Amanda Swearngin",
+        "Hussein Mozzanar",
+        "Gagan Bansal",
+        "Maya Murad",
+        "Rafah Hosn",
+        "Saleema Amershi"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-03T18:32:00+00:00",
+      "link": "https://arxiv.org/pdf/2606.05342v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "benchmark for monitoring agents that detect events in environments",
+      "llm_evidence_cn": "用于检测环境中事件的长时监测智能体基准",
+      "llm_evidence": "用于检测环境中事件的长时监测智能体基准",
+      "canonical_evidence": "用于检测环境中事件的长时监测智能体基准",
+      "llm_tldr_en": "SentinelBench provides 100 monitoring tasks across 10 web environments to evaluate agent event detection and response.",
+      "llm_tldr_cn": "本文提出SentinelBench基准，用于评估长时运行智能体在动态环境中检测事件并做出响应的能力。包含100个任务，涵盖邮箱、日历等10个合成网络环境。该基准强调智能体应持续感知环境而非盲目行动，为智能体检测和感知模块研究提供标准化评估平台。",
+      "llm_tldr": "本文提出SentinelBench基准，用于评估长时运行智能体在动态环境中检测事件并做出响应的能力。包含100个任务，涵盖邮箱、日历等10个合成网络环境。该基准强调智能体应持续感知环境而非盲目行动，为智能体检测和感知模块研究提供标准化评估平台。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-06-03-729991-v1",
+      "source": "biorxiv",
+      "title": "Predictive learning induces Bayesian cognitive maps in the hippocampus",
+      "abstract": "Navigation requires perception: location must be inferred from noisy and ambiguous egocentric sensory inputs, as in visual estimation of distance. However, many classical models of spatial representation implicitly assume that allocentric location is directly observable, thereby neglecting perceptual uncertainty. Here, we compare such a model with a Bayesian ideal observer that explicitly incorporates perceptual inference. We find that the Bayesian observer's beliefs over location more accurately reproduce key properties of place cell activity, including place field width, area, and density, within and across environments. Using analytic arguments and numerical simulations, we show that recurrent neural networks trained to predict the next egocentric sensory input learn representations resembling Bayesian beliefs and yield place cell-like activity in both familiar and unfamiliar environments, outperforming autoencoders trained to reproduce the current input. Together, these results suggest that hippocampal circuits may construct Bayesian cognitive maps from experience through predictive perceptual learning.",
+      "authors": [
+        "Kim, Y.",
+        "Kang, Y. H."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-06-05T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.06.03.729991v1.full.pdf",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "perception and detection in world model via Bayesian inference",
+      "llm_evidence_cn": "通过贝叶斯推理进行世界模型中的感知与检测",
+      "llm_evidence": "通过贝叶斯推理进行世界模型中的感知与检测",
+      "canonical_evidence": "通过贝叶斯推理进行世界模型中的感知与检测",
+      "llm_tldr_en": "Predictive learning induces Bayesian cognitive maps in hippocampus, showing perception and detection play a key role in world model construction.",
+      "llm_tldr_cn": "导航中感知不确定性常被忽略，该研究通过贝叶斯理想观察者模型揭示，海马体位置细胞活动模式与贝叶斯推断一致。训练递归神经网络预测下一帧自我中心感官输入，能自然形成类似认知地图的表示。工作表明感知与检测模块是世界模型构建的核心，对智能体架构设计有重要启示。",
+      "llm_tldr": "导航中感知不确定性常被忽略，该研究通过贝叶斯理想观察者模型揭示，海马体位置细胞活动模式与贝叶斯推断一致。训练递归神经网络预测下一帧自我中心感官输入，能自然形成类似认知地图的表示。工作表明感知与检测模块是世界模型构建的核心，对智能体架构设计有重要启示。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
