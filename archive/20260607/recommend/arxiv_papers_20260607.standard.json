@@ -1,0 +1,421 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-07T20:17:31.612143+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 6,
+    "deep_cap": 7,
+    "deep_selected": 6,
+    "quick_candidates": 4,
+    "quick_skim_target": 12,
+    "quick_selected": 4
+  },
+  "deep_dive": [
+    {
+      "id": "2606.01640v1",
+      "source": "arxiv",
+      "title": "MobEvolve: An Agentic Self-Evolving Heuristic System for Interpretable Human Mobility Generation",
+      "abstract": "Human mobility generation aims to synthesize realistic trip chains for target populations based on individual features. Existing paradigms, including deep generative models, LLM-based methods, and traditional heuristics, struggle to satisfy the complex demands of this task while simultaneously maintaining interpretability, behavioral plausibility, population-level distributional alignment, and inference efficiency. To bridge this gap, we introduce MobEvolve, the first agentic self-evolving heuristic framework for human mobility generation. MobEvolve initializes a behavior-inspired heuristic system and employs an LLM agent to iteratively evolve its internal logic. By diagnosing empirical misalignments and failure cases on a validation set, the agent proposes targeted updates and accumulates evolution memory for cumulative self-improvement. Extensive evaluations on the Singapore and Montreal benchmarks demonstrate that MobEvolve significantly outperforms state-of-the-art deep generative and LLM-based methods in individual trajectory fidelity, population-level distribution alignment, and behavioral plausibility, while preserving interpretability and high inference efficiency.",
+      "authors": [
+        "Junlin He",
+        "Yihong Tang",
+        "Tong Nie",
+        "Ao Qu",
+        "Yuebing Liang",
+        "Hamzeh Alizadeh",
+        "Bang Liu",
+        "Wei Ma",
+        "Lijun Sun"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-06-01T03:46:25+00:00",
+      "link": "https://arxiv.org/pdf/2606.01640v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "agentic self-evolving heuristic framework",
+      "llm_evidence_cn": "智能体自我进化启发式框架",
+      "llm_evidence": "智能体自我进化启发式框架",
+      "canonical_evidence": "智能体自我进化启发式框架",
+      "llm_tldr_en": "MobEvolve uses an LLM agent to iteratively evolve a heuristic system for human mobility generation, achieving interpretability and distributional alignment.",
+      "llm_tldr_cn": "现有的人类移动生成方法在可解释性、行为合理性和群体分布对齐方面存在不足。MobEvolve提出首个智能体自我进化启发式框架，通过LLM智能体迭代诊断偏差并进化内部逻辑，生成真实轨迹。实验表明该方法在保持可解释性的同时显著提升了生成质量，为智能体自我改进提供了新范式。",
+      "llm_tldr": "现有的人类移动生成方法在可解释性、行为合理性和群体分布对齐方面存在不足。MobEvolve提出首个智能体自我进化启发式框架，通过LLM智能体迭代诊断偏差并进化内部逻辑，生成真实轨迹。实验表明该方法在保持可解释性的同时显著提升了生成质量，为智能体自我改进提供了新范式。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.04465v1",
+      "source": "arxiv",
+      "title": "SePO: Self-Evolving Prompt Agent for System Prompt Optimization",
+      "abstract": "System prompt optimization improves agent behavior without modifying the underlying model, yielding human-readable, model-agnostic instructions. Existing methods build a prompt agent that refines task agents' system prompts, yet leave the prompt agent's own system prompt hand-engineered and fixed. We propose Self-Evolving Prompt Optimization (SePO), which treats the prompt agent's own system prompt as an optimization target alongside task agents' system prompts. SePO adopts a self-referential design. A single prompt agent improves both task agents' system prompts and its own under an open-ended evolutionary search that maintains an archive of candidate prompts as stepping stones. Training proceeds in two stages: pre-training evolves the prompt agent on a multi-task pool, and fine-tuning then applies it to a target task. Across five benchmarks spanning math (AIME'25), abstract reasoning (ARC-AGI-1), graduate-level science (GPQA), code generation (MBPP), and logic puzzles (Sudoku), SePO consistently outperforms Manual-CoT, TextGrad, and MetaSPO, improving the average accuracy by 4.49 points compared to Manual-CoT. The prompt optimization skill from pre-training also generalizes to tasks beyond the pre-training mixture, rather than memorizing per-task prompts.",
+      "authors": [
+        "Wangcheng Tao",
+        "Han Wu",
+        "Weng-Fai Wong"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-06-03T05:20:30+00:00",
+      "link": "https://arxiv.org/pdf/2606.04465v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-referential evolution for prompt agent's own system prompt",
+      "llm_evidence_cn": "提示智能体自身系统提示的自我参照进化",
+      "llm_evidence": "提示智能体自身系统提示的自我参照进化",
+      "canonical_evidence": "提示智能体自身系统提示的自我参照进化",
+      "llm_tldr_en": "SePO treats the prompt agent's own system prompt as an optimization target alongside task agents' prompts, using self-referential evolutionary search to achieve recursive self-improvement.",
+      "llm_tldr_cn": "现有系统提示优化方法将提示智能体的自身提示固定不变。本文提出SePO，采用自我参照设计，让同一个提示智能体同时优化任务智能体的系统提示和自身的系统提示。通过开放式的进化搜索维护候选提示档案库，两阶段训练实现提示智能体的自我进化。该方法实现了递归式自我改进，在多个任务上提升了智能体行为。",
+      "llm_tldr": "现有系统提示优化方法将提示智能体的自身提示固定不变。本文提出SePO，采用自我参照设计，让同一个提示智能体同时优化任务智能体的系统提示和自身的系统提示。通过开放式的进化搜索维护候选提示档案库，两阶段训练实现提示智能体的自我进化。该方法实现了递归式自我改进，在多个任务上提升了智能体行为。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "recursive self-improvement methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.06324v1",
+      "source": "arxiv",
+      "title": "From Failed Trajectories to Reliable LLM Agents: Diagnosing and Repairing Harness Flaws",
+      "abstract": "LLM-based agents increasingly rely on harnesses that provide execution environments, tool interfaces, context, lifecycle orchestration, observability, verification, and governance. Existing self-improving agents and automatic harness evolution methods mainly improve agents through runtime supervision, prompt optimization, workflow search, or harness modification based on final outcomes. However, they often fail to diagnose where the responsible evidence lies in failed trajectories and which harness layer causes the unreliable behavior, resulting in broad, indirect, or poorly scoped changes. This paper proposes HarnessFix, a trace-guided framework for diagnosing agent failures and repairing agent harnesses. HarnessFix compiles raw execution traces and harness code into a Harness-aware Trace Intermediate Representation (HTIR), which normalizes fragmented trajectory evidence and captures step-level provenance and control-flow relations. It then attributes failures to responsible trajectory steps and harness layers, consolidates recurring diagnoses into actionable flaw records, and maps them to scoped repair operators. Finally, HarnessFix generates and validates harness patches under flaw-specific repair specifications to reduce target flaws without introducing unacceptable regressions. We evaluate HarnessFix on SWE-Bench Verified, Terminal-Bench 2.0 Verified, GAIA and AppWorld. Across these benchmarks, HarnessFix improves held-out test performance over the initial harnesses by 15.2%--50.0%, outperforms human-designed and self-evolution baselines, and reveals recurring harness-flaw patterns across ETCLOVG layers.",
+      "authors": [
+        "Mengzhuo Chen",
+        "Junjie Wang",
+        "Zhe Liu",
+        "Yawen Wang",
+        "Qing Wang"
+      ],
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE",
+        "cs.MA"
+      ],
+      "published": "2026-06-04T15:58:30+00:00",
+      "link": "https://arxiv.org/pdf/2606.06324v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-improving agents via failure diagnosis and harness repair",
+      "llm_evidence_cn": "通过失败诊断和框架修复实现智能体自我改进",
+      "llm_evidence": "通过失败诊断和框架修复实现智能体自我改进",
+      "canonical_evidence": "通过失败诊断和框架修复实现智能体自我改进",
+      "llm_tldr_en": "HarnessFix diagnoses agent failures by tracing execution and repairs harness layers, enabling effective self-improvement for LLM agents.",
+      "llm_tldr_cn": "现有自我改进智能体往往无法精确定位失败原因，导致改进范围过大或效果不佳。本文提出HarnessFix框架，通过跟踪执行轨迹诊断智能体失败，并定位到具体的框架层进行修复。实验表明该方法能有效提升智能体可靠性。该工作为智能体自我改进提供了一种精确的原因诊断与修复机制，具有通用性。",
+      "llm_tldr": "现有自我改进智能体往往无法精确定位失败原因，导致改进范围过大或效果不佳。本文提出HarnessFix框架，通过跟踪执行轨迹诊断智能体失败，并定位到具体的框架层进行修复。实验表明该方法能有效提升智能体可靠性。该工作为智能体自我改进提供了一种精确的原因诊断与修复机制，具有通用性。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.03236v1",
+      "source": "arxiv",
+      "title": "Perceive Before Reasoning: A Pre-Reasoning Perception Framework for Efficient and Reliable Proactive Mobile Agents",
+      "abstract": "Multimodal large language models (MLLMs) have substantially advanced mobile agents, yet proactive mobile assistance remains challenging because agents must decide \\emph{when} to intervene before determining \\emph{how} to assist. Existing systems often implement these two decisions within a unified MLLM-based pipeline, leading to goal misalignment between conservative intervention filtering and comprehensive assistance generation, as well as redundant inference when the agent should remain silent. To address these limitations, we propose the \\textbf{Pre-Reasoning Perception Framework (PRPF)}, a two-stage framework built on perceiving before reasoning. PRPF introduces a lightweight Multimodal Proactive Perceptor (MPP) for intervention gating and context compression, and activates the Proactive Agent Reasoner (PAR) only when intervention is warranted. Experiments on the ProactiveMobile benchmark show that PRPF substantially reduces false trigger rates (FTR) while improving success rates (SR) and inference efficiency over the ProactiveMobile baseline.",
+      "authors": [
+        "Zhijie Ding",
+        "Weinan Hong",
+        "Zicheng Zhu",
+        "Lei Li",
+        "Dezhi Kong",
+        "Hao Wang",
+        "Peng Zhou",
+        "Xuchu Jiang",
+        "Jiaming Xu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-02T06:54:02+00:00",
+      "link": "https://arxiv.org/pdf/2606.03236v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "perception modules in agent architectures for proactive mobile agents",
+      "llm_evidence_cn": "智能体架构中的感知模块，用于主动移动智能体",
+      "llm_evidence": "智能体架构中的感知模块，用于主动移动智能体",
+      "canonical_evidence": "智能体架构中的感知模块，用于主动移动智能体",
+      "llm_tldr_en": "PRPF introduces a lightweight perception module before reasoning, enabling efficient and reliable proactive mobile agent decisions.",
+      "llm_tldr_cn": "主动移动智能体需决定何时干预，现有系统将干预决策与协助生成合一，导致目标错配和冗余推理。本文提出预推理感知框架PRPF，先感知后推理：用轻量级多模态主动感知模块进行干预检测，再由MLLM生成协助。在多个移动任务上实现了更高效的干预时机选择。",
+      "llm_tldr": "主动移动智能体需决定何时干预，现有系统将干预决策与协助生成合一，导致目标错配和冗余推理。本文提出预推理感知框架PRPF，先感知后推理：用轻量级多模态主动感知模块进行干预检测，再由MLLM生成协助。在多个移动任务上实现了更高效的干预时机选择。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in agent architectures",
+      "matched_requirement_id": "req-15",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.01993v1",
+      "source": "arxiv",
+      "title": "MMG2Skill: Can Agents Distill In-the-Wild Guides into Self-Evolving Skills?",
+      "abstract": "Abundant procedural knowledge on the Web holds great potential for helping agents solve long-horizon tasks. However, such knowledge is often multimodal, heterogeneous, noisy, and implicitly assumes human executors, making it difficult to use directly as the skills required by agents. To bridge the gap between human-oriented guides and agent-executable skills, we formalize this problem as guide-to-skill learning: converting in-the-wild guides into executable skills and continuously improving them from trajectories observable to the agent. To evaluate the capability of existing agents on this task, we introduce MMG2Skill-Bench, the first benchmark designed for this problem. We further propose MMG2Skill, a closed-loop framework that compiles guides into editable skills, conditions a fixed vision-language model (VLM) agent on these skills during execution, and revises the skills from trajectory-level root-cause feedback without using benchmark scores. Across GUI control, open-ended gameplay, and strategic card play with six VLM backbones, MMG2Skill consistently outperforms vanilla baseline agents in every model-domain setting, achieving macro-average gains of +12.8 to +25.3 percentage points across backbones. Ablation studies show that directly prompting agents with raw guides can degrade performance, while both structured skill construction and trajectory-driven revision are necessary for the observed improvements. On success-inferable tasks, analyzer-based early stopping further prevents late-stage performance regressions and saves 25%-53% of attempts when the success signal is properly calibrated.",
+      "authors": [
+        "Xinyu Che",
+        "Junqi Xiong",
+        "Yunfei Ge",
+        "Xinping Lei",
+        "Shihao Li",
+        "Hang Yan",
+        "Han Li",
+        "Yuanxing Zhang",
+        "Zhiqi Bai",
+        "Jinhua Hao",
+        "Ming Sun",
+        "Han Li",
+        "Jiaheng Liu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-06-01T09:50:40+00:00",
+      "link": "https://arxiv.org/pdf/2606.01993v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Proposes a closed-loop framework for agents to distill in-the-wild guides into self-evolving skills",
+      "llm_evidence_cn": "提出闭环框架让智能体从野外指南中蒸馏出自我演化技能",
+      "llm_evidence": "提出闭环框架让智能体从野外指南中蒸馏出自我演化技能",
+      "canonical_evidence": "提出闭环框架让智能体从野外指南中蒸馏出自我演化技能",
+      "llm_tldr_en": "Introduces MMG2Skill, a closed-loop framework that compiles human-oriented procedural guides into executable skills and continuously improves them from agent trajectories, addressing guide-to-skill learning.",
+      "llm_tldr_cn": "网络上丰富的程序性知识难以直接用于智能体。本文形式化引导到技能的学习问题，提出MMG2Skill闭环框架：将人类指南编译为可执行技能，并从智能体可观察的轨迹中持续改进技能。还提出MMG2Skill-Bench基准。实验验证了该方法能有效提升智能体解决长时任务的能力，实现了技能的自我演化。",
+      "llm_tldr": "网络上丰富的程序性知识难以直接用于智能体。本文形式化引导到技能的学习问题，提出MMG2Skill闭环框架：将人类指南编译为可执行技能，并从智能体可观察的轨迹中持续改进技能。还提出MMG2Skill-Bench基准。实验验证了该方法能有效提升智能体解决长时任务的能力，实现了技能的自我演化。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.03544v1",
+      "source": "arxiv",
+      "title": "SAGE: A Quantitative Evaluation of Socialized Evolution in Agent Ecosystems",
+      "abstract": "Self-improving language agents are typically evaluated in isolation: an agent attempts a task, receives feedback, and iteratively refines its own behavior. Yet agents increasingly operate alongside peers whose strategies and outcomes are publicly visible. This raises an under-studied question: when does shared experience produce improvements that self-improvement alone cannot achieve? We introduce SAGE (Social Agent Group Evolution),an evaluation framework that compares two compute-matched conditions: SocialEvo, where agents from five distinct model families co-evolve with access to all peers' histories; and SelfEvo, where each agent receives the same number of task attempts but sees only its own past, which is conventional in self-improving agent studies. We instantiate SAGE in three arenas: open-ended ML research, long-horizon economic planning, and strategic multiplayer play, evaluated across multiple evolutionary rounds. We find that group history is not a universal amplifier: the strongest agent does not exceed its self-evolution ceiling. However, agents that plateau under self-improvement can achieve significant breakthroughs when peer experience is available. In competitive settings, counterfactual controls reveal that agents improve generally rather than developing opponent-specific strategies. Across different forms of shared history, filtered peer traces and reflective summaries often outperform raw logs, indicating that social gains depend on abstraction rather than exposure volume. These findings reveal that peer-history gains are agent-specific, arena-dependent, and contingent on the capacity to abstract transferable knowledge from public traces.",
+      "authors": [
+        "Linyue Pan",
+        "Yaoming Zhu",
+        "Lin Qiu",
+        "Xuezhi Cao",
+        "Xunliang Cai"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-06-02T12:08:38+00:00",
+      "link": "https://arxiv.org/pdf/2606.03544v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "evaluation of self-improving agents and social evolution",
+      "llm_evidence_cn": "自我改进智能体的评估与社交进化",
+      "llm_evidence": "自我改进智能体的评估与社交进化",
+      "canonical_evidence": "自我改进智能体的评估与社交进化",
+      "llm_tldr_en": "Introduces SAGE, a framework comparing social evolution (agents sharing histories) vs. self-evolution (isolated self-improvement) to quantify benefits of shared experience.",
+      "llm_tldr_cn": "自我改进智能体通常在隔离环境中评估，但现实中智能体间可观察彼此策略。本文提出SAGE评估框架，比较社交进化（五类模型共享历史）与自进化（仅见自身历史）两种条件。实验表明社交进化能带来自改进无法实现的性能提升，揭示了共享经验在智能体自我改进中的关键作用。",
+      "llm_tldr": "自我改进智能体通常在隔离环境中评估，但现实中智能体间可观察彼此策略。本文提出SAGE评估框架，比较社交进化（五类模型共享历史）与自进化（仅见自身历史）两种条件。实验表明社交进化能带来自改进无法实现的性能提升，揭示了共享经验在智能体自我改进中的关键作用。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.02536v1",
+      "source": "arxiv",
+      "title": "Tracking the Behavioral Trajectories of Adapting Agents",
+      "abstract": "Text files such as skill files, memory files, and behavioral configuration files play a central role in defining how modern agents act. Through edits by humans or the agents themselves, these files may evolve over time, directly steering the agent's behavior in future interactions. We present a methodology and framework for measuring agent $traits$ by defining traits as directions in the embedding space of a text embedding model. We train a linear model on labeled \"before\" versus \"after\" skill file diffs to learn a trait vector, then score arbitrary skill edits by projecting their embedding diffs onto this vector. Evaluated on 68 labeled skill diff pairs for the trait of propensity to seek sensitive data, our method achieves 91.2% sign classification accuracy and a Spearman rank correlation of $ρ= 0.82$ under leave-one-out cross-validation. We build this trait evaluation into a broader agent-to-agent protocol that enables one agent to evaluate another's skill file updates through a trusted intermediary.",
+      "authors": [
+        "Jonah Leshin",
+        "Manish Shah",
+        "Ian Timmis"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-01T17:40:31+00:00",
+      "link": "https://arxiv.org/pdf/2606.02536v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "measures behavioral traits from skill file edits, tracking agent adaptation",
+      "llm_evidence_cn": "通过技能文件编辑测量行为特质，追踪智能体适应过程",
+      "llm_evidence": "通过技能文件编辑测量行为特质，追踪智能体适应过程",
+      "canonical_evidence": "通过技能文件编辑测量行为特质，追踪智能体适应过程",
+      "llm_tldr_en": "Proposes a method to measure agent behavioral traits from skill file diffs, enabling tracking of self-improvement trajectories with 91.2% accuracy.",
+      "llm_tldr_cn": "现有自改进智能体缺乏对行为变化的量化评估。本文提出一种通过技能文件差异嵌入测量智能体特质的方法，训练线性模型学习特质向量，在68个标记样例上达到91.2%的分类准确率。该方法为监测自改进过程提供了可量化的分析工具，有助于理解智能体行为演化。",
+      "llm_tldr": "现有自改进智能体缺乏对行为变化的量化评估。本文提出一种通过技能文件差异嵌入测量智能体特质的方法，训练线性模型学习特质向量，在68个标记样例上达到91.2%的分类准确率。该方法为监测自改进过程提供了可量化的分析工具，有助于理解智能体行为演化。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "Methods for agent self improvement",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.05587v1",
+      "source": "arxiv",
+      "title": "HDST-GNN: Heterogeneous Dynamic Spatiotemporal Graph Neural Networks for Multi-Object Tracking in UAV Aerial Imagery",
+      "abstract": "Multi-object tracking (MOT) from UAV imagery presents unique challenges: altitude varies across sequences, objects are small and densely packed, and frequent occlusion causes identity switches. Existing graph-based trackers assume fixed spatial context and treat all objects uniformly, ignoring the heterogeneous lifecycle states of detections, active tracklets, and lost targets. We propose HDST-GNN, a Heterogeneous Dynamic Spatiotemporal Graph Neural Network with three novel contributions. First, Altitude-Adaptive Edge Construction estimates a camera-altitude proxy from mean object area and adjusts the graph connectivity radius accordingly. Second, Heterogeneous Node Representation models detections (Type-D), confirmed tracklets (Type-T), and lost tracklets (Type-L) as distinct node types with dedicated projections and typed edge relations. Third, Occlusion-Gated Temporal Aggregation gates each node's attention contribution by its occlusion confidence, preventing occluded nodes from corrupting neighbour embeddings. HDST-GNN is trained end-to-end with a differentiable Sinkhorn head using joint cross-entropy and triplet loss. On VisDrone2019-MOT with oracle detections, HDST-GNN achieves 94.51% MOTA and 97.24% IDF1, outperforming SORT by +5.0 MOTA points and reducing identity switches by 81%. With real YOLOv8n detections, HDST-GNN reduces identity switches by 49% vs. SORT. Ablation studies confirm the independent contribution of each component.",
+      "authors": [
+        "Phillip Jiang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-06-04T02:04:52+00:00",
+      "link": "https://arxiv.org/pdf/2606.05587v1",
+      "tags": [
+        "query:agent-detect"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "proposes detection-aware heterogeneous nodes for multi-object tracking, relevant to detection techniques for agents",
+      "llm_evidence_cn": "提出针对多目标跟踪的检测感知异质节点表示，与智能体检测技术相关",
+      "llm_evidence": "提出针对多目标跟踪的检测感知异质节点表示，与智能体检测技术相关",
+      "canonical_evidence": "提出针对多目标跟踪的检测感知异质节点表示，与智能体检测技术相关",
+      "llm_tldr_en": "HDST-GNN introduces heterogeneous node types for detections, tracklets, and lost targets, addressing detection lifecycle states in UAV multi-object tracking.",
+      "llm_tldr_cn": "该论文提出HDST-GNN，一种异质动态时空图神经网络，用于无人机航拍图像的多目标跟踪。现有图跟踪器将检测统一对待，忽略了检测、活动轨迹和丢失目标的不同生命周期状态。HDST-GNN通过异质节点表示显式建模这些状态，并设计了自适应边构建和动态图变换器。在多个数据集上的实验表明，该方法在身份切换和跟踪精度上显著优于基线。这项工作为智能体感知中的检测建模提供了新思路。",
+      "llm_tldr": "该论文提出HDST-GNN，一种异质动态时空图神经网络，用于无人机航拍图像的多目标跟踪。现有图跟踪器将检测统一对待，忽略了检测、活动轨迹和丢失目标的不同生命周期状态。HDST-GNN通过异质节点表示显式建模这些状态，并设计了自适应边构建和动态图变换器。在多个数据集上的实验表明，该方法在身份切换和跟踪精度上显著优于基线。这项工作为智能体感知中的检测建模提供了新思路。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.02862v1",
+      "source": "arxiv",
+      "title": "Toward a Modular Architecture for Embedded AI Agent Systems at the Edge",
+      "abstract": "The rise of Large Language Models (LLMs) has enabled agentic AI capable of complex reasoning and tool use; however, deploying such autonomy in pervasive computing environments remains challenging due to the strict memory and energy constraints of embedded microcontrollers. Existing frameworks typically assume server-class resources or continuous connectivity, leaving a gap for deeply embedded systems. This paper proposes a modular reference architecture for Embedded Agent Systems that bridges the divide between deterministic real-time control and agentic intelligence.   We introduce a tiered design that decouples On-Device Agents - executing highly compressed neural networks and rule-based logic for low-latency, privacy-critical tasks - from Cloud-Augmented Agents that leverage Small Language Models (SLMs) for higher-level reasoning and planning. A key contribution is the integration of a cross-cutting Governance Layer, ensuring observability, policy enforcement, and safety across distributed fleets of autonomous devices. Rather than presenting purely empirical benchmarks, we analyze architectural design principles and trade-offs regarding latency, energy, and reliable execution in resource-constrained environments.",
+      "authors": [
+        "Marcus Rüb",
+        "Michael Gerhards"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.MA"
+      ],
+      "published": "2026-06-01T20:24:18+00:00",
+      "link": "https://arxiv.org/pdf/2606.02862v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "modular architecture with on-device perception modules",
+      "llm_evidence_cn": "包含设备端感知模块的模块化架构",
+      "llm_evidence": "包含设备端感知模块的模块化架构",
+      "canonical_evidence": "包含设备端感知模块的模块化架构",
+      "llm_tldr_en": "Proposes a modular embedded agent architecture with on-device perception for low-latency detection tasks.",
+      "llm_tldr_cn": "在边缘设备部署自主智能体面临内存和能耗限制。该论文提出分层模块化参考架构，将设备端智能体（执行压缩神经网络和规则逻辑）与云端增强分离，设备端模块负责低延迟的感知和检测任务。该架构为构建具感知检测能力的嵌入式智能体系统提供了蓝图。",
+      "llm_tldr": "在边缘设备部署自主智能体面临内存和能耗限制。该论文提出分层模块化参考架构，将设备端智能体（执行压缩神经网络和规则逻辑）与云端增强分离，设备端模块负责低延迟的感知和检测任务。该架构为构建具感知检测能力的嵌入式智能体系统提供了蓝图。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in agent architectures",
+      "matched_requirement_id": "req-15",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.05872v1",
+      "source": "arxiv",
+      "title": "Entropy-Based Evaluation of AI Agents: A Lightweight Framework for Measuring Behavioral Patterns",
+      "abstract": "AI agents are commonly evaluated using task success, reward, latency, and cost. These metrics are useful, but they often miss important aspects of agent behavior: whether an agent explores too much, repeats itself too rigidly, uses tools effectively, reduces uncertainty over time, or remains robust across repeated runs. This paper proposes Entropy-Based Evaluation of AI Agents (EEA), a lightweight framework for measuring agent behavior through entropy. Rather than treating intelligence as only final task completion, EEA studies the structure of the agents decision process. The framework introduces action entropy, trajectory entropy, tool entropy, information gain, exploration efficiency, and robustness entropy. These metrics are intended to complement, not replace, traditional evaluation methods. We also present a practical Python implementation designed to integrate with agent frameworks such as LangChain, Google ADK, custom agent loops, and stored observability traces.",
+      "authors": [
+        "Olasimbo Ayodeji Arigbabu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-06-04T08:46:43+00:00",
+      "link": "https://arxiv.org/pdf/2606.05872v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "provides entropy-based evaluation metrics for agent behavior analysis, useful for self-improvement methods",
+      "llm_evidence_cn": "提出基于熵的代理行为评估指标，可用于自我改进方法",
+      "llm_evidence": "提出基于熵的代理行为评估指标，可用于自我改进方法",
+      "canonical_evidence": "提出基于熵的代理行为评估指标，可用于自我改进方法",
+      "llm_tldr_en": "Proposes EEA, a lightweight entropy-based framework for measuring AI agent behavioral patterns including action entropy and trajectory entropy, enabling better understanding of agent decision processes for improvement.",
+      "llm_tldr_cn": "当前代理评估侧重于任务成功率等指标，忽略了行为模式如探索过度或工具使用效率。本文提出基于熵的代理评估框架（EEA），引入动作熵、轨迹熵、工具熵等指标，系统分析代理决策过程的结构。实验表明这些指标能有效揭示代理行为差异。该框架为代理自我改进提供了细粒度的评估工具，有助于设计更高效的改进策略。",
+      "llm_tldr": "当前代理评估侧重于任务成功率等指标，忽略了行为模式如探索过度或工具使用效率。本文提出基于熵的代理评估框架（EEA），引入动作熵、轨迹熵、工具熵等指标，系统分析代理决策过程的结构。实验表明这些指标能有效揭示代理行为差异。该框架为代理自我改进提供了细粒度的评估工具，有助于设计更高效的改进策略。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "Methods for agent self improvement",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

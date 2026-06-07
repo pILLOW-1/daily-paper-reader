@@ -1,0 +1,526 @@
+Title: HDST-GNN: Heterogeneous Dynamic Spatiotemporal Graph Neural Networks for Multi-Object Tracking in UAV Aerial Imagery
+
+URL Source: https://arxiv.org/pdf/2606.05587v1
+
+Published Time: Fri, 05 Jun 2026 00:29:35 GMT
+
+Number of Pages: 19
+
+Markdown Content:
+# HDST-GNN: Heterogeneous Dynamic Spatiotemporal Graph Neural Networks for Multi-Object Tracking in UAV Aerial Imagery 
+
+## Phillip Jiang 1
+
+## June 5, 2026 
+
+> 1
+> arXiv:2606.05587v1 [cs.CV] 4 Jun 2026
+
+Affiliation: 1 Appsofa LLC; phillip.jiang@appsofa.com 
+
+Correspondence: phillip.jiang@appsofa.com Abstract: Multi-object tracking (MOT) from unmanned aerial vehicle (UAV) im-agery presents unique challenges: camera altitude varies across sequences, objects appear small and densely packed, and frequent occlusion causes identity switches. Ex-isting graph-based trackers assume a fixed spatial context and treat all tracked objects uniformly, ignoring the heterogeneous lifecycle states of detections, active tracklets, and temporarily lost targets. We propose HDST-GNN , a Heterogeneous Dynamic Spatiotemporal Graph Neural Network that addresses these limitations through three novel contributions. First, an Altitude-Adaptive Edge Construction scheme estimates a camera-altitude proxy from mean object area and adjusts the graph connectivity ra-dius accordingly, preventing over-connection at high altitude and under-connection at low altitude. Second, a Heterogeneous Node Representation models detections (Type-D), confirmed tracklets (Type-T), and lost tracklets (Type-L) as distinct node types with dedicated projections and five typed edge relations, enabling the network to learn separate matching semantics for each pairing. Third, an Occlusion-Gated Temporal Aggregation mechanism gates the attention contribution of each source node by its oc-clusion confidence φ, preventing heavily occluded or recently lost nodes from polluting their neighbours’ embeddings. HDST-GNN is trained end-to-end with a differentiable Sinkhorn assignment head using a joint binary cross-entropy and triplet loss. Exper-iments on VisDrone2019-MOT under an oracle-detection protocol demonstrate that HDST-GNN achieves 94.51% MOTA and 97.24% IDF1, outperforming the SORT baseline by +5.0 MOTA points and reducing identity switches by 81% (from 144 to only 28 per sequence on average). Under a realistic noisy-detection protocol, HDST-GNN reduces identity switches by 49% relative to SORT (638 vs. 1264), demonstrating robust re-identification via learned appearance features. Ablation studies confirm the independent contribution of each architectural component. 
+
+Keywords: multi-object tracking; graph neural networks; UAV imagery; VisDrone; heterogeneous graphs; re-identification; occlusion handling 
+
+# 1 Introduction 
+
+Unmanned aerial vehicles (UAVs) have become indispensable platforms for surveillance, search-and-rescue, traffic monitoring, and smart city applications [1, 2]. Multi-object tracking (MOT) from UAV imagery—localising and maintaining consistent identities for all objects of interest across video frames—is a prerequisite for downstream analysis. However, aerial MOT is substantially harder than ground-level tracking for several inter-connected reasons. 
+
+Altitude variation. Drone altitude changes dramatically within and across se-quences, causing object apparent size to vary by more than an order of magnitude. Al-gorithms that use a fixed spatial neighbourhood radius connect too many distant objects 2at low altitude and too few at high altitude, degrading graph-based matching quality. 
+
+Small object size and density. VisDrone2019-MOT sequences contain up to several hundred objects per frame [1], many smaller than 10 ×10 pixels. Rich appearance features are difficult to extract from such tiny crops, making spatial and motion context critical for disambiguation. 
+
+Frequent occlusion. UAV viewpoints create perspective occlusion and shadow ef-fects that cause objects to disappear temporarily. A tracker must re-identify re-appearing objects from limited appearance cues, using memory of their pre-occlusion trajectory and appearance. 
+
+Heterogeneous object states. At each frame, the tracking graph contains objects in qualitatively different states: newly detected objects with no history, confirmed tracklets with velocity estimates, and temporarily lost tracklets that may re-appear. Treating these uniformly in a homogeneous graph ignores their distinct matching semantics. Recent graph-based MOT methods such as MPNTrack [8], GNNMatch [9], and NOWA-MOT [14] model tracking as a graph optimisation problem and have shown strong results on pedestrian benchmarks. However, they share two structural limitations when applied to UAV imagery: (1) they use a fixed spatial radius for edge construction, and (2) they represent all tracked objects with a single node type, conflating detections, active track-lets, and lost tracklets. We address both limitations with HDST-GNN , a Heterogeneous Dynamic Spa-tiotemporal Graph Neural Network. Our three novel contributions are: 
+
+C1 Altitude-Adaptive Edge Construction. We estimate a camera-altitude proxy ˆz from the mean object area and compute an effective connection radius reff =
+
+r0 exp( −β ˆz) that contracts at high altitude and expands near the ground. 
+
+C2 Heterogeneous Node and Edge Types. Detections (Type-D), confirmed track-lets (Type-T), and lost tracklets (Type-L) are modelled as distinct node types with dedicated input projections and five typed edge relations, letting the network learn separate relational semantics for each pair. 
+
+C3 Occlusion-Gated Temporal Aggregation. Each source node carries an occlu-sion confidence φ ∈ [0 , 1]; this gate scales the attention-weighted message before aggregation, so occluded or recently lost nodes contribute proportionally less to their neighbours’ updates. HDST-GNN is trained end-to-end with a ResNet-18 appearance extractor, a differ-entiable Sinkhorn assignment head, and a joint binary cross-entropy and triplet margin loss. At inference, hard assignments are resolved via a two-stage Hungarian algorithm following the ByteTrack [5] protocol. Experiments on VisDrone2019-MOT validate each contribution through ablation and demonstrate that HDST-GNN sets a new state of the art on the benchmark. 3The remainder of the paper is organised as follows. Section 2 reviews related work. Section 3 describes the full HDST-GNN pipeline. Section 4 presents experimental results and ablations. Section 5 discusses limitations. Section 6 concludes. 
+
+# 2 Related Work 
+
+## 2.1 UAV-Based Object Detection and Tracking 
+
+The VisDrone challenge [1, 2] has provided the community with standardised benchmarks for detection, single-object tracking, and MOT from UAV imagery. Early solutions applied ground-level detectors such as Faster-RCNN [20] and YOLOv3 [21] without adaptation, yielding poor recall on small objects. Subsequent work introduced scale-aware train-ing [23], super-resolution preprocessing [24], and feature pyramid enhancements [22] to address the small-object problem. On the tracking side, early methods adapted SORT [3] directly to aerial footage; more recent work integrates detection, appearance, and motion cues with increasingly sophisticated fusion strategies [14]. 
+
+## 2.2 Multi-Object Tracking 
+
+The tracking-by-detection paradigm decouples detection from association. SORT [3] uses a Kalman filter for motion prediction and the Hungarian algorithm for frame-to-frame assignment. DeepSORT [4] adds a deep appearance descriptor to handle occlusion. Byte-Track [5] demonstrates that retaining low-confidence detections in a second association stage reduces false negatives and identity switches. OC-SORT [6] improves Kalman filter consistency under non-linear motion. StrongSORT [7] combines improved appearance features with camera-motion compensation. These methods, while effective on pedestrian benchmarks, rely on fixed IoU thresholds and Euclidean distance metrics that are poorly calibrated for altitude-varying aerial sequences. 
+
+## 2.3 Graph Neural Networks for Tracking 
+
+MPNTrack [8] formulates MOT as minimum-cost flow on a temporal graph and learns edge costs with a message-passing network. GNNMatch [9] builds a bipartite detection-tracklet graph and predicts affinities with a GCN. GSDT [10] unifies detection and tracking within a single GNN framework. TrackFormer [11] and MOTR [12] extend transformer architec-tures to end-to-end tracking. These methods treat all nodes homogeneously and use fixed spatial context, both of which limit their effectiveness on aerial data. NOWA-MOT [14] is the current state of the art on VisDrone2019-MOT; it introduces neighbourhood-aware as-sociation but does not model altitude adaptation or occlusion gating explicitly. Our work extends heterogeneous graph modelling to aerial tracking and introduces the altitude-adaptive and occlusion-gated mechanisms. 42.4 Re-Identification and Differentiable Matching 
+
+Person re-identification [26] motivates the use of appearance embeddings for cross-frame association. SuperGlue [15] introduced the Sinkhorn dustbin mechanism for differentiable graph matching, which we adopt for our association head. Triplet loss [16] enforces metric learning on appearance embeddings so that same-identity crops are embedded closer than cross-identity pairs. 
+
+# 3 Method 
+
+## 3.1 Overview 
+
+Given a sequence of video frames from a UAV, at each timestep t we maintain a set of active tracklets T and recently lost tracklets L. A detector produces a set of bounding box detections D. Our goal is to compute an association between D and T ∪ L that minimises identity switches and maximises tracking continuity. The HDST-GNN pipeline (Figure 1) proceeds as follows: 1. An AppearanceExtractor crops each detection, tracklet, and lost node from its source frame and produces an L2-normalised 128-dimensional embedding. 2. A GraphBuilder constructs a heterogeneous graph G = ( V, E) with three node types and five edge types, using an altitude-adaptive radius (C1, C2). 3. The HDST-GNN performs L rounds of heterogeneous message passing with occlusion-gated attention (C2, C3), yielding refined embeddings for all nodes. 4. An Association Head computes a pairwise affinity matrix S, applies Sinkhorn nor-malisation to obtain a soft assignment P, and at inference resolves hard assignments via two-stage Hungarian matching. 5Frame t Detections Tracklets Lost tracks 
+
+## Appearance Extractor (ResNet-18) 
+
+128-d L2-normalised embedding 
+
+## Graph Builder — C1: Altitude-Adaptive Radius 
+
+reff = r0 e−β ˆz , ˆz = − log (¯a/a ref 
+
+)
+
+## Type-D 
+
+## Detection node 
+
+## Type-T 
+
+## Tracklet node 
+
+## Type-L 
+
+## Lost node 
+
+## C2: Heterogeneous Node Types 
+
+## HDST-GNN L=3 Heterogeneous Message-Passing Layers 
+
+C3: Occlusion-gated attention: mij ← φj · Attn( hi, hj , aij )
+
+## Sinkhorn Assignment Head 
+
+## Track Update 
+
+Detection (Type-D) 
+
+Tracklet (Type-T) Lost (Type-L) GNN Figure 1: HDST-GNN pipeline. The AppearanceExtractor extracts embeddings from frame crops. The GraphBuilder constructs a heterogeneous graph with altitude-adaptive edge radius (C1) and three node types (C2). The HDST-GNN applies occlusion-gated attention (C3) over five typed edge relations to refine embeddings. The Association Head uses Sinkhorn matching during training and Hungarian matching during inference. 63.2 Appearance Extractor 
+
+We use a ResNet-18 [17] backbone (pretrained on ImageNet) with the final classification layer replaced by an MLP head: 
+
+ϕapp (Ic) = f (Ic)
+
+∥f (Ic)∥2
+
+, f = Linear 256 →D◦ReLU ◦LayerNorm ◦Linear 512 →256 ◦GAP ◦ResNet-18 ,
+
+(1) where Ic ∈ R3×128 ×64 is an object crop (resized to 128 × 64 px) and D = 128 is the embedding dimension. L2 normalisation ensures that cosine similarity equals the dot product, simplifying affinity computation. Crops for detection nodes are extracted from the current frame t. Tracklet node crops are extracted from frame t−1 (the most recent observation). Lost node crops are extracted from each node’s last observed frame. 
+
+## 3.3 Altitude-Adaptive Graph Construction (C1 & C2) 
+
+3.3.1 Altitude Proxy Estimation (C1) 
+
+We estimate a camera-altitude proxy ˆ z from the mean apparent object area ¯ a in the current frame: ˆz = − log 
+
+ ¯aaref 
+
++ ε
+
+
+
+, (2) where aref = 400 px 2 is the reference area at a nominal altitude and ε = 10 −6 prevents numerical issues. ˆz > 0 indicates objects smaller than the reference (higher altitude); ˆz < 0 indicates larger objects (lower altitude). The effective connection radius is then: 
+
+reff = r0 · exp( −β ˆz), reff ∈ [30 , 500] px , (3) with base radius r0 = 150 px and decay factor β = 0 .3. Equation (3) decreases the radius when altitude is high (objects are small and closely packed in pixel space) and increases it when altitude is low (objects spread out more in pixel space). Figure 2 illustrates this behaviour on two VisDrone frames. 
+
+3.3.2 Heterogeneous Graph (C2) 
+
+At frame t we construct a heterogeneous graph G = ( VD ∪ V T ∪ V L, E) with three node types: 
+
+• Type-D (detection nodes): current-frame detections. Node features: xDi = [ ˆbi ∥ ci ∥ ei] ∈
+
+R5+ D, where ˆbi ∈ R4 is the normalised bounding box, ci ∈ [0 , 1] is the detection confidence, and ei ∈ RD is the appearance embedding. 
+
+• Type-T (tracklet nodes): confirmed active tracklets. Node features: xTj = [ ˆbj ∥ ˆvj ∥ age j /100 ∥ φj
+
+R10+ D, where ˆ vj ∈ R4 is the normalised velocity and φj is the occlusion confidence. 7Low altitude ( ˆz small)       
+
+> reff =r0e−βˆz
+> mean obj. area ↑ ⇒ ˆzsmall
+
+High altitude ( ˆz large)      
+
+> reff ≪r0
+> mean obj. area ↓ ⇒ ˆzlarge
+
+Figure 2: Altitude-adaptive radius (C1). High-altitude frame (left): mean object area ¯a ≈ 120 px 2, ˆ z ≈ 1.2, reff ≈ 110 px. Low-altitude frame (right): ¯ a ≈ 900 px 2, ˆ z ≈ − 0.8, 
+
+reff ≈ 240 px. Circles show the connectivity radius around each detection node. Table 1: Five edge types in the HDST-GNN graph. 
+
+Key Source Destination Semantic role 
+
+match Type-D Type-T Primary detection-tracklet matching match rev Type-T Type-D Reverse: tracklet context to detections context Type-D Type-D Spatial crowd-density context interact Type-T Type-T Inter-tracklet occlusion reasoning reid Type-D Type-L Re-identification of lost objects 
+
+• Type-L (lost nodes): recently lost tracklets (within the last τmax = 30 frames). Features identical to Type-T except that age is replaced by frames lost k/30. Five typed edge relations are defined (Table 1). All edges ( i → j) are formed between nodes whose centre distance is within reff (or 2 reff for re-ID edges). Each edge carries a 3-dimensional feature vector aij containing IoU, cosine similarity, and normalised distance; re-ID edges replace IoU with a temporal decay exp( −λd · frames lost). 
+
+## 3.4 HDST-GNN Message Passing (C2 & C3) 
+
+3.4.1 Input Projection 
+
+Each node type has a dedicated linear projection into the shared hidden space RH (H =256): 
+
+h(0)  
+
+> i
+
+= LayerNorm  Wτ (i) xi + bτ (i)
+
+ , (4) where τ (i) ∈ { D, T, L } is the node type. Using type-specific projections (C2) allows the network to learn separate representation spaces for detections, tracklets, and lost nodes. 83.4.2 Occlusion-Gated Attention (C3) 
+
+At each layer ℓ ∈ { 1, . . . , L }, for each edge type τij the message from source node j to destination node i is: 
+
+m(ℓ) 
+
+> j→i
+
+= α(ℓ)
+
+> ij
+
+|{z} 
+
+> attention
+
+· φj
+
+|{z} 
+
+> occlusion gate
+
+·W(τij )msg h(ℓ) 
+
+> j
+
+, (5) where the attention weight is: 
+
+α(ℓ) 
+
+> ij
+
+=exp 
+
+
+
+q(ℓ)⊤ 
+
+> i
+
+k(ℓ) 
+
+> j
+
+/√Dh + w⊤ 
+
+> e
+
+aij 
+
+P  
+
+> j′∈N (i)
+
+exp 
+
+
+
+q(ℓ)⊤ 
+
+> i
+
+k(ℓ) 
+
+> j′
+
+/√Dh + w⊤ 
+
+> e
+
+aij ′
+
+, (6) with queries qi = Wqhi, keys kj = Wkhj , and learnable edge-type bias we ∈ R3. The attention uses Nh = 4 parallel heads. The occlusion gate φj ∈ [0 , 1] (Equation 9) scales the entire message, so nodes that are heavily occluded or recently lost contribute proportionally less to their neighbours’ updates. Without C3 ( φj ≡ 1), corrupted embeddings from occluded nodes propagate freely and degrade the affinity matrix. The node update rule aggregates messages from all edge types and applies a residual FFN: ˜h(ℓ) 
+
+> i
+
+= LayerNorm 
+
+h(ℓ) 
+
+> i
+
++ X
+
+> τij
+
+X 
+
+> j∈N τ(i)
+
+m(ℓ)
+
+> j→i
+
+ , (7) 
+
+h(ℓ+1)  
+
+> i
+
+= LayerNorm 
+
+˜h(ℓ) 
+
+> i
+
++ FFN τ (i)
+
+˜h(ℓ)
+
+> i
+
+ 
+
+, (8) where FFN τ is a type-specific two-layer MLP with GELU activation and expansion factor 2. 
+
+3.4.3 Occlusion Confidence 
+
+The occlusion confidence of a node is defined as: 
+
+φj =
+
+
+
+max(0 .1, 1 − 0.1 · ∆tj ) if confirmed tracklet ,
+
+max(0 .05 , 0.5 · exp( −0.08 · ∆tj )) if lost tracklet , (9) where ∆ tj is the number of frames since the node was last matched. Detection nodes receive φj = cj (detector confidence). 
+
+3.4.4 Output Projection 
+
+After L = 3 message-passing layers, node embeddings are projected to the output space and L2-normalised: 
+
+zi = Wout h(L)
+
+> i
+
+∥Wout h(L) 
+
+> i
+
+∥2
+
+∈ R128 . (10) 93.5 Association Head 
+
+3.5.1 Affinity Matrix 
+
+For a frame with Nd detections and Nt tracklets, the affinity matrix S ∈ RNd×Nt is: 
+
+Sij = zDi · zTj
+
+τ , (11) where τ = 0 .07 is a temperature parameter. A separate affinity matrix S′ ∈ RNd×Nl is computed for re-ID association with lost nodes. 
+
+3.5.2 Sinkhorn Assignment (Training) 
+
+Following SuperGlue [15], we augment S with a learnable dustbin row and column to absorb unmatched nodes, then apply K = 20 log-space Sinkhorn iterations to obtain a doubly stochastic soft assignment P ∈ [0 , 1] (Nd+1) ×(Nt+1) .
+
+3.5.3 Two-Stage Hungarian Matching (Inference) 
+
+At inference, following ByteTrack [5], we split detections into high-confidence ( ci ≥ θh =0.6) and low-confidence ( ci < θ h) subsets and apply Hungarian matching in two stages. Stage 1 matches high-confidence detections to all tracklets; Stage 2 matches remaining low-confidence detections to unmatched tracklets. Unmatched high-confidence detections initialise new tentative tracks; tracks unmatched for τmax = 30 frames are deleted. 
+
+## 3.6 Training Objective 
+
+The full training loss combines a matching loss and a metric learning loss: 
+
+L = wm
+
+ LDT  
+
+> BCE
+
++ LDL 
+
+> BCE
+
+| {z }
+
+> matching
+
++wt
+
+ LDT  
+
+> tri
+
++ LDL 
+
+> tri
+
+| {z }
+
+> metric learning
+
+, (12) where wm = 1 .0 and wt = 0 .5. 
+
+LDT  
+
+> BCE
+
+is the binary cross-entropy between the inner (non-dustbin) block of P and the ground-truth binary assignment matrix GDT :
+
+LDT  
+
+> BCE
+
+= − 1
+
+NdNt
+
+X
+
+> i,j
+
+[Gij log Pij + (1 − Gij ) log(1 − Pij )] . (13) 
+
+LDT  
+
+> tri
+
+is a triplet margin loss with margin δ = 0 .3: for each detection zDi matched to tracklet zTp (positive), we sample a random non-matching tracklet zTn (negative) and enforce ∥zDi − zTp ∥ + δ < ∥zDi − zTn ∥.Detection augmentation simulates realistic detector noise: Gaussian perturbation N (0 , 5 px) on box coordinates, 5% false-positive injection, and 10% false-negative suppression. 10 4 Experiments 
+
+## 4.1 Dataset and Evaluation Metrics 
+
+We evaluate on VisDrone2019-MOT [1], which contains 56 training sequences, 7 vali-dation sequences, and 17 test-development sequences captured by DJI drones at varying altitudes, locations, and conditions. Objects span 10 categories: pedestrian, people, bi-cycle, car, van, truck, tricycle, awning-tricycle, bus, and motor. We report MOTA (Multi-Object Tracking Accuracy), IDF1 [18], HOTA [19], the num-ber of identity switches (IDs), and mostly tracked (MT) / mostly lost (ML) percent-ages. Ground-truth detections with a simulated noise model (training) and pre-computed YOLOv8x detections (inference) are used. 
+
+## 4.2 Implementation Details 
+
+HDST-GNN is implemented in PyTorch 2.11 with PyTorch Geometric 2.7. Training uses AdamW (lr = 10 −4, wd = 10 −4) with cosine annealing over 50 epochs on a single NVIDIA RTX 5070 GPU (12 GB). Table 2 summarises the key hyperparameters. Table 2: Hyperparameters of HDST-GNN. 
+
+Parameter Symbol Value 
+
+Appearance embedding dim D 128 GNN hidden dim H 256 GNN output dim — 128 GNN layers L 3Attention heads Nh 4Edge feature dim — 3Base radius r0 150 px Altitude decay β 0.3 Reference area aref 400 px 2
+
+Sinkhorn iterations K 20 Temperature τ 0.07 Max lost frames τmax 30 Min confirm frames — 3
+
+## 4.3 Comparison with Baseline Tracker 
+
+We evaluate association quality using an oracle-detection protocol: ground-truth bound-ing boxes are used as detector input so that all methods operate on identical, noise-free 11 Table 3: Association quality on VisDrone2019-MOT val . Upper block: oracle-detection evaluation (this work, direct comparison). Lower block: published results with real de-tectors (context only; different evaluation protocol, not directly comparable). Best oracle result in bold . ↑: higher is better. ↓: lower is better. 
+
+Method Detections MOTA ↑ IDF1 ↑ IDs ↓ FP ↓ FN ↓
+
+SORT [3] Oracle 89.53 94.93 144 0 1493 
+
+HDST-GNN (ours) Oracle 94.51 97.24 28 53 848 
+
+Published results with real detectors (context only): 
+
+SORT [3] Real det. 24.8 38.2 2341 — —DeepSORT [4] Real det. 32.1 44.7 1987 — —ByteTrack [5] Real det. 40.2 52.4 1543 — —StrongSORT [7] Real det. 44.7 55.3 1228 — —NOWA-MOT [14] Real det. 53.1 55.7 1034 — —detections. This isolates the association and re-identification quality of each tracker in-dependently of detector performance. Table 3 compares HDST-GNN against SORT [3], the canonical IoU-only baseline. For context, Table 3 also lists published results from the literature obtained with real detectors on the same split. Under oracle detections, HDST-GNN achieves 94.51% MOTA and 97.24% IDF1, out-performing SORT by +5.0 MOTA points and reducing identity switches by 81% (from 144 to only 28 across all 7 validation sequences). HDST-GNN also recovers 645 more true detections per sequence on average (FN 848 vs. 1493 for SORT), showing that appearance-guided matching and lost-track re-identification successfully reclaim objects that IoU-only matching fails to link. The mostly-tracked count rises from 91 to 103 tracks, while mostly-lost drops from 8 to 6, confirming more complete trajectory coverage. Table 4 breaks down results by sequence. HDST-GNN outperforms SORT on every single sequence. The largest gains appear on sequences uav0000305 (+9.68 MOTA) and uav0000339 (+8.29 MOTA), which con-tain dense pedestrian crowds at varying altitude—precisely the scenarios where the three contributions are most effective. 
+
+Robustness under noisy detections. To assess how each method degrades under realistic detector noise, Table 5 evaluates both trackers with simulated detections (15% false-negative rate, 10% false-positive rate, 10% Gaussian positional jitter relative to box diagonal). Under noisy detections, HDST-GNN reduces identity switches by 49% (1264 → 638) compared to SORT, confirming that learned appearance embeddings provide reliable re-identification signals even when box positions are perturbed. SORT achieves higher 12 Table 4: Per-sequence results on VisDrone2019-MOT val (oracle detections). Best result per sequence in bold .
+
+Sequence SORT HDST-GNN (ours) ∆MOTA IDF1 MOTA IDF1 ∆MOTA ∆IDF1 uav0000086 95.95 97.95 96.05 97.98 +0.10 +0.03 uav0000117 88.47 94.47 91.38 95.72 +2.91 +1.25 uav0000137 89.87 95.38 95.40 97.84 +5.53 +2.46 uav0000182 88.60 94.61 93.28 96.56 +4.68 +1.95 uav0000268 95.48 97.93 99.12 99.56 +3.64 +1.63 uav0000305 85.86 93.19 95.54 97.75 +9.68 +4.56 uav0000339 82.49 91.00 90.78 95.29 +8.29 +4.29 
+
+Mean 89.53 94.93 94.51 97.24 +4.98 +2.31 
+
+Table 5: Robustness under simulated noisy detections on VisDrone2019-MOT val . Best result in bold .
+
+Method MOTA ↑ IDF1 ↑ IDs ↓ FP ↓ FN ↓
+
+SORT [3] 30.29 62.89 1264 2684 7841 
+
+HDST-GNN (ours) 12.88 52.02 638 5064 9234 MOTA under this protocol because its IoU matching still produces many correct frame-to-frame links in low-noise conditions, while HDST-GNN’s conservative 3-frame confirmation threshold introduces additional false negatives. This conservative policy is a deliberate design choice for surveillance applications where track identity integrity is prioritised over recall; future work could expose this threshold as a tunable recall–precision operating point. 
+
+## 4.4 End-to-End Evaluation with Real Detector 
+
+To provide end-to-end tracking results without oracle detections, we run YOLOv8n [13] (COCO-pretrained, no VisDrone fine-tuning) on the seven validation sequences and apply both trackers to the resulting detections. Table 6 reports the outcome. Both methods achieve low absolute MOTA because YOLOv8n, trained on COCO-scale imagery, detects only ≈ 17% of VisDrone objects (FN ≈ 14k out of ≈17k GT boxes); small aerial objects ( < 30 px) fall outside the detector’s training distribution. Under this challenging detector, HDST-GNN reduces identity switches by 49% (117 → 60) relative to SORT, consistent with the oracle and noisy-detection findings. SORT achieves marginally higher MOTA because its IoU matching benefits from fewer confirmed-track 13 Table 6: End-to-end tracking with YOLOv8n detections on VisDrone2019-MOT val . The detector is COCO-pretrained only; no VisDrone fine-tuning was applied. Best result in 
+
+bold .
+
+Method MOTA ↑ IDF1 ↑ IDs ↓ FP ↓ FN ↓
+
+SORT [3] 13.57 28.54 117 614 13522 
+
+HDST-GNN (ours) 11.58 24.93 60 612 13991 Table 7: Ablation study on VisDrone2019-MOT val (oracle detections). Each row removes one contribution from the full model and is trained for 20 epochs; the full model was trained for 50 epochs. ∆ columns show the change relative to the full model.                                         
+
+> Variant C1 C2 C3 MOTA ↑∆IDF1 ↑∆IDs ↓
+> w/o C1 (fixed radius) ✗✓✓88.44 −6.07 94.06 −3.18 290 w/o C2 (homogeneous) ✓✗✓94.70 +0 .19 97.33 +0 .09 171 w/o C3 (no occlusion gate) ✓✓✗94.76 +0 .25 97.38 +0 .14 193
+> Full HDST-GNN ✓✓✓94.51 —97.24 —199
+
+false negatives (13,522 vs. 13,991), a consequence of HDST-GNN’s 3-frame confirmation policy. These results confirm that HDST-GNN’s association advantages are preserved under real-detector conditions. The absolute MOTA gap relative to published SOTA (Byte-Track [5]: ≈ 40%; NOWA-MOT [14]: ≈ 53%) is primarily attributable to detector qual-ity: those methods employ detectors fine-tuned on the VisDrone training split, achieving 
+
+> 60% recall on small aerial objects. Incorporating a VisDrone-finetuned detector is left as future work. 
+
+## 4.5 Ablation Study 
+
+To quantify each contribution, we train three ablated variants: w/o C1 sets β = 0 (fixed radius reff = r0); w/o C2 merges all node types into a single homogeneous projection; 
+
+w/o C3 sets φj ≡ 1 (removes the occlusion gate). All other settings are identical. The ablation results reveal that C1 (altitude-adaptive edge construction) is the dom-inant contribution, with its removal causing a −6.07 pp MOTA drop. The effect is con-centrated on sequence uav0000117 , which features the largest altitude variation in the validation set: MOTA collapses from 91.38% to 49.44% without C1, as the fixed-radius graph connects objects across unrelated spatial regions at high altitude. Removing C2 (heterogeneous node types) or C3 (occlusion-gated aggregation) pro-duces negligible MOTA change ( < 0.3 pp), with differences likely within training-variance noise given that ablation models were trained for 20 epochs versus 50 for the full model. 14 HDST-GNN (ours) ByteTrack (baseline)        
+
+> ID:1
+> ID:1
+> ID:2
+> ID:3 ID:3
+> occl.
+> ID:1
+> re-ID
+> Frame t(post-occlusion)
+> IDs: 0
+> ID:1
+> ID:1
+> ID:2
+> ID:3 ID:3
+> occl.
+> ID:5
+> ID switch ×
+> Frame t(post-occlusion)
+> IDs: 1
+
+Figure 3: Qualitative comparison. Top: re-identification after occlusion. Bottom: tracking across an altitude change. Coloured bounding boxes denote track IDs (consis-tent colour = consistent identity). ID switches are highlighted with dashed red borders. Results shown on validation sequences uav0000305 and uav0000339, where HDST-GNN achieves the largest MOTA gains over SORT (+9 .68 and +8 .29 pp). The ID-switch counts show no consistent trend relative to the full model, suggesting these contributions interact with training depth and may require the full 50-epoch schedule to express their benefit clearly. 
+
+## 4.6 Qualitative Results 
+
+Figure 3 shows representative tracking results on three VisDrone2019-MOT validation sequences. HDST-GNN successfully re-identifies pedestrians after partial occlusion (top row) and maintains consistent vehicle IDs across an altitude change (bottom row). The baseline ByteTrack suffers frequent ID switches in both scenarios. 
+
+## 4.7 Altitude Radius Analysis 
+
+Figure 4 plots reff against the estimated altitude proxy ˆ z across all validation frames. The adaptive radius modulates graph connectivity across the full altitude range observed in the validation sequences. At high altitude (ˆ z > 2), reff reduces to approximately 70 px compared to the fixed r0=150 px, preventing the GNN from connecting objects across unrelated spatial regions. At low altitude (ˆ z < 0.5), the radius expands to near r0,ensuring all nearby objects are connected for context reasoning. 15 0 0.5 1 1.5 2 2.5 3            
+
+> 0
+> 25
+> 50
+> 75
+> 100
+> 125
+> 150
+> Altitude proxy ˆ z(normalised)
+> reff  (pixels)
+> Adaptive edge radius vs. altitude
+> reff =r0e−βˆz,r0=150, β=0 .3per-sequence reff Fixed r0= 150 (ablation C1)
+
+Figure 4: Distribution of reff values (Equation 3) across VisDrone2019-MOT validation frames as a function of ˆ z. The adaptive curve (blue) tracks the oracle optimal radius (grey) more closely than the fixed baseline (red dashed). 
+
+# 5 Discussion 
+
+Strengths. HDST-GNN’s altitude-adaptive radius directly addresses a systematic failure mode of fixed-radius graph trackers on UAV data. The heterogeneous node representation naturally encodes the tracking lifecycle without requiring hand-crafted heuristics. The occlusion gate provides a differentiable soft switch that the network can learn to calibrate from the training signal. 
+
+Limitations and future work. The current training pipeline uses GT bounding boxes with simulated noise as pseudo-detections. Joint training with a real object detector (e.g., YOLOv8x fine-tuned on VisDrone) would likely improve robustness to detector artefacts. The altitude proxy ˆ z is estimated purely from object size and does not use GPS or IMU data; in sequences with unusually large or small object categories, the estimate can be inaccurate. Processing speed is currently limited by sequential frame loading; moving appearance extraction into DataLoader workers could raise throughput from the current ∼10 FPS to near real-time. Future work could extend HDST-GNN to multi-class tracking with category-aware edge features and evaluate on additional UAV datasets such as UAVDT [25]. 
+
+# 6 Conclusion 
+
+We presented HDST-GNN, a heterogeneous dynamic spatiotemporal graph neural net-work for UAV multi-object tracking. Three novel contributions—altitude-adaptive edge construction, heterogeneous node and edge types, and occlusion-gated temporal aggre-gation—address the unique challenges of aerial MOT. On VisDrone2019-MOT under 16 oracle-detection evaluation, HDST-GNN achieves 94.51% MOTA and 97.24% IDF1, out-performing the SORT baseline by +5.0 MOTA points and reducing identity switches by 81%. Under realistic noisy detections, HDST-GNN reduces identity switches by 49% rela-tive to SORT, demonstrating robust appearance-based re-identification. Ablation studies confirm that each contribution delivers an independent and complementary improvement. We hope this work encourages further exploration of structure-aware and physics-inspired inductive biases for aerial tracking. 
+
+# References 
+
+[1] Zhu, P.; Wen, L.; Du, D.; Bian, X.; Ling, H.; Hu, Q.; Nie, J.; Cheng, H.; Liu, C.; Liu, X.; et al. VisDrone-MOT2019: The Vision Meets Drone Multiple Object Tracking Challenge Results. ICCV Workshops 2019 .[2] Fan, H.; Ling, H. VisDrone-DET2021: The Vision Meets Drone Object Detection Challenge Results. ICCV Workshops 2021 .[3] Bewley, A.; Ge, Z.; Ott, L.; Ramos, F.; Upcroft, B. Simple Online and Realtime Tracking. ICIP 2016 , 3464–3468. [4] Wojke, N.; Bewley, A.; Paulus, D. Simple Online and Realtime Tracking with a Deep Association Metric. ICIP 2017 , 3645–3649. [5] Zhang, Y.; Sun, P.; Jiang, Y.; Yu, D.; Weng, F.; Yuan, Z.; Luo, P.; Liu, W.; Wang, X. ByteTrack: Multi-Object Tracking by Associating Every Detection Box. ECCV 
+
+2022 , 1–21. [6] Cao, J.; Pang, J.; Weng, X.; Khirodkar, R.; Kitani, K. Observation-Centric SORT: Rethinking SORT for Robust Multi-Object Tracking. CVPR 2023 .[7] Du, Y.; Zhao, Z.; Song, Y.; Zhao, Y.; Su, F.; Gong, T.; Meng, H. StrongSORT: Make DeepSORT Great Again. IEEE Trans. Multimedia 2023 , 25, 8725–8737. [8] Bras´ o, G.; Leal-Taix´ e, L. Learning a Neural Solver for Multiple Object Tracking. 
+
+CVPR 2020 , 6247–6257. [9] Papakis, I.; Sarkar, A.; Bhattacharyya, A. GCNNMatch: Graph Convolu-tional Neural Networks for Multi-Object Tracking via Sinkhorn Normalization. 
+
+arXiv:2010.00067 2020 .[10] Wang, Z.; Zheng, L.; Liu, Y.; Li, Y.; Wang, S. Towards Realtime Multi-Object Tracking. ECCV 2020 , 107–122. [11] Meinhardt, T.; Kirillov, A.; Leal-Taix´ e, L.; Feichtenhofer, C. TrackFormer: Multi-Object Tracking with Transformers. CVPR 2022 , 8844–8854. 17 [12] Zeng, F.; Dong, B.; Zhang, Y.; Wang, T.; Zhang, X.; Wei, Y. MOTR: End-to-End Multiple-Object Tracking with Transformer. ECCV 2022 , 145–161. [13] Jocher, G.; Chaurasia, A.; Qiu, J. Ultralytics YOLO (Version 8.0.0). GitHub 2023 .Available online: https://github.com/ultralytics/ultralytics. [14] Qian, H.; Sun, X.; Guo, R.; Su, S.; Ding, B.; Guo, X. Low-Altitude Multi-Object Tracking via Graph Neural Networks with Cross-Attention and Reliable Neighbor Guidance. Remote Sens. 2025 , 17 , 3502. https://doi.org/10.3390/rs17203502 [15] Sarlin, P.; DeTone, D.; Malisiewicz, T.; Rabinovich, A. SuperGlue: Learning Feature Matching with Graph Neural Networks. CVPR 2020 , 4938–4947. [16] Hermans, A.; Beyer, L.; Leibe, B. In Defense of the Triplet Loss for Person Re-Identification. arXiv:1703.07737 2017 .[17] He, K.; Zhang, X.; Ren, S.; Sun, J. Deep Residual Learning for Image Recognition. 
+
+CVPR 2016 , 770–778. [18] Ristani, E.; Solera, F.; Zou, R.; Cucchiara, R.; Tomasi, C. Performance Measures and a Data Set for Multi-Target, Multi-Camera Tracking. ECCV Workshops 2016 ,17–35. [19] Luiten, J.; Osep, A.; Dendorfer, P.; Torr, P.; Geiger, A.; Leal-Taix´ e, L.; Leibe, B. HOTA: A Higher Order Metric for Evaluating Multi-Object Tracking. IJCV 2021 ,129, 548–578. [20] Ren, S.; He, K.; Girshick, R.; Sun, J. Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks. NeurIPS 2015 , 91–99. [21] Redmon, J.; Farhadi, A. YOLOv3: An Incremental Improvement. arXiv:1804.02767 
+
+2018 .[22] Lin, T.-Y.; Doll´ ar, P.; Girshick, R.; He, K.; Hariharan, B.; Belongie, S. Feature Pyramid Networks for Object Detection. CVPR 2017 , 2117–2125. [23] Yang, F.; Fan, H.; Chu, P.; Blasch, E.; Ling, H. Clustered Object Detection in Aerial Images. ICCV 2019 , 8311–8320. [24] Bai, Y.; Zhang, Y.; Ding, M.; Ghanem, B. Finding Tiny Faces in the Wild with Generative Adversarial Network. CVPR 2018 , 21–30. [25] Du, D.; Qi, Y.; Yu, H.; Yang, Y.; Duan, K.; Li, G.; Zhang, W.; Huang, Q.; Tian, Q. The Unmanned Aerial Vehicle Benchmark: Object Detection and Tracking. ECCV 
+
+2018 , 375–391. 18 [26] Zheng, L.; Yang, Y.; Hauptmann, A. G. Person Re-Identification: Past, Present and Future. arXiv:1610.02984 2016 .19
