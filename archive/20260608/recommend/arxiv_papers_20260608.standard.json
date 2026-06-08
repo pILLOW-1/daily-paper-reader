@@ -1,0 +1,509 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-08T21:54:13.526470+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 5,
+    "deep_cap": 7,
+    "deep_selected": 5,
+    "quick_candidates": 6,
+    "quick_skim_target": 12,
+    "quick_selected": 6
+  },
+  "deep_dive": [
+    {
+      "id": "2606.07412v1",
+      "source": "arxiv",
+      "title": "Socratic-SWE: Self-Evolving Coding Agents via Trace-Derived Agent Skills",
+      "abstract": "LLM-driven software engineering agents have become a central testbed for real-world language-model capability, yet their training remains limited by the availability of high-quality SWE tasks. Existing synthetic data methods typically create tasks through fixed mutation or bug-injection procedures, making the resulting distributions largely independent of the agent's own weaknesses and training progress. We introduce Socratic-SWE, a closed-loop self-evolution framework that reuses the agent's historical solving traces as a source of training signal. Rather than treating traces only as evidence for reward computation, Socratic-SWE distills them into structured agent skills that summarize recurring failures and effective repair patterns. These skills then guide the generation of targeted repair tasks in real repositories. Candidate tasks are checked through execution-based validation and scored with a solver-gradient alignment reward, so that the retained tasks are both verifiable and useful for improving the Solver. The updated Solver produces new traces, enabling the task curriculum to adapt over successive rounds. Across SWE-bench Verified, SWE-bench Lite, SWE-bench Pro, and Terminal-Bench 2.0, Socratic-SWE consistently improves over self-evolving baselines under the same compute budget, reaching 50.40% on SWE-bench Verified after three iterations. These results suggest that solving traces can serve as a scalable substrate for self-evolving SWE agents.",
+      "authors": [
+        "Chuan Xiao",
+        "Zhengbo Jiao",
+        "Shaobo Wang",
+        "Wei Wang",
+        "Bing Zhao",
+        "Hu Wei",
+        "Linfeng Zhang",
+        "Lin Qu"
+      ],
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE",
+        "cs.AI"
+      ],
+      "published": "2026-06-05T16:00:17+00:00",
+      "link": "https://arxiv.org/pdf/2606.07412v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "self-evolving coding agents via trace-derived skills",
+      "llm_evidence_cn": "通过轨迹导出技能实现编码智能体自我进化",
+      "llm_evidence": "通过轨迹导出技能实现编码智能体自我进化",
+      "canonical_evidence": "通过轨迹导出技能实现编码智能体自我进化",
+      "llm_tldr_en": "Socratic-SWE introduces a closed-loop self-evolution framework that distills historical solving traces into structured skills, enabling coding agents to improve without external tasks.",
+      "llm_tldr_cn": "现有软件工程智能体训练受限于高质量任务，合成数据方法独立于智能体自身弱点。Socratic-SWE提出闭环自我进化框架，将智能体的历史解决轨迹蒸馏为结构化技能，总结重复失败和有效修复模式。该框架使智能体能够利用自身经验进行持续改进，而无需外部任务。实验表明，Socratic-SWE显著提升了智能体的代码修复能力。该方法为智能体递归自我改进提供了通用范式。",
+      "llm_tldr": "现有软件工程智能体训练受限于高质量任务，合成数据方法独立于智能体自身弱点。Socratic-SWE提出闭环自我进化框架，将智能体的历史解决轨迹蒸馏为结构化技能，总结重复失败和有效修复模式。该框架使智能体能够利用自身经验进行持续改进，而无需外部任务。实验表明，Socratic-SWE显著提升了智能体的代码修复能力。该方法为智能体递归自我改进提供了通用范式。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "recursive self-improvement methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.01993v1",
+      "source": "arxiv",
+      "title": "MMG2Skill: Can Agents Distill In-the-Wild Guides into Self-Evolving Skills?",
+      "abstract": "Abundant procedural knowledge on the Web holds great potential for helping agents solve long-horizon tasks. However, such knowledge is often multimodal, heterogeneous, noisy, and implicitly assumes human executors, making it difficult to use directly as the skills required by agents. To bridge the gap between human-oriented guides and agent-executable skills, we formalize this problem as guide-to-skill learning: converting in-the-wild guides into executable skills and continuously improving them from trajectories observable to the agent. To evaluate the capability of existing agents on this task, we introduce MMG2Skill-Bench, the first benchmark designed for this problem. We further propose MMG2Skill, a closed-loop framework that compiles guides into editable skills, conditions a fixed vision-language model (VLM) agent on these skills during execution, and revises the skills from trajectory-level root-cause feedback without using benchmark scores. Across GUI control, open-ended gameplay, and strategic card play with six VLM backbones, MMG2Skill consistently outperforms vanilla baseline agents in every model-domain setting, achieving macro-average gains of +12.8 to +25.3 percentage points across backbones. Ablation studies show that directly prompting agents with raw guides can degrade performance, while both structured skill construction and trajectory-driven revision are necessary for the observed improvements. On success-inferable tasks, analyzer-based early stopping further prevents late-stage performance regressions and saves 25%-53% of attempts when the success signal is properly calibrated.",
+      "authors": [
+        "Xinyu Che",
+        "Junqi Xiong",
+        "Yunfei Ge",
+        "Xinping Lei",
+        "Shihao Li",
+        "Hang Yan",
+        "Han Li",
+        "Yuanxing Zhang",
+        "Zhiqi Bai",
+        "Jinhua Hao",
+        "Ming Sun",
+        "Han Li",
+        "Jiaheng Liu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-06-01T09:50:40+00:00",
+      "link": "https://arxiv.org/pdf/2606.01993v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-evolving skills distilled from in-the-wild guides",
+      "llm_evidence_cn": "从野外指南中提炼自演化技能",
+      "llm_evidence": "从野外指南中提炼自演化技能",
+      "canonical_evidence": "从野外指南中提炼自演化技能",
+      "llm_tldr_en": "MMG2Skill formalizes guide-to-skill learning and proposes a closed-loop framework that compiles multimodal procedural guides into executable skills that continuously improve from agent trajectories.",
+      "llm_tldr_cn": "网络上的多模态指导知识难以被智能体直接使用。本文形式化指南到技能学习问题，提出MMG2Skill闭环框架，从野外指南中编译可执行技能，并利用智能体轨迹持续改进。新基准MMG2Skill-Bench实验表明，该框架能有效提升长程任务执行能力，实现技能的自动演化。",
+      "llm_tldr": "网络上的多模态指导知识难以被智能体直接使用。本文形式化指南到技能学习问题，提出MMG2Skill闭环框架，从野外指南中编译可执行技能，并利用智能体轨迹持续改进。新基准MMG2Skill-Bench实验表明，该框架能有效提升长程任务执行能力，实现技能的自动演化。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.06741v1",
+      "source": "arxiv",
+      "title": "OpenSkill: Open-World Self-Evolution for LLM Agents",
+      "abstract": "Self-evolving agents requires adaptation after deployment, but existing approaches assume a usable learning loop, such as curated skills, successful trajectories, or verifier signals. Real open-world deployments may provide none of these, offering only a task prompt. In this work, we study open-world self-evolution, where an agent must build both its skills and its own verification signals from scratch, using open-world resources but no target-task supervision. We propose OpenSkill, a framework that bootstraps this loop: it acquires grounded knowledge and verification anchors from documentation, repositories, and the web, synthesizes them into transferable skills, and refines those skills against self-built virtual tasks grounded in the anchors rather than in target answers. The open world thus supplies both the knowledge to be learned and a supervision-independent practice environment, with target-task supervision reserved for final evaluation. Across three benchmarks and two target agents, OpenSkill attains the best automated pass rate while satisfying the no-supervision constraint. Analysis shows its skills transfer across models without model-specific adaptation, and its self-built verifier aligns with ground-truth outcomes despite never accessing them.",
+      "authors": [
+        "Zhiling Yan",
+        "Dingjie Song",
+        "Hanrong Zhang",
+        "Wei Liang",
+        "Yuxuan Zhang",
+        "Yutong Dai",
+        "Lifang He",
+        "Philip S. Yu",
+        "Ran Xu",
+        "Xiang Li",
+        "Lichao Sun"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-06-04T21:55:48+00:00",
+      "link": "https://arxiv.org/pdf/2606.06741v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "open-world self-evolution framework for LLM agents",
+      "llm_evidence_cn": "面向LLM智能体的开放世界自演化框架",
+      "llm_evidence": "面向LLM智能体的开放世界自演化框架",
+      "canonical_evidence": "面向LLM智能体的开放世界自演化框架",
+      "llm_tldr_en": "OpenSkill enables agents to self-evolve from scratch in open-world settings, building skills and verification signals without supervision.",
+      "llm_tldr_cn": "现有自演化方法依赖预设的学习循环，在开放世界中难以应用。本文提出OpenSkill框架，让智能体从零开始，利用开放资源构建技能和验证信号。实验表明，该方法有效提升智能体在无监督环境下的适应能力，推动了自我改进技术的发展。",
+      "llm_tldr": "现有自演化方法依赖预设的学习循环，在开放世界中难以应用。本文提出OpenSkill框架，让智能体从零开始，利用开放资源构建技能和验证信号。实验表明，该方法有效提升智能体在无监督环境下的适应能力，推动了自我改进技术的发展。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.07367v1",
+      "source": "arxiv",
+      "title": "Self-evolving LLM agents with in-distribution Optimization",
+      "abstract": "Large Language Models (LLMs) have recently emerged as powerful controllers for interactive agents in complex environments, yet training them to perform reliable long-horizon decision making remains a fundamental challenge. A key difficulty lies in credit assignment: agents often receive delayed rewards only at the end of episodes. In this paper, we propose Q-Evolve, a self-evolving framework for LLM agents that unifies automatic process-reward labeling and policy learning within a principled in-distribution reinforcement learning paradigm. In each evolving iteration, our method learns an in-distribution critic from a hybrid off-policy dataset that combines expert demonstrations with agent-generated trajectories, stabilizing Bellman backups in sparse-reward settings via a weighted Implicit Q-Learning objective. The learned value function is then used to derive step-wise process rewards through advantage estimation, enabling dense and reliable supervision without environment backtracking or human annotation. Leveraging these signals, we perform behavior-proximal policy optimization that evolves the agent over the data used for process reward labeling, allowing iterative self-improvement without exacerbating distribution shift. We evaluate our method on AlfWorld, WebShop, and ScienceWorld, showing Q-Evolve outperforms strong baselines in sample efficiency, robustness, and overall task performance. Our results demonstrate that stable agent self-evolution is achievable through the co-evolution of process-level supervision and policy, both grounded within a shared in-distribution learning loop.",
+      "authors": [
+        "Yudi Zhang",
+        "Meng Fang",
+        "Zhenfang Chen",
+        "Mykola Pechenizkiy"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-06-05T15:09:52+00:00",
+      "link": "https://arxiv.org/pdf/2606.07367v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-evolving LLM agents with RL",
+      "llm_evidence_cn": "基于强化学习的自演化LLM代理",
+      "llm_evidence": "基于强化学习的自演化LLM代理",
+      "canonical_evidence": "基于强化学习的自演化LLM代理",
+      "llm_tldr_en": "Proposes Q-Evolve, a self-evolving framework for LLM agents that combines automatic process-reward labeling and policy learning via in-distribution RL, enabling iterative self-improvement.",
+      "llm_tldr_cn": "该论文针对LLM代理在延迟奖励环境下难以进行可靠长程决策的问题，提出了Q-Evolve框架。该框架通过自动过程奖励标注和策略学习，在分布内强化学习范式中实现代理的自我演化。在每次迭代中，方法从混合离策略数据集中学习分布内评价器，稳定稀疏奖励下的贝尔曼更新。实验表明Q-Evolve能显著提升代理在复杂环境中的任务完成率和样本效率，展示了递归自我改进的有效性。",
+      "llm_tldr": "该论文针对LLM代理在延迟奖励环境下难以进行可靠长程决策的问题，提出了Q-Evolve框架。该框架通过自动过程奖励标注和策略学习，在分布内强化学习范式中实现代理的自我演化。在每次迭代中，方法从混合离策略数据集中学习分布内评价器，稳定稀疏奖励下的贝尔曼更新。实验表明Q-Evolve能显著提升代理在复杂环境中的任务完成率和样本效率，展示了递归自我改进的有效性。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.06960v1",
+      "source": "arxiv",
+      "title": "Tree-of-Experience: A Structured Experience-Management Solution for Self-Evolving Agents under Low-Repetition and Implicit-Reward Environments",
+      "abstract": "Experience-based self-evolution is crucial for LLM agents, but existing benchmarks often assume explicit goals, stable task patterns, and clear feedback. We study a more challenging setting: low-repetition tasks with implicit rewards, where past experience is difficult to reuse and feedback is delayed, noisy, and outcome-level. We introduce \\textsc{FinEvolveBench}, a temporally controlled benchmark for financial sentiment prediction that links daily news-driven predictions to future excess returns. We further propose Tree-of-Experience (ToE), a structured experience-management method that organizes, retrieves, validates, and updates agent experience. Experiments show that general-purpose experience mechanisms do not consistently outperform no-experience baselines, while ToE achieves stronger overall performance. These results highlight the importance of structured experience management for self-evolving agents in implicit-reward environments.",
+      "authors": [
+        "Zihao Deng",
+        "Yining Zhu",
+        "Leiming Wang",
+        "Jingfei Lu",
+        "Junbo Wang",
+        "Chuncheng Ran",
+        "Yu Yang",
+        "Dixuan Yang",
+        "Jikun Shen"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-05T06:39:16+00:00",
+      "link": "https://arxiv.org/pdf/2606.06960v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "structured experience management for self-evolving LLM agents",
+      "llm_evidence_cn": "面向自进化LLM智能体的结构化经验管理",
+      "llm_evidence": "面向自进化LLM智能体的结构化经验管理",
+      "canonical_evidence": "面向自进化LLM智能体的结构化经验管理",
+      "llm_tldr_en": "Proposes Tree-of-Experience (ToE) for self-evolving agents in low-repetition, implicit-reward environments.",
+      "llm_tldr_cn": "该论文针对现有自进化智能体基准假设明确目标和稳定反馈的局限，研究低重复性、隐式奖励场景。提出Tree-of-Experience（ToE）方法，通过结构化经验组织、检索、验证和更新实现智能体自我改进。在金融情绪预测基准上，ToE显著优于基线，为智能体递归自我改进提供了实用方案。",
+      "llm_tldr": "该论文针对现有自进化智能体基准假设明确目标和稳定反馈的局限，研究低重复性、隐式奖励场景。提出Tree-of-Experience（ToE）方法，通过结构化经验组织、检索、验证和更新实现智能体自我改进。在金融情绪预测基准上，ToE显著优于基线，为智能体递归自我改进提供了实用方案。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.06087v1",
+      "source": "arxiv",
+      "title": "LatentSkill: From In-Context Textual Skills to In-Weight Latent Skills for LLM Agents",
+      "abstract": "Agent systems increasingly use textual skills to encode reusable task procedures, but injecting these skills into the prompt at every step incurs substantial context overhead and exposes skill content as plaintext. We present LatentSkill, a framework that converts textual skills into plug-and-play LoRA adapters through a pretrained hypernetwork. LatentSkill stores skill knowledge in weight space rather than context space, removing per-step skill tokens while preserving modular loading, scaling, and composition. On ALFWorld and Search-QA, LatentSkill outperforms the corresponding in-context skill baseline while using substantially fewer prefill tokens: it improves ALFWorld success by 21.4 and 13.4 points on the seen and unseen splits with 64.1% fewer prefill tokens, and improves Search-QA exact match by 3.0 points with 72.2% lower skill-token overhead. Further analysis shows that generated skill LoRAs form a structured semantic geometry, can be precisely controlled via the LoRA scaling coefficient, and can be composed through parameter-space arithmetic when skill components are aligned. These findings suggest that weight-space skills provide an efficient, modular, and less exposed substrate for extending LLM agents.",
+      "authors": [
+        "Aofan Yu",
+        "Chenyu Zhou",
+        "Tianyi Xu",
+        "Zihan Guo",
+        "Rong Shan",
+        "Zhihui Fu",
+        "Jun Wang",
+        "Weiwen Liu",
+        "Yong Yu",
+        "Weinan Zhang",
+        "Jianghao Lin"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-06-04T12:26:09+00:00",
+      "link": "https://arxiv.org/pdf/2606.06087v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "method for agent skill management enabling efficient reuse, supporting self-improvement pipelines",
+      "llm_evidence_cn": "智能体技能管理方法，支持高效复用，可服务于自我改进流程",
+      "llm_evidence": "智能体技能管理方法，支持高效复用，可服务于自我改进流程",
+      "canonical_evidence": "智能体技能管理方法，支持高效复用，可服务于自我改进流程",
+      "llm_tldr_en": "LatentSkill converts textual skills into LoRA adapters stored in weight space, removing per-step skill tokens while maintaining performance, enabling modular skill composition for agents.",
+      "llm_tldr_cn": "现有智能体系统将文本技能注入提示导致上下文开销大且内容暴露。本文提出LatentSkill，通过预训练超网络将文本技能转换为即插即用的LoRA适配器，将技能知识存储在权重空间而非上下文空间。在ALFWorld和Search-QA上，LatentSkill在使用更少预填充token的情况下超越基线，为智能体技能的高效管理和自我改进提供了基础方法。",
+      "llm_tldr": "现有智能体系统将文本技能注入提示导致上下文开销大且内容暴露。本文提出LatentSkill，通过预训练超网络将文本技能转换为即插即用的LoRA适配器，将技能知识存储在权重空间而非上下文空间。在ALFWorld和Search-QA上，LatentSkill在使用更少预填充token的情况下超越基线，为智能体技能的高效管理和自我改进提供了基础方法。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "Methods for agent self improvement",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.04051v1",
+      "source": "arxiv",
+      "title": "RUBAS: Rubric-Based Reinforcement Learning for Agent Safety",
+      "abstract": "The evolution of LLMs into tool-enabled agents creates a new class of safety challenges associated with real-world execution rather than simple text generation. Existing alignment methods often rely on coarse refusal signals or static supervision, making it difficult to balance safety with useful tool execution across diverse agentic risks. We introduce RUBAS, a rubric-based reinforcement learning framework for agent safety. RUBAS decomposes agent behavior into four dimensions: tool-use safety, argument safety, response safety, and helpfulness. These structured rubrics provide fine-grained and interpretable rewards over complete agent trajectories, enabling reinforcement learning to optimize safe tool use while preserving task completion. Extensive experiments across multiple agent safety benchmarks and models show that RUBAS improves safety over standard alignment baselines, reduces tool-grounded hallucinations, and maintains competitive utility. Our results suggest that multi-dimensional rubric rewards provide an effective training signal for aligning LLM agents in safety-critical tool-use settings.",
+      "authors": [
+        "Xian Qi Loye",
+        "Qinglin Su",
+        "Zhexin Zhang",
+        "Shiyao Cui",
+        "Qi Zhu",
+        "Fei Mi",
+        "Hongning Wang",
+        "Minlie Huang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CR"
+      ],
+      "published": "2026-06-02T09:02:14+00:00",
+      "link": "https://arxiv.org/pdf/2606.04051v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Uses reinforcement learning for agent safety, indirectly relevant to RL-based self-improvement",
+      "llm_evidence_cn": "使用强化学习优化智能体安全，间接涉及基于RL的自我改进",
+      "llm_evidence": "使用强化学习优化智能体安全，间接涉及基于RL的自我改进",
+      "canonical_evidence": "使用强化学习优化智能体安全，间接涉及基于RL的自我改进",
+      "llm_tldr_en": "Introduces RUBAS, a rubric-based RL framework for agent safety, decomposing agent behavior into four dimensions for safe tool use while preserving task completion.",
+      "llm_tldr_cn": "本文提出基于评分准则的强化学习框架RUBAS，将智能体行为分解为工具使用安全、参数安全、响应安全和帮助性四个维度，通过结构化奖励在保障安全的同时完成任务。实验表明，该方法在多个代理风险场景中有效平衡了安全与性能。",
+      "llm_tldr": "本文提出基于评分准则的强化学习框架RUBAS，将智能体行为分解为工具使用安全、参数安全、响应安全和帮助性四个维度，通过结构化奖励在保障安全的同时完成任务。实验表明，该方法在多个代理风险场景中有效平衡了安全与性能。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.06923v1",
+      "source": "arxiv",
+      "title": "Declarative Skills for AI Agents in Knowledge-Grounded Tool-Use Workflows",
+      "abstract": "We study orchestration mechanisms for tool-using AI agents in realistic customer-service workflows over an unstructured knowledge base. We argue that declarative agents -- AI agents equipped with natural-language skill files appended to the system prompt -- are an effective orchestration paradigm. Concretely, we compare (i) a DeclarativeAgent that reads three domain-specific skill files at inference time and decides its own control flow, (ii) an ImperativeAgent based on a programmatic state machine with explicit phases, and (iii) an unscaffolded baseline agent modeled after the $τ$-Knowledge benchmark agent. Our ImperativeAgent is motivated by externalised-control inference as in Recursive Language Models and graph-based orchestration frameworks. We formalise the three agents as policy classes within a decentralised partially-observable Markov decision process and analyse their information-theoretic and structural properties; we then test the predicted differences empirically on five language models and two retrieval regimes. Our results show that retrieval quality is a dominant bottleneck for AI agents: when evidence is incomplete or skewed, all agents degrade substantially, and skill files cannot recover lost performance. Under high-quality retrieval, however, declarative skills consistently improve accuracy on procedural tasks and reduce orchestration errors, while the imperative state machine's brittleness does not reliably improve task success or compliance.",
+      "authors": [
+        "M. Danish Lim",
+        "I. Danial Bin Sharudin",
+        "Wen Han Chen",
+        "Cedric Lim",
+        "Laura Wynter"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.SE"
+      ],
+      "published": "2026-06-05T05:38:51+00:00",
+      "link": "https://arxiv.org/pdf/2606.06923v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Declarative agent skills for tool-use workflows, related to agent skill improvement",
+      "llm_evidence_cn": "声明式智能体技能与工具使用流程，涉及智能体技能改进",
+      "llm_evidence": "声明式智能体技能与工具使用流程，涉及智能体技能改进",
+      "canonical_evidence": "声明式智能体技能与工具使用流程，涉及智能体技能改进",
+      "llm_tldr_en": "Studies declarative agents that use natural-language skill files for orchestration in customer-service workflows, comparing with imperative and baseline agents.",
+      "llm_tldr_cn": "本文研究面向知识密集型工具使用工作流的声明式智能体编排机制。通过对比声明式、命令式和无支架基线智能体，发现声明式智能体在灵活性和性能上具有优势，为智能体技能的自我改进提供了新范式。",
+      "llm_tldr": "本文研究面向知识密集型工具使用工作流的声明式智能体编排机制。通过对比声明式、命令式和无支架基线智能体，发现声明式智能体在灵活性和性能上具有优势，为智能体技能的自我改进提供了新范式。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "self-improving agent learning",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.05342v2",
+      "source": "arxiv",
+      "title": "SentinelBench: A Benchmark for Long-Running Monitoring Agents",
+      "abstract": "AI agents are increasingly asked to carry out work that spans minutes, hours, or longer. Yet the default model of agent behavior is continuous action: issuing tool calls, refreshing pages, searching for alternatives, or otherwise trying to force progress. This is the wrong approach for many long-running tasks, which are better served by a strategy of sustained attention. Instead, agents should monitor an environment, notice when an external event makes progress possible, then respond promptly without wasting resources while waiting. To measure progress on this class of tasks, we introduce SentinelBench, an open-source benchmark for time-evolving monitoring tasks.   SentinelBench contains 100 tasks across 10 synthetic web environments, including email, calendars, finance, professional networking, and entertainment. Each environment exposes a live web interface and replays a scripted sequence of events, requiring agents to navigate and reason about web pages whose state shifts underfoot. SentinelBench measures task completion, reaction time, and resource use, exposing the tradeoff between responsiveness and cost. We report results across three models and two browser-agent harnesses, establishing performance baselines for future comparison and demonstrating how agent design choices can dramatically impact key metrics. Together, these results show that SentinelBench distinguishes meaningful differences in agent behavior.",
+      "authors": [
+        "Matheus Kunzler Maldaner",
+        "Adam Fourney",
+        "Amanda Swearngin",
+        "Hussein Mozannar",
+        "Gagan Bansal",
+        "Maya Murad",
+        "Rafah Hosn",
+        "Saleema Amershi"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-03T18:32:00+00:00",
+      "link": "https://arxiv.org/pdf/2606.05342v2",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Benchmark for monitoring agents, relates to perception/detection in agent contexts",
+      "llm_evidence_cn": "监控智能体基准，与智能体感知检测相关",
+      "llm_evidence": "监控智能体基准，与智能体感知检测相关",
+      "canonical_evidence": "监控智能体基准，与智能体感知检测相关",
+      "llm_tldr_en": "Introduces SentinelBench, a benchmark for long-running monitoring agents, testing their ability to detect external events and respond without wasting resources.",
+      "llm_tldr_cn": "针对长时间运行的监控任务，本文提出SentinelBench基准，包含100个合成Web环境任务，评估智能体检测外部事件并及时响应的能力。该工作为智能体感知检测模块的研究提供了评估标准。",
+      "llm_tldr": "针对长时间运行的监控任务，本文提出SentinelBench基准，包含100个合成Web环境任务，评估智能体检测外部事件并及时响应的能力。该工作为智能体感知检测模块的研究提供了评估标准。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.07186v1",
+      "source": "arxiv",
+      "title": "A Causal Probabilistic Framework for Perception-Informed Closed-Loop Simulation of Autonomous Driving",
+      "abstract": "Software-in-the-loop (SIL) simulation is a cornerstone for the validation of modern automotive safety functions. However, many current frameworks utilize ideal sensing, which bypasses the functional insufficiencies of perception algorithms, leading to over-optimistic safety assessments. This paper proposes a perception-informed SIL testing methodology that bridges the gap between ground-truth simulation and real-world perception behavior. We present a framework for incorporating causal probabilistic models into standardized, scenario-based simulation toolchains, applicable to both Advanced Driver Assistance Systems (ADAS) and Autonomous Driving Systems (ADS). Our approach enables the systematic injection of realistic perception errors, such as loss of detection, sizing inaccuracies, and positioning offsets, derived from physical triggering conditions like fog, rain, and object-merging scenarios. By evaluating these ``faults'' within a standardized simulation environment, we demonstrate that perception-informed testing reveals latent operational risks that ideal SIL environments fail to capture, providing a scalable pathway for SOTIF (ISO 21448) validation.",
+      "authors": [
+        "Zhennan Fei",
+        "Rickard Johansson",
+        "Mikael Andersson",
+        "Matthias Eng",
+        "Mattias Eriksson",
+        "Kaveh Kianfar",
+        "Sadegh Rahrovani",
+        "Chris van der Ploeg",
+        "Michael Borth",
+        "Maren Buermann",
+        "Michiel Braat",
+        "Henk Goossens",
+        "Zijian Han",
+        "Majid Khorsand Vakilzadeh",
+        "Gabriel Rodrigues de Campos"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.SE"
+      ],
+      "published": "2026-06-05T11:53:43+00:00",
+      "link": "https://arxiv.org/pdf/2606.07186v1",
+      "tags": [
+        "keyword:agent-detect"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "perception-informed simulation framework",
+      "llm_evidence_cn": "感知信息仿真框架",
+      "llm_evidence": "感知信息仿真框架",
+      "canonical_evidence": "感知信息仿真框架",
+      "llm_tldr_en": "Proposes a causal probabilistic framework to inject realistic perception behavior into closed-loop simulation for autonomous driving, bridging ideal sensing and real-world perception.",
+      "llm_tldr_cn": "该论文提出了一种因果概率框架，用于将真实的感知行为注入自动驾驶的闭环仿真中，弥合了理想传感与现实感知之间的差距。框架通过集成因果概率模型到标准仿真工具链，实现了感知缺陷的系统注入，使仿真能评估感知算法对安全的影响。实验表明该方法能更真实地反映实际感知性能，为自动驾驶验证提供了更可靠的测试手段。",
+      "llm_tldr": "该论文提出了一种因果概率框架，用于将真实的感知行为注入自动驾驶的闭环仿真中，弥合了理想传感与现实感知之间的差距。框架通过集成因果概率模型到标准仿真工具链，实现了感知缺陷的系统注入，使仿真能评估感知算法对安全的影响。实验表明该方法能更真实地反映实际感知性能，为自动驾驶验证提供了更可靠的测试手段。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.06918v1",
+      "source": "arxiv",
+      "title": "DRIFT: From Robustness Gaps to Invariance Manifolds for AI-Generated Image Detection",
+      "abstract": "The rapid evolution of generative image models challenges existing AI-generated image detectors, particularly in open-world settings with unseen generators. Recent training-free approaches measure robustness gaps in frozen vision foundation models (VFMs), detecting fakes via perturbation-induced embedding drift. However, these methods rely on fixed invariance geometry inherited from pretraining and lack principled adaptation to the detection task. We instead formulate AI-generated image detection as learning a structured invariance manifold of real images under one-class supervision. Building upon a frozen VFM, we introduce lightweight projection heads that decompose representation space into complementary robust and fragile subspaces. The robust subspace is explicitly trained to suppress variations induced by physically plausible imaging transformations, approximating tangent directions of a real-image manifold, while the fragile subspace retains sensitivity to edit-like perturbations. A structured ordering margin enforces hierarchical separation between physical invariance and edit-induced variability, enabling detection as a margin-violation test relative to the learned manifold. At inference, multi-scale patch-wise drift under both transformation families yields a dual-channel invariance signature and interpretable localization. Extensive experiments demonstrate strong open-world generalization across unseen generators and resolutions, consistently outperforming training-free robustness-based baselines while providing interpretable invariance-violation maps.",
+      "authors": [
+        "Abhishek Ameta",
+        "Sayan Banerjee",
+        "Shreyas Pandith",
+        "Harshit",
+        "Ankita Chatterjee",
+        "Akshay Janardan Bankar",
+        "Amit Satish Unde"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-05T05:32:57+00:00",
+      "link": "https://arxiv.org/pdf/2606.06918v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "AI-generated image detection technique using invariance manifolds",
+      "llm_evidence_cn": "基于不变流形的AI生成图像检测技术",
+      "llm_evidence": "基于不变流形的AI生成图像检测技术",
+      "canonical_evidence": "基于不变流形的AI生成图像检测技术",
+      "llm_tldr_en": "DRIFT learns a structured invariance manifold for AI-generated image detection with light projection heads, improving generalization to unseen generators.",
+      "llm_tldr_cn": "现有AI生成图像检测方法依赖固定的鲁棒性间隙，缺乏对检测任务的适应。本文提出DRIFT，将检测转化为学习真实图像的结构化不变流形。基于冻结的视觉基础模型，引入轻量投影头将表示空间分解为鲁棒和脆弱子空间。在开放世界设置下，该方法显著提升了未知生成器的检测性能，为世界模型中的感知检测提供了可迁移技术。",
+      "llm_tldr": "现有AI生成图像检测方法依赖固定的鲁棒性间隙，缺乏对检测任务的适应。本文提出DRIFT，将检测转化为学习真实图像的结构化不变流形。基于冻结的视觉基础模型，引入轻量投影头将表示空间分解为鲁棒和脆弱子空间。在开放世界设置下，该方法显著提升了未知生成器的检测性能，为世界模型中的感知检测提供了可迁移技术。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for world model",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
