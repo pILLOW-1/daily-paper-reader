@@ -1,0 +1,420 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-09T22:08:43.881550+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 8,
+    "deep_cap": 7,
+    "deep_selected": 7,
+    "quick_candidates": 3,
+    "quick_skim_target": 12,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2606.01619v2",
+      "source": "arxiv",
+      "title": "ReSkill: Reconciling Skill Creation with Policy Optimization in Agentic RL",
+      "abstract": "Agentic reinforcement learning (RL) enables LLM agents to improve continuously from environment rewards, yet the resulting policies do not systematically accumulate reusable strategies that generalize across tasks. Modular skills can provide such reusable strategies, yet existing skill-augmented RL methods decouple skill creation from policy optimization, risking adopting skills that conflict with the evolving policy. Inspired by Anthropic's Skill Creator, we introduce ReSkill, an RL-in-the-loop skill creation framework that reconciles skill evolution with policy learning. ReSkill exploits the group-wise structure of GRPO to naturally embed three mechanisms with only marginal additional overhead: (1) an assertion-driven skill creator that diagnoses failures from past experience and proposes conditional, trigger-based skill revisions; (2) within-group rollout sampling that enables controlled comparison of skill versions, capturing which version best supports the policy's ongoing learning; and (3) Thompson Sampling with adaptive discounting to balance exploration and exploitation in skill version selection as the policy evolves. Across several domains, ReSkill consistently outperforms existing memory and skill-based RL methods, with the largest gains on unseen tasks. Analysis of the skill lifecycle shows skills being automatically created, tested, refined, and pruned as the policy improves, demonstrating reconciled skill-policy co-evolution.",
+      "authors": [
+        "Zelin He",
+        "Haotian Lin",
+        "Boran Han",
+        "Wei Zhu",
+        "Haoyang Fang",
+        "Bernie Wang",
+        "Xuan Zhu",
+        "Runze Li",
+        "Matthew Reimherr"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "stat.ML"
+      ],
+      "published": "2026-06-01T03:12:05+00:00",
+      "link": "https://arxiv.org/pdf/2606.01619v2",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "agentic RL with skill creation for self-improvement",
+      "llm_evidence_cn": "基于强化学习的智能体技能创造与自我改进",
+      "llm_evidence": "基于强化学习的智能体技能创造与自我改进",
+      "canonical_evidence": "基于强化学习的智能体技能创造与自我改进",
+      "llm_tldr_en": "ReSkill introduces an RL-in-the-loop skill creation framework that reconciles skill evolution with policy learning, enabling LLM agents to systematically improve from rewards.",
+      "llm_tldr_cn": "现有智能体强化学习方法无法系统积累可复用策略，ReSkill通过将技能创造嵌入策略优化循环，利用GRPO结构实现断言驱动的技能诊断、竞争性验证和约束对齐，在不增加显著开销的情况下提升技能质量与任务泛化能力，为智能体自我改进提供了新范式。",
+      "llm_tldr": "现有智能体强化学习方法无法系统积累可复用策略，ReSkill通过将技能创造嵌入策略优化循环，利用GRPO结构实现断言驱动的技能诊断、竞争性验证和约束对齐，在不增加显著开销的情况下提升技能质量与任务泛化能力，为智能体自我改进提供了新范式。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.06114v2",
+      "source": "arxiv",
+      "title": "Towards Healthy Evolution: Exploring the Role and Mechanisms of Human-Agent Interaction in Self-Evolving Systems",
+      "abstract": "Self-evolving agents improve through continual self-play and self-generated learning signals, but autonomous evolution can also cause capability degradation and safety drift. Although human feedback has proven effective for static and post-trained agents, its role in self-evolving systems remains underexplored. We introduce Agent Norm Correction through Human-like Oversight and Review (ANCHOR), an LLM-based framework that simulates human supervision and delivers feedback at various phases of self-evolution. With ANCHOR, we evaluate two representative open-source self-evolving agent systems across coding, mathematical reasoning, and safety. Our results show that even limited supervision substantially mitigates safety degradation while preserving stable performance on core evolutionary objectives. Further analysis shows that supervision over the output verification phase is the most effective for intervention, whereas increasing supervision frequency yields diminishing returns. These findings provide empirical evidence and practical guidance for designing more stable, controllable, and human-aligned self-evolving agent systems.",
+      "authors": [
+        "Dianxing Shi",
+        "Bowen Wang",
+        "Junqi He",
+        "Junhao Chen",
+        "Yuta Nakashima"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-04T13:03:16+00:00",
+      "link": "https://arxiv.org/pdf/2606.06114v2",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "framework for self-evolving agents with human-like oversight",
+      "llm_evidence_cn": "智能体自我进化框架，结合人类式监督",
+      "llm_evidence": "智能体自我进化框架，结合人类式监督",
+      "canonical_evidence": "智能体自我进化框架，结合人类式监督",
+      "llm_tldr_en": "Proposes ANCHOR, an LLM-based framework that simulates human supervision to guide self-evolving agents, mitigating capability degradation and safety drift.",
+      "llm_tldr_cn": "本文研究人机交互在自我进化智能体系统中的作用。提出ANCHOR框架，模拟人类监督并在自我进化各阶段提供反馈。在两个开源自我进化系统上的实验表明，即使有限的监督也能显著缓解能力下降和安全漂移。这项工作为健康地进化智能体提供了机制指导。",
+      "llm_tldr": "本文研究人机交互在自我进化智能体系统中的作用。提出ANCHOR框架，模拟人类监督并在自我进化各阶段提供反馈。在两个开源自我进化系统上的实验表明，即使有限的监督也能显著缓解能力下降和安全漂移。这项工作为健康地进化智能体提供了机制指导。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.07974v1",
+      "source": "arxiv",
+      "title": "PRISM: PRior-guided Imagination Sampling in world Models",
+      "abstract": "A learned world model provides a powerful physical intuition for evaluating future states. But its effectiveness in continuous control also depends critically on how candidate actions are generated for model-based planning. Rather than solely asking how accurately a model can simulate the future, we ask: which candidate actions are worth evaluating in the first place? Existing planners typically search arbitrarily or use expert demonstrations only to initialize a sampling mean, discarding the expert's state-conditioned confidence. Properly guiding this search requires a robust action prior, yet current approaches often rely on independent visual encoders or large-scale VLMs to obtain one. We argue that this architectural bloat is unnecessary: the exact same data - and the learned representations of the world model itself - inherently encode the agent's action intuition. We introduce PRISM, a task-agnostic framework that extracts both from a single dataset while maintaining strict architectural simplicity. Building on a standard JEPA-style latent world model, PRISM attaches a lightweight MLP directly to its frozen encoder to predict a state-conditioned Gaussian prior. At plan time, PRISM fuses this prior into the planner's sampling distribution via a precision-weighted Product-of-Gaussians update. This parameter-free, closed-form integration steers the sampling process, making the prior confident where it is and ceding control where it is not. PRISM improves success rates by 35 percentage points over vanilla world-model-based MPC on Cube and 32 percentage points on PushT, without introducing significant inference overhead.",
+      "authors": [
+        "Yuhai Wang",
+        "Jiawei Xia",
+        "Rongxuan Zhou",
+        "Xiao Hu",
+        "Yongliang Shi",
+        "Jing Du",
+        "Yang Ye"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-06-06T04:18:10+00:00",
+      "link": "https://arxiv.org/pdf/2606.07974v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "World model with prior-guided sampling for action evaluation",
+      "llm_evidence_cn": "世界模型中使用先验引导采样进行动作评估",
+      "llm_evidence": "世界模型中使用先验引导采样进行动作评估",
+      "canonical_evidence": "世界模型中使用先验引导采样进行动作评估",
+      "llm_tldr_en": "PRISM introduces a prior-guided imagination sampling method in world models, improving candidate action generation for model-based planning by using the expert s state-conditioned confidence from the same data.",
+      "llm_tldr_cn": "现有世界模型在模型规划中候选动作生成方式至关重要，但现有方法要么随机搜索，要么仅用专家演示初始化采样均值，忽略了专家状态条件置信度。PRISM提出先验引导想象采样，它从相同训练数据中提取专家状态条件置信度作为动作先验，避免引入额外视觉编码器或大规模VLM。实验表明该方法在连续控制任务中提升了规划效率和最终性能。其贡献在于提供了一种轻量级、数据驱动的动作先验来指导世界模型中的搜索。",
+      "llm_tldr": "现有世界模型在模型规划中候选动作生成方式至关重要，但现有方法要么随机搜索，要么仅用专家演示初始化采样均值，忽略了专家状态条件置信度。PRISM提出先验引导想象采样，它从相同训练数据中提取专家状态条件置信度作为动作先验，避免引入额外视觉编码器或大规模VLM。实验表明该方法在连续控制任务中提升了规划效率和最终性能。其贡献在于提供了一种轻量级、数据驱动的动作先验来指导世界模型中的搜索。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.08702v1",
+      "source": "arxiv",
+      "title": "ConMem: Structured Memory-Guided Adaptation in Training-Free Multi-Agent Systems",
+      "abstract": "Recent advances have improved the adaptive capabilities of LLM-based multi-agent systems (MAS) through memory-, skill-, and learning-based approaches, yet these approaches remain challenged by noisy trajectories, insufficient modeling of memory-skill relations, and reliance on additional training or high-quality supervision. To address these limitations, we propose ConMem, a relation-aware and training-free framework that enables efficient multi-agent adaptation through cross-experience coordination. Specifically, ConMem distills historical interaction trajectories into structured memory cards to capture reusable strategies and cues, organizing them into a relation-aware memory graph. At runtime, ConMem retrieves cards according to task needs and coordinates them through the card graph to resolve strategy conflicts and recover their dependencies. Combined, these modules yield structured and relation-aware guidance, enabling robust, lightweight adaptation in multi-agent systems without additional training. Extensive experiments across multiple benchmarks and mainstream MAS architectures show consistent gains over existing memory architectures, with improved inference-time efficiency through pruning more than 50% of expanded candidates and reducing planning overhead by over 80%. Our codes are available at https://anonymous.4open.science/r/ConMemCode",
+      "authors": [
+        "Zhixun Tan",
+        "Qiang Chen",
+        "Tairan Huang",
+        "Xiu Su",
+        "Yi Chen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-07T15:59:15+00:00",
+      "link": "https://arxiv.org/pdf/2606.08702v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Training-free multi-agent adaptation with structured memory cards and relation-aware graph",
+      "llm_evidence_cn": "使用结构化记忆卡和关系感知图实现无需训练的多智能体自适应",
+      "llm_evidence": "使用结构化记忆卡和关系感知图实现无需训练的多智能体自适应",
+      "canonical_evidence": "使用结构化记忆卡和关系感知图实现无需训练的多智能体自适应",
+      "llm_tldr_en": "ConMem proposes a relation-aware, training-free framework for LLM-based multi-agent systems, distilling trajectories into structured memory cards organized in a memory graph to enable efficient adaptation through cross-experience coordination.",
+      "llm_tldr_cn": "现有LLM多智能体系统依赖记忆、技能或学习，但面临噪声轨迹、记忆-技能关系建模不足以及依赖额外训练或高质量监督等问题。ConMem提出一种关系感知且无需训练的框架，将历史交互轨迹蒸馏为结构化记忆卡，并组织成关系感知记忆图。运行时根据任务需求检索卡片，并通过跨经验协调实现高效自适应。实验表明该方法在多种多智能体任务中提升了适应性，且无需额外训练。贡献在于提供了轻量级可迁移的记忆驱动自适应方法。",
+      "llm_tldr": "现有LLM多智能体系统依赖记忆、技能或学习，但面临噪声轨迹、记忆-技能关系建模不足以及依赖额外训练或高质量监督等问题。ConMem提出一种关系感知且无需训练的框架，将历史交互轨迹蒸馏为结构化记忆卡，并组织成关系感知记忆图。运行时根据任务需求检索卡片，并通过跨经验协调实现高效自适应。实验表明该方法在多种多智能体任务中提升了适应性，且无需额外训练。贡献在于提供了轻量级可迁移的记忆驱动自适应方法。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.07074v1",
+      "source": "arxiv",
+      "title": "SlimSearcher: Training Efficiency-Aware Web Agents via Adaptive Reward Gating",
+      "abstract": "Deep research agents have demonstrated remarkable capabilities in complex information-seeking tasks, yet this power comes at a steep computational cost. Driven by accuracy-focused training paradigms, current models adopt brute-force strategies characterized by blind tool dependency and performative reasoning-generating long, redundant trajectories that are far from necessary for resolving these tasks, leading to wasteful tool calls and excessive token consumption. To overcome this efficiency trap, we propose SlimSearcher, a principled framework that pushes the Pareto frontier between accuracy and computational cost across both Supervised Fine-Tuning (SFT) and Reinforcement Learning (RL). In the SFT stage, SlimSearcher employs Pareto-efficient filtration to distill trajectories that are both successful and economical, guiding the model toward inherently efficiency-aware search behaviors. During RL, we introduce Adaptive Reward Gating, a dynamic reward-shaping mechanism that evaluates relative tool and token efficiency within a sampled cohort. By cascading these adaptive efficiency metrics with a strict correctness gate, our approach effectively avoids the brevity bias associated with absolute penalties and mitigates reward hacking. Extensive experiments on long-horizon benchmarks, including GAIA, BrowseComp, and XBenchDeepSearch, demonstrate that SlimSearcher reduces average tool-call rounds by 17%-58% while maintaining or improving accuracy.",
+      "authors": [
+        "Zequn Xie",
+        "Junjie Wang",
+        "Dan Yang",
+        "Jie Feng",
+        "Yue Shen",
+        "Jian Wang",
+        "Jinjie Gu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-06-05T09:10:50+00:00",
+      "link": "https://arxiv.org/pdf/2606.07074v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "uses reinforcement learning to improve agent efficiency with adaptive reward gating",
+      "llm_evidence_cn": "使用强化学习和自适应奖励门控提升代理效率",
+      "llm_evidence": "使用强化学习和自适应奖励门控提升代理效率",
+      "canonical_evidence": "使用强化学习和自适应奖励门控提升代理效率",
+      "llm_tldr_en": "Proposes SlimSearcher, a framework using adaptive reward gating to train efficient web agents, pushing accuracy-cost Pareto frontier via SFT and RL.",
+      "llm_tldr_cn": "当前深度研究代理存在盲目使用工具导致计算浪费的问题。SlimSearcher提出一个基于自适应奖励门控的框架，通过监督微调和强化学习阶段追求准确性与计算成本的帕累托前沿。实验表明该方法能有效减少冗余轨迹并提升效率。该工作为训练效率感知的Web代理提供了新范式。",
+      "llm_tldr": "当前深度研究代理存在盲目使用工具导致计算浪费的问题。SlimSearcher提出一个基于自适应奖励门控的框架，通过监督微调和强化学习阶段追求准确性与计算成本的帕累托前沿。实验表明该方法能有效减少冗余轨迹并提升效率。该工作为训练效率感知的Web代理提供了新范式。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.08671v1",
+      "source": "arxiv",
+      "title": "SkillHone: A Harness for Continual Agent Skill Evolution Through Persistent Decision History",
+      "abstract": "Agent skills extend language-model agents with task-specific procedures, scripts, and references, but the tasks and environments they target continually change. Existing methods improve skills in bounded runs and retain only the final artifact, discarding the decision history that later agents need to interpret prior revisions, evaluations, and rejected alternatives. We introduce SkillHone, a harness for continual agent skill evolution grounded in persistent decision history. SkillHone pairs skill revisions with evaluation-side evidence that supplies practice feedback, recording structured histories of diagnoses, revisions, evidence, and outcomes. Role-separated subagents run candidate skills on practice probes with redacted reporting and propose revisions informed by prior decisions, enabling cross-session refinement without rediscovering past rationale. We evaluate SkillHone on deep-research benchmarks in a raw open-web setting, where agents are not given an integrated search stack and must organize retrieval through portable skills. We compare against a deep-research agent backed by commercial retrieval services. With Qwen3.6-35B-A3B as the evaluation-time backbone, the resulting skills outperform the deep-research agent by 15.8 points on GAIA and 3.2 points on WebWalkerQA-EN, while also exceeding prior skill-evolution methods.",
+      "authors": [
+        "Zhiwei Li",
+        "Yong Hu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-06-07T15:21:08+00:00",
+      "link": "https://arxiv.org/pdf/2606.08671v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "continual agent skill evolution through persistent decision history",
+      "llm_evidence_cn": "通过持久决策历史实现持续智能体技能演化",
+      "llm_evidence": "通过持久决策历史实现持续智能体技能演化",
+      "canonical_evidence": "通过持久决策历史实现持续智能体技能演化",
+      "llm_tldr_en": "SkillHone enables continual agent skill evolution by recording structured histories of revisions and evaluations.",
+      "llm_tldr_cn": "现有技能改进方法仅保留最终产物，丢失决策历史，难以支持持续演化。本文提出SkillHone，一个基于持久决策历史的持续智能体技能演化装备。SkillHone记录诊断、修订、证据和结果的完整历史，并利用角色分离的子代理进行实践评估。实验表明，SkillHone在持续技能演化中显著提升了技能质量和可解释性，为智能体自我改进提供了持续学习的机制。",
+      "llm_tldr": "现有技能改进方法仅保留最终产物，丢失决策历史，难以支持持续演化。本文提出SkillHone，一个基于持久决策历史的持续智能体技能演化装备。SkillHone记录诊断、修订、证据和结果的完整历史，并利用角色分离的子代理进行实践评估。实验表明，SkillHone在持续技能演化中显著提升了技能质量和可解释性，为智能体自我改进提供了持续学习的机制。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.08539v1",
+      "source": "arxiv",
+      "title": "AgentTrust: A Self-Improving Trust Layer for AI-Agent Actions",
+      "abstract": "AI agents increasingly take consequential actions -- shell commands, cloud operations, and arbitrary tool-calls -- so a trust layer must decide, per action, whether to allow, warn, block, or escalate. We argue that the right way to reason about such a layer is by threat type. Lexical (fixed-signature) threats, where danger lives in a stable token, are decidable by deterministic rules; semantic (intent-dependent) threats, where a benign and a malicious action share the same surface, are out of reach for rules by construction. We make this concrete with a negative proof: a determined, hand-authored cloud rule pack lifts held-out accuracy only 48 to 56% overall and moves the semantic categories by 0pp (data_db 29 to 29, observability 59 to 59, supply_chain 50 to 50), while a strong LLM judge carries exactly those categories. We give the judge a self-learning capability: on a corpus that is mainly semantic attacks it nearly doubles rule accuracy (48% to 83.6-85.2%) with near-zero false-blocks, and this holds across two model providers. We turn this into a self-improving dual-store system: the judge distills a growing deterministic rule floor on lexical threats (cheaper over time) and feeds a guarded RAG memory on semantic threats (a verdict-cache fails -- surface-twins collapse to ~58% -- so a corroboration guard lifts semantic accuracy +13pp, 70 to 84). The result is what sets AgentTrust v2 apart from its static v1 predecessor: a trust layer that self-evolves from its own stream of decisions -- cheaper on the lexical class (it distils its own rules) and smarter on the semantic class (it accrues guarded precedent), while never hard-blocking a benign action. An end-to-end online replay shows the judge-call rate falling (50% to 44%) and judge-domain accuracy rising (71% to 80%), with 0 benign hard-blocks across 45,000 actions.",
+      "authors": [
+        "Chenglin Yang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-07T09:39:20+00:00",
+      "link": "https://arxiv.org/pdf/2606.08539v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "self-improving trust layer for AI-agent actions",
+      "llm_evidence_cn": "面向AI智能体动作的自我改进信任层",
+      "llm_evidence": "面向AI智能体动作的自我改进信任层",
+      "canonical_evidence": "面向AI智能体动作的自我改进信任层",
+      "llm_tldr_en": "AgentTrust proposes a self-improving trust layer that uses threat-type reasoning to allow, warn, block, or escalate agent actions.",
+      "llm_tldr_cn": "AI智能体执行关键动作时缺乏可靠信任机制，AgentTrust提出基于威胁类型（词法vs语义）的自我改进信任层，通过规则与检测结合实现动态决策，在云操作场景中验证了有效性，为智能体安全执行提供可演进方案。",
+      "llm_tldr": "AI智能体执行关键动作时缺乏可靠信任机制，AgentTrust提出基于威胁类型（词法vs语义）的自我改进信任层，通过规则与检测结合实现动态决策，在云操作场景中验证了有效性，为智能体安全执行提供可演进方案。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.09316v1",
+      "source": "arxiv",
+      "title": "Anything2Skill: Compiling External Knowledge into Reusable Skills for Agents",
+      "abstract": "Retrieval-augmented generation (RAG) enables agents to access external knowledge at inference time, but it primarily retrieves fragmented declarative evidence, leaving agents to repeatedly infer task procedures from passages, manuals, examples, logs, or trajectories. This raises a fundamental question: can skills extracted from external knowledge bases be installed into an agent, enabling it to rapidly approximate domain expertise? In this paper, we propose Anything2Skill, a taxonomy-guided framework that compiles heterogeneous external knowledge into reusable, retrievable, and executable skills for agents. Given a corpus of knowledge records, \\textsc{Anything2Skill} first decomposes each record into evidence windows and performs plan-and-expand skill extraction under a skill-tree prior. The extracted candidates are then converted into structured skill contracts that specify invocation conditions, contraindications, action moves, workflow steps, constraints, output specifications, supporting evidence, and confidence scores. To construct a deployable procedural memory, Anything2Skill manages the extracted skills in a persistent SkillBank through taxonomy-aware compilation, registry-level reconciliation, lifecycle tracking, versioned updates, and visible skill-tree projection. At inference time, agents retrieve both task-specific passages from the original knowledge base and relevant procedural skills from the SkillBank, allowing RAG to provide declarative evidence while compiled skills provide reusable procedural guidance. Experiments on qsv and GitHub-CLI show that Anything2Skill combined with RAG achieves 98.85\\% and 94.10\\% success rates, respectively, substantially outperforming RAG-only agents. These results suggest that compiling latent procedural knowledge into explicit skills is an effective way to extend retrieval-augmented agents from knowledge access toward capability reuse.",
+      "authors": [
+        "Qianjun Pan",
+        "Yutao Yang",
+        "Junsong Li",
+        "Jie Zhou",
+        "Kai Chen",
+        "Xin Li",
+        "Qin Chen",
+        "Liang He"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-08T10:24:32+00:00",
+      "link": "https://arxiv.org/pdf/2606.09316v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "compiles external knowledge into reusable skills for agent improvement",
+      "llm_evidence_cn": "将外部知识编译为可复用技能以增强智能体",
+      "llm_evidence": "将外部知识编译为可复用技能以增强智能体",
+      "canonical_evidence": "将外部知识编译为可复用技能以增强智能体",
+      "llm_tldr_en": "Proposes Anything2Skill, a taxonomy-guided framework that compiles heterogeneous external knowledge into reusable, executable skills, enabling rapid domain expertise approximation for agents.",
+      "llm_tldr_cn": "针对检索增强生成只能提供碎片化陈述知识、无法直接获得任务过程技能的问题，本文提出Anything2Skill框架。它利用类别引导，将外部知识库中的多种记录分解为证据窗口，通过规划扩展等操作编译为可复用、可检索、可执行的技能。实验证明，该方法使智能体能快速获得领域专长，是一种通过外部知识实现自我提升的途径。",
+      "llm_tldr": "针对检索增强生成只能提供碎片化陈述知识、无法直接获得任务过程技能的问题，本文提出Anything2Skill框架。它利用类别引导，将外部知识库中的多种记录分解为证据窗口，通过规划扩展等操作编译为可复用、可检索、可执行的技能。实验证明，该方法使智能体能快速获得领域专长，是一种通过外部知识实现自我提升的途径。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2606.07861v1",
+      "source": "arxiv",
+      "title": "The Last Visible Pixel: Probing Fine-Scale Perception in Vision-Language Models",
+      "abstract": "Recent vision-language models (VLMs) excel at multimodal understanding and reasoning, yet their fine-grained visual perception remains underexplored. A natural extension of ``How many r are there in Strawberry?'' asks: how small a visual pattern can a VLM reliably perceive? As such, we introduce FineSightBench, a new benchmark that systematically probes this limit by separating perception tasks (pixel-level recognition of letters, shapes, objects) from reasoning tasks (spatial reasoning, counting, ordering over small targets) across controlled scales of 4--48px. Through comprehensive experiments and detailed failure mode analysis on state-of-the-art models, we reveal a sharp dissociation: perception saturates around 12px, while reasoning remains limited even at larger scales, with persistent numeracy and sequence errors. These findings expose fundamental deficiencies in VLMs' fine-scale visual reasoning that demand more rigorous evaluation.",
+      "authors": [
+        "Lujun Li",
+        "Lama Sleem",
+        "Niccolo Gentile",
+        "Yangjie Xu",
+        "Yewei Song",
+        "Wenbo Wu",
+        "Radu State"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-05T21:49:34+00:00",
+      "link": "https://arxiv.org/pdf/2606.07861v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "benchmark for fine-scale perception in vision-language models",
+      "llm_evidence_cn": "视觉语言模型细粒度感知能力基准",
+      "llm_evidence": "视觉语言模型细粒度感知能力基准",
+      "canonical_evidence": "视觉语言模型细粒度感知能力基准",
+      "llm_tldr_en": "Introduces FineSightBench to probe fine-scale visual perception in VLMs, revealing a sharp dissociation between perception and reasoning at small scales.",
+      "llm_tldr_cn": "本文提出FineSightBench基准，系统探测视觉语言模型的细粒度感知极限。通过分离感知与推理任务，在不同像素尺度（4-48px）下测试，发现感知能力在12px左右饱和，而推理能力持续改善。揭示了当前模型在微小模式识别上的根本限制。",
+      "llm_tldr": "本文提出FineSightBench基准，系统探测视觉语言模型的细粒度感知极限。通过分离感知与推理任务，在不同像素尺度（4-48px）下测试，发现感知能力在12px左右饱和，而推理能力持续改善。揭示了当前模型在微小模式识别上的根本限制。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-06-03-729790-v1",
+      "source": "biorxiv",
+      "title": "How a Predictive State Observer Can Self-Adapt Its Sensory Prediction-Error Correction Gain: Closed-Loop Evidence from a Muscle-Driven Reaching Task",
+      "abstract": "We ask how a forward-model-based predictive state observer should set its sensory prediction-error correction gain during muscle-driven reaching, and whether that gain can be adapted from agent-available signals - innovation history and per-episode reaching outcome - rather than from swept oracle labels. We evaluate a residual-MLP forward model in a 34-muscle MyoSuite arm on an IK-reachable below-shoulder task, deployed in closed loop with a stabilized endpoint probe controller that uses non-negative least-squares muscle routing and a virtual target ramp; the controller is a stabilized probe for evaluating state-estimation effects, not a biological motor planner. A swept fixed-gain closed-loop oracle reveals a delay-dependent correction structure: with no sensory delay, intermediate correction gains are best (K = 0.25-0.50), whereas with 18-step delay observation-heavy correction wins (K = 1.0). The forward-model-only K = 0 ablation is not the oracle: it is systematically worse than the best fixed K by 1.9-6.1 cm and shows large NNLS controller residuals caused by long-horizon autoregressive drift; we therefore report K = 0 as a diagnostic. Outcome-trained reliability-adaptive observers improve the delayed regime by 1.9-2.5 cm over default reliability while remaining neutral in no-delay cells, where the oracle is already intermediate. A feature-conditioned beta adapter that maps cell-level innovation statistics to per-field gain parameters nearly matches a per-cell trained diagnostic in 5/6 cells, but both remain 1.4-1.8 cm worse than the swept fixed-K oracle at 18-step delay. These results separate the delay-dependent correction structure, the forward-model-only failure mode of K = 0, and the remaining limits of agent-available adaptive correction.",
+      "authors": [
+        "Kobayashi, J."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-06-08T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.06.03.729790v1.full.pdf",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Self-adaptive sensory prediction-error correction gain using agent-available signals",
+      "llm_evidence_cn": "利用智能体可用信号自适应调整感觉预测误差修正增益",
+      "llm_evidence": "利用智能体可用信号自适应调整感觉预测误差修正增益",
+      "canonical_evidence": "利用智能体可用信号自适应调整感觉预测误差修正增益",
+      "llm_tldr_en": "This paper investigates how a forward-model-based predictive state observer can adapt its sensory prediction-error correction gain using only agent-available signals (innovation history and per-episode outcome), demonstrated on a muscle-driven reaching task.",
+      "llm_tldr_cn": "该研究探讨了前向模型预测状态观测器如何仅使用智能体自身可得信号（创新历史与每集结果）来自适应地设定感觉预测误差修正增益。在34肌肉手臂模型上评估，使用残差MLP前向模型和闭环控制，实验证明增益可从agent信号中自适应学习，无需真值标签。这为agent模型中感知处理的自适应提供了一种实用方法。贡献在于展示了如何在不使用外部监督的情况下实现感知误差处理的自我调整。",
+      "llm_tldr": "该研究探讨了前向模型预测状态观测器如何仅使用智能体自身可得信号（创新历史与每集结果）来自适应地设定感觉预测误差修正增益。在34肌肉手臂模型上评估，使用残差MLP前向模型和闭环控制，实验证明增益可从agent信号中自适应学习，无需真值标签。这为agent模型中感知处理的自适应提供了一种实用方法。贡献在于展示了如何在不使用外部监督的情况下实现感知误差处理的自我调整。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "Methods for agent self improvement",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
