@@ -1,0 +1,353 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-10T22:25:41.698597+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 5,
+    "deep_cap": 7,
+    "deep_selected": 5,
+    "quick_candidates": 3,
+    "quick_skim_target": 12,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2606.10917v1",
+      "source": "arxiv",
+      "title": "Role-Agent: Bootstrapping LLM Agents via Dual-Role Evolution",
+      "abstract": "Although Large Language Model (LLM) agents have demonstrated strong performance on complex tasks, their learning is often limited by inefficient interaction feedback and static training environments, which hinder broader generalization. To address these limitations, this paper introduces Role-Agent, \\textcolor{black}{a framework} that harnesses a single LLM to function concurrently as both the agent and the environment, enabling a bootstrapped co-evolution. Role-Agent comprises two synergistic components: World-In-Agent (WIA) and Agent-In-World (AIW). In WIA, the LLM acts as the agent and predicts future states after each action; the alignment between predicted and actual states is then used as a process reward, encouraging environment-aware reasoning. In AIW, the LLM analyzes failure modes from failed trajectories and retrieves tasks with similar failure patterns, thereby reshaping the training data distribution for targeted practice. Experiments on multiple benchmarks show that Role-Agent consistently improves performance, yielding an average gain of over 4\\% over strong baselines.",
+      "authors": [
+        "Xucong Wang",
+        "Ziyu Ma",
+        "Shidong Yang",
+        "Tongwen Huang",
+        "Pengkun Wang",
+        "Yong Wang",
+        "Xiangxiang Chu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-09T14:28:07+00:00",
+      "link": "https://arxiv.org/pdf/2606.10917v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "dual-role evolution for agent self-improvement",
+      "llm_evidence_cn": "双角色进化实现智能体自我改进",
+      "llm_evidence": "双角色进化实现智能体自我改进",
+      "canonical_evidence": "双角色进化实现智能体自我改进",
+      "llm_tldr_en": "Role-Agent lets a single LLM act as both agent and environment, using predicted state alignment as process reward for bootstrapped co-evolution.",
+      "llm_tldr_cn": "针对LLM智能体学习受限于静态环境和低效反馈的问题，本文提出Role-Agent框架，让单个LLM同时扮演智能体和环境角色，通过预测状态与实际状态的比对作为过程奖励，实现自举式协同进化。该方法包含World-In-Agent和Agent-In-World两个组件，分别促进环境感知推理和动作探索。实验表明智能体能通过这种自循环机制持续改进，为递归自我改进提供了新范式。",
+      "llm_tldr": "针对LLM智能体学习受限于静态环境和低效反馈的问题，本文提出Role-Agent框架，让单个LLM同时扮演智能体和环境角色，通过预测状态与实际状态的比对作为过程奖励，实现自举式协同进化。该方法包含World-In-Agent和Agent-In-World两个组件，分别促进环境感知推理和动作探索。实验表明智能体能通过这种自循环机制持续改进，为递归自我改进提供了新范式。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.08671v1",
+      "source": "arxiv",
+      "title": "SkillHone: A Harness for Continual Agent Skill Evolution Through Persistent Decision History",
+      "abstract": "Agent skills extend language-model agents with task-specific procedures, scripts, and references, but the tasks and environments they target continually change. Existing methods improve skills in bounded runs and retain only the final artifact, discarding the decision history that later agents need to interpret prior revisions, evaluations, and rejected alternatives. We introduce SkillHone, a harness for continual agent skill evolution grounded in persistent decision history. SkillHone pairs skill revisions with evaluation-side evidence that supplies practice feedback, recording structured histories of diagnoses, revisions, evidence, and outcomes. Role-separated subagents run candidate skills on practice probes with redacted reporting and propose revisions informed by prior decisions, enabling cross-session refinement without rediscovering past rationale. We evaluate SkillHone on deep-research benchmarks in a raw open-web setting, where agents are not given an integrated search stack and must organize retrieval through portable skills. We compare against a deep-research agent backed by commercial retrieval services. With Qwen3.6-35B-A3B as the evaluation-time backbone, the resulting skills outperform the deep-research agent by 15.8 points on GAIA and 3.2 points on WebWalkerQA-EN, while also exceeding prior skill-evolution methods.",
+      "authors": [
+        "Zhiwei Li",
+        "Yong Hu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-06-07T15:21:08+00:00",
+      "link": "https://arxiv.org/pdf/2606.08671v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "continual agent skill evolution via persistent decision history",
+      "llm_evidence_cn": "通过持久决策历史实现持续智能体技能演化",
+      "llm_evidence": "通过持久决策历史实现持续智能体技能演化",
+      "canonical_evidence": "通过持久决策历史实现持续智能体技能演化",
+      "llm_tldr_en": "SkillHone introduces a harness for continual agent skill evolution using persistent decision history, enabling iterative self-improvement through practice feedback and structured revision records.",
+      "llm_tldr_cn": "现有智能体技能演化方法仅在有限运行中改进并丢弃决策历史，导致后续智能体无法理解修订过程。SkillHone提出一种基于持久决策历史的持续技能演化框架，通过记录诊断、修订、证据和结果的完整历史，并由分离角色的子智能体对实践探针进行评估反馈，实现了智能体技能的迭代自我改进。实验表明该方法能有效提升技能质量，并为递归自我改进提供了基础设施。",
+      "llm_tldr": "现有智能体技能演化方法仅在有限运行中改进并丢弃决策历史，导致后续智能体无法理解修订过程。SkillHone提出一种基于持久决策历史的持续技能演化框架，通过记录诊断、修订、证据和结果的完整历史，并由分离角色的子智能体对实践探针进行评估反馈，实现了智能体技能的迭代自我改进。实验表明该方法能有效提升技能质量，并为递归自我改进提供了基础设施。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.10546v1",
+      "source": "arxiv",
+      "title": "SkillAxe: Sharpening LLM-Authored Agent Skills Through Evaluation-Guided Self-Refinement",
+      "abstract": "Skill documents, structured natural-language instructions that guide Large Language Model (LLM) agents, are critical to modern agent frameworks, yet LLMs struggle to write skills that actually work. On SkillsBench, human-authored skills improve pass rates by 16.2 percentage points, while LLM-authored skills provide no measurable gain. We introduce SkillAxe, a fully unsupervised framework that enables LLMs to iteratively diagnose and refine their own skills. SkillAxe decomposes skill quality into four interpretable dimensions (quality impact, trigger precision, instruction compliance with fault attribution, and solution-path coverage), producing structured improvement briefs that require no ground-truth labels, test suites, or environment rewards. On SkillsBench, SkillAxe improves pass rates by 28\\% relative over unimproved LLM skills and closes 47--67\\% of the gap to human-authored skills. We validate the approach as a continuous improvement engine in the wild on SpreadsheetBench, where a SkillAxe-built skill library learns from past agent trajectories and raises pass rate from 16.0\\% to 52.0\\% using only 22 skills.",
+      "authors": [
+        "Srishti Gautam",
+        "Arjun Radhakrishna",
+        "Sumit Gulwani"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-06-09T08:14:39+00:00",
+      "link": "https://arxiv.org/pdf/2606.10546v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "evaluation-guided self-refinement of agent skills",
+      "llm_evidence_cn": "评估引导的智能体技能自我精炼",
+      "llm_evidence": "评估引导的智能体技能自我精炼",
+      "canonical_evidence": "评估引导的智能体技能自我精炼",
+      "llm_tldr_en": "SkillAxe enables LLMs to iteratively diagnose and refine their own skills without any ground-truth labels or test suites.",
+      "llm_tldr_cn": "针对LLM自写技能效果差的问题，本文提出SkillAxe框架，将技能质量分解为四个可解释维度，并生成结构化改进简报。该方法完全无监督，无需标签或测试集。智能体通过自我诊断和迭代精炼，使自写技能达到接近人类编写水平。实验证明SkillAxe显著提升技能质量，为智能体自我改进技能提供了自动化方案。",
+      "llm_tldr": "针对LLM自写技能效果差的问题，本文提出SkillAxe框架，将技能质量分解为四个可解释维度，并生成结构化改进简报。该方法完全无监督，无需标签或测试集。智能体通过自我诊断和迭代精炼，使自写技能达到接近人类编写水平。实验证明SkillAxe显著提升技能质量，为智能体自我改进技能提供了自动化方案。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.10709v1",
+      "source": "arxiv",
+      "title": "Effective Reinforcement Learning for Agentic Search by Recycling Zero-Variance Queries During Training",
+      "abstract": "The use of GRPO-style algorithms has become the standard strategy for training LLM search agents under outcome-only rewards. With these algorithms, a query contributes to parameter updates only when its rollout group mixes successes and failures; all-correct (too-easy) and all-incorrect (too-hard) groups are zero-variance and waste rollout cost. Existing approaches treat zero-variance as a static property and either discard or pre-filter such groups. We hypothesize and empirically validate that queries flip between zero-variance and signal-bearing states as the policy evolves during training. Building on this intuition, we propose query recycling, which returns zero-variance groups to a mutable pool for future resampling, so that the effective training distribution co-evolves with the policy. With the proposed technique, a 1.7B parameter model trained on synthetic data can reach 66.0 average Pass@1 accross seven multi-hop QA benchmarks, matching or surpassing systems with up to 7B parameters trained on benchmark-derived supervision. Analysis of recycling patterns shows that recycled queries supply roughly three quarters of the effective batch by the end of training, with contributions split between recovery from policy improvement and policy drift.",
+      "authors": [
+        "João Coelho",
+        "João Magalhães",
+        "Bruno Martins",
+        "Chenyan Xiong"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "published": "2026-06-09T11:12:58+00:00",
+      "link": "https://arxiv.org/pdf/2606.10709v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "reinforcement learning training improvement for agentic search via query recycling",
+      "llm_evidence_cn": "通过查询回收改进智能体搜索的强化学习训练",
+      "llm_evidence": "通过查询回收改进智能体搜索的强化学习训练",
+      "canonical_evidence": "通过查询回收改进智能体搜索的强化学习训练",
+      "llm_tldr_en": "Query recycling reuses zero-variance queries during RL training, improving sample efficiency for agentic search.",
+      "llm_tldr_cn": "在GRPO训练中，全正确或全错误的查询组贡献为零，浪费计算资源。本文发现这些组随策略进化会在有信号和无信号间切换，提出查询回收机制将其重新放入可变池供未来重采样，提升了训练样本效率，加速了智能体学习。",
+      "llm_tldr": "在GRPO训练中，全正确或全错误的查询组贡献为零，浪费计算资源。本文发现这些组随策略进化会在有信号和无信号间切换，提出查询回收机制将其重新放入可变池供未来重采样，提升了训练样本效率，加速了智能体学习。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.09316v2",
+      "source": "arxiv",
+      "title": "Anything2Skill: Compiling External Knowledge into Reusable Skills for Agents",
+      "abstract": "Retrieval-augmented generation (RAG) enables agents to access external knowledge at inference time, but it primarily retrieves fragmented declarative evidence, leaving agents to repeatedly infer task procedures from passages, manuals, examples, logs, or trajectories. This raises a fundamental question: can skills extracted from external knowledge bases be installed into an agent, enabling it to rapidly approximate domain expertise? In this paper, we propose Anything2Skill, a taxonomy-guided framework that compiles heterogeneous external knowledge into reusable, retrievable, and executable skills for agents. Given a corpus of knowledge records, \\textsc{Anything2Skill} first decomposes each record into evidence windows and performs plan-and-expand skill extraction under a skill-tree prior. The extracted candidates are then converted into structured skill contracts that specify invocation conditions, contraindications, action moves, workflow steps, constraints, output specifications, supporting evidence, and confidence scores. To construct a deployable procedural memory, Anything2Skill manages the extracted skills in a persistent SkillBank through taxonomy-aware compilation, registry-level reconciliation, lifecycle tracking, versioned updates, and visible skill-tree projection. At inference time, agents retrieve both task-specific passages from the original knowledge base and relevant procedural skills from the SkillBank, allowing RAG to provide declarative evidence while compiled skills provide reusable procedural guidance. Experiments on qsv and GitHub-CLI show that Anything2Skill combined with RAG achieves 98.85\\% and 94.10\\% success rates, respectively, substantially outperforming RAG-only agents. These results suggest that compiling latent procedural knowledge into explicit skills is an effective way to extend retrieval-augmented agents from knowledge access toward capability reuse.",
+      "authors": [
+        "Qianjun Pan",
+        "Yutao Yang",
+        "Junsong Li",
+        "Jie Zhou",
+        "Kai Chen",
+        "Xin Li",
+        "Qin Chen",
+        "Liang He"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-08T10:24:32+00:00",
+      "link": "https://arxiv.org/pdf/2606.09316v2",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "compiling external knowledge into reusable agent skills for self-improvement",
+      "llm_evidence_cn": "将外部知识编译为可复用技能以改进智能体",
+      "llm_evidence": "将外部知识编译为可复用技能以改进智能体",
+      "canonical_evidence": "将外部知识编译为可复用技能以改进智能体",
+      "llm_tldr_en": "Proposes a framework to compile heterogeneous knowledge into reusable, executable skills, enabling rapid domain expertise approximation; directly supports agent self-improvement.",
+      "llm_tldr_cn": "现有检索增强生成仅提供零散证据，智能体需重复推断任务流程。本文提出Anything2Skill框架，通过分解知识记录、规划扩展和技能提炼，将异构外部知识编译为可检索、可执行的可复用技能。实验表明该框架能显著提升智能体在未见任务上的表现，为智能体自我改进提供了高效知识注入方法。",
+      "llm_tldr": "现有检索增强生成仅提供零散证据，智能体需重复推断任务流程。本文提出Anything2Skill框架，通过分解知识记录、规划扩展和技能提炼，将异构外部知识编译为可检索、可执行的可复用技能。实验表明该框架能显著提升智能体在未见任务上的表现，为智能体自我改进提供了高效知识注入方法。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "Methods for agent self improvement",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.07054v1",
+      "source": "arxiv",
+      "title": "TRACE: Trajectory Reasoning through Adaptive Cross-Step Evidence Aggregation for LLM Agents",
+      "abstract": "Autonomous LLM agents can pursue hidden malicious objectives through sequences of individually benign actions, making sabotage difficult to detect using standard trajectory-level monitoring. Existing approaches either evaluate complete trajectories in a single pass or partition them into independently scored windows, limiting their ability to connect evidence across temporally distant actions. We propose TRACE, a monitoring framework for long-horizon LLM agent trajectories. TRACE operates through a TIJ (Triage-Inspect-Judge) loop that identifies high-signal regions, performs targeted inspection while maintaining accumulated evidence across reasoning steps, and synthesizes a trajectory-level verdict. We evaluate TRACE on ten task domains from SHADE-Arena against state-of-the-art baselines. TRACE achieves an aggregate F1 of 0.713 and recall of 0.844, with the largest gains on tasks requiring long-range evidence linking.",
+      "authors": [
+        "Vijitha Mittapalli",
+        "Shreyaa Jayant Dani",
+        "Satya Srujana Pilli",
+        "Snigdha Ansu",
+        "Mohammadreza Teymoorianfard",
+        "Franck Dernoncourt",
+        "Hongjie Chen",
+        "Yu Wang",
+        "Ryan A. Rossi",
+        "Nesreen K. Ahmed"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.CR",
+        "cs.LG"
+      ],
+      "published": "2026-06-05T08:54:38+00:00",
+      "link": "https://arxiv.org/pdf/2606.07054v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "detection of malicious objectives in agent trajectories",
+      "llm_evidence_cn": "检测智能体轨迹中的恶意目标",
+      "llm_evidence": "检测智能体轨迹中的恶意目标",
+      "canonical_evidence": "检测智能体轨迹中的恶意目标",
+      "llm_tldr_en": "TRACE proposes a monitoring framework for LLM agents that aggregates evidence across temporally distant steps to detect sabotage.",
+      "llm_tldr_cn": "当前方法难以检测智能体通过长期轨迹隐藏的恶意行为。TRACE提出了一种监测框架，通过三阶段循环（分类-检查-判断）在时间上聚合证据，实现轨迹级判定。在十个任务上的评估表明TRACE能有效检测破坏行为，为智能体安全提供新工具。",
+      "llm_tldr": "当前方法难以检测智能体通过长期轨迹隐藏的恶意行为。TRACE提出了一种监测框架，通过三阶段循环（分类-检查-判断）在时间上聚合证据，实现轨迹级判定。在十个任务上的评估表明TRACE能有效检测破坏行为，为智能体安全提供新工具。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.06090v1",
+      "source": "arxiv",
+      "title": "Beyond Semantic Organization: Memory as Execution State Management for Long-Horizon Agents",
+      "abstract": "LLM-based agents increasingly tackle long-horizon tasks with interdependent decisions, where each action reshapes future constraints and intermediate errors can cascade. Existing RAG and agent memory systems organize histories by semantic similarity, retrieving content-relevant entries at decision time. We argue that this design mismatches execution-state dependencies: it fragments decision trajectories and mixes valid and erroneous traces, hindering coherent state reconstruction and error isolation. We propose MAGE (Memory as Agent-Guided Exploration), an active execution-state manager that stores interactions in a hierarchical state tree. The agent derives its state from the active root-to-current path, combining subgoal summaries, recent traces, and hints from prior branches. Four coupled operations maintain the tree: Grow records new traces, Compress summarizes completed subgoals, Maintain validates summaries, and Revise restores a target boundary and resumes on a new branch. This design bounds context growth while preserving state integrity and isolating flawed segments from the active path. Experiments on MemoryArena show that MAGE improves the average task success rate by 7.8--20.4 pp over baselines, while reducing token consumption by 55.1%.",
+      "authors": [
+        "Yaoqi Chen",
+        "Haibin Lai",
+        "Yuru Feng",
+        "Chuyu Han",
+        "Qianxi Zhang",
+        "Baotong Lu",
+        "Menghao Li",
+        "Xinjiang Wang",
+        "Zhirui Wang",
+        "Shusen Xu",
+        "Zengzhong Li",
+        "Zewen Jin",
+        "Hao Wu",
+        "Cheng Li",
+        "Qi Chen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-04T12:26:42+00:00",
+      "link": "https://arxiv.org/pdf/2606.06090v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "memory management for agent performance improvement",
+      "llm_evidence_cn": "通过记忆管理提升智能体性能的方法",
+      "llm_evidence": "通过记忆管理提升智能体性能的方法",
+      "canonical_evidence": "通过记忆管理提升智能体性能的方法",
+      "llm_tldr_en": "MAGE proposes a hierarchical state-tree memory for LLM agents, improving execution-state coherence and error isolation, which is a method for enhancing agent self-improvement capabilities.",
+      "llm_tldr_cn": "现有智能体记忆系统按语义相似性组织，导致轨迹碎片化与错误混杂。该论文提出MAGE，一种主动执行状态管理器，将交互存入分层状态树，智能体通过路径推导状态。该方法能提升长期任务中的状态重建与错误隔离能力，从而间接支持智能体自我改进。",
+      "llm_tldr": "现有智能体记忆系统按语义相似性组织，导致轨迹碎片化与错误混杂。该论文提出MAGE，一种主动执行状态管理器，将交互存入分层状态树，智能体通过路径推导状态。该方法能提升长期任务中的状态重建与错误隔离能力，从而间接支持智能体自我改进。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "Methods for agent self improvement",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.08059v1",
+      "source": "arxiv",
+      "title": "Perceptive Behavior Foundation Model: Adapting Human Motion Priors to Robot-Centric Terrain",
+      "abstract": "Humanoid behavior foundation models aim to acquire reusable whole-body control policies from broad human motion priors, enabling a single controller to produce diverse and expressive behaviors. However, existing motion-centric foundation policies largely assume that the reference motion is already physically compatible with the robot's surroundings. This assumption breaks when the demonstrator, operator, and robot inhabit different environments: a human motion may specify the intended behavior, but not the footholds, clearance, body height, or contact timing required by the robot's local terrain. We introduce \\emph{Perceptive Behavior Foundation Model} (Perceptive BFM), a terrain-aware humanoid control framework that grounds human motion priors in robot-centric perception. The model preserves raw kinematic motion references as the behavioral interface, while using local terrain observations to adapt contacts, posture, and timing. To provide scalable terrain supervision, we develop \\emph{terrain-conformal reference synthesis} (TCRS), which converts locomotion-oriented human motion clips into terrain-consistent references through contact-aware foothold construction, foot-geometry-aware swing optimization, support-aware root reconstruction, collision repair, and multi-point inverse kinematics. We then train a blind adapted-reference teacher and transfer its terrain-conformal behavior to a deployed raw-reference student through target-frame action alignment. The student is an identity-gated Transformer tracker whose terrain features enter through residual pathways initialized to preserve the motion-tracking prior and trained to produce local corrections only when needed.",
+      "authors": [
+        "Zifan Wang",
+        "Yizhao Li",
+        "Teli Ma",
+        "Qiang Zhang",
+        "Yudong Fan",
+        "Hao Xu",
+        "Shuo Yang",
+        "Junwei Liang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-06-06T08:46:44+00:00",
+      "link": "https://arxiv.org/pdf/2606.08059v1",
+      "tags": [
+        "keyword:agent-detect"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "perceptive control framework using terrain-aware perception for humanoid robots",
+      "llm_evidence_cn": "利用地形感知的人形机器人感知控制框架",
+      "llm_evidence": "利用地形感知的人形机器人感知控制框架",
+      "canonical_evidence": "利用地形感知的人形机器人感知控制框架",
+      "llm_tldr_en": "Perceptive BFM adapts human motion priors to robot-centric terrain by integrating perception, enabling whole-body control that respects local foothold and clearance constraints.",
+      "llm_tldr_cn": "现有行为基础模型假设参考运动与机器人环境物理兼容，但在演示者、操作者与机器人所处环境不同时失效。Perceptive BFM提出一种地形感知的人形机器人控制框架，将人体运动先验与机器人局部地形感知结合，通过感知模块提取地面接触点、净空高度等信息，使得控制器能生成顾及地形约束的全身动作。该方法展示了感知模块在智能体架构中的关键作用。",
+      "llm_tldr": "现有行为基础模型假设参考运动与机器人环境物理兼容，但在演示者、操作者与机器人所处环境不同时失效。Perceptive BFM提出一种地形感知的人形机器人控制框架，将人体运动先验与机器人局部地形感知结合，通过感知模块提取地面接触点、净空高度等信息，使得控制器能生成顾及地形约束的全身动作。该方法展示了感知模块在智能体架构中的关键作用。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in agent architectures",
+      "matched_requirement_id": "req-15",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
