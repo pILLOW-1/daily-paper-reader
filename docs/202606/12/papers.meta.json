@@ -1,0 +1,69 @@
+{
+  "label": "2026-06-12",
+  "date": "2026-06-12",
+  "generated_at": "2026-06-12T22:07:44",
+  "count": 4,
+  "papers": [
+    {
+      "paper_id": "202606/12/2606.06741v1-openskill-open-world-self-evolution-for-llm-agents",
+      "section": "deep",
+      "title_en": "OpenSkill: Open-World Self-Evolution for LLM Agents",
+      "authors": "Zhiling Yan, Dingjie Song, Hanrong Zhang, Wei Liang, Yuxuan Zhang, Yutong Dai, Lifang He, Philip S. Yu, Ran Xu, Xiang Li, Lichao Sun",
+      "date": "2026-06-04",
+      "pdf": "https://arxiv.org/pdf/2606.06741v1",
+      "score": "9.0",
+      "evidence": "LLM代理在开放世界中从零构建技能和验证信号进行自我进化",
+      "tldr": "现有LLM智能体自我进化假设存在监督信号，但开放世界部署常缺乏此类条件。本文提出OpenSkill框架，从文档、代码仓库及网络资源中获取知识并构建验证锚点，合成可迁移技能，通过自建虚拟任务进行无监督训练。在多个基准上，OpenSkill取得了最佳自动化通过率，且技能可跨模型迁移，无需模型特定调整。该工作首次实现了无目标任务监督的开放世界自我进化。",
+      "tags": "query:self-improve",
+      "abstract_en": "Self-evolving agents requires adaptation after deployment, but existing approaches assume a usable learning loop, such as curated skills, successful trajectories, or verifier signals. Real open-world deployments may provide none of these, offering only a task prompt. In this work, we study open-world self-evolution, where an agent must build both its skills and its own verification signals from scratch, using open-world resources but no target-task supervision. We propose OpenSkill, a framework that bootstraps this loop: it acquires grounded knowledge and verification anchors from documentation, repositories, and the web, synthesizes them into transferable skills, and refines those skills against self-built virtual tasks grounded in the anchors rather than in target answers. The open world thus supplies both the knowledge to be learned and a supervision-independent practice environment, with target-task supervision reserved for final evaluation. Across three benchmarks and two target agents, OpenSkill attains the best automated pass rate while satisfying the no-supervision constraint. Analysis shows its skills transfer across models without model-specific adaptation, and its self-built verifier aligns with ground-truth outcomes despite never accessing them.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/12/2606.08671v1-skillhone-a-harness-for-continual-agent-skill-evolution-through-persistent-decision-history",
+      "section": "deep",
+      "title_en": "SkillHone: A Harness for Continual Agent Skill Evolution Through Persistent Decision History",
+      "authors": "Zhiwei Li, Yong Hu",
+      "date": "2026-06-07",
+      "pdf": "https://arxiv.org/pdf/2606.08671v1",
+      "score": "9.0",
+      "evidence": "通过持久决策历史实现智能体技能的持续演进",
+      "tldr": "针对智能体技能演化中决策历史被丢弃导致跨会话改进受限的问题，提出SkillHone，通过持久决策历史和角色分离子代理记录诊断、修订、证据和结果，实现跨会话技能持续进化。在开放网络深度研究任务中，基于Qwen3.6-35B-A3B的技能在GAIA和WebWalkerQA-EN上分别超越商业检索服务代理15.8和3.2分，并优于此前方法，验证了持久历史对技能演化的有效性。",
+      "tags": "query:self-improve",
+      "abstract_en": "Agent skills extend language-model agents with task-specific procedures, scripts, and references, but the tasks and environments they target continually change. Existing methods improve skills in bounded runs and retain only the final artifact, discarding the decision history that later agents need to interpret prior revisions, evaluations, and rejected alternatives. We introduce SkillHone, a harness for continual agent skill evolution grounded in persistent decision history. SkillHone pairs skill revisions with evaluation-side evidence that supplies practice feedback, recording structured histories of diagnoses, revisions, evidence, and outcomes. Role-separated subagents run candidate skills on practice probes with redacted reporting and propose revisions informed by prior decisions, enabling cross-session refinement without rediscovering past rationale. We evaluate SkillHone on deep-research benchmarks in a raw open-web setting, where agents are not given an integrated search stack and must organize retrieval through portable skills. We compare against a deep-research agent backed by commercial retrieval services. With Qwen3.6-35B-A3B as the evaluation-time backbone, the resulting skills outperform the deep-research agent by 15.8 points on GAIA and 3.2 points on WebWalkerQA-EN, while also exceeding prior skill-evolution methods.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/12/2606.08755v1-co-evolving-skill-generation-and-policy-optimization",
+      "section": "deep",
+      "title_en": "Co-Evolving Skill Generation and Policy Optimization",
+      "authors": "Zhiwei Zhang, Yudi Lin, Nikki Lijing Kuang, Linlin Wu, Xiaomin Li, Songtao Liu, Fenglong Ma",
+      "date": "2026-06-07",
+      "pdf": "https://arxiv.org/pdf/2606.08755v1",
+      "score": "8.0",
+      "evidence": "通过共同进化技能生成与策略优化实现智能体自我改进",
+      "tldr": "现有技能增强强化学习在存储新技能前不评估其效用，导致低效甚至有害技能混入且难以归因。本文提出在线框架，利用现有rollout预算构建匹配组，通过奖励差距估计候选技能的边际效用，实现存储前筛选。该信号同时用于训练策略作为技能生成器，无需额外开销即可提升技能库质量，并支持检索重排序和旧技能修剪。方法缓解了对外部大模型的依赖，实现技能与策略协同进化。",
+      "tags": "query:self-improve",
+      "abstract_en": "Skill-augmented reinforcement learning improves language agents by storing reusable procedural knowledge acquired from past experience. Existing methods typically use strong language models to analyze trajectories, generate skills, and update a retrievable skill bank during online training. However, they rarely assess whether a newly generated skill is useful before it is stored and reused. We find that this assumption is unreliable: even skills generated by proprietary frontier LLMs exhibit highly mixed utility, with many providing little benefit or even degrading performance. Once such skills enter the bank, their effects are difficult to identify, because subsequent rollout feedback is delayed and usually reflects the combined effect of multiple retrieved skills rather than the marginal contribution of any individual skill. We propose an online reinforcement learning framework for pre-storage skill validation. The framework estimates whether a candidate skill contributes useful information beyond the skills already retrieved for the current task. It uses the standard rollout budget to form two matched groups under the same task and retrieval context: base rollouts conditioned on the currently retrieved skills, and skill-augmented rollouts conditioned on the same skills plus one candidate skill induced from the base trajectories. The reward gap between these two groups estimates the candidate skill's context-dependent marginal utility, enabling the framework to promote useful skills while filtering ineffective or harmful ones without additional rollout overhead. The framework further uses this marginal-utility signal to train the policy itself as a skill generator, reducing reliance on repeated calls to proprietary models. The learned skill-generation likelihood serves as a context-dependent score for retrieval-time reranking and outdated-skill pruning as the policy evolves.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202606/12/2606.11680v1-organize-then-retrieve-hierarchical-memory-navigation-for-efficient-agents",
+      "section": "quick",
+      "title_en": "Organize then Retrieve: Hierarchical Memory Navigation for Efficient Agents",
+      "authors": "Hao-Lun Hsu, Nikki Lijing Kuang, Boyi Liu, Zhewei Yao, Yuxiong He",
+      "date": "2026-06-10",
+      "pdf": "https://arxiv.org/pdf/2606.11680v1",
+      "score": "7.0",
+      "evidence": "层次化记忆导航提升智能体效率，支持自我改进",
+      "tldr": "LLM agent因无状态性在处理长程任务时需将所有信息编码到输入上下文，导致推理质量下降、成本高。提出HORMA，将经验组织成文件系统式的层次结构，通过强化学习训练的轻量级agent导航检索最小但充分的上下文。在ALFWorld、LoCoMo、LongMemEval上，HORMA在有限上下文预算下提升任务性能，且token使用量仅为基线方法的22.17%。实现了效率与性能的更优权衡，并有效泛化到未见任务。",
+      "tags": "query:self-improve",
+      "abstract_en": "Large language model (LLM) agents struggle with long-horizon tasks due to their inherent statelessness, requiring all task-relevant information to be encoded in growing input contexts. The resulting degraded reasoning quality, increased inference cost, and higher latency necessitate efficient working memory mechanisms. However, existing approaches either rely on lossy compression or similarity-based retrieval, which often fail to capture temporal structure and causal dependencies required for multi-step agentic tasks. In this work, we present HORMA, a Hierarchical Organize-and-Retrieve Memory Agent that organizes experience into a file-system-like hierarchical structure, where summarized entities are linked to the corresponding raw trajectories, enabling efficient access without losing detailed information. HORMA decomposes working memory into two stages: structured memory construction and navigation-based retrieval. The construction module iteratively refines how experiences are structured by distinguishing between failures caused by missing information and those caused by misleading or overloaded context. The navigation module retrieves task-relevant context by traversing the hierarchy using a lightweight agent trained with reinforcement learning to select minimal yet sufficient context, thereby reducing latency along the critical execution path. Across ALFWorld, LoCoMo, and LongMemEval, HORMA improves task performance under constrained context budgets while requiring at most 22.17% of the baseline token usage in long conversation tasks. Compared to existing methods, it consistently achieves better efficiency-performance trade-offs and generalizes effectively to unseen tasks.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
