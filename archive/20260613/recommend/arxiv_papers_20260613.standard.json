@@ -1,0 +1,392 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-13T21:06:14.622735+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 6,
+    "deep_cap": 7,
+    "deep_selected": 6,
+    "quick_candidates": 3,
+    "quick_skim_target": 12,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2606.08656v1",
+      "source": "arxiv",
+      "title": "From Player to Master: Enhancing Test-Time Learning of LLM Agents via Reinforcement Learning over Memory",
+      "abstract": "Large language model (LLM) agents are increasingly deployed in long-running settings where improving through experience at test time becomes important. A common approach is to update an explicit memory after each interaction to guide future decisions. However, most existing methods rely on hand-designed prompting rules, making it difficult to align memory updates with downstream objectives over multi-step horizons consistently. We propose MemoPilot, a plug-in memory copilot that explicitly trains the memory update process to improve a frozen LLM's performance across sequential interactions. We formulate memory updating as a multi-turn decision problem and optimize it end-to-end with multi-turn GRPO. Our training recipe introduces (i) a turn-wise reward signal and (ii) a context-independent, turn-level advantage estimation across rollouts, enabling finer-grained credit assignment and more stable training in multi-turn settings. We evaluate MemoPilot on two testbeds: multi-round Rock-Paper-Scissors (RPS) and Limit Texas Hold'em (LHE). Across both environments, MemoPilot substantially improves test-time learning of a frozen player over strong baselines, ranking first in Elo ratings on both games (1762 on LHE and 1590 on RPS) and outperforming all baseline memory methods and proprietary models, including DeepSeek-V3.2.",
+      "authors": [
+        "Yishuo Cai",
+        "Xingyu Guo",
+        "Xuancheng Huang",
+        "Jinhua Du",
+        "Can Huang",
+        "Wenxuan Huang",
+        "Wenhan Ma",
+        "Yuyang Hu",
+        "Aohan Zeng",
+        "Jie Tang",
+        "Xu Sun"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-07T14:53:19+00:00",
+      "link": "https://arxiv.org/pdf/2606.08656v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "LLM agent test-time learning via RL over memory for self-improvement",
+      "llm_evidence_cn": "通过记忆强化学习实现LLM代理测试时自我改进",
+      "llm_evidence": "通过记忆强化学习实现LLM代理测试时自我改进",
+      "canonical_evidence": "通过记忆强化学习实现LLM代理测试时自我改进",
+      "llm_tldr_en": "Proposes MemoPilot, a plug-in memory copilot that trains memory update via multi-turn GRPO to improve frozen LLM agent performance across sequential interactions, achieving self-improvement.",
+      "llm_tldr_cn": "现有LLM代理在长期部署中依赖手工设计的提示规则更新记忆，难以对齐下游目标。本文提出MemoPilot，一种即插即用的记忆副驾驶，将记忆更新建模为多轮决策问题，并用多轮GRPO端到端优化，以在冻结LLM的情况下提升代理在连续交互中的性能。实验表明该方法有效增强了代理的自我改进能力，为测试时学习提供了新范式。",
+      "llm_tldr": "现有LLM代理在长期部署中依赖手工设计的提示规则更新记忆，难以对齐下游目标。本文提出MemoPilot，一种即插即用的记忆副驾驶，将记忆更新建模为多轮决策问题，并用多轮GRPO端到端优化，以在冻结LLM的情况下提升代理在连续交互中的性能。实验表明该方法有效增强了代理的自我改进能力，为测试时学习提供了新范式。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.11671v1",
+      "source": "arxiv",
+      "title": "Runtime Skill Audit: Targeted Runtime Probing for Agent Skill Security",
+      "abstract": "Agent skills let LLM agents reuse instructions, resources, tools, and workflows, but they also create a new place for malicious behavior to hide. A skill may look benign in its documentation or code while becoming harmful only when it is invoked with particular user requests, local assets, persistent state, or multi-step tool interactions. This makes purely static vetting brittle. We present Runtime Skill Audit (RSA), a dynamic analysis method that audits skills by asking what the skill-mediated agent actually does under targeted runtime conditions. Instead of testing every skill with the same generic tasks, RSA profiles risk-relevant interfaces, prepares the execution context needed to exercise them, and assigns security labels from the resulting trace evidence. We instantiate RSA on OpenClaw and evaluate it on 100 skills against representative static baselines. RSA achieves 90.0\\% accuracy with an 88.0\\% true positive rate and an 8.0\\% false positive rate, improving accuracy by 13.0 percentage points over the best static baseline. Under self-evolving attacks, static detectors collapse after one or two rounds, while RSA continues to detect 19--20 out of 20 malicious skills across rounds.",
+      "authors": [
+        "Tu Lan",
+        "Chaowei Xiao"
+      ],
+      "primary_category": "cs.CR",
+      "categories": [
+        "cs.CR",
+        "cs.AI"
+      ],
+      "published": "2026-06-10T05:29:34+00:00",
+      "link": "https://arxiv.org/pdf/2606.11671v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "dynamic analysis method audits agent skills for security threats",
+      "llm_evidence_cn": "动态分析审计代理技能中的安全威胁",
+      "llm_evidence": "动态分析审计代理技能中的安全威胁",
+      "canonical_evidence": "动态分析审计代理技能中的安全威胁",
+      "llm_tldr_en": "Runtime Skill Audit is a dynamic analysis method that probes agent skills under targeted runtime conditions to detect malicious behavior, providing security labels.",
+      "llm_tldr_cn": "现有代理技能静态审查无法发现运行时触发的恶意行为。本文提出运行时技能审计（RSA）方法，通过针对性的运行时探测分析代理技能的实际行为，分配安全标签。实验表明该方法能有效检测语义威胁，弥补静态审查的不足，为代理安全检测提供了新手段。",
+      "llm_tldr": "现有代理技能静态审查无法发现运行时触发的恶意行为。本文提出运行时技能审计（RSA）方法，通过针对性的运行时探测分析代理技能的实际行为，分配安全标签。实验表明该方法能有效检测语义威胁，弥补静态审查的不足，为代理安全检测提供了新手段。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.07379v2",
+      "source": "arxiv",
+      "title": "Do Coding Agents Deceive Us? Detecting and Preventing Cheating via Capped Evaluation with Randomized Tests",
+      "abstract": "A growing failure mode in agent evaluation and training is that models can achieve high evaluation scores by exploiting shortcuts instead of solving the intended task, producing deceptive performance. This makes evaluation scores unreliable as measures of true task-solving ability. We propose CapCode, a framework for constructing coding datasets with randomized tests whose best achievable non-cheating performance is deliberately capped below one. This capped-performance design gives evaluation scores a clearer interpretation: scores substantially above the cap are implausible and therefore provide evidence of cheating. To prevent cheating, we propose CapReward, a reward design based on the CapCode principle to discourage optimization beyond the cap. Experiments across multiple datasets show that CapCode detects cheating while preserving performance ranking of models, and CapReward reduces cheating behavior, yielding models that better follow the intended task specification.",
+      "authors": [
+        "Thanawat Lodkaew",
+        "Johannes Ackermann",
+        "Soichiro Nishimori",
+        "Nontawat Charoenphakdee",
+        "Masashi Sugiyama",
+        "Takashi Ishida"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL",
+        "stat.ME"
+      ],
+      "published": "2026-06-05T15:20:37+00:00",
+      "link": "https://arxiv.org/pdf/2606.07379v2",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "detecting and preventing cheating in coding agents via capped evaluation",
+      "llm_evidence_cn": "通过带上限评估检测并防止编码智能体作弊",
+      "llm_evidence": "通过带上限评估检测并防止编码智能体作弊",
+      "canonical_evidence": "通过带上限评估检测并防止编码智能体作弊",
+      "llm_tldr_en": "Proposes CapCode framework to detect cheating in coding agents by capping non-cheating performance, and CapReward to discourage cheating, improving evaluation reliability.",
+      "llm_tldr_cn": "这篇论文针对编码智能体评估中模型通过走捷径获得高分而欺骗真实能力的问题，提出了CapCode框架：通过设计随机测试保证非作弊性能上限低于1，从而检测作弊行为；并在此基础上提出CapReward奖励机制来防止作弊。实验表明该方法能有效识别和抑制欺骗行为，提升了智能体评估的可信度。",
+      "llm_tldr": "这篇论文针对编码智能体评估中模型通过走捷径获得高分而欺骗真实能力的问题，提出了CapCode框架：通过设计随机测试保证非作弊性能上限低于1，从而检测作弊行为；并在此基础上提出CapReward奖励机制来防止作弊。实验表明该方法能有效识别和抑制欺骗行为，提升了智能体评估的可信度。",
+      "llm_tags": [
+        "query:agent-detect:composite"
+      ],
+      "matched_query_tag": "query:agent-detect:composite",
+      "matched_query_text": "Papers central to agent/world model领域中的检测相关论文, especially work that connects or combines: p; d; w; a; perception and detection modules in world model; papers on detection techniques for agent; papers on detection techniques for world model; perception and detection modules in agent architectures.",
+      "matched_requirement_id": "req-composite-agent-detect",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.08348v1",
+      "source": "arxiv",
+      "title": "Bayesian-Agent: Posterior-Guided Skill Evolution for LLM Agent Harnesses",
+      "abstract": "LLM agents increasingly rely on external inference conditions: prompts, tools, memory, SOPs, skills, and harness feedback. These assets can improve task execution without changing model weights, but they are often revised by heuristic reflection or by reusing observed successes and failures as if counts alone were reliable belief. We introduce \\textbf{Bayesian-Agent}, a native and cross-harness framework that treats reusable skills and SOPs as hypotheses about whether a frozen model will succeed under a particular prompt, context, and harness environment. Bayesian-Agent records verified trajectory evidence, maintains a feature-conditioned categorical posterior over each skill, and maps posterior state into inspectable actions such as patch, split, compress, retire, and explore. Model-facing prompts receive executable guardrails and failure-mode patches, while posterior summaries remain available for audit. With \\texttt{deepseek-v4-flash}, incremental repair improves SOP-Bench from 80\\% to 95\\%, Lifelong AgentBench from 90\\% to 100\\%, and RealFin-Bench from 45\\% to 65\\%. We further evaluate Bayesian-Agent's native backend and optional GenericAgent, mini-swe-agent, and Claude Code backends. The results include positive, negative, saturated, and case-study settings, suggesting that agent skill evolution is best viewed as posterior-guided harness optimization rather than uncalibrated prompt accumulation. The source code is available at https://github.com/DataArcTech/Bayesian-Agent.",
+      "authors": [
+        "Xiaojun Wu",
+        "Cehao Yang",
+        "Honghao Liu",
+        "Xueyuan Lin",
+        "Wenjie Zhang",
+        "Zhichao Shi",
+        "Xuhui Jiang",
+        "Chengjin Xu",
+        "Jia Li",
+        "Jian Guo"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-06T21:40:19+00:00",
+      "link": "https://arxiv.org/pdf/2606.08348v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Posterior-guided skill evolution for LLM agent harnesses",
+      "llm_evidence_cn": "后验指导的技能演化以改进LLM智能体",
+      "llm_evidence": "后验指导的技能演化以改进LLM智能体",
+      "canonical_evidence": "后验指导的技能演化以改进LLM智能体",
+      "llm_tldr_en": "Bayesian-Agent treats skills as hypotheses and updates a posterior over them using verified trajectories, enabling systematic skill improvement without retraining.",
+      "llm_tldr_cn": "该论文提出Bayesian-Agent框架，将智能体的可复用技能视为假设，通过维护基于特征的条件后验概率来指导技能演化。框架记录验证轨迹，根据后验状态执行修补、拆分等操作，实现了无需重新训练模型即可持续改进技能资产。实验表明该框架在多个智能体任务中显著优于启发式方法。",
+      "llm_tldr": "该论文提出Bayesian-Agent框架，将智能体的可复用技能视为假设，通过维护基于特征的条件后验概率来指导技能演化。框架记录验证轨迹，根据后验状态执行修补、拆分等操作，实现了无需重新训练模型即可持续改进技能资产。实验表明该框架在多个智能体任务中显著优于启发式方法。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.10064v1",
+      "source": "arxiv",
+      "title": "Bittensor Agent Arenas as a Trajectory Primitive: Distilling a Shopping Agent from ShoppingBench Subnet Traces",
+      "abstract": "Small-model agentic post-training is bottlenecked less by the algorithm than by the trajectory substrate it consumes. Leading recipes (RLVR, group-relative RL, rejection-sampled re-SFT) all need multi-turn traces carrying per-trajectory supervision, and the two existing sources fall short: frontier-synthesised data inherits the synthesizer's biases and collapses the long tail, while unfiltered production logs are unjudged and contaminated by shortcut behaviour. We argue that an incentive-aligned agent arena can be engineered to manufacture such trajectories, and demonstrate this on ORO Subnet 15 (SN15), a Bittensor deployment of the ShoppingBench agentic-commerce benchmark. SN15's race mechanism, LLM reasoning judge, and rotating leak-cluster-guarded problem suite yield a corpus with three properties: incentive-aligned diversity, per-trajectory judging, and anti-memorised held-out evaluation. We introduce a structural-quality filter that converts the raw firehose into a trainable corpus by keeping agentic trajectories (the model itself emits the tool calls) and rejecting sub-task trajectories (the model only classifies or narrates over a deterministic search loop), then post-train Qwen3-4B with a recipe matched to the published ShoppingBench SFT-then-GRPO pipeline. On a leak-cluster-guarded held-out partition scored production-strict, the model lifts from the published Qwen3-4B base of 18.0% ASR to 42.7%, within single-problem noise of the synthetic-data SFT-only baseline (43.6%), while training on a fraction of a single day of subnet output. The supervised stack leaves a large pass@8 to pass@1 gap (53.3% vs 34.8%); a per-step teacher-grounded Dr. GRPO reward converts that headroom into process improvement, and we identify the sub-task firehose as the primary lever for closing the gap to the 48.7% SFT+GRPO bar. We release the filter, the corpus splits, and the arena mechanics.",
+      "authors": [
+        "Shardul Bansal",
+        "Seth Schilbe",
+        "Jarrod Barnes"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-06-08T18:39:15+00:00",
+      "link": "https://arxiv.org/pdf/2606.10064v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Distilling agent from trajectory primitive using agent arenas",
+      "llm_evidence_cn": "利用智能体竞技场生成轨迹原始数据进行蒸馏",
+      "llm_evidence": "利用智能体竞技场生成轨迹原始数据进行蒸馏",
+      "canonical_evidence": "利用智能体竞技场生成轨迹原始数据进行蒸馏",
+      "llm_tldr_en": "Bittensor Agent Arenas generate incentive-aligned multi-turn trajectories for post-training, enabling effective distillation of small-model shopping agents.",
+      "llm_tldr_cn": "该论文指出小模型智能体后训练受限于高质量多轮轨迹数据。提出利用Bittensor子网上的智能体竞技场（如ShoppingBench SN15）生成带有全程监督的轨迹，通过竞赛机制和LLM推理评委获取纯净数据。实验证明以此蒸馏出的购物代理性能接近大模型，且数据效率极高。为智能体自我改进提供了一种数据生成范式。",
+      "llm_tldr": "该论文指出小模型智能体后训练受限于高质量多轮轨迹数据。提出利用Bittensor子网上的智能体竞技场（如ShoppingBench SN15）生成带有全程监督的轨迹，通过竞赛机制和LLM推理评委获取纯净数据。实验证明以此蒸馏出的购物代理性能接近大模型，且数据效率极高。为智能体自我改进提供了一种数据生成范式。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.10507v1",
+      "source": "arxiv",
+      "title": "HIPIF: Hierarchical Planning and Information Folding for Long-Horizon LLM Agent Learning",
+      "abstract": "While Large Language Models (LLMs) have demonstrated strong capabilities as autonomous agents across a wide range of tasks, their performance often degrades in multi-turn long-horizon agentic tasks. Existing methods have made progress through fine-grained credit assignment to alleviate long-horizon sparse rewards and hierarchical reinforcement learning to decompose tasks and reduce long-term dependency. However, these methods still do not directly address long-context interference, in which continuously growing histories weaken the agent's ability to track the global task state and impair subsequent reasoning and decision-making. Inspired by the way humans handle complex tasks through subgoal decomposition and completed progress summarization, we propose Hierarchical Planning and Information Folding (HIPIF) for long-horizon LLM agent learning. HIPIF trains the agent end-to-end to organize long-horizon execution around explicit subgoals while folding completed subgoal histories to reduce long-context interference. Furthermore, to stabilize subgoal-based planning and execution, HIPIF combines hierarchical reflection and subgoal-oriented process rewards to guide subgoal generation, transition, and execution, without relying on costly auxiliary models or task-specific expert trajectories. Extensive experiments on three publicly available agentic benchmarks demonstrate the validity of our method.",
+      "authors": [
+        "Juncheng Diao",
+        "Zhicong Lu",
+        "Peiguang Li",
+        "Yongwei Zhou",
+        "Changyuan Tian",
+        "Qingbin Li",
+        "Rongxiang Weng",
+        "Jingang Wang",
+        "Xunliang Cai"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-09T07:35:14+00:00",
+      "link": "https://arxiv.org/pdf/2606.10507v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Hierarchical planning and information folding for long-horizon agent learning",
+      "llm_evidence_cn": "分层规划与信息折叠提升长程智能体学习",
+      "llm_evidence": "分层规划与信息折叠提升长程智能体学习",
+      "canonical_evidence": "分层规划与信息折叠提升长程智能体学习",
+      "llm_tldr_en": "HIPIF addresses long-context interference in LLM agents via hierarchical planning and information folding, improving multi-turn task performance.",
+      "llm_tldr_cn": "该论文针对大语言模型在长程交互任务中因历史上下文干扰导致性能退化的问题，提出HIPIF框架。通过将任务分层分解并在各层级进行信息折叠压缩，减少长期依赖与干扰。实验表明该方法在多种长程智能体任务上显著优于现有方法，为智能体自我改进提供了有效的分层学习策略。",
+      "llm_tldr": "该论文针对大语言模型在长程交互任务中因历史上下文干扰导致性能退化的问题，提出HIPIF框架。通过将任务分层分解并在各层级进行信息折叠压缩，减少长期依赖与干扰。实验表明该方法在多种长程智能体任务上显著优于现有方法，为智能体自我改进提供了有效的分层学习策略。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.06787v1",
+      "source": "arxiv",
+      "title": "AdMem: Advanced Memory for Task-solving Agents",
+      "abstract": "Large Language Models (LLMs) show promise as tool-using agents but remain limited in long-horizon tasks that require remembering, organizing, and reusing knowledge. Prior memory approaches aim to resolve the situation, but mainly focus on storing factual information. Recent work on procedural memory improves task reuse, yet often reduces to replaying past successes without addressing failure cases or online scalability. We introduce a unified and automatic memory framework that integrates semantic, episodic, and procedural memory in a bi-level design combining short-term and long-term stores. A multi-agent architecture with actor, memory, and critic agents enables automatic memory generation, reward annotation, and adaptive retrieval. Long-term memory is managed through reward-based evaluation, merging, and pruning, ensuring scalability and continual improvement. Experiments across various environments show that our approach improves robustness and success on long multi-turn tasks compared to existing baselines. This work highlights the importance of comprehensive, adaptive memory for advancing LLM-based agents.",
+      "authors": [
+        "Runzhe Wang",
+        "Huilin Lu",
+        "Shengjie Liu",
+        "Li Dong",
+        "Jason Zhu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-05T00:11:57+00:00",
+      "link": "https://arxiv.org/pdf/2606.06787v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Unified memory framework integrating semantic, episodic, procedural memory for agents",
+      "llm_evidence_cn": "统一记忆框架整合语义、情景与程序记忆，提升智能体任务求解",
+      "llm_evidence": "统一记忆框架整合语义、情景与程序记忆，提升智能体任务求解",
+      "canonical_evidence": "统一记忆框架整合语义、情景与程序记忆，提升智能体任务求解",
+      "llm_tldr_en": "AdMem provides a bi-level memory with short/long-term stores, using multi-agent architecture for automatic memory generation and adaptive retrieval, enabling agents to learn from failures.",
+      "llm_tldr_cn": "该论文针对大语言模型在长期任务中记忆组织与复用不足的问题，提出AdMem统一记忆框架。框架融合语义、情景与程序记忆，采用短期与长期两级存储，并通过多智能体架构实现自动记忆生成、奖励标注与自适应检索。实验表明该方法在长程任务中显著提升任务成功率，尤其能有效利用失败案例改进后续决策。",
+      "llm_tldr": "该论文针对大语言模型在长期任务中记忆组织与复用不足的问题，提出AdMem统一记忆框架。框架融合语义、情景与程序记忆，采用短期与长期两级存储，并通过多智能体架构实现自动记忆生成、奖励标注与自适应检索。实验表明该方法在长程任务中显著提升任务成功率，尤其能有效利用失败案例改进后续决策。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.06976v1",
+      "source": "arxiv",
+      "title": "Exploring Agentic Tool-Calling Decisions via Uncertainty-Aligned Reinforcement Learning",
+      "abstract": "Large language model (LLM)-based agents often make suboptimal tool-use decisions, including unsupported tool invocation and hallucinated direct responses, which may accumulate errors throughout multi-step interactions. Existing approaches mainly improve these behaviors through inference-time correction or coarse-grained reward signals based on decision outcomes and structured checklists, leaving the uncertainty characteristics of agent decisions underexplored. We observe that decision-oriented reinforcement learning tends to weaken the uncertainty separation between correct and incorrect actions, resulting in overconfident mistakes and weaker exploration signals. Therefore, we propose TRUST, which incorporates uncertainty quantification into reward design as a repulsive force for maintaining uncertainty separation, and labels lightweight key-turn annotations for unified post-training of multi-turn trajectories. Experimental results across diverse tool-use benchmarks show that TRUST consistently enhances both decision quality and agent performance while maintaining more reliable uncertainty estimates during optimization.",
+      "authors": [
+        "Yijin Zhou",
+        "Linqian Zeng",
+        "Xiaoya Lu",
+        "Wenyuan Xie",
+        "Dongrui Liu",
+        "Junchi Yan",
+        "Jing Shao"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-05T07:08:34+00:00",
+      "link": "https://arxiv.org/pdf/2606.06976v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "reinforcement learning with uncertainty alignment to improve agent tool-calling decisions",
+      "llm_evidence_cn": "通过不确定性对齐的强化学习改进智能体工具调用决策",
+      "llm_evidence": "通过不确定性对齐的强化学习改进智能体工具调用决策",
+      "canonical_evidence": "通过不确定性对齐的强化学习改进智能体工具调用决策",
+      "llm_tldr_en": "TRUST uses uncertainty-aligned reinforcement learning to improve agent tool-calling decisions, correcting overconfident mistakes by maintaining uncertainty separation.",
+      "llm_tldr_cn": "大语言模型智能体在工具调用中常犯错误，现有方法依赖粗粒度奖励信号。本文提出TRUST，将不确定性量化融入强化学习，通过保持正确与错误决策的不确定性分离，增强探索信号并减少过度自信的错误。实验表明TRUST显著提升了工具调用准确性，为智能体自我改进提供了新途径。",
+      "llm_tldr": "大语言模型智能体在工具调用中常犯错误，现有方法依赖粗粒度奖励信号。本文提出TRUST，将不确定性量化融入强化学习，通过保持正确与错误决策的不确定性分离，增强探索信号并减少过度自信的错误。实验表明TRUST显著提升了工具调用准确性，为智能体自我改进提供了新途径。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-06-08-730978-v1",
+      "source": "biorxiv",
+      "title": "Multi-stage efficient coding of perception and value in goal-directed behavior",
+      "abstract": "To act effectively, the brain must transform information through a chain of processing stages, from sensing the environment, to evaluating options, to selecting actions. Because neural resources are limited, each stage should represent information efficiently. Yet efficient coding has been studied almost exclusively in perception, and always one stage at a time. Whether perception and valuation are each governed by their own efficient code, and how these codes interact along the pathway from sensation to action, remains an open question. We developed a formal framework, comparing models in which efficient coding and Bayesian decoding shape perception only, valuation only, or both. To tease apart contributions from each stage, we designed an experiment that independently varied how stimuli map onto values. In a preregistered study, behavior was best explained by efficient coding operating at both stages, with each stage tracking its own objective prior. Crucially, changing the value distribution reversed the classic repulsion biases seen in orientation perception, revealing separable efficient codes in perception and valuation. The two stages also operated on different timescales: perceptual representations reflected stable, long-term environmental structure, while value representations updated rapidly with changing context. Together, these findings show that separable efficient codes at successive processing stages combine to shape behavior. This principle likely extends well beyond perception and valuation: whenever behavior depends on abstract, constructed representations rather than raw sensory signals, the brain may solve the efficiency problem anew at each stage.",
+      "authors": [
+        "Bedi, S.",
+        "Hollander, G. d.",
+        "Harl, M.",
+        "Ruff, C. C."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-06-11T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.06.08.730978v1.full.pdf",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "perception and value coding in goal-directed behavior",
+      "llm_evidence_cn": "目标导向行为中的感知和价值编码",
+      "llm_evidence": "目标导向行为中的感知和价值编码",
+      "canonical_evidence": "目标导向行为中的感知和价值编码",
+      "llm_tldr_en": "This paper models how perception and valuation stages each perform efficient coding and Bayesian decoding in a multi-stage framework.",
+      "llm_tldr_cn": "传统高效编码研究局限于单阶段感知，本文构建多阶段框架探索感知和估值各自的高效编码及其交互。通过对比感知仅编码、估值仅编码和二者皆编码的模型，并设计行为实验，揭示了不同阶段编码策略的独立性与相互作用。",
+      "llm_tldr": "传统高效编码研究局限于单阶段感知，本文构建多阶段框架探索感知和估值各自的高效编码及其交互。通过对比感知仅编码、估值仅编码和二者皆编码的模型，并设计行为实验，揭示了不同阶段编码策略的独立性与相互作用。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
