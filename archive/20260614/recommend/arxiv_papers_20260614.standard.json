@@ -1,0 +1,384 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-14T20:41:59.016066+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 4,
+    "deep_cap": 7,
+    "deep_selected": 4,
+    "quick_candidates": 5,
+    "quick_skim_target": 12,
+    "quick_selected": 5
+  },
+  "deep_dive": [
+    {
+      "id": "2606.08656v1",
+      "source": "arxiv",
+      "title": "From Player to Master: Enhancing Test-Time Learning of LLM Agents via Reinforcement Learning over Memory",
+      "abstract": "Large language model (LLM) agents are increasingly deployed in long-running settings where improving through experience at test time becomes important. A common approach is to update an explicit memory after each interaction to guide future decisions. However, most existing methods rely on hand-designed prompting rules, making it difficult to align memory updates with downstream objectives over multi-step horizons consistently. We propose MemoPilot, a plug-in memory copilot that explicitly trains the memory update process to improve a frozen LLM's performance across sequential interactions. We formulate memory updating as a multi-turn decision problem and optimize it end-to-end with multi-turn GRPO. Our training recipe introduces (i) a turn-wise reward signal and (ii) a context-independent, turn-level advantage estimation across rollouts, enabling finer-grained credit assignment and more stable training in multi-turn settings. We evaluate MemoPilot on two testbeds: multi-round Rock-Paper-Scissors (RPS) and Limit Texas Hold'em (LHE). Across both environments, MemoPilot substantially improves test-time learning of a frozen player over strong baselines, ranking first in Elo ratings on both games (1762 on LHE and 1590 on RPS) and outperforming all baseline memory methods and proprietary models, including DeepSeek-V3.2.",
+      "authors": [
+        "Yishuo Cai",
+        "Xingyu Guo",
+        "Xuancheng Huang",
+        "Jinhua Du",
+        "Can Huang",
+        "Wenxuan Huang",
+        "Wenhan Ma",
+        "Yuyang Hu",
+        "Aohan Zeng",
+        "Jie Tang",
+        "Xu Sun"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-07T14:53:19+00:00",
+      "link": "https://arxiv.org/pdf/2606.08656v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "uses reinforcement learning to train memory updates for LLM agent self-improvement",
+      "llm_evidence_cn": "使用强化学习训练记忆更新以实现LLM代理自我改进",
+      "llm_evidence": "使用强化学习训练记忆更新以实现LLM代理自我改进",
+      "canonical_evidence": "使用强化学习训练记忆更新以实现LLM代理自我改进",
+      "llm_tldr_en": "Proposes MemoPilot, a plug-in memory copilot that trains the memory update process via multi-turn GRPO to improve frozen LLM agent performance across sequential interactions.",
+      "llm_tldr_cn": "LLM代理在长期运行中需要从经验中改进，但现有方法依赖手工提示规则，难以对齐记忆更新与长期目标。该文提出MemoPilot，将记忆更新建模为多轮决策问题，通过多轮GRPO端到端优化，显式训练记忆更新过程。实验表明，该方法能有效提升冻结LLM在多轮交互中的表现，实现代理的自我改进。",
+      "llm_tldr": "LLM代理在长期运行中需要从经验中改进，但现有方法依赖手工提示规则，难以对齐记忆更新与长期目标。该文提出MemoPilot，将记忆更新建模为多轮决策问题，通过多轮GRPO端到端优化，显式训练记忆更新过程。实验表明，该方法能有效提升冻结LLM在多轮交互中的表现，实现代理的自我改进。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.12780v1",
+      "source": "arxiv",
+      "title": "ProPlay: Procedural World Models for Self-Evolving LLM Agents",
+      "abstract": "Self-evolving agents are expected to improve through interaction without external supervision, but this remains difficult in partially observable environments where agents must explore actively, learn from limited feedback, and decide when to trust prior experience. Existing LLM-agent methods often rely on memory or planning modules, yet they rarely close the loop between them to continually refine an internal understanding of environment dynamics. We introduce ProPlay, a procedural world model that supports procedure-level preplay, where agents can rehearse future procedural paths using the learned world knowledge. Rather than representing experience as isolated rules or low-level action constraints, ProPlay abstracts successful trajectories into procedures and organizes them in a procedure graph that captures causal transitions among task stages. Each transition is associated with a reliability record embedding to estimate its task-specific contribution from past outcomes. Before each episode, ProPlay simulates future procedural trajectories over known graph structures as structured soft guidance; after execution, it refines the graph using environment feedback. Experiments on public benchmarks show that ProPlay consistently improves environment understanding and self-evolution capability over strong baselines. Our code has been released in https://github.com/antman9914/proplay.",
+      "authors": [
+        "Yijun Ma",
+        "Zehong Wang",
+        "Yiyang Li",
+        "Ziming Li",
+        "Xiaoguang Guo",
+        "Weixiang Sun",
+        "Chuxu Zhang",
+        "Yanfang Ye"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "published": "2026-06-11T00:47:37+00:00",
+      "link": "https://arxiv.org/pdf/2606.12780v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "proposes self-evolving agents via procedural world models for procedure-level preplay",
+      "llm_evidence_cn": "通过程序世界模型实现自进化智能体，支持过程级预演",
+      "llm_evidence": "通过程序世界模型实现自进化智能体，支持过程级预演",
+      "canonical_evidence": "通过程序世界模型实现自进化智能体，支持过程级预演",
+      "llm_tldr_en": "Introduces ProPlay, a procedural world model that enables self-evolving LLM agents to rehearse future procedural paths using learned world knowledge, improving without external supervision.",
+      "llm_tldr_cn": "自进化智能体期望通过交互持续改进，但现有方法缺乏对世界动态的闭环优化。该文提出ProPlay程序世界模型，将成功轨迹抽象为程序，支持智能体在过程级预演未来路径。通过与记忆和规划模块的闭环交互，智能体能够自主探索并利用所学知识改进决策。实验证明该方法在部分可观察环境中有效实现了无监督自我改进。",
+      "llm_tldr": "自进化智能体期望通过交互持续改进，但现有方法缺乏对世界动态的闭环优化。该文提出ProPlay程序世界模型，将成功轨迹抽象为程序，支持智能体在过程级预演未来路径。通过与记忆和规划模块的闭环交互，智能体能够自主探索并利用所学知识改进决策。实验证明该方法在部分可观察环境中有效实现了无监督自我改进。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "self-improving agent learning",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.13317v1",
+      "source": "arxiv",
+      "title": "SkillCAT: Contrastive Assessment and Topology-Aware Skill Self-Evolution for LLM Agents",
+      "abstract": "Skill self-evolution methods for LLM agents aim to turn execution trajectories into reusable skill documents, but current pipelines typically learn from one trajectory per task, merge candidate skill patches before checking them, and load the full skill corpus before inference. We propose SkillCAT, a training-free framework that separates this process into three stages. Contrastive Causal Extraction (CCE) samples multiple trajectories for each task and compares same-task success/failure pairs to identify evidence that explains outcome differences. Assessment-Augmented Evolution (AAE) replays each candidate patch on source-task clones and keeps only patches that improve or preserve task outcomes before hierarchical skill patch merging. Topology-Aware Task Execution (TTE) compiles the evolved skills into a routable sub-skill topology, so inference loads only the capability nodes relevant to the task. We evaluate SkillCAT on common agent benchmarks, including SpreadsheetBench, WikiTableQuestions, and DocVQA, and further test cross-model and out-of-distribution generalization. Across these settings, SkillCAT raises the average score over baselines by up to 40.40%, demonstrating reliable skill evolution without model training.",
+      "authors": [
+        "Kunfeng Chen",
+        "Qihuang Zhong",
+        "Juhua Liu",
+        "Bo Du"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-11T13:12:10+00:00",
+      "link": "https://arxiv.org/pdf/2606.13317v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "skill self-evolution for LLM agents",
+      "llm_evidence_cn": "智能体技能自我进化方法",
+      "llm_evidence": "智能体技能自我进化方法",
+      "canonical_evidence": "智能体技能自我进化方法",
+      "llm_tldr_en": "SkillCAT is a training-free framework for LLM agent skill self-evolution using contrastive extraction and assessment-augmented evolution, improving task performance.",
+      "llm_tldr_cn": "现有智能体技能自我进化方法通常从单条轨迹学习、合并候选技能前不验证，并在推理时加载全部技能。SkillCAT提出无训练的三阶段框架：对比因果抽取（CCE）从多条轨迹中识别关键证据，评估增强进化（AAE）在任务副本上验证候选补丁，仅保留改进或保持结果的补丁。实验表明该方法有效提升了智能体的任务表现，为智能体自我改进提供了实用方案。",
+      "llm_tldr": "现有智能体技能自我进化方法通常从单条轨迹学习、合并候选技能前不验证，并在推理时加载全部技能。SkillCAT提出无训练的三阶段框架：对比因果抽取（CCE）从多条轨迹中识别关键证据，评估增强进化（AAE）在任务副本上验证候选补丁，仅保留改进或保持结果的补丁。实验表明该方法有效提升了智能体的任务表现，为智能体自我改进提供了实用方案。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.13643v1",
+      "source": "arxiv",
+      "title": "Recursive Agent Harnesses",
+      "abstract": "Recursive language models (RLMs) showed that recursion over model calls is an effective strategy for long-context reasoning, and production coding agents have begun to write code that spawns subagents at scale, most recently in Anthropic's dynamic workflows. We name and study the pattern between these two lines of work, where the recursive unit is a full agent harness with filesystem tools, code execution, and planning rather than a model call with no tools. We call this the Recursive Agent Harness (RAH) and frame it as harness recursion, the code-first extension to the model recursion of RLMs. A parent agent generates and runs an executable script that spawns subagent harnesses in parallel for fine-grained workloads and uses structured function calls for small subtasks. We provide a controlled evaluation on long-context reasoning. With the backbone held fixed at GPT-5 to match the published Codex and RLM baselines, RAH improves the Codex coding-agent baseline from 71.75% to 81.36% on Oolong-Synthetic (199 samples, 13 context-length buckets up to 4M tokens), a gain attributable to the harness rather than the model. With a stronger backbone, Claude Sonnet 4.5, the same design reaches 89.77%.",
+      "authors": [
+        "Elias Lumer",
+        "Sahil Sen",
+        "Kevin Paul",
+        "Vamse Kumar Subbiah"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-11T17:47:30+00:00",
+      "link": "https://arxiv.org/pdf/2606.13643v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "proposes Recursive Agent Harness (RAH) for recursive agent workflows",
+      "llm_evidence_cn": "提出递归代理工具集（RAH）用于递归代理工作流",
+      "llm_evidence": "提出递归代理工具集（RAH）用于递归代理工作流",
+      "canonical_evidence": "提出递归代理工具集（RAH）用于递归代理工作流",
+      "llm_tldr_en": "Proposes Recursive Agent Harness (RAH) extending model recursion to full agent harness recursion for long-context reasoning and fine-grained workloads.",
+      "llm_tldr_cn": "针对长上下文推理和细粒度工作负载，现有递归语言模型仅对模型调用进行递归，而实际代理需要完整的工具和规划。该工作提出递归代理工具集（RAH），将递归单元扩展为包含文件系统、代码执行和规划的全代理工具集，父代理生成脚本并行生成子代理。该方法通过代码优先的方式实现递归，提升了代理在复杂任务中的效率和可扩展性。",
+      "llm_tldr": "针对长上下文推理和细粒度工作负载，现有递归语言模型仅对模型调用进行递归，而实际代理需要完整的工具和规划。该工作提出递归代理工具集（RAH），将递归单元扩展为包含文件系统、代码执行和规划的全代理工具集，父代理生成脚本并行生成子代理。该方法通过代码优先的方式实现递归，提升了代理在复杂任务中的效率和可扩展性。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "recursive self-improvement methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.12563v1",
+      "source": "arxiv",
+      "title": "Arbor: Tree Search as a Cognition Layer for Autonomous Agents",
+      "abstract": "Arbor is a multi-agent framework that introduces structured tree search as a cognition layer for autonomous agents operating in large, stateful action spaces. Prior autonomous optimization systems operate on isolated targets with stateless evaluation. Arbor instead maintains an explicit search tree of scored hypotheses that serves as the shared working memory across agents, evolving with every measurement, treating failures as diagnostic signal that reshapes subsequent exploration, and expanding as prior successes shift the bottleneck distribution.   We validate Arbor on full-stack LLM inference optimization, a domain where achieving peak performance has historically required coordinated effort from engineering teams across the application, framework, compiler, kernel, and hardware stack. Arbor pairs an Orchestrator agent, which drives optimization by delegating to Domain Specialists across the inference stack, with a Critic agent that safeguards stability through root-cause analysis, introspection, and measurement validation -- a checks-and-balances architecture where neither agent can unilaterally drive the system. Agent capabilities are decomposed into hard skills (domain expertise) and soft skills (coordination protocols that determine how contributions compose), enabling fully autonomous multi-day campaigns. Arbor achieves up to 193% inference throughput-latency Pareto improvement over vendor-optimized baselines, while a single agent without the harness plateaus at +33% throughput improvement and crashes irrecoverably within hours. Arbor generalizes to multiple generations of hardware platform, and run-to-run variance is within 2 percentage points demonstrating that the method is hardware-agnostic and reproducible.",
+      "authors": [
+        "Neha Prakriya",
+        "Chaojun Hou",
+        "Zheng Gong",
+        "Huasha Zhao",
+        "Xi Zhao",
+        "Mou Li",
+        "Zhenyu Gu",
+        "Emad Barsoum"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-10T18:14:56+00:00",
+      "link": "https://arxiv.org/pdf/2606.12563v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "tree search for agent self-improvement, diagnostic signal from failures",
+      "llm_evidence_cn": "树搜索用于智能体自我改进，从失败中提取诊断信号",
+      "llm_evidence": "树搜索用于智能体自我改进，从失败中提取诊断信号",
+      "canonical_evidence": "树搜索用于智能体自我改进，从失败中提取诊断信号",
+      "llm_tldr_en": "Arbor uses tree search as a cognition layer for autonomous agents, maintaining a shared search tree that evolves with measurements, treating failures as diagnostic signals.",
+      "llm_tldr_cn": "传统自主优化系统仅在孤立目标上进行无状态评估，无法有效利用失败信息。Arbor提出将结构化树搜索作为智能体认知层，维护一个动态演化的假设搜索树，将每一次测量视为更新，将失败转化为后续探索的信号。在全栈LLM推理优化任务上，该方法显著提升了优化效率，为智能体自我改进提供了新范式。",
+      "llm_tldr": "传统自主优化系统仅在孤立目标上进行无状态评估，无法有效利用失败信息。Arbor提出将结构化树搜索作为智能体认知层，维护一个动态演化的假设搜索树，将每一次测量视为更新，将失败转化为后续探索的信号。在全栈LLM推理优化任务上，该方法显著提升了优化效率，为智能体自我改进提供了新范式。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.08239v1",
+      "source": "arxiv",
+      "title": "When No Answer Is Correct: Diagnosing Absent Answer Detection for MLLMs in Video Understanding",
+      "abstract": "Multimodal large language models (MLLMs) have made substantial advancements in video understanding, yet the reliability of their responses remains underexplored. This work presents a diagnostic study of absent answer detection for MLLMs in video understanding, where the correct answer is deliberately excluded from the candidate set and a reliable model is expected to recognize that no valid option exists. We evaluate the absent answer detection behavior under three settings: multiple-choice questions augmented with an ``None of the Above'' option, open-ended generation with a detection instruction, and standard evaluation without any guidance. Across a diverse set of models and benchmarks, we find that MLLMs overwhelmingly select plausible distractors rather than detecting the absent answer. This failure is more pronounced in temporal reasoning tasks and worsens with denser frame sampling. We further explore chain-of-thought prompting as a mitigation strategy and find that while it substantially improves detection rates, performance remains unsatisfactory, suggesting that prompting-based strategies alone are insufficient to fully address this limitation. These findings expose a systematic failure in absent answer detection and highlight the need for explicit detection mechanisms in multimodal systems.",
+      "authors": [
+        "Yiheng Wang",
+        "Yueqian Lin",
+        "Lichen Zhu",
+        "Yudong Liu",
+        "Hai \"Helen\" Li",
+        "Yiran Chen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CV"
+      ],
+      "published": "2026-06-06T15:51:25+00:00",
+      "link": "https://arxiv.org/pdf/2606.08239v1",
+      "tags": [
+        "keyword:agent-detect"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "detection technique for model reliability",
+      "llm_evidence_cn": "针对模型可靠性的检测技术",
+      "llm_evidence": "针对模型可靠性的检测技术",
+      "canonical_evidence": "针对模型可靠性的检测技术",
+      "llm_tldr_en": "Diagnoses absent answer detection in MLLMs for video understanding, revealing models fail to recognize when no correct option exists.",
+      "llm_tldr_cn": "针对多模态大模型（MLLM）在视频理解中回答不可靠的问题，本文系统诊断了模型在正确答案被故意排除时的检测能力。研究设置了三种评估场景，发现MLLM几乎总是选择错误选项，即使有“以上皆非”选项。这揭示了现有模型在检测缺失答案方面的严重缺陷，为提升智能体系统的可靠检测提供了诊断工具。",
+      "llm_tldr": "针对多模态大模型（MLLM）在视频理解中回答不可靠的问题，本文系统诊断了模型在正确答案被故意排除时的检测能力。研究设置了三种评估场景，发现MLLM几乎总是选择错误选项，即使有“以上皆非”选项。这揭示了现有模型在检测缺失答案方面的严重缺陷，为提升智能体系统的可靠检测提供了诊断工具。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-06-10-731342-v1",
+      "source": "biorxiv",
+      "title": "LizardLens: A Two-Stage Deep Learning Pipeline for Detecting and Classifying Similar Species in Visually Complex Environments",
+      "abstract": "Community science platforms like iNaturalist generate unprecedented volumes of biodiversity data, but their scientific utility depends critically on accurate species identification; a persistent challenge when contributors often lack taxonomic expertise. We developed LizardLens, a two-stage machine learning pipeline that decouples object detection from species classification to enable fine-grained identification of morphologically similar organisms in visually complex field photographs. Using 10,000 verified iNaturalist images of five Anolis lizard species in Florida, we trained specialized YOLO-based detection and Swin Transformer classification models and compared performance against state-of-the-art single-stage architectures. Our two-stage pipeline achieved 83.0% Top-1 accuracy and a macro-averaged F1-score of 89.0%, indicating strong precision-recall performance across species and outperforming single-stage YOLOv8 and YOLOv12 models across all evaluation metrics for all species, with relative improvements ranging from 10.5% to 13.2%. Gradient-weighted Class Activation Mapping (Grad-CAM) indicated that the models predictions were consistently associated with regions corresponding to diagnostic morphological (e.g., head shape, feet, and limb lengths) and pattern features (e.g., ocular rings and body patterning), providing evidence that LizardLens leverages biologically relevant visual cues consistent with those used by expert taxonomists. Error analysis identified partial occlusion and multiple proximate individuals as primary sources of missed detections, while spurious detections of lizard-like environmental features (e.g., sticks, bark) represented the dominant false positive error mode. We deployed LizardLens as an accessible web application featuring interactive bounding box correction, ranked species predictions with confidence scores, directly supporting the Lizards on the Loose middle school community science initiative. By combining technical advances in fine-grained visual classification with user-centered design, LizardLens demonstrates how machine learning can simultaneously enhance data quality for biodiversity monitoring and provide authentic scientific experiences for student participants. Our approach is generalizable to other small-bodied organisms in complex habitats and provides a framework for translating computer vision advances into practical tools for community science and conservation.",
+      "authors": [
+        "Chia, W. H.",
+        "Jahanshahi, I.",
+        "Loh, L. Y.",
+        "Zheng, A.",
+        "Verma, N.",
+        "Mussman, S.",
+        "Shi, B.",
+        "Stroud, J. T."
+      ],
+      "primary_category": "ecology",
+      "categories": [
+        "ecology"
+      ],
+      "published": "2026-06-12T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.06.10.731342v1.full.pdf",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Two-stage deep learning pipeline for detecting and classifying similar species in complex visual environments",
+      "llm_evidence_cn": "两阶段深度学习流水线，用于在复杂视觉环境中检测和分类相似物种",
+      "llm_evidence": "两阶段深度学习流水线，用于在复杂视觉环境中检测和分类相似物种",
+      "canonical_evidence": "两阶段深度学习流水线，用于在复杂视觉环境中检测和分类相似物种",
+      "llm_tldr_en": "Develops LizardLens, a two-stage pipeline decoupling detection (YOLO) and classification (Swin Transformer) for fine-grained species identification in complex field photos.",
+      "llm_tldr_cn": "社区科学数据依赖精确物种鉴定，但贡献者常缺乏专业知识。LizardLens提出两阶段流水线，先使用YOLO进行目标检测分离个体，再用Swin Transformer进行细粒度分类。在5种安乐蜥的10,000张图像上实验表明，该解耦方法显著优于端到端模型。该工作为复杂视觉环境中的生物多样性监测提供了高效工具。",
+      "llm_tldr": "社区科学数据依赖精确物种鉴定，但贡献者常缺乏专业知识。LizardLens提出两阶段流水线，先使用YOLO进行目标检测分离个体，再用Swin Transformer进行细粒度分类。在5种安乐蜥的10,000张图像上实验表明，该解耦方法显著优于端到端模型。该工作为复杂视觉环境中的生物多样性监测提供了高效工具。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.12628v1",
+      "source": "arxiv",
+      "title": "Context-Aware Feature-Fusion for Co-occurring Object Detection in Autonomous Driving",
+      "abstract": "Object detection in autonomous driving requires precise localization and an inherent understanding of the relational context between co-occurring objects. In extremely complex heterogeneous environments rare classes, small-scale objects, and frequently appearing objects are difficult for standard object detection frameworks to handle. In this paper, we propose a novel framework called Context-Centric Feature Fusion (CCFF), which utilizes two attention-based modules, Local Context Fusion Module (LCFM) uses the RoI-to-RoI self-attention mechanism to resolve spatial interactions, mainly considering small and partially obscured objects, while Global Context Attention Module (GCAM) converts the co-occurrence of objects priors by pooling top-K RoI features into a global context attention token, avoiding the computational overhead of pixel-level global pooling. This fusion of local and object-centric global features yields contextualized embeddings that enhance classification results and co-occurring objects detection. Our method is evaluated on two datasets, Cityscapes and BDD100K which demonstrate significant improvement on relational consistency, achieving a Category-level Consistency Strategy (CCS) of 0.973 and 0.969, respectively. Furthermore, our approach produces substantial gains in small object detection (AP_S: 14.1%) and successfully recovers rare classes such as \"Train\" that are typically lost in large distributions. Our efficiency report shows that the framework processes images in real time with a 0.2 FPS overhead. The code is available at https://github.com/BinayKSingh/CCFF.",
+      "authors": [
+        "Binay Kumar Singh",
+        "Niels Da Vitoria Lobo"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-10T19:33:16+00:00",
+      "link": "https://arxiv.org/pdf/2606.12628v1",
+      "tags": [
+        "query:agent-detect"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "proposes context-aware feature fusion for object detection, relevant to detection techniques for autonomous agents",
+      "llm_evidence_cn": "提出上下文感知特征融合用于物体检测，与智能体检测技术相关",
+      "llm_evidence": "提出上下文感知特征融合用于物体检测，与智能体检测技术相关",
+      "canonical_evidence": "提出上下文感知特征融合用于物体检测，与智能体检测技术相关",
+      "llm_tldr_en": "Proposes Context-Centric Feature Fusion (CCFF) for co-occurring object detection in autonomous driving, using local and global attention modules.",
+      "llm_tldr_cn": "自动驾驶中的物体检测需要理解物体间关系，传统方法难以处理罕见类和遮挡。该文提出CCFF框架，包含局部上下文融合模块（LCFM）和全局上下文注意力模块（GCAM），分别处理空间交互和共现先验。该方法提升了自动驾驶场景中各类物体的检测精度，可作为智能体感知模块的候选方案。",
+      "llm_tldr": "自动驾驶中的物体检测需要理解物体间关系，传统方法难以处理罕见类和遮挡。该文提出CCFF框架，包含局部上下文融合模块（LCFM）和全局上下文注意力模块（GCAM），分别处理空间交互和共现先验。该方法提升了自动驾驶场景中各类物体的检测精度，可作为智能体感知模块的候选方案。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-06-08-729424-v1",
+      "source": "biorxiv",
+      "title": "Continuous Strategy Adaptation and Discrete Switching Driven by Environment and Internal State in Meta-Learning",
+      "abstract": "Behavioral strategies can change in response to environmental and internal states, either gradually or abruptly, enabling flexible adaptation. Such strategy regulation is central to meta-learning, the ability to learn to learn. Previous studies analyzed temporal or condition-dependent strategy change using models and theories that assume continuous or discrete changes. Here, we analyze the mice's behavior in a two-step decision task using four different approaches: stay-switch choice probability analysis; generalized linear mixed model (GLMM) of choice and reaction time (RT) given preceding task events; fitting a reinforcement learning (RL) model with time-varying meta-parameter by a novel multiple-step particle filtering method; and fitting a finite internal state (FIS) model that produces choice and RT depending on discrete state transition. Together, the stay probability and GLMM analyses reveal that learning progress encourages a shift toward a model-based, value-based learning strategy, accompanied by elevated choice perseveration. More uncertain reward settings or changes in them lead to random, exploratory behavior. Meta-parameter dynamics show faster learning, greater involvement of a model-based strategy, higher choice stochasticity, and more rapid development of choice perseveration with less contribution to the final decision as learning progresses. Exploratory behavior in the face of uncertain reward settings or changes in those settings is underpinned by slower forgetting and greater model-based contribution. FIS modeling discovered a trial-level switch between an optimal value-based learning state and a suboptimal self-repeating state. Meta-parameter dynamics reflect continuous strategy changes, while state transitions capture abrupt, discrete strategy switches. At an intermediate timescale, when reward settings change, two processes interact: mice persist in a self-repeating state, leading to attempts at model-based strategy with incomplete adaptation.",
+      "authors": [
+        "Chen, J.",
+        "Taira, M.",
+        "Doya, K."
+      ],
+      "primary_category": "animal behavior and cognition",
+      "categories": [
+        "animal behavior and cognition"
+      ],
+      "published": "2026-06-11T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.06.08.729424v1.full.pdf",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "studies meta-learning and strategy adaptation, relevant to self-improving agent learning",
+      "llm_evidence_cn": "研究元学习与策略适应，与自我改进智能体学习相关",
+      "llm_evidence": "研究元学习与策略适应，与自我改进智能体学习相关",
+      "canonical_evidence": "研究元学习与策略适应，与自我改进智能体学习相关",
+      "llm_tldr_en": "Analyzes how mice adapt strategies in a two-step decision task using multiple modeling approaches, revealing continuous and discrete changes. Provides insights for agent self-improvement through meta-learning.",
+      "llm_tldr_cn": "本文研究小鼠在两步决策任务中如何根据环境和内部状态进行策略的连续适应和离散切换。采用四种分析手段，包括强化学习模型和粒子滤波方法，发现策略调整兼具连续和离散特征。这一研究揭示了元学习中策略调控的机制，对开发能够自我改进的智能体具有启示意义，为设计动态学习策略的智能体提供了生物学基础。",
+      "llm_tldr": "本文研究小鼠在两步决策任务中如何根据环境和内部状态进行策略的连续适应和离散切换。采用四种分析手段，包括强化学习模型和粒子滤波方法，发现策略调整兼具连续和离散特征。这一研究揭示了元学习中策略调控的机制，对开发能够自我改进的智能体具有启示意义，为设计动态学习策略的智能体提供了生物学基础。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "self-improving agent learning",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
