@@ -1,0 +1,547 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-15T22:56:54.026637+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 5,
+    "deep_cap": 7,
+    "deep_selected": 5,
+    "quick_candidates": 7,
+    "quick_skim_target": 12,
+    "quick_selected": 7
+  },
+  "deep_dive": [
+    {
+      "id": "2606.09919v1",
+      "source": "arxiv",
+      "title": "Co-GLANCE: Uncertainty-Aware Active Perception for Heterogeneous Robot Teaming",
+      "abstract": "Perceptual uncertainty is a central challenge for heterogeneous robot teams operating in unstructured outdoor environments, where no single viewpoint affords reliable scene understanding. Perceptual uncertainty, arising from sources such as occlusions, manifests differently across robot viewpoints depending on scene structure. Detecting and resolving sources of perceptual uncertainty requires both scene-based contextual reasoning and capability-aware robot allocation. While vision-language models provide strong semantic priors for both, they are computationally prohibitive for onboard inference and lack calibrated uncertainty quantification. We introduce Co-GLANCE, a real-time onboard perception and decision-making system for uncertainty resolution in heterogeneous robot teams. Co-GLANCE distills the semantic reasoning capabilities of a vision-language model into an end-to-end model for occlusion segmentation and robot allocation, eliminating the need for cloud-based inference. To quantify perceptual uncertainty, Co-GLANCE combines conformal prediction with selective abstention to provide statistically valid coverage guarantees for segmentation, robot allocation, and detection outputs. These calibrated uncertainty estimates directly trigger active perception, dispatching the most appropriate robot to acquire informative viewpoints and resolve uncertainty. Across real-world scenarios, Co-GLANCE outperforms cloud-based vision-language model baselines in occlusion segmentation and robot allocation accuracy by 25% and 36%, respectively, while reducing per-frame inference latency 350x. We also release an air-ground dataset for future research. Code, videos, and dataset available at https://co-glance.github.io/ .",
+      "authors": [
+        "Michal P. Podolinsky",
+        "Neel P. Bhatt",
+        "Pranay Samineni",
+        "Rohan Siva",
+        "Christian Ellis",
+        "Ufuk Topcu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.MA",
+        "cs.RO"
+      ],
+      "published": "2026-06-07T00:02:21+00:00",
+      "link": "https://arxiv.org/pdf/2606.09919v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "real-time onboard perception and decision-making system for uncertainty resolution",
+      "llm_evidence_cn": "用于不确定性消解的实时机上感知与决策系统",
+      "llm_evidence": "用于不确定性消解的实时机上感知与决策系统",
+      "canonical_evidence": "用于不确定性消解的实时机上感知与决策系统",
+      "llm_tldr_en": "Co-GLANCE introduces a real-time onboard perception system for heterogeneous robot teams to detect and resolve perceptual uncertainty using vision-language models and uncertainty quantification.",
+      "llm_tldr_cn": "Co-GLANCE针对异构机器人团队在非结构化环境中的感知不确定性挑战，提出了一种实时机上感知与决策系统。该系统利用视觉语言模型进行场景推理，并校准不确定性估计，从而有效检测并消解由遮挡等引起的感知不确定性。实验证明该方法在保持实时性的同时提高了团队的感知可靠性。该系统为机器人团队中的主动感知提供了实用范式。",
+      "llm_tldr": "Co-GLANCE针对异构机器人团队在非结构化环境中的感知不确定性挑战，提出了一种实时机上感知与决策系统。该系统利用视觉语言模型进行场景推理，并校准不确定性估计，从而有效检测并消解由遮挡等引起的感知不确定性。实验证明该方法在保持实时性的同时提高了团队的感知可靠性。该系统为机器人团队中的主动感知提供了实用范式。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in agent architectures",
+      "matched_requirement_id": "req-15",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.14211v1",
+      "source": "arxiv",
+      "title": "Closing the Reflection Gap: A Free Calibration Bonus for Agentic RL",
+      "abstract": "LLMs are increasingly deployed as agents that interact with external environments and observe feedback such as execution results, error messages, and tool outputs. A well-functioning agent should be able to leverage this feedback to accurately assess its own performance. Yet we find a persistent reflection gap: LLM agents tend to mis-assess their own outputs after observing concrete environment feedback -- even for questions they correctly answered -- and standard RL barely helps due to a credit-assignment mismatch. To close this gap, we propose RefGRPO, a simple yet effective fix that augments standard RL algorithms with two key ingredients: a free calibration bonus computed by contrasting the agent's own reflection with the actual outcome (requiring no additional reward model, LLM judge, or external annotation), and a dynamic schedule on its coefficient. Compared to standard RL baselines, our method simultaneously improves reflection calibration (e.g., reduces underconfidence rate $44.4\\% \\to 7.7\\%$) and task accuracy (e.g., $75.1\\% \\to 76.5\\%$) on text-to-SQL across five benchmarks. The resulting calibrated reflection turns the agent into its own verifier grounded in environment feedback, which further enables (i) better self-improvement that uses reflections as pseudo-rewards without outcome supervision, and (ii) more effective test-time selective prediction by committing only to rollouts flagged as correct.",
+      "authors": [
+        "Yinglun Zhu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-06-12T07:47:15+00:00",
+      "link": "https://arxiv.org/pdf/2606.14211v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Reflection gap closed by calibration bonus in agentic RL",
+      "llm_evidence_cn": "通过校准奖励关闭智能体强化学习中的反思差距",
+      "llm_evidence": "通过校准奖励关闭智能体强化学习中的反思差距",
+      "canonical_evidence": "通过校准奖励关闭智能体强化学习中的反思差距",
+      "llm_tldr_en": "RefGRPO augments standard RL with a free calibration bonus computed by contrasting agent reflection with environment outcome, closing the reflection gap and improving agent self-improvement.",
+      "llm_tldr_cn": "LLM智能体在与环境交互后常误判自身表现，标准RL难以解决。本文提出RefGRPO，通过对比智能体自我反思与实际结果计算免费校准奖励，有效关闭反思差距。实验证明该方法显著提升智能体自我评估准确性，并促进强化学习中的自我改进，是实现递归自我改进的关键技术。",
+      "llm_tldr": "LLM智能体在与环境交互后常误判自身表现，标准RL难以解决。本文提出RefGRPO，通过对比智能体自我反思与实际结果计算免费校准奖励，有效关闭反思差距。实验证明该方法显著提升智能体自我评估准确性，并促进强化学习中的自我改进，是实现递归自我改进的关键技术。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.14239v1",
+      "source": "arxiv",
+      "title": "SkillAudit: Ground-Truth-Free Skill Evolution via Paired Trajectory Auditing",
+      "abstract": "Agent skills are structured procedural packages that guide frozen LLM agents in specialized workflows. Skills rarely remain sufficient after deployment: edge cases, API changes, and deployment constraints become visible only through use, making skill evolution a practical necessity. Existing methods depend on privileged feedback such as held-out validation scores, hidden test outcomes, or environment rewards -- signals often unavailable when a practitioner has only a task description and workspace data. We introduce SkillAudit, a framework for evolving agent skills without ground-truth feedback. The key idea is paired trajectory auditing: at each iteration, the same task is executed with and without the candidate skill, isolating how the skill changes agent behavior without external labels. To turn behavioral differences into edit guidance, SkillAudit uses Process-Aligned Contrastive Evaluation (PACE), a cluster of evaluators that maps trajectory divergences to diagnostic signals linked to specific passages in the skill document. A structural verifier, compiled once from the task specification and then fixed, checks task constraints and rolls back harmful updates. SkillAudit routes edits through two pipelines: Refine removes noisy or irrelevant guidance from broadly useful skills, while Repair replaces passages that conflict with the task. Across 89 containerized tasks spanning 8 professional domains, SkillAudit achieves 73.9% average task reward, outperforming an agent without skills (40.9%) and the static expert skill (56.7%). These gains are obtained without accessing hidden tests, reference solutions, or external scoring functions during evolution.",
+      "authors": [
+        "Haowen Gao",
+        "Haoran Chen",
+        "Can Wang",
+        "Shasha Guo",
+        "Liang Pang",
+        "Zhaoyang Liu",
+        "Huawei Shen",
+        "Xueqi Cheng"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-12T08:20:09+00:00",
+      "link": "https://arxiv.org/pdf/2606.14239v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "agent skill evolution without ground-truth feedback",
+      "llm_evidence_cn": "无真实反馈的智能体技能进化",
+      "llm_evidence": "无真实反馈的智能体技能进化",
+      "canonical_evidence": "无真实反馈的智能体技能进化",
+      "llm_tldr_en": "Introduces SkillAudit, a framework for evolving agent skills without ground-truth feedback by paired trajectory auditing, comparing trajectories with and without the candidate skill to isolate its effect.",
+      "llm_tldr_cn": "智能体技能在部署后常因边缘情况或API变化而失效，现有方法依赖验证分数等特权反馈。该论文提出SkillAudit，通过成对轨迹审计——在同一任务上分别执行带与不带候选技能的操作，对比轨迹差异——实现无需真实反馈的技能进化。迭代过程自动发现并改进技能缺陷，为智能体自适应优化提供了实用方法。",
+      "llm_tldr": "智能体技能在部署后常因边缘情况或API变化而失效，现有方法依赖验证分数等特权反馈。该论文提出SkillAudit，通过成对轨迹审计——在同一任务上分别执行带与不带候选技能的操作，对比轨迹差异——实现无需真实反馈的技能进化。迭代过程自动发现并改进技能缺陷，为智能体自适应优化提供了实用方法。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "Methods for agent self improvement",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.14302v1",
+      "source": "arxiv",
+      "title": "Retrospective Progress-Aware Self-Refinement for LLM Agent Training",
+      "abstract": "LLM-based agents trained with reinforcement learning optimize step-wise action prediction but lack metacognitive awareness of task progress, inducing a gap that hinders long-horizon scaling. A pilot study reveals that online progress prompting hurts performance while retrospective demonstrations help, yet this capability cannot emerge from outcome-reward training alone. We present RePro, Retrospective Progress-Aware Training, a framework that trains agents to self-generate progress signals via a forward-then-reflect rollout paradigm: the agent executes actions online, then retrospectively reassesses its step-wise progress given the completed trajectory and known outcome. RePro initializes with a Retrospection Warmup that teaches reflection format from minimal external demonstrations, then further trains through RePro-PO with a composite reward that produces self-generated signals without continuous external supervision. Experiments on WebShop, ALFWorld, and Sokoban show that RePro enhances the Qwen family's performance, with up to $12\\%$ absolute success rate gains.",
+      "authors": [
+        "Xinbei Ma",
+        "Congmin Zheng",
+        "Jiyang Qiu",
+        "Jiale Hong",
+        "Yao Yao",
+        "Xiangmou Qu",
+        "Jiaxin Yin",
+        "Xingyu Lou",
+        "Jun Wang",
+        "Weiwen Liu",
+        "Weinan Zhang",
+        "Zhuosheng Zhang",
+        "Hai Zhao"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-12T09:38:47+00:00",
+      "link": "https://arxiv.org/pdf/2606.14302v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "retrospective self-refinement for LLM agents via progress-aware training",
+      "llm_evidence_cn": "通过回顾性进度感知训练实现LLM智能体的自精炼",
+      "llm_evidence": "通过回顾性进度感知训练实现LLM智能体的自精炼",
+      "canonical_evidence": "通过回顾性进度感知训练实现LLM智能体的自精炼",
+      "llm_tldr_en": "Proposes RePro, a framework for LLM agents to self-generate progress signals via forward-then-reflect paradigm, enabling recursive self-improvement without external rewards.",
+      "llm_tldr_cn": "针对LLM智能体缺乏元认知进度意识的问题，提出RePro框架，采用先执行后回顾的范式，让智能体自主生成进度信号并自精炼。实验表明该方法能有效提升长期任务性能，是实现递归自我改进的有效途径。",
+      "llm_tldr": "针对LLM智能体缺乏元认知进度意识的问题，提出RePro框架，采用先执行后回顾的范式，让智能体自主生成进度信号并自精炼。实验表明该方法能有效提升长期任务性能，是实现递归自我改进的有效途径。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "How do agents achieve recursive self improvement?",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.14249v1",
+      "source": "arxiv",
+      "title": "HarnessX: A Composable, Adaptive, and Evolvable Agent Harness Foundry",
+      "abstract": "AI agent performance depends critically on the runtime harness, comprising the prompts, tools, memory, and control flow that mediate how a model observes, reasons, and acts. Yet today's harnesses remain largely hand-crafted and static: each new model or task still demands bespoke scaffolding, and the rich traces produced during execution are rarely distilled back into systematic improvement. We introduce HarnessX, a foundry for composable, adaptive, and evolvable agent harnesses. HarnessX assembles typed harness primitives via a substitution algebra, adapts them through AEGIS, a trace-driven multi-agent evolution engine grounded in an operational mirror between symbolic adaptation and reinforcement learning, and closes the harness-model loop by turning trajectories into both harness updates and model training signal. Across five benchmarks (ALFWorld, GAIA, WebShop, tau^3-Bench, and SWE-bench Verified), HarnessX yields an average gain of +14.5% (up to +44.0%), with gains largest where baselines are lowest. These results suggest that agent progress need not come from model scaling alone: composing and evolving runtime interfaces from execution feedback is an actionable and complementary lever. The complete codebase will be open-sourced in a future release.",
+      "authors": [
+        "Tingyang Chen",
+        "Shuo Lu",
+        "Kang Zhao",
+        "Weicheng Meng",
+        "Hanlin Teng",
+        "Tianhao Li",
+        "Chao Li",
+        "Xule Liu",
+        "Jian Liang",
+        "Zhizhong Zhang",
+        "Yuan Xie",
+        "Heng Qu",
+        "Kun Shao",
+        "Jian Luan"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-12T08:27:11+00:00",
+      "link": "https://arxiv.org/pdf/2606.14249v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "trace-driven multi-agent evolution engine for agent improvement",
+      "llm_evidence_cn": "基于运行痕迹的多智能体进化引擎，用于智能体改进",
+      "llm_evidence": "基于运行痕迹的多智能体进化引擎，用于智能体改进",
+      "canonical_evidence": "基于运行痕迹的多智能体进化引擎，用于智能体改进",
+      "llm_tldr_en": "HarnessX introduces a composable, adaptive, and evolvable agent harness foundry with AEGIS engine that uses execution traces to systematically improve agent behavior, enabling recursive self-improvement.",
+      "llm_tldr_cn": "现有智能体运行时框架多为手工定制且静态，HarnessX提出一种组合式、自适应、可进化的智能体框架工坊，通过AEGIS多智能体进化引擎，利用执行痕迹驱动系统化改进，实现智能体自我改进。该方法将符号适应与强化学习统一，自动优化提示、工具等组件，为递归自我改进提供基础设施。",
+      "llm_tldr": "现有智能体运行时框架多为手工定制且静态，HarnessX提出一种组合式、自适应、可进化的智能体框架工坊，通过AEGIS多智能体进化引擎，利用执行痕迹驱动系统化改进，实现智能体自我改进。该方法将符号适应与强化学习统一，自动优化提示、工具等组件，为递归自我改进提供基础设施。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.10348v1",
+      "source": "arxiv",
+      "title": "Rethinking Embodied Navigation via Relational Inductive Bias",
+      "abstract": "Object navigation requires an agent to locate a target in an unknown environment through visual observations. Existing methods typically rely on open-vocabulary detectors or vision-language models (VLMs) to answer where to search, but often overlook what not to trust - which semantic cues are unreliable. Open-vocabulary perception is prone to systematic misleading evidence: false positives, outdated static priors, and repeated failed exploration due to lack of embodied verification, which contaminates mapping and decision-making. Such errors are rooted in structured object relations in real-world scenes. To address this, we propose DB-Nav, a framework that reshapes the search space via dual relational biases. It factorizes target-centric relations into an Activation Bias (propagates contextual evidence) and an Inhibition Bias (suppresses unreliable regions via perceptual confusion and action-level falsification). These biases are unified into a Relational Activation-Inhibition Exploration Graph that modulates frontier exploration values using online observations and failed accesses. Experiments on ObjectNav benchmarks show that DB-Nav significantly outperforms existing methods in success rate (SR) and Success weighted by Path Length (SPL), offering a lightweight, interpretable, and robust navigation framework without costly online VLM reasoning.",
+      "authors": [
+        "Weitao An",
+        "Chenghao Xu",
+        "Xu Yang",
+        "Cheng Deng"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-06-09T02:57:34+00:00",
+      "link": "https://arxiv.org/pdf/2606.10348v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "perception and detection modules in world model for embodied navigation",
+      "llm_evidence_cn": "具身导航中的世界模型感知与检测模块",
+      "llm_evidence": "具身导航中的世界模型感知与检测模块",
+      "canonical_evidence": "具身导航中的世界模型感知与检测模块",
+      "llm_tldr_en": "DB-Nav uses dual relational biases to reshape search space and handle unreliable semantic cues in object navigation.",
+      "llm_tldr_cn": "针对具身导航中开放词汇检测易受误导的问题,本文提出DB-Nav框架,通过双重关系偏置重塑搜索空间,区分可靠与不可靠语义线索,从而提升导航效率和鲁棒性。实验表明该方法能有效过滤假阳性并改善探索决策。",
+      "llm_tldr": "针对具身导航中开放词汇检测易受误导的问题,本文提出DB-Nav框架,通过双重关系偏置重塑搜索空间,区分可靠与不可靠语义线索,从而提升导航效率和鲁棒性。实验表明该方法能有效过滤假阳性并改善探索决策。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.14155v1",
+      "source": "arxiv",
+      "title": "Graph-based Target Back-Propagation for Context Adaptation in Multi-LLM Agentic Systems",
+      "abstract": "Context adaptation automates prompt engineering in LLM-based systems by iteratively revising tunable prompts from task feedback, without modifying model weights. Extending this paradigm to multi-LLM agentic systems is crucial: existing methods suffer from inaccurate credit assignment and lack convergence guarantees. We propose \\textbf{G}raph-based \\textbf{T}arget \\textbf{B}ack-\\textbf{P}ropagation (GTBP), a context adaptation framework for agentic workflows modeled as directed acyclic graphs. GTBP propagates local target outputs backward through the workflow graph and uses target--output discrepancies to guide a stage-wise prompt update mechanism. Theoretically, we show that GTBP's stage-wise prompt updates become stable over iterations, and that a sufficiently capable LLM optimizer can decrease the overall objective. Empirically, GTBP consistently outperforms strong baselines across three benchmarks while maintaining comparable computational cost.",
+      "authors": [
+        "Tan Zhu",
+        "Tong Yao",
+        "Kananart Kuwaranancharoen",
+        "Amit Singh",
+        "Yushang Lai",
+        "Deepa Mohan",
+        "Shankara Bhargava"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "published": "2026-06-12T06:27:15+00:00",
+      "link": "https://arxiv.org/pdf/2606.14155v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "iterative context adaptation in multi-LLM agent systems via graph-based target back-propagation",
+      "llm_evidence_cn": "通过基于图的目标反向传播在多LLM代理系统中进行迭代上下文自适应",
+      "llm_evidence": "通过基于图的目标反向传播在多LLM代理系统中进行迭代上下文自适应",
+      "canonical_evidence": "通过基于图的目标反向传播在多LLM代理系统中进行迭代上下文自适应",
+      "llm_tldr_en": "GTBP enables iterative prompt revision in multi-LLM agent workflows by back-propagating target-output discrepancies through a graph, achieving stable convergence.",
+      "llm_tldr_cn": "多LLM代理系统的上下文自适应面临信用分配不准和收敛无保障的问题。GTBP将工作流建模为有向无环图，通过反向传播局部目标输出来分阶段更新提示。理论证明其更新稳定，实验验证了有效性，为代理系统的迭代自我改进提供了新框架。",
+      "llm_tldr": "多LLM代理系统的上下文自适应面临信用分配不准和收敛无保障的问题。GTBP将工作流建模为有向无环图，通过反向传播局部目标输出来分阶段更新提示。理论证明其更新稳定，实验验证了有效性，为代理系统的迭代自我改进提供了新框架。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "iterative self-improvement agent",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.11543v1",
+      "source": "arxiv",
+      "title": "SkillJuror: Measuring How Agent Skill Organization Changes Runtime Behavior",
+      "abstract": "Agent Skills augment large language model (LLM) agents with procedural knowledge at inference time, but current benchmarks rarely distinguish what a Skill says from how it is organized. We study this distinction through Progressive Disclosure, where a concise root file points agents to supporting resources on demand, and compare it with a normalized flat baseline. We present SkillJuror, a framework for evaluating Skill writing paradigms through semantically controlled variants, matched multi-trial evaluations, and trajectory evidence while holding task knowledge fixed. In an 82-task SkillsBench study, Progressive Disclosure changes runtime behavior before aggregate outcomes: distinct Skill resources touched per trajectory rise from 1.18 to 3.85, and effective uptake events rise from 1.33 to 3.92. It also yields 17 additional verifier-passing trials out of 410 matched trials (+4.1%) over the normalized flat baseline. The benefit is task-dependent. Progressive Disclosure helps when supporting resources guide implementation, checking, or repair, but is weaker when success hinges on exact output conventions, numerical thresholds, or long artifact-generation pipelines. These results show that Skill organization is not mere presentation: it can change how agents search and apply procedural knowledge, while outcome gains depend on whether the exposed resources are actionable for the task. Code is available at https://github.com/zhiyuchen-ai/skill-juror.",
+      "authors": [
+        "Zhiyu Chen",
+        "Zihan Guo",
+        "Bo Huang",
+        "Bingwei Lu",
+        "Jianghao Lin",
+        "Yuanjian Zhou",
+        "Weinan Zhang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.SE"
+      ],
+      "published": "2026-06-10T01:11:50+00:00",
+      "link": "https://arxiv.org/pdf/2606.11543v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "studies how agent skill organization affects runtime behavior, relevant to self-improvement techniques",
+      "llm_evidence_cn": "研究智能体技能组织如何影响运行时行为，与自我改进技术相关",
+      "llm_evidence": "研究智能体技能组织如何影响运行时行为，与自我改进技术相关",
+      "canonical_evidence": "研究智能体技能组织如何影响运行时行为，与自我改进技术相关",
+      "llm_tldr_en": "Introduces SkillJuror framework to evaluate agent skill writing paradigms via Progressive Disclosure, showing changes in runtime behavior and resource usage.",
+      "llm_tldr_cn": "现有基准难以区分技能内容与组织方式的区别。本文提出SkillJuror框架，通过渐进式披露（根文件指向子资源）与扁平基准对比，在82个任务上评估技能组织对智能体行为的影响。结果显示渐进式披露改变了轨迹中的资源使用模式，为智能体技能优化提供了新的评测视角。",
+      "llm_tldr": "现有基准难以区分技能内容与组织方式的区别。本文提出SkillJuror框架，通过渐进式披露（根文件指向子资源）与扁平基准对比，在82个任务上评估技能组织对智能体行为的影响。结果显示渐进式披露改变了轨迹中的资源使用模式，为智能体技能优化提供了新的评测视角。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.14502v1",
+      "source": "arxiv",
+      "title": "From Chatbot to Digital Colleague: The Paradigm Shift Toward Persistent Autonomous AI",
+      "abstract": "Large Language Models (LLMs) are undergoing a fundamental transformation from conversational generators into integrated AI systems capable of reasoning, action, memory, and self-improvement. We conceptualize this transition as a shift from Chatbot to Digital Colleague: from conversational answers to persistent work. We organize this transition along two tightly coupled dimensions. First, at the cognitive core level, LLMs are advancing from Chatbot-era \"fast thinking\" systems driven by next-token prediction toward Thinking LLMs that leverage inference-time computation, Chain-of-Thought reasoning, reflection, process supervision, and reinforcement learning to support more deliberate and reliable cognition. Second, at the tool-augmented task execution level, LLMs are progressing from tool-calling Agents that invoke external resources in an ad hoc manner toward OpenClaw-style workstation systems (OpenClaw) equipped with persistent Workspaces, skills, verification loops, and governance. The \"Workspace + Skill\" paradigm makes episodic tool use colleague-like via state persistence, reusable procedures, task closure, and experience reuse. We examine data construction shifts from instruction-response pairs to State-Action-Observation trajectories and evaluation from static benchmarks to sandboxed, auditable, self-evolving AI ecosystems.",
+      "authors": [
+        "Yongheng Zhang",
+        "Ziang Liu",
+        "Jiaxuan Zhu",
+        "Shuai Wang",
+        "Xiangqi Chen",
+        "Haojing Huang",
+        "Jiayi Kuang",
+        "Siyu Chen",
+        "Ao Shen",
+        "Hao Wu",
+        "Qiufeng Wang",
+        "Qian-Wen Zhang",
+        "Junnan Dong",
+        "Wenhao Jiang",
+        "Ying Shen",
+        "Hai-Tao Zheng",
+        "Yinghui Li",
+        "Di Yin",
+        "Xing Sun",
+        "Philip S. Yu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-12T14:33:55+00:00",
+      "link": "https://arxiv.org/pdf/2606.14502v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "discusses self-improvement in autonomous AI systems",
+      "llm_evidence_cn": "讨论自主AI系统中的自我改进",
+      "llm_evidence": "讨论自主AI系统中的自我改进",
+      "canonical_evidence": "讨论自主AI系统中的自我改进",
+      "llm_tldr_en": "This perspective paper conceptualizes the shift from chatbot to persistent autonomous AI, highlighting self-improvement as a key capability enabled by thinking LLMs and tool augmentation.",
+      "llm_tldr_cn": "大型语言模型正从对话生成器向集成自主AI系统转型，具备推理、行动、记忆和自我改进能力。本文将该转变概念化为从聊天机器人到数字同事，强调推理时计算、思链推理、反思、过程监督和强化学习等认知核心，以及工具增强的任务执行。自我改进被定位为关键能力，为智能体递归提升提供了理论基础。",
+      "llm_tldr": "大型语言模型正从对话生成器向集成自主AI系统转型，具备推理、行动、记忆和自我改进能力。本文将该转变概念化为从聊天机器人到数字同事，强调推理时计算、思链推理、反思、过程监督和强化学习等认知核心，以及工具增强的任务执行。自我改进被定位为关键能力，为智能体递归提升提供了理论基础。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.14525v1",
+      "source": "arxiv",
+      "title": "Detecting Bot Detection: Prevalence, Techniques, and Implications for Web Measurement Research",
+      "abstract": "Browser automation frameworks are essential tools for security and privacy research on the web, yet bot detection scripts increasingly probe their artifacts, threatening measurement validity as automated browsers may be blocked or served different content. Prior work measures detection deployment, while we measure blocking-induced sample loss. Through a literature survey of top-tier security, privacy, and web measurement venues, we find that 83% of papers omit any discussion of bot detection blocking. To address this gap, we conduct a measurement study of 10,000 websites across four browser configurations (40K page visits in total) to quantify detection prevalence and employed techniques. Using custom instrumentation to detect when sites probe for automation, we develop a taxonomy of bot detection techniques and measure how often they appear in practice. Chromium headless encounters a 15% soft block rate compared to 7% for other configurations. Across all conditions, 82% of blocks are attributable to bot detection (59% vendor-confirmed, 23% inferred from condition-dependent blocking), predominantly by providers with integrated bot detection such as Cloudflare (37% block rate) and Akamai (26%). A header spoofing experiment establishes that 75% of Chromium-headless-only blocks are caused by header-level signals alone, yet JavaScript-based environment probing is more extensive than current blocking rates suggest. These findings demonstrate that bot detection creates systematic, provider-correlated sample loss that the web measurement community neither measures nor reports. The downstream effect on specific measurement outcomes remains future work.",
+      "authors": [
+        "Ralf Gundelach",
+        "Michael Mühlhauser",
+        "Dominik Herrmann"
+      ],
+      "primary_category": "cs.CR",
+      "categories": [
+        "cs.CR",
+        "cs.CY"
+      ],
+      "published": "2026-06-12T14:59:11+00:00",
+      "link": "https://arxiv.org/pdf/2606.14525v1",
+      "tags": [
+        "keyword:agent-detect"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "bot detection techniques and blocking measurement",
+      "llm_evidence_cn": "机器人检测技术与拦截测量",
+      "llm_evidence": "机器人检测技术与拦截测量",
+      "canonical_evidence": "机器人检测技术与拦截测量",
+      "llm_tldr_en": "This paper measures bot detection deployment across 10,000 websites, cataloging techniques and blocking rates, providing a detection technique reference for agent detection.",
+      "llm_tldr_cn": "网络机器人检测脚本影响自动化代理的有效性。本文系统测量了10000个网站上的机器人检测部署情况，量化了拦截导致的样本损失，并归纳了检测技术。该研究为智能体检测提供了实战技术清单和影响评估，有助于设计反检测策略。",
+      "llm_tldr": "网络机器人检测脚本影响自动化代理的有效性。本文系统测量了10000个网站上的机器人检测部署情况，量化了拦截导致的样本损失，并归纳了检测技术。该研究为智能体检测提供了实战技术清单和影响评估，有助于设计反检测策略。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.14693v1",
+      "source": "arxiv",
+      "title": "Learning Coordinated Preference for Multi-Objective Multi-Agent Reinforcement Learning",
+      "abstract": "Cooperative multi-objective multi-agent reinforcement learning (MOMARL) models team decision making under multiple, potentially conflicting objectives. In this setting, conflicts arise not only across objectives but also across agents with different observations, roles, and contributions. We propose Preference Coordinated Multi-agent Policy Optimization (PCMA), which learns coordinated agent-specific preferences to enable complementary trade-offs among agents. Theoretically, we formulate cooperative MOMARL as a team-optimal game and show that, under suitable conditions, preference diversity can induce team improvement through a first-order improvement decomposition. Experiments on multiple cooperative MOMA environments and a practical traffic-control scenario show that PCMA improves both performance and trade-off coordination.",
+      "authors": [
+        "Pengxin Wang",
+        "Lihao Guo",
+        "Yi Xie",
+        "Bo Liu",
+        "Siyang Cao",
+        "Jingdi Chen"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.AI"
+      ],
+      "published": "2026-06-12T17:55:28+00:00",
+      "link": "https://arxiv.org/pdf/2606.14693v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multi-agent RL with team improvement through preference coordination",
+      "llm_evidence_cn": "多智能体强化学习中通过偏好协调实现团队改进",
+      "llm_evidence": "多智能体强化学习中通过偏好协调实现团队改进",
+      "canonical_evidence": "多智能体强化学习中通过偏好协调实现团队改进",
+      "llm_tldr_en": "Proposes PCMA for multi-objective multi-agent RL, learning coordinated preferences to achieve team improvement with theoretical guarantees.",
+      "llm_tldr_cn": "该论文针对多目标多智能体强化学习中的冲突协调问题，提出了偏好协调多智能体策略优化（PCMA）方法。PCMA通过学习智能体特有的偏好实现互补性权衡，理论上证明了偏好多样性可通过一阶改进分解诱导团队提升。实验在多智能体环境中验证了方法的有效性。该方法为多智能体系统的协同改进提供了新思路。",
+      "llm_tldr": "该论文针对多目标多智能体强化学习中的冲突协调问题，提出了偏好协调多智能体策略优化（PCMA）方法。PCMA通过学习智能体特有的偏好实现互补性权衡，理论上证明了偏好多样性可通过一阶改进分解诱导团队提升。实验在多智能体环境中验证了方法的有效性。该方法为多智能体系统的协同改进提供了新思路。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.14674v1",
+      "source": "arxiv",
+      "title": "AgentSpec: Understanding Embodied Agent Scaffolds Through Controlled Composition",
+      "abstract": "LLM agents are increasingly built not as single model calls, but as scaffolded systems that combine reasoning, memory, reflection, action execution, and learning. While such scaffolds often improve performance, they are often embedded in tightly coupled pipelines, making it difficult to isolate component contributions, compare alternative designs, or understand how module interactions shape agent behavior. We introduce AgentSpec, a modular specification framework that represents embodied agents as typed compositions of reusable policy components with standardized interfaces. AgentSpec standardizes the interfaces among perception, memory, reasoning, reflection, action, and optional learning, enabling components to be swapped and recombined under controlled conditions. We instantiate this framework across DeliveryBench, ALFRED, MiniGrid, and RoboTHOR, and analyze reasoning, memory, reflection, and reinforcement-learning modules across model backbones. Our results show that agent performance is governed by scaffold compatibility and interaction effects rather than isolated module strength. In particular, structured multi-granularity memory improves long-horizon state tracking, reasoning and memory interact non-uniformly across environments, reflection trades off correction and cost, and RL-trained policies compose best when optimized with deployment-time scaffold structure. AgentSpec provides a controlled foundation for studying, comparing, and designing composable LLM agents. Our code, baselines and interactive playground are publicly available at https://agentspec-embodied.github.io.",
+      "authors": [
+        "Jixuan Chen",
+        "Jianzhi Shen",
+        "Haoqiang Kang",
+        "Zhi Hong",
+        "Qingyi Jiang",
+        "Soham Bose",
+        "Yiming Zhang",
+        "Leon Leng",
+        "Amit Vyas",
+        "Lingjun Mao",
+        "Siru Ouyang",
+        "Kun Zhou",
+        "Lianhui Qin"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-12T17:39:49+00:00",
+      "link": "https://arxiv.org/pdf/2606.14674v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "proposes modular framework standardizing perception interfaces in agent architectures",
+      "llm_evidence_cn": "提出模块化框架标准化智能体架构中的感知接口",
+      "llm_evidence": "提出模块化框架标准化智能体架构中的感知接口",
+      "canonical_evidence": "提出模块化框架标准化智能体架构中的感知接口",
+      "llm_tldr_en": "AgentSpec provides a modular specification framework for embodied agents with typed components and standardized interfaces for perception, memory, reasoning, reflection, action, and learning.",
+      "llm_tldr_cn": "大型语言模型智能体通常由紧耦合的管道组成，难以分离组件贡献。本文提出AgentSpec，一种模块化规范框架，将具身智能体表示为可复用的策略组件组合，并标准化感知、记忆、推理、反思、动作和学习接口。通过组件互换与重组，可系统研究不同架构选择对行为的影响，为智能体设计与调试提供基础。",
+      "llm_tldr": "大型语言模型智能体通常由紧耦合的管道组成，难以分离组件贡献。本文提出AgentSpec，一种模块化规范框架，将具身智能体表示为可复用的策略组件组合，并标准化感知、记忆、推理、反思、动作和学习接口。通过组件互换与重组，可系统研究不同架构选择对行为的影响，为智能体设计与调试提供基础。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in agent architectures",
+      "matched_requirement_id": "req-15",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

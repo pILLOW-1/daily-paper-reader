@@ -1,0 +1,767 @@
+Title: Closing the Reflection Gap: A Free Calibration Bonus for Agentic RL
+
+URL Source: https://arxiv.org/pdf/2606.14211v1
+
+Published Time: Mon, 15 Jun 2026 00:42:16 GMT
+
+Number of Pages: 18
+
+Markdown Content:
+# Closing the Reflection Gap: A Free Calibration Bonus for Agentic RL 
+
+## Yinglun Zhu 
+
+yzhu@ucr.edu 
+
+University of California, Riverside 
+
+Abstract 
+
+LLMs are increasingly deployed as agents that interact with external environments and observe feedback such as execution results, error messages, and tool outputs. A well-functioning agent should be able to leverage this feedback to accurately assess its own performance. Yet we find a persistent reflection gap : LLM agents tend to mis-assess their own outputs after observing concrete environment feedback— even for questions they correctly answered—and standard RL barely helps due to a credit-assignment mismatch. To close this gap, we propose RefGRPO , a simple yet effective fix that augments standard RL algorithms with two key ingredients: a free calibration bonus computed by contrasting the agent’s own reflection with the actual outcome (requiring no additional reward model, LLM judge, or external annotation), and a dynamic schedule on its coefficient. Compared to standard RL baselines, our method simultaneously improves reflection calibration (e.g., reduces underconfidence rate 44 .4% → 7.7%) and task accuracy (e.g., 75 .1% → 76 .5%) on text-to-SQL across five benchmarks. The resulting calibrated reflection turns the agent into its own verifier grounded in environment feedback, which further enables (i) better self-improvement that uses reflections as pseudo-rewards without outcome supervision, and (ii) more effective test-time selective prediction by committing only to rollouts flagged as correct. action  ak,1  env. obs.  ok,1  re fl ection  s𝗋 𝖾 𝖿  
+
+> k,1
+
+# ⋯ action  ak,H env. obs.  ok,H re fl ection  s𝗋 𝖾 𝖿  
+
+> k,H
+
+outcome  rk
+
+contrast and s𝗋 𝖾 𝖿 
+
+k,H rk
+
+Calibrated rollouts are lifted above miscalibrated ones 
+
+honest error fl ag 
+
+α(t)
+
+undercon fi dent 
+
+1
+
+con fi dent success 
+
+1 + α(t)
+
+overcon fi dent 
+
+0rk = 0
+
+rk = 1
+
+s𝗋 𝖾 𝖿  
+
+> k,H
+
+= 0 s𝗋 𝖾 𝖿  
+
+> k,H
+
+= 1
+
+## • a free calibration bonus 
+
+## • Augment reward with a 
+
+dynamic coe ff .
+
+## ck = 𝕀 (s𝗋 𝖾 𝖿 
+
+k,H = rk)
+
+## α(t) ≥ 0
+
+## ˜rk = rk + α(t) ⋅ ck
+
+Figure 1: High-level overview of our RefGRPO algorithm. We instruct the agent to reflect on environment feedback and generate a binary reflection score sref ∈ { 0, 1}. RefGRPO has two key ingredients: (i) a free 
+
+calibration bonus ck = I(sref  
+
+> k,H
+
+= rk) computed by contrasting post-feedback reflection with the outcome, requiring no additional reward model, LLM judge, or external annotation; it lifts well-calibrated rollouts above miscalibrated ones, giving honest reflection positive relative advantage regardless of task outcome. (ii) a 
+
+dynamic schedule on the calibration coefficient, which enables the model to simultaneously improve reflection calibration and task performance. In effect, RefGRPO turns the agent into its own verifier grounded in environment feedback. 1    
+
+> arXiv:2606.14211v1 [cs.AI] 12 Jun 2026 0
+> 20
+> 40
+> 60 54.3
+> 44.4
+> 7.7
+> Underconfidence rate (%)
+> 60
+> 65
+> 70
+> 75
+> 80
+> 68.7
+> 75.1 76.5
+> Task accuracy (%)
+> 60
+> 65
+> 70
+> 75
+> 80
+> 66.0
+> 73.0
+> 76.5
+> Chow score (%)
+> Qwen2.5-Coder-7B-Instruct GRPO +RefGRPO (Ours)
+
+Figure 2: Comparison of the base model, a GRPO-style RL baseline, and our RefGRPO in the multi-turn setting. The model generates reflection scores sref ∈ { 0, 1} based on environment feedback before receiving the outcome reward r ∈ { 0, 1}. (a) underconfidence rate UnderConf = P(r = 1 | sref = 0), the fraction of self-flagged errors that are actually correct ( lower is better ). (b) task accuracy Acc = P(r = 1) ( higher is better ). (c) a unified metric ChowScore for task accuracy and reflection calibration ( higher is better ). 
+
+# 1 Introduction 
+
+LLM agents acting in an environment receive environment feedback , e.g., execution results, error messages, or tool outputs, after each action (Jin et al., 2025; Cao et al., 2025; Zhang et al., 2026). This feedback is concrete evidence about whether an action succeeded, yet agents typically consume it only as context for choosing the next action, rarely explicitly using it to judge whether the task itself has been correctly solved. In this work, we explicitly instruct the agent to reflect on the environment feedback and produce a binary score indicating whether its answer is correct—a post-feedback self-assessment grounded in evidence it has already observed. This casts reflection as a prediction problem: an agent that can accurately predict its own correctness from the feedback it has seen demonstrates good understanding of the consequences of its actions. Post-feedback reflection quality is therefore a direct measure of how well the agent comprehends what it has done and how the environment evolves, i.e., the quality of its implicit world model (Ha and Schmidhuber, 2018). Crucially, this is different from existing work on LLM self-assessment (Kadavath et al., 2022; Tian et al., 2023; Xiong et al., 2024; Tao et al., 2024; Leng et al., 2025; Bani-Harouni et al., 2026; Damani et al., 2026), where a model expresses its confidence in a self-generated answer solely based on its own generation, without environment feedback . In our setting, the agent reflects on its own actions after observing concrete environment feedback—strictly more information than the self-generated answer alone. Interpreting evidence one has already seen should be easier than forecasting correctness blind, so we would expect agents—especially RL-trained agents with strong reasoning capabilities—to excel at it. Yet they do not. Beyond the well-documented overconfidence of LLMs (Xiong et al., 2024; Leng et al., 2025), we find a more surprising failure: LLM agents exhibit significant underconfidence —flagging correct answers as wrong—even after observing concrete environment feedback, and standard RL recipes fail to fix it. On a multi-turn text-to-SQL setup, a Qwen2.5-Coder-7B-Instruct base is badly underconfident: 54 .3% of the answers it flags as wrong are actually correct (Figure 2(a)). Training that base with a GRPO-style algorithm (Shao et al., 2024; Guo et al., 2025; Yu et al., 2025; Liu et al., 2025; He et al., 2025) only nudges this rate down to 44 .4% even though it lifts task accuracy substantially. Standard RL recipes make the model a stronger task solver, but leave its post-feedback reflection quality broken—a persistent failure we call the 
+
+reflection gap . The cause is structural: outcome-only RL assigns advantage purely based on the outcome, so a rollout with an incorrect outcome but an honest error flag receives negative advantage, training the agent to suppress correct error flags rather than reward them; see Section 3.1 for a detailed discussion. To close the reflection gap, we propose a new algorithm RefGRPO that extends outcome-only RL with two key ingredients (Figure 1). (i) A free calibration bonus: since both reflection sref and the outcome 
+
+r are already available during RL training, we add a calibration bonus c = I(sref = r) to the outcome reward before group normalization. This lifts well-calibrated rollouts above miscalibrated ones, giving honest reflection positive relative advantage regardless of task outcome. (ii) A dynamic schedule on the calibration 2coefficient α(t) ≥ 0, which starts with a relatively large value to front-load calibration early and then decays the coefficient to let the model focus on task performance while largely retaining the calibration ability. As shown in Figure 2, compared to a GRPO-style baseline, RefGRPO significantly reduces the underconfidence rate 44 .4% → 7.7%, while simultaneously improving the task accuracy 75 .1% → 76 .5%. We also introduce the ChowScore from statistical learning (Chow, 1957, 1970) to the agentic setting as a unified metric for task accuracy and reflection calibration; RefGRPO improves ChowScore 73 .0% → 76 .5%. 
+
+Contributions. We make the following main contributions: 1. Post-feedback reflection is broken, and outcome-only RL barely fixes it. We show LLM agents tend to mis-assess their own outputs even after observing concrete environment feedback, with underconfidence rates above 44% in the multi-turn setting (Figure 2). We propose metrics to quantify the reflection gap (Section 2), and trace it to a credit-assignment mismatch problem (Section 3.1). 2. Augmenting RL with a free calibration bonus. We augment standard RL recipes with (i) a free calibration bonus computed from the contrast between post-feedback reflection and outcome, and (ii) a dynamic schedule on its coefficient (Section 3.2). As shown in Figure 2 and Section 4.2, our algorithm simultaneously improves reflection calibration (e.g., reduces underconfidence rate 44 .4% → 7.7%) and task accuracy (e.g., 75 .1% → 76 .5%), lifting the unified ChowScore metric 73 .0% → 76 .5%. 3. Calibration enables better self-improvement and selective prediction. The resulting calibrated reflection turns the agent into its own verifier—one grounded in environment feedback rather than pure self-assessment. We show that this further enables (i) better self-improvement that uses reflections as pseudo-rewards without outcome supervision (Section 4.3), and (ii) more effective test-time selective prediction by committing only to rollouts flagged as correct (Section 4.4). 
+
+# 2 Problem Setting 
+
+We formalize the interaction between agents and environments, and introduce the metrics to evaluate the quality of an agent’s reflection based on both its own actions and the environment feedback. 
+
+The interaction framework. We study an environment in which the agent assesses its action after observing concrete environment feedback . Each turn proceeds in three stages (see Figure 1, top): 1. Action. The agent takes an action a (e.g., a SQL query) after step-by-step reasoning. 2. Observation. The environment executes the action a and returns an observation o (e.g., query results, error messages, or tool outputs). 3. Reflection. The agent reflects on both the action a and the observation o and generates a binary reflection score sref ∈ { 0, 1} indicating whether it believes the action successfully completed the task (i.e., sref = 1) or not (i.e., sref = 0). After the final turn, the environment provides a binary outcome reward r ∈ { 0, 1} based on the correctness of the action; the outcome reward is used for RL training but is not revealed to the agent in the interaction. 
+
+Single-turn and multi-turn settings. We study both single-turn and multi-turn interactions. In the 
+
+single-turn setting, the agent takes an action, observes the environment feedback, and conducts the reflection. 1
+
+In the multi-turn setting, the agent interacts with the environment up to H turns. The agent can commit to a final action early and terminate the episode if it is confident about the result. At each turn, we instruct the agent to reflect on all preceding actions and observations and generate a reflection score; we therefore use the last reflection score sref  
+
+> H
+
+as the overall self-assessment for the episode. 
+
+> 1Our single-turn setting differs from the non-agentic single-turn setup (e.g., Damani et al. (2026)): the agent reflects on its action together with the resulting environment feedback, rather than on its self-generated answer alone.
+
+30 72 144 216        
+
+> Training step
+> 0
+> 20
+> 40
+> 60 Underconfidence rate (%)
+> GRPO +
+> RefGRPO (Ours)
+> 072 144 216
+> Training step
+> 70
+> 80
+> 90
+> Reflection accuracy (%)
+> 072 144 216
+> Training step
+> 50
+> 60
+> 70
+> 80
+> Chow score (%)
+
+Figure 3: Training curves for GRPO + and RefGRPO (Ours) in the single-turn setting using Qwen2.5-Coder-3B-Instruct as the base model. Left: underconfidence rate ( lower is better ); Middle: reflection accuracy (higher is better ); Right: ChowScore at β=0 .1 ( higher is better ). 
+
+Evaluation metrics. We measure task performance and reflection quality with the following metrics. 
+
+Task accuracy Acc = P(r = 1) measures whether the agent’s answer is correct. Reflection accuracy Acc ref =
+
+P(sref = r) measures the agreement between the agent’s reflection and the actual outcome. We also consider two directional miscalibration rates to decompose the failure modes when sref ̸ = r: overconfidence rate 
+
+OverConf = P(r = 0 | sref = 1), the fraction of answers it flags as correct that are actually wrong; and 
+
+underconfidence rate UnderConf = P(r = 1 | sref = 0), the fraction of answers it flags as wrong that are actually correct (lower is better for both). 
+
+A unified metric: Chow score. We introduce the ChowScore (Chow, 1957, 1970) from statistical learning to the agentic setting as a unified metric for task accuracy and reflection calibration —the agent’s ability to know when it has solved the task. Specifically, the ChowScore scores commits ( sref = 1) by correctness and self-flagged errors ( sref = 0) by a fixed credit β ∈ [0 , 1): 
+
+ChowScore β = P(sref = 1 , r = 1) + β · P(sref = 0) .
+
+ChowScore β = Acc for an always-commit agent and exceeds Acc whenever the agent’s error flags are infor-mative; β controls how much we credit honest error detection (which can be interpreted as abstention). We treat ChowScore as the main metric since it captures both task accuracy and reflection calibration. We set 
+
+β = 0 .1 by default and report a sweep over β ∈ [0 , 0.5] in the ablations (Section 4.5). 
+
+# 3 Methods 
+
+We analyze why outcome-only RL leads to uncalibrated models (Section 3.1) and propose a new algorithm that closes the reflection gap (Section 3.2). 
+
+## 3.1 Limitations of Outcome-Only RL 
+
+Background: GRPO. Group Relative Policy Optimization (GRPO; Shao et al. 2024; Guo et al. 2025) generates G rollouts {τk}Gk=1 for each prompt q ∼ D and updates the policy via the following clipped surrogate objective (Schulman et al., 2017; Yu et al., 2025): 
+
+JGRPO + (θ) = Eq, {τk }
+
+ 1
+
+> NG
+
+X 
+
+> k=1
+> |τk|
+
+X
+
+> t=1
+
+min  ρk,t Agrpo  
+
+> k
+
+, clip( ρk,t , 1 − εlow , 1 + εhigh ) Agrpo 
+
+> k
+
+ , (1) where ρk,t = πθ (ak,t | hk,t )/π θold (ak,t | hk,t ) is the importance ratio and the advantage Agrpo  
+
+> k
+
+= ( rk −μ)/(σ +ε)is normalized with respect to the group mean μ and standard deviation σ over outcome rewards {rj }Gj=1 .We additionally (i) normalize by total number of tokens N = P 
+
+> k
+
+|τk| to remove length bias, (ii) apply the asymmetric clip (ρ, 1 − εlow , 1 + εhigh ) to encourage exploration and prevent entropy collapse, and (iii) drop 4Algorithm 1 RefGRPO : GRPO Augmented with a Free Calibration Bonus and a Dynamic Schedule 
+
+Input: Schedule {α(t)}t≥0 with α(t) ≥ 0 
+
+> 1:
+
+for each training step t do  
+
+> 2:
+
+Get α ← α(t) from the schedule  
+
+> 3:
+
+for each rollout k = 1 , . . . , G do  
+
+> 4:
+
+Extract the last reflection score sref  
+
+> k,H
+> 5:
+
+Get ck ← I(sref  
+
+> k,H
+
+= rk) // Calibration bonus  
+
+> 6:
+
+Augment the reward with ˜ rk ← rk + α · ck // Augmented reward  
+
+> 7:
+
+Compute Agrpo  
+
+> k
+
+← ˜rk − μσ + ε with μ = 1
+
+> G
+
+PGj=1 ˜rj and σ2 = 1
+
+> G
+
+PGj=1 (˜ rj − μ)2 // GRPO advantage  
+
+> 8:
+
+Update policy with {Agrpo  
+
+> k
+
+} via the RL objective in Eq. (1) the KL divergence term to avoid over-constraining the policy and allow learning to be driven more directly by verifiable rewards (Yu et al., 2025; Liu et al., 2025; He et al., 2025). We denote the resulting objective in Eq. (1) as GRPO + to distinguish it from the original GRPO (Shao et al., 2024). 
+
+Credit assignment mismatch. The advantage Agrpo  
+
+> k
+
+in Eq. (1) depends only on the outcome rk, so the gradient is purely driven by task correctness. On rollouts where the agent self-flags its final action as wrong (sref  
+
+> k,H
+
+= 0), the signal can be misleading for reflection quality: 
+
+• Honest error flag ( rk = 0 , sref  
+
+> k,H
+
+= 0 ): even though the reflection is correct, the negative advantage 
+
+Agrpo  
+
+> k
+
+< 0 induced by the outcome trains the agent to stop flagging genuine errors .
+
+• Underconfident error flag ( rk = 1 , sref  
+
+> k,H
+
+= 0 ): the positive advantage Agrpo  
+
+> k
+
+> 0 induced by the outcome trains the agent to wrongly doubt its success .Both cases harm the agent’s post-feedback reflection quality. As shown in Figure 3, under standard outcome-only RL (e.g., GRPO +), UnderConf drifts upward as training proceeds, while Acc ref and ChowScore lag far behind those of our method ( RefGRPO , introduced in Section 3.2). 
+
+## 3.2 RefGRPO: Free Calibration from the Reflection-Outcome Contrast 
+
+We introduce a new algorithm RefGRPO (Algorithm 1) to resolve the credit-assignment mismatch in outcome-only RL, thereby closing the reflection gap. RefGRPO has two key ingredients: (i) a free calibration bonus computed by contrasting the agent’s reflection with the actual outcome, and (ii) a dynamic schedule on the calibration coefficient. 
+
+A free calibration bonus from the reflection-outcome contrast. The key observation is that, for each rollout k, the agent’s post-feedback reflection sref  
+
+> k,H
+
+and the outcome reward rk are both available during training, and the contrast between them can be used to compute a calibration signal. Specifically, we compute the binary calibration bonus ck = I(sref  
+
+> k,H
+
+= rk) and augment the outcome reward rk with this calibration bonus (with coefficient α(t) ≥ 0 at training step t): ˜rk(t) = rk + α(t) · ck.
+
+This augmentation assigns positive relative advantage to correct post-feedback reflection independently of the task outcome. As shown in Figure 1, no matter whether the task succeeds or not, a well-calibrated rollout receives higher reward than a miscalibrated one with the same outcome, which pushes the agent toward better-calibrated reflection. Figure 3 further corroborates this effect: compared to GRPO +, RefGRPO 
+
+significantly reduces UnderConf and improves Acc ref , while achieving higher ChowScore .Notably, the calibration bonus is free : it is computed by contrasting the agent’s own reflection with the actual outcome, requiring no additional reward model, LLM judge, or external annotation. 5Table 1: Single-turn results across five metrics: task accuracy, reflection accuracy, overconfidence rate, underconfidence rate, and Chow score. All values are percentages. Best results are highlighted in bold .Results are averaged across 5 benchmarks; per-dataset breakdowns are provided in Appendix A.2.                                           
+
+> Method Acc ↑Acc ref ↑OverConf ↓UnderConf ↓ChowScore 0.1↑
+> Llama-3.2-3B-Instruct
+> Base 52.1 65.1 37.5 31.4 49.0 GRPO +62.9 74.5 26.5 30.9 58.4
+> RefGRPO (Ours) 64.0 76.0 26.3 23.5 62.2
+> Qwen2.5-Coder-3B-Instruct
+> Base 56.8 71.4 31.4 25.2 53.8 GRPO +69.4 76.6 24.6 23.7 68.5
+> RefGRPO (Ours) 70.2 79.7 23.1 1.3 71.1
+
+A dynamic schedule on the calibration bonus coefficient. While the augmented reward ˜rk helps the agent improve its reflection calibration, it can slightly reduce task accuracy as part of the signal is reserved for calibration quality rather than correctness. To balance the two, we introduce a dynamic schedule on the calibration bonus coefficient α(t) ≥ 0 that decays the calibration bonus as training proceeds. We instantiate 
+
+α(t) as a simple two-stage schedule: 
+
+α(t) = 
+
+(
+
+α0 t ≤ γ · T, α1 t > γ · T, α1 < α 0,
+
+where T is the total number of training steps. The relatively larger coefficient α0 in the first γ · T steps front-loads calibration; the smaller coefficient α1 in the remaining (1 − γ) · T steps lets the model focus on task performance while largely retaining the calibration ability built up in the first stage. By default we set 
+
+α0 = 0 .1, α1 = 0, and γ = 2 /3. As shown in Figure 2 and Tables 1 and 2, RefGRPO with this schedule improves both calibration quality and task accuracy compared to outcome-only RL baselines. We provide ablations of the dynamic schedule in Section 4.5. 
+
+# 4 Experiments 
+
+## 4.1 Experimental Setup 
+
+We evaluate on text-to-SQL, a widely-studied agentic environment with verifiable rewards (Yu et al., 2018; Li et al., 2023; Gao et al., 2024; Li et al., 2025; Pourreza et al., 2025; Ma et al., 2025a). It provides unambiguous binary outcomes (execution correctness) and concrete environment feedback (SQL query results or error messages) at a difficulty level suited to open-source models. 
+
+Data and models. We train on 4,660 text-to-SQL problems drawn from the training set of Spider (Yu et al., 2018) and OmniSQL (Li et al., 2025), and evaluate on five standard benchmarks: Spider-Dev (Yu et al., 2018), Spider-Domain Knowledge (DK; Gan et al. 2021), Spider-Realistic (Deng et al., 2021), Spider-Test (Yu et al., 2018), and Bird-Dev (Li et al., 2023). We provide the average results across five benchmarks in the main content and provide per-dataset breakdowns in the appendix (Appendix A). We experiment with three instruction-tuned models across two scales: Qwen2.5-Coder-3B/7B-Instruct (Hui et al., 2024) and Llama-3.2-3B-Instruct (Grattafiori et al., 2024). 2
+
+Baselines. We use GRPO + (Eq. (1)) as the outcome-only RL baseline; it augments the original GRPO objective (Shao et al., 2024) with DAPO-style improvements (Yu et al., 2025)—asymmetric clipping, token-mean normalization, and the removal of the KL divergence term. Our RefGRPO (Algorithm 1) further 
+
+> 2We use instruction-tuned rather than RL-trained models as our base to avoid potential failure modes induced by standard RL training (Section 3.1).
+
+6Table 2: Multi-turn results across five metrics: task accuracy, reflection accuracy, overconfidence rate, underconfidence rate, and Chow score. All values are percentages. Best results are highlighted in bold .Results are averaged across 5 benchmarks; per-dataset breakdowns are provided in Appendix A.2.                                           
+
+> Method Acc ↑Acc ref ↑OverConf ↓UnderConf ↓ChowScore 0.1↑
+> Qwen2.5-Coder-3B-Instruct
+> Base 57.2 70.7 32.8 18.7 55.8 GRPO +72.5 75.8 24.0 36.5 70.8
+> RefGRPO (Ours) 72.9 76.3 24.8 2.2 73.1
+> Qwen2.5-Coder-7B-Instruct
+> Base 68.7 73.1 25.0 54.3 66.0 GRPO +75.1 76.2 22.8 44.4 73.0
+> RefGRPO (Ours) 76.5 77.8 22.4 7.7 76.5
+
+augments GRPO + with a free calibration bonus and a dynamic schedule on its coefficient (Section 3.2). We train both GRPO + and RefGRPO for 6 epochs, using the same hyperparameters detailed in Appendix A.1. We additionally benchmark against two open source 7B SQL specialists: OmniSQL-7B (SFT with 2.5M CoT data; Li et al. 2025) and SQL-R1-7B (GRPO with outcome reward; Ma et al. 2025a). 
+
+Metrics. We report five metrics for both single- and multi-turn (up to 6 turns) results: task accuracy 
+
+Acc , reflection accuracy Acc ref , the two miscalibration rates OverConf and UnderConf , and the unified metric 
+
+ChowScore .3 We consider ChowScore as the main metric that captures both task accuracy and reflection calibration (Section 2). Following prior work (Li et al., 2025; Ma et al., 2025a), the main results are reported with greedy decoding; in Section 4.4, we report aggregated results with k = 8 samples at temperature 0 .6. We default to ChowScore 0.1 and provide a sweep over error-flag credits β ∈ [0 , 0.5] in the ablations (Section 4.5), where we also evaluate error detection via other metrics such as precision and recall. 
+
+## 4.2 Main Results 
+
+Single-turn results. Table 1 reports results in the single-turn setting for two base models (Llama-3.2-3B-Instruct and Qwen2.5-Coder-3B-Instruct). RefGRPO dominates GRPO + on all five metrics across both base models—most notably improving Acc ref (Qwen: GRPO + 76 .6 → RefGRPO 79 .7; Llama: GRPO + 74 .5 →
+
+RefGRPO 76 .0) and reducing UnderConf (Qwen: GRPO + 23 .7 → RefGRPO 1.3; Llama: GRPO + 30 .9 →
+
+RefGRPO 23 .5). Compared to the base, GRPO + only marginally reduces UnderConf (Qwen: Base 25 .2 →
+
+GRPO + 23 .7; Llama: Base 31 .4 → GRPO + 30 .9), while RefGRPO reduces it substantially (Qwen: Base 25 .2 → RefGRPO 1.3; Llama: Base 31 .4 → RefGRPO 23 .5). The large improvement in reflection quality confirms that the free calibration bonus directly addresses the credit-assignment mismatch in outcome-only RL (Section 3.1). Overall, these effects translate into substantial ChowScore gains at both bases 
+
+(Qwen: GRPO + 68 .5 → RefGRPO 71 .1; Llama: GRPO + 58 .4 → RefGRPO 62 .2), the main metric that captures both task accuracy and reflection calibration. 
+
+Multi-turn results. The multi-turn setting tests long-horizon agentic performance with error correction. Table 2 reports results across five metrics at both 3B and 7B scales. The results match the pattern in the single-turn setting: RefGRPO outperforms GRPO + across metrics, especially in improving Acc ref (Qwen-7B: GRPO + 76 .2 → RefGRPO 77 .8) and reducing UnderConf (Qwen-7B: GRPO + 44 .4 → RefGRPO 
+
+7.7; Qwen-3B: GRPO + 36 .5 → RefGRPO 2.2). On Qwen-3B, GRPO + achieves slightly better OverConf 
+
+(GRPO + 24 .0 vs. RefGRPO 24 .8) but at the cost of worsening UnderConf over the base model (Base 18 .7 → GRPO + 36 .5); RefGRPO instead reduces both OverConf and UnderConf , with especially substantial improvement in UnderConf (Base 18 .7 → RefGRPO 2.2). On Qwen-7B, RefGRPO also meaningfully lifts 
+
+Acc (GRPO + 75 .1 → RefGRPO 76 .5). Overall, these effects translate into substantial ChowScore 
+
+gains at both scales (Qwen-7B: GRPO + 73 .0 → RefGRPO 76 .5; Qwen-3B: GRPO + 70 .8 → RefGRPO 
+
+73 .1), the main metric that captures both task accuracy and reflection calibration. 
+
+> 3To reduce clutter, in this section we drop the % symbol after reported results whenever context makes the unit unambiguous.
+
+7Ckpt Self          
+
+> 67
+> 68
+> 69
+> 70
+> Task accuracy (%)
+> GRPO +
+> RefGRPO (Ours)
+> 018 36 54 72
+> Training step
+> 0.75
+> 0.80
+> 0.85
+> 0.90
+> 0.95
+> 1.00 (sref = 1)
+> Single-turn Multi-turn
+> 0.0
+> 0.5
+> 1.0
+> 1.5
+> 2.0
+> +0.6
+> +0.9
+> +1.6
+> +1.1
+> Acc sel @8 Avg@8 (%)
+
+Figure 5: Self-improvement and selective prediction results using Qwen2.5-Coder-3B-Instruct as the base model (averaged across 5 benchmarks; per-dataset breakdowns are provided in Appendices A.4 and A.5). (a) 
+
+Task accuracy before (Ckpt) and after (Self) self-improvement in the single-turn setting. (b) Commit rate 
+
+P(sref = 1) during single-turn self-improvement training. (c) Selective-prediction lift Acc sel @8 − Avg @8 for GRPO + vs. RefGRPO in single-turn and multi-turn settings. OmniSQL-7B SQL-R1-7B RefGRPO-7B (Ours)   
+
+> 1.5
+> 0.0
+> 1.5
+> -1.0
+> +0.2
+> +1.3
+> Acc ref Acc (%)
+
+Figure 4: Comparison of Acc ref − Acc 
+
+across three 7B models. Greater than zero indicates the reflection is informa-tive. Best result is highlighted in bold .Results are averaged across 5 bench-marks; per-dataset breakdowns are pro-vided in Appendix A.3. 
+
+Comparison with other 7B SQL specialists. We compare our 7B model against two open-weight 7B SQL specialists: OmniSQL-7B (SFT with 2.5M CoT data; Li et al. 2025) and SQL-R1-7B (GRPO with outcome reward; Ma et al. 2025a). Since these special-ists use different training data and hyperparameters, we focus on the calibration delta ∆ = Acc ref − Acc , which isolates the reflection contribution beyond raw task accuracy: a trivial “always-commit” model has ∆ = 0, while a better-calibrated model achieves ∆ > 0by correctly flagging some of its own errors. As shown in Figure 4, 
+
+RefGRPO achieves the largest ∆ at +1 .3; SQL-R1 is barely pos-itive (+0 .2); and OmniSQL is even negative (−1.0), meaning its reflection is not informative—the model can answer some questions correctly but cannot tell whether its own answers are right, even with environment feedback (e.g., SQL query results). 
+
+## 4.3 RefGRPO Enables Verifier-Free Self-Improvement 
+
+Calibration turns the agent into its own verifier: its calibrated reflection becomes an informative reward signal, so we can continue RL training using reflection scores as pseudo-rewards without any outcome supervision. To test this, we run a self-supervised RL phase from GRPO + and RefGRPO checkpoints taken before performance plateaus, with the outcome reward replaced by the agent’s reflection score sref (no calibration bonus, α = 0); reflection tokens are masked so only task tokens receive gradients. We run this phase for 2 epochs with the same hyperparameters as the original training run. 
+
+Results. Figure 5(a) shows the key result: starting from a RefGRPO checkpoint, self-improvement lifts task accuracy by +2 .8 points (67 .1 → 69 .9), while starting from a GRPO + checkpoint yields only +0 .5 points (68 .3 → 68 .8). Despite starting from a lower-accuracy checkpoint, the RefGRPO trajectory ends with higher final task accuracy than GRPO + (GRPO + 68 .8 → RefGRPO 69 .9). Figure 5(b) explains why. During self-improvement, the GRPO + checkpoint’s commit rate P(sref =1) rapidly saturates near 1 .0: the model asserts confidence on nearly every rollout, so almost all self-rewards collapse to 1 regardless of correctness. This creates two problems: (i) the pseudo-rewards are systematically miscalibrated— since the actual task accuracy is below 70 (Figure 5(a)), the agent rewards itself for many incorrect rollouts; and (ii) GRPO +’s within-group normalization on near-constant rewards produces near-zero advantages, effectively halting learning. The RefGRPO checkpoint, by contrast, retains a more calibrated commit rate of around 0 .83, so the pseudo-reward inherits the informativeness of sref induced by the calibration bonus, and continues to drive policy improvement. 868.5 69.5 70.5 71.5            
+
+> Chow score (%)
+> 69.0
+> 69.5
+> 70.0
+> 70.5
+> Task accuracy (%)  GRPO +
+> RefGRPO ( = 0.1 )
+> RefGRPO ( : 0.1 0)
+> 25 27 29 31
+> Recall (%)
+> 75
+> 85
+> 95
+> Precision (%)
+> 0.0 0.1 0.2 0.3 0.4 0.5
+> 67.5
+> 70.0
+> 72.5
+> 75.0
+> Chow score (%)
+
+Figure 6: Comparison of GRPO +, RefGRPO with a fixed schedule α = 0 .1, and RefGRPO with a dynamic schedule α : 0 .1 → 0 in the single-turn setting using Qwen2.5-Coder-3B-Instruct as the base model (averaged across 5 benchmarks). (a) Task accuracy vs. ChowScore at β = 0 .1. (b) Precision vs. recall for error detection. (c) ChowScore across error-flag credits β ∈ [0 , 0.5]. 
+
+## 4.4 RefGRPO Enables Better Test-Time Selective Prediction 
+
+In test-time scaling with k rollouts per question, the agent can act as its own verifier, using its reflection 
+
+sref to select which rollouts to commit to. We measure this with selective prediction accuracy Acc sel @k, the expected correctness over the committed set C(q) = {i : sref  
+
+> i
+
+= 1 }:
+
+Acc sel @k = Eq
+
+" Pki=1 I(sref  
+
+> i
+
+= 1) ri
+
+max  1, |C(q)|#
+
+.
+
+On each question we average correctness over the rollouts the agent commits to ( sref  
+
+> i
+
+= 1); if it commits to none of the k samples, the question scores 0. An always-commit agent recovers Acc sel @k = Avg @k, while a well-calibrated agent achieves Acc sel @k > Avg@ k by selectively committing to correct rollouts. 
+
+Results. Figure 5(c) reports the selective-prediction lift Acc sel @k − Avg @k for GRPO + and RefGRPO in both the single-turn and multi-turn settings. RefGRPO attains the higher lift in both regimes: GRPO +
+
++0 .6 → RefGRPO +1 .6 in single-turn, and GRPO + +0 .9 → RefGRPO +1 .1 in multi-turn—a meaningful improvement especially in the single-turn setting. 
+
+## 4.5 Analyses and Ablations 
+
+We conduct additional analyses and ablations using Qwen2.5-Coder-3B-Instruct, reporting averaged results across the 5 evaluation benchmarks. 
+
+Dynamic vs. fixed schedule. Figure 6(a) plots Acc vs. ChowScore for GRPO +, RefGRPO with a fixed schedule α = 0 .1, and RefGRPO with a dynamic schedule α : 0 .1 → 0. RefGRPO with a fixed schedule improves ChowScore over GRPO + but at the cost of a small drop in Acc ; RefGRPO with a dynamic schedule front-loads calibration and then switches to optimizing task performance, recovering the drop in Acc and dominating GRPO + on both metrics. 
+
+Error detection analysis. Figure 6(b) shows the precision-recall trade-off for error detection. GRPO +
+
+has moderate precision (76 .3) and low recall (26 .3). Both RefGRPO variants reach precision ≥ 98 .7. The variant with a fixed schedule α = 0 .1 achieves the highest recall (30 .2) while the variant with a dynamic schedule α : 0 .1 → 0 accepts a small recall drop in exchange for higher Acc (as shown in Figure 6(a)). 
+
+ChowScore across error-flag credits. Figure 6(c) plots ChowScore β across error-flag credits β ∈ [0 , 0.5]. 
+
+RefGRPO dominates GRPO + across the entire range: RefGRPO with a dynamic schedule α : 0 .1 → 0leads by +2 .8 at β = 0 and +1 .9 at β = 0 .5. This demonstrates that the improvements in ChowScore β
+
+induced by RefGRPO are robust to the choice of β.9Table 3: Effect of the calibration coefficient schedule for RefGRPO in the multi-turn setting using Qwen2.5-Coder-3B-Instruct as the base model: fixed schedules α ∈ { 0, 0.1, 0.2} versus a dynamic schedule α : 0 .1 → 0. Note that α = 0 recovers GRPO +. All values are percentages. Best results are highlighted in bold . Results are averaged across 5 benchmarks.                         
+
+> Schedule Acc ↑Acc ref ↑ChowScore 0.1↑
+> α= 0 (GRPO +)72.5 75.8 70.8
+> α= 0 .1 (fixed) 72.5 76.5 72.6
+> α= 0 .2 (fixed) 71.5 77.4 71.9
+> α: 0 .1→0 (dynamic) 72.9 76.3 73.1
+
+Calibration coefficient sweep (multi-turn). Table 3 sweeps the calibration coefficient with fixed schedules α ∈ { 0, 0.1, 0.2} and compares against the variant with a dynamic schedule ( α : 0 .1 → 0) in the multi-turn setting. Increasing α improves Acc ref monotonically (from 75 .8 at α = 0 to 76 .5 at α = 0 .1, and to 77 .4 at α = 0 .2) but can degrade Acc (e.g., from 72 .5 at α = 0 .1 to 71 .5 at α = 0 .2); the dynamic schedule 
+
+α : 0 .1 → 0 attains the highest Acc and ChowScore simultaneously. 
+
+# 5 Related Work 
+
+Reinforcement learning for LLMs. RL has become a central post-training paradigm for large language models, driving substantial gains across diverse domains (Ouyang et al., 2022; Bai et al., 2022; Achiam et al., 2023; Comanici et al., 2025). Progress is especially pronounced in domains with verifiable rewards such as math and coding, where the correctness of each action provides a clean training signal (Shao et al., 2024; Jaech et al., 2024; Guo et al., 2025; Yu et al., 2025; Liu et al., 2025; Zheng et al., 2025; He et al., 2025). More recently, attention has shifted to agentic settings where models interact with environments over multiple turns and tool calls (Jin et al., 2025; Wang et al., 2025; Cao et al., 2025; Wei et al., 2025; Gandhi et al., 2026; Zhang et al., 2026). However, the primary objective of these works remains task accuracy alone. This includes concurrent and independent work (Shrivastava et al., 2026), which also learns from environment feedback but optimizes a cross-entropy loss on observation tokens rather than training the agent’s reflection to be calibrated. We instead develop an RL algorithm that, beyond task accuracy, trains the agent to produce calibrated reflection on environment feedback: with a free calibration bonus and a dynamic schedule on the calibration coefficient, our method simultaneously improves reflection calibration and task performance relative to standard outcome-only RL. 
+
+Selective prediction and calibration. Selective prediction with an abstention option, and the associated error-reject tradeoff, are classical topics in statistical learning (Chow, 1957, 1970): abstaining on uncertain inputs yields polynomial sample-complexity speedups for passive learners (Bousquet and Zhivotovskiy, 2021) and exponential speedups for active learners (Zhu and Nowak, 2022a,b). A closely related concept, confidence calibration, studies how to align self-predicted confidence with empirical correctness (Guo et al., 2017). These ideas have recently been imported into LLM research, where models are probed for whether they know what they know (Kadavath et al., 2022; Tian et al., 2023; Xiong et al., 2024) or trained to be better calibrated (Tao et al., 2024; Leng et al., 2025; Bani-Harouni et al., 2026). Closest to our setting is Damani et al. (2026), which uses RL with a fixed-coefficient Brier bonus on the model’s confidence in its self-generated answer 
+
+without environment feedback . We differ in two key respects. First, our agent reflects on environment feed-back —execution results or error messages—in the agentic setting, a strictly richer signal than self-assessment over a self-generated answer. Second, we introduce a dynamic schedule on the calibration coefficient, which is important for simultaneously improving calibration and task accuracy: Figure 6(a) shows that a fixed coefficient improves calibration at the cost of degrading task accuracy. 
+
+Self-improvement in LLMs. As LLMs are increasingly deployed as autonomous agents, a central question is how they can improve themselves over time. One line of work performs iterative verbal self-refinement at inference time, guided by self-generated critiques (e.g., via prompting) or external feedback (Shinn et al., 10 2023; Madaan et al., 2023; Gou et al., 2024). A complementary line uses gradient-based updates (SFT or RL) to train models to self-correct or self-improve, optimizing for a more correct final answer with self-generated or external signals (Kumar et al., 2025; Ma et al., 2025b; Zuo et al., 2025; Zhu et al., 2026). Despite some promising results, Huang et al. (2024) find that LLMs can struggle to self-correct solely based on self-generated signals. Our approach differs in what it trains. Rather than training the policy to directly produce more correct answers, we train the agent’s reflection to accurately judge its own correctness after observing environment feedback—a calibration objective orthogonal to task performance. This yields the reliable signal that naive self-correction lacks: once calibrated, the reflections serve as pseudo-rewards for further self-improvement without outcome supervision. In effect, our method turns the agent into its own verifier grounded in environment feedback, instead of requiring separately trained verifiers (Cobbe et al., 2021). 
+
+# 6 Discussion 
+
+We identified a persistent reflection gap: LLM agents mis-assess their own actions even after observing concrete environment feedback, and outcome-only RL barely fixes it. We offer a simple yet effective fix that augments the outcome reward with a calibration bonus and a dynamic schedule on its coefficient. The calibration bonus is computed for free by contrasting the agent’s own reflection with the actual outcome, while the dynamic schedule enables the agent to simultaneously improve reflection calibration (e.g., reduces underconfidence rate 44 .4% → 7.7%) and task accuracy (e.g., 75 .1% → 76 .5%), lifting the unified ChowScore metric 73 .0% → 76 .5%. The resulting calibrated reflection turns the agent into its own verifier grounded in environment feedback, which further enables (i) better self-improvement that uses reflections as pseudo-rewards without outcome supervision, and (ii) more effective test-time selective prediction by committing only to rollouts flagged as correct. 
+
+Limitations and future work. Due to compute constraints, the largest model we trained is at the 7B scale; validating RefGRPO at larger scales is an important next step. In addition, we focus on a binary reflection score sref ∈ { 0, 1}, and extending it to real-valued confidence scores in [0 , 1] is an interesting direction. 
+
+# References 
+
+Josh Achiam, Steven Adler, Sandhini Agarwal, Lama Ahmad, Ilge Akkaya, Florencia Leoni Aleman, Diogo Almeida, Janko Altenschmidt, Sam Altman, Shyamal Anadkat, et al. Gpt-4 technical report. arXiv preprint arXiv:2303.08774 , 2023. Yuntao Bai, Saurav Kadavath, Sandipan Kundu, Amanda Askell, Jackson Kernion, Andy Jones, Anna Chen, Anna Goldie, Azalia Mirhoseini, Cameron McKinnon, et al. Constitutional ai: Harmlessness from ai feedback. arXiv preprint arXiv:2212.08073 , 2022. David Bani-Harouni, Chantal Pellegrini, Paul Stangel, Ege ¨Ozsoy, Kamilia Zaripova, Nassir Navab, and Matthias Keicher. Rewarding doubt: A reinforcement learning approach to calibrated confidence expression of large language models. In The Fourteenth International Conference on Learning Representations , 2026. Olivier Bousquet and Nikita Zhivotovskiy. Fast classification rates without standard margin assumptions. 
+
+Information and Inference: A Journal of the IMA , 10(4):1389–1421, 2021. Shiyi Cao, Dacheng Li, Fangzhou Zhao, Shuo Yuan, Sumanth R Hegde, Connor Chen, Charlie Ruan, Tyler Griggs, Shu Liu, Eric Tang, et al. Skyrl-agent: Efficient rl training for multi-turn llm agent. arXiv preprint arXiv:2511.16108 , 2025. Chi-Keung Chow. An optimum character recognition system using decision functions. IRE Transactions on Electronic Computers , (4):247–254, 1957. CK Chow. On optimum recognition error and reject tradeoff. IEEE Transactions on Information Theory ,1970. 11 Karl Cobbe, Vineet Kosaraju, Mohammad Bavarian, Mark Chen, Heewoo Jun, Lukasz Kaiser, Matthias Plappert, Jerry Tworek, Jacob Hilton, Reiichiro Nakano, et al. Training verifiers to solve math word problems. arXiv preprint arXiv:2110.14168 , 2021. Gheorghe Comanici, Eric Bieber, Mike Schaekermann, Ice Pasupat, Noveen Sachdeva, Inderjit Dhillon, Marcel Blistein, Ori Ram, Dan Zhang, Evan Rosen, et al. Gemini 2.5: Pushing the frontier with advanced reasoning, multimodality, long context, and next generation agentic capabilities. arXiv preprint arXiv:2507.06261 ,2025. Mehul Damani, Isha Puri, Stewart Slocum, Idan Shenfeld, Leshem Choshen, Yoon Kim, and Jacob Andreas. Beyond binary rewards: Training LMs to reason about their uncertainty. In The Fourteenth International Conference on Learning Representations , 2026. Xiang Deng, Ahmed Hassan, Christopher Meek, Oleksandr Polozov, Huan Sun, and Matthew Richardson. Structure-grounded pretraining for text-to-sql. In Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies , pages 1337–1350, 2021. Yujian Gan, Xinyun Chen, and Matthew Purver. Exploring underexplored limitations of cross-domain text-to-sql generalization. In Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing , pages 8926–8931, 2021. Kanishk Gandhi, Shivam Garg, Noah D Goodman, and Dimitris Papailiopoulos. Endless terminals: Scaling rl environments for terminal agents. arXiv preprint arXiv:2601.16443 , 2026. Yingqi Gao, Yifu Liu, Xiaoxia Li, Xiaorong Shi, Yin Zhu, Yiming Wang, Shiqi Li, Wei Li, Yuntao Hong, Zhiling Luo, et al. A preview of xiyan-sql: A multi-generator ensemble framework for text-to-sql. arXiv preprint arXiv:2411.08599 , 2024. Zhibin Gou, Zhihong Shao, Yeyun Gong, yelong shen, Yujiu Yang, Nan Duan, and Weizhu Chen. CRITIC: Large language models can self-correct with tool-interactive critiquing. In The Twelfth International Conference on Learning Representations , 2024. Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Alex Vaughan, et al. The llama 3 herd of models. arXiv preprint arXiv:2407.21783 , 2024. Chuan Guo, Geoff Pleiss, Yu Sun, and Kilian Q Weinberger. On calibration of modern neural networks. In 
+
+International conference on machine learning , pages 1321–1330. PMLR, 2017. Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Peiyi Wang, Qihao Zhu, Runxin Xu, Ruoyu Zhang, Shirong Ma, Xiao Bi, et al. Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement learning. arXiv preprint arXiv:2501.12948 , 2025. David Ha and J¨ urgen Schmidhuber. World models. arXiv preprint arXiv:1803.10122 , 2(3):440, 2018. Bingxiang He, Zekai Qu, Zeyuan Liu, Yinghao Chen, Yuxin Zuo, Cheng Qian, Kaiyan Zhang, Weize Chen, Chaojun Xiao, Ganqu Cui, et al. Justrl: Scaling a 1.5 b llm with a simple rl recipe. arXiv preprint arXiv:2512.16649 , 2025. Jie Huang, Xinyun Chen, Swaroop Mishra, Huaixiu Steven Zheng, Adams Wei Yu, Xinying Song, and Denny Zhou. Large language models cannot self-correct reasoning yet. In The Twelfth International Conference on Learning Representations , 2024. Binyuan Hui, Jian Yang, Zeyu Cui, Jiaxi Yang, Dayiheng Liu, Lei Zhang, Tianyu Liu, Jiajun Zhang, Bowen Yu, Keming Lu, et al. Qwen2. 5-coder technical report. arXiv preprint arXiv:2409.12186 , 2024. Aaron Jaech, Adam Kalai, Adam Lerer, Adam Richardson, Ahmed El-Kishky, Aiden Low, Alec Helyar, Aleksander Madry, Alex Beutel, Alex Carney, et al. Openai o1 system card. arXiv preprint arXiv:2412.16720 ,2024. 12 Bowen Jin, Hansi Zeng, Zhenrui Yue, Jinsung Yoon, Sercan O Arik, Dong Wang, Hamed Zamani, and Jiawei Han. Search-r1: Training LLMs to reason and leverage search engines with reinforcement learning. In 
+
+Second Conference on Language Modeling , 2025. Saurav Kadavath, Tom Conerly, Amanda Askell, Tom Henighan, Dawn Drain, Ethan Perez, Nicholas Schiefer, Zac Hatfield-Dodds, Nova DasSarma, Eli Tran-Johnson, et al. Language models (mostly) know what they know. arXiv preprint arXiv:2207.05221 , 2022. Aviral Kumar, Vincent Zhuang, Rishabh Agarwal, Yi Su, John D Co-Reyes, Avi Singh, Kate Baumli, Shariq Iqbal, Colton Bishop, Rebecca Roelofs, Lei M Zhang, Kay McKinney, Disha Shrivastava, Cosmin Paduraru, George Tucker, Doina Precup, Feryal Behbahani, and Aleksandra Faust. Training language models to self-correct via reinforcement learning. In The Thirteenth International Conference on Learning Representations , 2025. Jixuan Leng, Chengsong Huang, Banghua Zhu, and Jiaxin Huang. Taming overconfidence in LLMs: Reward calibration in RLHF. In The Thirteenth International Conference on Learning Representations , 2025. Haoyang Li, Shang Wu, Xiaokang Zhang, Xinmei Huang, Jing Zhang, Fuxin Jiang, Shuai Wang, Tieying Zhang, Jianjun Chen, Rui Shi, et al. Omnisql: Synthesizing high-quality text-to-sql data at scale. arXiv preprint arXiv:2503.02240 , 2025. Jinyang Li, Binyuan Hui, GE QU, Jiaxi Yang, Binhua Li, Bowen Li, Bailin Wang, Bowen Qin, Ruiying Geng, Nan Huo, Xuanhe Zhou, Chenhao Ma, Guoliang Li, Kevin Chang, Fei Huang, Reynold Cheng, and Yongbin Li. Can LLM already serve as a database interface? a BIg bench for large-scale database grounded text-to-SQLs. In Thirty-seventh Conference on Neural Information Processing Systems Datasets and Benchmarks Track , 2023. Zichen Liu, Changyu Chen, Wenjun Li, Penghui Qi, Tianyu Pang, Chao Du, Wee Sun Lee, and Min Lin. Understanding r1-zero-like training: A critical perspective. In Second Conference on Language Modeling ,2025. Peixian Ma, Xialie Zhuang, Chengjin Xu, Xuhui Jiang, Ran Chen, and Jian Guo. Sql-r1: Training natural language to sql reasoning model by reinforcement learning. arXiv preprint arXiv:2504.08600 , 2025a. Ruotian Ma, Peisong Wang, Cheng Liu, Xingyan Liu, Jiaqi Chen, Bang Zhang, Xin Zhou, Nan Du, and Jia Li. S2r: Teaching llms to self-verify and self-correct via reinforcement learning. In Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pages 22632–22654, 2025b. Aman Madaan, Niket Tandon, Prakhar Gupta, Skyler Hallinan, Luyu Gao, Sarah Wiegreffe, Uri Alon, Nouha Dziri, Shrimai Prabhumoye, Yiming Yang, et al. Self-refine: Iterative refinement with self-feedback. 
+
+Advances in neural information processing systems , 36:46534–46594, 2023. Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, et al. Training language models to follow instructions with human feedback. Advances in neural information processing systems , 35:27730–27744, 2022. Mohammadreza Pourreza, Shayan Talaei, Ruoxi Sun, Xingchen Wan, Hailong Li, Azalia Mirhoseini, Amin Saberi, and Sercan O Arik. Reasoning-SQL: Reinforcement learning with SQL tailored partial rewards for reasoning-enhanced text-to-SQL. In Second Conference on Language Modeling , 2025. John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal policy optimization algorithms. arXiv preprint arXiv:1707.06347 , 2017. Zhihong Shao, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Xiao Bi, Haowei Zhang, Mingchuan Zhang, YK Li, Yang Wu, et al. Deepseekmath: Pushing the limits of mathematical reasoning in open language models. arXiv preprint arXiv:2402.03300 , 2024. 13 Noah Shinn, Federico Cassano, Ashwin Gopinath, Karthik Narasimhan, and Shunyu Yao. Reflexion: Language agents with verbal reinforcement learning. Advances in neural information processing systems , 36:8634–8652, 2023. Vaishnavi Shrivastava, Piero Kauffmann, Ahmed Awadallah, and Dimitris Papailiopoulos. Echo: Terminal agents learn world models for free. arXiv preprint arXiv:2605.24517 , 2026. Shuchang Tao, Liuyi Yao, Hanxing Ding, Yuexiang Xie, Qi Cao, Fei Sun, Jinyang Gao, Huawei Shen, and Bolin Ding. When to trust llms: Aligning confidence with response quality. In Findings of the Association for Computational Linguistics: ACL 2024 , pages 5984–5996, 2024. Katherine Tian, Eric Mitchell, Allan Zhou, Archit Sharma, Rafael Rafailov, Huaxiu Yao, Chelsea Finn, and Christopher D Manning. Just ask for calibration: Strategies for eliciting calibrated confidence scores from language models fine-tuned with human feedback. In Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing , pages 5433–5442, 2023. Zihan Wang, Kangrui Wang, Qineng Wang, Pingyue Zhang, Linjie Li, Zhengyuan Yang, Xing Jin, Kefan Yu, Minh Nhat Nguyen, Licheng Liu, et al. Ragen: Understanding self-evolution in llm agents via multi-turn reinforcement learning. arXiv preprint arXiv:2504.20073 , 2025. Quan Wei, Siliang Zeng, Chenliang Li, William Brown, Oana Frunza, Wei Deng, Anderson Schneider, Yuriy Nevmyvaka, Yang Katie Zhao, Alfredo Garcia, et al. Reinforcing multi-turn reasoning in llm agents via turn-level reward design. arXiv preprint arXiv:2505.11821 , 2025. Miao Xiong, Zhiyuan Hu, Xinyang Lu, YIFEI LI, Jie Fu, Junxian He, and Bryan Hooi. Can LLMs express their uncertainty? an empirical evaluation of confidence elicitation in LLMs. In The Twelfth International Conference on Learning Representations , 2024. Qiying Yu, Zheng Zhang, Ruofei Zhu, Yufeng Yuan, Xiaochen Zuo, Yu Yue, Weinan Dai, Tiantian Fan, Gaohong Liu, Lingjun Liu, et al. Dapo: An open-source llm reinforcement learning system at scale. arXiv preprint arXiv:2503.14476 , 2025. Tao Yu, Rui Zhang, Kai Yang, Michihiro Yasunaga, Dongxu Wang, Zifan Li, James Ma, Irene Li, Qingning Yao, Shanelle Roman, et al. Spider: A large-scale human-labeled dataset for complex and cross-domain semantic parsing and text-to-sql task. In Proceedings of the 2018 conference on empirical methods in natural language processing , pages 3911–3921, 2018. Guibin Zhang, Hejia Geng, Xiaohang Yu, Zhenfei Yin, Zaibin Zhang, Zelin Tan, Heng Zhou, Zhong-Zhi Li, Xiangyuan Xue, Yijiang Li, Yifan Zhou, Yang Chen, Chen Zhang, Yutao Fan, Zihu Wang, Songtao Huang, Francisco Piedrahita Velez, Yue Liao, Hongru WANG, Mengyue Yang, Heng Ji, Jun Wang, Shuicheng YAN, Philip Torr, and LEI BAI. The landscape of agentic reinforcement learning for LLMs: A survey. 
+
+Transactions on Machine Learning Research , 2026. ISSN 2835-8856. Chujie Zheng, Shixuan Liu, Mingze Li, Xiong-Hui Chen, Bowen Yu, Chang Gao, Kai Dang, Yuqiong Liu, Rui Men, An Yang, et al. Group sequence policy optimization. arXiv preprint arXiv:2507.18071 , 2025. Yinglun Zhu and Robert Nowak. Active learning with neural networks: Insights from nonparametric statistics. 
+
+Advances in Neural Information Processing Systems , 35:142–155, 2022a. Yinglun Zhu and Robert Nowak. Efficient active learning with abstention. Advances in Neural Information Processing Systems , 35:35379–35391, 2022b. Yinglun Zhu, Jiancheng Zhang, and Fuzhi Tang. Test-time matching: Unlocking compositional reasoning in multimodal models. In The Fourteenth International Conference on Learning Representations , 2026. Yuxin Zuo, Kaiyan Zhang, Li Sheng, Shang Qu, Ganqu Cui, Xuekai Zhu, Haozhan Li, Yuchen Zhang, Xinwei Long, Ermo Hua, et al. Ttrl: Test-time reinforcement learning. arXiv preprint arXiv:2504.16084 , 2025. 14 A Additional Experimental Details and Results 
+
+## A.1 Implementation Details 
+
+Table 4 lists the training hyperparameters shared between GRPO + and RefGRPO . The maximum response length is enforced per turn , so a k-turn rollouts can emit up to 3000 × k tokens in total. Table 4: Training hyperparameters shared by GRPO + and RefGRPO .
+
+Hyperparameter Value Train Batch Size 128 Max Response Length per turn 3000 (εlow , ε high ) (0 .2, 0.28) Optimizer AdamW Learning Rate 1×10 −6 (constant) Weight Decay 1×10 −2
+
+Temperature 1.0 Rollout N 8
+
+For evaluation, we download all base and external models from Hugging Face and run our own evaluation. The external models (OmniSQL-7B and SQL-R1-7B) are evaluated only in the single-turn setting, since they are trained in a single-turn format with long chain-of-thought reasoning. For reflection accuracy ( Acc ref ), we report the conditional variant, which normalizes over the samples in which the model actually produces a valid reflection. 4 Table 5 reports the probability of generating such a valid reflection: it is consistently lower for the base and external models, whereas our trained models (GRPO + and RefGRPO ) are almost always 100% (and 99 .9% in the rare exception). Crucially, although this conditional normalization inflates Acc ref for the base and external models—since samples with invalid reflections are not counted as errors— RefGRPO 
+
+still attains the best average Acc ref overall (as shown in Tables 1 and 2). Table 5: Probability of generating a valid reflection ( Pvalid ) for the base and external models. We omit our trained models (GRPO + and RefGRPO ), whose Pvalid is almost always 100% (and 99 .9% in the rare exception). All values are percentages ( higher is better ). Results are averaged across 5 benchmarks. 
+
+Base models: single-turn Base models: multi-turn External 7B specialists: single-turn Llama-3B Qwen-3B Qwen-3B Qwen-7B OmniSQL-7B SQL-R1-7B 
+
+Pvalid 89.0 98.6 87.6 85.1 95.4 97.6 
+
+## A.2 Per-Dataset Results for the Main Results 
+
+Tables 6 and 7 provide per-dataset results for the main results presented in Section 4.2. 
+
+> 4The other metrics are unaffected by this normalization: task accuracy does not depend on reflection; the overconfidence rate and underconfidence rate are themselves conditional probabilities; and for the Chow score, a sample with an invalid reflection score is scored by its task accuracy rather than discarded.
+
+15 Table 6: Per-dataset single-turn results across five metrics: task accuracy, reflection accuracy, overconfidence rate, underconfidence rate, and Chow score. All values are percentages. Each block reports one metric across the five benchmarks plus the average; arrows in the block headers indicate the desired direction. Best per-dataset results within each scale block are highlighted in bold .
+
+Base Method Spider-Dev Spider-DK Spider-Realistic Spider-Test Bird-Dev Avg. 
+
+Task accuracy Acc ↑
+
+Llama-3B Base 63.1 53.1 57.7 60.5 26.1 52.1 GRPO + 74.6 63.4 71.1 72.1 33.1 62.9 
+
+RefGRPO (Ours) 76.4 63.6 70.9 74.3 35.0 64.0 
+
+Qwen-3B Base 65.2 57.4 60.0 66.1 35.2 56.8 GRPO + 79.2 66.9 75.0 78.7 47.4 69.4 
+
+RefGRPO (Ours) 80.6 69.9 75.0 79.6 45.9 70.2 
+
+Reflection accuracy Acc ref ↑
+
+Llama-3B Base 68.4 58.7 68.4 69.1 60.9 65.1 GRPO + 77.2 67.5 75.8 80.5 71.3 74.5 
+
+RefGRPO (Ours) 79.4 68.6 77.6 81.9 72.7 76.0 
+
+Qwen-3B Base 70.9 64.1 70.2 76.4 75.5 71.4 GRPO + 81.0 69.3 78.7 81.8 72.3 76.6 
+
+RefGRPO (Ours) 85.3 79.6 80.3 82.8 70.3 79.7 
+
+Overconfidence rate OverConf ↓
+
+Llama-3B Base 30.0 39.7 32.1 30.8 55.1 37.5 GRPO + 18.7 29.2 19.6 19.4 45.8 26.5 
+
+RefGRPO (Ours) 18.4 29.8 20.6 18.9 43.8 26.3 
+
+Qwen-3B Base 27.7 36.3 29.5 24.2 39.1 31.4 GRPO + 17.9 29.1 20.9 18.3 36.7 24.6 
+
+RefGRPO (Ours) 15.4 22.6 20.8 17.6 39.2 23.1 
+
+Underconfidence rate UnderConf ↓
+
+Llama-3B Base 41.3 47.9 28.9 31.5 7.3 31.4 GRPO + 42.5 42.0 39.7 20.4 9.9 30.9 
+
+RefGRPO (Ours) 37.2 37.6 31.1 11.0 0.5 23.5 
+
+Qwen-3B Base 35.1 34.5 30.8 20.3 5.5 25.2 GRPO + 34.9 41.4 25.6 15.3 1.5 23.7 
+
+RefGRPO (Ours) 0.0 0.0 0.0 5.3 1.0 1.3 
+
+Chow score at β = 0 .1 ChowScore 0.1 ↑
+
+Llama-3B Base 58.9 46.4 54.8 57.9 26.8 49.0 GRPO + 68.9 55.1 64.3 70.6 33.2 58.4 
+
+RefGRPO (Ours) 73.2 57.9 67.1 74.2 38.6 62.2 
+
+Qwen-3B Base 60.6 52.3 54.7 64.4 37.1 53.8 GRPO + 77.7 62.8 73.8 78.4 49.6 68.5 
+
+RefGRPO (Ours) 81.0 70.9 75.5 79.8 48.1 71.1 
+
+16 Table 7: Per-dataset multi-turn results across five metrics: task accuracy, reflection accuracy, overconfidence rate, underconfidence rate, and Chow score. All values are percentages. Each block reports one metric across the five benchmarks plus the average; arrows in the block headers indicate the desired direction. Best per-dataset results within each scale block are highlighted in bold .
+
+Base Method Spider-Dev Spider-DK Spider-Realistic Spider-Test Bird-Dev Avg. 
+
+Task accuracy Acc ↑
+
+Qwen-3B Base 63.4 55.7 57.7 66.1 43.0 57.2 GRPO + 81.5 72.0 76.0 81.0 52.2 72.5 
+
+RefGRPO (Ours) 81.5 71.8 77.0 81.1 52.9 72.9 
+
+Qwen-7B Base 75.0 63.6 74.6 76.9 53.3 68.7 GRPO + 83.3 70.8 79.3 83.3 58.7 75.1 
+
+RefGRPO (Ours) 83.7 72.7 80.9 83.8 61.3 76.5 
+
+Reflection accuracy Acc ref ↑
+
+Qwen-3B Base 70.9 69.2 67.3 77.2 68.8 70.7 GRPO + 81.9 72.3 75.6 82.0 67.1 75.8 
+
+RefGRPO (Ours) 83.1 73.8 78.7 82.4 63.3 76.3 
+
+Qwen-7B Base 76.2 66.2 78.3 77.6 67.3 73.1 GRPO + 82.3 70.3 78.5 83.7 66.3 76.2 
+
+RefGRPO (Ours) 84.6 74.2 81.9 84.5 64.0 77.8 
+
+Overconfidence OverConf ↓
+
+Qwen-3B Base 29.9 34.0 34.6 24.5 41.1 32.8 GRPO + 16.6 25.8 21.4 17.6 38.6 24.0 
+
+RefGRPO (Ours) 17.1 26.7 21.6 17.8 40.9 24.8 Qwen-7B Base 21.0 30.8 18.5 20.8 33.7 25.0 GRPO + 15.4 27.3 19.2 15.9 36.0 22.8 
+
+RefGRPO (Ours) 15.5 26.1 18.2 15.6 36.8 22.4 
+
+Underconfidence UnderConf ↓
+
+Qwen-3B Base 24.8 21.7 25.0 13.1 8.8 18.7 GRPO + 46.2 47.8 52.0 33.9 2.5 36.5 
+
+RefGRPO (Ours) 5.6 0.0 0.0 3.2 2.4 2.2 
+
+Qwen-7B Base 69.2 56.9 64.5 59.8 21.3 54.3 GRPO + 59.3 52.9 56.7 40.0 13.3 44.4 
+
+RefGRPO (Ours) 0.0 10.0 14.3 0.0 14.0 7.7 
+
+Chow score at β = 0 .1 ChowScore 0.1 ↑
+
+Qwen-3B Base 61.4 53.1 55.2 65.8 43.3 55.8 GRPO + 79.7 68.7 71.9 80.4 53.4 70.8 
+
+RefGRPO (Ours) 81.6 72.0 77.1 81.2 53.7 73.1 
+
+Qwen-7B Base 72.1 59.1 71.3 75.0 52.6 66.0 GRPO + 80.7 66.7 76.6 82.7 58.4 73.0 
+
+RefGRPO (Ours) 83.8 72.7 80.8 83.9 61.2 76.5 
+
+## A.3 Per-Dataset External 7B Comparison 
+
+Table 8 reports per-dataset results for the two external 7B SQL specialists discussed in Figure 4. 
+
+## A.4 Per-Dataset Self-Improvement Results 
+
+Table 9 reports per-dataset results for the self-improvement results presented in Section 4.3. 17 Table 8: Per-dataset results for two external 7B SQL specialists (OmniSQL-7B, SQL-R1-7B) across two metrics: task accuracy and reflection accuracy. All values are percentages. Per-dataset results for our 
+
+RefGRPO 7B are reported in Table 7. 
+
+Model Metric Spider-Dev Spider-DK Spider-Realistic Spider-Test Bird-Dev Avg. OmniSQL-7B Acc 82.1 72.1 77.0 82.6 63.2 75.4 
+
+Acc ref 80.3 72.4 74.8 79.7 64.8 74.4 SQL-R1-7B Acc 82.9 71.8 79.5 83.6 64.1 76.4 
+
+Acc ref 82.4 72.2 80.2 82.9 65.4 76.6 
+
+Table 9: Per-dataset task accuracy before ( Acc Ckpt ) and after ( Acc Self ) self-improvement in the single-turn setting using Qwen2.5-Coder-3B-Instruct as the base model. ∆ = Acc Self − Acc Ckpt denotes the change from checkpoint to self-improvement. All values are percentages. Best per-dataset ∆ is highlighted in bold .
+
+GRPO + RefGRPO (Ours) Dataset Acc Ckpt Acc Self ∆ Acc Ckpt Acc Self ∆Spider-Dev 78.0 77.9 −0.1 77.4 78.4 +1.0
+
+Spider-DK 66.5 70.3 +3.8 65.4 69.0 +3 .6Spider-Realistic 74.4 71.5 −2.9 72.4 74.4 +2.0
+
+Spider-Test 78.5 78.7 +0 .2 78.3 79.6 +1.3
+
+Bird-Dev 44.3 45.4 +1 .1 41.9 48.2 +6.3
+
+Average 68.3 68.8 +0 .5 67.1 69.9 +2.8
+
+## A.5 Per-Dataset Selective Prediction Results 
+
+Table 10 provides per-dataset results for the selective prediction results presented in Section 4.4. Table 10: Per-dataset selective-prediction results: average pass rate ( Avg @8), accuracy of selective prediction (Acc sel @8), and the gain ∆ = Acc sel @8 − Avg @8 from selective prediction. Evaluation protocol follows Section 4.4, and both single-turn and multi-turn evaluations use Qwen2.5-Coder-3B-Instruct as the base model. All values are percentages. Best per-dataset ∆ between the two methods is highlighted in bold .
+
+GRPO + RefGRPO (Ours) Dataset Avg@8 Acc sel @8 ∆ Avg@8 Acc sel @8 ∆
+
+Single-turn 
+
+Spider-Dev 79.3 79.1 −0.2 80.5 81.7 +1.2
+
+Spider-DK 67.0 65.2 −1.8 69.9 71.2 +1.3
+
+Spider-Realistic 74.3 74.7 +0 .4 75.3 76.9 +1.6
+
+Spider-Test 79.0 79.7 +0 .7 79.8 80.9 +1.1
+
+Bird-Dev 46.6 50.2 +3.6 45.9 48.6 +2 .7Average 69.2 69.8 +0 .6 70.3 71.9 +1.6
+
+Multi-turn 
+
+Spider-Dev 80.7 80.9 +0 .2 81.1 82.0 +0.9
+
+Spider-DK 70.8 71.7 +0 .9 71.1 72.3 +1.2
+
+Spider-Realistic 76.6 76.7 +0 .1 76.5 77.4 +0.9
+
+Spider-Test 80.8 81.3 +0 .5 81.1 81.7 +0.6
+
+Bird-Dev 52.7 55.5 +2.8 52.7 54.8 +2 .1Average 72.3 73.2 +0 .9 72.5 73.6 +1.1
+
+18
