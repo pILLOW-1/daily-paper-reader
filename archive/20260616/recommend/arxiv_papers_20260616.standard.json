@@ -1,0 +1,572 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-16T23:03:56.672488+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 7,
+    "deep_cap": 7,
+    "deep_selected": 7,
+    "quick_candidates": 6,
+    "quick_skim_target": 12,
+    "quick_selected": 6
+  },
+  "deep_dive": [
+    {
+      "id": "2606.15096v1",
+      "source": "arxiv",
+      "title": "VGPT-RSI for RH-Adjacent Formal Progress: Boundary Certificates, Verified Finite Lagarias Inequalities, and Explicit Failure Localization",
+      "abstract": "The Riemann Hypothesis remains one of the central unsolved problems in mathematics. Rather than claiming proof, we investigate whether a verifiable AI-assisted reasoning system can produce reliable, formally checked partial progress while explicitly identifying the remaining mathematical obstructions. We apply the Verifiable Growing Physical Transformer with Recursive Self-Improvement (VGPT-RSI) to two RH-adjacent certification tasks. First, we construct and verify a finite RH-boundary certificate for inequality on a parameterized safe lower curve over a region. The numerical boundary curve is converted into a certificate-backed lower curve, audited using outward-rounded interval arithmetic and Arb/FLINT ball arithmetic, and then checked in Rocq/CoqInterval for the parameterized theorem. Second, we initiate a formal Lagarias-route certificate. Lagarias criterion states that RH is equivalent to the global inequality. We formalize the finite quantity and produce a Coq-checked finite certificate. The final system identifies the exact unresolved mathematical bottlenecks: formalizing the Lagarias equivalence, proving the global tail theorem beyond any finite cutoff, and potentially reducing counterexamples to colossally abundant or related extremal integers. These results demonstrate that VGPT-RSI can produce certified RH-adjacent formal progress, organize proof dependencies, and avoid overclaiming when the remaining obstruction is genuinely mathematical.",
+      "authors": [
+        "Zhixin Hu",
+        "Tao Xu",
+        "Xiaodian Sun",
+        "Li Jin",
+        "Momiao Xiong"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-13T04:12:25+00:00",
+      "link": "https://arxiv.org/pdf/2606.15096v1",
+      "tags": [
+        "keyword:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "VGPT-RSI explicitly uses Recursive Self-Improvement for mathematical certification tasks",
+      "llm_evidence_cn": "VGPT-RSI明确使用递归自我改进技术解决数学验证任务",
+      "llm_evidence": "VGPT-RSI明确使用递归自我改进技术解决数学验证任务",
+      "canonical_evidence": "VGPT-RSI明确使用递归自我改进技术解决数学验证任务",
+      "llm_tldr_en": "VGPT-RSI applies recursive self-improvement to produce verifiable partial progress on RH-adjacent problems, constructing boundary certificates and localizing failures for AI-assisted formal mathematics.",
+      "llm_tldr_cn": "VGPT-RSI将递归自我改进（RSI）应用于黎曼猜想邻接问题的形式验证，构建了可验证的有限边界证书和不等式。通过递归地改进自身推理，系统能产生可靠的部分进展并显式定位剩余障碍。展示了AI辅助形式数学中递归自我改进的潜力。",
+      "llm_tldr": "VGPT-RSI将递归自我改进（RSI）应用于黎曼猜想邻接问题的形式验证，构建了可验证的有限边界证书和不等式。通过递归地改进自身推理，系统能产生可靠的部分进展并显式定位剩余障碍。展示了AI辅助形式数学中递归自我改进的潜力。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "recursive self-improvement methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.15363v1",
+      "source": "arxiv",
+      "title": "APEX: Adaptive Principle EXtraction A Three-Layer Self-Evolution Framework for Production AI Agents",
+      "abstract": "Self-improvement in AI agents has emerged as a key research frontier: systems that modify their own prompts, workflows, and decision rules based on accumulated operational experience. The state-of-the-art Self-Harness framework [1] achieves 14--21% improvement on Terminal-Bench-2.0 by mining failure clusters and patching the agent harness. However, Self-Harness optimises only one dimension -- the prompt harness -- leaving behavioural principles and workflow topology unchanged. We propose APEX (Adaptive Principle EXtraction), a three-layer co-evolution framework that simultaneously evolves: (L1) the harness via failure-mode patching, (L2) behavioural principles via success-trace distillation [2], and (L3) the agent workflow topology via structural fitness-based selection [6]. We implement APEX on Joe [13], a production-grade super AI Agent built on NVIDIA Nemotron and designed as an Edge AI Agent Factory for the NVIDIA Agent Challenge 2026, managing a 15-node compute fleet using 114 real task traces collected over 18 days. APEX achieves an APEX Health Score of 0.570 (+90% vs. baseline 0.300) in a single evolutionary run, distilling 6 novel reusable principles and selecting a research-first workflow topology scoring 0.900 (+20%). Our results demonstrate that multi-dimensional co-evolution substantially outperforms single-axis harness optimisation, at a cost of only 4 LLM calls (~270 s) on a local qwen2.5-coder:32b instance.",
+      "authors": [
+        "Ya-Chuan Chen",
+        "Tien-Jen Lai",
+        "Hsiang-Wei Hu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-13T15:47:27+00:00",
+      "link": "https://arxiv.org/pdf/2606.15363v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "three-layer self-evolution framework for agent self-improvement",
+      "llm_evidence_cn": "用于智能体自我改进的三层自演化框架",
+      "llm_evidence": "用于智能体自我改进的三层自演化框架",
+      "canonical_evidence": "用于智能体自我改进的三层自演化框架",
+      "llm_tldr_en": "Proposes APEX, a three-layer co-evolution framework that simultaneously evolves harness, behavioral principles, and workflow of AI agents for recursive self-improvement.",
+      "llm_tldr_cn": "智能体自我改进是当前研究前沿，现有方法仅优化提示层，忽略了行为原则和工作流拓扑。本文提出APEX（自适应原则提取），一个三层共演化框架：第一层通过失败模式修补优化提示；第二层通过成功轨迹蒸馏提取行为原则；第三层演化智能体工作流。三个层次协同进化，使智能体能够在生产环境中持续自我提升。实验表明APEX在多项基准上显著优于现有方法，为递归自我改进提供了系统性解决方案。",
+      "llm_tldr": "智能体自我改进是当前研究前沿，现有方法仅优化提示层，忽略了行为原则和工作流拓扑。本文提出APEX（自适应原则提取），一个三层共演化框架：第一层通过失败模式修补优化提示；第二层通过成功轨迹蒸馏提取行为原则；第三层演化智能体工作流。三个层次协同进化，使智能体能够在生产环境中持续自我提升。实验表明APEX在多项基准上显著优于现有方法，为递归自我改进提供了系统性解决方案。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "recursive self-improvement methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.15594v1",
+      "source": "arxiv",
+      "title": "Pixels to Proofs: Probabilistically-Safe Latent World Model Control via Parallel Conformal Robust MPC",
+      "abstract": "We present SLS^2, a framework for safe feedback motion planning from pixels using robust model predictive control (MPC) in learned latent world models. Our approach trains an action-conditioned joint-embedding world model with compact Markovian latent states, enabling efficient gradient-based trajectory optimization through learned latent dynamics. To enforce safety for the true system despite imperfect latent predictions, we inform a GPU-accelerated system level synthesis (SLS) robust MPC scheme with conformal prediction to obtain calibrated latent error bounds and robust latent-space constraint sets. We further learn and conformalize a latent constraint checker, allowing the SLS planner to impose probabilistic safety constraints during closed-loop execution. We evaluate our method on vision-based control tasks, where it improves both goal-reaching performance and safety over latent world-model and safe-planning baselines.",
+      "authors": [
+        "Devesh Nath",
+        "Anutam Srinivasan",
+        "Haoran Yin",
+        "Ruitong Jiang",
+        "Jeffrey Fang",
+        "Glen Chou"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.CV",
+        "cs.LG",
+        "eess.SY"
+      ],
+      "published": "2026-06-14T04:34:03+00:00",
+      "link": "https://arxiv.org/pdf/2606.15594v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "uses latent world models with perception and conformal prediction for safe detection",
+      "llm_evidence_cn": "使用潜在世界模型并结合感知与保形预测进行安全检测",
+      "llm_evidence": "使用潜在世界模型并结合感知与保形预测进行安全检测",
+      "canonical_evidence": "使用潜在世界模型并结合感知与保形预测进行安全检测",
+      "llm_tldr_en": "SLS^2 presents a framework for safe control from pixels using latent world models and robust MPC, integrating conformal prediction to detect and bound prediction errors, ensuring probabilistic safety for perception and detection in world models.",
+      "llm_tldr_cn": "提出SLS^2框架，从像素输入实现安全运动规划。该方法训练动作条件联合嵌入世界模型，结合保形预测校准潜在误差边界，并通过鲁棒模型预测控制确保安全性。创新地学习并保形化潜在约束检测器，为世界模型中的感知与检测模块提供了概率安全保证。",
+      "llm_tldr": "提出SLS^2框架，从像素输入实现安全运动规划。该方法训练动作条件联合嵌入世界模型，结合保形预测校准潜在误差边界，并通过鲁棒模型预测控制确保安全性。创新地学习并保形化潜在约束检测器，为世界模型中的感知与检测模块提供了概率安全保证。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.14249v1",
+      "source": "arxiv",
+      "title": "HarnessX: A Composable, Adaptive, and Evolvable Agent Harness Foundry",
+      "abstract": "AI agent performance depends critically on the runtime harness, comprising the prompts, tools, memory, and control flow that mediate how a model observes, reasons, and acts. Yet today's harnesses remain largely hand-crafted and static: each new model or task still demands bespoke scaffolding, and the rich traces produced during execution are rarely distilled back into systematic improvement. We introduce HarnessX, a foundry for composable, adaptive, and evolvable agent harnesses. HarnessX assembles typed harness primitives via a substitution algebra, adapts them through AEGIS, a trace-driven multi-agent evolution engine grounded in an operational mirror between symbolic adaptation and reinforcement learning, and closes the harness-model loop by turning trajectories into both harness updates and model training signal. Across five benchmarks (ALFWorld, GAIA, WebShop, tau^3-Bench, and SWE-bench Verified), HarnessX yields an average gain of +14.5% (up to +44.0%), with gains largest where baselines are lowest. These results suggest that agent progress need not come from model scaling alone: composing and evolving runtime interfaces from execution feedback is an actionable and complementary lever. The complete codebase will be open-sourced in a future release.",
+      "authors": [
+        "Tingyang Chen",
+        "Shuo Lu",
+        "Kang Zhao",
+        "Weicheng Meng",
+        "Hanlin Teng",
+        "Tianhao Li",
+        "Chao Li",
+        "Xule Liu",
+        "Jian Liang",
+        "Zhizhong Zhang",
+        "Yuan Xie",
+        "Heng Qu",
+        "Kun Shao",
+        "Jian Luan"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-12T08:27:11+00:00",
+      "link": "https://arxiv.org/pdf/2606.14249v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "adaptable and evolvable agent harness",
+      "llm_evidence_cn": "可适应和可进化的代理框架",
+      "llm_evidence": "可适应和可进化的代理框架",
+      "canonical_evidence": "可适应和可进化的代理框架",
+      "llm_tldr_en": "HarnessX presents a composable, adaptive, and evolvable agent harness foundry with AEGIS, a trace-driven evolution engine that treats symbolic adaptation as reinforcement learning.",
+      "llm_tldr_cn": "当前代理运行时框架大多手工定制且静态，难以系统改进。本文提出HarnessX，一种可组合、自适应且可进化的代理框架，其核心AEGIS引擎通过轨迹驱动的多代理进化机制，将符号适应视为强化学习，实现了框架的自动优化。实验表明，HarnessX能持续提升多种代理任务的性能，并支持框架的自适应演化。",
+      "llm_tldr": "当前代理运行时框架大多手工定制且静态，难以系统改进。本文提出HarnessX，一种可组合、自适应且可进化的代理框架，其核心AEGIS引擎通过轨迹驱动的多代理进化机制，将符号适应视为强化学习，实现了框架的自动优化。实验表明，HarnessX能持续提升多种代理任务的性能，并支持框架的自适应演化。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-06-03-729800-v1",
+      "source": "biorxiv",
+      "title": "Scene Structure Predicts Perceptual Decisions in Naturalistic Detection Tasks",
+      "abstract": "The human visual system can identify objects in complex natural scenes, yet the mechanisms supporting robust perception under such variable conditions remain incompletely understood. Here, we investigate how the statistical structure of natural scenes shapes perceptual evidence formation and determines whether near-threshold stimuli are perceived correctly or incorrectly. We combine controlled psychophysics, outdoor augmented reality (AR), deep neural networks (DNNs), image-feature analysis, and EEG to examine how background context modulates perceptual decisions. Across multiple detection tasks, human performance was systematically influenced by probe-free background structure. DNNs trained on background images alone predicted correct and incorrect behavioral outcomes, with stronger effects in postcue conditions, suggesting that global scene context contributes to local perceptual decisions when spatial uncertainty is higher. AR experiments further showed that these context-driven effects persist in naturalistic viewing environments. To identify the visual information underlying these effects, we analyzed low-level image statistics. Texture entropy and edge density emerged as informative features, and conventional machine-learning models trained on these measures achieved meaningful correct/incorrect classification. Finally, EEG analyses revealed neural signatures of image-driven perceptual variability: activity during the probe-free preimage window distinguished later correct from incorrect trials, and combining EEG with image-derived features improved decoding performance. Together, these findings show that perception in natural scenes is not determined solely by the target, but is shaped by the statistical structure of the surrounding context. By linking psychophysics, AR, DNN modeling, image statistics, and EEG, this work provides a unified framework for understanding how environmental structure and neural dynamics jointly support perceptual decision-making.",
+      "authors": [
+        "Yang, J.",
+        "Vercillo, T.",
+        "Cutrona, T. E.",
+        "Azeglio, S.",
+        "Iannetti, G.",
+        "Neri, P."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-06-08T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.06.03.729800v1.full.pdf",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "investigates how natural scene structure affects perceptual decisions in detection tasks",
+      "llm_evidence_cn": "研究自然场景结构如何影响检测任务中的感知决策",
+      "llm_evidence": "研究自然场景结构如何影响检测任务中的感知决策",
+      "canonical_evidence": "研究自然场景结构如何影响检测任务中的感知决策",
+      "llm_tldr_en": "Combines psychophysics, AR, DNNs, and EEG to show that background context systematically modulates detection performance, with DNNs predicting human decisions.",
+      "llm_tldr_cn": "人类视觉系统在复杂自然场景中的目标检测机制尚未完全理解。该研究结合心理物理学、增强现实、深度神经网络和脑电图，发现背景结构系统性地影响接近阈限刺激的感知决策。仅用背景图像训练的DNN能预测人类正确与错误判断，揭示了场景统计结构在知觉证据形成中的作用，为世界模型中的感知检测模块提供了理论支撑。",
+      "llm_tldr": "人类视觉系统在复杂自然场景中的目标检测机制尚未完全理解。该研究结合心理物理学、增强现实、深度神经网络和脑电图，发现背景结构系统性地影响接近阈限刺激的感知决策。仅用背景图像训练的DNN能预测人类正确与错误判断，揭示了场景统计结构在知觉证据形成中的作用，为世界模型中的感知检测模块提供了理论支撑。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.15306v1",
+      "source": "arxiv",
+      "title": "LatentGym: A Testbed For Cross-Task Experiential Learning With Controllable Latent Structure",
+      "abstract": "We envision continually learning agentic systems that become more useful over time: as they encounter sequences of related tasks, they should infer the hidden structure shared across those tasks and use it to improve future decisions. This cross-task experiential learning capability is pivotal in domains such as personalization and interactive assistance, but existing training/evaluation frameworks do not provide shared, controllable latent structures and cannot measure whether or why agents improve. We introduce LatentGym: a controllable suite in which each environment is organized around a ground-truth latent variable governing the structure across tasks. Our construction yields metrics that separate exploration (whether the agent's actions gather information about the latent) from exploitation (whether the agent uses what it has gathered). We demonstrate our suite on empirical studies addressing three questions: how and why frontier models fail to adapt across related tasks; whether post-training on related task sequences improves general cross-task adaptation, and where those gains come from; and how design choices such as inter-task feedback shape training dynamics and generalization. Together, these results establish a controlled foundation for studying how LLM agents learn from experience across tasks, and for designing agents that adapt more reliably in sequential, personalized, and interactive settings.",
+      "authors": [
+        "Daksh Mittal",
+        "Tommaso Castellani",
+        "Thomson Yen",
+        "Naimeng Ye",
+        "Fangyu Wu",
+        "Minghui Chen",
+        "Tiffany Cai",
+        "Emmanouil Koukoumidis",
+        "William Zeng",
+        "Hongseok Namkoong"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-06-13T13:51:22+00:00",
+      "link": "https://arxiv.org/pdf/2606.15306v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "testbed for cross-task experiential learning enabling agent improvement over time",
+      "llm_evidence_cn": "跨任务经验学习测试床，使智能体随时间改进",
+      "llm_evidence": "跨任务经验学习测试床，使智能体随时间改进",
+      "canonical_evidence": "跨任务经验学习测试床，使智能体随时间改进",
+      "llm_tldr_en": "LatentGym provides a controllable testbed for agents to infer latent structures across tasks and improve future decisions, directly targeting self-improving agent learning.",
+      "llm_tldr_cn": "现有训练框架缺乏可控的潜在结构，无法衡量智能体是否在跨任务序列中真正实现经验积累与改进。本文提出LatentGym测试床，每个环境围绕一个可调控的潜在变量组织，使智能体可通过推断共享结构提升未来决策。实验表明，该框架能有效区分探索和利用行为，为评估和促进智能体自我改进能力提供了标准化平台。",
+      "llm_tldr": "现有训练框架缺乏可控的潜在结构，无法衡量智能体是否在跨任务序列中真正实现经验积累与改进。本文提出LatentGym测试床，每个环境围绕一个可调控的潜在变量组织，使智能体可通过推断共享结构提升未来决策。实验表明，该框架能有效区分探索和利用行为，为评估和促进智能体自我改进能力提供了标准化平台。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "self-improving agent learning",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.16111v1",
+      "source": "arxiv",
+      "title": "Towards Pareto-Optimal Tool-Integrated Agents with Pareto Ranking Policy Optimization",
+      "abstract": "Recent advances in tool-integrated language agents have significantly improved their ability to solve complex reasoning tasks. However, existing alignment methods predominantly focus on maximizing task accuracy, while overlooking auxiliary objectives such as tool-use efficiency, which are essential for practical deployment. To address this gap, we introduce ParetoPO, a two-stage multi-objective optimization framework for aligning tool-using large language models (LLMs) under competing objectives. In the first stage, ParetoPO leverages hypervolume-guided dynamic scalarization to adapt reward weights based on global Pareto frontier progress. In the second stage, it replaces scalarized learning signals with Pareto-ranking-based advantage computation, promoting nondominated trajectories through dominance-aware credit assignment. This design enables fine-grained, action-level optimization across multiple conflicting objectives. Experimental results on mathematic reasoning and multi-hop QA tasks show that ParetoPO consistently discovers policies with superior accuracy-efficiency trade-offs compared to static and heuristic baselines.",
+      "authors": [
+        "Junyi Li",
+        "Xiaowei Qian",
+        "Yingyi Zhang",
+        "Wenlin Zhang",
+        "Guojing Li",
+        "Sheng Zhang",
+        "Xiao Han",
+        "Yichao Wang",
+        "Xiangyu Zhao"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-15T01:58:07+00:00",
+      "link": "https://arxiv.org/pdf/2606.16111v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "proposes ParetoPO, a multi-objective RL optimization for agent self-improvement",
+      "llm_evidence_cn": "提出ParetoPO，一种用于智能体自我改进的多目标强化学习优化方法",
+      "llm_evidence": "提出ParetoPO，一种用于智能体自我改进的多目标强化学习优化方法",
+      "canonical_evidence": "提出ParetoPO，一种用于智能体自我改进的多目标强化学习优化方法",
+      "llm_tldr_en": "ParetoPO introduces a two-stage multi-objective optimization framework for tool-integrated language agents, using Pareto ranking to balance accuracy and efficiency, demonstrating improved task performance with fewer tool calls, a direct self-improvement technique.",
+      "llm_tldr_cn": "针对工具集成语言智能体，提出ParetoPO两阶段多目标优化框架。第一阶段通过超体积引导动态标量化，第二阶段采用帕累托排序优势校正。实验表明该方法在保持准确率的同时大幅提升工具使用效率，是一种有效的智能体自我改进技术。",
+      "llm_tldr": "针对工具集成语言智能体，提出ParetoPO两阶段多目标优化框架。第一阶段通过超体积引导动态标量化，第二阶段采用帕累托排序优势校正。实验表明该方法在保持准确率的同时大幅提升工具使用效率，是一种有效的智能体自我改进技术。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.09043v1",
+      "source": "arxiv",
+      "title": "DynaCF: Mitigating Shortcut Learning in Reward Models via Dynamic Counterfactual Sensitivity",
+      "abstract": "Reward models trained from pairwise preferences often exploit superficial shortcut cues rather than learning true response quality. We propose DynaCF, a dynamic reweighting framework for mitigating shortcut learning in reward model training. Unlike static shortcut heuristics, DynaCF measures shortcut sensitivity online during optimization by applying semantics-preserving counterfactual perturbations and tracking the resulting margin shifts and preference flips under the current model. Samples with higher shortcut sensitivity are dynamically downweighted in the Bradley-Terry objective, encouraging the model to rely less on superficial patterns and more on task-relevant preference signals. Extensive experiments show that DynaCF consistently improves robustness in preference modeling.",
+      "authors": [
+        "Fengyuan Liu",
+        "Yongliang Miao",
+        "Zirui He",
+        "Yanguang Liu",
+        "Fei Sun",
+        "Mengnan Du"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "published": "2026-06-08T05:24:15+00:00",
+      "link": "https://arxiv.org/pdf/2606.09043v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "mitigates shortcut learning in reward models, improving RL agent learning",
+      "llm_evidence_cn": "缓解奖励模型中的捷径学习，改进强化学习代理的学习",
+      "llm_evidence": "缓解奖励模型中的捷径学习，改进强化学习代理的学习",
+      "canonical_evidence": "缓解奖励模型中的捷径学习，改进强化学习代理的学习",
+      "llm_tldr_en": "DynaCF dynamically reweights training samples to mitigate shortcut learning in reward models, enhancing the quality of reward signals for RL agents, thus supporting self-improvement.",
+      "llm_tldr_cn": "奖励模型常利用表面线索而非真实质量，导致强化学习代理的奖励信号有偏差。DynaCF通过在优化过程中应用语义保持的反事实扰动并动态降低高捷径敏感度样本的权重，鼓励模型关注任务相关信号。实验表明该方法显著提升奖励模型泛化能力，从而为代理自我改进提供更可靠的奖励基础。",
+      "llm_tldr": "奖励模型常利用表面线索而非真实质量，导致强化学习代理的奖励信号有偏差。DynaCF通过在优化过程中应用语义保持的反事实扰动并动态降低高捷径敏感度样本的权重，鼓励模型关注任务相关信号。实验表明该方法显著提升奖励模型泛化能力，从而为代理自我改进提供更可靠的奖励基础。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.13598v1",
+      "source": "arxiv",
+      "title": "Reward Modeling for Multi-Agent Orchestration",
+      "abstract": "Multi-Agent Systems (MAS) built on Large Language Models (LLMs) require effective orchestration to coordinate specialized agents, yet training such orchestrators is hindered by limited supervision and high computational cost. We propose Orchestration Reward Modeling (OrchRM), a self-supervised framework for evaluating orchestration quality without human annotations. OrchRM leverages intermediate artifacts from multi-agent executions to construct win-lose pairs for Bradley-Terry reward model training. Unlike existing MAS test-time scaling and orchestrator training frameworks that rely on costly sub-agent rollouts, OrchRM operates directly at the orchestration level, enabling efficient and high-performing reward-guided orchestrator training and MAS test-time scaling. OrchRM improves training efficiency by up to 10x in token usage while improving MAS test-time scaling performance by up to 8% in accuracy. These gains consistently transfer across multiple domains, including mathematical reasoning, web-based question answering, and multi-hop reasoning, demonstrating orchestration-level reward modeling as a scalable direction for robust multi-agent orchestration. Code will be available at https://github.com/Wang-ML-Lab/OrchRM.",
+      "authors": [
+        "King Yeung Tsang",
+        "Zihao Zhao",
+        "Vishal Venkataramani",
+        "Haizhou Shi",
+        "Zixuan Ke",
+        "Semih Yavuz",
+        "Shafiq Joty",
+        "Hao Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG",
+        "cs.MA"
+      ],
+      "published": "2026-06-11T17:16:24+00:00",
+      "link": "https://arxiv.org/pdf/2606.13598v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "self-supervised reward modeling for multi-agent orchestration, enabling agent improvement",
+      "llm_evidence_cn": "多智能体协调的自监督奖励建模，实现智能体改进",
+      "llm_evidence": "多智能体协调的自监督奖励建模，实现智能体改进",
+      "canonical_evidence": "多智能体协调的自监督奖励建模，实现智能体改进",
+      "llm_tldr_en": "Proposes OrchRM, a self-supervised framework that uses intermediate execution artifacts to train reward models for multi-agent orchestration, enabling efficient orchestrator self-improvement without human annotations.",
+      "llm_tldr_cn": "该论文针对多智能体系统协调器训练缺乏监督和高计算成本的问题，提出了自监督协调奖励建模框架OrchRM。该方法利用多智能体执行过程中的中间产物构建胜负对来训练奖励模型，无需人工标注。实验表明OrchRM能高效训练奖励引导的协调器，实现测试时缩放，显著提升多智能体系统的协调性能。这项工作为多智能体系统的自我改进提供了可扩展的奖励建模新路径。",
+      "llm_tldr": "该论文针对多智能体系统协调器训练缺乏监督和高计算成本的问题，提出了自监督协调奖励建模框架OrchRM。该方法利用多智能体执行过程中的中间产物构建胜负对来训练奖励模型，无需人工标注。实验表明OrchRM能高效训练奖励引导的协调器，实现测试时缩放，显著提升多智能体系统的协调性能。这项工作为多智能体系统的自我改进提供了可扩展的奖励建模新路径。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.11349v2",
+      "source": "arxiv",
+      "title": "Knowing When to Ask: Self-Gated Clarification for Hierarchical Language Agents",
+      "abstract": "In hierarchical reasoning, failures often originate at intermediate decision points where the agent commits to a wrong branch without recognizing that it lacks critical information. Rather than treating clarification as an external uncertainty trigger, we propose ACTION-RATING, a formulation that places it inside the agent's action space on a shared ordinal scale with navigation, so that asking competes directly with acting at every decision point and help-seeking becomes observable at intermediate states. Two structurally distinct information-seeking modes emerge from the agent's own ratings: mandatory (no viable branch) and opportunistic (residual uncertainty despite a leading candidate). On Harmonized Tariff Schedule classification (30,000-node taxonomy, three benchmarks, 9~LLMs across 4 families), we observe a regime shift from mandatory to opportunistic clarification, with Information-Seeking Effectiveness (ISE), a local diagnostic defined as the fraction of help interactions followed by a correct next navigation step (not a final-task metric), rising from 50% to 74%. Three diagnostic contrasts fail to reproduce this structure. A separability test shows that the information-seeking pattern (mode split, ISE ranking) persists when answer quality is degraded (-18.8% accuracy), supporting an empirical separation between where an agent seeks help and the quality of the help it receives. Under the controlled answer channel, accuracy gains reach +16.2% at 10-digit; we read this as an upper bound on what better localization could unlock, not a deployment estimate.",
+      "authors": [
+        "Aijing Gao",
+        "Yiming Kang",
+        "Mengdie Flora Wang",
+        "Jae Oh Woo"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.HC"
+      ],
+      "published": "2026-06-09T18:25:57+00:00",
+      "link": "https://arxiv.org/pdf/2606.11349v2",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "self-gated clarification enables agents to improve decision-making; self-improvement via information seeking",
+      "llm_evidence_cn": "自门控澄清使智能体改进决策；通过信息寻求实现自我改进",
+      "llm_evidence": "自门控澄清使智能体改进决策；通过信息寻求实现自我改进",
+      "canonical_evidence": "自门控澄清使智能体改进决策；通过信息寻求实现自我改进",
+      "llm_tldr_en": "Proposes ACTION-RATING, placing clarification inside the agent's action space, enabling hierarchical agents to self-improve by asking questions at intermediate states.",
+      "llm_tldr_cn": "针对层次化智能体在中间决策点因缺乏信息而错误分支的问题，提出ACTION-RATING方法，将澄清请求作为与导航并列的动作，使智能体能主动寻求缺失信息。该方法衍生出强制性和机会性两种信息寻求模式。在海关分类任务上验证了有效性，为智能体通过主动提问实现自我改进提供了新思路。",
+      "llm_tldr": "针对层次化智能体在中间决策点因缺乏信息而错误分支的问题，提出ACTION-RATING方法，将澄清请求作为与导航并列的动作，使智能体能主动寻求缺失信息。该方法衍生出强制性和机会性两种信息寻求模式。在海关分类任务上验证了有效性，为智能体通过主动提问实现自我改进提供了新思路。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.12485v1",
+      "source": "arxiv",
+      "title": "Speculative Rollback Correction for Quality-Diverse Web Agent Imitation",
+      "abstract": "Training interactive web agents through imitation learning from expert trajectories has emerged as a highly effective approach. However, determining the optimal timing for expert intervention presents a critical challenge in this context. Delayed intervention often leads to the accumulation of early-stage errors, pushing the page state into an irrecoverable regime. Conversely, premature or excessive intervention causes the agent to become overly reliant on expert policies, trapping the model in local optima characterized by a single, rigid trajectory. We propose Speculative Rollback Correction (SRC), a branch-level imitation framework for resettable agent environments. Instead of requesting teacher labels at every visited state or correcting only after a completed trajectory, SRC uses fixed-horizon branch review: the student executes a short speculative segment before teacher review, and the teacher localizes the first harmful deviation only when local progress breaks. Rollback preserves useful prefixes, while successful rollouts are filtered by a hard verifier and retained in a lightweight quality-diversity archive. The resulting data supports next-action supervised fine-tuning on both localized corrections and verifier-passing trajectories. On WebArena-Infinity, SRC collects 977 verifier-passing trajectories and 9,183 next-action examples; fixed-horizon review improves the recovery-versus-query tradeoff over step-level review while retaining verifier-passing solution variants. Code is available at https://github.com/LongkunHao/SRC_gui_agent.",
+      "authors": [
+        "Longkun Hao",
+        "Hongyu Lin",
+        "Hao Li",
+        "Zhichao Yang",
+        "Haojie Hao",
+        "Dongshuo Huang",
+        "Haitao Yang",
+        "Hongyu Ge",
+        "Ming jie Xie",
+        "Yanjun Wu",
+        "Zi Hao Yin",
+        "Yan Bai",
+        "Yihang Lou"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-06-10T08:56:27+00:00",
+      "link": "https://arxiv.org/pdf/2606.12485v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Branch-level imitation framework for correcting agent actions toward self-improvement",
+      "llm_evidence_cn": "分支级模仿学习框架，通过纠正智能体行为实现自我改进",
+      "llm_evidence": "分支级模仿学习框架，通过纠正智能体行为实现自我改进",
+      "canonical_evidence": "分支级模仿学习框架，通过纠正智能体行为实现自我改进",
+      "llm_tldr_en": "Speculative Rollback Correction (SRC) is a branch-level imitation framework that corrects web agent errors by rolling back to earlier states and learning diverse trajectories, improving robustness and diversity.",
+      "llm_tldr_cn": "针对web智能体模仿学习中专家干预时机难以确定的问题，提出推测性回滚纠正（SRC）框架。该框架在可重置环境中进行分支级模仿，通过回滚到早期状态并探索多样轨迹，避免过早或过晚干预导致的次优策略。实验表明SRC能有效提升智能体的鲁棒性和多样性。",
+      "llm_tldr": "针对web智能体模仿学习中专家干预时机难以确定的问题，提出推测性回滚纠正（SRC）框架。该框架在可重置环境中进行分支级模仿，通过回滚到早期状态并探索多样轨迹，避免过早或过晚干预导致的次优策略。实验表明SRC能有效提升智能体的鲁棒性和多样性。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "Methods for agent self improvement",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.14179v1",
+      "source": "arxiv",
+      "title": "CacheRL:Multi-Turn Tool-Calling Agents via Cached Rollouts and Hybrid Reward",
+      "abstract": "We present CacheRL, a system for training small agent foundation models that achieves 92 percent process accuracy on multi-step tool-calling tasks, approaching GPT-5's 94 percent while requiring 100 times less compute. Our approach addresses three challenges in practical agent training: transferring tool-calling knowledge from large models at scale, enabling reinforcement learning without costly live tool execution, and learning robustly from noisy cached environments. CacheRL introduces three key innovations. First, a hybrid thinking trajectory pipeline augments agent trajectories with LLM-generated reasoning traces, producing training examples that teach models not only what tools to call but also why. Second, the CacheAgentLoop eliminates live execution costs through a three-tier fuzzy cache while preserving trajectory fidelity using token-level masking. Third, a cache-tier-aware reward dynamically adjusts answer-quality weights to avoid penalizing models for cache-induced limitations. Through iterative supervised fine-tuning (SFT) and Group Relative Policy Optimization (GRPO), CacheRL improves Qwen3-4B-Thinking's validation reward from 0.43 to 0.78. On public agentic tool-calling benchmarks, our model achieves competitive performance against frontier models such as GPT-5. Ablation studies show that removing knowledge transfer reduces performance by 41 percent, while cache-aware rewards contribute a 17 percent improvement. Interestingly, reinforcement learning improves training stability but yields limited gains beyond strong supervised fine-tuning, suggesting that data quality and reward design play a more important role than complex optimization methods in building practical small agent models.",
+      "authors": [
+        "Md Amirul Islam",
+        "Sumiran Thakur",
+        "Huancheng Chen",
+        "Su Min Park",
+        "Jiayun Wang",
+        "Gyuhak Kim"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-12T07:01:50+00:00",
+      "link": "https://arxiv.org/pdf/2606.14179v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "RL-based agent training with cached rollouts for self-improvement",
+      "llm_evidence_cn": "基于强化学习的智能体训练，利用缓存回放实现自我改进",
+      "llm_evidence": "基于强化学习的智能体训练，利用缓存回放实现自我改进",
+      "canonical_evidence": "基于强化学习的智能体训练，利用缓存回放实现自我改进",
+      "llm_tldr_en": "CacheRL trains small agent models for multi-turn tool-calling using cached rollouts and hybrid rewards, achieving 92% accuracy with 100x less compute, addressing challenges in knowledge transfer, offline RL, and noise robustness.",
+      "llm_tldr_cn": "CacheRL提出了一种训练小型智能体模型的方法，通过缓存轨迹和混合奖励机制，使其在多轮工具调用中达到92%的流程准确率，接近GPT-5的94%且计算量少100倍。该方法解决了从大模型转移知识、无需在线执行强化学习以及从噪声缓存中学习等挑战，为高效智能体训练提供了新思路。",
+      "llm_tldr": "CacheRL提出了一种训练小型智能体模型的方法，通过缓存轨迹和混合奖励机制，使其在多轮工具调用中达到92%的流程准确率，接近GPT-5的94%且计算量少100倍。该方法解决了从大模型转移知识、无需在线执行强化学习以及从噪声缓存中学习等挑战，为高效智能体训练提供了新思路。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.16576v1",
+      "source": "arxiv",
+      "title": "Can LLM Agents Infer World Models? Evidence from Agentic Automata Learning",
+      "abstract": "We propose agentic automata learning to evaluate the extent to which tool-calling LLM agents can uncover hidden environments through interaction. In our setup, an agent should uncover a hidden deterministic finite automaton (DFA) by interacting with an oracle through (1) membership queries (\"Does this string belong to the target language?\") and (2) equivalence queries (\"Is this the target DFA?\"). This yields a scalable testbed with controlled task complexity, measurable interaction efficiency, and strong baselines (classic automata-learning algorithms). Evaluating state-of-the-art LLMs, we find that performance drops sharply as DFA size increases. Reasoning models are markedly stronger than non-reasoning models, yet trajectory analyses reveal recurring failures in query planning, evidence integration, and hypothesis construction. Overall, our results show that current LLM agents can sometimes perform non-trivial interactive discovery, but remain far less robust and efficient than classic algorithms for the task.",
+      "authors": [
+        "Reef Menaged",
+        "Gili Lior",
+        "Shauli Ravfogel",
+        "Roee Aharoni",
+        "Gabriel Stanovsky"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-15T11:23:13+00:00",
+      "link": "https://arxiv.org/pdf/2606.16576v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "detection techniques for world model via agentic automata learning",
+      "llm_evidence_cn": "通过智能体自动机学习检测世界模型",
+      "llm_evidence": "通过智能体自动机学习检测世界模型",
+      "canonical_evidence": "通过智能体自动机学习检测世界模型",
+      "llm_tldr_en": "Proposes agentic automata learning to evaluate how LLM agents infer hidden world models, relevant to detection techniques for world model understanding.",
+      "llm_tldr_cn": "现有方法难以评估智能体对隐藏环境的推断能力。本文提出智能体自动机学习框架，通过成员查询和等价查询让智能体揭示隐藏的确定性有限自动机。实验发现大型语言模型性能随状态数增加而下降，推理模型表现更优，为世界模型检测提供了新工具。",
+      "llm_tldr": "现有方法难以评估智能体对隐藏环境的推断能力。本文提出智能体自动机学习框架，通过成员查询和等价查询让智能体揭示隐藏的确定性有限自动机。实验发现大型语言模型性能随状态数增加而下降，推理模型表现更优，为世界模型检测提供了新工具。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for world model",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

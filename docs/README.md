@@ -6,58 +6,59 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-06-15
-- 运行时间：2026-06-15 23:05:58 UTC
+- 最新运行日期：2026-06-16
+- 运行时间：2026-06-16 23:12:23 UTC
 - 运行状态：成功
-- 本次总论文数：12
-- 精读区：5
-- 速读区：7
+- 本次总论文数：13
+- 精读区：7
+- 速读区：6
 
 ### 今日简报（AI）
-今日精选12篇论文，重点关注异构机器人团队中的不确定性感知主动感知与智能体强化学习的反射间隙问题。  
-两篇高分论文分别针对异构机器人协作和智能体RL的校准优化，值得深入研读。  
-建议优先精读这两篇9分论文，并关注速读中关于具身导航关系归纳偏置和机器人技能组织对运行时行为影响的研究。
-- 详情：[/202606/15/README](/202606/15/README)
+今天共推荐13篇论文，精读7篇速读6篇，其中《VGPT-RSI》和《APEX》以9.0分并列最高分。最值得关注的两个方向：形式化验证中的边界证书与不等式验证，以及生产级AI智能体的自适应原则提取框架。建议优先精读这两篇高分论文，前者深化对Lagarias不等式的理解，后者掌握三层次自我进化方法论。
+- 详情：[/202606/16/README](/202606/16/README)
 
 ### 精读区论文标签
-1. [Co-GLANCE: Uncertainty-Aware Active Perception for Heterogeneous Robot Teaming](/202606/15/2606.09919v1-co-glance-uncertainty-aware-active-perception-for-heterogeneous-robot-teaming)  
-   标签：评分：9.0/10、query:agent-detect
-   evidence：用于不确定性消解的实时机上感知与决策系统
-2. [Closing the Reflection Gap: A Free Calibration Bonus for Agentic RL](/202606/15/2606.14211v1-closing-the-reflection-gap-a-free-calibration-bonus-for-agentic-rl)  
+1. [VGPT-RSI for RH-Adjacent Formal Progress: Boundary Certificates, Verified Finite Lagarias Inequalities, and Explicit Failure Localization](/202606/16/2606.15096v1-vgpt-rsi-for-rh-adjacent-formal-progress-boundary-certificates-verified-finite-lagarias-inequalities-and-explicit-failure-localization)  
    标签：评分：9.0/10、query:self-improve
-   evidence：通过校准奖励关闭智能体强化学习中的反思差距
-3. [SkillAudit: Ground-Truth-Free Skill Evolution via Paired Trajectory Auditing](/202606/15/2606.14239v1-skillaudit-ground-truth-free-skill-evolution-via-paired-trajectory-auditing)  
+   evidence：VGPT-RSI明确使用递归自我改进技术解决数学验证任务
+2. [APEX: Adaptive Principle EXtraction A Three-Layer Self-Evolution Framework for Production AI Agents](/202606/16/2606.15363v1-apex-adaptive-principle-extraction-a-three-layer-self-evolution-framework-for-production-ai-agents)  
    标签：评分：9.0/10、query:self-improve
-   evidence：无真实反馈的智能体技能进化
-4. [Retrospective Progress-Aware Self-Refinement for LLM Agent Training](/202606/15/2606.14302v1-retrospective-progress-aware-self-refinement-for-llm-agent-training)  
-   标签：评分：9.0/10、query:self-improve
-   evidence：通过回顾性进度感知训练实现LLM智能体的自精炼
-5. [HarnessX: A Composable, Adaptive, and Evolvable Agent Harness Foundry](/202606/15/2606.14249v1-harnessx-a-composable-adaptive-and-evolvable-agent-harness-foundry)  
+   evidence：用于智能体自我改进的三层自演化框架
+3. [HarnessX: A Composable, Adaptive, and Evolvable Agent Harness Foundry](/202606/16/2606.14249v1-harnessx-a-composable-adaptive-and-evolvable-agent-harness-foundry)  
    标签：评分：8.0/10、query:self-improve
-   evidence：基于运行痕迹的多智能体进化引擎，用于智能体改进
+   evidence：可适应和可进化的代理框架
+4. [LatentGym: A Testbed For Cross-Task Experiential Learning With Controllable Latent Structure](/202606/16/2606.15306v1-latentgym-a-testbed-for-cross-task-experiential-learning-with-controllable-latent-structure)  
+   标签：评分：8.0/10、query:self-improve
+   evidence：跨任务经验学习测试床，使智能体随时间改进
+5. [Pixels to Proofs: Probabilistically-Safe Latent World Model Control via Parallel Conformal Robust MPC](/202606/16/2606.15594v1-pixels-to-proofs-probabilistically-safe-latent-world-model-control-via-parallel-conformal-robust-mpc)  
+   标签：评分：8.0/10、query:agent-detect
+   evidence：使用潜在世界模型并结合感知与保形预测进行安全检测
+6. [Towards Pareto-Optimal Tool-Integrated Agents with Pareto Ranking Policy Optimization](/202606/16/2606.16111v1-towards-pareto-optimal-tool-integrated-agents-with-pareto-ranking-policy-optimization)  
+   标签：评分：8.0/10、query:self-improve
+   evidence：提出ParetoPO，一种用于智能体自我改进的多目标强化学习优化方法
+7. [Scene Structure Predicts Perceptual Decisions in Naturalistic Detection Tasks](/202606/16/biorxiv-10-64898-2026-06-03-729800-v1-scene-structure-predicts-perceptual-decisions-in-naturalistic-detection-tasks)  
+   标签：评分：8.0/10、query:agent-detect
+   evidence：研究自然场景结构如何影响检测任务中的感知决策
 
 ### 速读区论文标签
-1. [Rethinking Embodied Navigation via Relational Inductive Bias](/202606/15/2606.10348v1-rethinking-embodied-navigation-via-relational-inductive-bias)  
-   标签：评分：7.0/10、query:agent-detect
-   evidence：具身导航中的世界模型感知与检测模块
-2. [SkillJuror: Measuring How Agent Skill Organization Changes Runtime Behavior](/202606/15/2606.11543v1-skilljuror-measuring-how-agent-skill-organization-changes-runtime-behavior)  
+1. [DynaCF: Mitigating Shortcut Learning in Reward Models via Dynamic Counterfactual Sensitivity](/202606/16/2606.09043v1-dynacf-mitigating-shortcut-learning-in-reward-models-via-dynamic-counterfactual-sensitivity)  
    标签：评分：7.0/10、query:self-improve
-   evidence：研究智能体技能组织如何影响运行时行为，与自我改进技术相关
-3. [Detecting Bot Detection: Prevalence, Techniques, and Implications for Web Measurement Research](/202606/15/2606.14525v1-detecting-bot-detection-prevalence-techniques-and-implications-for-web-measurement-research)  
+   evidence：缓解奖励模型中的捷径学习，改进强化学习代理的学习
+2. [Knowing When to Ask: Self-Gated Clarification for Hierarchical Language Agents](/202606/16/2606.11349v2-knowing-when-to-ask-self-gated-clarification-for-hierarchical-language-agents)  
+   标签：评分：7.0/10、query:self-improve
+   evidence：自门控澄清使智能体改进决策；通过信息寻求实现自我改进
+3. [Speculative Rollback Correction for Quality-Diverse Web Agent Imitation](/202606/16/2606.12485v1-speculative-rollback-correction-for-quality-diverse-web-agent-imitation)  
+   标签：评分：7.0/10、query:self-improve
+   evidence：分支级模仿学习框架，通过纠正智能体行为实现自我改进
+4. [CacheRL:Multi-Turn Tool-Calling Agents via Cached Rollouts and Hybrid Reward](/202606/16/2606.14179v1-cacherlmulti-turn-tool-calling-agents-via-cached-rollouts-and-hybrid-reward)  
+   标签：评分：7.0/10、query:self-improve
+   evidence：基于强化学习的智能体训练，利用缓存回放实现自我改进
+5. [Can LLM Agents Infer World Models? Evidence from Agentic Automata Learning](/202606/16/2606.16576v1-can-llm-agents-infer-world-models-evidence-from-agentic-automata-learning)  
    标签：评分：7.0/10、query:agent-detect
-   evidence：机器人检测技术与拦截测量
-4. [AgentSpec: Understanding Embodied Agent Scaffolds Through Controlled Composition](/202606/15/2606.14674v1-agentspec-understanding-embodied-agent-scaffolds-through-controlled-composition)  
-   标签：评分：7.0/10、query:agent-detect
-   evidence：提出模块化框架标准化智能体架构中的感知接口
-5. [Graph-based Target Back-Propagation for Context Adaptation in Multi-LLM Agentic Systems](/202606/15/2606.14155v1-graph-based-target-back-propagation-for-context-adaptation-in-multi-llm-agentic-systems)  
+   evidence：通过智能体自动机学习检测世界模型
+6. [Reward Modeling for Multi-Agent Orchestration](/202606/16/2606.13598v1-reward-modeling-for-multi-agent-orchestration)  
    标签：评分：6.0/10、query:self-improve
-   evidence：通过基于图的目标反向传播在多LLM代理系统中进行迭代上下文自适应
-6. [From Chatbot to Digital Colleague: The Paradigm Shift Toward Persistent Autonomous AI](/202606/15/2606.14502v1-from-chatbot-to-digital-colleague-the-paradigm-shift-toward-persistent-autonomous-ai)  
-   标签：评分：6.0/10、query:self-improve
-   evidence：讨论自主AI系统中的自我改进
-7. [Learning Coordinated Preference for Multi-Objective Multi-Agent Reinforcement Learning](/202606/15/2606.14693v1-learning-coordinated-preference-for-multi-objective-multi-agent-reinforcement-learning)  
-   标签：评分：6.0/10、query:self-improve
-   evidence：多智能体强化学习中通过偏好协调实现团队改进
+   evidence：多智能体协调的自监督奖励建模，实现智能体改进
 
 
 <div class="dpr-home-promo-card">

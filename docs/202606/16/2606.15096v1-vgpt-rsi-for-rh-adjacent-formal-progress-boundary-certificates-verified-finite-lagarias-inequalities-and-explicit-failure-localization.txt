@@ -1,0 +1,1273 @@
+Title: 2606.15096v1.pdf
+
+URL Source: https://arxiv.org/pdf/2606.15096v1
+
+Published Time: Tue, 16 Jun 2026 00:25:41 GMT
+
+Number of Pages: 31
+
+Markdown Content:
+1
+
+# VGPT -RSI for RH -Adjacent Formal Progress: Boundary 
+
+# Certificates, Verified Finite Lagarias Inequalities, and Explicit 
+
+# Failure Localization 
+
+Zhixin Hu 1,$ , Tao Xu 2,$ , Xiaodian Sun 3 , Li Jin 4, Momiao Xiong 4,5,* 
+
+> 1
+
+Ministry of Education Key Laboratory of Contemporary Anthropology, School of Life 
+
+Sciences, Fudan University, Shanghai, China. 
+
+> 2
+
+Department of Immunology and Molecular Microbiology, School of Medicine, Texas Tech 
+
+University Health Science Center, Lubbock, TX 79430, USA. 
+
+> 3
+
+Biostatistics and Bioinformatics Shared Resource, Sylvester Comprehensive Cancer Center, 
+
+University of Miami Miller School of Medicine, Miami, FL 33136 
+
+> 4
+
+School of Life Sciences, Fudan University, Shanghai 200438, China 
+
+> 5
+
+Department of Biostatistics and Data Science, School of Public Health, The University of Texas 
+
+Health Science Center at Houston, Houston, TX 77030, USA. 
+
+> 6
+
+Society of Artificial Intelligence Research, Houston, TX 77030, USA. 
+
+$: equal contributions. 
+
+Key words : Open problem, Riemannian Hypothesis, A rtificial Intelligence, transformer, 
+
+manifold, physical AI, HJB equation, causal, Recursive Self -Improvement, Hamiltonian, 
+
+symplectic structure, generative semantic workspace, world model, verification. 
+
+> *
+
+Address for correspondence and reprints: Dr. Momiao Xiong, Department of Biostatistics and 
+
+Data Science, School of Public Health, The University of Texas School of Public Health, P.O. 
+
+Box 20186, Houston, Texas 77225; Society of Artificial Intelligence Rese arch, 1956 Woodbury 
+
+St. Houston, TX 77030, USA. Phone: 713 -259 -2371, E -mail:  momiao.xiong@gmail.com 2
+
+# Abstract 
+
+The Riemann Hypothesis remains one of the central unsolved problems in mathematics. Rather 
+
+than claiming a proof, we investigate whether a verifiable AI -assisted reasoning system can 
+
+produce reliable, formally checked partial progress while explicitly iden tifying the remaining 
+
+mathematical obstructions. We apply the Verifiable Growing Physical Transformer with 
+
+Recursive Self -Improvement (VGPT -RSI) to two RH -adjacent certification tasks. First, we 
+
+construct and verify a finite RH -boundary certificate for ine quality 
+
+𝐵 (𝑥 , 𝑇 ) = 𝑇 − 9.06    
+
+> log log 𝑥
+
+√ 𝑥   
+
+> log 𝑥
+
+≥ 0
+
+on a parameterized safe lower curve over  𝑇 ∈ [10 11 , 10 13 ]. The numerical boundary curve is 
+
+converted into a certificate -backed lower curve, audited using outward -rounded interval 
+
+arithmetic and Arb/FLINT ball arithmetic, and then checked in Rocq/CoqInterval for the 
+
+parameterized theorem 
+
+∀𝑠 ∈ [11 ,13 ], 𝐵 (𝑥 ̂ (𝑠 ), 𝑇 (𝑠 )) ≥ 0.
+
+Second, we initiate a formal Lagarias -route certificate. Lagarias’ criterion states that RH is 
+
+equivalent to the global inequality 
+
+𝜎 (𝑛 ) ≤ 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ) for all  𝑛 ≥ 1.
+
+We formalize the finite quantity 
+
+𝐵 𝐿 (𝑛 ) = 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ) − 𝜎 (𝑛 )
+
+and produce a Coq -checked finite certificate provin g
+
+∀𝑛 , 1 ≤ 𝑛 ≤ 10000 ⇒ 𝐵 𝐿 (𝑛 ) ≥ 0.3
+
+The final system identifies the exact unresolved mathematical bottlenecks: formalizing the 
+
+Lagarias equivalence, proving the global tail theorem beyond any finite cutoff, and potentially 
+
+reducing counterexamples to colossally abundant or related extremal i ntegers. These results 
+
+demonstrate that VGPT -RSI can produce certified RH -adjacent formal progress, organize proof 
+
+dependencies, and avoid overclaiming when the remaining obstruction is genuinely 
+
+mathematical (Figure 1) .4
+
+# 1. Introduction 
+
+Large language models and agentic AI systems are increasingly being applied to mathematical 
+
+discovery, theorem proving, and formal verification (Sosso et al. 2026; Chen et al. 2026 ; de 
+
+Moura and Ullrich, 2021 ; Tsoukalas et al. 2026 ; Ágoston and Pálvölgyi , 2020; Alexeev et al. 
+
+2026 ). However, open mathematical problems require a stronger standard than plausible 
+
+reasoning. For a problem such as the Riemann Hypothesis (RH) (Tegetmeyer 2026 ; Connes 
+
+2026) , a useful AI system must distinguish among numerical evidence, computational 
+
+certificates, proof -assistant -checked lemmas, RH -equivalent criteria, and complete proofs. It 
+
+must also be able to state when a proof attempt remains unresolved. 
+
+This paper studies RH as a case study for the Verifiable Growing Physical Transformer with 
+
+Recursive Self -Improvement (VGPT -RSI) , a unified architecture that treats reasoning as 
+
+controlled, verifiable information flow through a coupled physical -symbolic state. VGPT -RSI 
+
+integrates physicalized transformer dynamics (Bhattacharjee and Lee 2025 ), Neural Differential 
+
+Manifold trajectories (Zhang 2025) , Generative Semantic Workspace memory (Rajesh et al. 
+
+2025) , causal episodic graphs (Shyalika et al. 2025) , co ntinual and nested learning (Darlow et al. 
+
+2025), signed recurrent connectome dynamics (Huo and Johnson, 2025; Chiang 2026 ) ,
+
+Hamilton –Jacobi –Bellman intervention planning (Tang et al. 2021 ; Guo et al. 2024 ) ,
+
+increasing proof/search graphs, executable harnesses, formal verification (Tu et al. 2025) ,
+
+function -preserving sparse growth (Chen et al. 2026) , recursive self -improvement (Zhuge et al. 
+
+2025) , and category -theoretic cross -domain recombination (Kim et al. 2026) . VGPT -RSI is 
+
+designed not as a one -shot answer generator, but as a structured reasoning system that maintains 
+
+a proof/search graph, invokes computational harnesses, records verification status, and extracts 
+
+reusable tactics from successful and failed proo f attempts. 5
+
+The goal of this work is not to prove RH. Instead, we ask a more modest and operational 
+
+question: can VGPT -RSI move an RH -adjacent investigation from numerical experimentation 
+
+toward formally checked partial results, while also identifying the precise rema ining 
+
+obstructions? 
+
+We report two complementary lines of work. 
+
+First, VGPT -RSI was applied to a finite RH -boundary relation. Define 
+
+𝑔 (𝑥 ) = 9.06    
+
+> log log 𝑥
+
+√ 𝑥  
+
+> log 𝑥
+
+and 
+
+𝐵 (𝑥 , 𝑇 ) = 𝑇  − 𝑔 (𝑥 ).
+
+The inequality 
+
+𝐵 (𝑥 , 𝑇 ) ≥ 0
+
+appears in finite RH verification consequences connecting a verified zero height  𝑇  to explicit 
+
+prime -counting ranges. Codex -generated numerical data first computed a boundary curve  𝑥 ∗(𝑇 ),
+
+and subsequent verification converted this curve into a certified safe lower curve 
+
+𝑥 ̂ (𝑇 ).
+
+This provides a formally checked RH -adjacent boundary lemma on a finite  𝑇 -range. 
+
+Second, VGPT -RSI shifted from the finite boundary relation to a genuinely RH -equivalent 
+
+framework: Lagarias’ criterion (MacArevey 2026) . Lagarias’ theorem states that RH is 
+
+equivalent to 
+
+𝜎 (𝑛 ) ≤ 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ) for all  𝑛 ≥ 1.
+
+This suggested a formal target 6
+
+𝐵 𝐿 (𝑛 ) = 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ) − 𝜎 (𝑛 ) ≥ 0.
+
+VGPT -RSI constructed finite formal certificates for this inequality and reached a clean Coq -
+
+checked milestone for 
+
+1 ≤ 𝑛 ≤ 10000 .
+
+These results are useful precisely because they do not overclaim. The finite boundary theorem 
+
+does not imply RH. The finite Lagarias certificate does not imply the global Lagarias criterion. 
+
+The remaining obstacle is not more numerical evaluation, but a gl obal mathematical theorem: 
+
+either a formal proof of Lagarias’ equivalence plus a tail theorem for all  𝑛 > 𝑁 , or another fully 
+
+global RH -equivalent certificate. 
+
+The contributions of this work are therefore: 
+
+1.  a certificate -backed RH -boundary curve over  𝑇 ∈ [10 11 , 10 13 ];
+
+2.  an Arb/FLINT -audited interval -kernel verification of the same boundary inequality; 
+
+3.  a Rocq/CoqInterval -checked parameterized RH -boundary theorem; 
+
+4.  a Coq -checked finite Lagarias certificate up to  𝑁 = 10000 ;
+
+5.  a precise failure analysis showing why the current pipeline does not prove RH; 
+
+6.  an explicit roadmap of the remaining proof obligations. 
+
+# 2. Methods 
+
+Methods consist of two complementary lines of work. 
+
+First, we use VGPT -RSI as a verifiable reasoning architecture to construct a finite, certificate -
+
+backed RH -adjacent boundary theorem. 
+
+The goal is not to prove the Riemann Hypothesis, but to certify a finite implication of the form 
+
+on a rigorously specified parameter range (Figure 2) .7
+
+Second, we use VGPT -RSI to initiate a formal proof route based on Lagarias’ criterion for the 
+
+Riemann Hypothesis. The purpose of this route is not to prove RH directly, but to transform an 
+
+RH -equivalent global statement into a sequence of finite, formally checkable certificate tasks. 
+
+This enables the system to produce rigorous finite progress while preserving a clear boundary 
+
+between verified partial results and a full proof of RH (Figure 3). 
+
+# 2.1 VGPT -RSI proof workflow 
+
+VGPT -RSI organizes mathematical reasoning as a growing proof/search graph . Nodes include 
+
+definitions, boundary functionals, numerical certificates, interval enclosures, formal lemmas, 
+
+failed proof obligations, and verified theorems. Edges encode implication, dependency, 
+
+verification, failure, or reduction. 
+
+For the RH case study, the proof/search graph had two main branches: 
+
+RH -boundary certificate branch (Figure 2) 
+
+and 
+
+Lagarias finite -certificate branch (Figure 3) .
+
+The first branch studies a finite boundary relation related to finite RH verification consequences. 
+
+The second branch moves to a known RH -equivalent criterion. 
+
+At each stage, VGPT -RSI assigns a verification status: 
+
+numerical, interval -certified, audited interval -kernel, proof -assistant checked, unresolved. 
+
+This status tracking is essential, because the mathematical value of each result depends on its 
+
+certificate level. The Generative Semantic Workspace stores the definitions, parameter range, 
+
+constants, and intended theorem. 
+
+# 2.2 RH -boundary functional 
+
+We define 8
+
+𝑔 (𝑥 ) = 9.06    
+
+> log log 𝑥
+
+√ 𝑥  
+
+> log 𝑥
+
+and 
+
+𝐵 (𝑥 , 𝑇 ) = 𝑇  − 𝑔 (𝑥 ).
+
+For fixed  𝑇 , the boundary equation is 
+
+𝑔 (𝑥 ) = 𝑇 .
+
+VGPT -RSI invokes an executable numerical harness to solve the boundary equation 
+
+A safe lower endpoint curve  𝑥 ̂ (𝑇 ) satisfies 
+
+𝐵 (𝑥 ̂ (𝑇 ), 𝑇 ) ≥ 0.
+
+Codex first generated a numerical boundary curve  𝑇 → 𝑥 ∗(𝑇 ) over 
+
+𝑇 ∈ [10 11 , 10 13 ].
+
+VGPT -RSI then constructs a certificate -backed lower approximation 
+
+𝑥 ̂ (𝑇 ) < 𝑥 ∗(𝑇 )
+
+The curve was then converted into a certificate -backed lower curve by fitting a degree -4
+
+polynomial in 
+
+𝑠 = log 10 𝑇 
+
+and subtracting a safety shift: 
+
+𝑥 ̂ (𝑇 ) = 10 𝑝 (log 10 𝑇 )−10 −6
+
+.
+
+The verification target became: 
+
+𝐵 (𝑥 ̂ (𝑇 ), 𝑇 ) ≥ 0 for all  𝑇 ∈ [10 11 , 10 13 ].
+
+# 2.3 Decimal interval and Arb/FLINT verification 
+
+For each sampled height , VGPT -RSI verifies that the numerical root is enclosed by a certified 
+
+interval. 9
+
+The boundary equation was solved in the variable 
+
+𝑦 = log 𝑥 .
+
+In this variable, 
+
+log 𝑔 (𝑒 𝑦 ) = log (9.06 ) + 𝑦 
+
+2 − log 𝑦 
+
+2 − log log 𝑦 .
+
+For each sampled height  𝑇 𝑖 ,
+
+a bisection procedure produced an interval 
+
+[𝑦 𝑖 
+
+> −
+
+, 𝑦 𝑖 
+
+> +
+
+]
+
+such that 
+
+𝐵 (𝑒 𝑦 𝑖 
+
+> −
+
+, 𝑇 𝑖 ) ≥ 0, 𝐵 (𝑒 𝑦 𝑖 
+
+> +
+
+, 𝑇 𝑖 ) ≤ 0.
+
+This confirms that the root lies inside the bracket 
+
+𝑒 𝑦 𝑖 
+
+> −
+
+≤ 𝑥 ∗(𝑇 𝑖 ) ≤ 𝑒 𝑦 𝑖 
+
+> +
+
+.
+
+VGPT -RSI records each bracket as a local certificate node in the proof/search graph. 
+
+Pointwise root brackets are not enough. The system must also verify that the boundary equation 
+
+has the expected monotone behavior. VGPT -RSI checks the monotonicity of 
+
+𝑔 (𝑥 ) = 9.06 
+
+log log 𝑥 √ 𝑥 
+
+log 𝑥 
+
+on the certified range. 
+
+Monotonicity was certified through the derivative condition 
+
+(log 𝑥 − 1) log log 𝑥 > 2,
+
+equivalently in the log variable through the corresponding positive monotonicity margin. 
+
+The important consequence is: 10 
+
+𝑥 ≤ 𝑔 (𝑥 ∗(𝑇 )) ⇒ 𝑔 (𝑥 ) ≤ 𝑇 ⇒ 𝐵 (𝑥 , 𝑇 ) ≥ 0.
+
+Therefore, if the constructed curve satisfies 
+
+𝑥 ̂ (𝑇 ) ≤ 𝑥 ∗(𝑇 ),
+
+Then 
+
+𝐵 (𝑥 ̂ (𝑇 ), 𝑇 ) ≥ 0.
+
+This upgrades the certificate from isolated numerical samples to a monotone boundary 
+
+certificate. 
+
+This ensures that each sign bracket encloses a unique root. 
+
+The continuous lower curve was then checked over 
+
+𝑠 = log 10 𝑇 ∈ [11 ,13 ].
+
+Define 
+
+𝑅 (𝑠 ) = log  𝑇  − log  (𝑔 (𝑥 ̂ (𝑇 ))) .
+
+If 
+
+𝑅 (𝑠 ) > 0
+
+then 
+
+𝑔 (𝑥 ̂ (𝑇 )) ≤ 𝑇 
+
+and hence 
+
+𝐵 (𝑥 ̂ (𝑇 ), 𝑇 ) ≥ 0.
+
+The interval verification subdivided [11 ,13 ] into 20,000 intervals . On each subinterval, VGPT -
+
+RSI uses outward -rounded interval arithmetic to prove a lower bound 
+
+𝑅 (𝑠 ) > 0,
+
+Thus the system verifies the continuous theorem 11 
+
+∀𝑠 ∈ [11 ,13 , 𝐵 (𝑥 ̂ (𝑠 ), 𝑇 (𝑠 ))] ≥ 0.
+
+To avoid relying on a single custom interval implementation, VGPT -RSI independently audits 
+
+the certificate using Arb/FLINT ball arithmetic. 
+
+The same mathematical objects are checked again: 
+
+𝐵 (𝑥 , 𝑇 ), 𝑔 (𝑥 ), 𝑥 ̂ (𝑠 ), 𝑇 (𝑠 ), 𝑅 (𝑠 ).
+
+Arb/FLINT verifies the root brackets, monotonicity conditions, and subdivision residuals using 
+
+rigorous real ball enclosures. 
+
+This provides an independent interval -kernel audit of the certificate. 
+
+The proof status becomes: 
+
+Arb /FLINT − audited certificate .
+
+# 2.4 Rocq/CoqInterval verification 
+
+The next stage , a fter the interval and Arb/FLINT audits, VGPT -RSI translates the statement 
+
+into Rocq/CoqInterval. The checked theorem was: 
+
+∀𝑠 ∈ ℝ, 11 ≤ 𝑠 ≤ 13 ⟹ 𝐵 (𝑥 ̂ (𝑠 ), 𝑇 (𝑠 )) ≥ 0
+
+Or, in words: 
+
+For every real number  𝑠 between  11 and  13 , the boundary function  𝐵 evaluated at the certified 
+
+lower curve  𝑥 ̂ (𝑠 )and the corresponding height  𝑇 (𝑠 )is nonnegative. 
+
+Using the definitions 
+
+𝑇 (𝑠 ) = exp ((ln 10 )𝑠 ) = 10 𝑠 ,
+
+𝑥 ̂ (𝑠 ) = 𝑥 hat (𝑠 ),
+
+and 12 
+
+𝐵 (𝑥 , 𝑇 ) = 𝑇 − 9.06 
+
+ln (ln 𝑥 ) √ 𝑥 
+
+ln 𝑥 ,
+
+the theorem becomes: 
+
+∀𝑠 ∈ [11 ,13 ], 10 𝑠 − 9.06 
+
+ln (ln 𝑥 ̂ (𝑠 )) √ 𝑥 ̂ (𝑠 )
+
+ln 𝑥 ̂ (𝑠 ) ≥ 0.
+
+Equivalently, 
+
+9.06 
+
+ln (ln 𝑥 ̂ (𝑠 )) √ 𝑥 ̂ (𝑠 )
+
+ln 𝑥 ̂ (𝑠 ) ≤ 10 𝑠 for all 𝑠 ∈ [11 ,13 ].
+
+VGPT -RSI then invokes the formal verification harness. 
+
+The CoqInterval proof used interval bisection, Taylor expansion, and degree -8 approximation at 
+
+precision 140. The resulting theorem was checked with coqc and then with rocqchk .
+
+This theorem is parameterized by 
+
+𝑠 = log 10 𝑇 .
+
+A direct theorem quantified over arbitrary  𝑇 ∈ [10 11 , 10 13 ] can be obtained by the wrapper 
+
+𝑠 (𝑇 ) = log 𝑇  
+
+> log 10
+
+,
+
+but the central proof -assistant theorem already establishes the parameterized boundary 
+
+inequality. 
+
+The result verifies that a constructed safe lower curve lies inside the certified finite boundary 
+
+region over the specified range. It does not establish RH globally, nor does it prove that all 
+
+nontrivial zeros of the zeta function lie on the critical line. 
+
+# 2.5 Lagarias route 
+
+We use VGPT -RSI to initiate a formal proof route based on Lagarias’ criterion for the Riemann 
+
+Hypothesis. 13 
+
+The finite RH -boundary certificate is not equivalent to RH. Therefore, VGPT -RSI shifted to a 
+
+recognized RH -equivalent criterion: Lagarias’ criterion. 
+
+Define: 
+
+𝜎 (𝑛 ) = ∑ 𝑑 ,
+
+> 𝑑 |𝑛
+
+𝐻 𝑛 = ∑ 1
+
+𝑛 ,
+
+> 𝑛
+> 𝑘 =1
+
+and 
+
+𝐵 𝐿 (𝑛 ) = 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ) − 𝜎 (𝑛 ).
+
+Lagarias’ criterion states that RH is equivalent to 
+
+𝐵 𝐿 (𝑛 ) ≥ 0 for all 𝑛 ≥ 1.
+
+VGPT -RSI first encodes Lagarias’ criterion as a structured proof/search graph. The graph 
+
+contains the main mathematical objects: 
+
+𝜎 (𝑛 ), 𝐻 𝑛 , 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ), 𝐵 𝐿 (𝑛 ).
+
+VGPT -RSI formalized the finite objects: 
+
+𝜎 (𝑛 ), 𝐻 𝑛 , 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ), 𝐵 𝐿 (𝑛 ),
+
+and generated finite proof obligations. 
+
+The first finite version checked the inequality for 
+
+1 ≤ 𝑛 ≤ 100 .
+
+This was then scaled to 
+
+1 ≤ 𝑛 ≤ 1000 .
+
+The final completed theorem was: 
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 1000 ⟹ 𝐵 𝐿 (𝑛 ) ≥ 0.14 
+
+Here 
+
+𝐵 𝐿 (𝑛 ) = 𝐻 𝑛 + exp (𝐻 𝑛 )log (𝐻 𝑛 ) − 𝜎 (𝑛 ),
+
+so the theorem can also be written as: 
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 1000 ⟹ 𝐻 𝑛 + exp (𝐻 𝑛 )log (𝐻 𝑛 ) − 𝜎 (𝑛 ) ≥ 0.
+
+Equivalently, 
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 1000 ⟹ 𝜎 (𝑛 ) ≤ 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ).
+
+In words: 
+
+For every natural number  𝑛  from  1 to  1000 , the Lagarias inequality holds. 
+
+The two Coq theorem names are just two versions of the same finite certificate: 
+
+lagarias_finite_N1000_kernel_checked 
+
+is the main checked theorem, and 
+
+lagarias_finite_certificate_N1000 
+
+is the wrapper theorem with the same mathematical content. 
+
+The finite theorem uses CoqInterval -generated proof terms and does not rely on the global 
+
+Lagarias equivalence axiom, the global tail theorem, or RH itself. 
+
+# 2.6 Scall to  𝑵 = 𝟏𝟎𝟎𝟎𝟎 
+
+VGPT -RSI then attempted to scale the finite Lagarias certificate to  𝑁 = 10000 .
+
+The first scaling bottleneck was harmonic -number expansion. VGPT -RSI therefore uses 
+
+reusable harmonic lower -bound lemmas :
+
+𝐻 𝑚 + 𝑝 
+
+𝑚 + 𝑝 ≤ 𝐻 𝑚 +𝑝 .
+
+This allows the system to avoid expanding large harmonic sums from scratch. Instead, it can 
+
+certify lower bounds on over blocks of values. The expression 15 
+
+𝐻 𝑛 + exp (𝐻 𝑛 )log (𝐻 𝑛 )
+
+is then bounded from below using interval methods and monotonicity. The system produces 
+
+interval certificates proving that, over each block, 
+
+𝐻 𝑛 + exp (𝐻 𝑛 )log (𝐻 𝑛 ) ≥ 𝐿 
+
+for a certified lower bound  𝐿 .
+
+The other side of Lagarias’ inequality is  𝜎 (𝑛 ). A naive divisor -sum computation is too expensive 
+
+at scale. VGPT -RSI therefore improves the sigma verification pipeline by using factorization -
+
+backed sigma certificates. The sum -of -divisors function satisfies the prime -power formula 
+
+𝜎 (𝑝 𝑘 ) = 1 + 𝑝 + 𝑝 2 + ⋯ + 𝑝 𝑘 = 𝑝 𝑘 +1 − 1
+
+𝑝 − 1 ,
+
+and multiplicativity over coprime factors: 
+
+gcd (𝑎 , 𝑏 ) = 1 ⇒ 𝜎 (𝑎𝑏 ) = 𝜎 (𝑎 )𝜎 (𝑏 ).
+
+Using these facts, VGPT -RSI verifies upper bounds 
+
+𝜎 (𝑛 ) ≤ 𝑀 ,
+
+for finite subranges. This avoids repeated brute -force divisor enumeration and makes larger finite 
+
+certificates tractable. 
+
+A previous monolithic  𝑁 = 10000  theorem into independently compiled chunks attempt timed 
+
+out. VGPT -RSI localized this as a proof -engineering bottleneck, not as a mathematical failure. 
+
+The system then refactored the certificate into ten independently compiled chunk files: 
+
+[1, 1000 ], [1001 , 2000 ], ⋯ , [90001 , 100000 ]
+
+Each chunk proves a theorem of the form 
+
+∀𝑛 ∈ 𝑁 , 𝑎 ≤ 𝑛 ≤ 𝑏 ,⇒ 𝐵 𝐿 (𝑛 ) ≥ 0.
+
+This chunked structure reduces proof -term size, compilation time, and duplicated computation. 16 
+
+VGPT -RSI compiles each chunk independently using coqc . Each successful chunk becomes a 
+
+verified local certificate. The compiled chunks are then treated as trusted inputs for the final 
+
+assembly theorem. This produces a modular proof architecture: 
+
+chunk certificates ⟹ assembled finite theorem. 
+
+The successful compilation of all ten chunks establishes that each part of the range 
+
+1 ≤ 𝑛 ≤ 10000 ,
+
+has been formally verified. 
+
+After the chunk files are compiled, VGPT -RSI creates a final wrapper theorem: 
+
+∀𝑛 ∈ 𝑁 , 1 ≤ 𝑛 ≤ 10000 ,⇒ 𝐵 𝐿 (𝑛 ) ≥ 0.
+
+In Coq, this theorem is named: 
+
+lagarias _finite _certificate _N10000 .
+
+The wrapper theorem delegates to the compiled chunk theorems and performs a finite interval 
+
+dispatch over the ten subranges. The underlying checked theorem is: 
+
+lagarias _finite _N10000 _kernel _checked .
+
+Both express the same ordinary mathematical statement: 
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 10000 ⟹ 𝐵 𝐿 (𝑛 ) ≥ 0.
+
+Equivalently, 
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 10000 ⟹ 𝜎 (𝑛 ) ≤ 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 )
+
+VGPT -RSI then runs proof -checking commands on the assembled theorem. The final 
+
+assembly file compiles successfully with  coqc .
+
+The nonrecursive checker 
+
+coqchk − norec 
+
+also succeeds for the final certificate. 17 
+
+A full recursive checker may be attempted, but because it checks a large dependency stack, 
+
+timeout does not necessarily indicate proof failure. The important point is that no proof rejection 
+
+is observed. VGPT -RSI also runs an assumption audit. The audit ch ecks whether the finite 
+
+theorem depends on any forbidden global assumptions: 
+
+lagarias _equivalence ,
+
+lagarias _tail _after _N,
+
+or 
+
+RH .
+
+The desired result is that none of these appear in the dependency list. Thus the finite certificate is 
+
+independent of the global Lagarias equivalence, independent of any assumed tail theorem, and 
+
+independent of RH itself. 
+
+The completed finite certificate proves: 
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 10000 ⟹ 𝐵 𝐿 (𝑛 ) ≥ 0.
+
+This is a formally checked finite Lagarias certificate. 
+
+However, it does not prove RH. 
+
+The reason is that Lagarias’ criterion requires the inequality for all positive integers: 
+
+∀𝑛 ≥ 1, 𝐵 𝐿 (𝑛 ) ≥ 0.
+
+The certificate only proves the finite portion 
+
+1 ≤ 𝑛 ≤ 10000 .
+
+The remaining unresolved global statement is 
+
+∀𝑛 > 10000 , 𝐵 𝐿 (𝑛 ) ≥ 0.
+
+Therefore, the remaining mathematical bottlenecks are: 
+
+formalizing the global Lagarias equivalence ,18 
+
+proving the global tail theorem beyond 𝑁 = 10000 ,
+
+and possibly reducing counterexamples to colossally abundant or related extremal integers. 
+
+formalizing the global Lagarias equivalence, proving the global tail theorem beyond N = 10000, 
+
+and possibly reducing counterexamples to colossally abundant or related extremal integers. 
+
+# 3. Results 
+
+# 3.1 Certified RH -boundary curve 
+
+The RH -boundary curve experiment produced a certificate -backed lower curve over 
+
+𝑇 ∈ [10 11 , 10 13 ].
+
+All 401 sampled roots were enclosed by interval sign checks. The monotonicity condition for  𝑔 
+
+was verified on the certified range. The fitted lower approximation 
+
+𝑥 ̂ (𝑇 ) = 10 𝑝 (log 10 𝑇 )−10 −6
+
+was then verified by interval subdivision. 
+
+The continuous verification used 20,000 subdivisions over 
+
+𝑠 = log 10 𝑇 ∈ [11 ,13 ].
+
+The minimum certified logarithmic residual was approximately 
+
+1.015636 × 10 −6.
+
+Thus the computational certificate verifies: 
+
+𝐵 (𝑥 ̂ (𝑇 ), 𝑇 ) ≥ 0 for all 𝑇 ∈ [10 11 , 10 13 ].
+
+This result should be interpreted as a certified finite boundary lemma, not as a proof of RH. 
+
+# 3.2 Arb/FLINT audited interval -kernel certificate 
+
+The same RH -boundary predicates, constants, root brackets, and subdivision certificate were 
+
+ported to Arb/FLINT ball arithmetic via python -flint .19 
+
+The Arb/FLINT audit checked: 
+
+[ 401/401 ] root brackets and [ 20000/20000 ] continuous subdivisions. 
+
+The minimum Arb lower bound for the continuous residual was approximately 
+
+1.015636 × 10 −6.
+
+The Arb/FLINT kernel therefore independently verified: 
+
+𝐵 (𝑥 ̂ (𝑇 ), 𝑇 ) ≥ 0
+
+on the full interval 
+
+𝑇 ∈ [10 11 , 10 13 ].
+
+This moved the certificate from an internal decimal interval computation to an independently 
+
+audited ball -arithmetic kernel. 
+
+# 3.3 Rocq/CoqInterval theorem 
+
+The boundary inequality was then formalized in Rocq/CoqInterval. The checked theorem was: 
+
+∀𝑠 ∈ [11 ,13 ], 𝐵 (𝑥 ℎ𝑎𝑡 (𝑠 ), 𝑇 (𝑠 )) ≥ 0.
+
+The file RHBoundary_CoqInterval_direct_B.v was checked by coqc and then by rocqchk , with  
+
+> rocqchk
+
+reporting that the modules were successfully checked. 
+
+This establishes a proof -assistant -checked interval theorem for the parameterized RH -boundary 
+
+curve. 
+
+# 3.4 Finite Lagarias certificate for  𝑵 = 𝟏𝟎𝟎 
+
+The first Lagarias finite milestone proved: 
+
+∀𝑛 , 1 ≤ 𝑛 ≤ 100 ⇒ 𝐵 𝐿 (𝑛 ) ≥ 0.20 
+
+The original exact -rational certificate was too slow as a single giant proof, so Codex replaced it 
+
+with a grouped proof. The range was split into groups, each group used a CoqInterval inequality 
+
+of the form: 
+
+0 ≤ 𝑥 + exp (𝑥 ) log (𝑥 ) − 𝑀 ,
+
+and concrete values of  𝑛  were discharged by exact computation of  𝜎 (𝑛 ), elementary harmonic 
+
+bounds, and the matching interval lemma. 
+
+This theorem compiled with Coq and avoided the unproved assumptions  
+
+> lagarias_equivalence
+
+and lagarias_tail_after_N .
+
+# 3.5 Finite Lagarias certificate for  𝒏 = 𝟏𝟎𝟎𝟎 
+
+The strongest completed finite Lagarias theorem was: 
+
+∀𝑛 , 1 ≤ 𝑛 ≤ 1000 ⇒ 𝐵 𝐿 (𝑛 ) ≥ 0.
+
+The Coq theorem was 
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 1000 ⟹ 𝐵 𝐿 (𝑛 ) ≥ 0,
+
+where 
+
+𝐵 𝐿 (𝑛 ) = 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ) − 𝜎 (𝑛 ).
+
+This becomes: 
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 1000 ⟹ 𝐻 𝑛 + exp (𝐻 𝑛 )log (𝐻 𝑛 ) − 𝜎 (𝑛 ) ≥ 0.
+
+Equivalently: 
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 1000 ⟹ 𝜎 (𝑛 ) ≤ 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ).
+
+In words: 
+
+For every natural number  𝑛 from  1 to  1000 , the Lagarias inequality holds. 
+
+A wrapper theorem was also produced: 21 
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 1000 ⟹ 𝐵 𝐿 (𝑛 ) ≥ 0,
+
+𝐵 𝐿 (𝑛 ) = 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ) − 𝜎 (𝑛 ),
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 1000 ⟹ 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ) − 𝜎 (𝑛 ) ≥ 0.
+
+In words: 
+
+For every natural number  𝑛 from  1 to  1000 , the Lagarias inequality holds. 
+
+Both files compiled under Coq 8.20.1. 
+
+Assumption audits showed that the finite theorem did not us 
+
+lagarias_equivalence: [∀𝑛 ≥ 1, 𝜎 (𝑛 ) ≤ 𝐻 𝑛 + exp (𝐻 𝑛 )log (𝐻 𝑛 )] ⟺ RH .
+
+lagarias_tail_after_N: ∀𝑛 > 𝑁 , 𝜎 (𝑛 ) ≤ 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ) .
+
+RH: 𝜁 (𝑠 ) = 0, 0 < ℜ(𝑠 ) < 1 ⟹ ℜ(𝑠 ) = 1
+
+2 .
+
+So the finite theorem proves only: 
+
+1 ≤ 𝑛 ≤ 1000 .
+
+The missing global pieces would be: 
+
+∀𝑛 > 1000 
+
+and the equivalence between the full Lagarias inequality and RH. 
+
+The printed assumptions were from the Coq/Interval/primitive numeric library stack. Thus the 
+
+𝑁 = 1000  theorem is a genuine finite formal milestone, separate from the unproved global RH -
+
+level assumptions. 
+
+3.6 Completed  𝑵 = 𝟏𝟎𝟎𝟎𝟎  finite Lagarias extension 
+
+The  𝑁 = 10000  finite Lagarias extension was completed after refactoring the previous 
+
+monolithic proof into a chunked certificate architecture. In the earlier attempt, the full file 
+
+PathB_LagariasFiniteGrouped_N10000.v timed out after 1800 seconds and produced no 22 
+
+compiled .vo file. The main obstacle was not a mathematical counterexample, but proof -
+
+engineering scale: the generated proof was too large to compile efficiently as a single object. 
+
+The completed version resolves this by splitting the finite range 
+
+1 ≤ 𝑛 ≤ 10000 
+
+into ten independently compiled chunks: 
+
+[1,1000 ], [1001 , 2000 ], … , [9001 , 10000 ].
+
+Each chunk proves the Lagarias inequality on its own subrange, and the final wrapper theorem 
+
+assembles these local results by interval dispatch. The shared harmonic and interval lemmas 
+
+were moved into a common file, PathB_LagariasFinite_N10000_Shared.v , while sigma 
+
+verification was supported by the factorization -backed helper file PathB_LagariasSigmaFactor.v .
+
+Boundary sigma certificates were clipped to chunk -local subranges to avoid duplicated range 
+
+evaluation. 
+
+The strongest completed theorem is the wrapper certificate 
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 10000 ⟹ 𝐵 𝐿 (𝑛 ) ≥ 0,
+
+where 
+
+𝐵 𝐿 (𝑛 ) = 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ) − 𝜎 (𝑛 ),
+
+Equivalently, 
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 10000 ⟹ 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ) − 𝜎 (𝑛 ) ≥ 0.
+
+Both Coq statements have the same ordinary mathematical meaning: 
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 10000 ⟹ 𝐵 𝐿 (𝑛 ) ≥ 0.
+
+Using the Lagarias definition, 
+
+𝐵 𝐿 (𝑛 ) = 𝐻 𝑛 + exp (𝐻 𝑛 )log (𝐻 𝑛 ) − 𝜎 (𝑛 ),
+
+this becomes: 23 
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 10000 ⟹ 𝐻 𝑛 + exp (𝐻 𝑛 )log (𝐻 𝑛 ) − 𝜎 (𝑛 ) ≥ 0.
+
+Equivalently, 
+
+∀𝑛 ∈ ℕ, 1 ≤ 𝑛 ≤ 10000 ⟹ 𝜎 (𝑛 ) ≤ 𝐻 𝑛 + exp (𝐻 𝑛 ) log (𝐻 𝑛 ).
+
+In words: 
+
+For every natural number  𝑛 from  1to  10000 , the finite Lagarias inequality holds. 
+
+The two theorem names mean: 
+
+lagarias_finite_certificate_N10000 
+
+is the wrapper theorem, and 
+
+lagarias_finite_N10000_kernel_checked 
+
+is the underlying checked theorem. Mathematically, they express the same finite statement. 
+
+A full recursive coqchk was attempted but timed out after 1800 seconds while checking recursive 
+
+library dependencies; no proof -rejection diagnostic was observed. 
+
+Thus, the  𝑁 = 10000  theorem is a finite Lagarias certificate and does not rely on the global 
+
+Lagarias equivalence, any assumed tail theorem, or RH itself. The remaining assumptions come 
+
+from the imported Coq, Interval, primitive numeric, classical real, and functional extensionality 
+
+libraries. 
+
+This result strengthens the previous  𝑁 = 1000 milestone to a formally checked finite certificate 
+
+over therange 
+
+1 ≤ 𝑛 ≤ 10000 .
+
+However, it still does not prove RH. The theorem verifies the Lagarias inequality only on a finite 
+
+interval. To obtain RH through this route, one would still need a formal proof of the global 
+
+Lagarias equivalence and a global tail theorem proving 
+
+𝐵 𝐿 (𝑛 ) ≥ 0 for all 𝑛 > 10000 .24 
+
+# 3.7 Remaining bottlenecks 
+
+The final stop report identifies three remaining bottlenecks. 
+
+First, the formal Lagarias equivalence theorem remains unproved in the local development: 
+
+lagarias _global ↔ 𝑅𝐻 .
+
+Second, the global tail theorem remains open: 
+
+∀𝑛 > 𝑁 , 𝐵 𝐿 (𝑛 ) ≥ 0.
+
+Third, a possible path to the tail theorem may require reducing counterexamples to colossally 
+
+abundant or related extremal integers. This is a mathematical reduction problem, not a routine 
+
+finite -computation problem. 
+
+# 4. Conclusion 
+
+This work does not prove RH. Its contribution is to demonstrate a verified AI -assisted workflow 
+
+for RH -adjacent formal progress. 
+
+VGPT -RSI successfully moved a numerical RH -boundary curve through multiple levels of 
+
+certification: high -precision interval enclosures, outward -rounded interval verification, 
+
+Arb/FLINT ball arithmetic, and Rocq/CoqInterval theorem checking. It also produce d a Coq -
+
+checked finite Lagarias certificate proving 
+
+𝐵 𝐿 (𝑛 ) ≥ 0
+
+for 
+
+1 ≤ 𝑛 ≤ 10000 .
+
+At the same time, the system correctly identified the remaining global mathematical obstruction. 
+
+Finite checking, even when formally verified, does not prove RH. To complete the Lagarias 
+
+route, one would need a formal proof of the Lagarias equivalence and a global tail theorem for 
+
+all  𝑛 > 𝑁 . These are research -scale mathematical tasks. 25 
+
+The final result is therefore a verified RH -adjacent formal -progress case study. It demonstrates 
+
+that VGPT -RSI can produce certified partial results, organize proof dependencies, identify exact 
+
+failure points, and stop without overclaiming when the remaini ng obstruction is genuinely 
+
+unresolved. 
+
+VGPT -RSI is advantageous because it does not treat a numerical RH -adjacent observation as a 
+
+proof. Instead, it converts the observation through a sequence of increasingly rigorous 
+
+verification layers: 
+
+numerical observation → safe certified curve → interval certificate 
+
+→ independent Arb/FLINT audit → Rocq/CoqInterval theorem 
+
+→ explicit limitation statement .
+
+This makes the system useful for open -problem research, where the distinction between 
+
+evidence , finite certificate , formal theorem , and full proof is essential. 
+
+VGPT -RSI has three main advantages over baseline approaches. First, it converts numerical RH -
+
+adjacent evidence into machine -checkable finite certificates. Second, it maintains an explicit 
+
+boundary between certified partial progress and a full proof of RH. Third, it localizes the 
+
+remaining mathematical bottlenecks rather than hiding them behind informal proof sketches. In 
+
+this sense, VGPT -RSI is not merely a theorem -proving assistant or numerical search engine; it is 
+
+a controlled verification architecture fo r transforming conjectural evidence into formally audited, 
+
+scope -limited mathematical results. 
+
+# Acknowledgements 
+
+The authors wish to acknowledge the use of AI -powered language models (ChatGPT) for 
+
+assistance in creating images, improving the grammar, spelling, and readability of this 
+
+manuscript. 26 
+
+# Author contributions 
+
+TX and ZH: Derive formulas and perform data analysis, XS: Problem formulation formula 
+
+derivation, LJ, Design project, MX: Design project and write paper. 
+
+# Competing interests 
+
+The authors declare no competing interests. 27 
+
+# References 
+
+Ágoston, P. and Pálvölgyi , D. (2020). An improved constant factor for the unit distance 
+
+problem. arXiv:2006.06285. 
+
+Alexeev, B., Barreto, K., Li, Y., Lichtman, J. D., Price, L., Shah, J. I., Tang, Q and Tao, T. 
+
+(2026). Primitive sets and von Mangoldt chains: Erdős Problem #1196 and beyond. 
+
+arXiv:2605.00301. 
+
+Bhattacharjee, S. and Lee, S. -C. (2026). Testing the spin -bath view of self -attention: A 
+
+Hamiltonian analysis of GPT -2 transformer. Phys. Rev. E 113, 015308. 
+
+Chen, J., Gou, Y., Liu, C., Wang, Z. and Peng, X. (2026). Learning subspace -preserving sparse 
+
+attention graphs from heterogeneous multiview data. arXiv:2605.11881. 
+
+Chen, L., Liu, Z., He, W and Dong, B. (2026). Iteris: Agentic research loops for computational 
+
+mathematics . arXiv:2606.02484 .
+
+Chiang, P. -H. (2026). Parallelized hierarchical connectome: A spatiotemporal recurrent 
+
+framework for spiking state -space models. arXiv:2604.01295. 
+
+Connes , A. (2026). The Riemann Hypothesis: Past, present and a letter through time .
+
+arXiv:2602.04022 .
+
+Darlow, L., Regan, C., Risi, S., Seely, J., and Jones, L. (2025). Continuous thought machines. 
+
+arXiv:2505.05522. 
+
+Guo, Y., Shu, X. B., Xu, F., and Yang, C. (2024). HJB equation for optimal control system with 
+
+random impulses. Optimization, 73(4), 1303 -1327. 
+
+Huo, F. Y. and Johnson, N. F. (2025). Capturing AI attention: Physics of repetition, 
+
+hallucination, bias and beyond. arXiv:2504.04600. 
+
+Kim, J., You, J., Park, Y. et al. (2026). Optimizing cross -domain transfer for universal machine 
+
+learning interatomic potentials. Nat Commun 17, 3432. 
+
+MacArevey, A. (2026). On the Lagarias inequality and superabundant numbers. 
+
+arXiv:2602.15905. 
+
+Rajesh, S., Holur, P., Duan, C., Chong, D. and Vwani Roychowdhur, V. (2025). Beyond fact 
+
+retrieval: Episodic memory for RAG with generative semantic workspaces. arXiv:2511.07587. 
+
+Shyalika, C., Sharma, A., Kalach, E. E., Jaimini, U. Henson, C., Harik, R. and Sheth, A. 
+
+(2025). CausalTrace: A neurosymbolic causal analysis agent for smart manufacturing. 
+
+arXiv:2510.12033. 
+
+Sosso, A., Arora, A. and Spitters , B. (2026). Agentic proving for program verification .
+
+arXiv:2605.23772 .28 
+
+Tang, W., Zhang, P. Y. and Zhou, X. Y. (2021). Exploratory HJB equations and their 
+
+convergence. arXiv:2109.10269. 
+
+Tegetmeyer , B. (2026). Proof of the Riemann Hypothesis . arXiv:2201.06601 .
+
+Tu, H., Zhao, H., Song, Y., Zafar, M., Meng, R. and Roychoudhury, A. (2025). Agentic 
+
+verification of software systems. arXiv:2511.17330. 
+
+Zhang, D. (2025). The neural differential manifold. arXiv:2510.25113. 
+
+Zhuge, M., Zeng, A., Zhu, D., Zhu, D., Yang, S., Chandra, V. and Schmidhuber, J. (2025).  AI 
+
+with recursive self -improvement. ICLR 2026 Workshop Proposals. 
+
+https://openreview.net/forum?id=OsPQ6zTQXV#discussion .29 
+
+Figure 1. Information flow in VGPT -RSI for RH -Adjacent formal progress”. 30 
+
+Figure 2. From numerical evidence to certified partial progress (not a proof of RH). 31 
+
+Figure 3. VGPT -RSI for a formal lagarias -route certificate.
