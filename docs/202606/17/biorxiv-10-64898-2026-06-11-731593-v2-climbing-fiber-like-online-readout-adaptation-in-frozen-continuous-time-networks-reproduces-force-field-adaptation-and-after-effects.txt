@@ -1,0 +1,188 @@
+Title: Climbing-fiber-like online readout adaptation in frozen continuous-time networks reproduces force-field adaptation and after-effects
+
+URL Source: https://www.biorxiv.org/content/10.64898/2026.06.11.731593v2.full.pdf
+
+Number of Pages: 6
+
+Markdown Content:
+> IEEE ROBOTICS AND AUTOMATION LETTERS. 1
+
+# When Identifiability Is Not Enough: Terminal Controllability in Task-Compatible Active Calibration 
+
+Anonymous Authors 
+
+Abstract —Robots that operate with uncertain body, tool, or contact parameters must often refine their body models without abandoning the task at hand. This paper shows that active calibration is not solved by identifiability alone: an exploratory trajectory can yield accurate parameters while placing the robot in a state from which the downstream task is hard to complete. We study this failure mode in a minimal redundant planar manipulator with unknown link lengths and a two-phase calibration-to-task protocol. We formulate finite-step task-compatible probing as a higher-order generalization of first-order null-space information-gradient control, allowing the robot to escape first-order task-compatible degeneracy while limiting task drift. Across 50 seeds, finite-step probing eliminates calibration failures but still leaves substantial downstream task failure with-out terminal controllability management. These failures are not explained by parameter error (AUC = 0.511) or static singularity measures (AUC = 0.490), but short-horizon terminal rollout risk achieves perfect separation (AUC = 1.000), including with oracle parameters. Phase-2 experiments show that longer execution and null-space posture regularization together eliminate the remaining task failures; follow-up checks show that the failure appears in degenerate and near-degenerate starts, while non-degenerate starts succeed with the plain controller. The results support a three-layer view of active calibration: identifiability creation, task-compatible exploration, and post-calibration finite-horizon controllability. 
+
+Index Terms —Active calibration, redundant manipulators, in-formation gain, null-space control, robot learning. 
+
+I. I NTRODUCTION 
+
+Robots operating outside fixed calibration setups face changing tools, payloads, contacts, and body parameters [1], [2]. A mounted tool can have an offset, a grasped object can shift, and contact conditions can change while the task is still active. In such settings, offline calibration is insufficient: the robot must refine its body model through action while preserv-ing the ongoing task. This work is motivated by developmental motor learning, where an agent learns its own body through action before its body model is reliable [3], but we study the problem as active calibration for redundant robots under task constraints. Active calibration and optimal experiment design are com-monly evaluated by uncertainty reduction or estimation ac-curacy [4]. That view is incomplete for robots that must act immediately after calibration. Exploratory motion can improve the body estimate while leaving the robot in a poor state for the downstream task. A task-compatible action must therefore do three things: create identifiability, preserve the task during exploration, and maintain finite-horizon controllability after calibration (Fig. 1). We isolate this failure mode in a deliberately minimal redundant manipulator. A 4-DOF planar arm must calibrate four unknown link lengths while holding a 2D end-effector position, then use the calibrated model to reach the task goal. The main initial configuration is fully extended and first-order degenerate for task-compatible information seeking: task-only control does not excite the body parameters, and action-space information-gain optimization fails. We compare task-only control, first-order null-space information gradients, finite-step task-compatible probing, and Phase-2 posture regularization over 50 random seeds. The purpose of this setting is not to model a complete robot application, but to separate param-eter identifiability from downstream task executability under controlled conditions. Our results show that finite-step probing restores identi-fiability but does not by itself solve the task. It achieves accurate parameter estimates with zero calibration failures, yet the plain downstream controller still fails in 44% of seeds. Rollout diagnostics show that these failures are not explained by parameter RMSE or static singularity measures; short-horizon terminal rollout risk separates successful and failed seeds, even when the rollout uses oracle parameters. A longer Phase-2 horizon is necessary, and fixed null-space posture regularization eliminates the remaining task failures for the degenerate start. This paper makes three contributions. First, we formulate finite-step task-compatible probing as a higher-order general-ization of first-order null-space information-gradient control. Second, we demonstrate that accurate calibration is insufficient for downstream task success in a redundant arm. Third, we diagnose the missing factor as terminal finite-horizon controllability in degenerate and near-degenerate starts and show through controlled experiments that it must be handled separately from identifiability. II. R ELATED WORK 
+
+A. Robot Calibration and Experiment Design 
+
+Robot calibration has a long history in kinematic model identification, including taxonomies of measurement, param-eterization, and observability issues [1]. Many calibration pipelines separate data collection from task execution: the robot visits informative configurations, estimates parameters, and then uses the calibrated model for control. Classical experiment design for manipulators selects measurement con-figurations or excitation trajectories that maximize an observ-ability or Fisher-information criterion [5]–[8]. Self-contained 
+
+.CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 16, 2026. ;https://doi.org/10.64898/2026.06.11.731593 doi: bioRxiv preprint 2 IEEE ROBOTICS AND AUTOMATION LETTERS. 
+
+calibration methods reduce external instrumentation by ex-ploiting self-observation, contact, or multiple kinematic chains [9]. Active calibration and optimal experiment design in-stead select measurements to reduce posterior uncertainty, commonly through Fisher-information, log-determinant, or Bayesian active-learning criteria [4], [10]. Our work uses the same information-seeking foundation but asks a different question: whether an information-seeking trajectory that gives accurate parameters also leaves the robot in a state from which the downstream task can be completed within the available horizon. 
+
+B. Redundancy and Task-Compatible Motion 
+
+Redundant manipulators can use null-space motion to satisfy secondary objectives while preserving a primary operational-space task to first order [11], [12]. Task-priority and stack-of-tasks formulations extend this to multiple priori-tized objectives with singularity-robust and constraint-aware redundancy resolution [13]–[16]. This structure is directly attractive for calibration because it suggests that epistemic motion can be placed in the null space of the task Jacobian. However, first-order null-space methods inherit a local limita-tion: when the projected information gradient vanishes, they do not identify whether informative motion is truly absent or only unavailable at first order. Our finite-step probing formulation addresses this limitation by treating null-space information gradients as the local approximation of a constrained finite-displacement information problem. 
+
+C. Epistemic Action and Developmental Motivation 
+
+The work is also related to epistemic action, intrinsic motivation, and active-inference accounts of action as a trade-off between task-directed and information-seeking behavior [3], [17]. We use this perspective only as motivation and structure: the implemented objective is a Fisher-information proxy plus task and control regularization, not full expected free-energy minimization. This distinction matters because the empirical contribution is not a claim about a complete active-inference controller. Rather, it is a robotics result about where an epistemic calibration controller can fail: low parameter error does not guarantee finite-horizon task executability. III. P ROBLEM AND METHOD 
+
+A. Two-Phase Active Calibration 
+
+Let q ∈ Rn be the robot configuration, θ ∈ Rp the unknown body parameters, and y = f (q, θ) ∈ Rm a task-space observation, where f is the forward-kinematics map. The current belief is b = ( ˆθ, Pθ ), where ˆθ is the current point estimate of θ and Pθ is a posterior precision (inverse-covariance) approximation. The robot executes two phases: Phase 1: calibrate θ while preserving a task manifold , (1) Phase 2: execute a downstream task using ˆθ. (2) We use terminal controllability in an operational finite-horizon sense, not in the classical Kalman-controllability sense or as a full MPC terminal-set guarantee [18]. The notion is closest to finite-horizon feasibility and the terminal-ingredient and horizon-length conditions studied in predictive control [19]–[21]: whether a controller can reach the goal set within the available horizon from a given state. Given the phase-transition state qc, frozen estimate ˆθc, Phase-2 controller πtask ,horizon H, and task tolerance ϵtask , terminal controllability means finite-horizon task executability: 
+
+qt+1 = Φ( qt, π task (qt, ˆθc)) , t = 0 , . . . , H − 1, (3) 
+
+∥f (qH , θeval ) − ytask ∥ ≤ ϵtask , (4) where Φ is the one-step transition map, qt is the configuration at Phase-2 step t (so qH is the single configuration reached at the final step, not a stacked trajectory), and ytask is a fixed target end-effector position rather than a reference trajectory. The rollout risk used in Sec. V-C is the terminal residual in (4); it is a diagnostic proxy for whether the current transition state is executable within a specified Phase-2 horizon. Estimated rollouts use the evaluation parameters θeval = θtrue for the residual but the frozen estimate ˆθc for control, while oracle rollouts replace ˆθc by θtrue in the controller as well. The calibration objective uses a Fisher-information proxy, as in optimal experiment design [4], 
+
+F (q, ˆθ) = Jθ (q, ˆθ)⊤R−1Jθ (q, ˆθ), (5) where Jθ = ∂f /∂ θ ∈ Rm×p is the parameter Jacobian and R
+
+is the observation-noise covariance. We use a log-determinant information measure, a standard Gaussian information proxy [22], 
+
+I(q; b) = log det( Pθ + F (q, ˆθ)) . (6) This is an epistemic-value proxy, not a full expected-free-energy implementation. 
+
+B. First-Order Null-Space Information Gradient 
+
+For a task Jacobian J(q, ˆθ) = ∂f /∂ q ∈ Rm×n, define the null-space projector 
+
+N (q, ˆθ) = I − J(q, ˆθ)†J(q, ˆθ). (7) A first-order null-space information-gradient controller is 
+
+u = utask + αN (q, ˆθ)∇q I(q; b), (8) where utask is the task-holding action and α is an information-seeking gain. This exploits redundancy while preserving the estimated task output to first order, following the same operational-space and null-space structure used in redundant manipulation [11], [12]. However, at first-order task-compatible degenerate configu-rations, 
+
+N (q, ˆθ)∇q I(q; b) = 0, (9) so the first-order controller has no task-compatible informative direction even when finite motion would reveal information.   
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 16, 2026. ;https://doi.org/10.64898/2026.06.11.731593 doi: bioRxiv preprint ANONYMOUS: WHEN IDENTIFIABILITY IS NOT ENOUGH 3
+> Fig. 1. Three-layer view of task-compatible active calibration. Active calibration must create parameter identifiability, keep exploration compatible with the ongoing task, and leave the robot in a terminal state from which the downstream task is executable within the available horizon. The lower sequence illustrates the constructed stress test: a degenerate Phase-1 hold, finite-step probing, and two possible Phase-2 outcomes with similar calibration quality but different terminal controllability.
+
+C. Finite-Step Task-Compatible Probing 
+
+We formulate finite-step probing as the parent problem: 
+
+d⋆ ∈ arg max  
+
+> d
+
+I(q + ϵd; b) (10) s.t. ∥d∥ ≤ 1,
+
+∥f (q + ϵd, ˆθ) − f (q, ˆθ)∥ ≤ δy .
+
+The implementation uses candidate search over bounded joint-space directions. Each raw candidate is projected through the estimated null-space projector, normalized, and scored by 
+
+S(d) = I(q + ϵd; b) − I(q; b) − λtask ∥J(q, ˆθ)d∥. (11) This is a soft implementation of (10): the finite-step score estimates information gain, while the task penalty discourages residual first-order task drift caused by damping and finite nu-merical tolerance. In all reported runs, the candidate direction set for d contains 10 hand-coded sign-pattern directions that bend paired joints in opposite directions, plus 64 Gaussian-sampled unit directions generated with a fixed random seed for reproducibility. We use ϵ = ∆ t u probe with ∆t = 0 .05 ,
+
+uprobe = 0 .2, λtask = 10 −3, and a damping of 10 −3 in the pseudoinverse. These values are chosen relative to the problem scale rather than tuned: joint actions are clipped to a maximum rate umax = 1 , so the probe rate uprobe = 0 .2 is 
+
+20% of the maximum and produces a finite probe displacement 
+
+ϵ = 0 .01 rad. The task-drift weight λtask = 10 −3 is two to three orders of magnitude below typical information-gain differences, so it only suppresses the residual first-order drift left by the damped null-space projection rather than competing with exploration; the pseudoinverse damping (10 −3) is astandard singularity regularizer. Equation (10) reduces to (8) in the strict local limit. The task constraint expands as 
+
+f (q + ϵd, ˆθ) − f (q, ˆθ) = ϵJ(q, ˆθ)d + O(ϵ2), (12) so the local equality constraint is J(q, ˆθ)d = 0. The informa-tion objective expands as 
+
+I(q + ϵd; b) = I(q; b) + ϵ∇q I(q; b)⊤d
+
++ 12 ϵ2d⊤HI (q; b)d + O(ϵ3), (13) where HI is the Hessian of I with respect to q. Maximizing the first-order term under the local null-space constraint gives 
+
+d ∝ N (q, ˆθ)∇q I(q; b). Finite-step probing can still be infor-mative when this first-order term vanishes but the constrained second-order structure is nonzero. The executed epistemic direction blends the first-order and finite-step directions: 
+
+dsoft = norm ( αN dIG + (1 − αN )dprobe ) ,αN = ∥N ∇q I(q; b)∥∥∇ q I(q; b)∥ + η . (14) Here norm( x) = x/∥x∥ for nonzero x, dIG is the normal-ized first-order null-space information-gradient (IG) direction, 
+
+dprobe is the best finite-step candidate, and η is a small stabilizer. Thus finite-step probing dominates when the local information gradient is absent or task-disruptive, and ordinary null-space IG dominates when the local gradient is already task-compatible. We use η = 10 −12 as a numerical stabilizer that only prevents division by zero and does not affect the qualitative behavior. 
+
+D. Phase-2 Terminal Regularization 
+
+After calibration, the plain Phase-2 controller uses 
+
+u = J(q, ˆθ)†vtask , (15) where vtask is a task-space velocity toward the task goal. The posture-regularized controller adds a fixed null-space term: 
+
+u = J(q, ˆθ)†vtask + N (q, ˆθ)( −k(q − qref )) . (16)  
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 16, 2026. ;https://doi.org/10.64898/2026.06.11.731593 doi: bioRxiv preprint 4IEEE ROBOTICS AND AUTOMATION LETTERS.
+
+This term is not a Phase-1 identifiability mechanism. It is a Phase-2 terminal-controllability regularizer that can change the finite-horizon joint trajectory while preserving the esti-mated task velocity to first order. The main experiments use 
+
+qref = [0 , 0, 0, 0] ⊤, which should be read as a simple joint-norm regularizer in the estimated null space, not as a claim that the zero posture is globally optimal. IV. E XPERIMENTAL SETUP 
+
+We use a planar 4-DOF arm with unknown link lengths: 
+
+q = [ q1, q 2, q 3, q 4]⊤, θ = [ l1, l 2, l 3, l 4]⊤, y = [ xee , y ee ]⊤.
+
+(17) The true parameters are θtrue = [0 .3, 0.3, 0.3, 0.3] ⊤ and the initial estimate is ˆθinit = [0 .6, 0.1, 0.3, 0.3] ⊤. Unless otherwise stated, trials start at q0 = [0 , 0, 0, 0] ⊤, a fully extended degenerate configuration. Phase 1 runs for 150 steps and holds the end effector near yhold = [1 .2, 0] ⊤ while calibrating. Phase 2 moves to ytask = [0 .1345 , 1.0815] ⊤, generated by target configuration [π/ 4, π/ 3, −π/ 6, π/ 6] ⊤ under θtrue . The total arm length is 1.2, so this target has radius approximately 1.09 in the same normalized planar workspace. We evaluate 50 random seeds. Each E-step performs a Gauss–Newton MAP update of ˆθ from the accumulated end-effector residuals and the Gaussian parameter prior; it is run every three Phase-1 steps with five Gauss–Newton iterations. The main metrics are parameter RMSE at the phase change, mean Phase-1 end-effector hold error (EEhold), final task error, failRMSE, and failTask. The failure thresholds are set relative to the workspace scale rather than chosen arbitrarily. Task failure is declared when the final task error exceeds 0.10, about 8% of the total reach (1.2) and about 7% of the commanded hold-to-task displacement (magnitude ≈ 1.52 ). RMSE failure is declared when the parameter RMSE exceeds 0.08, about 7% of the total arm length and less than half the initial parameter RMSE ( ≈ 0.18 for ˆθinit ); it therefore flags only trials in which calibration has not substantially improved on the prior. For binary failure rates, we report Wilson 95% confidence intervals (Wilson score intervals for binomial proportions) in the text where they are most relevant. The main conditions are:  
+
+> •
+
+task only : task-holding controller without excitation;  
+
+> •
+
+action IG : action-space information-gain control using gradient descent on a task-error minus information-gain objective;  
+
+> •
+
+null-space : first-order null-space information gradient;  
+
+> •
+
+finite-step probe : task-compatible finite-step probing;  
+
+> •
+
+probe + posture : finite-step probing in Phase 1 and posture-regularized Phase 2. V. R ESULTS 
+
+A. Identifiability Alone Is Not Enough 
+
+Task-only and action-space information-gain control remain stuck at the degenerate configuration, with failRMSE = 1.00 and failTask = 1.00. The action IG baseline fails because the task-holding term dominates near the fully extended state: the optimizer does not find a task-compatible finite displacement  
+
+> Fig. 2. Phase-2 horizon sweep after identical finite-step probing in Phase 1 from the degenerate start. Posture regularization does not improve short-horizon performance, but eliminates the residual hard tail over 150–200 steps.
+
+that changes the rank-deficient observation geometry. First-order null-space control improves RMSE to 0.0274 and re-duces failTask to 0.30. Finite-step probing eliminates cali-bration failures and reaches parameter RMSE = 0.0125, but failTask increases to 0.44 under the plain Phase-2 controller. The full probe + posture condition keeps the same Phase-1 calibration quality while reducing failTask to 0.00. All information-seeking conditions keep the Phase-1 hold error small (EEhold ≤ 0.0146 ). For failTask, the Wilson 95% intervals are 0.30 (0.19, 0.44) for null-space, 0.44 (0.31, 0.58) for finite-step probing, and 0.00 (0.00, 0.07) for probe + posture. 
+
+B. Horizon and Posture Separate Two Phase-2 Effects 
+
+We next fix Phase 1 to finite-step probing and vary only the Phase-2 horizon and controller. The plain controller at 50 steps fails in 44% of seeds. Extending the horizon to 200 steps reduces failure to 6%, while posture at 50 steps gives no benefit. Combining posture with a 200-step horizon reduces failure to 0%. The corresponding Wilson intervals are 0.44 (0.31, 0.58), 0.06 (0.02, 0.16), and 0.00 (0.00, 0.07). The horizon sweep in Fig. 2 clarifies the role of posture. Plain and posture controllers are identical at 50 and 80 steps. They diverge only after 100 steps, and posture reaches 0 failure by 150 steps. Thus posture does not primarily accelerate short-horizon convergence; it removes a slow-convergence tail over a longer horizon. 
+
+C. Terminal Rollout Risk Explains Failures 
+
+The ‘finite-step probe’ condition has good calibration but 22 task failures out of 50 seeds. We diagnose these failures using metrics computed at the phase transition qc after Phase 1 and before any Phase-2 motion. Parameter RMSE is uninformative (AUC = 0.511), and static singularity risk is also uninformative (AUC = 0.490). In contrast, a 50-step noiseless rollout risk under the plain task controller separates success and failure   
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 16, 2026. ;https://doi.org/10.64898/2026.06.11.731593 doi: bioRxiv preprint ANONYMOUS: WHEN IDENTIFIABILITY IS NOT ENOUGH 5
+> Fig. 3. AUC for predicting task failure in the finite-step probe condition. Parameter RMSE and static singularity are uninformative, while short-horizon rollout risk separates downstream failures in these 50 seeds, even with oracle parameters.
+
+across these 50 seeds (AUC = 1.000; Fig. 3). The estimated rollout uses ˆθc for control and evaluates the final end-effector error against the true task. The oracle rollout uses θtrue for both control and evaluation from the same qc, and gives the same perfect separation. This rules out estimation error as the proximate cause: even perfect parameters do not make some transition states executable within 50 steps. At a 200-step horizon, rollout risk collapses near chance (AUC = 0.539), consistent with the ablation showing that most failures are slow finite-horizon convergence failures rather than permanent reachability failures. 
+
+D. Negative Results Support the Decomposition 
+
+Three ablations constrain the interpretation. Adding aposture-potential penalty or an early rollout-risk penalty during Phase 1 gives only marginal gains or regressions, showing that a risk quantity diagnostic at the phase transition is not automatically safe to optimize while the body belief is poor. Adaptive posture and manipulability-maximizing posture are also worse than fixed posture: at horizons 100/150/200 their failure rates are 0.22/0.04/0.04 and 0.20/0.06/0.06, whereas fixed posture gives 0.16/0.00/0.00. Thus terminal risk should be belief-confidence gated rather than treated as an uncondi-tional early exploration penalty. 
+
+E. Initial-Posture and Reference Robustness 
+
+We rerun finite-step probing from three initial configura-tions. The degenerate start q0 = [0 , 0, 0, 0] ⊤ and a near-degenerate start q0 = [0 .1, −0.1, 0.05 , −0.05] ⊤ both pro-duce downstream failures, while a non-degenerate start q0 =[0 , π/ 4, −π/ 4, 0] ⊤ has failTask = 0.00 for all tested horizons and both Phase-2 controllers. At H = 50 , the near-degenerate start is slightly harder than the exactly degenerate start (fail-Task 0.56 versus 0.44); at H = 200 , only a small residual remains (0.06 plain, 0.04 posture). The median Phase-1 joint change is 0.2066, 0.2336, and 0.7813 for the degenerate, near-degenerate, and non-degenerate starts, respectively, linking the failure to limited Phase-1 displacement rather than the exact zero vector. Varying qref across three fixed postures and the median transition posture gives the same qualitative result: failTask is 0.44 at H = 50 and 0.00 at H = 150 and H = 200 
+
+for all references. 
+
+F. Commercial-Arm Case Study (KUKA iiwa) 
+
+To check that the effect is not specific to planar kinematics, we repeat the protocol on a KUKA LBR iiwa 7-DOF kine-matic model with three unknown distal link-scale parameters and a 3D position task. Forward kinematics are taken from a vendored open-source URDF and validated against MuJoCo reference kinematics; the planar arm remains the controlled stress test, and the iiwa study is a limited commercial-arm check. The same signatures appear (Fig. 4): after probing, RMSE is low (median 0.019), yet the plain Phase-2 controller fails in all seeds at H = 20 and in 0.31 (0.14, 0.56) at 
+
+H = 50 , recovering to 0.00 by H = 75 . At H = 50 , a non-probing Phase-1 condition has worse calibration (RMSE 0.106) but failTask 0.00, and across 30 seeds parameter RMSE (AUC 0.36) and static singularity (AUC 0.45) do not predict failures whereas rollout risk does (AUC 0.97, also with oracle parameters). VI. D ISCUSSION AND CONCLUSION 
+
+The experiments separate three requirements that are often conflated in active calibration: create identifiable observations, keep exploration task-compatible, and leave a finite-horizon executable terminal state. Finite-step probing satisfies the first two but fails the third in 44% of degenerate-start seeds at 
+
+H = 50 , which is why low RMSE alone does not certify task success. Mechanistically, small Phase-1 joint displacement leaves the transition posture near a slow-convergence region; posture regularization or longer horizon mitigates this tail, but the iiwa case shows that horizon recovery can be the domi-nant effect. The practical implication is sequential: use task-compatible excitation while the model is uncertain, diagnose the transition state before task execution, and allocate horizon or terminal regularization when the diagnostic indicates risk. The current implementation assumes effective redundancy, either kinematic redundancy or a task that constrains only part of the end-effector motion. Fully constrained tasks would require task-feasible trajectory excitation rather than null-space probing. The study is also limited to simulated kinematic models and does not model dynamics, contact, compliance, actuator limits, latency, or safety constraints. Moreover, using terminal rollout risk as an online penalty remains a design implication rather than a validated controller. Even with these limitations, the results show that active calibration must be evaluated not only by parameter identifiability, but also by whether the calibrated transition state is executable within the downstream task horizon.  
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 16, 2026. ;https://doi.org/10.64898/2026.06.11.731593 doi: bioRxiv preprint 6IEEE ROBOTICS AND AUTOMATION LETTERS.
+
+Fig. 4. KUKA iiwa 7-DOF commercial-arm case study (kinematic model). (a) Task failure rate versus Phase-2 horizon (16 seeds; Wilson 95% intervals shown as bands): accurate Phase-1 calibration still fails at short horizon and recovers as H grows. (b) Predictor AUC for task failure at H = 50 (30 seeds): parameter RMSE and static singularity are uninformative, while short-horizon rollout risk—including with oracle parameters—is nearly perfect. (c) Per-seed separation: downstream failures separate along rollout risk, not parameter RMSE. 
+
+REFERENCES [1] J. M. Hollerbach and C. W. Wampler, “The calibration index and taxonomy for robot kinematic calibration methods,” The International Journal of Robotics Research , vol. 15, no. 6, pp. 573–591, 1996. [2] B. Siciliano, L. Sciavicco, L. Villani, and G. Oriolo, Robotics: Mod-elling, Planning and Control . Springer London, 2009. [3] P.-Y. Oudeyer, F. Kaplan, and V. V. Hafner, “Intrinsic motivation systems for autonomous mental development,” IEEE Transactions on Evolutionary Computation , vol. 11, no. 2, pp. 265–286, 2007. [4] K. Chaloner and I. Verdinelli, “Bayesian experimental design: A review,” 
+
+Statistical Science , vol. 10, no. 3, pp. 273–304, 1995. [5] J.-H. Borm and C.-H. Menq, “Determination of optimal measurement configurations for robot calibration based on observability measure,” The International Journal of Robotics Research , vol. 10, no. 1, pp. 51–63, 1991. [6] M. R. Driels and U. S. Pathre, “Significance of observation strategy on the design of robot calibration experiments,” Journal of Robotic Systems ,vol. 7, no. 2, pp. 197–223, 1990. [7] J. Swevers, C. Ganseman, D. B. Tukel, J. De Schutter, and H. Van Brus-sel, “Optimal robot excitation and identification,” IEEE Transactions on Robotics and Automation , vol. 13, no. 5, pp. 730–740, 1997. [8] W. Khalil and E. Dombre, Modeling, Identification and Control of Robots . Butterworth-Heinemann, 2004. [9] K. Stepanova, J. Rozlivek, F. Puciow, P. Krsek, T. Pajdla, and M. Hoff-mann, “Automatic self-contained calibration of an industrial dual-arm robot with cameras using self-contact, planar constraints, and self-observation,” Robotics and Computer-Integrated Manufacturing , vol. 73, p. 102250, 2022. [10] E. Das ¸ and J. W. Burdick, “An active learning based robot kinematic calibration framework using gaussian processes,” in Proceedings of the IEEE International Conference on Robotics and Automation , 2023, pp. 11 495–11 501. [11] O. Khatib, “A unified approach for motion and force control of robot manipulators: The operational space formulation,” IEEE Journal on Robotics and Automation , vol. 3, no. 1, pp. 43–53, 1987. [12] Y. Nakamura, H. Hanafusa, and T. Yoshikawa, “Task-priority based redundancy control of robot manipulators,” The International Journal of Robotics Research , vol. 6, no. 2, pp. 3–15, 1987. [13] B. Siciliano and J.-J. E. Slotine, “A general framework for managing multiple tasks in highly redundant robotic systems,” in Proceedings of the International Conference on Advanced Robotics (ICAR) , 1991, pp. 1211–1216. [14] S. Chiaverini, “Singularity-robust task-priority redundancy resolution for real-time kinematic control of robot manipulators,” IEEE Transactions on Robotics and Automation , vol. 13, no. 3, pp. 398–410, 1997. [15] J. Nakanishi, R. Cory, M. Mistry, J. Peters, and S. Schaal, “Operational space control: A theoretical and empirical comparison,” The Interna-tional Journal of Robotics Research , vol. 27, no. 6, pp. 737–757, 2008. [16] N. Mansard, O. Khatib, and A. Kheddar, “A unified approach to integrate unilateral constraints in the stack of tasks,” IEEE Transactions on Robotics , vol. 25, no. 3, pp. 670–685, 2009. [17] K. Friston, “The free-energy principle: A unified brain theory?” Nature Reviews Neuroscience , vol. 11, no. 2, pp. 127–138, 2010. [18] D. Q. Mayne, J. B. Rawlings, C. V. Rao, and P. O. M. Scokaert, “Con-strained model predictive control: Stability and optimality,” Automatica ,vol. 36, no. 6, pp. 789–814, 2000. [19] J. B. Rawlings, D. Q. Mayne, and M. M. Diehl, Model Predictive Con-trol: Theory, Computation, and Design , 2nd ed. Nob Hill Publishing, 2017. [20] F. Borrelli, A. Bemporad, and M. Morari, Predictive Control for Linear and Hybrid Systems . Cambridge University Press, 2017. [21] L. Gr¨ une and J. Pannek, Nonlinear Model Predictive Control: Theory and Algorithms , 2nd ed. Springer, 2017. [22] C. M. Bishop, Pattern Recognition and Machine Learning . Springer New York, 2006. 
+
+.CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 16, 2026. ;https://doi.org/10.64898/2026.06.11.731593 doi: bioRxiv preprint

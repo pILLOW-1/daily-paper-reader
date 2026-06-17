@@ -6,59 +6,47 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-06-16
-- 运行时间：2026-06-16 23:12:23 UTC
+- 最新运行日期：2026-06-17
+- 运行时间：2026-06-17 22:18:31 UTC
 - 运行状态：成功
-- 本次总论文数：13
-- 精读区：7
+- 本次总论文数：9
+- 精读区：3
 - 速读区：6
 
 ### 今日简报（AI）
-今天共推荐13篇论文，精读7篇速读6篇，其中《VGPT-RSI》和《APEX》以9.0分并列最高分。最值得关注的两个方向：形式化验证中的边界证书与不等式验证，以及生产级AI智能体的自适应原则提取框架。建议优先精读这两篇高分论文，前者深化对Lagarias不等式的理解，后者掌握三层次自我进化方法论。
-- 详情：[/202606/16/README](/202606/16/README)
+今日精选9篇论文，重点推荐自演进LLM智能体评估环境《SEAGym》与生物信息学自动化框架《AutoZyme》。最值得关注的方向：智能体自适应能力提升与隐私保护机制。建议后续可关注智能体在本地隐私保护下的自主进化趋势。
+- 详情：[/202606/17/README](/202606/17/README)
 
 ### 精读区论文标签
-1. [VGPT-RSI for RH-Adjacent Formal Progress: Boundary Certificates, Verified Finite Lagarias Inequalities, and Explicit Failure Localization](/202606/16/2606.15096v1-vgpt-rsi-for-rh-adjacent-formal-progress-boundary-certificates-verified-finite-lagarias-inequalities-and-explicit-failure-localization)  
+1. [SEAGym: An Evaluation Environment for Self-Evolving LLM Agents](/202606/17/2606.17546v1-seagym-an-evaluation-environment-for-self-evolving-llm-agents)  
    标签：评分：9.0/10、query:self-improve
-   evidence：VGPT-RSI明确使用递归自我改进技术解决数学验证任务
-2. [APEX: Adaptive Principle EXtraction A Three-Layer Self-Evolution Framework for Production AI Agents](/202606/16/2606.15363v1-apex-adaptive-principle-extraction-a-three-layer-self-evolution-framework-for-production-ai-agents)  
+   evidence：自演化LLM智能体的评估环境
+2. [AutoZyme: An Autonomous Agentic Framework to Optimize Bioinformatics Software](/202606/17/biorxiv-10-64898-2026-06-12-731250-v1-autozyme-an-autonomous-agentic-framework-to-optimize-bioinformatics-software)  
    标签：评分：9.0/10、query:self-improve
-   evidence：用于智能体自我改进的三层自演化框架
-3. [HarnessX: A Composable, Adaptive, and Evolvable Agent Harness Foundry](/202606/16/2606.14249v1-harnessx-a-composable-adaptive-and-evolvable-agent-harness-foundry)  
+   evidence：自主智能体框架迭代优化软件，实现自我改进
+3. [Environment-Grounded Automated Prompt Optimization for LLM Game Agents](/202606/17/2606.17838v1-environment-grounded-automated-prompt-optimization-for-llm-game-agents)  
    标签：评分：8.0/10、query:self-improve
-   evidence：可适应和可进化的代理框架
-4. [LatentGym: A Testbed For Cross-Task Experiential Learning With Controllable Latent Structure](/202606/16/2606.15306v1-latentgym-a-testbed-for-cross-task-experiential-learning-with-controllable-latent-structure)  
-   标签：评分：8.0/10、query:self-improve
-   evidence：跨任务经验学习测试床，使智能体随时间改进
-5. [Pixels to Proofs: Probabilistically-Safe Latent World Model Control via Parallel Conformal Robust MPC](/202606/16/2606.15594v1-pixels-to-proofs-probabilistically-safe-latent-world-model-control-via-parallel-conformal-robust-mpc)  
-   标签：评分：8.0/10、query:agent-detect
-   evidence：使用潜在世界模型并结合感知与保形预测进行安全检测
-6. [Towards Pareto-Optimal Tool-Integrated Agents with Pareto Ranking Policy Optimization](/202606/16/2606.16111v1-towards-pareto-optimal-tool-integrated-agents-with-pareto-ranking-policy-optimization)  
-   标签：评分：8.0/10、query:self-improve
-   evidence：提出ParetoPO，一种用于智能体自我改进的多目标强化学习优化方法
-7. [Scene Structure Predicts Perceptual Decisions in Naturalistic Detection Tasks](/202606/16/biorxiv-10-64898-2026-06-03-729800-v1-scene-structure-predicts-perceptual-decisions-in-naturalistic-detection-tasks)  
-   标签：评分：8.0/10、query:agent-detect
-   evidence：研究自然场景结构如何影响检测任务中的感知决策
+   evidence：通过迭代进化循环自动优化LLM智能体提示
 
 ### 速读区论文标签
-1. [DynaCF: Mitigating Shortcut Learning in Reward Models via Dynamic Counterfactual Sensitivity](/202606/16/2606.09043v1-dynacf-mitigating-shortcut-learning-in-reward-models-via-dynamic-counterfactual-sensitivity)  
-   标签：评分：7.0/10、query:self-improve
-   evidence：缓解奖励模型中的捷径学习，改进强化学习代理的学习
-2. [Knowing When to Ask: Self-Gated Clarification for Hierarchical Language Agents](/202606/16/2606.11349v2-knowing-when-to-ask-self-gated-clarification-for-hierarchical-language-agents)  
-   标签：评分：7.0/10、query:self-improve
-   evidence：自门控澄清使智能体改进决策；通过信息寻求实现自我改进
-3. [Speculative Rollback Correction for Quality-Diverse Web Agent Imitation](/202606/16/2606.12485v1-speculative-rollback-correction-for-quality-diverse-web-agent-imitation)  
-   标签：评分：7.0/10、query:self-improve
-   evidence：分支级模仿学习框架，通过纠正智能体行为实现自我改进
-4. [CacheRL:Multi-Turn Tool-Calling Agents via Cached Rollouts and Hybrid Reward](/202606/16/2606.14179v1-cacherlmulti-turn-tool-calling-agents-via-cached-rollouts-and-hybrid-reward)  
-   标签：评分：7.0/10、query:self-improve
-   evidence：基于强化学习的智能体训练，利用缓存回放实现自我改进
-5. [Can LLM Agents Infer World Models? Evidence from Agentic Automata Learning](/202606/16/2606.16576v1-can-llm-agents-infer-world-models-evidence-from-agentic-automata-learning)  
+1. [Minim: Privacy-Aware Minimal View for Agents via Trusted Local Sanitization](/202606/17/2606.13949v1-minim-privacy-aware-minimal-view-for-agents-via-trusted-local-sanitization)  
    标签：评分：7.0/10、query:agent-detect
-   evidence：通过智能体自动机学习检测世界模型
-6. [Reward Modeling for Multi-Agent Orchestration](/202606/16/2606.13598v1-reward-modeling-for-multi-agent-orchestration)  
+   evidence：智能体的隐私感知最小化视图，检测敏感UI元素
+2. [Physically intelligent insect-inspired antenna sensors enhance tactile feature perception by active touch](/202606/17/biorxiv-10-1101-2025-10-20-683587-v2-physically-intelligent-insect-inspired-antenna-sensors-enhance-tactile-feature-perception-by-active-touch)  
+   标签：评分：7.0/10、query:agent-detect
+   evidence：通过触觉感知实现世界模型中的感知与检测
+3. [An end-to-end platform for pose estimation and real-time edge-AI deployment](/202606/17/biorxiv-10-64898-2026-01-24-700912-v2-an-end-to-end-platform-for-pose-estimation-and-real-time-edge-ai-deployment)  
+   标签：评分：7.0/10、query:agent-detect
+   evidence：面向智能体姿态估计的检测技术平台
+4. [Reward Modeling for Multi-Agent Orchestration](/202606/17/2606.13598v1-reward-modeling-for-multi-agent-orchestration)  
    标签：评分：6.0/10、query:self-improve
-   evidence：多智能体协调的自监督奖励建模，实现智能体改进
+   evidence：多智能体编排中的自我监督奖励建模
+5. [A Dual-Branch Collaborative Framework for Joint Optimization of Underwater Image Enhancement and Object Detection](/202606/17/2606.15857v1-a-dual-branch-collaborative-framework-for-joint-optimization-of-underwater-image-enhancement-and-object-detection)  
+   标签：评分：6.0/10、query:agent-detect
+   evidence：水下图像增强与目标检测双分支框架
+6. [Climbing-fiber-like online readout adaptation in frozen continuous-time networks reproduces force-field adaptation and after-effects](/202606/17/biorxiv-10-64898-2026-06-11-731593-v2-climbing-fiber-like-online-readout-adaptation-in-frozen-continuous-time-networks-reproduces-force-field-adaptation-and-after-effects)  
+   标签：评分：6.0/10、query:self-improve
+   evidence：在线读出自适应使智能体无需重训练即可改进性能
 
 
 <div class="dpr-home-promo-card">

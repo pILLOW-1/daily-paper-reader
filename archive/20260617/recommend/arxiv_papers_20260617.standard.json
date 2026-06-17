@@ -1,0 +1,377 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-17T22:14:05.622745+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 3,
+    "deep_cap": 7,
+    "deep_selected": 3,
+    "quick_candidates": 6,
+    "quick_skim_target": 12,
+    "quick_selected": 6
+  },
+  "deep_dive": [
+    {
+      "id": "2606.17546v1",
+      "source": "arxiv",
+      "title": "SEAGym: An Evaluation Environment for Self-Evolving LLM Agents",
+      "abstract": "Self-evolving LLM-based agents improve mainly by changing their agent harness: the structured execution layer around a base model, including prompts, memory, tools, middleware, runtime state, and the model-tool interaction loop. Existing evaluations often reduce this process to isolated task scores or a single sequential curve, obscuring whether an update produces reusable improvement, overfits recent tasks, increases cost, or harms older behavior. We introduce SEAGym, an evaluation environment for measuring agent harness updates across training, validation, test, replay, and cost records. SEAGym turns Harbor-compatible benchmarks into dynamic self-evolution task sources with train batches, frozen update-validation, held-out ID and OOD transfer views, replay diagnostics, and saved snapshot and metric records. Instantiating SEAGym on Terminal-Bench 2.0 and HLE, we compare ACE, TF-GRPO, and AHE under a shared epoch/batch protocol. The results show that these evaluation views provide complementary signals about the evolution process: frequent updates may fail to improve held-out performance, useful intermediate snapshots may collapse later, and source diversity and model backend can affect harness reliability.",
+      "authors": [
+        "Congjie Zheng",
+        "Chuanyi Xue",
+        "Bin Liang",
+        "Jun Yang",
+        "Changshui Zhang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-16T05:50:55+00:00",
+      "link": "https://arxiv.org/pdf/2606.17546v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "evaluation environment for self-evolving LLM agents",
+      "llm_evidence_cn": "自演化LLM智能体的评估环境",
+      "llm_evidence": "自演化LLM智能体的评估环境",
+      "canonical_evidence": "自演化LLM智能体的评估环境",
+      "llm_tldr_en": "Introduces SEAGym, a benchmark for measuring agent harness updates in self-evolving LLM agents across training, validation, test, and cost records.",
+      "llm_tldr_cn": "该论文针对自演化LLM智能体评估中仅用孤立任务分数或单一曲线衡量进步的不足，提出了SEAGym评估环境。它通过将Harbor兼容基准转化为动态自我演化任务源，包含训练批次、冻结更新验证、保留域内外迁移视图和回放数据集，全面衡量智能体更新的可复用性、过拟合风险和成本变化。SEAGym为自演化智能体研究提供了标准化评估框架。",
+      "llm_tldr": "该论文针对自演化LLM智能体评估中仅用孤立任务分数或单一曲线衡量进步的不足，提出了SEAGym评估环境。它通过将Harbor兼容基准转化为动态自我演化任务源，包含训练批次、冻结更新验证、保留域内外迁移视图和回放数据集，全面衡量智能体更新的可复用性、过拟合风险和成本变化。SEAGym为自演化智能体研究提供了标准化评估框架。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-06-12-731250-v1",
+      "source": "biorxiv",
+      "title": "AutoZyme: An Autonomous Agentic Framework to Optimize Bioinformatics Software",
+      "abstract": "Performance bottlenecks in widely used genomics and bioinformatics software present a substantial and growing burden as biological datasets continue to increase in size and number. Relieving these bottlenecks relies largely on expert manual optimization and therefore remains difficult to scale. Here we present AutoZyme, an agentic framework for scientific software optimization. Given a target function, AutoZyme builds benchmarks, identifies bottlenecks, and iteratively tests code changes, retaining only those that improve runtime while preserving output. We evaluated AutoZyme on 45 functions, improving runtime without substantial memory increases in over 95% of cases considered. Across 38 functions from Seurat, Scanpy and related packages in genomics and bioinformatics, AutoZyme reduced runtime by a median of 8.52-fold, with the largest reductions exceeding 676-fold. The optimized functions are distributed through AutoZyme-Library as drop-in replacements for existing analysis pipelines. We also release AutoZyme as a reusable framework for optimizing additional user-specified packages and functions.",
+      "authors": [
+        "Xie, E.",
+        "Cheng, L.",
+        "Cai, Y.",
+        "Shireman, J.",
+        "Kendziorski, C."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-06-16T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.06.12.731250v1.full.pdf",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "autonomous agentic framework iteratively optimizes software, embodying self-improvement",
+      "llm_evidence_cn": "自主智能体框架迭代优化软件，实现自我改进",
+      "llm_evidence": "自主智能体框架迭代优化软件，实现自我改进",
+      "canonical_evidence": "自主智能体框架迭代优化软件，实现自我改进",
+      "llm_tldr_en": "AutoZyme is an autonomous agentic framework that iteratively benchmarks, identifies bottlenecks, and tests code changes to optimize bioinformatics software, achieving runtime improvements in over 95% of cases.",
+      "llm_tldr_cn": "生物信息学软件性能优化依赖专家手工调整，难以规模化。AutoZyme提出一种自主智能体框架，对目标函数自动构建基准、识别瓶颈、迭代测试代码更改，仅保留提升运行时的修改。在45个函数上评估，超过95%的案例中运行时改善且内存未显著增加。该工作展示了自主智能体在软件优化中的自我改进能力，可直接扩展至其他领域。",
+      "llm_tldr": "生物信息学软件性能优化依赖专家手工调整，难以规模化。AutoZyme提出一种自主智能体框架，对目标函数自动构建基准、识别瓶颈、迭代测试代码更改，仅保留提升运行时的修改。在45个函数上评估，超过95%的案例中运行时改善且内存未显著增加。该工作展示了自主智能体在软件优化中的自我改进能力，可直接扩展至其他领域。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.17838v1",
+      "source": "arxiv",
+      "title": "Environment-Grounded Automated Prompt Optimization for LLM Game Agents",
+      "abstract": "LLM agents in interactive environments are highly sensitive to their prompts, yet prompt engineering remains a manual, task-specific process. We introduce an automated prompt optimization framework for LLM agents that decomposes the observation-to-action pipeline into a goal-conditioned descriptor agent and an action selection agent, and iteratively refines each module's prompt through an LLM-driven evolutionary loop guided by environment returns. We propose a behavior analyzer to attribute episode outcomes to specific prompt components, and a mutator to propose targeted revisions to the prompt, before validating them through environment rollouts. We evaluate on all five BabyAI tasks in the BALROG benchmark, comparing our pipeline against BALROG's RobustCoTAgent under both plain and guided prompt initializations. Optimization improves performance consistently across tasks and conditions, without requiring updates to the model weights. On PutNext, a multi-step coordination task where the RobustCoTAgent achieves 0% success, our framework reaches up to 72.5% success rate using the same underlying LLM with optimized prompts. These results suggest that a multi-agent framework, combined with automatic prompt optimization, enhances LLMs without the need for fine-tuning or extensive human supervision.",
+      "authors": [
+        "Rean Clive Fernandes",
+        "Lukas Fehring",
+        "Theresa Eimer",
+        "Marius Lindauer",
+        "Matthias Feurer"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-16T12:06:27+00:00",
+      "link": "https://arxiv.org/pdf/2606.17838v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "automated prompt optimization for LLM agents through iterative evolutionary loop",
+      "llm_evidence_cn": "通过迭代进化循环自动优化LLM智能体提示",
+      "llm_evidence": "通过迭代进化循环自动优化LLM智能体提示",
+      "canonical_evidence": "通过迭代进化循环自动优化LLM智能体提示",
+      "llm_tldr_en": "Proposes an automated prompt optimization framework for LLM game agents that iteratively refines prompts via an LLM-driven evolutionary loop grounded in environment rewards, achieving task-specific self-improvement.",
+      "llm_tldr_cn": "该论文针对LLM游戏智能体提示工程依赖人工的问题，提出了一种环境驱动的自动提示优化框架。该框架将观察-动作流程分解为描述器和动作选择器，并通过LLM驱动的进化循环迭代优化每个模块的提示。在BabyAI基准上的实验表明，该方法能够有效提升任务性能，实现了智能体的自动自我改进。",
+      "llm_tldr": "该论文针对LLM游戏智能体提示工程依赖人工的问题，提出了一种环境驱动的自动提示优化框架。该框架将观察-动作流程分解为描述器和动作选择器，并通过LLM驱动的进化循环迭代优化每个模块的提示。在BabyAI基准上的实验表明，该方法能够有效提升任务性能，实现了智能体的自动自我改进。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.13949v1",
+      "source": "arxiv",
+      "title": "Minim: Privacy-Aware Minimal View for Agents via Trusted Local Sanitization",
+      "abstract": "Modern LLM-powered autonomous agents increasingly rely on rich user interface (UI) state observations to achieve reliable action grounding in complex digital environments. However, many deployments transmit the full UI state to remote inference servers even when most elements are irrelevant to the current task, which can leak sensitive but unnecessary context such as authentication codes, private notifications, and background application states. We propose MINIM, a trusted local broker that performs privacy-aware minimization on the client side before any observation leaves the device. Grounded in Contextual Integrity (CI), MINIM learns a dual-score representation for each UI element by predicting an inherent sensitivity score (s) and a task-conditioned necessity score (n). These scores drive a ternary disclosure policy that keeps essential elements, abstracts sensitive attributes when needed, and removes task-irrelevant content. We optimize a CI-aware objective that penalizes necessity errors more strongly on high-risk content, enabling aggressive pruning while preserving task-critical information. Experiments on real-world UI observations derived from WebArena show that MINIM substantially reduces task-irrelevant sensitive leakage while preserving task-critical semantic context and the interactive affordances required for reliable agent actions.",
+      "authors": [
+        "Hexuan Yu",
+        "Chaoyu Zhang",
+        "Heng Jin",
+        "Shanghao Shi",
+        "Ning Zhang",
+        "Y. Thomas Hou",
+        "Wenjing Lou"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-11T22:27:27+00:00",
+      "link": "https://arxiv.org/pdf/2606.13949v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Privacy-aware minimal view for agents with detection of sensitive UI elements",
+      "llm_evidence_cn": "智能体的隐私感知最小化视图，检测敏感UI元素",
+      "llm_evidence": "智能体的隐私感知最小化视图，检测敏感UI元素",
+      "canonical_evidence": "智能体的隐私感知最小化视图，检测敏感UI元素",
+      "llm_tldr_en": "MINIM proposes a trusted local broker for privacy-aware minimization of UI states in agents, learning dual-score representation for each element to detect sensitive context, addressing perception and detection in agent architectures.",
+      "llm_tldr_cn": "现代LLM驱动的智能体常将完整UI状态传输至远程服务器，导致敏感信息泄露。本文提出MINIM，一种可信本地代理，在客户端执行隐私感知的最小化操作。通过为每个UI元素学习固有敏感度和任务条件相关性双分数表示，实现敏感上下文检测。该方法在不牺牲任务性能的前提下，显著降低了隐私风险，为智能体架构中的感知与检测模块提供了新方案。",
+      "llm_tldr": "现代LLM驱动的智能体常将完整UI状态传输至远程服务器，导致敏感信息泄露。本文提出MINIM，一种可信本地代理，在客户端执行隐私感知的最小化操作。通过为每个UI元素学习固有敏感度和任务条件相关性双分数表示，实现敏感上下文检测。该方法在不牺牲任务性能的前提下，显著降低了隐私风险，为智能体架构中的感知与检测模块提供了新方案。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in agent architectures",
+      "matched_requirement_id": "req-15",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.13598v1",
+      "source": "arxiv",
+      "title": "Reward Modeling for Multi-Agent Orchestration",
+      "abstract": "Multi-Agent Systems (MAS) built on Large Language Models (LLMs) require effective orchestration to coordinate specialized agents, yet training such orchestrators is hindered by limited supervision and high computational cost. We propose Orchestration Reward Modeling (OrchRM), a self-supervised framework for evaluating orchestration quality without human annotations. OrchRM leverages intermediate artifacts from multi-agent executions to construct win-lose pairs for Bradley-Terry reward model training. Unlike existing MAS test-time scaling and orchestrator training frameworks that rely on costly sub-agent rollouts, OrchRM operates directly at the orchestration level, enabling efficient and high-performing reward-guided orchestrator training and MAS test-time scaling. OrchRM improves training efficiency by up to 10x in token usage while improving MAS test-time scaling performance by up to 8% in accuracy. These gains consistently transfer across multiple domains, including mathematical reasoning, web-based question answering, and multi-hop reasoning, demonstrating orchestration-level reward modeling as a scalable direction for robust multi-agent orchestration. Code will be available at https://github.com/Wang-ML-Lab/OrchRM.",
+      "authors": [
+        "King Yeung Tsang",
+        "Zihao Zhao",
+        "Vishal Venkataramani",
+        "Haizhou Shi",
+        "Zixuan Ke",
+        "Semih Yavuz",
+        "Shafiq Joty",
+        "Hao Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG",
+        "cs.MA"
+      ],
+      "published": "2026-06-11T17:16:24+00:00",
+      "link": "https://arxiv.org/pdf/2606.13598v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "self-supervised reward modeling for multi-agent orchestration",
+      "llm_evidence_cn": "多智能体编排中的自我监督奖励建模",
+      "llm_evidence": "多智能体编排中的自我监督奖励建模",
+      "canonical_evidence": "多智能体编排中的自我监督奖励建模",
+      "llm_tldr_en": "Proposes OrchRM, a self-supervised reward model for multi-agent orchestration, improving orchestration quality without human annotations.",
+      "llm_tldr_cn": "该论文针对多智能体系统编排训练中监督不足且计算成本高的问题，提出了OrchRM，一种无需人工标注的自我监督奖励建模框架。它通过利用多智能体执行过程中的中间产物构建胜负对来训练奖励模型，从而高效指导编排器训练和测试时扩展。实验表明该方法能显著提升编排质量，为多智能体系统的自我改进提供了新思路。",
+      "llm_tldr": "该论文针对多智能体系统编排训练中监督不足且计算成本高的问题，提出了OrchRM，一种无需人工标注的自我监督奖励建模框架。它通过利用多智能体执行过程中的中间产物构建胜负对来训练奖励模型，从而高效指导编排器训练和测试时扩展。实验表明该方法能显著提升编排质量，为多智能体系统的自我改进提供了新思路。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-1101-2025-10-20-683587-v2",
+      "source": "biorxiv",
+      "title": "Physically intelligent insect-inspired antenna sensors enhance tactile feature perception by active touch",
+      "abstract": "Soft robotic sensors today struggle to interpret complex tactile scenes without incurring significant computational costs. Inspired by insect antennae--compliant, distributed sensors that efficiently process tactile information through physical intelligence--we investigated whether mechanical design and active touch sensing strategies could enhance robotic tactile feature perception. We hypothesized that insect-inspired antenna dynamics, specifically flexural stiffness gradients and active touch speed, could simplify tactile classification. Using a sim-to-real framework that bridges bioinspired computational models with a multi-link soft robot antenna, we introduce the notion of tactile fields--spatiotemporal representations of tactile stimuli shaped by contact location, feature type, and active touch speed. Our analyses show that cockroach-inspired antenna mechanics jointly with active touch speeds improve feature classification accuracy compared to conventional sensors with uniform flexural stiffness gradient by increasing tactile data sparsity and dispersion. An exploration of stiffness and damping of antenna mechanics revealed design trade-offs that influence tactile discrimination and structural stability. Through sim-to-real transfer, stiffness gradients and structured active touch motions were demonstrated on a miniature distributed soft robotic antenna, validating their effectiveness in real-world robotic systems. Taken together, this work presents a biologically grounded framework for tactile sensor design that reduces computational load and enhances adaptability.",
+      "authors": [
+        "Meng, L.",
+        "McDonnell, P.",
+        "Jayaram, K.",
+        "Mongeau, J.-M."
+      ],
+      "primary_category": "bioengineering",
+      "categories": [
+        "bioengineering"
+      ],
+      "published": "2026-06-15T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.1101/2025.10.20.683587v2.full.pdf",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "perception and detection in world model via tactile sensing",
+      "llm_evidence_cn": "通过触觉感知实现世界模型中的感知与检测",
+      "llm_evidence": "通过触觉感知实现世界模型中的感知与检测",
+      "canonical_evidence": "通过触觉感知实现世界模型中的感知与检测",
+      "llm_tldr_en": "Insect-inspired antenna sensors enhance tactile feature perception, proposing tactile fields for robotic perception without heavy computation.",
+      "llm_tldr_cn": "该论文受昆虫触角启发，设计了具有物理智能的软体机器人触角传感器，通过主动触觉传感策略增强触觉特征感知。提出了\"触觉场\"概念，利用仿真到真实的框架实现了对复杂触觉场景的高效分类，为机器人世界模型中的感知模块提供了低计算成本的生物灵感方案。",
+      "llm_tldr": "该论文受昆虫触角启发，设计了具有物理智能的软体机器人触角传感器，通过主动触觉传感策略增强触觉特征感知。提出了\"触觉场\"概念，利用仿真到真实的框架实现了对复杂触觉场景的高效分类，为机器人世界模型中的感知模块提供了低计算成本的生物灵感方案。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.15857v1",
+      "source": "arxiv",
+      "title": "A Dual-Branch Collaborative Framework for Joint Optimization of Underwater Image Enhancement and Object Detection",
+      "abstract": "Due to wavelength dependent light absorption and scattering, underwater images usually suffer from color distortion and blurred details, which limits underwater object detection performance. Existing underwater image enhancement methods mainly focus on visual quality improvement, while it is still difficult to balance enhancement quality, processing efficiency, and downstream detection performance. Therefore, this paper proposes an efficient dual-branch underwater image enhancement framework for object detection. The detail enhancement branch improves brightness and local contrast to recover texture details in dark regions. The color restoration branch uses adaptive compensation to reduce color distortion and improve color gradation. By combining the complementary outputs of the two branches, the proposed framework provides clearer and more informative images for object detection. On the UIEB and EUVP datasets, the proposed method achieves UIQM scores of 2.249 and 2.576. When applied to the YOLOv8 detection task on the URPC dataset, the proposed method improves mAP50 by 2.1\\% compared with the baseline. Extensive experiments show that our method improves object detection in complex underwater scenes, while balancing enhancement quality and processing efficiency.",
+      "authors": [
+        "Liyuan Cao",
+        "Zheng Liu",
+        "Guanghao Liao",
+        "Yonghui Yang",
+        "Qi Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-14T15:25:31+00:00",
+      "link": "https://arxiv.org/pdf/2606.15857v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Underwater image enhancement and object detection dual-branch framework",
+      "llm_evidence_cn": "水下图像增强与目标检测双分支框架",
+      "llm_evidence": "水下图像增强与目标检测双分支框架",
+      "canonical_evidence": "水下图像增强与目标检测双分支框架",
+      "llm_tldr_en": "Proposes a dual-branch collaborative framework for joint optimization of underwater image enhancement and object detection, addressing perception and detection in underwater environments.",
+      "llm_tldr_cn": "水下图像因波长吸收和散射导致细节模糊和颜色失真，影响目标检测性能。本文提出一种高效双分支水下图像增强框架：细节增强分支恢复暗区纹理，色彩还原分支自适应补偿颜色失真。该框架在提升视觉质量的同时，显著改善了水下目标检测任务的性能，平衡了增强质量与下游检测需求。",
+      "llm_tldr": "水下图像因波长吸收和散射导致细节模糊和颜色失真，影响目标检测性能。本文提出一种高效双分支水下图像增强框架：细节增强分支恢复暗区纹理，色彩还原分支自适应补偿颜色失真。该框架在提升视觉质量的同时，显著改善了水下目标检测任务的性能，平衡了增强质量与下游检测需求。",
+      "llm_tags": [
+        "query:agent-detect:composite"
+      ],
+      "matched_query_tag": "query:agent-detect:composite",
+      "matched_query_text": "Papers central to agent/world model领域中的检测相关论文, especially work that connects or combines: p; d; w; a; perception and detection modules in world model; papers on detection techniques for agent; papers on detection techniques for world model; perception and detection modules in agent architectures.",
+      "matched_requirement_id": "req-composite-agent-detect",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-01-24-700912-v2",
+      "source": "biorxiv",
+      "title": "An end-to-end platform for pose estimation and real-time edge-AI deployment",
+      "abstract": "Accurate pose estimation underpins quantitative analysis of behavior, yet many deep learning-based tracking tools remain optimized for offline workflows that rely on fragmented software pipelines, workstation-grade GPUs, or external middleware to enable real-time deployment. Here we present an integrated software-hardware ecosystem for pose estimation that spans dataset creation, model training, offline analysis, and real-time deployment on embedded edge-computing devices. SqueakPose Studio provides a software suite for whole-frame, deep learning-based pose estimation that unifies dataset creation, manual and model-assisted labeling, model training, validation, and large-scale offline inference. The system leverages modern object-detection architectures to enable efficient end-to-end training and inference without patch-based sampling or multi-stage postprocessing, and supports execution on CPUs, GPUs, and Apple Silicon. For experimental settings requiring continuous recording and synchronized data acquisition, SqueakView enables real-time model deployment, video capture, and sensor logging on embedded edge-computing hardware, while MouseHouse provides a compact, modular enclosure designed for home cage-based experiments that integrates embedded GPU compute, microcontroller-based timing, and peripheral I/O. A shared data format and deterministic timing architecture ensure consistency across offline analysis and real-time deployment. Together, SqueakPose Studio, SqueakView, and MouseHouse provide a unified platform for pose estimation that supports both conventional offline analysis and embedded, real-time experimentation, without reliance on workstation-grade hardware or external middleware.",
+      "authors": [
+        "Haggerty, D. L.",
+        "Darden, C. B.",
+        "Lovinger, D. M."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-06-15T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.01.24.700912v2.full.pdf",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "detection technique platform for agent pose estimation",
+      "llm_evidence_cn": "面向智能体姿态估计的检测技术平台",
+      "llm_evidence": "面向智能体姿态估计的检测技术平台",
+      "canonical_evidence": "面向智能体姿态估计的检测技术平台",
+      "llm_tldr_en": "End-to-end platform for pose estimation and real-time edge-AI deployment, unifying dataset creation, training, and real-time inference.",
+      "llm_tldr_cn": "该论文提出了一个集成的软硬件生态系统SqueakPose Studio，用于姿态估计，覆盖数据集创建、模型训练、离线分析和边缘设备实时部署。它利用物体检测架构，实现了从端到端的全流程支持，为智能体的检测模块提供了可实际部署的技术平台。",
+      "llm_tldr": "该论文提出了一个集成的软硬件生态系统SqueakPose Studio，用于姿态估计，覆盖数据集创建、模型训练、离线分析和边缘设备实时部署。它利用物体检测架构，实现了从端到端的全流程支持，为智能体的检测模块提供了可实际部署的技术平台。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-06-11-731593-v2",
+      "source": "biorxiv",
+      "title": "Climbing-fiber-like online readout adaptation in frozen continuous-time networks reproduces force-field adaptation and after-effects",
+      "abstract": "Robotic motor control built on liquid neural networks and related continuous-time models, such as LTC and CfC, is typically trained offline via backpropagation through time and lacks an explicit mechanism for recalibrating online as plant dynamics change. We ask whether a frozen CfC core, whose liquid state spans a fixed continuous-time basis, can support cerebellar-style online adaptation by adapting only its linear readout with a climbing-fiber-like error signal. In a planar two-link reaching simulation with a velocity-dependent curl force field, we adapt the readout online with a feedback-error-learning (FEL) signal under a least-mean-squares (LMS) rule, leaving the core untouched. The frozen-core readout-only controller re-straightens curl-perturbed reaches and, upon field removal, produces a mirror-image after-effect, a behavioral signature consistent with internal-model learning, which a feedback-only controller does not produce. The result generalizes from a dense CfC to a sparse Neural-Circuit-Policy (NCP) wiring when the recurrent state, rather than the projected motor output, is used as the readout basis; it is robust to force-field strength and direction; and a recursive-least-squares variant adapts faster but de-adapts slowly because its covariance collapses, a rigidity that a covariance-reset safe-forgetting rule removes. Within the explored two-link planar simulation range, we did not find a readout-only failure case that required adapting the frozen core in the tested conditions. In this simulation study, adapting only the readout therefore provides a biologically inspired, low-cost online error-adaptation layer for offline-trained continuous-time controllers.",
+      "authors": [
+        "Kobayashi, J."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-06-16T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.06.11.731593v2.full.pdf",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "online readout adaptation enables agent to improve performance without retraining",
+      "llm_evidence_cn": "在线读出自适应使智能体无需重训练即可改进性能",
+      "llm_evidence": "在线读出自适应使智能体无需重训练即可改进性能",
+      "canonical_evidence": "在线读出自适应使智能体无需重训练即可改进性能",
+      "llm_tldr_en": "A frozen continuous-time network with online linear readout adaptation using a climbing-fiber-like error signal enables cerebellar-style online improvement for robotic motor control.",
+      "llm_tldr_cn": "液体神经网络等连续时间模型通常离线训练，缺乏在线适应机制。本文研究冻结的CfC核心是否能通过仅适应线性读出实现小脑风格在线改进。采用类似爬行纤维的误差信号和LMS规则在线调整读出，在平面双链接达模拟中，面对速度相关的卷曲力场，在线适应成功补偿扰动，证明持续改进是可能的。这为智能体在不重训练核心的情况下自我改进提供了方法。",
+      "llm_tldr": "液体神经网络等连续时间模型通常离线训练，缺乏在线适应机制。本文研究冻结的CfC核心是否能通过仅适应线性读出实现小脑风格在线改进。采用类似爬行纤维的误差信号和LMS规则在线调整读出，在平面双链接达模拟中，面对速度相关的卷曲力场，在线适应成功补偿扰动，证明持续改进是可能的。这为智能体在不重训练核心的情况下自我改进提供了方法。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "Methods for agent self improvement",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
