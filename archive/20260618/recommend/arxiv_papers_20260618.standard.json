@@ -1,0 +1,437 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-18T22:23:37.494495+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 3,
+    "deep_cap": 7,
+    "deep_selected": 3,
+    "quick_candidates": 7,
+    "quick_skim_target": 12,
+    "quick_selected": 7
+  },
+  "deep_dive": [
+    {
+      "id": "2606.17628v1",
+      "source": "arxiv",
+      "title": "OPD-Evolver: Cultivating Holistic Agent Evolver via On-Policy Distillation",
+      "abstract": "Memory has become a standard substrate for self-evolving agents, yet retaining experience is not the same as learning how to evolve through it. Existing memory agents can store trajectories, retrieve reflections, or accumulate skills, but often lack the holistic competence to select useful experience, act on it, write reusable knowledge, and maintain a growing repository. We introduce OPD-Evolver, a slow-fast co-evolution framework that cultivates such an agent evolver through on-policy self-distillation. In the fast loop, OPD-Evolver interacts with a four-level memory hierarchy to read, use, write, and maintain experience for rapid test-time evolution. In the slow loop, outcome-calibrated memory attribution and privileged hindsight distill these four abilities into the deployable policy. Across multi-domain benchmarks, OPD-Evolver surpasses memory systems such as ReasoningBank by up to 11.5%, and training-based methods such as Skill0 by ~5.8%. Further analysis shows that OPD-Evolver internalizes high-value experience and memory management, enabling OPD-Evolver-9B to challenge giant counterparts such as Qwen3.5-397B-A17B and Step-3.5-Flash, pointing beyond memory-augmented agents toward genuinely qualified agent evolvers.",
+      "authors": [
+        "Guibin Zhang",
+        "Xun Xu",
+        "Yanwei Yue",
+        "Zikun Su",
+        "Wangchunshu Zhou",
+        "Xiaobin Hu",
+        "Shuicheng Yan"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-16T07:33:53+00:00",
+      "link": "https://arxiv.org/pdf/2606.17628v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "agent self-evolution through on-policy distillation",
+      "llm_evidence_cn": "通过在线策略蒸馏实现智能体自我进化",
+      "llm_evidence": "通过在线策略蒸馏实现智能体自我进化",
+      "canonical_evidence": "通过在线策略蒸馏实现智能体自我进化",
+      "llm_tldr_en": "OPD-Evolver proposes a slow-fast co-evolution framework for holistic agent self-improvement via on-policy self-distillation, enabling experience selection, action, writing, and maintenance.",
+      "llm_tldr_cn": "现有记忆型智能体虽然能存储轨迹和技能，但缺乏整体进化能力。OPD-Evolver提出慢快双环共演化框架，快速环利用四级记忆层次进行测试时快速进化，慢速环通过结果校准的记忆归因和事后经验蒸馏强化性能。实验表明该框架有效培养了智能体在多种任务上的自我进化能力，为智能体自我改进提供了新范式。",
+      "llm_tldr": "现有记忆型智能体虽然能存储轨迹和技能，但缺乏整体进化能力。OPD-Evolver提出慢快双环共演化框架，快速环利用四级记忆层次进行测试时快速进化，慢速环通过结果校准的记忆归因和事后经验蒸馏强化性能。实验表明该框架有效培养了智能体在多种任务上的自我进化能力，为智能体自我改进提供了新范式。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.18890v1",
+      "source": "arxiv",
+      "title": "Skill-Guided Continuation Distillation for GUI Agents",
+      "abstract": "Improving GUI agents typically relies on behavior cloning on expert trajectories. However, as the current policy deviates from the expert policy, it inevitably encounters policy-induced off-trajectory states during closed-loop execution, i.e., states that fall outside the expert trajectories. Since expert trajectories provide no demonstrations for these unseen states, such states receive no effective supervision, leaving the policy unable to select the correct action. To close this supervision gap, we propose Skill-Guided Continuation Distillation (SGCD), an iterative self-improvement framework. SGCD first runs the plain policy without skill guidance for a few steps to reach realistic off-trajectory states. From these states, a skill-guided policy then completes the task and produces successful continuations, which are mixed with expert trajectories to supply supervision over policy-induced off-trajectory states. The skills are extracted from both successful and failed rollouts, consisting of Continuation Plans, Critical Targets, Failure Traps, and Success Criteria. On OSWorld-Verified, SGCD improves the success rate of three base models from the low-30\\% range to over 50\\%, demonstrating its effectiveness and generality.",
+      "authors": [
+        "Zhimin Fan",
+        "Hongwei Yu",
+        "Yeqing Shen",
+        "Haolong Yan",
+        "Guozhen Peng",
+        "Tianhao Peng",
+        "Yudong Zhang",
+        "Xiaowen Zhang",
+        "Kaijun Tan",
+        "Zheng Ge",
+        "Xiangyu Zhang",
+        "Daxin Jiang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-17T10:07:51+00:00",
+      "link": "https://arxiv.org/pdf/2606.18890v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "iterative self-improvement framework for GUI agents",
+      "llm_evidence_cn": "面向GUI智能体的迭代自我改进框架",
+      "llm_evidence": "面向GUI智能体的迭代自我改进框架",
+      "canonical_evidence": "面向GUI智能体的迭代自我改进框架",
+      "llm_tldr_en": "Proposes SGCD, an iterative self-improvement framework for GUI agents that continues from off-trajectory states, using a skill-guided policy to close the supervision gap.",
+      "llm_tldr_cn": "该论文提出了技能引导连续蒸馏（SGCD）框架，用于GUI智能体的迭代自我改进。现有行为克隆方法在偏离专家轨迹的状态下缺乏监督。SGCD首先运行无技能策略到达离线状态，然后使用技能引导策略完成任务，从而提供有效监督。实验表明该方法显著提升了GUI智能体的闭环执行性能。",
+      "llm_tldr": "该论文提出了技能引导连续蒸馏（SGCD）框架，用于GUI智能体的迭代自我改进。现有行为克隆方法在偏离专家轨迹的状态下缺乏监督。SGCD首先运行无技能策略到达离线状态，然后使用技能引导策略完成任务，从而提供有效监督。实验表明该方法显著提升了GUI智能体的闭环执行性能。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "iterative self-improvement agent",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.15857v1",
+      "source": "arxiv",
+      "title": "A Dual-Branch Collaborative Framework for Joint Optimization of Underwater Image Enhancement and Object Detection",
+      "abstract": "Due to wavelength dependent light absorption and scattering, underwater images usually suffer from color distortion and blurred details, which limits underwater object detection performance. Existing underwater image enhancement methods mainly focus on visual quality improvement, while it is still difficult to balance enhancement quality, processing efficiency, and downstream detection performance. Therefore, this paper proposes an efficient dual-branch underwater image enhancement framework for object detection. The detail enhancement branch improves brightness and local contrast to recover texture details in dark regions. The color restoration branch uses adaptive compensation to reduce color distortion and improve color gradation. By combining the complementary outputs of the two branches, the proposed framework provides clearer and more informative images for object detection. On the UIEB and EUVP datasets, the proposed method achieves UIQM scores of 2.249 and 2.576. When applied to the YOLOv8 detection task on the URPC dataset, the proposed method improves mAP50 by 2.1\\% compared with the baseline. Extensive experiments show that our method improves object detection in complex underwater scenes, while balancing enhancement quality and processing efficiency.",
+      "authors": [
+        "Liyuan Cao",
+        "Zheng Liu",
+        "Guanghao Liao",
+        "Yonghui Yang",
+        "Qi Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-14T15:25:31+00:00",
+      "link": "https://arxiv.org/pdf/2606.15857v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "dual-branch framework for underwater object detection and enhancement",
+      "llm_evidence_cn": "双分支框架用于水下目标检测与增强",
+      "llm_evidence": "双分支框架用于水下目标检测与增强",
+      "canonical_evidence": "双分支框架用于水下目标检测与增强",
+      "llm_tldr_en": "A dual-branch framework jointly optimizes image enhancement and object detection for underwater environments, improving detection performance with adaptive compensation.",
+      "llm_tldr_cn": "水下图像颜色失真和模糊限制了目标检测性能。本文提出双分支框架，细节增强分支恢复纹理，颜色恢复分支自适应补偿色偏，联合优化增强与检测。实验表明该方法在提升视觉质量的同时显著提高了目标检测准确率，为智能体在复杂环境中的感知检测提供了有效技术。",
+      "llm_tldr": "水下图像颜色失真和模糊限制了目标检测性能。本文提出双分支框架，细节增强分支恢复纹理，颜色恢复分支自适应补偿色偏，联合优化增强与检测。实验表明该方法在提升视觉质量的同时显著提高了目标检测准确率，为智能体在复杂环境中的感知检测提供了有效技术。",
+      "llm_tags": [
+        "query:agent-detect:composite"
+      ],
+      "matched_query_tag": "query:agent-detect:composite",
+      "matched_query_text": "Papers central to agent/world model领域中的检测相关论文, especially work that connects or combines: p; d; w; a; perception and detection modules in world model; papers on detection techniques for agent; papers on detection techniques for world model; perception and detection modules in agent architectures.",
+      "matched_requirement_id": "req-composite-agent-detect",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.18591v1",
+      "source": "arxiv",
+      "title": "Bridging Creative Intent and Visual Quality: Creator-Driven Recurrent Video Generation with Agentic Feedback Loops",
+      "abstract": "Generative AI has made content creation increasingly accessible, but many AI-generated videos lack narrative coherence and creative direction, issues that become more substantial at longer durations. Unlike coding, where AI generation benefits from reliable feedback and techniques such as recurrent self-improvement, video generation requires subjective feedback about plot, scenes, and narrative, which naturally motivates approaches that incorporate human creative direction. We introduce CHIEF, a human-AI co-creation video generation framework that places the creator at the center of human-in-the-loop iterative video refinement, and supports them by providing automatic subjective feedback. The creator incorporates their creative direction by driving each iteration, while their revisions are incorporated by a specialized refiner agent. The feedback loop is generated by persona-conditioned multimodal LLMs that watch generated videos and produce subjective critique from the audience perspectives, providing feedback that self-evaluation alone cannot capture. To test the effectiveness of our proposed framework, we work with high school and college students with no prior filmmaking experience to create videos, from short 1-minute videos to a complete short 10-minute film with a complicated plot.",
+      "authors": [
+        "Denis Savytski",
+        "Aiden Lei",
+        "Heding Liu",
+        "Warren Yang",
+        "Sihan Liang",
+        "Alexander Liu",
+        "Zhe Zhao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-17T01:39:30+00:00",
+      "link": "https://arxiv.org/pdf/2606.18591v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "agentic feedback loops for iterative video refinement",
+      "llm_evidence_cn": "智能体反馈循环实现迭代视频精炼",
+      "llm_evidence": "智能体反馈循环实现迭代视频精炼",
+      "canonical_evidence": "智能体反馈循环实现迭代视频精炼",
+      "llm_tldr_en": "CHIEF framework uses human-in-the-loop agentic feedback for recurrent video generation, analogous to recurrent self-improvement in coding.",
+      "llm_tldr_cn": "针对AI生成视频叙事连贯性不足的问题，本文提出CHIEF框架，将人类创作者置于迭代精炼的中心，通过智能体反馈循环提供自动主观反馈。该方法受编码中递归自我改进技术的启发，但适应了视频生成的主观性需求。实验表明该框架能有效提升视频叙事质量，实现了人机协作的迭代改进过程。",
+      "llm_tldr": "针对AI生成视频叙事连贯性不足的问题，本文提出CHIEF框架，将人类创作者置于迭代精炼的中心，通过智能体反馈循环提供自动主观反馈。该方法受编码中递归自我改进技术的启发，但适应了视频生成的主观性需求。实验表明该框架能有效提升视频叙事质量，实现了人机协作的迭代改进过程。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "Methods for agent self improvement",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.13598v1",
+      "source": "arxiv",
+      "title": "Reward Modeling for Multi-Agent Orchestration",
+      "abstract": "Multi-Agent Systems (MAS) built on Large Language Models (LLMs) require effective orchestration to coordinate specialized agents, yet training such orchestrators is hindered by limited supervision and high computational cost. We propose Orchestration Reward Modeling (OrchRM), a self-supervised framework for evaluating orchestration quality without human annotations. OrchRM leverages intermediate artifacts from multi-agent executions to construct win-lose pairs for Bradley-Terry reward model training. Unlike existing MAS test-time scaling and orchestrator training frameworks that rely on costly sub-agent rollouts, OrchRM operates directly at the orchestration level, enabling efficient and high-performing reward-guided orchestrator training and MAS test-time scaling. OrchRM improves training efficiency by up to 10x in token usage while improving MAS test-time scaling performance by up to 8% in accuracy. These gains consistently transfer across multiple domains, including mathematical reasoning, web-based question answering, and multi-hop reasoning, demonstrating orchestration-level reward modeling as a scalable direction for robust multi-agent orchestration. Code will be available at https://github.com/Wang-ML-Lab/OrchRM.",
+      "authors": [
+        "King Yeung Tsang",
+        "Zihao Zhao",
+        "Vishal Venkataramani",
+        "Haizhou Shi",
+        "Zixuan Ke",
+        "Semih Yavuz",
+        "Shafiq Joty",
+        "Hao Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG",
+        "cs.MA"
+      ],
+      "published": "2026-06-11T17:16:24+00:00",
+      "link": "https://arxiv.org/pdf/2606.13598v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "self-supervised reward model for multi-agent orchestration",
+      "llm_evidence_cn": "多智能体编排的自我监督奖励模型",
+      "llm_evidence": "多智能体编排的自我监督奖励模型",
+      "canonical_evidence": "多智能体编排的自我监督奖励模型",
+      "llm_tldr_en": "Proposes a self-supervised reward modeling framework for multi-agent orchestration, enabling efficient training without human annotations.",
+      "llm_tldr_cn": "本文针对多智能体系统中协调器训练缺乏监督和高计算成本的问题，提出了一种自我监督的编排奖励建模框架（OrchRM），通过利用多智能体执行过程中的中间产物构建胜负对来训练奖励模型，从而在无需人工标注的情况下实现高效高质量的协调器训练和多智能体系统测试时扩展。",
+      "llm_tldr": "本文针对多智能体系统中协调器训练缺乏监督和高计算成本的问题，提出了一种自我监督的编排奖励建模框架（OrchRM），通过利用多智能体执行过程中的中间产物构建胜负对来训练奖励模型，从而在无需人工标注的情况下实现高效高质量的协调器训练和多智能体系统测试时扩展。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.18668v1",
+      "source": "arxiv",
+      "title": "EARS: Explanatory Abstention for Reliable Sub-Agent Modeling in Large-scale Multi-Agent Systems",
+      "abstract": "In large-scale enterprise settings, centralized multi-agent systems (MAS) are increasingly adopted, in which a coordinator delegates user requests to lightweight, domain-specialized sub-agents. While this architecture improves modularity, scalability, and cost efficiency, its reliability depends not only on accurate routing but also on sub-agents' ability to calibrate their responses to capability constraints. In particular, sub-agents built on smaller fine-tuned models often struggle with such calibration, leading them to over-answer ambiguous, underspecified, misrouted, or unsupported requests and produce hallucinated outputs instead of actionable feedback. To address this challenge, we present EARS (Explanatory Abstention for Reliable Sub-Agent Modeling), a production-oriented framework that reframes sub-agent abstention as an inter-agent communication protocol: a sub-agent does not merely abstain, but exposes an actionable failure state to the coordinator. EARS curates human-agent interaction data using an ensemble of calibrated LLM-as-a-Judge models, producing structured abstention labels and rationales under a taxonomy of sub-agent failure modes. These data are used to fine-tune sub-agents to detect failure conditions and return rationales for coordinator-level clarification, rerouting, or fallback. We evaluate EARS in a large-scale production e-commerce assistant supporting enterprise business intelligence workflows. EARS improves the overall response pass rate from 68.5% to 78.9%, demonstrating that sub-agent-side explanatory abstention improves MAS reliability.",
+      "authors": [
+        "Shuang Xie",
+        "Yunan Lu",
+        "Han Li",
+        "Lingyun Wang"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.CL"
+      ],
+      "published": "2026-06-17T04:07:41+00:00",
+      "link": "https://arxiv.org/pdf/2606.18668v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "detection of sub-agent capability limits via abstention",
+      "llm_evidence_cn": "通过弃权检测子智能体能力边界",
+      "llm_evidence": "通过弃权检测子智能体能力边界",
+      "canonical_evidence": "通过弃权检测子智能体能力边界",
+      "llm_tldr_en": "EARS introduces explanatory abstention for sub-agents in multi-agent systems, enabling them to detect when they cannot reliably answer and provide feedback instead of hallucinating, improving overall system reliability.",
+      "llm_tldr_cn": "大规模多智能体系统中，轻量子智能体常因能力限制对模糊或错误请求生成幻觉输出。EARS提出解释性弃权机制，让子智能体在不确定时主动弃权并给出可操作反馈。实验表明该方法显著减少幻觉，提升系统可靠性。该方法为智能体检测技术提供了新思路，可用于构建更可靠的代理架构。",
+      "llm_tldr": "大规模多智能体系统中，轻量子智能体常因能力限制对模糊或错误请求生成幻觉输出。EARS提出解释性弃权机制，让子智能体在不确定时主动弃权并给出可操作反馈。实验表明该方法显著减少幻觉，提升系统可靠性。该方法为智能体检测技术提供了新思路，可用于构建更可靠的代理架构。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.18502v1",
+      "source": "arxiv",
+      "title": "Towards Scalable Customization and Deployment of Multi-Agent Systems for Enterprise Applications",
+      "abstract": "Large language model (LLM)-based multi-agent systems demonstrate strong performance on complex reasoning and task execution, enabling broad enterprise applications. However, production deployment remains challenging due to domain-specific customization requirements and high latency and inference costs in agentic workflows. We propose a unified framework for customization and efficient deployment of multi-agent systems in real-world settings. The first stage, Agentic Model Customization, combines continual pretraining, supervised fine-tuning, and preference optimization to adapt a compact model to specialized domains while retaining strong agentic capabilities. The second stage, Inference Optimization, integrates speculative decoding and FP8 quantization with targeted calibration to enable cost-efficient serving with minimal quality loss. Across enterprise workloads, our framework enables rapid domain adaptation and achieves a 4.48x speedup in throughput while maintaining performance and improving robustness on long-tail scenarios.",
+      "authors": [
+        "Paresh Dashore",
+        "Shreyas Kulkarni",
+        "Uttam Gurram",
+        "Nadia Bathaee",
+        "Kartik Balasubramaniam",
+        "Genta Indra Winata",
+        "Sambit Sahu",
+        "Shi-Xiong Zhang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-16T21:30:10+00:00",
+      "link": "https://arxiv.org/pdf/2606.18502v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "framework for customization and deployment of multi-agent systems including model adaptation",
+      "llm_evidence_cn": "多智能体系统的定制与部署框架，包括模型自适应",
+      "llm_evidence": "多智能体系统的定制与部署框架，包括模型自适应",
+      "canonical_evidence": "多智能体系统的定制与部署框架，包括模型自适应",
+      "llm_tldr_en": "Proposes a unified framework for customizing and deploying multi-agent systems with agentic model customization and inference optimization.",
+      "llm_tldr_cn": "本文针对LLM多智能体系统在生产部署中面临的领域定制需求和延迟成本问题，提出了两阶段框架：首先是智能体模型定制，结合持续预训练、监督微调和偏好优化将紧凑模型适应到特定领域；其次是推理优化，集成推测解码等技术降低延迟和成本。",
+      "llm_tldr": "本文针对LLM多智能体系统在生产部署中面临的领域定制需求和延迟成本问题，提出了两阶段框架：首先是智能体模型定制，结合持续预训练、监督微调和偏好优化将紧凑模型适应到特定领域；其次是推理优化，集成推测解码等技术降低延迟和成本。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.18671v1",
+      "source": "arxiv",
+      "title": "HANSEL: Extracting Breadcrumbs from Web Agent Trajectories for Interactive Verification",
+      "abstract": "AI web agents can perform complex, multi-step tasks such as searching for products, comparing options, and making purchases on behalf of users. However, verifying the correctness of an agent's output remains difficult. Existing transparency mechanisms, including full trajectory logs, source links, screenshots, and LLM-generated summaries, treat verification as a passive reading task, leaving users to sift through overwhelming logs or trust potentially unfaithful explanations. We present HANSEL (Highlighting Agent Navigation Steps as Evidence Links), a system that extracts interactive, verifiable evidence from web-agent trajectories. Given an agent trajectory, HANSEL extracts evidence pages and snippets and presents them as navigable, interactive views with relevant page state preserved (e.g., applied filters, search queries, and scroll positions), enabling users to verify how the agent arrived at its answer. When the agent's answer cannot be traced to any visited page, HANSEL explicitly flags this gap. A technical evaluation on 45 tasks from AssistantBench and Online-Mind2Web shows that HANSEL achieves 83.7% precision and 88.8% recall in identifying evidence pages, while reducing trajectory volume by 61.6%. In a controlled user study with 14 participants, HANSEL significantly reduced task completion time and perceived effort compared to a standard agent interface, while participants rated it significantly higher on usability, verification ease, and error identification. Our results demonstrate that reframing verification as an interactive activity, rather than passive consumption of agent explanations, leads to more efficient human oversight of AI agents.",
+      "authors": [
+        "Yujin Zhang",
+        "Daye Nam"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-06-17T04:13:20+00:00",
+      "link": "https://arxiv.org/pdf/2606.18671v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "interactive verification and detection of web agent behavior",
+      "llm_evidence_cn": "Web智能体行为的交互验证与检测",
+      "llm_evidence": "Web智能体行为的交互验证与检测",
+      "canonical_evidence": "Web智能体行为的交互验证与检测",
+      "llm_tldr_en": "HANSEL extracts interactive evidence from web agent trajectories for verification, presenting navigable snippets that allow users to inspect agent actions.",
+      "llm_tldr_cn": "用户难以验证Web智能体输出的正确性，现有透明度机制缺乏互动验证。HANSEL系统从智能体轨迹中提取证据页面和片段，以可导航链接形式呈现，支持用户交互式检查智能体行为。在多个Web任务上展示了提取的交互式证据的有效性，增强了Web智能体的可验证性。",
+      "llm_tldr": "用户难以验证Web智能体输出的正确性，现有透明度机制缺乏互动验证。HANSEL系统从智能体轨迹中提取证据页面和片段，以可导航链接形式呈现，支持用户交互式检查智能体行为。在多个Web任务上展示了提取的交互式证据的有效性，增强了Web智能体的可验证性。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.19319v1",
+      "source": "arxiv",
+      "title": "Data Intelligence Agents: Interpreting, Modeling, and Querying Enterprise Data via Autonomous Coding Agents",
+      "abstract": "Production data integration is bottlenecked by repeated, lossy handoffs between data owners, engineers, and analysts who must collaboratively discover, structure, and query enterprise data. We present Data Intelligence Agents (DIA), a system of three agents (Data Interpreter, Schema Creator, and Query Generator) that compresses this workflow by treating autonomous coding agents (ACAs) as a first-class abstraction: rather than emitting text, the agents generate, execute, validate, and repair concrete artifacts, draw on a shared memory for experience reuse, and surface each for review by domain experts. DIA is deployed in production for enterprise customers. We study the Query Generator in depth and evaluate it in fully autonomous mode across seven SQL benchmarks spanning four task categories and four dialects. It matches or surpasses the best published results on all seven, demonstrating that an architecture grounded in execution, built on ACAs and a shared memory, generalizes across the data intelligence workload with adaptation confined to natural-language instructions.",
+      "authors": [
+        "Anoushka Vyas",
+        "Aarushi Dhanuka",
+        "Sina Khoshfetrat Pakazad",
+        "Henrik Ohlsson"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.AI",
+        "cs.DB"
+      ],
+      "published": "2026-06-17T17:45:32+00:00",
+      "link": "https://arxiv.org/pdf/2606.19319v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "autonomous coding agents generate, execute, validate, and repair artifacts",
+      "llm_evidence_cn": "自主编码智能体生成、执行、验证并修复工件",
+      "llm_evidence": "自主编码智能体生成、执行、验证并修复工件",
+      "canonical_evidence": "自主编码智能体生成、执行、验证并修复工件",
+      "llm_tldr_en": "DIA system uses three autonomous coding agents that iteratively improve artifacts via shared memory and domain expert review.",
+      "llm_tldr_cn": "针对企业数据集成中反复且低效的手动交接问题，本文提出数据智能体（DIA）系统，由数据解释器、模式创建者和查询生成器三个自主编码智能体组成。这些智能体通过生成、执行、验证和修复具体工件，并利用共享记忆进行经验重用，实现了工作流的压缩和迭代改进。在生产部署中验证了其有效性。",
+      "llm_tldr": "针对企业数据集成中反复且低效的手动交接问题，本文提出数据智能体（DIA）系统，由数据解释器、模式创建者和查询生成器三个自主编码智能体组成。这些智能体通过生成、执行、验证和修复具体工件，并利用共享记忆进行经验重用，实现了工作流的压缩和迭代改进。在生产部署中验证了其有效性。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.18837v1",
+      "source": "arxiv",
+      "title": "Skill-MAS: Evolving Meta-Skill for Automatic Multi-Agent Systems",
+      "abstract": "Large Language Model (LLM)-based automatic Multi-Agent Systems (MAS) generation has become a crucial frontier for tackling complex tasks. However, existing methods face a dilemma between model capability and experience retention. Inference-time MAS leverages frozen frontier LLMs but repeats identical searches without learning from past experience. Conversely, Training-time MAS internalizes experience via gradient updates but is constrained by the low capability ceiling of smaller models, and is hard to scale to large frontier LLMs. To bridge this gap, we propose Skill-MAS, a novel third path that decouples experience retention from parametric updates by conceptualizing the high-level orchestration capability as an evolvable Meta-Skill. Skill-MAS refines this architectural knowledge through a closed optimization loop: (1) Multi-Trajectory Rollout samples a behavioral distribution for each task under the current Meta-Skill; and (2) Selective Reflection adaptively selects priority tasks and applies hierarchical contrastive analysis to distill systemic experience into generalizable, strategy-level principles. Extensive experiments across four complex benchmarks and four distinct LLMs demonstrate that Skill-MAS not only achieves remarkable performance gains but also maintains a favorable cost-performance trade-off. Further analysis reveals that the evolved Meta-Skills are highly robust and exhibit strong transferability across unseen tasks and different LLMs.",
+      "authors": [
+        "Hehai Lin",
+        "Qi Yang",
+        "Chengwei Qin"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-06-17T09:12:50+00:00",
+      "link": "https://arxiv.org/pdf/2606.18837v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "evolvable meta-skill for automatic multi-agent systems self-improvement",
+      "llm_evidence_cn": "可演化元技能实现自动多智能体系统自我改进",
+      "llm_evidence": "可演化元技能实现自动多智能体系统自我改进",
+      "canonical_evidence": "可演化元技能实现自动多智能体系统自我改进",
+      "llm_tldr_en": "Skill-MAS introduces evolvable Meta-Skill for automatic multi-agent systems, decoupling experience retention from parametric updates to enable continual self-improvement without model retraining.",
+      "llm_tldr_cn": "针对现有自动多智能体系统在模型能力与经验保留间的两难，本文提出Skill-MAS，通过将高层编排能力概念化为可演化的元技能，实现经验保留与参数更新的解耦。该框架在不更新模型参数的情况下，通过元技能的持续演化提升多智能体系统性能。实验证明，Skill-MAS在复杂任务上优于现有方法，为多智能体系统的自我改进开辟了新路径。",
+      "llm_tldr": "针对现有自动多智能体系统在模型能力与经验保留间的两难，本文提出Skill-MAS，通过将高层编排能力概念化为可演化的元技能，实现经验保留与参数更新的解耦。该框架在不更新模型参数的情况下，通过元技能的持续演化提升多智能体系统性能。实验证明，Skill-MAS在复杂任务上优于现有方法，为多智能体系统的自我改进开辟了新路径。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

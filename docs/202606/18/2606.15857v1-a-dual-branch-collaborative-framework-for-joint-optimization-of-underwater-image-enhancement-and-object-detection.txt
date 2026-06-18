@@ -1,0 +1,451 @@
+Title: A Dual-Branch Collaborative Framework for Joint Optimization of Underwater Image Enhancement and Object Detection
+
+URL Source: https://arxiv.org/pdf/2606.15857v1
+
+Published Time: Tue, 16 Jun 2026 01:39:51 GMT
+
+Number of Pages: 15
+
+Markdown Content:
+# Highlights 
+
+## A Dual-Branch Collaborative Framework for Joint Optimization of Underwater Image Enhance-ment and Object Detection 
+
+Liyuan Cao, Zheng Liu, Guanghao Liao, Yonghui Yang, Qi Li 
+
+• A dual-branch framework jointly improves underwater details and color fidelity. 
+
+• The lightweight method avoids complex network training and maintains high efficiency. 
+
+• The method balances image quality, processing speed, and detection performance. 
+
+> arXiv:2606.15857v1 [cs.CV] 14 Jun 2026
+
+# A Dual-Branch Collaborative Framework for Joint Optimization of Underwater Image Enhancement and Object Detection 
+
+## Liyuan Cao a, Zheng Liu a,∗, Guanghao Liao a, Yonghui Yang a and Qi Li a
+
+> a
+
+School of Electronic and Information Engineering, University of Science and Technology Liaoning, No.189 Qianshan Middle Road, Lishan District, Anshan, 114051, Liaoning, China 
+
+A R T I C L E I N F O 
+
+Keywords :image enhancement real-time performance YOLOv8 underwater object detection two-branch network 
+
+A B S T R A C T 
+
+Due to wavelength dependent light absorption and scattering, underwater images usually suffer from color distortion and blurred details, which limits underwater object detection performance. Existing underwater image enhancement methods mainly focus on visual quality improvement, while it is still difficult to balance enhancement quality, processing efficiency, and downstream detection performance. Therefore, this paper proposes an efficient dual-branch underwater image enhancement framework for object detection. The detail enhancement branch improves brightness and local contrast to recover texture details in dark regions. The color restoration branch uses adaptive compensation to reduce color distortion and improve color gradation. By combining the complementary outputs of the two branches, the proposed framework provides clearer and more informative images for object detection. On the UIEB and EUVP datasets, the proposed method achieves UIQM scores of 2.249 and 2.576. When applied to the YOLOv8 detection task on the URPC dataset, the proposed method improves mAP50 by 2.1% compared with the baseline. Extensive experiments show that our method improves object detection in complex underwater scenes, while balancing enhancement quality and processing efficiency. 
+
+## 1. Introduction 
+
+With the growing demand for marine resource devel-opment, ecological and environmental monitoring, and in-telligent navigation, underwater target detection is playing an increasingly important role in underwater robotic oper-ations, marine observation, and engineering applications. Because light propagation in water involves absorption and scattering, the attenuation rates of light at different wave-lengths vary significantly, which can easily cause color shifts in underwater images (Chang et al., 2025). At the same time, the scattering effect caused by suspended particles in water further reduces image contrast, blurs edge structures, and results in a loss of texture information, as shown in Fig. 1. These degradation phenomena not only reduce the observability of underwater scenes but also weaken the effective representation of features in the target area, making feature extraction and recognition more difficult, and thereby limiting the accuracy and stability of detection models in complex environments. Existing methods for underwater image enhancement can be mainly divided into physical model-based methods, model-free methods, and deep learning-based methods. Physical model-based methods restore underwater images by estimating background light and transmission maps, which provides strong physical interpretability. However, their performance highly depends on model assumptions and parameter estimation accuracy, leading to unstable restora-tion results in complex underwater environments (Song 
+
+> ∗
+
+Corresponding author  
+
+> 2451452455@qq.com
+
+(L. Cao); lz6949505@163.com (Z. Liu);  
+
+> liaoguanghao0826@163.com
+
+(G. Liao); Yangyh2636688@163.com (Y. Yang);  
+
+> liqi_74@163.com
+
+(Q. Li) 
+
+> ORCID
+
+(s): 0000-0002-9209-6622 (Z. Liu); 0009-0005-0966-5839 (G. Liao) 
+
+et al., 2020). Model-free methods mainly improve the visual quality of underwater images through histogram algorithms (Peng et al., 2022) and Retinex algorithms (Zhang et al., 2017). Although these methods are simple to implement and have low computational cost, they may cause detail distortion and unnatural colors. Deep learning-based meth-ods have achieved significant progress in underwater image enhancement (Sun et al., 2024). However, these methods usually rely on large amounts of high quality training data and high computational resources. Meanwhile, in complex real underwater scenes without reference images, the cross scene generalization ability and enhancement stability of these methods still need to be improved. Some methods may also produce color over correction and texture artifacts, which limits their application in real time deployment and lightweight underwater vision systems. Most existing research on underwater image enhance-ment focuses primarily on improving visual quality, and evaluations typically emphasize image quality metrics such as SSIM (Wang et al., 2004), UIQM (Panetta et al., 2016), and UCIQE (Yang and Sowmya, 2015). Previous studies have shown that improved visual quality does not always lead to better downstream object detection performance (Liu et al., 2020). Even if the enhanced images show improve-ments in terms of subjective visual quality or objective evaluation metrics, they may not necessarily provide more effective discriminative features for object detection. There-fore, the design and evaluation of underwater image en-hancement methods should not only focus on visual quality, but also consider processing efficiency and their influence on downstream tasks. 
+
+L. Cao et al.: Preprint submitted to Elsevier Page 1 of 14 Dual-Branch Underwater Image Enhancement and Object Detection  
+
+> Figure 1: Diagram of a complex underwater environment.
+
+To address these problems, we divide underwater image degradation into two complementary aspects: detail degra-dation and color distortion. Based on the needs of down-stream object detection, we propose a dual-branch under-water image enhancement framework. The detail enhance-ment branch reduces uneven lighting through illumination correction, and improves image layering and texture clarity through brightness adjustment and local detail enhancement. The color restoration branch uses brightness guided color compensation and local contrast optimization to improve color naturalness and overall visual consistency. Through the collaborative dual-branch design, the proposed method improves underwater image quality without complex net-work training while maintaining high processing efficiency. We apply the enhanced images to YOLOv8 and evaluate the proposed method in terms of image quality, processing efficiency, and detection performance. The results demon-strate its suitability for complex underwater scenes and its potential for practical applications. The main contributions of this paper are as follows: 
+
+• To address detail degradation and color distortion in underwater images, we propose a dual-branch en-hancement framework for object detection. The two branches work together to improve image details and restore colors. 
+
+• We design a lightweight enhancement strategy that requires no complex network training. It improves the visual quality of underwater images while maintaining high processing efficiency, showing strong potential for engineering applications. 
+
+• We evaluate the proposed method from three aspects: image quality, processing speed, and downstream ob-ject detection performance. Experimental results on multiple underwater image datasets show that the pro-posed method achieves a good balance among these three aspects. This paper is organized as follows. Section 2 reviews related studies. Section 3 introduces the proposed method. Sections 4 presents the experimental results and analysis. Section 5 concludes the paper. 
+
+## 2. Related Work 
+
+2.1. Image Processing Methods 
+
+In complex imaging environments, images are often affected by insufficient illumination, low contrast, and noise interference, making it difficult to accurately represent target edges, texture structures, and local region information. Im-proving image visibility, enhancing structural information, and suppressing degrading noise are key research topics in the field of image processing. He et al. (2013) proposed a directional filtering method that improves filtering compu-tational efficiency while preserving edge structures. Zero-DCE (Guo et al., 2020) improves the brightness of low-light images through curve estimation learning. URetinex-Net (Wu et al., 2022) combines Retinex theory to improve image structures and detail representation from the perspectives of illumination and reflection decomposition. The SNR-Aware method (Xu et al., 2022) uses signal-to-noise ratio distribution to estimate the degradation level of different regions and improve restoration performance in low-light areas. These methods have achieved good performance in   
+
+> L. Cao et al.: Preprint submitted to Elsevier Page 2 of 14 Dual-Branch Underwater Image Enhancement and Object Detection
+
+brightness restoration, structure preservation, and detail en-hancement. However, model driven methods are easily lim-ited by fixed rules, while learning based methods rely heavily on training data and computational resources, and may suffer from insufficient generalization or unstable enhancement performance in cross scene applications. 
+
+2.2. Underwater Image Processing Methods 
+
+Compared with common imaging scenes, underwater image degradation shows more distinct characteristics. Due to the different absorption and scattering effects of water on different wavelengths of light, underwater images usually suffer from color distortion, brightness attenuation, low con-trast, and blurred details. These degradations not only reduce the subjective visual quality of images, but also weaken the ability of subsequent detection algorithms to extract target edges, texture information, and category features. Existing studies mainly focus on three directions: physical model-based methods, model-free methods, and deep learning-based methods. The classical Jaffe-McGlamery simplified underwater imaging model (Jaffe, 1990) provides the the-oretical foundation for physical model-based methods. Li et al. (2024), Xiang et al. (2023), and Zhou et al. (2023) improved underwater image quality from the perspectives of light attenuation modeling, histogram equalization, and deep feature learning, respectively. These methods have achieved certain improvements in color correction, contrast enhance-ment, and detail restoration. However, physical model-based methods usually rely on imaging assumptions and parame-ter estimation. Single traditional enhancement methods are difficult to handle multiple degradation factors at the same time, while deep learning-based methods often require large amounts of training data and high computational resources. Therefore, this paper adopts a non-learning collaborative enhancement strategy. It improves degraded underwater im-ages by addressing detail loss and color distortion. 
+
+2.3. Object Detection Methods 
+
+Object detection is a key task in underwater scene per-ception and target recognition. It is widely applied in un-derwater robot perception, marine organism monitoring, and underwater target recognition. Object detection meth-ods mainly include two stage detection algorithms and one stage detection algorithms. Two stage methods such as Fast R-CNN (Girshick, 2015) and Faster R-CNN (Ren et al., 2017) improve detection accuracy and localization stability through region proposal generation and refined classifica-tion regression. One-stage methods such as YOLO (Red-mon et al., 2016) and SSD (Liu et al., 2016) remove the region proposal generation process and directly perform object classification and location regression, achieving faster inference speed and better real-time application potential. YOLOv8 further optimizes feature extraction, feature fusion, and detection head design, achieving a good balance be-tween detection speed and detection accuracy, which makes it suitable as a basic framework for real time underwater object detection tasks. The commonly used CIoU loss in YOLOv8 comprehensively considers overlap area, center  
+
+> Figure 2: Overall Processing Framework Diagram.
+
+point distance, and aspect ratio differences, which can im-prove bounding box regression accuracy and convergence speed to a certain extent. However, in complex underwa-ter scenes, target scale variation, blurred boundaries, and differences among samples of different quality may still affect localization performance. In this paper, we feed the enhanced underwater images into the detection network. We also optimize the bounding box regression loss to improve target localization and overall detection performance. 
+
+## 3. Methods 
+
+Underwater image degradation mainly appears in two forms: detail loss and color distortion. Detail loss blurs object edges and weakens texture information, which makes feature extraction more difficult. Color distortion reduces the contrast between objects and the background, which makes object recognition more difficult. Therefore, this pa-per builds a detail enhancement branch and a color restora-tion branch. A weighted fusion strategy combines their com-plementary information and improves the overall quality of underwater images in a simple and efficient way. The fused images are fed into YOLOv8 for object detection. We also optimize the bounding box regression loss to improve the match between predicted boxes and ground truth boxes. This further improves localization accuracy and overall detection performance. The overall framework of the proposed method is shown in Fig. 2. 
+
+3.1. Detail Enhancement Branch 
+
+The Detail Enhancement branch comprises three com-ponents, including lighting correction, adaptive brightness adjustment, and local contrast enhancement, which optimize the input image in stages to improve its overall visibility and detail rendering. The overall flowchart is shown in Fig. 3. To reduce the influence of uneven underwater illumina-tion on image quality, this paper adopts the Single Scale Retinex method for illumination correction of the input image. According to the Retinex theory, an image can be    
+
+> L. Cao et al.: Preprint submitted to Elsevier Page 3 of 14 Dual-Branch Underwater Image Enhancement and Object Detection
+> Figure 3: Diagram of the detail enhancement branch.
+
+decomposed into illumination and reflection components, where the illumination component mainly contains low fre-quency information, while the reflection component mainly reflects texture and detail features of the scene and is more related to high frequency information. Based on this idea, the input image is compared with its Gaussian smoothed result in the logarithmic domain. This operation suppresses illumination influence, enhances reflection information, and improves the visibility of dark regions. The Retinex output is formulated as Eq. 1 
+
+𝑅 (𝑥, 𝑦 ) = log 𝐼 0(𝑥, 𝑦 ) − log (𝐺 𝜎 ∗ 𝐼 0
+
+) (𝑥, 𝑦 ) (1) Where 𝐺 𝜎 represents a Gaussian function with a standard deviation of 𝜎 .After illumination correction, we construct an adaptive adjustment factor based on the overall image brightness. We apply a nonlinear mapping to enhance detail responses, allowing the enhancement strength to adapt to different brightness levels. The mapping process is formulated as Eq. 2 
+
+𝐷 (𝑥, 𝑦 ) = 𝑅 𝑛 (𝑥, 𝑦 ) 1 
+
+> 𝜂
+
+(2) Where 𝜂 is an adaptive parameter, which is calculated using Eq. 3. 
+
+𝜂 = 𝜂 max − 𝜇 
+
+255 
+
+(𝜂 max − 𝜂 min 
+
+) (3) where 𝜇 denotes the average image brightness. The param-eters 𝜂 min and 𝜂 max only limit the adaptive adjustment range and prevent large fluctuations in mapping strength. They do not serve as the main adjustment parameters. When the image brightness is low, the mapping pro-cess increases the response intensity of dark regions to enhance weak textures and edge structures. When the image brightness is high, the enhancement strength is automatically reduced to avoid local over enhancement and noise amplifi-cation, thereby keeping the enhancement process stable and natural. This paper further introduces a mild local contrast en-hancement operation after global brightness adjustment. The  
+
+> Figure 4: Color Restoration Branch Diagram.
+
+mapped result is converted into the LAB color space, and mild local contrast enhancement is applied to the L channel to further improve local brightness differences and tex-ture layering information. As a result, the enhanced image achieves improved overall brightness together with clearer detail representation and richer visual layering. 
+
+3.2. Color Restoration Branch 
+
+The color restoration branch includes channel statistical analysis, brightness guided gain modulation, and local con-trast optimization. These components progressively correct the input image to improve color naturalness and visual layering. The overall flow of the branch is shown in Fig. 4. The mean value of each color channel is calculated according to Eq. 4. 
+
+𝑎𝑣𝑔 𝑐 =
+
+∑𝑥,𝑦 𝐼 0,𝑐 (𝑥, 𝑦 )
+
+𝑁 , 𝑐 ∈ { 𝑟, 𝑔, 𝑏 } (4) Where 𝑁 represents the total number of pixels in the image. Calculate the average of the overall grayscale values using Eq. 5. 
+
+𝑎𝑣𝑔 = 𝑎𝑣𝑔 𝑟 + 𝑎𝑣𝑔 𝑔 + 𝑎𝑣𝑔 𝑏 
+
+3 (5) After obtaining the global statistics, we introduce a small standard deviation correction term into the channel mean to improve the stability of white balance adjustment. We use it to calculate the gain coefficient for each channel. The gain coefficients of different channels are formulated as Eq. 6 
+
+𝑘 𝑐 = avg avg 𝑐 + 𝛽𝜎 𝑐 + 𝜀 , 𝑐 ∈ { 𝑟, 𝑔, 𝑏 } (6) where 𝜎 denotes the standard deviation of each channel, and 
+
+𝜀 is a small constant that prevents division by zero. The parameter 𝛽 serves as a correction coefficient to limit large fluctuations in the gain of individual channels. We set 𝛽 to 0.1 and keep it unchanged in all experiments. Since dark regions in underwater images usually contain low brightness and low confidence color information, strong color compensation may easily cause noise enhancement and false colors.Therefore, we introduce a brightness guided   
+
+> L. Cao et al.: Preprint submitted to Elsevier Page 4 of 14 Dual-Branch Underwater Image Enhancement and Object Detection
+
+weight to perform spatial adaptive modulation on the color gain. The brightness guided weight is formulated as Eq. 7. 
+
+𝜔 (𝑥, 𝑦 ) = 𝐼 𝑔𝑟𝑎𝑦 (𝑥, 𝑦 )255 (7) The adaptive variation of channel gain with image brightness is formulated as Eq. 8. 
+
+𝐺 𝑐 (𝑥, 𝑦 ) = 𝑘 𝜔 (𝑥,𝑦 ) 
+
+> 𝑐
+
+, 𝑐 ∈ { 𝑟, 𝑔, 𝑏 } (8) The final correction result is formulated as Eq. 9. 
+
+𝐺 𝑐𝑟,𝑐 (𝑥, 𝑦 ) = 𝐼 0,𝑐 (𝑥, 𝑦 ) ⋅ 𝐺 𝑐 (𝑥, 𝑦 ), 𝑐 ∈ { 𝑟, 𝑔, 𝑏 } (9) When the region brightness is low, the color compen-sation strength is automatically reduced to suppress dark region noise. In bright regions, the color information is more stable, so the color compensation strength is properly increased to restore attenuated red information and reduce strong blue green color cast. This makes the color distri-bution more natural and balanced. After the above color correction process, image 𝐺 𝑐𝑟,𝑐 (𝑥, 𝑦 ) is converted into the LAB color space, and the L channel is extracted for local layering adjustment. This process redistributes the L channel distribution by limiting the local histogram enhancement strength. The enhanced L channel is then merged with the original a and b channels and converted back to the RGB color space to obtain color restoration result 𝐺 𝑐 (𝑥, 𝑦 ).
+
+3.3. Linear weighted fusion 
+
+The processed images 𝐷 (𝑥, 𝑦 ) and 𝐺 𝑒 (𝑥, 𝑦 ) are linearly weighted and fused according to Eq. 10 to obtain the final image 𝐼 𝑟 (𝑥, 𝑦 ).
+
+𝐼 𝑟 (𝑥, 𝑦 ) = 𝜕𝐷 (𝑥, 𝑦 ) + (1 − 𝜕 )𝐺 𝑒 (𝑥, 𝑦 ) (10) Where 𝜕 represents the weight. 
+
+## 4. Experimental Results and Analysis 
+
+4.1. Experimental Environment 
+
+The experimental setup details are shown in Table 1. The experiment was programmed in Python and ran on Windows 11. The model used for the object detection phase was YOLOv8n, with 100 epochs, a batch size of 4, and input image dimensions of 640 × 640 .     
+
+> Table 1
+> Experimental configuration. Experimental Environment Specification GPU NVIDIA GeForce RTX 4070 CPU Intel Core i7-10875H CUDA 11.1 PyTorch 1.8.2
+
+Algorithm 1 Underwater Image Enhancement Algorithm  
+
+> 1:
+
+Input: Raw underwater image 𝐼 0(𝑥, 𝑦 ) 
+
+> 2:
+
+Output: Enhanced image 𝐼 𝑟 (𝑥, 𝑦 ) 
+
+> 3:
+
+Estimate illumination component 𝐿 (𝑥, 𝑦 ) using Gaus-sian smoothing  
+
+> 4:
+
+Obtain reflectance response 𝑅 (𝑥, 𝑦 ) by logarithmic dif-ference  
+
+> 5:
+
+Normalize reflectance response 𝑅 𝑛 (𝑥, 𝑦 ) 
+
+> 6:
+
+Calculate luminance mean 𝜇 from 𝑅 𝑛 (𝑥, 𝑦 ) 
+
+> 7:
+
+Determine adaptive adjustment factor 𝜂 based on 𝜇  
+
+> 8:
+
+Perform adaptive nonlinear mapping to obtain 𝐷 1(𝑥, 𝑦 ) 
+
+> 9:
+
+Apply mild local contrast enhancement to 𝐷 1(𝑥, 𝑦 ) in LAB space  
+
+> 10:
+
+Obtain detail-enhanced image 𝐷 (𝑥, 𝑦 ) 
+
+> 11:
+
+Calculate channel means 𝑎𝑣𝑔 𝑐 and standard deviations 
+
+𝜎 𝑐 of 𝐼 0(𝑥, 𝑦 ) 
+
+> 12:
+
+Calculate global channel average 𝑎𝑣𝑔  
+
+> 13:
+
+Determine statistically constrained channel gains 𝑘 𝑐  
+
+> 14:
+
+Calculate luminance-guided weight map 𝜔 (𝑥, 𝑦 ) from 
+
+𝐼 0(𝑥, 𝑦 ) 
+
+> 15:
+
+Modulate 𝑘 𝑐 with 𝜔 (𝑥, 𝑦 ) to obtain adaptive gain map 
+
+𝐺 𝑐 (𝑥, 𝑦 ) 
+
+> 16:
+
+Apply adaptive color restoration to obtain 𝐺 𝑐𝑟,𝑐 (𝑥, 𝑦 ) 
+
+> 17:
+
+Apply local contrast enhancement to 𝐺 𝑐𝑟,𝑐 (𝑥, 𝑦 ) in LAB space  
+
+> 18:
+
+Obtain color-restored image 𝐺 𝑒 (𝑥, 𝑦 ) 
+
+> 19:
+
+Fuse 𝐷 (𝑥, 𝑦 ) and 𝐺 𝑒 (𝑥, 𝑦 ) with weight 𝜕 to obtain final enhanced image 𝐼 𝑟 (𝑥, 𝑦 ) 
+
+> 20:
+
+Return 𝐼 𝑟 (𝑥, 𝑦 )
+
+4.2. Experimental Dataset 
+
+This paper uses four underwater image datasets-URPC2022, UIEB, EUVP, and DUO-for experimentation. The UIEB dataset is a commonly used benchmark dataset in underwater image enhancement research. It con-tains 950 real underwater images, including 890 images with reference images and 60 challenging images. The EUVP dataset contains various complex degradation scenes and can be used to evaluate the enhancement performance of models under different conditions. These two datasets are mainly used for the quantitative evaluation of underwater image enhancement methods to verify enhancement performance under different scenes. We calculate the evaluation metrics on 890 images from the UIEB dataset. Since the EUVP dataset contains a large number of images, we randomly select 500 images from the EUVP ∖Paired ∖underwater_dark subset for metric calculation. The URPC2022 dataset contains 9000 underwater im-ages, and the target categories include holothurian, echinus, scallop, and starfish. This paper not only uses the dataset to evaluate image enhancement performance, but also relabels the dataset for the training and validation of the YOLOv8 ob-ject detection model. During YOLOv8 training, the dataset is divided with a ratio of 0.83:0.17, where 7470 images are used for training and 1530 images are used for validation.   
+
+> L. Cao et al.: Preprint submitted to Elsevier Page 5 of 14 Dual-Branch Underwater Image Enhancement and Object Detection
+
+The DUO dataset shows common underwater degra-dation problems, such as color distortion, low contrast, blur, and complex backgrounds. Its targets are usually small, densely distributed, and easily occluded, which places higher requirements on detection algorithms. This paper uses the DUO dataset as supplementary experimental data. It further verifies the robustness and generalization ability of the proposed method in complex underwater scenes. 
+
+4.3. Experimental Pretreatment 
+
+During the testing stage, models that support arbitrary input sizes process images at their original resolutions. This preserves the spatial resolution of the enhanced results. For models limited by network structure, we first use reflection padding to expand the input image to the required size of the network, and then crop the output back to the original resolution after inference. This operation is only used to satisfy the size compatibility requirements of the network structure and does not introduce additional enhancement information. 
+
+4.4. Experimental Evaluation Criteria 
+
+Image quality metrics include Entropy, UCIQE, UIQM, PSNR, and SSIM. Entropy measures the richness of image information, where a larger value usually indicates that the image contains more information. UCIQE quantitatively evaluates nonuniform color distortion, blur, and low contrast in underwater images. UIQM comprehensively evaluates image color balance, sharpness, and contrast. Peak Signal to Noise Ratio (PSNR) measures the global distortion between the enhanced image and the reference image. SSIM evaluates the similarity between the enhanced image and the reference image from the aspects of brightness, contrast, and structural information. Real time metrics include Runtime and FPS. Runtime measures the average end to end processing time for a single image. FPS evaluates the real time processing ability of the method, where a larger value indicates a faster running speed. Object detection metrics include P, R, mAP50, and mAP50:95. P measures how many predicted positive sam-ples are true positive samples. R measures the proportion of real targets that are correctly detected. mAP50 represents the mean average precision of all categories when the IoU threshold is 0.5. mAP50:95 represents the mean average precision when the IoU threshold ranges from 0.5 to 0.95 with a step size of 0.05. 
+
+4.5. Analysis of Image Processing Results 
+
+4.5.1. Subjective Analysis 
+
+As shown in Figs. 5-8, the enhancement effects of var-ious methods vary under different degradation conditions such as cyan bias, green bias, blue bias, and exposure. Single traditional methods such as HE can improve image contrast to a certain extent, but they may easily cause color distortion or local over enhancement. WB and Fusion improve color correction to some extent, but they still suffer from residual color distortion and insufficient detail restoration. ULAP improves brightness and clarity in some images, but its color stability is limited, and obvious color shifts can still be observed in green cast and exposure degradation scenes. Deep learning-based methods such as WaterNet, UWCNN, FUnIE-GAN, PUIE-Net, and HUPE improve visual qual-ity, but some results still show unnatural colors, uneven brightness, or blurred texture details in complex underwater scenes. Overall, the proposed method shows better stability in different complex underwater environments. It effectively corrects color deviation, improves image brightness and con-trast, and produces more natural and clearer visual results. 
+
+4.5.2. Objective Analysis 
+
+This paper selects 30 images from each of four complex underwater scenes in the URPC dataset, including cyan cast, green cast, blue cast, and exposure degradation, to construct the test set. The above objective evaluation metrics are then calculated for the results produced by different methods. Considering the differences among datasets in imaging en-vironment, degradation type, and scene complexity, it is difficult to comprehensively evaluate the effectiveness of the proposed method using only the URPC dataset. Therefore, this paper also conducts experimental analysis on the UIEB and EUVP datasets to evaluate the performance of the pro-posed method in more diverse scenes. The results are shown in Tables 2 and 3. Due to differences in public implementations, parameter settings, and reproduction conditions, some deep learning methods use an input size of 256 × 256 in our experi-ments. For these methods, we select images with an orig-inal resolution of 256 × 256 from the EUVP dataset. All methods use the same input size, without additional resiz-ing. Differences in input size may further affect inference efficiency and downstream detection performance. There-fore, we report only the image quality metrics for these methods and present the results as supplementary experi-ments. TestA contains the same 500 images selected above from the EUVP subset underwater_dark ∖trainA. TestB con-tains 500 images randomly selected from the EUVP subset underwater_imagenet ∖trainA. The results are shown in Ta-ble 4. As shown in Tables 2-4, the enhanced images produced by our method outperform the original images on most met-rics. This demonstrates that our method effectively improves underwater image quality. The proposed method achieves excellent performance on no reference metrics, especially UIQM, and outperforms other state of the art methods on both the UIEB and EUVP datasets. This indicates that the proposed method can effectively improve the visual perception quality of underwater images. Since this paper focuses more on improving overall visual quality, clarity, and contrast rather than strictly optimizing pixel level recon-struction errors, the proposed method does not achieve the best performance on full reference metrics such as PSNR and SSIM, and some differences still exist between the enhanced images and the reference images.   
+
+> L. Cao et al.: Preprint submitted to Elsevier Page 6 of 14
+
+Dual-Branch Underwater Image Enhancement and Object Detection 
+
+Figure 5: The visual comparison of cyan cast underwater images. From left to right are: Raw, HE, WB, Fusion (Ancuti et al., 2018), ULAP (Song et al., 2018), WaterNet (Li et al., 2020b), UWCNN (Li et al., 2020a), FUnIE-GAN (Islam et al., 2020), PUIE-Net (Fu et al., 2022), HUPE (Zhang et al., 2025), and Ours. 
+
+Figure 6: The visual comparison of green cast underwater images. From left to right are: Raw, HE, WB, Fusion (Ancuti et al., 2018), ULAP (Song et al., 2018), WaterNet (Li et al., 2020b), UWCNN (Li et al., 2020a), FUnIE-GAN (Islam et al., 2020), PUIE-Net (Fu et al., 2022), HUPE (Zhang et al., 2025), and Ours. 
+
+Figure 7: The visual comparison of blue cast underwater images. From left to right are: Raw, HE, WB, Fusion (Ancuti et al., 2018), ULAP (Song et al., 2018), WaterNet (Li et al., 2020b), UWCNN (Li et al., 2020a), FUnIE-GAN (Islam et al., 2020), PUIE-Net (Fu et al., 2022), HUPE (Zhang et al., 2025), and Ours. 
+
+Figure 8: The visual comparison of exposure-degraded underwater images. From left to right are: Raw, HE, WB, Fusion (Ancuti et al., 2018), ULAP (Song et al., 2018), WaterNet (Li et al., 2020b), UWCNN (Li et al., 2020a), FUnIE-GAN (Islam et al., 2020), PUIE-Net (Fu et al., 2022), HUPE (Zhang et al., 2025), and Ours. L. Cao et al.: Preprint submitted to Elsevier Page 7 of 14 Dual-Branch Underwater Image Enhancement and Object Detection                                                                                                                                                                 
+
+> Table 2
+> No-reference image quality evaluation. Method URPC UIEB EUVP Entropy UCIQE UIQM Entropy UCIQE UIQM Entropy UCIQE UIQM Raw 6.652 0.416 0.954 6.786 0.457 1.837 7.195 0.500 2.489 HE 7.473 0.528 1.596 7.298 0.541 2.078 7.608 0.533 2.539 WB 6.702 0.411 1.051 6.503 0.472 1.960 7.327 0.501 2.558 Fusion 7.040 0.460 1.099 6.747 0.471 1.808 7.165 0.503 2.539 ULAP 6.987 0.479 1.366 6.618 0.512 1.952 7.308 0.533 2.447 WaterNet 7.438 0.505 1.525 7.418 0.517 2.211 7.592 0.522 2.556 UWCNN 6.687 0.418 1.080 6.932 0.459 1.931 7.484 0.503 2.511 FUnIE-GAN 7.068 0.456 1.423 7.223 0.487 2.205 7.527 0.514 2.522 PUIE-Net 7.290 0.476 1.400 7.336 0.494 2.114 7.530 0.506 2.534 HUPE 7.462 0.508 1.220 7.489 0.531 2.142 7.675 0.538 2.546 Ours 7.034 0.428 1.508 7.181 0.470 2.249 7.602 0.502 2.576 Table 3
+> Full-reference image quality evaluation. Method UIEB EUVP PSNR SSIM PSNR SSIM Raw 28.62 0.773 28.39 0.832 HE 28.11 0.771 27.96 0.699 WB 28.20 0.774 28.74 0.864 Fusion 27.99 0.678 28.13 0.713 ULAP 28.31 0.744 28.29 0.782 WaterNet 29.35 0.876 28.73 0.856 UWCNN 28.09 0.754 28.61 0.880
+> FUnIE-GAN 28.29 0.714 28.91 0.775 PUIE-Net 28.53 0.868 28.45 0.871 HUPE 29.14 0.859 28.39 0.847 Ours 28.13 0.849 28.03 0.772
+> Figure 9: RGB distribution histogram.
+
+This paper analyzes the pixel distribution of each color channel before and after enhancement using RGB his-tograms, which provides a more intuitive evaluation of color correction and dynamic range in different complex underwater scenes. The results are shown in Fig. 9. It can be observed that the peaks of different color channels in group (b) become more concentrated, and the separation between channel intervals is clearly improved. Compared with the scattered histogram distribution or ex-cessive overflow of a single channel in the original images of group (a), the enhanced results show obvious improve-ment. These results indicate that the proposed method can effectively optimize image color distribution, improve the utilization of color information, reduce pixel redundancy, and enhance overall color balance. 
+
+4.6. Real-time Analysis 
+
+To further evaluate the runtime efficiency of different methods, we select images with five representative reso-lutions from URPC2022, UIEB, and EUVP: 256 × 256 ,
+
+640 × 480 , 1280 × 720 , 1920 × 1080 , and 3840 × 2160 .All images are converted to JPG format to ensure con-sistent testing conditions. The average runtime per image and the corresponding FPS are reported in Table 5. HUPE requires additional prior information during inference, and its complete processing pipeline cannot be fully reproduced under the unified timing environment adopted in this study. Therefore, HUPE is excluded from the runtime comparison. The results show that our method adapts well to different input resolutions. It maintains high processing efficiency, especially for high-resolution images. 
+
+4.7. Feature Analysis 
+
+The above objective image metrics quantitatively de-scribe enhancement results from the perspectives of global statistical characteristics and reference consistency. Although these metrics can reflect the overall quality change of images, they still lack intuitive evaluation of whether target regions are effectively highlighted, background interference is suppressed, and local textures, edges, and structural infor-mation are sufficiently preserved. Especially in underwater image enhancement tasks, enhancement results should not only improve visual quality, but also provide more reliable inputs for subsequent object detection, feature extraction, and image matching.                                                                                                                                       
+
+> L. Cao et al.: Preprint submitted to Elsevier Page 8 of 14 Dual-Branch Underwater Image Enhancement and Object Detection
+> Table 4
+> Comparison with advanced underwater image enhancement methods. Method TestA TestB Entropy UCIQE UIQM PSNR SSIM Entropy UCIQE UIQM PSNR SSIM Ucolor (Li et al., 2021) 7.562 0.515 2.547 28.61 0.865 7.547 0.520 2.527 28.95 0.873
+> PUGAN (Cong et al., 2023) 7.511 0.513 2.519 28.60 0.818 7.655 0.540 2.571 28.54 0.826 Semi-UIR (Huang et al., 2023) 7.711 0.535 2.515 28.42 0.824 7.649 0.533 2.533 28.37 0.759 X-CAUNET (Pramanick et al., 2024) 7.637 0.530 2.548 28.71 0.863 7.589 0.536 2.565 28.61 0.846 Ours 7.602 0.502 2.576 28.03 0.772 7.528 0.491 2.588 28.03 0.769
+> Table 5
+> Runtime and model parameter comparison. Method 256 × 256 640 × 480 1280 × 720 1920 × 1080 3840 × 2160 Parameters Time (s) FPS Time (s) FPS Time (s) FPS Time (s) FPS Time (s) FPS WaterNet 0.085 11.779 0.243 4.115 0.622 1.608 1.443 0.693 46.278 0.024 1.09M UWCNN 0.216 4.630 0.395 2.534 0.883 1.132 1.892 0.529 7.465 1.134 0.04M FUnIE-GAN 0.018 54.688 0.044 22.386 0.083 12.004 0.137 7.292 0.597 1.676 7.02M PUIE-Net 0.042 23.726 0.076 13.191 0.187 5.335 0.394 2.539 14.364 0.070 16.12M Ours 0.009 106.693 0.020 50.900 0.048 20.762 0.108 9.218 0.388 2.579 –
+> Figure 10: Significance detection results of U2NET (Qin et al., 2020). The upper row shows the original input results, while the lower row displays the results processed by our method.
+
+Therefore, this paper uses saliency detection and feature matching experiments to qualitatively analyze the enhance-ment results from two perspectives: target saliency represen-tation and local feature preservation. The above experiments, including image quality eval-uation, real time analysis, saliency detection, and feature matching, verify the effectiveness of the proposed method from three aspects: image quality, computational efficiency, and feature representation ability. These results provide a relatively comprehensive evaluation of enhancement perfor-mance, but their evaluation focus is still mainly at the image level. To further show the application value of enhanced results in practical vision tasks, this paper introduces ob-ject detection in the following experiments. The changes in            
+
+> Figure 11: Feature matching results (Lowe, 2004). The upper row shows the original input results, while the lower row displays the results processed by our method.
+
+detection performance are used to evaluate how different enhancement methods support downstream tasks. 
+
+4.8. Analysis of Target Detection Results 
+
+4.8.1. YOLOv8 Detection Results on URPC 
+
+Comprehensive analysis: According to Tables 2-3 and Table 6, there is no simple positive correlation between image quality evaluation metrics and object detection per-formance. Entropy increases when the image contains richer gray level distribution and more detailed information, but it may also reflect more noise and background interference. UCIQE and UIQM improve when the image obtains better color, contrast, and clarity, but higher values do not always mean that the target features required by the detector are also enhanced. PSNR and SSIM increase when the enhanced image is closer to the reference image in pixel values and structural distribution, which indicates smaller reconstruc-tion errors and higher similarity. However, these full refer-ence metrics mainly describe reconstruction consistency and                                                    
+
+> L. Cao et al.: Preprint submitted to Elsevier Page 9 of 14 Dual-Branch Underwater Image Enhancement and Object Detection
+> Table 6
+> Object detection results on the URPC dataset. Method PRmAP50 mAP50:95 Raw 0.830 0.705 0.794 0.445 HE 0.807 0.680 0.769 0.419 WB 0.813 0.716 0.803 0.449 Fusion 0.797 0.696 0.776 0.429 ULAP 0.815 0.711 0.792 0.442 WaterNet 0.820 0.717 0.805 0.447 UWCNN 0.804 0.701 0.782 0.437 FUnIE-GAN 0.806 0.692 0.776 0.426 PUIE-Net 0.815 0.723 0.807 0.451 HUPE 0.819 0.732 0.809 0.454 Ours 0.818 0.735 0.815 0.456
+> Figure 12: Detection results under different underwater envi-ronments. (a) Cyan cast underwater environment; (b) Green cast underwater environment; (c) Blue cast underwater envi-ronment; and (d) Exposure degraded underwater environment. The upper row of each group shows the detection results on the raw images, while the lower row presents the detection results after image enhancement.
+
+have limited ability to reflect target saliency and detection usability. Therefore, some methods achieve good objective evaluation metrics, but do not obtain ideal results in the object detection task. In comparison, the proposed method not only improves image quality, but also promotes under-water object detection performance. It improves mAP50 by 2.1%, and achieves the best results in recall and mAP50-95, reaching 0.735 and 0.456, respectively. 
+
+4.8.2. Visualization Results 
+
+This paper visualizes the test results in four underwa-ter environments: cyan-dominated, green-dominated, blue-dominated, and exposed conditions. The following images demonstrate the detection performance and corresponding confidence levels for sea cucumbers, sea urchins, scallops, and starfish.  
+
+> Figure 13: Thermal maps under different environmental con-ditions. (a) Original image; (b) Thermal map of the original image; (c) Post-processing image; (d) Thermal map of the post-processing image.
+
+As shown in Fig. 12, the original image in the cyan cast scene shows a cold color tone, and the layers between the targets and the rock background are not clear enough. After processing by the proposed method, the image color becomes more natural, and the target contours and rock textures are enhanced, making targets such as echinus and holothurian easier to distinguish. In the green cast scene, severe color distortion reduces the difference between the targets and the background. After processing, the color dis-tortion is improved, the local contrast is enhanced, and the target regions become more prominent. In the blue cast scene, the target edges and local textures become clearer after processing, which improves the recognition of densely distributed echinus. In the abnormal exposure scene, the original image suffers from uneven brightness distribution and local detail loss. After processing, some image details are restored, which improves the object detection perfor-mance under complex lighting conditions. The proposed method shows good enhancement effects in four typical complex underwater environments. It effec-tively reduces visual degradation caused by color distortion and abnormal exposure, improves the distinction between targets and backgrounds, and enables the detection model to obtain clearer target feature representation. The results show that the proposed method detects more targets, achieves     
+
+> L. Cao et al.: Preprint submitted to Elsevier Page 10 of 14 Dual-Branch Underwater Image Enhancement and Object Detection
+> Figure 14: Comparison of P-R curves.
+> Figure 15: Canny edge detection.
+
+more accurate localization, and maintains more stable con-fidence scores after enhancement. As shown in Fig. 13, the proposed method shows stronger feature response and localization ability in complex under-water backgrounds. Compared with the detection results of the original images, the proposed method produces more concentrated heatmap responses on target regions, which reduces missed detections and false detections of small underwater targets. Fig. 14 shows that the P-R curve of the enhanced images is closer to the upper right corner and keeps higher preci-sion in most recall ranges. This indicates that the proposed method improves target feature representation and reduces background interference, which helps the detector obtain better detection results. 
+
+4.8.3. Analysis of the Reasons for Improved Detection Performance 
+
+This paper uses the Canny operator to compare edge de-tection results between the original images and the enhanced images. Fig. 15 shows that the proposed method makes target edges clearer. Structures such as echinus spines, shell contours, and small target boundaries become more obvious, indicating that the proposed method enhances target edge in-formation and helps improve Recall and mAP. However, the proposed method also enhances some background textures, which may introduce certain false detections and prevent Precision from achieving the best result.  
+
+> Figure 16: Sensitivity analysis of the fusion parameter.
+
+4.8.4. Ablation Experiment 
+
+The previous analysis shows that image quality metrics do not strictly correspond to object detection performance. Higher entropy may result from amplified underwater noise and enhanced information in non target regions. Higher UIQM and UCIQE values reflect improvements in color, contrast, and clarity. However, these metrics cannot show whether the improvements mainly occur in target regions or backgrounds. If fusion weights rely only on image quality metrics, the parameters may favor global visual enhance-ment. This choice may not preserve and highlight useful features in target regions. Therefore, we adopt a task based evaluation strategy. We select the final parameters accord-ing to detection performance, while keeping image quality stable. The internal ablation study in Table 7 shows that re-moving any module reduces detection performance. This result confirms that each module contributes to the final detection performance. Removing the B1 module reduces mAP50 from 0.815 to 0.804, which gives the largest drop. This result shows that B1 plays an important role in target feature representation. Removing the other modules causes smaller drops in detection performance, but none reaches the full model. These results indicate complementary and collaborative effects among the modules. The structural ablation study in Table 7 shows that nei-ther single branch structures nor cascaded structures achieve the best performance. Branch A focuses on detail enhance-ment, while Branch B focuses on color restoration. Used alone, each branch cannot fully preserve target details and color consistency. Although A followed by B and B followed by A combine both types of information, the later operation may weaken some details or color information. In contrast, the parallel structure preserves useful information from both branches. The fusion process combines their complementary strengths. Therefore, the parallel structure achieves better detection performance than single branch and cascade struc-tures. As shown in Table 7 and Fig. 16, ( 𝜕 = 0.20) lies within a stable high performance region. At this setting, Recall, mAP50, and mAP50-95 reach strong levels, while image quality metrics remain stable. This result shows that the set-ting balances visual enhancement quality and downstream detection performance. Therefore, we use a fusion weight of (𝜕 = 0.20) in all experiments.   
+
+> L. Cao et al.: Preprint submitted to Elsevier Page 11 of 14
+
+Dual-Branch Underwater Image Enhancement and Object Detection 
+
+Table 7 
+
+Ablation experiments. Type Experimental setting Image quality Object detection results Entropy UCIQE UIQM P R mAP50 mAP50:95 Internal ablation w/o A1 7.210 0.451 1.530 0.829 0.722 0.809 0.452 w/o A2 7.037 0.428 1.424 0.823 0.731 0.811 0.453 w/o A3 6.965 0.420 1.515 0.818 0.738 0.813 0.454 w/o B1 7.027 0.431 1.484 0.828 0.715 0.804 0.449 w/o B2 6.506 0.385 1.039 0.822 0.729 0.812 0.456 
+
+Structural ablation Only A 5.993 0.355 1.278 0.813 0.697 0.790 0.439 Only B 7.206 0.452 1.563 0.826 0.720 0.804 0.453 A→B 6.976 0.431 1.912 0.818 0.703 0.793 0.441 B→A 6.179 0.357 1.352 0.810 0.697 0.783 0.433 A//B ( 𝜕 = 0 .10 ) 7.126 0.440 1.536 0.822 0.728 0.809 0.452 A//B ( 𝜕 = 0 .15 ) 7.081 0.434 1.523 0.820 0.727 0.811 0.453 A//B ( 𝜕 = 0 .20 ) 7.034 0.428 1.508 0.818 0.735 0.815 0.456 
+
+A//B ( 𝜕 = 0 .25 ) 6.986 0.422 1.494 0.824 0.728 0.811 0.453 A//B ( 𝜕 = 0 .30 ) 6.936 0.417 1.480 0.825 0.723 0.809 0.452 A//B ( 𝜕 = 0 .35 ) 6.884 0.411 1.466 0.833 0.723 0.809 0.454 A//B ( 𝜕 = 0 .50 ) 6.718 0.396 1.424 0.825 0.720 0.810 0.453 A//B ( 𝜕 = 0 .65 ) 6.533 0.382 1.381 0.815 0.720 0.803 0.450 A//B ( 𝜕 = 0 .80 ) 6.319 0.370 1.336 0.816 0.713 0.799 0.444 
+
+4.8.5. Comparative Analysis Under Different Loss Functions 
+
+After confirming the overall effectiveness of the pro-posed enhancement method, we further analyze the de-tection stability of enhanced images. We compare several representative bounding box regression losses, including GIoU Rezatofighi et al. (2019), DIoU and CIoU Zheng et al. (2020), EIoU Zhang et al. (2022), SIoU Gevorgyan (2022), and WIoU Tong et al. (2023). We keep the detection network, training settings, and dataset split unchanged, and only replace the loss function. Table 8 presents the results. 
+
+Table 8 
+
+Comparison of different IoU loss functions. Loss P R mAP50mAP50:95 GIoU 0.814 0.730 0.810 0.453 DIoU 0.821 0.734 0.811 0.452 CIoU 0.818 0.735 0.815 0.456 
+
+SIoU 0.824 0.727 0.813 0.455 EIoU 0.820 0.724 0.806 0.450 WIoU v1 0.816 0.737 0.810 0.455 WIoU v2 ( 𝛾 = 0 .5) 0.821 0.735 0.816 0.454 WIoU v3 ( 𝛼 = 1 .9, 𝛿 = 3 )0.826 0.733 0.814 0.456 
+
+WIoU v3 ( 𝛼 = 1 .6, 𝛿 = 4 ) 0.815 0.731 0.812 0.453 WIoU v3 ( 𝛼 = 1 .4, 𝛿 = 5 )0.826 0.729 0.813 0.454 
+
+Based on the edge and saliency results, our method strengthens object contours and texture details. It also im-proves the separation between targets and backgrounds, re-ducing geometric errors between predicted and ground truth boxes. Therefore, CIoU can better use its center distance and aspect ratio constraints. After enhancement, some blurry targets become more informative samples. WIoU reduces the influence of abnormal samples through dynamic sample weighting. It also focuses more on medium quality samples with greater optimization value. As a result, WIoU achieves better overall detection performance. 
+
+4.8.6. YOLOv8 Detection Results on DUO 
+
+Table 9 
+
+Object detection results on the DUO dataset. Method P R mAP50 mAP50:95 Raw 0.822 0.727 0.803 0.602 HE 0.835 0.668 0.770 0.551 WB 0.836 0.718 0.806 0.600 Fusion 0.787 0.680 0.763 0.532 ULAP 0.798 0.729 0.798 0.590 WaterNet 0.830 0.712 0.801 0.587 UWCNN 0.841 0.699 0.794 0.585 FUnIE-GAN 0.820 0.667 0.773 0.560 PUIE-Net 0.853 0.715 0.812 0.604 
+
+HUPE 0.829 0.725 0.805 0.598 Ours 0.817 0.735 0.811 0.603 
+
+The results are shown in Table 9, the proposed method achieves the highest recall of 0.735, while mAP50 and mAP50-95 reach 0.811 and 0.603, respectively, which are the second best results. These results indicate that the pro-posed method has good generalization ability in different underwater scenes. 
+
+L. Cao et al.: Preprint submitted to Elsevier Page 12 of 14 Dual-Branch Underwater Image Enhancement and Object Detection 
+
+Figure 17: Typical failure cases in extremely dark and blurry scenes. 
+
+4.9. Failure Case Analysis 
+
+Although our method improves image brightness, color quality, and object edges in most underwater scenes, it performs less effectively in extremely dark and blurry con-ditions. Fig. 17 presents typical failure cases. The enhance-ment process improves overall brightness and local contrast, making the scenes easier to recognize. However, the Canny edge maps show that the method does not recover useful target information. Two main factors cause these results. Under extremely low light and blur, the original contrast between the tar-get and the background is weak. Some texture and con-tour information has already been severely lost. The detail enhancement branch highlights high frequency responses through log-domain illumination correction and local con-trast enhancement. However, it can only strengthen the struc-tural information that remains in the input image. It cannot reconstruct target edges that have been severely lost. The color restoration branch uses a statistical gain adjustment strategy guided by brightness. In extremely dark regions, low brightness weights suppress excessive color compensation. This reduces the risk of background noise amplification and local color overcorrection. However, it also limits the recovery of targets in dark regions. When the target area is dim and blurry, the color restoration branch cannot further improve local visibility. For extremely low light and severe blur, future work will introduce mechanisms that sense the degree of degradation and fusion strategies that adapt to different regions. These improvements will enhance the adaptability of the method to complex underwater environments. 
+
+## 5. Conclusion 
+
+This paper addresses the issues of detail degradation and color shifts in underwater images, which lead to reduced per-formance in object detection, by proposing an efficient dual-branch underwater image enhancement framework. By con-structing a detail enhancement branch and a color restora-tion branch, the framework achieves joint optimization of detail and color information in underwater images, thereby improving image quality while enhancing the suitability of the enhanced results for object detection tasks. Experimental results show that the proposed method achieves good overall performance on multiple underwater image datasets. It performs better than the original images on most image quality metrics. It also achieves excellent UIQM results on both the UIEB and EUVP datasets and performs better than other state of the art methods. At a resolution of 
+
+256 × 256 , the average processing time per image is only 0.009s. In the object detection task, the enhanced images achieve the best results on Recall, mAP50, and mAP50-95, with mAP50 improved by 2.1% compared with the baseline. The results on the DUO dataset further show that the proposed method improves underwater object detection performance in different scenes. These results indicate that the proposed method achieves a good balance among image enhancement quality, processing efficiency, and object de-tection performance. 
+
+## CRediT authorship contribution statement 
+
+Liyuan Cao: Investigation, Writing – original draft. 
+
+Zheng Liu: Supervision, Writing – review. Guanghao Liao: Methodology, Writing – editing. Yonghui Yang: 
+
+Resources. Qi Li: Data curation. 
+
+## Declaration of competing interest 
+
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper. 
+
+## Data availability 
+
+Data will be made available on request. 
+
+## References     
+
+> Ancuti, C.O., Ancuti, C., De Vleeschouwer, C., Bekaert, P., 2018. Color balance and fusion for underwater image enhancement. IEEE Transac-tions on Image Processing 27, 379–393. Chang, B., Yuan, G., Li, J., 2025. Mamba-enhanced spectral-attentive wavelet network for underwater image restoration. Engineering Appli-cations of Artificial Intelligence 143, 109999. Cong, R., Yang, W., Zhang, W., Li, C., Guo, C.L., Huang, Q., Kwong, S., 2023. PUGAN: Physical model-guided underwater image enhancement using GAN with dual-discriminators. IEEE Transactions on Image Processing 32, 4472–4485. Fu, Z., Wang, W., Huang, Y., Ding, X., Ma, K.K., 2022. Uncertainty inspired underwater image enhancement, in: Computer Vision – ECCV 2022, pp. 465–482. Gevorgyan, Z., 2022. SIoU loss: More powerful learning for bounding box regression. arXiv preprint arXiv:2205.12740 . Girshick, R., 2015. Fast R-CNN, in: In Proc. IEEE Int. Conf. Comput. Vis., pp. 1440–1448. Guo, C., Li, C., Guo, J., Loy, C.C., Hou, J., Kwong, S., Cong, R., 2020. Zero-reference deep curve estimation for low-light image enhancement, in: In Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit., pp. 1777– 1786. He, K., Sun, J., Tang, X., 2013. Guided image filtering. IEEE Transactions on Pattern Analysis and Machine Intelligence 35, 1397–1409. Huang, S., Wang, K., Liu, H., Chen, J., Li, Y., 2023. Contrastive semi-supervised learning for underwater image restoration via reliable bank, in: In Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit., pp. 18145–18155. Islam, M.J., Xia, Y., Sattar, J., 2020. Fast underwater image enhancement for improved visual perception. IEEE Robotics and Automation Letters 5, 3227–3234.
+
+L. Cao et al.: Preprint submitted to Elsevier Page 13 of 14 Dual-Branch Underwater Image Enhancement and Object Detection 
+
+Jaffe, J.S., 1990. Computer modeling and the design of optimal underwater imaging systems. IEEE Journal of Oceanic Engineering 15, 101–111. Li, C., Anwar, S., Hou, J., Cong, R., Guo, C., Ren, W., 2021. Underwater image enhancement via medium transmission-guided multi-color space embedding. IEEE Transactions on Image Processing 30, 4985–5000. Li, C., Anwar, S., Porikli, F., 2020a. Underwater scene prior inspired deep underwater image and video enhancement. Pattern Recognition 98, 107038. Li, C., Guo, C., Ren, W., Cong, R., Hou, J., Kwong, S., Tao, D., 2020b. An underwater image enhancement benchmark dataset and beyond. IEEE Transactions on Image Processing 29, 4376–4389. Li, J., Zhu, X., Zheng, Y., Lu, H., Li, Y., 2024. Underwater image restoration based on light attenuation prior and color-contrast adaptive correction. Image and Vision Computing 150, 105217. Liu, R., Fan, X., Zhu, M., Hou, M., Luo, Z., 2020. Real-world underwa-ter enhancement: Challenges, benchmarks, and solutions under natural light. IEEE Transactions on Circuits and Systems for Video Technology 30, 4861–4875. Liu, W., Anguelov, D., Erhan, D., Szegedy, C., Reed, S., Fu, C.Y., Berg, A.C., 2016. SSD: Single shot multibox detector, in: Computer Vision – ECCV 2016, pp. 21–37. Lowe, D.G., 2004. Distinctive image features from scale-invariant key-points. International Journal of Computer Vision 60, 91–110. Panetta, K., Gao, C., Agaian, S., 2016. Human-visual-system-inspired un-derwater image quality measures. IEEE Journal of Oceanic Engineering 41, 541–551. Peng, Y.T., Chen, Y.R., Chen, Z., Wang, J.H., Huang, S.C., 2022. Underwa-ter image enhancement based on histogram-equalization approximation using physics-based dichromatic modeling. Sensors 22, 2168. Pramanick, A., Sarma, S., Sur, A., 2024. X-CAUNET: Cross-color channel attention with underwater image-enhancing transformer, in: In Proc. IEEE Int. Conf. Acoust. Speech Signal Process., pp. 3550–3554. Qin, X., Zhang, Z., Huang, C., Dehghan, M., Zaiane, O.R., Jagersand, M., 2020. U2-Net: Going deeper with nested U-structure for salient object detection. Pattern Recognition 106, 107404. Redmon, J., Divvala, S., Girshick, R., Farhadi, A., 2016. You only look once: Unified, real-time object detection, in: In Proc. IEEE Conf. Comput. Vis. Pattern Recognit., pp. 779–788. Ren, S., He, K., Girshick, R., Sun, J., 2017. Faster R-CNN: Towards real-time object detection with region proposal networks. IEEE Transactions on Pattern Analysis and Machine Intelligence 39, 1137–1149. Rezatofighi, H., Tsoi, N., Gwak, J.Y., Sadeghian, A., Reid, I., Savarese, S., 2019. Generalized intersection over union: A metric and a loss for bounding box regression, in: In Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit., pp. 658–666. Song, W., Wang, Y., Huang, D., Liotta, A., Perra, C., 2020. Enhancement of underwater images with statistical model of background light and optimization of transmission map. IEEE Transactions on Broadcasting 66, 153–169. Song, W., Wang, Y., Huang, D., Tjondronegoro, D., 2018. A rapid scene depth estimation model based on underwater light attenuation prior for underwater image restoration, in: Advances in Multimedia Information Processing – PCM 2018, pp. 678–688. Sun, L., Li, W., Xu, Y., 2024. Ghost-UNet: Lightweight model for underwater image enhancement. Engineering Applications of Artificial Intelligence 133, 108585. Tong, Z., Chen, Y., Xu, Z., Yu, R., 2023. Wise-IoU: Bounding box regression loss with dynamic focusing mechanism. arXiv preprint arXiv:2301.10051 . Wang, Z., Bovik, A.C., Sheikh, H.R., Simoncelli, E.P., 2004. Image quality assessment: From error visibility to structural similarity. IEEE Transactions on Image Processing 13, 600–612. Wu, W., Weng, J., Zhang, P., Wang, X., Yang, W., Jiang, J., 2022. URetinex-Net: Retinex-based deep unfolding network for low-light image enhance-ment, in: In Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit., pp. 5891–5900. Xiang, D., Wang, H., He, D., Zhai, C., 2023. Research on histogram equal-ization algorithm based on optimized adaptive quadruple segmentation and cropping of underwater image (AQSCHE). IEEE Access 11, 69356– 69365. Xu, X., Wang, R., Fu, C.W., Jia, J., 2022. SNR-aware low-light image enhancement, in: In Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recog-nit., pp. 17693–17703. Yang, M., Sowmya, A., 2015. An underwater color image quality evaluation metric. IEEE Transactions on Image Processing 24, 6062–6071. Zhang, S., Wang, T., Dong, J., Yu, H., 2017. Underwater image enhance-ment via extended multi-scale Retinex. Neurocomputing 245, 1–9. Zhang, Y.F., Ren, W., Zhang, Z., Jia, Z., Wang, L., Tan, T., 2022. Focal and efficient IoU loss for accurate bounding box regression. Neurocomput-ing 506, 146–157. Zhang, Z., Jiang, Z., Ma, L., Liu, J., Fan, X., Liu, R., 2025. HUPE: Heuristic underwater perceptual enhancement with semantic collaborative learn-ing. International Journal of Computer Vision 133, 3259–3277. Zheng, Z., Wang, P., Liu, W., Li, J., Ye, R., Ren, D., 2020. Distance-IoU loss: Faster and better learning for bounding box regression. Proceedings of the AAAI Conference on Artificial Intelligence 34, 12993–13000. Zhou, J., Zhang, D., Zhang, W., 2023. Cross-view enhancement network for underwater images. Engineering Applications of Artificial Intelligence 121, 105952. 
+
+L. Cao et al.: Preprint submitted to Elsevier Page 14 of 14
