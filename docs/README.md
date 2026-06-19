@@ -6,50 +6,44 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-06-18
-- 运行时间：2026-06-18 22:28:50 UTC
+- 最新运行日期：2026-06-19
+- 运行时间：2026-06-19 20:57:40 UTC
 - 运行状态：成功
-- 本次总论文数：10
-- 精读区：3
-- 速读区：7
+- 本次总论文数：8
+- 精读区：4
+- 速读区：4
 
 ### 今日简报（AI）
-今日聚焦智能体进化与GUI智能体策略蒸馏，两篇9分论文提出新颖的在线策略蒸馏和技能引导延续蒸馏方法；速读则涵盖视频生成、多智能体可解释性及网络智能体验证。最值得深入的是OPD-Evolver的培育性进化框架和Skill-Guided Distillation的GUI技能迁移方案。建议优先精读这两篇高分论文，理解智能体自我进化与GUI任务高效学习的前沿思路。
-- 详情：[/202606/18/README](/202606/18/README)
+今日聚焦8篇论文，精读2篇高分研究均指向机器人智能体在真实世界中的自我改进与趣味性学习。最值得关注两个方向：ENPIRE实现真实世界无需外部监督的机器人策略自改进，Playful Agentic Robot Learning通过玩耍式互动激发机器人主动学习。建议普通读者关注具身智能体的自主进化路径，这类工作正在定义下一代机器人的核心能力。
+- 详情：[/202606/19/README](/202606/19/README)
 
 ### 精读区论文标签
-1. [OPD-Evolver: Cultivating Holistic Agent Evolver via On-Policy Distillation](/202606/18/2606.17628v1-opd-evolver-cultivating-holistic-agent-evolver-via-on-policy-distillation)  
+1. [ENPIRE: Agentic Robot Policy Self-Improvement in the Real World](/202606/19/2606.19980v1-enpire-agentic-robot-policy-self-improvement-in-the-real-world)  
+   标签：评分：10.0/10、query:self-improve
+   evidence：通过真实世界反馈循环实现智能体机器人策略自我改进
+2. [Playful Agentic Robot Learning](/202606/19/2606.19419v1-playful-agentic-robot-learning)  
    标签：评分：9.0/10、query:self-improve
-   evidence：通过在线策略蒸馏实现智能体自我进化
-2. [Skill-Guided Continuation Distillation for GUI Agents](/202606/18/2606.18890v1-skill-guided-continuation-distillation-for-gui-agents)  
-   标签：评分：9.0/10、query:self-improve
-   evidence：面向GUI智能体的迭代自我改进框架
-3. [A Dual-Branch Collaborative Framework for Joint Optimization of Underwater Image Enhancement and Object Detection](/202606/18/2606.15857v1-a-dual-branch-collaborative-framework-for-joint-optimization-of-underwater-image-enhancement-and-object-detection)  
-   标签：评分：8.0/10、query:agent-detect
-   evidence：双分支框架用于水下目标检测与增强
+   evidence：通过自导玩耍进行持续技能学习
+3. [Elastic Queries Reinforcement Learning: Self-Aware Policy Execution for VLA Models](/202606/19/2606.14375v1-elastic-queries-reinforcement-learning-self-aware-policy-execution-for-vla-models)  
+   标签：评分：8.0/10、query:self-improve
+   evidence：基于强化学习的自感知策略执行实现VLA模型自适应推理
+4. [Skill-MAS: Evolving Meta-Skill for Automatic Multi-Agent Systems](/202606/19/2606.18837v1-skill-mas-evolving-meta-skill-for-automatic-multi-agent-systems)  
+   标签：评分：8.0/10、query:self-improve
+   evidence：多智能体系统中演化元技能作为自我改进
 
 ### 速读区论文标签
-1. [Bridging Creative Intent and Visual Quality: Creator-Driven Recurrent Video Generation with Agentic Feedback Loops](/202606/18/2606.18591v1-bridging-creative-intent-and-visual-quality-creator-driven-recurrent-video-generation-with-agentic-feedback-loops)  
+1. [Communication Policy Evolution for Proactive LLM Agents](/202606/19/2606.14314v1-communication-policy-evolution-for-proactive-llm-agents)  
    标签：评分：7.0/10、query:self-improve
-   evidence：智能体反馈循环实现迭代视频精炼
-2. [EARS: Explanatory Abstention for Reliable Sub-Agent Modeling in Large-scale Multi-Agent Systems](/202606/18/2606.18668v1-ears-explanatory-abstention-for-reliable-sub-agent-modeling-in-large-scale-multi-agent-systems)  
-   标签：评分：7.0/10、query:agent-detect
-   evidence：通过弃权检测子智能体能力边界
-3. [HANSEL: Extracting Breadcrumbs from Web Agent Trajectories for Interactive Verification](/202606/18/2606.18671v1-hansel-extracting-breadcrumbs-from-web-agent-trajectories-for-interactive-verification)  
-   标签：评分：7.0/10、query:agent-detect
-   evidence：Web智能体行为的交互验证与检测
-4. [Skill-MAS: Evolving Meta-Skill for Automatic Multi-Agent Systems](/202606/18/2606.18837v1-skill-mas-evolving-meta-skill-for-automatic-multi-agent-systems)  
-   标签：评分：7.0/10、query:self-improve
-   evidence：可演化元技能实现自动多智能体系统自我改进
-5. [Reward Modeling for Multi-Agent Orchestration](/202606/18/2606.13598v1-reward-modeling-for-multi-agent-orchestration)  
+   evidence：针对主动LLM智能体的通信策略演化（自我改进）
+2. [Multi-Agent Transactive Memory](/202606/19/2606.19911v1-multi-agent-transactive-memory)  
    标签：评分：6.0/10、query:self-improve
-   evidence：多智能体编排的自我监督奖励模型
-6. [Towards Scalable Customization and Deployment of Multi-Agent Systems for Enterprise Applications](/202606/18/2606.18502v1-towards-scalable-customization-and-deployment-of-multi-agent-systems-for-enterprise-applications)  
+   evidence：重用智能体轨迹以提升智能体性能
+3. [Efficient and Sound Probabilistic Verification for AI Agents](/202606/19/2606.20510v1-efficient-and-sound-probabilistic-verification-for-ai-agents)  
+   标签：评分：6.0/10、query:agent-detect
+   evidence：AI智能体的概率验证，包括PII检测和安全谓词
+4. [Climbing-fiber-like online readout adaptation in frozen continuous-time networks reproduces force-field adaptation and after-effects](/202606/19/biorxiv-10-64898-2026-06-11-731593-v1-climbing-fiber-like-online-readout-adaptation-in-frozen-continuous-time-networks-reproduces-force-field-adaptation-and-after-effects)  
    标签：评分：6.0/10、query:self-improve
-   evidence：多智能体系统的定制与部署框架，包括模型自适应
-7. [Data Intelligence Agents: Interpreting, Modeling, and Querying Enterprise Data via Autonomous Coding Agents](/202606/18/2606.19319v1-data-intelligence-agents-interpreting-modeling-and-querying-enterprise-data-via-autonomous-coding-agents)  
-   标签：评分：6.0/10、query:self-improve
-   evidence：自主编码智能体生成、执行、验证并修复工件
+   evidence：在线读出适应与任务兼容探测用于机器人校准，与自我改进相关
 
 
 <div class="dpr-home-promo-card">
