@@ -1,0 +1,339 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-20T21:32:41.003424+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 3,
+    "deep_cap": 7,
+    "deep_selected": 3,
+    "quick_candidates": 5,
+    "quick_skim_target": 12,
+    "quick_selected": 5
+  },
+  "deep_dive": [
+    {
+      "id": "2606.18837v1",
+      "source": "arxiv",
+      "title": "Skill-MAS: Evolving Meta-Skill for Automatic Multi-Agent Systems",
+      "abstract": "Large Language Model (LLM)-based automatic Multi-Agent Systems (MAS) generation has become a crucial frontier for tackling complex tasks. However, existing methods face a dilemma between model capability and experience retention. Inference-time MAS leverages frozen frontier LLMs but repeats identical searches without learning from past experience. Conversely, Training-time MAS internalizes experience via gradient updates but is constrained by the low capability ceiling of smaller models, and is hard to scale to large frontier LLMs. To bridge this gap, we propose Skill-MAS, a novel third path that decouples experience retention from parametric updates by conceptualizing the high-level orchestration capability as an evolvable Meta-Skill. Skill-MAS refines this architectural knowledge through a closed optimization loop: (1) Multi-Trajectory Rollout samples a behavioral distribution for each task under the current Meta-Skill; and (2) Selective Reflection adaptively selects priority tasks and applies hierarchical contrastive analysis to distill systemic experience into generalizable, strategy-level principles. Extensive experiments across four complex benchmarks and four distinct LLMs demonstrate that Skill-MAS not only achieves remarkable performance gains but also maintains a favorable cost-performance trade-off. Further analysis reveals that the evolved Meta-Skills are highly robust and exhibit strong transferability across unseen tasks and different LLMs.",
+      "authors": [
+        "Hehai Lin",
+        "Qi Yang",
+        "Chengwei Qin"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-06-17T09:12:50+00:00",
+      "link": "https://arxiv.org/pdf/2606.18837v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "evolving meta-skill for multi-agent systems provides agent self-improvement",
+      "llm_evidence_cn": "通过进化元技能实现多智能体系统的自我改进",
+      "llm_evidence": "通过进化元技能实现多智能体系统的自我改进",
+      "canonical_evidence": "通过进化元技能实现多智能体系统的自我改进",
+      "llm_tldr_en": "Skill-MAS decouples experience retention from parametric updates by evolving a Meta-Skill, enabling automatic multi-agent systems to improve without full retraining.",
+      "llm_tldr_cn": "现有LLM多智能体系统在经验保留上存在两难：推理时代重复搜索无学习，训练时代受限于小模型。Skill-MAS提出进化元技能，将高阶编排能力作为可进化技能，解耦经验保留与参数更新，从而在无需重新训练的情况下持续改进，平衡了能力与经验。实验证明该方法有效提升了多智能体系统的任务表现。",
+      "llm_tldr": "现有LLM多智能体系统在经验保留上存在两难：推理时代重复搜索无学习，训练时代受限于小模型。Skill-MAS提出进化元技能，将高阶编排能力作为可进化技能，解耦经验保留与参数更新，从而在无需重新训练的情况下持续改进，平衡了能力与经验。实验证明该方法有效提升了多智能体系统的任务表现。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.18235v1",
+      "source": "arxiv",
+      "title": "EvolveNav: Proactive Preflection and Self-Evolving Memory for Zero-Shot Object Goal Navigation",
+      "abstract": "Zero-Shot Object-Goal Navigation (ZS-OGN) requires embodied agents to explore and locate target objects without any prior training. To this end, recent methods leverage foundation models. But they typically rely on static priors and lack adaptation, which leads to repeated errors and costly trial and error. In this paper, we propose a self-evolving ZS-OGN framework that enables continuous test-time improvement. Specifically, we build an agentic rule memory by extracting actionable knowledge from past trajectories. Then, we propose a retrieval strategy based on upper confidence bound, selecting effective rules by balancing semantic relevance and historical success. In addition, we introduce a memory-guided preflection module that forecasts potential outcomes before action, reducing inefficient exploration. Extensive experiments show that our method outperforms existing zero-shot baselines, achieving a 10.1\\% improvement in success rate with fewer unnecessary steps.",
+      "authors": [
+        "Qi Chai",
+        "Wenhao Shen",
+        "Nanjie Yao",
+        "Yue Xia",
+        "Kaiyong Zhao",
+        "Jie Ma",
+        "Guosheng Lin",
+        "Hao Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-16T17:56:57+00:00",
+      "link": "https://arxiv.org/pdf/2606.18235v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "self-evolving memory for continuous test-time improvement in object goal navigation",
+      "llm_evidence_cn": "用于零样本目标导航的自我演化记忆实现持续测试时改进",
+      "llm_evidence": "用于零样本目标导航的自我演化记忆实现持续测试时改进",
+      "canonical_evidence": "用于零样本目标导航的自我演化记忆实现持续测试时改进",
+      "llm_tldr_en": "EvolveNav proposes a self-evolving framework for zero-shot object-goal navigation that extracts actionable rules from past trajectories and uses UCB-based retrieval for continuous test-time improvement.",
+      "llm_tldr_cn": "零样本目标导航中现有方法依赖静态先验，导致重复错误。本文提出EvolveNav，一个自我演化的导航框架，通过从历史轨迹中提取动作知识构建智能体规则记忆，并采用基于上置信界（UCB）的检索策略平衡语义相关性与历史成功率。此外引入记忆引导的预反思模块，使智能体在测试时持续改进。实验证明该方法能有效减少探索错误，显著提升导航成功率，实现了智能体在无训练情况下的自改进。",
+      "llm_tldr": "零样本目标导航中现有方法依赖静态先验，导致重复错误。本文提出EvolveNav，一个自我演化的导航框架，通过从历史轨迹中提取动作知识构建智能体规则记忆，并采用基于上置信界（UCB）的检索策略平衡语义相关性与历史成功率。此外引入记忆引导的预反思模块，使智能体在测试时持续改进。实验证明该方法能有效减少探索错误，显著提升导航成功率，实现了智能体在无训练情况下的自改进。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.18902v1",
+      "source": "arxiv",
+      "title": "SAGE: Stochastic Prompt Optimization via Agent-Guided Exploration",
+      "abstract": "Context engineering has emerged as a primary lever for improving AI systems without parameter updates. Recent work showing that textual gradients do not function as real gradients motivates treating automatic prompt optimization (APO) as black-box search. We introduce SPO (Stochastic Prompt Optimization), a framework for stochastic search over prompt space, and compare three strategies of increasing sophistication: error-informed random search, a genetic algorithm with evolutionary operators, and SAGE (SPO via Agent-Guided Exploration), a multi-agent pipeline with diagnostic code execution. Across three benchmarks, no single strategy dominates; effectiveness depends on the interaction of landscape structure with error type. We further deploy SAGE on a mental-health chatbot under a continuous optimization paradigm, where it compounds eight cycles of individually-noisy A/B tests into a statistically robust gain in next-day retention. We argue that coupling qualitative diagnosis with quantitative validation is what makes agentic optimization effective for open-ended task-oriented dialogue.",
+      "authors": [
+        "Ziyi Zhu",
+        "Luka Smyth",
+        "Saki Shinoda",
+        "Jinghong Chen"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-17T10:25:25+00:00",
+      "link": "https://arxiv.org/pdf/2606.18902v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "agent-guided exploration for automatic prompt optimization, a self-improvement technique",
+      "llm_evidence_cn": "通过智能体引导探索进行自动提示优化，属于自我改进技术",
+      "llm_evidence": "通过智能体引导探索进行自动提示优化，属于自我改进技术",
+      "canonical_evidence": "通过智能体引导探索进行自动提示优化，属于自我改进技术",
+      "llm_tldr_en": "SAGE uses multi-agent pipeline with diagnostic code execution for stochastic prompt optimization, showing effectiveness depends on error type and landscape structure.",
+      "llm_tldr_cn": "将自动提示优化视为黑盒搜索问题，提出随机提示优化框架SPO，并比较了三种策略：误差引导随机搜索、遗传算法和多智能体引导探索SAGE。SAGE通过诊断代码执行进行智能体引导探索。实验表明没有一种策略普适最优，有效性取决于误差类型与函数地形结构的交互。该工作为提示优化提供了新的视角和方法。",
+      "llm_tldr": "将自动提示优化视为黑盒搜索问题，提出随机提示优化框架SPO，并比较了三种策略：误差引导随机搜索、遗传算法和多智能体引导探索SAGE。SAGE通过诊断代码执行进行智能体引导探索。实验表明没有一种策略普适最优，有效性取决于误差类型与函数地形结构的交互。该工作为提示优化提供了新的视角和方法。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.16000v1",
+      "source": "arxiv",
+      "title": "GRACE-DS: a Guarded Reward-guided Agent Correction Environment in Data Science",
+      "abstract": "We introduce GRACE-DS, a Guarded Reward-guided Agent Correction Environment in Data Science for pre-deployment evaluation of LLM-powered AutoML agents. GRACE-DS is a set of evaluation metrics in an isolated environment that can be applied to tabular ML tasks specific to a particular organization. It exposes agents to realistic workflow stages, from planning and data inspection through feature engineering, model development, validation, and code repair to final submission, while hidden executable validators measure not only final predictive performance but also leakage avoidance, reproducibility, protocol validity, correction behavior, and reward alignment. The strongest structured regime, flexible iterative interaction (our approach), achieves higher end-to-end normalized hidden-test quality than single-shot generation, unstructured interaction, and restart-based baselines, while also improving protocol-valid completion. Validated across more than 7,000 episodes, these results establish GRACE-DS as a robust platform for assessing the capacity of LLM-based AutoML agents to execute machine learning workflows under production-like conditions and in accordance with organization-specific requirements.",
+      "authors": [
+        "Aleksandr Tsymbalov",
+        "Danis Zaripov",
+        "Artem Epifanov",
+        "Anastasya Palienko"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-06-14T19:58:06+00:00",
+      "link": "https://arxiv.org/pdf/2606.16000v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "guarded reward-guided agent correction environment for self-improvement in data science",
+      "llm_evidence_cn": "带守卫奖励引导的智能体修正环境，用于数据科学领域的自我改进",
+      "llm_evidence": "带守卫奖励引导的智能体修正环境，用于数据科学领域的自我改进",
+      "canonical_evidence": "带守卫奖励引导的智能体修正环境，用于数据科学领域的自我改进",
+      "llm_tldr_en": "GRACE-DS provides a guarded reward-guided environment for LLM-powered AutoML agents to correct their behavior through flexible iterative interaction, improving final performance.",
+      "llm_tldr_cn": "LLM加持的AutoML代理在部署前缺乏系统评估和修正机制。GRACE-DS构建了一个隔离环境，通过隐藏的可执行验证器评估代理在多个阶段的性能，并采用灵活迭代交互（我们的方法）引导代理修正错误。实验表明该环境有效提升了代理的最终预测性能和合规性，是一种代理自我改进的评估与训练平台。",
+      "llm_tldr": "LLM加持的AutoML代理在部署前缺乏系统评估和修正机制。GRACE-DS构建了一个隔离环境，通过隐藏的可执行验证器评估代理在多个阶段的性能，并采用灵活迭代交互（我们的方法）引导代理修正错误。实验表明该环境有效提升了代理的最终预测性能和合规性，是一种代理自我改进的评估与训练平台。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.17871v1",
+      "source": "arxiv",
+      "title": "StepGuard: Guarding Web Navigation via Single-Step Calibration",
+      "abstract": "Web navigation requires agents to follow natural language goals, interact with web pages, and produce accurate answers. While recent advances leverage vision-language models and reinforcement learning, existing methods still suffer from single-step fragility due to reward misalignment and error propagation. To tackle the reward entanglement, we design Dynamic Dual-Policy Optimization (DDPO), which dynamically switches between a navigation-first mode for exploration and an answer-first mode for question-answering to mitigate reward conflict. To calibrate the single-step error, we propose Confidence-Guided Adaptive Navigation Reflection (CANR), a mechanism that estimates per-step confidence, triggers reflection only when necessary, and uses contrastive rewards to encourage self-correction to calibrate the single-step inaccuracy. With the above as the main components, we finally develop our StepGuard, a new framework of Guarding Web Navigation via Single-Step Calibration. Experiments demonstrate that our approach significantly improves navigation and answer accuracy, setting new state-of-the-art performance on standard web navigation benchmarks.",
+      "authors": [
+        "Zhihao Cui",
+        "Yuchen Zhang",
+        "Xiyang Sun",
+        "Yaxiong Wang",
+        "Li Zhu",
+        "Jinpeng Hu",
+        "Liu Liu",
+        "Mengjia Li",
+        "Yujiao Wu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-16T12:42:09+00:00",
+      "link": "https://arxiv.org/pdf/2606.17871v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "single-step calibration and dual-policy optimization for web navigation agents",
+      "llm_evidence_cn": "针对网页导航智能体的单步校准和双策略优化方法",
+      "llm_evidence": "针对网页导航智能体的单步校准和双策略优化方法",
+      "canonical_evidence": "针对网页导航智能体的单步校准和双策略优化方法",
+      "llm_tldr_en": "StepGuard introduces Dynamic Dual-Policy Optimization and Confidence-Guided Adaptive Navigation Reflection to improve web navigation agents by calibrating single-step errors and alleviating reward misalignment.",
+      "llm_tldr_cn": "现有网页导航代理在单步决策上存在脆弱性，源于奖励错配和误差累积。StepGuard提出动态双策略优化（DDPO）在探索和问答模式间切换以缓解奖励冲突，以及置信度引导自适应导航反思（CANR）估计每步置信度并仅在必要时触发反思。实验表明该方法显著提升了导航准确率，是一种有效的智能体自我改进方法。",
+      "llm_tldr": "现有网页导航代理在单步决策上存在脆弱性，源于奖励错配和误差累积。StepGuard提出动态双策略优化（DDPO）在探索和问答模式间切换以缓解奖励冲突，以及置信度引导自适应导航反思（CANR）估计每步置信度并仅在必要时触发反思。实验表明该方法显著提升了导航准确率，是一种有效的智能体自我改进方法。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "Methods for agent self improvement",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.16448v1",
+      "source": "arxiv",
+      "title": "Hierarchical Fine-Grained Aerial Object Detection",
+      "abstract": "Fine-grained aerial object detection, driven by the intrinsic granularity of real-world object categories, is crucial for advanced scene understanding in remote sensing. Existing methods largely inherit the paradigm of coarse-grained object detection, relying solely on single-label supervision and thus struggling to distinguish model-level categories with subtle structural differences. However, for each specific model (e.g., Boeing 787), structured prior knowledge such as attributes and hierarchies offers discriminative semantics across multiple granularities. Motivated by this, we present ExpertDet, a scheme that incorporates expert-informed cues to enhance fine-grained aerial object detection. Specifically, we design Vision-aware Masked Attribute Modeling (VMAM), which aligns attribute semantics with visual structures by reconstructing randomly masked attributes from visual cues, enabling the detector to capture subtle structural distinctions. We further propose Hierarchical Visual Instance Promotion (HierVIP), which builds a visual prototype tree based on hierarchical relations and imposes taxonomy-aware constraints to preserve cross-level semantic continuity while enhancing category discrimination. Moreover, we curate a new fine-grained object detection benchmark for Precise recognition of model-specific Ships and Planes from aerial imagery, PSP, covering 106 ship classes and 30 airplane models, respectively, featuring the most extensive collection of model-specific categories among existing aerial object detection datasets to date. We benchmark state-of-the-art object detection algorithms on the PSP benchmark. Extensive evaluation demonstrates that ExpertDet consistently outperforms other fine-grained competitors across hierarchy levels. The dataset, benchmark, and code are available at https://nnnnerd.github.io/PSP-Benchmark/.",
+      "authors": [
+        "Yan Zhang",
+        "Fang Xu",
+        "Wen Yang",
+        "Gui-Song Xia"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-15T09:20:16+00:00",
+      "link": "https://arxiv.org/pdf/2606.16448v1",
+      "tags": [
+        "query:agent-detect"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "object detection method transferable to agent perception",
+      "llm_evidence_cn": "目标检测技术可迁移至智能体感知",
+      "llm_evidence": "目标检测技术可迁移至智能体感知",
+      "canonical_evidence": "目标检测技术可迁移至智能体感知",
+      "llm_tldr_en": "ExpertDet uses expert-informed cues and masked attribute modeling for fine-grained aerial object detection; provides a detection paradigm that can enhance perception in agent architectures.",
+      "llm_tldr_cn": "针对现有粗粒度目标检测方法难以区分细粒度航空目标的问题，提出ExpertDet，通过引入专家知识线索和视觉掩码属性建模，实现了层次化细粒度检测。该方法可直接用于智能体架构中的感知模块，提升对细粒度目标的识别能力。",
+      "llm_tldr": "针对现有粗粒度目标检测方法难以区分细粒度航空目标的问题，提出ExpertDet，通过引入专家知识线索和视觉掩码属性建模，实现了层次化细粒度检测。该方法可直接用于智能体架构中的感知模块，提升对细粒度目标的识别能力。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.20363v1",
+      "source": "arxiv",
+      "title": "Automating SKILL.md Generation for Computer-Using Agents via Interaction Trajectory Mining",
+      "abstract": "Explicit skill libraries make computer-using agents easier to inspect, but it remains unclear whether such libraries can be mined from interaction data in a way that improves downstream policies. We study this question through a three-stage pipeline that segments GUI trajectories, clusters segments into candidate skills, and trains a skill-aware policy from the resulting annotations. The mined clusters are readable on the source benchmark: five of eight clusters have at least 0.95 purity against InteraSkill Workflows labels. However, readability does not imply transfer. GRPO improves IW skill-step accuracy only from 18.5\\% to 20.5\\%, leaves BrowseComp+ essentially unchanged, and underperforms trivial frequency priors on key source-domain metrics. We therefore present the method as a diagnostic study: trajectory mining can expose inspectable skill structure, but the current boundary detector, orderless segment representation, and offline reward model are insufficient for reliable cross-domain policy improvement.",
+      "authors": [
+        "Yuexing Hao",
+        "Xiaomin Li"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-18T15:25:42+00:00",
+      "link": "https://arxiv.org/pdf/2606.20363v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "mining skill libraries from agent trajectories to improve policies",
+      "llm_evidence_cn": "从智能体轨迹中挖掘技能库以改进策略",
+      "llm_evidence": "从智能体轨迹中挖掘技能库以改进策略",
+      "canonical_evidence": "从智能体轨迹中挖掘技能库以改进策略",
+      "llm_tldr_en": "This paper mines skill libraries from agent interaction trajectories to enhance downstream policies, though transfer gains are modest.",
+      "llm_tldr_cn": "计算机使用智能体需要可检查的技能库。本文通过三段式流程从GUI轨迹中分割、聚类生成候选技能，并训练技能感知策略。聚类纯度高达0.95，但策略改进有限（GRPO提升IW技能步准确率仅2%），表明可读性不等于可迁移性。",
+      "llm_tldr": "计算机使用智能体需要可检查的技能库。本文通过三段式流程从GUI轨迹中分割、聚类生成候选技能，并训练技能感知策略。聚类纯度高达0.95，但策略改进有限（GRPO提升IW技能步准确率仅2%），表明可读性不等于可迁移性。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "self-improving agent learning",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.20047v1",
+      "source": "arxiv",
+      "title": "PACMS: Submodular Context Selection as a Pluggable Engine for LLM Agents",
+      "abstract": "Conversational and tool-using LLM agents operate over a context window that fills from several directions simultaneously. As a session proceeds, the agent accumulates user and assistant turns, entries drawn from a persistent memory store, and often largest of all, the verbatim outputs of tool calls such as file reads, search results, and API responses. Once the cumulative context exceeds the model's token budget, the framework must decide what to keep.   The prevailing mechanism is recency truncation, sometimes paired with periodic summarization. This is topic-blind: a fact established early in a session is discarded simply because it is old, even when the current user query is about exactly that fact; conversely, verbose but irrelevant recent material is retained. Agents that must recall information across many turns, the defining case for memory, are precisely where recency truncation fails.   Existing alternatives sit outside the agent's assembly step. Retrieval augmented generation fetches external documents into the prompt but does not arbitrate the agent's \\emph{already-present} pooled context. Context-compression methods reduce token count by rewriting or pruning text, but operate query-blind and lossily. Neither treats memory entries, conversation turns, and tool outputs as a single candidate pool to be selected from by relevance at the moment the prompt is assembled.",
+      "authors": [
+        "Manu Ghulyani",
+        "Arunabh Singh",
+        "Karan Bharadwaj",
+        "Ankit Nath",
+        "Suranjan Goswami"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR"
+      ],
+      "published": "2026-06-18T10:22:57+00:00",
+      "link": "https://arxiv.org/pdf/2606.20047v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "pluggable context selection engine improves LLM agent performance by optimizing context usage",
+      "llm_evidence_cn": "可插拔上下文选择引擎通过优化上下文使用提升LLM智能体性能",
+      "llm_evidence": "可插拔上下文选择引擎通过优化上下文使用提升LLM智能体性能",
+      "canonical_evidence": "可插拔上下文选择引擎通过优化上下文使用提升LLM智能体性能",
+      "llm_tldr_en": "PACMS introduces submodular context selection for LLM agents to avoid topic-blind truncation, improving session performance.",
+      "llm_tldr_cn": "该论文提出PACMS系统，利用子模函数进行上下文选择，替代传统的基于时间截断的策略。在LLM智能体会话中，该方法优先保留与当前查询相关的早期信息，显著提升了任务完成质量。该工作提供了一种即插即用的上下文优化工具，可直接提升智能体的自我改进能力。",
+      "llm_tldr": "该论文提出PACMS系统，利用子模函数进行上下文选择，替代传统的基于时间截断的策略。在LLM智能体会话中，该方法优先保留与当前查询相关的早期信息，显著提升了任务完成质量。该工作提供了一种即插即用的上下文优化工具，可直接提升智能体的自我改进能力。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
