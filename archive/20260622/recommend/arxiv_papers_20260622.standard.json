@@ -1,0 +1,543 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-22T22:44:41.964695+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 7,
+    "deep_cap": 7,
+    "deep_selected": 7,
+    "quick_candidates": 6,
+    "quick_skim_target": 12,
+    "quick_selected": 6
+  },
+  "deep_dive": [
+    {
+      "id": "2606.18235v1",
+      "source": "arxiv",
+      "title": "EvolveNav: Proactive Preflection and Self-Evolving Memory for Zero-Shot Object Goal Navigation",
+      "abstract": "Zero-Shot Object-Goal Navigation (ZS-OGN) requires embodied agents to explore and locate target objects without any prior training. To this end, recent methods leverage foundation models. But they typically rely on static priors and lack adaptation, which leads to repeated errors and costly trial and error. In this paper, we propose a self-evolving ZS-OGN framework that enables continuous test-time improvement. Specifically, we build an agentic rule memory by extracting actionable knowledge from past trajectories. Then, we propose a retrieval strategy based on upper confidence bound, selecting effective rules by balancing semantic relevance and historical success. In addition, we introduce a memory-guided preflection module that forecasts potential outcomes before action, reducing inefficient exploration. Extensive experiments show that our method outperforms existing zero-shot baselines, achieving a 10.1\\% improvement in success rate with fewer unnecessary steps.",
+      "authors": [
+        "Qi Chai",
+        "Wenhao Shen",
+        "Nanjie Yao",
+        "Yue Xia",
+        "Kaiyong Zhao",
+        "Jie Ma",
+        "Guosheng Lin",
+        "Hao Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-16T17:56:57+00:00",
+      "link": "https://arxiv.org/pdf/2606.18235v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "proposes self-evolving framework with memory for continuous test-time improvement",
+      "llm_evidence_cn": "提出自演进框架，通过记忆实现连续测试时改进",
+      "llm_evidence": "提出自演进框架，通过记忆实现连续测试时改进",
+      "canonical_evidence": "提出自演进框架，通过记忆实现连续测试时改进",
+      "llm_tldr_en": "EvolveNav enables zero-shot object-goal navigation agents to self-evolve at test time by building agentic rule memory and using UCB-based retrieval, achieving continuous improvement without retraining.",
+      "llm_tldr_cn": "现有零样本导航智能体依赖静态先验，无法从过去经验中学习。EvolveNav提出自演进框架，通过提取轨迹中的可行动知识构建智能体规则记忆，并采用上置信界策略平衡相关性与历史成功率进行规则检索。实验证明该方法能持续提升导航成功率且避免重复错误，为智能体自我改进提供了一种高效记忆驱动方案。",
+      "llm_tldr": "现有零样本导航智能体依赖静态先验，无法从过去经验中学习。EvolveNav提出自演进框架，通过提取轨迹中的可行动知识构建智能体规则记忆，并采用上置信界策略平衡相关性与历史成功率进行规则检索。实验证明该方法能持续提升导航成功率且避免重复错误，为智能体自我改进提供了一种高效记忆驱动方案。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "self-improving agent learning",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.19752v1",
+      "source": "arxiv",
+      "title": "Temporal Self-Imitation Learning",
+      "abstract": "Long-horizon robot manipulation policies trained with reward shaping can still exploit dense rewards through inefficient interaction, while rare efficient behaviors may be forgotten during training. We argue that temporal efficiency itself provides a powerful and underutilized source of self-supervision for reinforcement learning. We introduce Temporal Self-Imitation Learning (TSIL), a reinforcement learning framework that mines temporally efficient successful trajectories generated during learning and converts them into reusable supervision for future policy improvement. TSIL progressively refines learning using configuration-conditioned adaptive temporal targets derived from fast successful trajectories, while preserving and replaying efficient behaviors through efficiency-weighted self-imitation learning. Across 15 distinct long-horizon manipulation tasks, TSIL consistently improves learning efficiency, task-completion efficiency, revisitation of fast successful behaviors, and robustness to unstable training conditions. More broadly, our results suggest that the temporal structure of successful behavior itself provides a scalable self-supervisory signal for reinforcement learning beyond manually engineered reward shaping alone.",
+      "authors": [
+        "Yinsen Jia",
+        "Boyuan Chen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-06-18T03:31:56+00:00",
+      "link": "https://arxiv.org/pdf/2606.19752v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "reinforcement learning agent self-improvement via temporal self-imitation",
+      "llm_evidence_cn": "通过时间自我模仿实现强化学习智能体自我改进",
+      "llm_evidence": "通过时间自我模仿实现强化学习智能体自我改进",
+      "canonical_evidence": "通过时间自我模仿实现强化学习智能体自我改进",
+      "llm_tldr_en": "Temporal Self-Imitation Learning (TSIL) mines efficient trajectories during RL training and uses them as self-supervision to improve long-horizon robot policies.",
+      "llm_tldr_cn": "该研究针对长时域机器人策略训练中效率低的问题，提出时间自我模仿学习（TSIL）框架。TSIL从学习过程中挖掘时间高效的轨迹，将其转化为可复用的监督信号，通过自适应时间目标和效率加权回放逐步优化策略。实验表明TSIL显著提升了策略效率和成功率，为强化学习智能体提供了基于时间效率的自我改进新范式。",
+      "llm_tldr": "该研究针对长时域机器人策略训练中效率低的问题，提出时间自我模仿学习（TSIL）框架。TSIL从学习过程中挖掘时间高效的轨迹，将其转化为可复用的监督信号，通过自适应时间目标和效率加权回放逐步优化策略。实验表明TSIL显著提升了策略效率和成功率，为强化学习智能体提供了基于时间效率的自我改进新范式。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.20002v1",
+      "source": "arxiv",
+      "title": "Connect the Dots: Training LLMs for Long-Lifecycle Agents with Cross-Domain Generalization Via Reinforcement Learning",
+      "abstract": "This work presents a general framework for training large language models (LLMs) to \"Connect the Dots\" (CoD), a meta-capability required by long-lifecycle agents: as an LLM-based AI agent gets deployed in an environment, it solves a long sequence of tasks while continuously exploring the environment, learning from its own experiences, and iteratively self-updating its context about the environment, thereby achieving progressively better performance on future tasks conditioned on the updated context. Major components of the CoD framework include: (1) algorithm design and infrastructure for end-to-end reinforcement learning (RL) with long rollout sequences interleaving solve-task and update-context episodes; (2) tasks and environments for incentivizing and eliciting the targeted meta-capability in LLMs during training, as well as for faithfully measuring progress during evaluation. We present proof-of-concept implementations of the CoD framework, including a GRPO-style RL algorithm with fine-grained credit assignment, as well as tasks and environments tailored to the targeted meta-capability (rather than domain-specific LLM capabilities or standard task-by-task RL). Empirical results validate the efficacy of end-to-end RL training in the CoD setting, and demonstrate the potential for out-of-distribution generalization -- within the training domains, across different domains, and from CoD to Ralph-loop settings -- of the elicited meta-capability. Our investigation of CoD connects several lines of prior works, and opens up new opportunities for advancing LLMs and AI agents. To facilitate further research and applications, we release our implementations at \\url{https://github.com/agentscope-ai/Trinity-RFT/tree/research/cod/examples/research_cod}.",
+      "authors": [
+        "Yanxi Chen",
+        "Weijie Shi",
+        "Yuexiang Xie",
+        "Boyi Hu",
+        "Yaliang Li",
+        "Bolin Ding",
+        "Jingren Zhou"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-06-18T09:38:45+00:00",
+      "link": "https://arxiv.org/pdf/2606.20002v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "uses reinforcement learning for long-lifecycle agents to iteratively self-update",
+      "llm_evidence_cn": "使用强化学习让长期生命周期智能体迭代自我更新",
+      "llm_evidence": "使用强化学习让长期生命周期智能体迭代自我更新",
+      "canonical_evidence": "使用强化学习让长期生命周期智能体迭代自我更新",
+      "llm_tldr_en": "Connect the Dots (CoD) trains LLMs via reinforcement learning to iteratively self-update context and improve performance on future tasks, directly addressing agent self-improvement.",
+      "llm_tldr_cn": "本文提出CoD框架，通过强化学习训练大语言模型在长期部署中迭代更新上下文，从而持续提升未来任务表现。框架包括端到端RL算法和长序列交互设计，直接解决了智能体自我改进的核心问题。实验表明智能体能在探索中学习并实现跨领域泛化。",
+      "llm_tldr": "本文提出CoD框架，通过强化学习训练大语言模型在长期部署中迭代更新上下文，从而持续提升未来任务表现。框架包括端到端RL算法和长序列交互设计，直接解决了智能体自我改进的核心问题。实验表明智能体能在探索中学习并实现跨领域泛化。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.15857v1",
+      "source": "arxiv",
+      "title": "A Dual-Branch Collaborative Framework for Joint Optimization of Underwater Image Enhancement and Object Detection",
+      "abstract": "Due to wavelength dependent light absorption and scattering, underwater images usually suffer from color distortion and blurred details, which limits underwater object detection performance. Existing underwater image enhancement methods mainly focus on visual quality improvement, while it is still difficult to balance enhancement quality, processing efficiency, and downstream detection performance. Therefore, this paper proposes an efficient dual-branch underwater image enhancement framework for object detection. The detail enhancement branch improves brightness and local contrast to recover texture details in dark regions. The color restoration branch uses adaptive compensation to reduce color distortion and improve color gradation. By combining the complementary outputs of the two branches, the proposed framework provides clearer and more informative images for object detection. On the UIEB and EUVP datasets, the proposed method achieves UIQM scores of 2.249 and 2.576. When applied to the YOLOv8 detection task on the URPC dataset, the proposed method improves mAP50 by 2.1\\% compared with the baseline. Extensive experiments show that our method improves object detection in complex underwater scenes, while balancing enhancement quality and processing efficiency.",
+      "authors": [
+        "Liyuan Cao",
+        "Zheng Liu",
+        "Guanghao Liao",
+        "Yonghui Yang",
+        "Qi Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-14T15:25:31+00:00",
+      "link": "https://arxiv.org/pdf/2606.15857v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "dual-branch framework for joint image enhancement and object detection",
+      "llm_evidence_cn": "双分支联合水下图像增强与目标检测框架",
+      "llm_evidence": "双分支联合水下图像增强与目标检测框架",
+      "canonical_evidence": "双分支联合水下图像增强与目标检测框架",
+      "llm_tldr_en": "This paper proposes a dual-branch framework that jointly optimizes underwater image enhancement and object detection for improved detection performance.",
+      "llm_tldr_cn": "针对水下图像颜色失真和细节模糊导致目标检测性能下降的问题，本文提出双分支协同框架。细节增强分支恢复暗区纹理，色彩恢复分支自适应补偿色偏。两个分支联合优化，在提升图像质量的同时保证下游检测精度。实验表明该方法在多个水下数据集上超越了现有增强和检测方法，为水下感知提供了实用方案。",
+      "llm_tldr": "针对水下图像颜色失真和细节模糊导致目标检测性能下降的问题，本文提出双分支协同框架。细节增强分支恢复暗区纹理，色彩恢复分支自适应补偿色偏。两个分支联合优化，在提升图像质量的同时保证下游检测精度。实验表明该方法在多个水下数据集上超越了现有增强和检测方法，为水下感知提供了实用方案。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.16409v1",
+      "source": "arxiv",
+      "title": "PathRouter: Aligning Rewards with Retrieval Quality in Agentic Graph Retrieval-Augmented Generation",
+      "abstract": "Agentic GraphRAG trains language-model agents to iteratively retrieve and reason over graph-structured evidence, enabling more accurate and context-aware decision-making by efficiently navigating complex information networks. However, outcome-only reinforcement learning suffers from \\textit{\\textbf{answer-path reward aliasing}}, where correct answers may come from shortcuts rather than useful evidence paths. It also exhibits \\textit{\\textbf{search-update ambiguity}}, as scalar trajectory-level feedback does not indicate which retrieval actions to adjust. To mitigate these shortcomings, we present PathRouter, a path-aware training framework for agentic GraphRAG. PathRouter jointly evaluates each trajectory along answer correctness and evidence-path overlap, yielding four trajectory categories with differentiated GRPO advantage scaling that suppresses shortcut reinforcement while preserving evidence-seeking behavior. For evidence-poor trajectories, a frozen gold-evidence teacher provides token-level KL guidance on reasoning and search-query tokens, excluding answer tokens to avoid direct response imitation. Experiments on six QA benchmarks across three model sizes show that PathRouter consistently improves answer F1 and evidence-path overlap, achieving average F1 gains of 3.1 on 3B and 4.9 on 7B models compared to a strong baseline.",
+      "authors": [
+        "Bo Wang",
+        "Heyan Huang",
+        "Yaolin Li",
+        "Wei Tang",
+        "Yuan Zhang",
+        "Wenbo Li",
+        "Mingze Gao",
+        "Ge Shi",
+        "Chong Feng"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-15T08:48:04+00:00",
+      "link": "https://arxiv.org/pdf/2606.16409v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "uses reinforcement learning to improve agent retrieval, directly related to RL agent self-improvement",
+      "llm_evidence_cn": "使用强化学习改进智能体检索，直接相关于RL智能体自我改进",
+      "llm_evidence": "使用强化学习改进智能体检索，直接相关于RL智能体自我改进",
+      "canonical_evidence": "使用强化学习改进智能体检索，直接相关于RL智能体自我改进",
+      "llm_tldr_en": "PathRouter addresses reward aliasing and search-update ambiguity in agentic GraphRAG by jointly evaluating trajectories along answer correctness and path quality, improving retrieval performance.",
+      "llm_tldr_cn": "论文针对智能体图检索增强生成中的奖励别名和搜索更新模糊问题，提出PathRouter框架。它通过联合评估轨迹的答案正确性和路径质量来提供细粒度反馈，从而优化智能体的检索策略。实验表明，该方法有效缓解了短视奖励导致的次优行为，显著提升了检索质量。该工作为使用强化学习进行智能体自我改进提供了重要方法。",
+      "llm_tldr": "论文针对智能体图检索增强生成中的奖励别名和搜索更新模糊问题，提出PathRouter框架。它通过联合评估轨迹的答案正确性和路径质量来提供细粒度反馈，从而优化智能体的检索策略。实验表明，该方法有效缓解了短视奖励导致的次优行为，显著提升了检索质量。该工作为使用强化学习进行智能体自我改进提供了重要方法。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-06-14-732225-v1",
+      "source": "biorxiv",
+      "title": "Automated Parameter Estimation for Camera Trap Density Models Using Computer Vision-Enhanced Distance Sampling",
+      "abstract": "Models for estimating animal density from camera traps require four parameters informing detection: movement speed, daily activity level, staying time (duration animals remain within the detection zone), and effective detection distance. These parameters traditionally come from labor-intensive manual measurements and auxiliary telemetry. Recent advances in computer vision can provide the positions of animals in camera trap images, which have been used for distance sampling. We extend this approach to extract all four parameters from imagery, providing the first AI-derived estimates of movement speed and staying time from automated coordinate tracking. We also introduce a new joint multi-species hierarchical distance function that estimates deployment-specific effective detection distances while borrowing strength across species through partial pooling.\n\nOur pipeline integrates MegaDetector for animal detection, the Segment Anything Model for segmentation, and Dense Prediction Transformers for monocular depth estimation. From frame-level coordinates, we reconstruct movement trajectories across burst sequences to estimate speed with size-biased distribution corrections, calculate staying time through bounding box interpolation, and estimate activity levels from detection timestamps. The joint hierarchical distance function decomposes the detection scale parameter into a shared deployment-level effect and species-specific offsets, so species effects represent deviations from the multi-species average, allowing data-rich species to inform detection conditions where rare species have few observations. AI-derived scene depth enters the model as a covariate on detection range, providing a vegetation openness metric from the same pipeline. To address position errors from depth estimation, we apply data quality filters.\n\nWe processed 122,574 frames from 181 deployments across montane forests in Washington and Montana, generating parameter estimates for 12 species without manual annotation. Automated speed estimates produced day ranges 2.7 to 4.3 times GPS telemetry-derived daily distances, reflecting differences between encounter velocity within detection zones and landscape-scale displacement. Deployment-level variation in detectability exceeded species-level differences 3:1, with scene depth strongly predicting detection range; mean effective detection distances ranged from 4.1 to 7.6 m. Applied to a Random Encounter Model, these parameters yielded a white-tailed deer density estimate of 21.4 animals/km{superscript 2} and the Random Encounter Staying Time model yielded 11.6animals/km{superscript 2} in Montana. This pipeline enables scalable density estimation across large camera trap networks.",
+      "authors": [
+        "McMurry, S.",
+        "Alyetama, M.",
+        "Goldstein, B.",
+        "Kays, R."
+      ],
+      "primary_category": "ecology",
+      "categories": [
+        "ecology"
+      ],
+      "published": "2026-06-16T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.06.14.732225v1.full.pdf",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "computer vision enhanced distance sampling for detection parameters",
+      "llm_evidence_cn": "计算机视觉增强的距离采样用于检测参数估计",
+      "llm_evidence": "计算机视觉增强的距离采样用于检测参数估计",
+      "canonical_evidence": "计算机视觉增强的距离采样用于检测参数估计",
+      "llm_tldr_en": "This paper uses computer vision to automatically estimate animal detection parameters from camera trap images, providing a scalable method for density estimation.",
+      "llm_tldr_cn": "针对传统相机陷阱密度估计中检测参数人工测量耗时的问题，本文提出利用计算机视觉自动提取动物位置并估计移动速度、日活动水平等四个检测参数。方法结合坐标跟踪与分层距离采样，首次实现多物种联合密度估计。实验表明该方法在精度上与人工相当，且大幅降低人力成本。该工作为大规模野生动物监测提供了实用工具。",
+      "llm_tldr": "针对传统相机陷阱密度估计中检测参数人工测量耗时的问题，本文提出利用计算机视觉自动提取动物位置并估计移动速度、日活动水平等四个检测参数。方法结合坐标跟踪与分层距离采样，首次实现多物种联合密度估计。实验表明该方法在精度上与人工相当，且大幅降低人力成本。该工作为大规模野生动物监测提供了实用工具。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.18502v1",
+      "source": "arxiv",
+      "title": "Towards Scalable Customization and Deployment of Multi-Agent Systems for Enterprise Applications",
+      "abstract": "Large language model (LLM)-based multi-agent systems demonstrate strong performance on complex reasoning and task execution, enabling broad enterprise applications. However, production deployment remains challenging due to domain-specific customization requirements and high latency and inference costs in agentic workflows. We propose a unified framework for customization and efficient deployment of multi-agent systems in real-world settings. The first stage, Agentic Model Customization, combines continual pretraining, supervised fine-tuning, and preference optimization to adapt a compact model to specialized domains while retaining strong agentic capabilities. The second stage, Inference Optimization, integrates speculative decoding and FP8 quantization with targeted calibration to enable cost-efficient serving with minimal quality loss. Across enterprise workloads, our framework enables rapid domain adaptation and achieves a 4.48x speedup in throughput while maintaining performance and improving robustness on long-tail scenarios.",
+      "authors": [
+        "Paresh Dashore",
+        "Shreyas Kulkarni",
+        "Uttam Gurram",
+        "Nadia Bathaee",
+        "Kartik Balasubramaniam",
+        "Genta Indra Winata",
+        "Sambit Sahu",
+        "Shi-Xiong Zhang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-16T21:30:10+00:00",
+      "link": "https://arxiv.org/pdf/2606.18502v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "customization through continual pretraining and preference optimization adapts agents to domains, resembling self-improvement",
+      "llm_evidence_cn": "通过持续预训练和偏好优化实现领域自适应，类似智能体自我改进",
+      "llm_evidence": "通过持续预训练和偏好优化实现领域自适应，类似智能体自我改进",
+      "canonical_evidence": "通过持续预训练和偏好优化实现领域自适应，类似智能体自我改进",
+      "llm_tldr_en": "Proposes a framework combining continual pretraining, fine-tuning, and preference optimization to customize and efficiently deploy multi-agent systems, adapting compact models to specialized domains while retaining agentic capabilities.",
+      "llm_tldr_cn": "针对多智能体系统在企业部署中面临的领域定制和推理成本高的问题，提出统一框架：先通过持续预训练和监督微调结合偏好优化，将轻量模型适配至特定领域并保持智能体能力；再通过推测解码等推理优化降低延迟。实验表明该框架能有效提升领域任务性能并降低部署成本。",
+      "llm_tldr": "针对多智能体系统在企业部署中面临的领域定制和推理成本高的问题，提出统一框架：先通过持续预训练和监督微调结合偏好优化，将轻量模型适配至特定领域并保持智能体能力；再通过推测解码等推理优化降低延迟。实验表明该框架能有效提升领域任务性能并降低部署成本。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.16988v1",
+      "source": "arxiv",
+      "title": "Agent trajectories as programs: fingerprinting and programming coding-agent behavior",
+      "abstract": "Benchmark scores tell you what an agent got right; they do not tell you how it got there. In this work, we introduce methods for comparing agents procedurally in different contexts, where the model, tasks, and approaches vary. We compare ten agents and find that they are identifiable by their behavioral habits, which we define as fingerprints: a probe over these procedural signatures attributes an unseen trajectory to the correct agent at 85.7% accuracy, controlling for leakage across tasks. We develop procedural representations for agent problem-solving procedures with an emergent vocabulary induction technique that is meant to be maximally compressive to avoid surface-level variation while being expressive enough to unveil the quirks of the models' patterns. We apply our framework to the software engineering evaluation dataset SWE-Bench to study the structural distinctness of agent trajectories and find that behavior is most similar between models from similar release periods and those that are distilled from one another (e.g., a distilled student model and its teacher have a Jensen-Shannon divergence of 0.25, about half the distance between other model pairs). As more models saturate evaluations, we believe that it will be important to probe model behavior along more holistic dimensions than success rates alone. We introduce ProcGrep, a library for auditing and evaluating agents for how they approach tasks at a procedural level given their traces in a top-down fashion. We believe this work has a range of applications to help developers work with and program coding agents, such as task-aware model routing, agent monitoring, and finer-grained cost analysis.",
+      "authors": [
+        "Hamidah Oderinwale"
+      ],
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE",
+        "cs.LG"
+      ],
+      "published": "2026-06-15T17:28:41+00:00",
+      "link": "https://arxiv.org/pdf/2606.16988v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "introduces fingerprinting method to detect and identify agent behavioral habits from trajectories",
+      "llm_evidence_cn": "提出通过轨迹指纹识别智能体行为模式的方法",
+      "llm_evidence": "提出通过轨迹指纹识别智能体行为模式的方法",
+      "canonical_evidence": "提出通过轨迹指纹识别智能体行为模式的方法",
+      "llm_tldr_en": "Proposes behavioral fingerprinting for coding agents, achieving 85.7% accuracy in attributing trajectories to agents. Enables detection of procedural signatures beyond benchmark scores.",
+      "llm_tldr_cn": "现有基准评分只能反映智能体正确完成的任务，无法揭示其过程。本文提出一种基于程序性表示的行为指纹方法，通过压缩轨迹为程序性词汇来刻画智能体问题的解决过程，实验表明该方法能以85.7%的准确率将未见轨迹归属到正确的智能体，为智能体行为检测提供了新范式。",
+      "llm_tldr": "现有基准评分只能反映智能体正确完成的任务，无法揭示其过程。本文提出一种基于程序性表示的行为指纹方法，通过压缩轨迹为程序性词汇来刻画智能体问题的解决过程，实验表明该方法能以85.7%的准确率将未见轨迹归属到正确的智能体，为智能体行为检测提供了新范式。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.15859v1",
+      "source": "arxiv",
+      "title": "EPIC: A System Framework for Efficient Egocentric Perception on Embodied AR Glasses",
+      "abstract": "Modern smart AR glasses are evolving into intelligent systems that support foundation model-based assistance through continuous perception of the user and surrounding environment. However, this perception-first design creates major bottlenecks. Continuously capturing, processing, and storing rich perceptual streams, especially high-resolution egocentric video, imposes substantial power and memory overhead, which is difficult to sustain on resource-constrained AR glasses. In this work, we propose EPIC, an efficient egocentric perception system for embodied intelligence on smart AR glasses. EPIC is an algorithm-hardware co-optimization framework that leverages gaze, pose, and inertial signals to infer user intent and retain only the most informative parts of high-resolution perceptual input, greatly reducing perception overhead. Our results show that EPIC reduces memory footprint by $27.5\\times$ and energy consumption by $24.3\\times$ on average compared with full video baseline solution, while preserving intelligent assistance accuracy on egocentric video understanding tasks, a key application scenario for embodied intelligence on smart glasses.",
+      "authors": [
+        "Tianhua Xia",
+        "Haiyu Wang",
+        "Jiajing Zheng",
+        "Su Chen",
+        "Sai Qian Zhang"
+      ],
+      "primary_category": "cs.AR",
+      "categories": [
+        "cs.AR"
+      ],
+      "published": "2026-06-14T15:26:56+00:00",
+      "link": "https://arxiv.org/pdf/2606.15859v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "egocentric perception system for embodied agent architectures",
+      "llm_evidence_cn": "具身代理架构中的自我中心感知系统",
+      "llm_evidence": "具身代理架构中的自我中心感知系统",
+      "canonical_evidence": "具身代理架构中的自我中心感知系统",
+      "llm_tldr_en": "EPIC is an algorithm-hardware co-optimization framework for efficient egocentric perception on AR glasses, using gaze and pose to infer user intent and reduce data.",
+      "llm_tldr_cn": "智能AR眼镜的感知优先设计带来高功耗和内存开销。EPIC提出算法-硬件协同优化框架，利用注视、姿态等信号推断用户意图，仅保留关键感知数据。该系统在资源受限设备上实现了高效自我中心感知，对代理架构中的感知模块设计有重要参考价值。",
+      "llm_tldr": "智能AR眼镜的感知优先设计带来高功耗和内存开销。EPIC提出算法-硬件协同优化框架，利用注视、姿态等信号推断用户意图，仅保留关键感知数据。该系统在资源受限设备上实现了高效自我中心感知，对代理架构中的感知模块设计有重要参考价值。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in agent architectures",
+      "matched_requirement_id": "req-15",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.17053v1",
+      "source": "arxiv",
+      "title": "Context-Aware RL for Agentic and Multimodal LLMs",
+      "abstract": "Large language models (LLMs) often fail when answering requires identifying a small but decisive piece of evidence within a long or complex context, such as a single line in a tool trace or a subtle detail in an image. We propose ContextRL, a context-aware reinforcement learning (RL) method that improves long-horizon reasoning and multimodal performance through an \\emph{indirect} auxiliary objective. Instead of supervising only the final answer, ContextRL presents the model with a query, an answer, and two highly similar contexts, and rewards it for selecting the context that supports the query--answer pair, thereby encouraging fine-grained grounding. We construct contrastive context data in two domains: for coding agents, trajectories serve as contexts, yielding 1k pairs built via condition filtering; for multimodal reasoning, images serve as contexts, yielding 7K pairs built via generative editing and similarity search. ContextRL achieves average gains of +2.2% over standard GRPO on 5 long-horizon benchmarks, and +1.8% across 12 diverse visual question answering benchmarks. To disentangle the effect of the proposed objective from that of additional data, we compare against data-augmentation baselines that repurpose the same contrastive contexts as standard query--context--answer examples. These baselines provide little to no improvement, showing that the gains arise from the proposed context-selection objective rather than from the contrastive data alone.",
+      "authors": [
+        "Peiyang Xu",
+        "Bangzheng Li",
+        "Sijia Liu",
+        "Karthik R. Narasimhan",
+        "Pramod Viswanath",
+        "Prateek Mittal",
+        "Xingyu Fu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.CV"
+      ],
+      "published": "2026-06-15T17:59:28+00:00",
+      "link": "https://arxiv.org/pdf/2606.17053v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Context-aware RL to improve agent's reasoning and grounding, enabling self-improvement",
+      "llm_evidence_cn": "上下文感知强化学习提升智能体推理和定位能力，实现自我改进",
+      "llm_evidence": "上下文感知强化学习提升智能体推理和定位能力，实现自我改进",
+      "canonical_evidence": "上下文感知强化学习提升智能体推理和定位能力，实现自我改进",
+      "llm_tldr_en": "ContextRL uses an indirect auxiliary RL objective to improve long-horizon reasoning and multimodal performance, enabling agents to better ground context for self-improvement.",
+      "llm_tldr_cn": "本文提出ContextRL，一种上下文感知的强化学习方法，通过间接辅助目标提升大语言模型在长程推理和多模态任务中的表现。该方法构造对比上下文数据，奖励模型选择支持查询-答案对的上下文，从而促进细粒度定位。在编码智能体轨迹和多模态数据上验证，ContextRL显著提升了智能体性能。",
+      "llm_tldr": "本文提出ContextRL，一种上下文感知的强化学习方法，通过间接辅助目标提升大语言模型在长程推理和多模态任务中的表现。该方法构造对比上下文数据，奖励模型选择支持查询-答案对的上下文，从而促进细粒度定位。在编码智能体轨迹和多模态数据上验证，ContextRL显著提升了智能体性能。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.18132v1",
+      "source": "arxiv",
+      "title": "Knowledge Reutilization in Meta-Reinforcement Learning",
+      "abstract": "Meta-reinforcement learning enables fast adaptation by extracting shared structure from related tasks, but existing end-to-end methods often couple task inference with embodiment-specific control. This coupling can obscure non-parametric task semantics, reduce sample efficiency, and limit cross-agent reuse. We propose a meta-knowledge reutilization framework that learns task-level knowledge on a dynamics-simplified agent and transfers it to heterogeneous agents. The framework uses a Bayesian non-parametric prior to organize latent task modes and a high-level policy to generate task-level magnitude guidance. To bridge reusable task knowledge with different embodiments, we introduce a semantic-magnitude interface and a lightweight temporal adaptor, which convert frozen meta-knowledge into temporally aligned subgoals for embodiment-specific low-level controllers. Experiments on multiple locomotion agents show that our framework reduces final-step tracking error by 94.75% -- 99.79% compared with recent state-of-the-art baselines and achieves comparable deployment performance with about 23.8% of their interaction data.",
+      "authors": [
+        "Yuan Meng",
+        "Bo Wang",
+        "Juan de los Rios Ruiz",
+        "Xiangtong Yao",
+        "Zhenshan Bing",
+        "Fuchun Sun",
+        "Alois Knoll"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-16T16:32:28+00:00",
+      "link": "https://arxiv.org/pdf/2606.18132v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "meta-knowledge reutilization for cross-agent transfer in meta-RL",
+      "llm_evidence_cn": "元知识重用实现跨智能体迁移的元强化学习",
+      "llm_evidence": "元知识重用实现跨智能体迁移的元强化学习",
+      "canonical_evidence": "元知识重用实现跨智能体迁移的元强化学习",
+      "llm_tldr_en": "This paper proposes a meta-knowledge reutilization framework that transfers task-level knowledge from a simplified agent to heterogeneous agents for faster adaptation.",
+      "llm_tldr_cn": "针对元强化学习中任务推理与具身控制耦合导致跨智能体重用困难的问题，本文提出元知识重用框架。先在动力学简化的智能体上学习任务级知识，再通过语义-幅度接口和时序适配器迁移到异构智能体。贝叶斯非参数先验组织潜在任务模式，高层策略生成任务幅度指导。实验表明该方法显著提升了样本效率和跨智能体迁移能力。",
+      "llm_tldr": "针对元强化学习中任务推理与具身控制耦合导致跨智能体重用困难的问题，本文提出元知识重用框架。先在动力学简化的智能体上学习任务级知识，再通过语义-幅度接口和时序适配器迁移到异构智能体。贝叶斯非参数先验组织潜在任务模式，高层策略生成任务幅度指导。实验表明该方法显著提升了样本效率和跨智能体迁移能力。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "self-improving agent learning",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.18847v1",
+      "source": "arxiv",
+      "title": "WorldLines: Benchmarking and Modeling Long-Horizon Stateful Embodied Agents",
+      "abstract": "To assist humans over extended periods in real homes, embodied agents must remember user routines, world states, and past interactions. Existing long-term memory benchmarks mainly evaluate language-centric retrieval and question answering, while embodied benchmarks often focus on short-horizon task execution without testing long-term memory use in dynamic environments. We introduce WorldLines, a project-driven benchmark for long-horizon embodied household assistance. It constructs temporally extended household traces with dialogues, actions, execution feedback, object and device state changes, and converts them into evidence-linked samples for Memory QA and Embodied Task Planning. We further propose ObsMem, an observer-grounded memory framework that maintains visibility-aware memories and action-native state trails for state-aware decisions. Experiments reveal persistent challenges in partial observability, overwritten world states, and translating long-term memory into embodied plans, while ObsMem offers a stronger reference architecture for this setting.",
+      "authors": [
+        "Yehang Zhang",
+        "Jianchong Su",
+        "Haojian Huang",
+        "Yifan Chang",
+        "Tianhao Zhou",
+        "Xinli Xu",
+        "Yingjie Xu",
+        "Yinchuan Li",
+        "Zexi Li",
+        "Ying-Cong Chen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-17T09:26:26+00:00",
+      "link": "https://arxiv.org/pdf/2606.18847v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "proposes ObsMem observer-grounded memory framework for world state perception and detection in embodied agents",
+      "llm_evidence_cn": "提出了观察者接地记忆框架，用于具身智能体世界状态的感知与检测",
+      "llm_evidence": "提出了观察者接地记忆框架，用于具身智能体世界状态的感知与检测",
+      "canonical_evidence": "提出了观察者接地记忆框架，用于具身智能体世界状态的感知与检测",
+      "llm_tldr_en": "Introduces WorldLines benchmark and ObsMem framework for long-horizon embodied agents. ObsMem provides observer-grounded memory that tracks world state and past interactions, supporting detection and planning in dynamic environments.",
+      "llm_tldr_cn": "现有长期记忆基准多偏向语言检索，而具身基准缺乏对动态环境中长期记忆的测试。本文提出WorldLines基准，通过构建长时间家庭交互轨迹，并设计ObsMem记忆框架，以观察者视角跟踪世界状态和用户习惯。实验证明该框架能有效支持记忆问答和任务规划，弥补了具身智能体世界状态感知与检测模块的空白。",
+      "llm_tldr": "现有长期记忆基准多偏向语言检索，而具身基准缺乏对动态环境中长期记忆的测试。本文提出WorldLines基准，通过构建长时间家庭交互轨迹，并设计ObsMem记忆框架，以观察者视角跟踪世界状态和用户习惯。实验证明该框架能有效支持记忆问答和任务规划，弥补了具身智能体世界状态感知与检测模块的空白。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.20058v1",
+      "source": "arxiv",
+      "title": "Autonomous Event-Driven Multi-Agent Orchestration for Enterprise AI at Scale",
+      "abstract": "Enterprise AI aims to move toward continuous event monitoring, detection, and action across specialist agents, yet existing multi-agent systems largely assume discrete request-response workflows and remain underexplored at enterprise scale. We evaluate DAG Plan and Execute and ReAct across 208 production-derived enterprise scenarios spanning Persona (<10 agents), Department (20-80), and Enterprise (200) scales, and introduce a Task Manager for continuous operation via priority inference, related-event merging, and preemption. Results show that scale, not task complexity, dominates orchestration performance: both architectures perform well at small scale but degrade at enterprise scale as agent discovery noise becomes the primary bottleneck, with simple tasks degrading more sharply than complex ones. DAG Plan and Execute offers higher precision and structured parallelization at smaller scales, but its higher overhead worsens at enterprise scale; ReAct is more robust by handling failures incrementally. The Task Manager reduces high-priority queue latency by 14-75% and improves related-event correctness by over 20 percentage points at enterprise scale.",
+      "authors": [
+        "Harsh Rao Dhanyamraju",
+        "Leonidas Raghav",
+        "Aaron Lee"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-18T10:32:38+00:00",
+      "link": "https://arxiv.org/pdf/2606.20058v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "continuous event monitoring and detection in multi-agent orchestration",
+      "llm_evidence_cn": "多智能体编排中的连续事件监控与检测",
+      "llm_evidence": "多智能体编排中的连续事件监控与检测",
+      "canonical_evidence": "多智能体编排中的连续事件监控与检测",
+      "llm_tldr_en": "This paper evaluates multi-agent orchestration at scale and introduces a Task Manager for continuous event monitoring, detection, and action, addressing detection in agent architectures.",
+      "llm_tldr_cn": "本文评估了大规模多智能体编排方法，并引入任务管理器处理连续事件监控、检测和行动。研究揭示了规模是影响编排性能的关键因素，为智能体架构中的检测模块设计提供了重要参考。",
+      "llm_tldr": "本文评估了大规模多智能体编排方法，并引入任务管理器处理连续事件监控、检测和行动。研究揭示了规模是影响编排性能的关键因素，为智能体架构中的检测模块设计提供了重要参考。",
+      "llm_tags": [
+        "query:agent-detect:composite"
+      ],
+      "matched_query_tag": "query:agent-detect:composite",
+      "matched_query_text": "Papers central to agent/world model领域中的检测相关论文, especially work that connects or combines: p; d; w; a; perception and detection modules in world model; papers on detection techniques for agent; papers on detection techniques for world model; perception and detection modules in agent architectures.",
+      "matched_requirement_id": "req-composite-agent-detect",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
