@@ -6,71 +6,73 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-06-23
-- 运行时间：2026-06-23 22:25:26 UTC
+- 最新运行日期：2026-06-25
+- 运行时间：2026-06-25 22:28:37 UTC
 - 运行状态：成功
 - 本次总论文数：17
 - 精读区：7
 - 速读区：10
 
 ### 今日简报（AI）
-今日精读17篇论文，重点关注LLM自训练崩溃模式与多步智能体自适应评估框架。最值得关注的是Self-Improvement Can Self-Regress揭示自训练风险，及ARCO提出协同进化评估方法。建议普通读者警惕模型自我提升的失效边界，探索更稳健的评估策略。
-- 详情：[/202606/23/README](/202606/23/README)
+今日聚焦强化学习与具身智能认知框架，精读两篇9分佳作：时间自我模仿学习与自进化因果世界模型。  
+值得深挖自我模仿学习的时间泛化能力，以及因果建模驱动科学具身智能的自主演化路径。  
+建议优先精读这两篇高分论文，并留意速读中自改进教师推理框架与语义一致性策略优化。
+- 详情：[/202606/25/README](/202606/25/README)
 
 ### 精读区论文标签
-1. [Self-Improvement Can Self-Regress: The Rise-and-Collapse Failure Mode of LLM Self-Training](/202606/23/2606.21090v1-self-improvement-can-self-regress-the-rise-and-collapse-failure-mode-of-llm-self-training)  
+1. [Temporal Self-Imitation Learning](/202606/25/2606.19752v2-temporal-self-imitation-learning)  
    标签：评分：9.0/10、query:self-improve
-   evidence：研究LLM自训练中的自我改进失效模式
-2. [ARCO: Adaptive Rubric with Co-Evolution for Multi-Step LLM-Based Agents](/202606/23/2606.21262v1-arco-adaptive-rubric-with-co-evolution-for-multi-step-llm-based-agents)  
+   evidence：强化学习中从高效轨迹进行自我模仿
+2. [Self-Evolving Cognitive Framework via Causal World Modeling for Embodied Scientific Intelligence](/202606/25/2606.22449v1-self-evolving-cognitive-framework-via-causal-world-modeling-for-embodied-scientific-intelligence)  
    标签：评分：9.0/10、query:self-improve
-   evidence：基于规则的多步LLM智能体强化学习，提供步骤级奖励
-3. [Self-Evolving Cognitive Framework via Causal World Modeling for Embodied Scientific Intelligence](/202606/23/2606.22449v1-self-evolving-cognitive-framework-via-causal-world-modeling-for-embodied-scientific-intelligence)  
+   evidence：通过因果世界建模实现自我进化的认知框架
+3. [Metis: Bridging Text and Code Memory for Self-Evolving Agents](/202606/25/2606.24151v1-metis-bridging-text-and-code-memory-for-self-evolving-agents)  
    标签：评分：9.0/10、query:self-improve
-   evidence：通过因果世界建模实现持续认知细化的自我进化框架
-4. [Self-Evolution for Multi-Turn Tool-Calling Agents via Divergence-Point Preference Learning](/202606/23/2606.23112v1-self-evolution-for-multi-turn-tool-calling-agents-via-divergence-point-preference-learning)  
+   evidence：自我进化智能体，经验蒸馏
+4. [Escaping the Self-Confirmation Trap: An Execute-Distill-Verify Paradigm for Agentic Experience Learning](/202606/25/2606.24428v1-escaping-the-self-confirmation-trap-an-execute-distill-verify-paradigm-for-agentic-experience-learning)  
    标签：评分：9.0/10、query:self-improve
-   evidence：通过分歧点偏好学习实现工具调用智能体的自我进化
-5. [WITHDRAWN: Agent-Guided Ranking Policy Improvement for Peptide Drug Candidate Prioritization](/202606/23/biorxiv-10-64898-2026-04-19-719536-v2-withdrawn-agent-guided-ranking-policy-improvement-for-peptide-drug-candidate-prioritization)  
-   标签：评分：9.0/10、query:self-improve
-   evidence：智能体引导的排序策略改进，自我改进的智能体
-6. [ACCORD: Action-Conditioned Contextual Grounding for Language Agents](/202606/23/2606.16432v1-accord-action-conditioned-contextual-grounding-for-language-agents)  
-   标签：评分：8.0/10、query:agent-detect
-   evidence：语言智能体的动作条件上下文获取，检测缺失信息
-7. [Whose Agent Are You? Multi-Layer Fingerprinting and Attribution of Autonomous Web Agents](/202606/23/2606.20910v1-whose-agent-are-you-multi-layer-fingerprinting-and-attribution-of-autonomous-web-agents)  
-   标签：评分：8.0/10、query:agent-detect
-   evidence：多层指纹识别检测AI网络智能体
+   evidence：通过带验证的经验学习实现智能体自我改进
+5. [Hypothesis-Driven Skill Optimization for LLM Agents](/202606/25/2606.22330v1-hypothesis-driven-skill-optimization-for-llm-agents)  
+   标签：评分：8.0/10、query:self-improve
+   evidence：假设驱动的技能优化用于智能体自我改进
+6. [A Stackelberg Framework for Resource-Aware LLM Agents: Learning, Repair, and Conditional Guarantees](/202606/25/2606.23026v1-a-stackelberg-framework-for-resource-aware-llm-agents-learning-repair-and-conditional-guarantees)  
+   标签：评分：8.0/10、query:self-improve
+   evidence：基于Stackelberg博弈的LLM智能体资源分配策略学习与修复框架
+7. [Reinforcement Learning for Computer-Use Agents with Autonomous Evaluation](/202606/25/2606.24515v1-reinforcement-learning-for-computer-use-agents-with-autonomous-evaluation)  
+   标签：评分：8.0/10、query:self-improve
+   evidence：基于自主视觉语言评估的GUI智能体RL微调框架，通过RL实现自我改进
 
 ### 速读区论文标签
-1. [Reward-free Pretraining for Reinforcement Learning via Occupancy Coverage Maximization](/202606/23/2606.21271v1-reward-free-pretraining-for-reinforcement-learning-via-occupancy-coverage-maximization)  
+1. [Teach-to-Reason: Competition-Guided Reasoning with a Self-Improving Teacher](/202606/25/2606.25407v1-teach-to-reason-competition-guided-reasoning-with-a-self-improving-teacher)  
    标签：评分：8.0/10、query:self-improve
-   evidence：通过预训练实现强化学习智能体自我改进
-2. [VLA-FAIL: Efficient Task Failure Detection for Finetuned Vision-Language-Action Models](/202606/23/2606.21386v1-vla-fail-efficient-task-failure-detection-for-finetuned-vision-language-action-models)  
-   标签：评分：8.0/10、query:agent-detect
-   evidence：面向视觉-语言-动作智能体的故障检测
-3. [ToolChain-CRC: Conformal Risk Control for Agentic AI Under Retrieval and Tool-Use Drift](/202606/23/2606.18467v1-toolchain-crc-conformal-risk-control-for-agentic-ai-under-retrieval-and-tool-use-drift)  
-   标签：评分：7.0/10、query:agent-detect
-   evidence：智能体轨迹风险检测技术
-4. [Inverting the Bellman Equation: From $Q$-Values to World Models](/202606/23/2606.21173v1-inverting-the-bellman-equation-from-q-values-to-world-models)  
-   标签：评分：7.0/10、query:agent-detect
-   evidence：通过逆贝尔曼方程从Q值提取世界模型
-5. [CalVerT: Augmenting Agents with Calibrated Verifier Telemetry Improves Action and Learning in Knowledge-Intensive Tasks](/202606/23/2606.21777v1-calvert-augmenting-agents-with-calibrated-verifier-telemetry-improves-action-and-learning-in-knowledge-intensive-tasks)  
+   evidence：通过自我竞争迭代增强的自改进教师
+2. [Semantic Consistency Policy Optimization for Reinforcement Learning of LLM Agents](/202606/25/2606.25852v1-semantic-consistency-policy-optimization-for-reinforcement-learning-of-llm-agents)  
+   标签：评分：8.0/10、query:self-improve
+   evidence：通过奖励塑形实现强化学习智能体自我改进
+3. [Autodata: An agentic data scientist to create high quality synthetic data](/202606/25/2606.25996v1-autodata-an-agentic-data-scientist-to-create-high-quality-synthetic-data)  
+   标签：评分：8.0/10、query:self-improve
+   evidence：对数据科学家agent自身进行元优化以获得更大性能提升
+4. [AutoRAS: Learning Robust Agentic Systems with Primitive Representations](/202606/25/2606.21445v1-autoras-learning-robust-agentic-systems-with-primitive-representations)  
    标签：评分：7.0/10、query:self-improve
-   evidence：通过验证器遥测增强智能体状态以改进动作和学习
-6. [MAS-PromptBench: When Does Prompt Optimization Improve Multi-Agent LLM Systems?](/202606/23/2606.23664v1-mas-promptbench-when-does-prompt-optimization-improve-multi-agent-llm-systems)  
+   evidence：自动化设计鲁棒智能体系统以实现自我改进
+5. [ReM-MoA: Reasoning Memory Sustains Mixture-of-Agents Scaling](/202606/25/2606.24437v1-rem-moa-reasoning-memory-sustains-mixture-of-agents-scaling)  
    标签：评分：7.0/10、query:self-improve
-   evidence：多智能体系统的提示优化作为自我改进技术
-7. [AdaMem: Learning What to Remember for Personalized Long-Horizon LLM Agents](/202606/23/2606.21144v1-adamem-learning-what-to-remember-for-personalized-long-horizon-llm-agents)  
+   evidence：通过记忆增强的智能体缩放实现迭代改进
+6. [VisCritic: Visual State Comparison as Process Reward for GUI Agents](/202606/25/2606.24525v1-viscritic-visual-state-comparison-as-process-reward-for-gui-agents)  
+   标签：评分：7.0/10、query:agent-detect
+   evidence：通过视觉特征比较验证智能体动作
+7. [SAFARI: Scaling Long Horizon Agentic Fault Attribution via Active Investigation](/202606/25/2606.24626v1-safari-scaling-long-horizon-agentic-fault-attribution-via-active-investigation)  
+   标签：评分：7.0/10、query:agent-detect
+   evidence：智能体故障检测与归因
+8. [Neglected Free Lunch from Post-training: Progress Advantage for LLM Agents](/202606/25/2606.26080v1-neglected-free-lunch-from-post-training-progress-advantage-for-llm-agents)  
+   标签：评分：7.0/10、query:self-improve
+   evidence：RL后训练为LLM智能体提供步骤级评分，无需专用奖励模型即可实现自我改进
+9. [Skill-MAS: Evolving Meta-Skill for Automatic Multi-Agent Systems](/202606/25/2606.18837v2-skill-mas-evolving-meta-skill-for-automatic-multi-agent-systems)  
    标签：评分：6.0/10、query:self-improve
-   evidence：学习记忆内容以提升个性化长时LLM智能体的问答准确性
-8. [AutoRAS: Learning Robust Agentic Systems with Primitive Representations](/202606/23/2606.21445v1-autoras-learning-robust-agentic-systems-with-primitive-representations)  
-   标签：评分：6.0/10、query:self-improve
-   evidence：通过原始表示自动设计鲁棒智能体系统
-9. [Simultaneous detection and estimation in olfactory sensing](/202606/23/biorxiv-10-1101-2025-11-01-686013-v2-simultaneous-detection-and-estimation-in-olfactory-sensing)  
+   evidence：通过进化元技能实现多智能体系统自我改进
+10. [Omni-Perception Policy Optimization for Multimodal Emotion Reasoning](/202606/25/2606.25325v1-omni-perception-policy-optimization-for-multimodal-emotion-reasoning)  
    标签：评分：6.0/10、query:agent-detect
-   evidence：基于压缩感知的嗅觉检测模型，受SLAM启发
-10. [CellOS: Learning a World Model of Cellular State through Joint Embedding Prediction](/202606/23/biorxiv-10-64898-2026-06-18-733163-v1-cellos-learning-a-world-model-of-cellular-state-through-joint-embedding-prediction)  
-   标签：评分：6.0/10、query:agent-detect
-   evidence：包含感知视图的世界模型
+   evidence：用于情感推理的多模态感知RL优化框架，与感知模块相关
 
 
 <div class="dpr-home-promo-card">

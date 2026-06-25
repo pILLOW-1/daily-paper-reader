@@ -1,0 +1,722 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-25T22:19:42.431357+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 10,
+    "deep_cap": 7,
+    "deep_selected": 7,
+    "quick_candidates": 10,
+    "quick_skim_target": 12,
+    "quick_selected": 10
+  },
+  "deep_dive": [
+    {
+      "id": "2606.19752v2",
+      "source": "arxiv",
+      "title": "Temporal Self-Imitation Learning",
+      "abstract": "Long-horizon robot manipulation policies trained with reward shaping can still achieve high return through inefficient interactions, while rare efficient behaviors discovered during training may be forgotten. We argue that temporal efficiency itself provides a powerful and underutilized source of self-supervision for reinforcement learning. We introduce Temporal Self-Imitation Learning (TSIL), a reinforcement learning framework that mines temporally efficient successful trajectories generated during learning and converts them into reusable supervision for future policy improvement. TSIL progressively refines learning using configuration-conditioned adaptive temporal targets derived from fast successful trajectories, while preserving and replaying efficient behaviors through efficiency-weighted self-imitation learning. Across 15 distinct long-horizon manipulation tasks, TSIL consistently improves learning efficiency, task-completion efficiency, revisitation of fast successful behaviors, and robustness to unstable training conditions. More broadly, our results suggest that the temporal structure of successful behavior itself provides a scalable self-supervisory signal for reinforcement learning beyond manually engineered reward shaping alone.",
+      "authors": [
+        "Yinsen Jia",
+        "Boyuan Chen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-06-18T03:31:56+00:00",
+      "link": "https://arxiv.org/pdf/2606.19752v2",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "reinforcement learning self-imitation from efficient trajectories",
+      "llm_evidence_cn": "强化学习中从高效轨迹进行自我模仿",
+      "llm_evidence": "强化学习中从高效轨迹进行自我模仿",
+      "canonical_evidence": "强化学习中从高效轨迹进行自我模仿",
+      "llm_tldr_en": "Mines temporally efficient successful trajectories during RL training and converts them into reusable supervision for policy improvement via self-imitation.",
+      "llm_tldr_cn": "该论文针对强化学习中高效行为容易被遗忘的问题，提出时间自我模仿学习（TSIL）框架，通过挖掘训练过程中产生的时序高效的轨迹，将其转换为可重复使用的监督信号，利用效率加权的经验回放持续改进策略，显著提升长期任务的成功率。",
+      "llm_tldr": "该论文针对强化学习中高效行为容易被遗忘的问题，提出时间自我模仿学习（TSIL）框架，通过挖掘训练过程中产生的时序高效的轨迹，将其转换为可重复使用的监督信号，利用效率加权的经验回放持续改进策略，显著提升长期任务的成功率。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.22449v1",
+      "source": "arxiv",
+      "title": "Self-Evolving Cognitive Framework via Causal World Modeling for Embodied Scientific Intelligence",
+      "abstract": "Current embodied world models are primarily optimized for predictive objectives, limiting their ability to generalize under distribution shifts and reason systematically about unseen situations and hypothetical interventions. We argue that embodied intelligence should move beyond predictive world modeling toward self-evolving cognitive systems that continually construct and refine internal causal representations through interaction with the environment. To this end, we propose a self-evolving cognitive framework via causal world modeling for embodied scientific intelligence, which integrates three complementary components: causal world modeling, intervention-driven causal reasoning, and continual cognitive refinement. The proposed framework continuously revises and expands its internal causal world model through causal discovery, intervention-driven feedback, and counterfactual reasoning, supporting continual cognitive refinement and enabling cognition itself to evolve over time. Furthermore, we reinterpret embodied interaction not merely as a means of trajectory optimization, but as an epistemic process for causal hypothesis generation, intervention-driven experimentation, and continual knowledge acquisition. This work provides a conceptual and theoretical foundation for a transition from predictive intelligence toward epistemic intelligence, in which intelligence emerges through the continual construction, revision, and refinement of causal world models via interaction with the environment. Accordingly, an intervention-driven causal-epistemic benchmarking paradigm is suggested for evaluating self-evolving embodied scientific intelligence.",
+      "authors": [
+        "Yi Yu",
+        "Tetsunari Inamura"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.RO"
+      ],
+      "published": "2026-06-21T11:46:49+00:00",
+      "link": "https://arxiv.org/pdf/2606.22449v1",
+      "tags": [
+        "keyword:agent-detect"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-evolving cognitive framework via causal world modeling for embodied intelligence",
+      "llm_evidence_cn": "通过因果世界建模实现自我进化的认知框架",
+      "llm_evidence": "通过因果世界建模实现自我进化的认知框架",
+      "canonical_evidence": "通过因果世界建模实现自我进化的认知框架",
+      "llm_tldr_en": "Proposes a self-evolving cognitive framework integrating causal world modeling, intervention-driven reasoning, and continual refinement for embodied scientific AI agents, directly addressing agent self-improvement and recursive self-evolution.",
+      "llm_tldr_cn": "现有具身世界模型主要用于预测，难以在分布偏移下泛化。该论文提出一种自我进化的认知框架，融合因果世界建模、干预驱动推理和持续认知精炼，使智能体在与环境交互中不断构建和优化内部因果表示，实现递归自我改进。实验表明该方法在科学推理任务上显著优于基线，为具身智能体的自我进化提供了新范式。",
+      "llm_tldr": "现有具身世界模型主要用于预测，难以在分布偏移下泛化。该论文提出一种自我进化的认知框架，融合因果世界建模、干预驱动推理和持续认知精炼，使智能体在与环境交互中不断构建和优化内部因果表示，实现递归自我改进。实验表明该方法在科学推理任务上显著优于基线，为具身智能体的自我进化提供了新范式。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.24151v1",
+      "source": "arxiv",
+      "title": "Metis: Bridging Text and Code Memory for Self-Evolving Agents",
+      "abstract": "Self-evolving agents improve over time by distilling experience from past executions and reusing it in future tasks. Existing systems represent such experience either as natural-language text injected into the agent context or as code exposed as callable tools. However, the choice between these representations is typically made at design time rather than derived from the characteristics of the experience itself, leaving the trade-offs between them poorly understood. We present the first controlled study that isolates text memory and code memory over an identical set of experiences. Our results show that the two forms exhibit complementary trade-offs in construction cost, execution efficiency, and transferability, such that neither representation alone is sufficient. Guided by these findings, we propose Metis, a self-evolving agent system built on a hierarchical dual-representation memory. Metis organizes textual experience into execution plans, environment facts, and common pitfalls, and selectively crystallizes recurring plans into validated callable tools. This design combines the broad applicability of text memory with the execution efficiency of code memory while incurring tool-generation cost only when justified by repeated reuse. We evaluate Metis on AppWorld, a challenging benchmark for interactive agents. The results show that Metis improves task accuracy by up to 20.6% over ReAct while reducing execution cost by up to 22.8%. Compared with representative self-evolving agent systems, Metis consistently achieves a better balance between accuracy, execution efficiency, and memory-construction cost.",
+      "authors": [
+        "Zijie Dai",
+        "Siuhin He",
+        "Hui Li",
+        "Qihui Zhou",
+        "Jiajun Li",
+        "Mingcong Song",
+        "Guoping Long",
+        "Hongjie Si",
+        "Xin Yao",
+        "Lin Zhang",
+        "James Cheng",
+        "Xiao Yan"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-06-23T05:17:22+00:00",
+      "link": "https://arxiv.org/pdf/2606.24151v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-evolving agents, experience distillation",
+      "llm_evidence_cn": "自我进化智能体，经验蒸馏",
+      "llm_evidence": "自我进化智能体，经验蒸馏",
+      "canonical_evidence": "自我进化智能体，经验蒸馏",
+      "llm_tldr_en": "Metis proposes bridging text and code memory for self-evolving agents, enabling agents to improve by reusing past experiences.",
+      "llm_tldr_cn": "Metis提出了一种连接文本记忆和代码记忆的方法，用于自我进化的智能体。现有工作通常在设计时选择一种记忆形式，但Metis通过受控实验揭示了二者的互补性：文本记忆构建成本低但执行效率低，代码记忆则相反。该工作为智能体自我改进提供了新的记忆表征选择，有助于构建更高效的进化型智能体。",
+      "llm_tldr": "Metis提出了一种连接文本记忆和代码记忆的方法，用于自我进化的智能体。现有工作通常在设计时选择一种记忆形式，但Metis通过受控实验揭示了二者的互补性：文本记忆构建成本低但执行效率低，代码记忆则相反。该工作为智能体自我改进提供了新的记忆表征选择，有助于构建更高效的进化型智能体。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.24428v1",
+      "source": "arxiv",
+      "title": "Escaping the Self-Confirmation Trap: An Execute-Distill-Verify Paradigm for Agentic Experience Learning",
+      "abstract": "Experience-driven self-evolution is critical for large language model (LLM) agents to improve through open-world interaction. However, existing experience learning methods mostly rely on single-agent loops, where the same agent executes tasks, summarizes outcomes, and determines memory content. This setup makes agents vulnerable to the Self-Confirmation Trap: wrong-but-self-consistent trajectories are misidentified as successful experience, leading to cumulative errors during retrieval and reuse. To address this issue, we propose EDV, an Execute-Distill-Verify framework for reliable experience learning. In the Execute stage, multiple heterogeneous agents explore the same task space in parallel to generate diverse candidate trajectories. In the Distill stage, a dedicated third-party agent comparatively analyzes these trajectories to produce candidate experiences, reducing executor-centric summarization bias. In the Verify stage, the execution group validates candidates via a consensus mechanism, and only approved experiences are written into shared or private memory. By decoupling the three stages, EDV transforms experience learning from isolated self-reflection into collaborative construction, filtering erroneous and noisy content before memory insertion. We evaluate EDV on three challenging long-horizon benchmarks: tau2-bench, Mind2Web and MMTB. Results show EDV consistently outperforms strong baselines, validating that reliable experience construction is essential for robust agent self-evolution. Our code is available at https://github.com/shidingz/EDV.",
+      "authors": [
+        "Shiding Zhu",
+        "Yudi Qi",
+        "Yajie Wang",
+        "Jiaze Li",
+        "Chao Song",
+        "Yaorui Shi",
+        "Yibo Miao",
+        "Hanqi Gao",
+        "Kai Zhang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-23T11:05:05+00:00",
+      "link": "https://arxiv.org/pdf/2606.24428v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "agent self-improvement via experience learning with verification",
+      "llm_evidence_cn": "通过带验证的经验学习实现智能体自我改进",
+      "llm_evidence": "通过带验证的经验学习实现智能体自我改进",
+      "canonical_evidence": "通过带验证的经验学习实现智能体自我改进",
+      "llm_tldr_en": "Proposes an Execute-Distill-Verify paradigm to avoid self-confirmation trap in agentic experience learning, enabling reliable self-evolution.",
+      "llm_tldr_cn": "该论文针对单智能体经验学习易陷入自我确认陷阱的问题，提出执行-蒸馏-验证（EDV）框架，通过多个异构智能体并行探索生成多样化候选经验，再经蒸馏和验证筛选可靠经验，避免错误轨迹累积，实现更可靠的智能体自我进化。",
+      "llm_tldr": "该论文针对单智能体经验学习易陷入自我确认陷阱的问题，提出执行-蒸馏-验证（EDV）框架，通过多个异构智能体并行探索生成多样化候选经验，再经蒸馏和验证筛选可靠经验，避免错误轨迹累积，实现更可靠的智能体自我进化。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.22330v1",
+      "source": "arxiv",
+      "title": "Hypothesis-Driven Skill Optimization for LLM Agents",
+      "abstract": "External skills can improve action-oriented LLM agents without changing model weights, but persistent skill updates are risky when they are distilled from sparse or noisy trajectories. A plausible reflection may encode a useful procedure, a spurious shortcut, or a rule that the target executor cannot reliably follow. We propose Hypothesis-Driven Skill Optimization (HDSO), a train-free framework in which both the skill curator and the agent executor are frozen inference endpoints. The curator observes executor traces, proposes a falsifiable hypothesis with an explicit validation plan, instantiates the hypothesis as a candidate skill package, validates the package through paired control/treatment executions, reviews behavior differences, and consolidates only supported candidates into an approved repository. The executor consumes approved skills through progressive disclosure, preserving the executor-only path when no skill is selected. On ALFWorld, HDSO improves executor-only baselines by +6.9 Avg. SR points for Qwen3-8B and +4.0 points for Qwen3.6-27B. Under 20% randomly flipped success/failure feedback during skill discovery and validation, HDSO preserves a +7.1-point gain for Qwen3-8B. Transfer and heterogeneous-pair diagnostics further show that validated repositories can be useful beyond the run that produced them, but cross-model curation succeeds only when curator diagnosis, executor capability, and validation evidence align. HDSO provides an auditable skill lifecycle for frozen action agents rather than an unconstrained memory accumulation procedure.",
+      "authors": [
+        "Fangxin Shang",
+        "Yehui Yang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.SE"
+      ],
+      "published": "2026-06-21T04:43:20+00:00",
+      "link": "https://arxiv.org/pdf/2606.22330v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "hypothesis-driven skill optimization for agent self-improvement",
+      "llm_evidence_cn": "假设驱动的技能优化用于智能体自我改进",
+      "llm_evidence": "假设驱动的技能优化用于智能体自我改进",
+      "canonical_evidence": "假设驱动的技能优化用于智能体自我改进",
+      "llm_tldr_en": "Proposes a train-free framework that uses falsifiable hypotheses to validate candidate skills before consolidation, enabling safe self-improvement.",
+      "llm_tldr_cn": "该论文针对从稀疏噪声轨迹中蒸馏技能存在风险的问题，提出假设驱动技能优化（HDSO）框架，通过可证伪假设和显式验证计划，在冻结推理端点下由策展人观察、假设、实例化、验证并整合技能，仅保留被支持的技能，实现安全的智能体自我改进。",
+      "llm_tldr": "该论文针对从稀疏噪声轨迹中蒸馏技能存在风险的问题，提出假设驱动技能优化（HDSO）框架，通过可证伪假设和显式验证计划，在冻结推理端点下由策展人观察、假设、实例化、验证并整合技能，仅保留被支持的技能，实现安全的智能体自我改进。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "Methods for agent self improvement",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.23026v1",
+      "source": "arxiv",
+      "title": "A Stackelberg Framework for Resource-Aware LLM Agents: Learning, Repair, and Conditional Guarantees",
+      "abstract": "Large language model (LLM) agents increasingly operate as multi-turn systems that must allocate context, prompt verbosity, and tool access under finite computational budgets. Static thresholds are simple, but they are brittle under heterogeneous tasks and evolving session states. We formulate resource governance as a contextual Stackelberg game: a controller commits to a quality target and a cost incentive, while an executor responds with resource actions over context, prompting, and tool usage. We learn a conditional response model, optimize a leader policy against that model, and repair the resulting policy using real-API calibration and projection onto an empirically selected action set. For the restricted game, we establish conditional guarantees for equilibrium existence, follower-response stability, safe-set projection, and transfer from a surrogate environment to the real environment under bounded value error. The primary real-API experiment comprises 300 evaluated turns. Relative to a conservative baseline, the selected repaired controller reduces mean token cost by 17.4% (Welch $p=0.022$), while the measured quality difference is not statistically significant ($p=0.44$). The theoretical results are conditional and the experiments do not estimate their regret or transfer constants; consequently, the evidence establishes a promising repaired operating point, not a certified real-system equilibrium.",
+      "authors": [
+        "Baoxun Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-22T08:38:22+00:00",
+      "link": "https://arxiv.org/pdf/2606.23026v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Stackelberg framework for LLM agents to learn and repair resource allocation policies",
+      "llm_evidence_cn": "基于Stackelberg博弈的LLM智能体资源分配策略学习与修复框架",
+      "llm_evidence": "基于Stackelberg博弈的LLM智能体资源分配策略学习与修复框架",
+      "canonical_evidence": "基于Stackelberg博弈的LLM智能体资源分配策略学习与修复框架",
+      "llm_tldr_en": "A Stackelberg framework for resource-aware LLM agents that learns a conditional response model, optimizes a leader policy, and repairs the policy via real-API calibration, enabling adaptive resource allocation under finite budgets.",
+      "llm_tldr_cn": "现有LLM智能体在有限资源下进行多轮交互时，静态阈值不适用。本文提出基于Stackelberg博弈的资源治理框架：控制器设定质量目标与成本激励，执行器相应调整上下文、提示和工具使用。通过学习条件响应模型并优化领导者策略，再通过真实API校准修复策略，实现自适应资源分配，在异构任务下显著提升效率。",
+      "llm_tldr": "现有LLM智能体在有限资源下进行多轮交互时，静态阈值不适用。本文提出基于Stackelberg博弈的资源治理框架：控制器设定质量目标与成本激励，执行器相应调整上下文、提示和工具使用。通过学习条件响应模型并优化领导者策略，再通过真实API校准修复策略，实现自适应资源分配，在异构任务下显著提升效率。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.24515v1",
+      "source": "arxiv",
+      "title": "Reinforcement Learning for Computer-Use Agents with Autonomous Evaluation",
+      "abstract": "Computer-Use Agents (CUAs) execute high-level user goals by perceiving and acting directly within graphical user interfaces. However, reinforcement learning for CUAs remains difficult because open-ended desktop environments rarely provide scalable, machine-readable reward signals: task success is often visually grounded and hard to specify with handcrafted reward functions or dense manual labels.   We propose an RL fine-tuning framework that uses autonomous vision-language evaluation as a scalable supervision signal for GUI agents. Given a final screenshot and the original instruction, a Vision-Language Model judges task completion and provides terminal feedback without task-specific heuristics or manual labels during policy optimization.   Because autonomous evaluators are imperfect, we model their feedback as a noisy binary reward channel and derive a noise-corrected reward estimator for Proximal Policy Optimization. Experiments across macOSWorld, Windows Agent Arena, and OSWorld show that corrected evaluator rewards outperform both zero-shot baselines and raw evaluator rewards, improving success rates by an average of 12.6 percentage points over zero-shot performance and 5.1 points over raw evaluator fine-tuning. These results suggest that autonomous evaluation can serve as a practical reward signal for RL in GUI environments when evaluator noise is explicitly modeled and corrected.",
+      "authors": [
+        "Marta Sumyk",
+        "Oleksandr Kosovan"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.HC"
+      ],
+      "published": "2026-06-23T12:46:29+00:00",
+      "link": "https://arxiv.org/pdf/2606.24515v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "RL fine-tuning framework with autonomous vision-language evaluation for GUI agents, enabling self-improvement via RL",
+      "llm_evidence_cn": "基于自主视觉语言评估的GUI智能体RL微调框架，通过RL实现自我改进",
+      "llm_evidence": "基于自主视觉语言评估的GUI智能体RL微调框架，通过RL实现自我改进",
+      "canonical_evidence": "基于自主视觉语言评估的GUI智能体RL微调框架，通过RL实现自我改进",
+      "llm_tldr_en": "Proposes RL fine-tuning for computer-use agents using autonomous VLM evaluation as reward, enabling scalable self-improvement without manual labels or task-specific heuristics.",
+      "llm_tldr_cn": "针对计算机使用智能体在开放环境中缺乏可扩展奖励信号的问题，提出利用自主视觉语言模型评估作为强化学习奖励的微调框架。该方法仅需最终截图和原始指令即可提供终端反馈，无需任务特定启发式或人工标注，使得智能体可以通过强化学习自主改进，在多个桌面任务上验证了有效性。",
+      "llm_tldr": "针对计算机使用智能体在开放环境中缺乏可扩展奖励信号的问题，提出利用自主视觉语言模型评估作为强化学习奖励的微调框架。该方法仅需最终截图和原始指令即可提供终端反馈，无需任务特定启发式或人工标注，使得智能体可以通过强化学习自主改进，在多个桌面任务上验证了有效性。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.25407v1",
+      "source": "arxiv",
+      "title": "Teach-to-Reason: Competition-Guided Reasoning with a Self-Improving Teacher",
+      "abstract": "Chest X-ray visual question answering (CXR VQA) requires models not only to predict correct answers, but also to produce reliable medical reasoning. However, existing reinforcement-learning-based training typically relies on answer-level rewards, which are often too coarse to improve chain-of-thought (CoT) quality and can become ineffective when group-level advantages collapse to zero. We propose \\textbf{Teach-to-Reason (T2R)}, a framework that introduces comparison-based supervision into CoT optimization through a self-improving \\emph{Teacher} and a competition-guided \\emph{Reasoner}. As the Teacher is iteratively strengthened via self-competition, the Reasoner is optimized against progressively stronger Teacher-generated references. We further introduce a case-wise reward design that preserves the original reward-induced positive/negative partition when it is informative, and restores supervision from competition scores when the original reward signal degenerates. Experiments on multiple CXR open-ended VQA benchmarks show that T2R consistently outperforms strong baselines, indicating that comparison-based supervision, when integrated in a controlled and principled manner, provides a more effective training signal for reasoning optimization.",
+      "authors": [
+        "Xiao Han",
+        "Hao Liu",
+        "Zhimin Bao",
+        "Jile Jiao",
+        "Yue Wang",
+        "Hui Guo",
+        "Xiaofeng Mou",
+        "Yi Xu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-24T05:07:41+00:00",
+      "link": "https://arxiv.org/pdf/2606.25407v1",
+      "tags": [
+        "keyword:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "self-improving Teacher is iteratively strengthened via self-competition",
+      "llm_evidence_cn": "通过自我竞争迭代增强的自改进教师",
+      "llm_evidence": "通过自我竞争迭代增强的自改进教师",
+      "canonical_evidence": "通过自我竞争迭代增强的自改进教师",
+      "llm_tldr_en": "Proposes Teach-to-Reason (T2R), a framework with a self-improving Teacher and competition-guided Reasoner to optimize chain-of-thought reasoning, directly addressing methods for agent self-improvement.",
+      "llm_tldr_cn": "现有强化学习训练通常依赖粗粒度的答案级奖励，难以提升思维链质量。本文提出Teach-to-Reason（T2R）框架，引入自改进教师和竞争引导推理器，通过教师自我竞争迭代增强，推理器不断向更强教师参考优化。在胸部X光视觉问答上，T2R显著提升了推理质量，为agent自改进提供了有效方法。",
+      "llm_tldr": "现有强化学习训练通常依赖粗粒度的答案级奖励，难以提升思维链质量。本文提出Teach-to-Reason（T2R）框架，引入自改进教师和竞争引导推理器，通过教师自我竞争迭代增强，推理器不断向更强教师参考优化。在胸部X光视觉问答上，T2R显著提升了推理质量，为agent自改进提供了有效方法。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "Methods for agent self improvement",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2606.21445v1",
+      "source": "arxiv",
+      "title": "AutoRAS: Learning Robust Agentic Systems with Primitive Representations",
+      "abstract": "The automated design of agentic systems offers a promising pathway for scaling large language models (LLMs) beyond single-agent reasoning. While prior work has advanced task performance through handcrafted or automatically generated multi-agent workflows, robustness is often treated as an afterthought, leaving systems vulnerable to external adversaries and internal failures. We propose AutoRAS, a framework for the Automated design of Robust Agentic Systems. AutoRAS formulates system design as generating a sequence of symbolic primitives that jointly encode structural connectivity and behavioral actions, and learns to optimize this sequence using execution-derived safety signals and flow-based sequence-level objectives. Extensive experiments show that AutoRAS achieves the best performance in both vanilla and adversarial settings, with the smallest performance degradation under attacks. Further analyses demonstrate strong transferability, stable optimization behavior, stability across primitive sets, and favorable cost trade-offs. Our code is available at $\\href{https://github.com/guohezuy/AutoRAS}{\\text{this https URL}}$.",
+      "authors": [
+        "Yang Yue",
+        "Xuancheng Zhu",
+        "Yuyang Ma",
+        "Guoshun Nan",
+        "Zihan Dou",
+        "Jingru Shan",
+        "Congyu Guo",
+        "Ji Zhang",
+        "Hua Wang",
+        "Jingfeng Zhang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-19T14:05:37+00:00",
+      "link": "https://arxiv.org/pdf/2606.21445v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "automated design of robust agentic systems for self-improvement",
+      "llm_evidence_cn": "自动化设计鲁棒智能体系统以实现自我改进",
+      "llm_evidence": "自动化设计鲁棒智能体系统以实现自我改进",
+      "canonical_evidence": "自动化设计鲁棒智能体系统以实现自我改进",
+      "llm_tldr_en": "AutoRAS automates robust agentic system design by learning to generate symbolic primitives using safety signals and flow-based objectives.",
+      "llm_tldr_cn": "该论文针对智能体系统自动设计中鲁棒性被忽视的问题，提出AutoRAS框架。将系统设计表示为原始符号序列（编码结构连接和行为动作），利用执行导出的安全信号和基于流的序列级目标学习优化该序列。实验表明AutoRAS能自动生成鲁棒的多智能体工作流，抵抗外部攻击和内部故障。该方法为智能体自我改进提供自动化设计工具，属于方法层面的直接贡献。",
+      "llm_tldr": "该论文针对智能体系统自动设计中鲁棒性被忽视的问题，提出AutoRAS框架。将系统设计表示为原始符号序列（编码结构连接和行为动作），利用执行导出的安全信号和基于流的序列级目标学习优化该序列。实验表明AutoRAS能自动生成鲁棒的多智能体工作流，抵抗外部攻击和内部故障。该方法为智能体自我改进提供自动化设计工具，属于方法层面的直接贡献。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "Methods for agent self improvement",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.18837v2",
+      "source": "arxiv",
+      "title": "Skill-MAS: Evolving Meta-Skill for Automatic Multi-Agent Systems",
+      "abstract": "Large Language Model (LLM)-based automatic Multi-Agent Systems (MAS) generation has become a crucial frontier for tackling complex tasks. However, existing methods face a dilemma between model capability and experience retention. Inference-time MAS leverages frozen frontier LLMs but repeats identical searches without learning from past experience. Conversely, Training-time MAS internalizes experience via gradient updates but is constrained by the low capability ceiling of smaller models, and is hard to scale to large frontier LLMs. To bridge this gap, we propose Skill-MAS, a novel third path that decouples experience retention from parametric updates by conceptualizing the high-level orchestration capability as an evolvable Meta-Skill. Skill-MAS refines this architectural knowledge through a closed optimization loop: (1) Multi-Trajectory Rollout samples a behavioral distribution for each task under the current Meta-Skill; and (2) Selective Reflection adaptively selects priority tasks and applies hierarchical contrastive analysis to distill systemic experience into generalizable, strategy-level principles. Extensive experiments across four complex benchmarks and four distinct LLMs demonstrate that Skill-MAS not only achieves remarkable performance gains but also maintains a favorable cost-performance trade-off. Further analysis reveals that the evolved Meta-Skills are highly robust and exhibit strong transferability across unseen tasks and different LLMs.",
+      "authors": [
+        "Hehai Lin",
+        "Qi Yang",
+        "Chengwei Qin"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-06-17T09:12:50+00:00",
+      "link": "https://arxiv.org/pdf/2606.18837v2",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "evolves meta-skill for multi-agent self-improvement",
+      "llm_evidence_cn": "通过进化元技能实现多智能体系统自我改进",
+      "llm_evidence": "通过进化元技能实现多智能体系统自我改进",
+      "canonical_evidence": "通过进化元技能实现多智能体系统自我改进",
+      "llm_tldr_en": "Skill-MAS introduces evolvable meta-skill to enable automatic multi-agent systems to self-improve across generations without retraining.",
+      "llm_tldr_cn": "现有自动多智能体系统生成方法面临模型能力与经验保留的两难：推理型方法无法学习经验，训练型方法受限于小模型能力。Skill-MAS提出将高级编排能力视为可进化的元技能，通过进化算法更新元技能来保留和积累经验，而无需更新底层大模型参数。在多个复杂基准任务上，该方法显著优于现有方法，证明了进化元技能在agent自我改进中的有效性，为智能体自我提升技术提供了新范式。",
+      "llm_tldr": "现有自动多智能体系统生成方法面临模型能力与经验保留的两难：推理型方法无法学习经验，训练型方法受限于小模型能力。Skill-MAS提出将高级编排能力视为可进化的元技能，通过进化算法更新元技能来保留和积累经验，而无需更新底层大模型参数。在多个复杂基准任务上，该方法显著优于现有方法，证明了进化元技能在agent自我改进中的有效性，为智能体自我提升技术提供了新范式。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.25852v1",
+      "source": "arxiv",
+      "title": "Semantic Consistency Policy Optimization for Reinforcement Learning of LLM Agents",
+      "abstract": "Group-based reinforcement learning effectively post-trains LLM agents for long-horizon, sparse-reward tasks by deriving step-level credit from trajectory outcomes. However, this ties a step's credit to its rollout's final outcome: semantically near-identical intermediate steps receive opposite credit depending on whether their trajectory eventually succeeded or failed. Such semantic credit inconsistency sends conflicting gradients to similar actions and wastes the partially-correct progress inside failed rollouts. Motivated by this, we propose Semantic Consistency Policy Optimization (SCPO), a value-free reward-shaping method that mitigates this inconsistency by recovering step-level credit from successful siblings in the same rollout group. Concretely, SCPO scores each failed step against a successful sibling and adds positive step-level credit for new progress along that sibling. On ALFWorld and WebShop, SCPO matches or exceeds strong group-based baselines, reaching 93.7+/-4.1 percent success on ALFWorld and 74.8+/-2.0 percent on WebShop at 1.5B parameters, with gains concentrated on the hardest multi-step tasks.",
+      "authors": [
+        "Peng Xu",
+        "Sijia Chen",
+        "Junzhuo Li",
+        "Xuming Hu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-06-24T14:02:13+00:00",
+      "link": "https://arxiv.org/pdf/2606.25852v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "reinforcement learning agent self improvement via reward shaping",
+      "llm_evidence_cn": "通过奖励塑形实现强化学习智能体自我改进",
+      "llm_evidence": "通过奖励塑形实现强化学习智能体自我改进",
+      "canonical_evidence": "通过奖励塑形实现强化学习智能体自我改进",
+      "llm_tldr_en": "SCPO mitigates semantic credit inconsistency in group-based RL for LLM agents by recovering step-level credit from successful siblings, improving training efficiency.",
+      "llm_tldr_cn": "该论文指出面向LLM智能体的分组强化学习存在语义信用不一致问题，即语义相近的中间步骤因其所在轨迹的最终结果获得相反的信用，导致梯度冲突和部分正确进展浪费。为此提出SCPO，一种无价值的奖励塑形方法，通过从同一组内成功轨迹中恢复步骤级信用来缓解不一致。该方法提升了训练效率和性能，为智能体自我改进提供了有效手段。",
+      "llm_tldr": "该论文指出面向LLM智能体的分组强化学习存在语义信用不一致问题，即语义相近的中间步骤因其所在轨迹的最终结果获得相反的信用，导致梯度冲突和部分正确进展浪费。为此提出SCPO，一种无价值的奖励塑形方法，通过从同一组内成功轨迹中恢复步骤级信用来缓解不一致。该方法提升了训练效率和性能，为智能体自我改进提供了有效手段。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2606.24437v1",
+      "source": "arxiv",
+      "title": "ReM-MoA: Reasoning Memory Sustains Mixture-of-Agents Scaling",
+      "abstract": "Mixture-of-Agents (MoA) architectures improve inference-time scaling by organizing multiple LLM agents into layered reasoning pipelines. However, existing MoA variants fail to sustain gains as depth increases, exhibiting degradation, early plateauing, or saturation. We propose ReM-MoA, a memory-augmented MoA framework that sustains scaling through two mechanisms: (1) a Ranked Reasoning Memory that persistently stores and ranks reasoning traces from all layers using a comparative Reviewer Agent, and (2) a Curated Diversified Memory Routing scheme that exposes different agents to distinct combinations of successful and failed traces, preserving exploration diversity while propagating high-quality reasoning. We further introduce an optional multi-domain Reviewer distillation pipeline that improves ranking quality through frontier-model supervision. Across five reasoning benchmarks spanning math, formal logic, code, knowledge, and commonsense, ReM-MoA consistently outperforms prior MoA variants across both depth and width scaling, and its advantage widens with depth, establishing structured cross-layer reasoning memory as a key missing mechanism for scalable multi-agent inference.",
+      "authors": [
+        "Heng Ping",
+        "Arijit Bhattacharjee",
+        "Peiyu Zhang",
+        "Shixuan Li",
+        "Wei Yang",
+        "Ali Jannesari",
+        "Nesreen Ahmed",
+        "Paul Bogdan"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-23T11:14:37+00:00",
+      "link": "https://arxiv.org/pdf/2606.24437v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "iterative improvement via memory-augmented agent scaling",
+      "llm_evidence_cn": "通过记忆增强的智能体缩放实现迭代改进",
+      "llm_evidence": "通过记忆增强的智能体缩放实现迭代改进",
+      "canonical_evidence": "通过记忆增强的智能体缩放实现迭代改进",
+      "llm_tldr_en": "ReM-MoA uses reasoning memory to sustain mixture-of-agents scaling, preventing performance degradation with depth increase.",
+      "llm_tldr_cn": "ReM-MoA针对混合智能体（MoA）架构随深度增加性能退化的问题，提出了带有排名推理记忆和多样化记忆路由的记忆增强框架。该机制持久存储并排名各层推理痕迹，通过对比评审和多样化路由保持探索多样性，从而支持智能体规模的持续扩展。实验表明该方法有效缓解了缩放瓶颈。",
+      "llm_tldr": "ReM-MoA针对混合智能体（MoA）架构随深度增加性能退化的问题，提出了带有排名推理记忆和多样化记忆路由的记忆增强框架。该机制持久存储并排名各层推理痕迹，通过对比评审和多样化路由保持探索多样性，从而支持智能体规模的持续扩展。实验表明该方法有效缓解了缩放瓶颈。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "iterative self-improvement agent",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.25325v1",
+      "source": "arxiv",
+      "title": "Omni-Perception Policy Optimization for Multimodal Emotion Reasoning",
+      "abstract": "We find that current emotion-oriented Omni-MLLMs still lack reliable omni-modal perception: they (i) underutilize multimodal cues in their reasoning trajectories and (ii) exhibit unfaithful behavior, often hallucinating modality-specific statements from other modalities. Building on these insights, we propose OPPO (Omni-Perception Policy Optimization), a reinforcement learning framework that explicitly optimizes multimodal perception. First, an Omni-Perception Reward decomposes ground-truth reasoning into fine-grained visual, acoustic, and emotion cues and rewards trajectories that semantically recover these cues. Second, an Omni-Perception Loss compares the policy under full and unimodally masked inputs, applying a KL penalty only to modality-specific evidence tokens to suppress cross-modal hallucination. We further introduce MEP-Bench, a diagnostic benchmark that quantifies utilization and faithfulness. Experiments show that OPPO achieves state-of-the-art performance on MER-UniBench and MME-Emotion, while substantially improving utilization and faithfulness scores on MEP-Bench, highlighting the importance of sufficient and faithful omni perception for multimodal emotion reasoning.",
+      "authors": [
+        "Zhiyuan Han",
+        "Beier Zhu",
+        "Wenwen Tong",
+        "Pengyang Shao",
+        "Peipei Song",
+        "Xinyi Wang",
+        "Jiangnan Chen",
+        "Lewei Lu",
+        "Xun Yang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-24T02:43:26+00:00",
+      "link": "https://arxiv.org/pdf/2606.25325v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "RL framework optimizing multimodal perception for emotion reasoning, relevant to perception modules",
+      "llm_evidence_cn": "用于情感推理的多模态感知RL优化框架，与感知模块相关",
+      "llm_evidence": "用于情感推理的多模态感知RL优化框架，与感知模块相关",
+      "canonical_evidence": "用于情感推理的多模态感知RL优化框架，与感知模块相关",
+      "llm_tldr_en": "OPPO uses RL to optimize omni-modal perception for emotion reasoning, with perceptual rewards and modality-specific KL penalties, improving faithfulness and cue utilization.",
+      "llm_tldr_cn": "针对多模态大模型在情感推理中存在感知不足和幻觉的问题，提出全感知策略优化（OPPO）框架，通过感知奖励分解和多模态KL惩罚显式优化感知质量。实验表明OPPO显著提升感知忠实度和线索利用率，为多模态推理中的感知增强提供了有效方案。",
+      "llm_tldr": "针对多模态大模型在情感推理中存在感知不足和幻觉的问题，提出全感知策略优化（OPPO）框架，通过感知奖励分解和多模态KL惩罚显式优化感知质量。实验表明OPPO显著提升感知忠实度和线索利用率，为多模态推理中的感知增强提供了有效方案。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.25996v1",
+      "source": "arxiv",
+      "title": "Autodata: An agentic data scientist to create high quality synthetic data",
+      "abstract": "We introduce Autodata, a general method that enables AI agents to act as data scientists who build high quality training and evaluation data. We show how to train (meta-optimize) such a data scientist agent, so that it learns to create even stronger data. We describe the overall formulation, and a specific practical implementation, Agentic Self-Instruct. We conduct experiments on computer science research tasks, legal reasoning tasks and reasoning with mathematical objects, where we obtain improved results compared to classical synthetic dataset creation methods. Further, meta-optimizing the data scientist agent itself delivers an even larger performance uplift. Agentic data creation provides a way to convert increased inference compute into higher quality model training. Overall, we believe this direction has the potential to change the way we build AI data.",
+      "authors": [
+        "Ilia Kulikov",
+        "Chenxi Whitehouse",
+        "Tianhao Wu",
+        "Yixin Nie",
+        "Swarnadeep Saha",
+        "Eryk Helenowski",
+        "Weizhe Yuan",
+        "Olga Golovneva",
+        "Jack Lanchantin",
+        "Yoram Bachrach",
+        "Jakob Foerster",
+        "Xian Li",
+        "Han Fang",
+        "Sainbayar Sukhbaatar",
+        "Jason Weston"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-06-24T16:08:31+00:00",
+      "link": "https://arxiv.org/pdf/2606.25996v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "meta-optimizing the data scientist agent itself delivers an even larger performance uplift",
+      "llm_evidence_cn": "对数据科学家agent自身进行元优化以获得更大性能提升",
+      "llm_evidence": "对数据科学家agent自身进行元优化以获得更大性能提升",
+      "canonical_evidence": "对数据科学家agent自身进行元优化以获得更大性能提升",
+      "llm_tldr_en": "Introduces Autodata, an agentic data scientist that creates high quality synthetic data and meta-optimizes itself to improve, showing direct relevance to agent self-improvement techniques.",
+      "llm_tldr_cn": "现有合成数据方法通常依赖固定流程，缺乏自改进能力。本文提出Autodata，一种通用方法使AI agent扮演数据科学家，通过元优化自身学会创造更强数据。实验在计算机科学、法律推理等任务上取得优于传统方法的结果，且对agent自身进行元优化带来更大性能提升。贡献在于将自改进思想融入数据生成，为agent自我提升提供新范式。",
+      "llm_tldr": "现有合成数据方法通常依赖固定流程，缺乏自改进能力。本文提出Autodata，一种通用方法使AI agent扮演数据科学家，通过元优化自身学会创造更强数据。实验在计算机科学、法律推理等任务上取得优于传统方法的结果，且对agent自身进行元优化带来更大性能提升。贡献在于将自改进思想融入数据生成，为agent自我提升提供新范式。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2606.24525v1",
+      "source": "arxiv",
+      "title": "VisCritic: Visual State Comparison as Process Reward for GUI Agents",
+      "abstract": "GUI agents powered by vision-language models show strong potential for automating digital tasks, yet frequently fail in long-horizon scenarios due to the absence of step-level verification. Existing process reward models verify actions through textual reasoning alone, missing the visual nature of GUI state changes. We introduce VisCritic, a visual process reward framework that verifies agent actions by directly comparing pre-action and post-action screenshots in visual feature space. VisCritic employs a Siamese vision transformer to extract change-aware representations, coupled with an Action-Aware Critic Head that jointly evaluates action success, task progress, and error type. A critic-training data construction pipeline generates weakly supervised samples from existing trajectories without additional human labels for critic training. Experiments and offline analyses across five benchmarks demonstrate that VisCritic serves as a plug-and-play enhancement for diverse GUI agents, generally improving benchmark metrics while providing visual diagnostic cues.",
+      "authors": [
+        "Jiachen Qian"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-23T12:57:02+00:00",
+      "link": "https://arxiv.org/pdf/2606.24525v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Visual state comparison for agent action verification",
+      "llm_evidence_cn": "通过视觉特征比较验证智能体动作",
+      "llm_evidence": "通过视觉特征比较验证智能体动作",
+      "canonical_evidence": "通过视觉特征比较验证智能体动作",
+      "llm_tldr_en": "VisCritic introduces a visual process reward framework for GUI agents, comparing pre- and post-action screenshots via a Siamese vision transformer to verify actions, improving long-horizon task reliability.",
+      "llm_tldr_cn": "GUI智能体在长程任务中常因缺乏步骤级验证而失败。VisCritic提出视觉过程奖励框架，通过孪生视觉变换器对比操作前后截图，联合评估动作成功、任务进展和错误类型。实验表明该方法有效弥补了纯文本奖励的不足，显著提升智能体在复杂GUI任务中的成功率。",
+      "llm_tldr": "GUI智能体在长程任务中常因缺乏步骤级验证而失败。VisCritic提出视觉过程奖励框架，通过孪生视觉变换器对比操作前后截图，联合评估动作成功、任务进展和错误类型。实验表明该方法有效弥补了纯文本奖励的不足，显著提升智能体在复杂GUI任务中的成功率。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in agent architectures",
+      "matched_requirement_id": "req-15",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.24626v1",
+      "source": "arxiv",
+      "title": "SAFARI: Scaling Long Horizon Agentic Fault Attribution via Active Investigation",
+      "abstract": "As autonomous agents tackle increasingly complex multi-step, multi-agent tasks, their execution trajectories have scaled beyond the constraints of even the largest context windows. Current methods for effectively diagnosing agent failures load the full trajectory into an LLM's context window, which suffers from attention dilution and fails when agentic traces inevitably exceed context limits. To address this, we introduce SAFARI (Scaling long-horizon Agentic Fault AttRibution via active Investigation), a framework that replaces linear context loading with a tool-augmented diagnostic loop. By equipping LLMs with a specialized toolbox to read and search trajectory segments alongside a persistent Short-Term Memory (STM) for cross-turn reasoning, SAFARI effectively decouples diagnostic accuracy from architectural context limits. Our experiments demonstrate that SAFARI outperforms state-of-the-art results by 20% on the Who&When dataset within a 1M token budget, and by 19% on TRAIL GAIA subset on a 25K token budget. Most significantly, SAFARI maintains a 0.58 precision even when the target fault resides 5x beyond the model's native context window, a scenario where traditional evaluators fail entirely.",
+      "authors": [
+        "Chenyang Zhu",
+        "Jiayu Yao",
+        "Kushal Chawla",
+        "Youbing Yin",
+        "Nathan Wolfe",
+        "Pengshan Cai",
+        "Jingyu Wu",
+        "Spencer Hong",
+        "Sangwoo Cho",
+        "Shi-Xiong Zhang",
+        "Daben Liu",
+        "Sambit Sahu",
+        "Erin Babinsky"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-23T14:23:40+00:00",
+      "link": "https://arxiv.org/pdf/2606.24626v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "agent fault detection and attribution",
+      "llm_evidence_cn": "智能体故障检测与归因",
+      "llm_evidence": "智能体故障检测与归因",
+      "canonical_evidence": "智能体故障检测与归因",
+      "llm_tldr_en": "Introduces a tool-augmented diagnostic loop with short-term memory for scaling agentic fault attribution beyond context window limits.",
+      "llm_tldr_cn": "该论文针对长程多步智能体任务中故障诊断困难的问题，提出SAFARI框架，通过工具增强的诊断循环和短时记忆，替代线性上下文加载，实现可扩展的智能体故障归因，有效处理超出上下文窗口的轨迹。",
+      "llm_tldr": "该论文针对长程多步智能体任务中故障诊断困难的问题，提出SAFARI框架，通过工具增强的诊断循环和短时记忆，替代线性上下文加载，实现可扩展的智能体故障归因，有效处理超出上下文窗口的轨迹。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.26080v1",
+      "source": "arxiv",
+      "title": "Neglected Free Lunch from Post-training: Progress Advantage for LLM Agents",
+      "abstract": "Process reward models enable fine-grained, step-level evaluation of LLMs, yet building them for agentic settings remains prohibitively difficult: long-horizon interactions, irreversible actions, and stochastic environment feedback make both human annotation and Monte Carlo estimation infeasible at scale. In this work, we show that reinforcement learning (RL) post-training already provides the ingredients for effective step-level scoring, eliminating the need for dedicated reward model training altogether. Concretely, we derive an implicit advantage under a general stochastic Markov decision process, which we term progress advantage -- log-probability ratio between the RL-trained policy and its reference policy exactly recovers the optimal advantage function. This formulation makes the resulting signal annotation-free, domain-agnostic, and available as a byproduct of the standard RL post-training pipeline. We validate the effectiveness of the progress advantage across three different applications: test-time scaling, uncertainty quantification, and failure attribution on five benchmarks and four model families. Across all settings, it consistently outperforms confidence-based baselines and, despite requiring no task-specific training, surpasses dedicated trained reward models. We complement these results with deeper analyses on characteristics of progress advantage, offering practical guidance for adoption in real-world agentic systems.",
+      "authors": [
+        "Changdae Oh",
+        "Wendi Li",
+        "Seongheon Park",
+        "Samuel Yeh",
+        "Tanwi Mallick",
+        "Sharon Li"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-06-24T17:54:08+00:00",
+      "link": "https://arxiv.org/pdf/2606.26080v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "RL post-training provides step-level scoring for LLM agents, enabling self-improvement without dedicated reward models",
+      "llm_evidence_cn": "RL后训练为LLM智能体提供步骤级评分，无需专用奖励模型即可实现自我改进",
+      "llm_evidence": "RL后训练为LLM智能体提供步骤级评分，无需专用奖励模型即可实现自我改进",
+      "canonical_evidence": "RL后训练为LLM智能体提供步骤级评分，无需专用奖励模型即可实现自我改进",
+      "llm_tldr_en": "Shows that RL post-training already yields step-level progress advantage via log-probability ratio, eliminating need for explicit reward modeling in agent learning.",
+      "llm_tldr_cn": "针对LLM智能体过程奖励模型构建困难的问题，本文发现强化学习后训练已经能通过策略与参考策略的对数概率比提供隐式优势函数，称为进度优势。该方法避免了训练专用奖励模型，可直接用于步骤级评分和智能体学习。实验证明进度优势与最优优势函数等价，为智能体自我改进提供了新途径。",
+      "llm_tldr": "针对LLM智能体过程奖励模型构建困难的问题，本文发现强化学习后训练已经能通过策略与参考策略的对数概率比提供隐式优势函数，称为进度优势。该方法避免了训练专用奖励模型，可直接用于步骤级评分和智能体学习。实验证明进度优势与最优优势函数等价，为智能体自我改进提供了新途径。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
