@@ -1,0 +1,2447 @@
+Title: Inside insight: decoding how insight emerges from competing world models
+
+URL Source: https://www.biorxiv.org/content/10.64898/2026.05.21.726889v2.full.pdf
+
+Number of Pages: 24
+
+Markdown Content:
+# Inside insight: decoding how insight emerges 1
+
+# from competing world models 2
+
+Kengo Inutsuka 1,2 , Tadaaki Nishioka 3,4 , Tom Macpherson 4,5 , Mana Fujiwara 2, Takatoshi Hikida 4,* ,3
+
+and Honda Naoki 1,2,6,* 4 
+
+> 1
+
+Laboratory for Data-driven Biology, Graduate School of Integrated Sciences for Life, Hiroshima 5
+
+University, Higashihiroshima, Hiroshima, Japan 6 2 Nagoya University Graduate School of Medicine, Aichi, Japan 7 3 Icahn School of Medicine at Mount Sinai, New York, NY, USA 8 4 Laboratory for Advanced Brain Functions, Institute for Protein Research, the University of Osaka, 9
+
+Suita, Japan 10 5 Faculty of Pharmaceutical Sciences, Kyoto University, Kyoto, Japan 11 6 Center for One Medicine Innovative Translational Research (COMIT), Nagoya University, Nagoya, 12 
+
+Aichi, Japan 13 14 
+
+*Correspondence: honda.naoki.t1@f.mail.nagoya-u.ac.jp, hikida@protein.osaka-u.ac.jp 15 
+
+# Abstract 16 
+
+When and how does insight emerge? We conceptualize insight as a sudden realization arising from 17 
+
+restructuring a world model: an internal interpretation linking actions to outcomes. Yet these latent 18 
+
+dynamics remain difficult to access, even with behavior and verbal report. Here we developed inside 19 
+
+insight dynamics (IID), a machine-learning framework that estimates latent world-model dynamics 20 
+
+from behavioral data. Using IID, we analyzed mouse behavior in indirect- and direct-rule tasks, each 21 
+
+requiring a shift from an initial world model to a rule-consistent representation. IID inferred the 22 
+
+“when” of insight-like shifts by estimating the timing of transitions between competing world models, 23 
+
+and examined the “how” by comparing alternative learning processes underlying them. This analysis 24 
+
+revealed distinct mechanisms of world-model learning: the indirect- and direct-rule tasks were better 25 
+
+explained by gated learning and parallel learning, respectively. Thus, IID opens a route to quantifying 26 
+
+latent insight dynamics from observable behavior alone. 27 
+
+# Introduction 28 
+
+In daily life, flexible problem solving often requires more than the gradual refinement of an existing 29 
+
+strategy. In some situations, a solution emerges only after a qualitative change in how the problem 30 
+
+itself is represented [1, 2]. Such insight-like change is often described as an “Aha!” moment, in which an 31 
+
+individual abruptly shifts from one interpretation of a situation to another [3]. A useful historical analogy 32 
+
+is a conceptual shift from a geocentric to a heliocentric view of planetary motion: the same observations 33 
+
+become explainable once the underlying representational framework changes [4]. Although insight has 34 
+
+long been studied in psychology and cognitive neuroscience, its underlying neural and computational 35 
+
+mechanisms remain difficult to define quantitatively [2, 3]. 36 
+
+One way to formalize insight-like change is as a restructuring of an internal “world model.” A world 37 
+
+model is an internal representation of how the external environment is organized and how actions lead 38 
+
+to outcomes [5, 6]. From the perspective of the Bayesian brain hypothesis, such a model can be viewed 39 
+
+as a generative model that enables an agent to infer hidden causes of observations and predict future 40 
+
+1
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint
+
+outcomes [7, 8]. In this framework, insight-like change can be understood as a transition between 41 
+
+competing world models: the agent stops interpreting the environment through one model and begins 42 
+
+to rely on another model that better explains the observed action-outcome relationship. 43 
+
+However, this view raises an important computational question. If multiple candidate world models 44 
+
+exist, how are they learned and selected [6, 9]? One possibility is a gated learning mechanism, in 45 
+
+which each world model is updated in proportion to the agent’s current reliance on that model [10]. 46 
+
+Under this mechanism, insight-like change is not merely a sudden behavioral readout, but a process in 47 
+
+which an emerging world model gradually becomes available for learning as it gains internal weight. An 48 
+
+alternative possibility is a parallel learning mechanism, in which multiple candidate world models are 49 
+
+updated simultaneously, regardless of their current contribution to behavior. In this case, an apparent 50 
+
+moment of insight may reflect the later selection of a model that has already been learned implicitly [5]. 51 
+
+Distinguishing between these alternatives is essential for understanding whether insight-like behavior 52 
+
+arises from belief-dependent selective learning or from parallel latent learning followed by behavioral 53 
+
+expression. 54 
+
+Insight has been extensively studied in humans, often by combining behavioral performance, brain 55 
+
+activity, and subjective reports of the moment of insight [2, 3, 11]. However, subjective reports provide 56 
+
+only limited access to the underlying temporal dynamics, and non-invasive measurements such as fMRI 57 
+
+and EEG, by themselves, are not sufficient to establish circuit-level mechanisms. Animal models offer 58 
+
+the possibility of invasive neural recording, manipulation, and genetic intervention, but they lack verbal 59 
+
+report. This makes it difficult to identify when an animal undergoes an insight-like change in internal 60 
+
+representation. Therefore, a method is needed to infer latent insight dynamics directly from observable 61 
+
+behavior, without relying on subjective report. 62 
+
+We previously developed a visual discrimination-based learning task in mice to study cue-guided 63 
+
+inhibition behavior, and showed that dopamine D2 receptor activity contributes to avoidance of a cue 64 
+
+associated with reward omission [12]. 65 
+
+In the present study, we reanalyzed two related touchscreen-based tasks from that study, which we 66 
+
+refer to here as an indirect-rule task and a direct-rule task, corresponding to the original VD-Inhibit 67 
+
+and VD-Attend tasks, respectively ( Fig. 1a ). In the indirect-rule task, one fixed cue was consistently 68 
+
+associated with reward omission, whereas other randomly presented cues were rewarded; therefore, mice 69 
+
+had to learn to inhibit responses to the fixed cue and choose the alternative cue. In the direct-rule task, 70 
+
+by contrast, one fixed cue was consistently rewarded, whereas the other randomly presented cues were 71 
+
+unrewarded; therefore, mice had to learn to choose the fixed cue. Because cue positions varied across 72 
+
+trials in both tasks, successful performance required learning a cue-based reward rule rather than a 73 
+
+simple left-right choice rule. Thus, the two tasks differed in task structure: the indirect-rule task 74 
+
+required animals to infer the rewarded choice by avoiding a specific non-rewarded cue, whereas the 75 
+
+direct-rule task involved a more direct cue-reward association. 76 
+
+In this study, we developed inside insight dynamics (IID), a computational framework for estimating 77 
+
+latent insight dynamics from trial-by-trial action and reward sequences. IID assumes that behavior is 78 
+
+generated by competition between two candidate world models: a side-dependent model, in which 79 
+
+reward is interpreted as depending on the chosen side, and a cue-dependent model, in which reward is 80 
+
+interpreted as depending on cue identity. The method estimates both reward beliefs within each model 81 
+
+and a time-varying insight variable representing their relative dominance. By comparing gated learning 82 
+
+and parallel learning models, IID further tests how alternative world models are learned during insight-83 
+
+like transitions. Applied to mouse behavior, IID revealed task-dependent mechanisms: indirect-rule 84 
+
+task was better explained by gated learning, whereas direct-rule task was more consistent with parallel 85 
+
+learning. These results suggest that insight-like behavioral change is not governed by a single fixed 86 
+
+computational mechanism, but depends on task structure. More broadly, IID provides a quantitative 87 
+
+approach for inferring hidden restructuring of internal world models from behavior alone. 88 
+
+2 
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint Trials 0.0 0.5 1.0 Model reliance
+> Side-dependent world model Cue-dependent world model
+
+Fig. 1 | Workflow for decoding insight dynamics from behavioral time-series. a, Behavioral task paradigm. Mice performed two touchscreen-based visual discrimination tasks, indirect-rule task, originally termed VD-Inhibit, and direct-rule task, originally termed VD-Attend. In indirect-rule task, one fixed cue, Cue A, was consistently associated with non-reward, whereas the other simultaneously presented cues were rewarded; thus, mice had to inhibit responses to Cue A and choose the alternative cue. In direct-rule task, one fixed cue, Cue B, was consistently rewarded, whereas the other cues were not; thus, mice had to choose the matching cue. Trial-by-trial behavioral data consisted of the chosen action, left or right, and the resulting reward outcome. b, Agent decision-making model and candidate update mechanisms. The agent was assumed to maintain two internal world models: a side-dependent world model, in which reward is interpreted as depending on the chosen side, and a cue-dependent world model, in which reward is interpreted as depending on cue identity. Within each world model, the agent sequentially updates belief/recognition states about the reward probability for the side-dependent model and for the cue-dependent model. The agent selects actions by integrating these two world models according to a latent weighting variable wt, which represents their relative dominance. Insight dynamics were defined as the temporal evolution of this weighting variable, corresponding to a transition from reliance on the side-dependent world model to reliance on the cue-dependent world model. We compared two candidate update mechanisms. In the gated learning model, belief updating within each world model was weighted by the current reliance on that model. In the parallel learning model, both world models were updated in parallel, independently of their current contribution to behavior. c, IID workflow. The inputs to inside insight dynamics (IID) were trial-by-trial behavioral data, consisting of choices and reward outcomes, together with task-defined category mappings used to assign the cue-dependent components. IID formulates an inverse problem based on the forward decision-making model shown in 
+
+b and estimates the latent internal trajectories that most likely generated the observed behavior. The outputs are decoded insight dynamics and decoded belief/recognition trajectories for the side-dependent and cue-dependent world models. 
+
+3
+
+.CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint Results 89 
+
+Workflow for decoding insight dynamics from behavior 90 
+
+We first outline the overall workflow of this study ( Fig. 1 ). We analyzed trial-by-trial behavioral 91 
+
+data from two touchscreen-based visual discrimination tasks: an indirect-rule task and a direct-rule 92 
+
+task, corresponding to the original VD-Inhibit and VD-Attend tasks, respectively. In both tasks, mice 93 
+
+selected either the left or right option and received reward or no reward depending on a cue-based task 94 
+
+rule ( Fig. 1a ). To explain these behavioral sequences, we constructed an agent decision-making model 95 
+
+in which the agent internally maintains two competing world models of the task structure ( Fig. 1b ). 96 
+
+These consisted of a side-dependent model, in which reward is interpreted as depending on the chosen 97 
+
+side, and a cue-dependent model, in which reward is interpreted as depending on cue identity. In this 98 
+
+decision-making model, the agent sequentially updates belief states within each world model and selects 99 
+
+actions according to their relative dominance. 100 
+
+We defined insight dynamics as the temporal change in this relative dominance, represented by 101 
+
+a latent weighting variable wt (Fig. 1b ). A low value of wt corresponds to stronger reliance on the 102 
+
+side-dependent model, whereas a high value of wt corresponds to stronger reliance on the cue-dependent 103 
+
+model. This relative dominance was used to define two candidate learning mechanisms ( Fig. 1b, right ). 104 
+
+In the gated learning formulation, belief updating within each world model is weighted by the current 105 
+
+reliance on that model. In the parallel learning formulation, both world models are updated indepen-106 
+
+dently of their current contribution to behavior. Thus, a transition in wt represents an insight-like 107 
+
+restructuring from a side-based interpretation of the task to a cue-based interpretation, while compari-108 
+
+son between the two learning formulations tests how this restructuring is acquired. We then developed 109 
+
+inside insight dynamics (IID), an observer-side inference framework that formulates the inverse problem 110 
+
+of this decision-making model and decodes latent recognition states and insight dynamics from the ob-111 
+
+served action–reward sequences and task-defined cue-category mappings ( Fig. 1c and Supplementary 112 
+
+Fig. S1 ). This workflow allowed us to ask when mice shifted between world models and whether such 113 
+
+shifts were better explained by gated learning or parallel learning. 114 
+
+Behavioral transitions reflect restructuring of the world model 115 
+
+We next characterized the overt behavioral transitions observed during learning. In the indirect-rule 116 
+
+task, mice initially showed an imbalance in left versus right choice probabilities, indicating that early 117 
+
+behavior was biased toward spatial choice rather than cue identity ( Fig. 2a ). As training progressed, 118 
+
+this side bias gradually disappeared, suggesting that the animals no longer relied primarily on a left– 119 
+
+right choice strategy. Consistent with this transition, the fraction of correct choices initially remained 120 
+
+near chance level but later increased to above 80% ( Fig. 2b ). The cumulative reward curve also showed 121 
+
+a marked increase in slope, indicating an abrupt improvement in reward acquisition ( Fig. 2c ). A similar 122 
+
+behavioral transition was observed in the direct-rule task. Mice again showed an initial imbalance in left 123 
+
+versus right choice probabilities, suggesting that early choices were influenced by spatial bias ( Fig. 2d ). 124 
+
+This bias was subsequently reduced as learning proceeded. The fraction of correct choices increased from 125 
+
+near chance level to above 80% ( Fig. 2e ), and the cumulative reward curve showed a corresponding 126 
+
+increase in slope ( Fig. 2f ). Thus, in both tasks, mice shifted from an early spatially biased strategy 127 
+
+to a later cue-rule-consistent strategy. Individual behavioral trajectories for all mice are shown for the 128 
+
+indirect- and direct-rule tasks in Supplementary Fig. S2 and Fig. S3 , respectively. 129 
+
+These behavioral changes suggest that learning involved a change in how animals interpreted the 130 
+
+task structure. We interpreted the early phase as behavior that may be described by stronger reliance 131 
+
+on a side-dependent world model, whereas the later phase may be described by stronger reliance on a 132 
+
+cue-dependent world model. We therefore used these overt behavioral transitions as a starting point for 133 
+
+modeling the latent dynamics of world-model reliance over trials. 134 
+
+4                  
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint 0200 400 600 0200 400
+> 0200 400 600 0.0 0.5 1.0
+> 0200 400 600 Right 00.5 1.0 Left
+> Left Right Rewarded Non-rewarded 0200 400 600
+> 0200 400 0200 400 600 0.0 0.5 1.0 Raw Binary Data Performance
+> 0200 400 600 Right 00.5 1.0 Left
+
+a d
+
+> Left and Right Action Probability Performance / Binary Value
+
+b e 
+
+> Cumulative rewards / Change points Trials Trials
+
+c fIndirect-rule task Direct-rule task 
+
+> Cue B (1 image) The others (50 images)
+> Cue A (1 image) The others (50 images)
+> Cumulative Rewards Piecewise Linear Fit Change point trial Change point
+
+Fig. 2 | Behavioral transitions in the indirect- and direct-rule tasks. a-c, Representative behavioral session from a mouse performing the indirect-rule task. d-f, Representative behavioral session from a mouse performing the direct-rule task. a,d, Trial-by-trial left and right choice probabilities smoothed by an exponentially weighted moving average (EWMA). Blue and red lines indicate the two choices, and gray tick marks indicate raw choices on individual trials. b,e, Trial-by-trial correct/incorrect outcomes and their EWMA-smoothed accuracy. Gray tick marks indicate raw binary outcomes on individual trials. c,f, Cumulative rewards across trials. A piecewise linear fit was applied to each cumulative reward trajectory to estimate the behavioral breakpoint at which the reward accumulation rate changed. The breakpoint is indicated by the orange dashed line and red diamond. 
+
+Decision-making with competing world models 135 
+
+To account for abrupt behavioral transitions during learning, we hypothesized that the animals’ choices 136 
+
+were generated by a dynamic interplay between competing internal world models rather than by a single 137 
+
+fixed model. Based on this idea, we constructed an agent decision-making model in which action selection 138 
+
+arises from the weighted integration of two candidate world models: a side-dependent model and a cue-139 
+
+dependent model. In the side-dependent model, reward is assumed to be generated from latent states 140 
+
+corresponding to side-dependent reward probabilities. Under this model, the agent attempts to infer the 141 
+
+reward probabilities associated with the left and right choices. In the cue-dependent model, reward is 142 
+
+assumed to be generated from latent states corresponding to cue-dependent reward probabilities. Under 143 
+
+this model, the agent attempts to infer the reward probabilities associated with the specific cue and 144 
+
+5
+
+.CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint with the other cues ( Fig. 1b, left ). 145 
+
+In each world model, the observed reward is generated from an underlying latent variable z, with 146 
+
+reward probability given by a sigmoid function, 1/(1 + e−z ). The agent was assumed to regard this 147 
+
+latent variable as a hidden state that evolves according to random-walk dynamics over time, i.e., zt =148 
+
+zt−1 + noise. Based on such a world model, the agent sequentially updated its belief about the latent 149 
+
+reward structure in a Bayesian manner, following a free-energy-based formulation developed in our 150 
+
+previous work [13] ( see Methods ). Specifically, the posterior belief over the latent state at trial t was 151 
+
+approximated by a Gaussian distribution, 152 
+
+Q
+
+(
+
+z(m)
+
+> t,s
+
+)
+
+= N
+
+(
+
+z(m) 
+
+> t,s
+
+| μ(m) 
+
+> t,s
+
+, 1/ p(m)
+
+> t,s
+
+)
+
+, (1) 153 
+
+where m ∈ {side , cue } denotes the world model. In the side-dependent model, s ∈ {left , right }, whereas 154 
+
+in the cue-dependent model, s ∈ {specific , other }.155 
+
+In addition to these latent states, we introduced an internal latent variable wt representing the degree 156 
+
+to which the agent relied on each world model ( Fig. 1b left and bottom ). Under this formulation, 157 
+
+the agent relied on the side-dependent model with weight 1 − σ(wt) and on the cue-dependent model 158 
+
+with weight σ(wt), where σ(·) denotes the sigmoid function. At each trial, the agent was assumed to 159 
+
+consider both world models and to choose the option with the higher expected reward probability based 160 
+
+on their weighted integration. Thus, action selection was modeled as a mixture of decisions derived 161 
+
+from the two competing world models. 162 
+
+The agent was assumed to update these beliefs sequentially in a Bayesian manner. The posterior 163 
+
+mean of the latent state followed the update rule 164 
+
+μ(m) 
+
+> t,s
+
+= μ(m) 
+
+> t−1,s
+
++ αg(m) 
+
+> t
+
+K(m)
+
+> t
+
+(
+
+rt−1 − σ
+
+(
+
+μ(m)
+
+> t−1,s
+
+)) 
+
+, (2) 165 
+
+where α is the learning rate, K(m) 
+
+> t
+
+is the Kalman-gain-like coefficient, rt−1 is the reward outcome at the 166 
+
+previous trial, and σ(·) maps the latent state to reward probability. 167 
+
+Here, g(m) 
+
+> t
+
+represents a gating term that modulates learning according to the current reliance on 168 
+
+each world model ( Fig. 1c ). The rationale for this assumption is that a world model should not be 169 
+
+strongly updated when the agent does not currently rely on it. In the gated learning model, g(side ) 
+
+> t
+
+was 170 
+
+set to 1 − σ(wt) and g(cue ) 
+
+> t
+
+was set to σ(wt), so that updating of a world model was attenuated when 171 
+
+the agent assigned little reliance to that model. Details of the component-specific belief updates, trial 172 
+
+timing, and gating formulation are described in Methods. 173 
+
+Inside insight dynamics method 174 
+
+Here, we developed a machine-learning method, termed inside insight dynamics (IID), to infer latent 175 
+
+internal dynamics underlying insight-like behavioral transitions from observable action and reward se-176 
+
+quences ( Fig. 1c ). IID introduces an inverse state-space model from the observer’s perspective, which 177 
+
+we refer to as the observer-SSM, to infer the hidden internal states of the agent that give rise to observ-178 
+
+able behavioral sequences. 179 
+
+The observer-SSM assumes that the animal’s behavior is generated by the internal Bayesian decision-180 
+
+making model described above, in which two competing world models, a side-dependent model and a 181 
+
+cue-dependent model, jointly govern decision-making. These models are characterized by latent reward 182 
+
+states, zside  
+
+> t
+
+and zcue  
+
+> t
+
+, and by an internal weighting variable wt that controls the relative influence of 183 
+
+the two world models on behavior. Based on the observed action–reward history, the observer-SSM 184 
+
+infers, at each trial, the hidden variables from the observer’s perspective: namely the estimated reward 185 
+
+probabilities under each world model, the confidence associated with those estimates, and the relative 186 
+
+reliance on the competing world models. The inference was implemented using a particle filter (see 187 
+
+Methods). Through this framework, IID enables the observer to track latent restructuring of internal 188 
+
+world-model dynamics during learning. 189 
+
+6                                 
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint 0200 400 600 800 1000 1200 1400 0.0 0.2 0.4 0.6 0.8 1.0 left right 0200 400 600 800 1000 1200 1400 0.0 0.2 0.4 0.6 0.8 1.0 1e4 0200 400 600 800 1000 1200 1400 0.0 0.2 0.4 0.6 0.8 1.0 0200 400 600 800 1000 1200 1400 0.0 0.2 0.4 0.6 0.8 1.0 1e4 0.2 0200 400 600 0.0 0.2 0.4 0.6 0.8 1.0 left right
+
+Precision Trials Reward probability m=cue m=side Trials Trials 0 200 400 600 0.0 0.5 1.0 Raw Binary Data EWMA Raw reward / Performance Trials Trials Left or Right Action Probability    
+
+> 0200 400 600 Right 00.5 1.0 Left Left Right Rewarded Non-rewarded
+
+Insight dynamics 0 200 400 600 0.0 0.2 0.4 0.6 0.8 1.0 Model reliance Trials Model reliance left right Precision Trials Reward probability m=cue m=side Trials specific other specific other Trials Model reliance Insight dynamics 0 200 400 600 
+
+> Cumulative Rewards Piecewise Linear Fit Change point trial Change point 0200 400
+
+Cumulative reward 
+
+## acedb    
+
+> Cue A Random Image Random Image Cue A Mice need to inhibit their response to Cue A
+> Cue A (1 image) The others (50 images)
+> trial i trial i+1
+> NEXT
+
+Indirect-rule task                  
+
+> 0200 400 600 0.0 0.2 0.4 0.6 0.8 1.0 1.2 1e3 left right 0200 400 600 0.0 0.2 0.4 0.6 0.8 1.0 1.2 1e3 specific other 0200 400 600 0.0 0.2 0.4 0.6 0.8 1.0 specific other 0200 400 600 800 1000 1200 1400 0.0 0.2 0.4 0.6 0.8 1.0 Model reliance
+
+Fig. 3 | Inverse estimation of insight dynamics in a representative indirect-rule task sessions. a, Schematic of the indirect-rule task structure shown in Fig. 1a and behavioral data from a representative mouse performing the indirect-rule task shown in the same format as Fig. 2a-c . From left to right, the panels show the indirect-rule task schematic, EWMA-smoothed left/right choice probabilities with raw choices, EWMA-smoothed accuracy with raw binary outcomes, and cumulative reward with piecewise linear fit. The behavioral breakpoint estimated from the cumulative reward trajectory is indicated by the orange dashed line and red marker. b, Inferred insight dynamics for the mouse shown in a. The plot shows the estimated latent weighting variable σ(wt), representing the trial-by-trial reliance on the cue-dependent world model relative to the side-dependent world model. The orange dashed line indicates the behavioral breakpoint estimated from the cumulative reward trajectory in a. c, Inferred belief/recognition states within each world model for the mouse shown in a. Left panels show estimated reward probabilities, and right panels show the corresponding precisions. Upper and lower rows correspond to the side-dependent and cue-dependent world models, respectively. These inferred trajectories show that the increase in wt was accompanied by the formation of cue-dependent reward beliefs and increased confidence in those beliefs during learning. d, e, Inferred insight dynamics and belief/recognition states in a different mouse performing the indirect-rule task from the mouse shown in a–c . The same format as b and c is used. 
+
+7
+
+.CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint To validate the ability of IID to recover latent internal dynamics, we next performed simulation-190 
+
+based analyses. We first specified a latent insight variable wt and used the forward model to generate 191 
+
+behavioral sequences. In this simulation, actions were generated trial by trial, and the agent’s beliefs 192 
+
+about reward probability within each world model were updated sequentially according to the resulting 193 
+
+action–reward history. We then applied IID to the simulated behavioral data alone, without observing 194 
+
+the ground-truth trajectories of wt or the underlying belief states. The inferred latent dynamics were 195 
+
+in good agreement with the ground truth, confirming that IID can recover both the insight-related 196 
+
+weighting dynamics and the associated belief-updating process from behavior alone ( Supplementary 197 
+
+Fig. S4 ). 198 
+
+Inverse estimation of insight dynamics in indirect-rule task 199 
+
+Applying IID to mouse behavioral data from the indirect-rule task, we estimated latent insight dynamics, 200 
+
+including the mouse’s reward-probability estimates under each world model σ(μ(m) 
+
+> t
+
+), the confidence 201 
+
+associated with those estimates p(m) 
+
+> t
+
+, and the time-varying reliance on the competing world models 202 
+
+(Fig. 3 ). 203 
+
+The estimated latent states indicated that this mouse underwent an abrupt transition at around trial 204 
+
+200, characterized by a rapid shift in the relative reliance on the competing world models ( Fig. 3b ). 205 
+
+This latent transition was accompanied by an abrupt increase in the slope of the cumulative reward 206 
+
+curve, consistent with a sudden improvement in reward acquisition ( the rightmost panel of Fig. 3a ). 207 
+
+Notably, the transition detected by IID preceded the change point identified from the cumulative reward 208 
+
+dynamics, suggesting that IID captures latent restructuring of the internal world model before it is fully 209 
+
+manifested in overt behavior. 210 
+
+We next examined how latent reward beliefs evolved within each world model ( Fig. 3c ). Early in 211 
+
+learning, updating was dominated by the side-dependent model, reflecting the animal’s stronger reliance 212 
+
+on this model at the beginning of the task. Under the side-dependent model, the estimated reward 213 
+
+probabilities for the left and right choices fluctuated around 0.5, consistent with the fact that reward 214 
+
+was obtained with approximately equal probability on the two sides. Confidence in these estimates 215 
+
+remained modest throughout this phase, indicating that the side-dependent model did not provide a 216 
+
+highly reliable account of the task structure. 217 
+
+Around trial 100, however, the animal began to assign non-negligible weight to the cue-dependent 218 
+
+model, suggesting that it had started to consider the possibility that reward might depend on cue identity 219 
+
+rather than choice side. Because learning was gated by the current reliance on each world model, this 220 
+
+shift allowed the cue-dependent model to be updated more strongly. Accordingly, the estimated reward 221 
+
+probabilities under the cue-dependent model became increasingly differentiated. Around trial 200, when 222 
+
+reliance on the two models became comparable ( wt ≈ 0.5), the cue-dependent model rapidly converged 223 
+
+on the correct task structure: the reward probability associated with the specific cue approached 0, 224 
+
+whereas that associated with the other cues approached 1.0. At the same time, confidence in the cue-225 
+
+dependent estimates increased sharply, indicating the formation of a reliable internal representation of 226 
+
+the task structure. 227 
+
+As another example of IID estimation, we examined a second representative mouse performing the 228 
+
+indirect-rule task ( Fig. 3d, e ). In this mouse, the estimated reliance on the cue-dependent model did 229 
+
+not exhibit a clear abrupt transition, but instead increased gradually with a temporary decrease before 230 
+
+eventually stabilizing near the cue-dependent state ( Fig. 3d ). The corresponding belief trajectories 231 
+
+nevertheless showed increasing separation of cue-dependent reward probabilities, together with a later 232 
+
+increase in precision ( Fig. 3e ). These results suggest that IID can capture not only clear insight-233 
+
+like transitions, but also more gradual and non-monotonic changes in world-model reliance, in which 234 
+
+competition between alternative models persists before convergence. 235 
+
+8
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint
+
+## dTransition timing and trial counts       
+
+> Trials Mouse
+> 0500 1000 1500 2000 2500 3000 M2 M1 M7 M8 M10 M9 M3 M4 M6 M5 657 678 758 886 937 1096 1158 1486 2104 2898 Total trials Behavioral change point Gating threshold (> 0.8) Parallel threshold (> 0.8)
+
+Parallel 
+
+Gated   
+
+> Which learning rule explains behavior well during indirect-rule task?
+
+Model comparison 
+
+## ca b
+
+> Mean ΔLL per trial (gated − parallel)
+
+Mice 
+
+Model preference        
+
+> Model reliance Performance Trials Rolling mean ΔLL increment
+> 0.0 0.5 1.0
+> Gating model Parallel model
+> 0.00 0.25 0.50 0.75 1.00
+> Performance Cumulative rewards
+> 0100 200 300 400 500 600 -0.01 0.00 0.01 0.02 Rolling mean ΔLL increment 0100 200 300 400 Cumulative rewards
+> Threshold (parallel) trial = 283 Threshold (gating) trial = 247
+
+↓Parallel better 
+
+↑Gating better 
+
+> Representative mouse (M1)
+> M5 M1 M9 M4 M2 M6 M8 M7 M3 M10
+
+-6 -4 -2 0241e-3 Gating better Parallel better 
+
+Fig. 4 | Model comparison between gated and parallel learning in the indirect-rule task. a, Schematic of the model comparison. We compared two alternative learning mechanisms: a gated learning model, in which belief updating in each world model is weighted by the current reliance on that model, and a parallel learning model, in which the two world models are updated in parallel. b, Representative comparison between gated and parallel learning models in one mouse. This representative mouse corresponds to the indirect-rule task example shown in Fig. 2a-c and 
+
+Fig. 3 , and is labeled M1 in c and d. The upper panel shows inferred insight dynamics under the gated learning model and the parallel learning model. Dashed vertical lines indicate the inferred insight timing in each model, defined as the trial at which the inferred insight variable exceeded 0.8. The middle panel shows behavioral performance and cumulative rewards. The lower panel shows the moving average of the trial-wise predictive log-likelihood difference between the gated and parallel learning models. Shaded regions indicate variability across repeated inference runs with different random seeds. c, 
+
+Insight timing across mice. Gray bars indicate the total number of trials for each mouse. Black diamonds indicate change points in the slope of the cumulative reward trajectory detected by piecewise linear fitting. Blue and purple markers indicate the inferred insight timing under the gated and parallel learning models, respectively. Insight timing was defined as the trial at which the inferred insight variable exceeded 0.8. d, Summary of model preference across mice. Y-axis shows the mean trial-wise predictive log-likelihood difference between the gated and parallel learning models, defined as gated minus parallel. Positive and negative values indicate better action-prediction performance by the gated and parallel learning models, respectively. Points indicate medians across repeated inference runs with different random seeds, and asymmetric error bars indicate the 5th and 95th percentiles across seeds. 
+
+9
+
+.CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint Gated learning better explains insight dynamics in indirect-rule task 236 
+
+Our analyses thus far have assumed a gated learning mechanism, whereby learning in each world model 237 
+
+is weighted by the animal’s current reliance on that model. Under this view, once the animal begins to 238 
+
+assign partial weight to a new world model, learning within that model proceeds in proportion to its 239 
+
+internal weight. This formulation captures the idea that animals selectively update hypotheses that are 240 
+
+currently considered relevant, rather than updating all possible interpretations of the task equally. 241 
+
+However, an alternative possibility is that multiple world models are learned in parallel, irrespective 242 
+
+of their current contribution to behavior. This parallel learning mechanism can be implemented as a non-243 
+
+gating account ( gt = 1 ), in which the animal updates both candidate world models simultaneously, even 244 
+
+before one of them is expressed strongly enough to guide action selection. Distinguishing between gated 245 
+
+learning and parallel learning is important because it addresses whether insight-like transitions arise 246 
+
+from reliance-dependent updating of an emerging world model, or from the later behavioral expression 247 
+
+of a world model that has already been learned in parallel ( Fig. 4a ). 248 
+
+To resolve this issue, we compared the gated learning model and the parallel learning model based 249 
+
+on their predictive performance for observed action sequences in the indirect-rule task. For each model, 250 
+
+we inferred insight dynamics and computed the trial-wise predictive log-likelihood of action selection. 251 
+
+In a representative mouse, both models captured an increase in the insight variable, but their inferred 252 
+
+insight timing and action-prediction performance differed (upper panel in Fig. 4b ). 253 
+
+As a behavioral reference, we also detected the change point in the slope of the cumulative reward 254 
+
+trajectory by piecewise linear fitting, together with the corresponding behavioral performance trajectory 255 
+
+(middle panel in Fig. 4b ). We then quantified model preference over time using the trial-wise predictive 256 
+
+log-likelihood difference between the two models (lower panel in Fig. 4b ). 257 
+
+Across mice, we compared the inferred insight timing from the two models with this cumulative-258 
+
+reward change point ( Fig. 4c ). To summarize model preference for each mouse, we averaged the pre-259 
+
+dictive log-likelihood difference over time. The gated learning model showed better action-prediction 260 
+
+performance in 7 of 10 mice ( Fig. 4d ). Individual mouse-level model-comparison trajectories for the 261 
+
+indirect-rule task, including seed-dependent variability and the transition-defined analysis epochs, are 262 
+
+shown in ( Supplementary Fig. S5 ). As a complementary visualization of model evidence over time, 263 
+
+cumulative trial-wise log-likelihood advantages for the indirect-rule task are shown in Supplementary 264 
+
+Fig. S6 . These results support the view that, in the indirect-rule task, learning of the cue-dependent 265 
+
+world model is better explained by a gated learning mechanism than by parallel learning of both can-266 
+
+didate models. This interpretation is consistent with the structure of the indirect-rule task, in which 267 
+
+successful performance requires discovery of a hidden and indirect cue-based rule rather than straight-268 
+
+forward reinforcement of an already explicit cue–reward association. 269 
+
+Direct-rule task behavior favors parallel learning over gated learning 270 
+
+We next applied IID to the direct-rule task, where successful performance can be achieved by learning a 271 
+
+more direct cue–reward relationship than in indirect-rule task ( Fig. 5a ). This allowed us to ask whether 272 
+
+gated learning was still required when the cue-based rule was more directly accessible. We compared 273 
+
+the gated and parallel learning models using the same likelihood-based procedure as in the indirect-rule 274 
+
+task. 275 
+
+In a representative mouse, both models inferred a transition toward the cue-dependent world model 276 
+
+during learning, although the inferred insight trajectories differed between the gated and parallel learning 277 
+
+models (upper panel in Fig. 5b ). To relate these latent dynamics to overt behavior, we also plotted 278 
+
+behavioral performance and cumulative rewards for the same session (middle panel in Fig. 5b ). We then 279 
+
+quantified model preference over time using the trial-wise predictive log-likelihood difference between 280 
+
+the two models (lower panel in Fig. 5b ). 281 
+
+Across mice, we compared the inferred insight timing from the two models with the cumulative-282 
+
+reward change point ( Fig. 5c ). The inferred insight points, as well as the cumulative-reward change 283 
+
+10 
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint
+
+↓Parallel better 
+
+↑Gating better 
+
+> Mice
+> Model preference
+> Mean ΔLL per trial (gated − parallel) Trials
+> M15 M20 M21 M18 M19 M13 M22 M16 M14 M12 M11 M17 -15 -10 -5 051e-3 Gating better Parallel better
+
+Fig. 5 | Model comparison between gated and parallel learning in the direct-rule task. a, Schematic of the direct-rule task structure shown in Fig. 1a and comparison between gated and parallel learning models, as in Fig. 4a . b, Representative comparison in one mouse performing the direct-rule task. This representative mouse corresponds to the direct-rule task example shown in Fig. 2d-f , and is labeled M11 in b-d, . The upper panel shows inferred insight dynamics under the gated and parallel learning models, with dashed lines indicating inferred insight timing, defined as the trial at which the insight variable exceeded 0.8. The middle panel shows behavioral performance and cumulative rewards, and the lower panel shows the moving average of the trial-wise predictive log-likelihood difference between the two models. Shaded regions indicate variability across repeated inference runs with different random seeds. c, Inferred insight timing across mice. Gray bars indicate total trial counts, black diamonds indicate change points in the slope of cumulative reward trajectories, and blue and purple markers indicate inferred insight timing under the gated and parallel learning models, respectively. d, Summary of model preference across mice. Y-axis shows the mean trial-wise predictive log-likelihood difference between the gated and parallel learning models, defined as gated minus parallel. Positive and negative values indicate better action-prediction performance by the gated and parallel learning models, respectively. Points indicate medians across repeated inference runs with different random seeds, and asymmetric error bars indicate the 5th and 95th percentiles across seeds. 
+
+11 
+
+.CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint point, appeared earlier in the direct-rule task than in the indirect-rule task (compare Fig. 5c with 284 
+
+Fig. 4c ). This suggests that mice reached the cue-based solution earlier in direct-rule task, regardless 285 
+
+of how the transition timing was quantified. 286 
+
+We next asked which learning mechanism better explained these earlier transitions in direct-rule 287 
+
+task ( Fig. 5d ). The gated learning model did not show a consistent predictive advantage. Instead, 288 
+
+the parallel learning model achieved a higher action-prediction performance in 9 of 12 mice. Individ-289 
+
+ual mouse-level model-comparison trajectories for the direct-rule task are shown in ( Supplementary 290 
+
+Fig. S7 ). Cumulative trial-wise log-likelihood advantages for the direct-rule task are shown in Sup-291 
+
+plementary Fig. S8 . Thus, direct-rule task behavior was not consistently better explained by gated 292 
+
+learning, suggesting that the more direct cue–reward structure may allow the cue-dependent world 293 
+
+model to be acquired through parallel learning. 294 
+
+Together with the indirect-rule task results, these findings reveal a task-dependent dissociation in 295 
+
+the computational organization of insight dynamics. In indirect-rule task, insight-like transitions were 296 
+
+more consistently explained by gated learning, whereas in direct-rule task this gating advantage was not 297 
+
+observed. This contrast indicates that the process by which animals acquire a new world model is not 298 
+
+fixed, but depends on the structural demands of the task. Importantly, IID made it possible to uncover 299 
+
+this distinction from behavioral data by reconstructing latent internal dynamics that would otherwise 300 
+
+remain inaccessible. 301 
+
+# Discussion 302 
+
+In this study, we developed inside insight dynamics (IID), a computational framework based on the 303 
+
+premise that an agent may have multiple competing world models and that learning depends on how 304 
+
+these models are explored, updated, and selected. Within this framework, we operationally defined 305 
+
+insight-like change as a transition between internal world models. We applied IID to mouse two-choice 306 
+
+tasks in which successful performance required a shift between competing world models, and found that 307 
+
+the resulting abrupt behavioral transitions are better understood not simply as changes in performance, 308 
+
+but as latent restructuring of the internal world models through which animals interpret task structure. 309 
+
+In this sense, the present work provides a quantitative approach for studying insight-like behavioral 310 
+
+change as an internal restructuring process rather than as an externally observed shift in performance 311 
+
+alone. 312 
+
+A central question in this study is what computational mechanism underlies the inferred restruc-313 
+
+turing of internal world models. In particular, the IID method allowed us to distinguish between two 314 
+
+alternatives: a gating mechanism, in which learning within each world model depends on the animal’s 315 
+
+current reliance on that model, and a parallel learning mechanism, in which multiple candidate world 316 
+
+models are updated in parallel. Our results showed that the answer depended on task structure. In 317 
+
+the indirect-rule task, behavior was better explained by the gating formulation, suggesting that a newly 318 
+
+emerging world model became learnable only as the animal began to assign weight to it. By contrast, in 319 
+
+the direct-rule task, the parallel learning formulation provided a better account, consistent with the idea 320 
+
+that the more direct cue–reward structure of this task allows competing world models to be updated in 321 
+
+parallel. Thus, the present study does not merely identify latent restructuring as a substrate of insight-322 
+
+like behavioral change, but further shows that the computational mechanism of that restructuring is 323 
+
+itself task dependent. 324 
+
+To clarify what is meant by “insight” in the present study, it is important to distinguish the present 325 
+
+framework from the subjective “Aha!” experience often discussed in human psychology [2, 3]. This 326 
+
+distinction is especially important in animal cognition, where insight-like behavior cannot be validated 327 
+
+through the phenomenology that defines the human ”Aha!” experience and where the relation between 328 
+
+human insight and putative nonhuman insight remains conceptually disputed [14, 15]. Human studies 329 
+
+of insight have often relied on subjective report to identify the moment of insight, but such reports may 330 
+
+not fully capture the temporal structure of the underlying process [16, 17]. In particular, under a gating 331 
+
+mechanism, a newly emerging world model becomes learnable gradually as the agent begins to assign 332 
+
+12 
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint
+
+weight to it, potentially before the moment at which the subject consciously reports having reached a 333 
+
+solution. IID may therefore provide a way to quantify a latent computational process that precedes 334 
+
+subjective report or contributes to it, potentially extending the study of insight beyond subjective report 335 
+
+alone. 336 
+
+Although the present study did not directly analyze neural activity, IID is particularly important for 337 
+
+future neuroscience studies using animal models, such as mice, rats, and monkeys, in which insight-like 338 
+
+change cannot be accessed through subjective report. Neural data are often interpreted in relation to 339 
+
+observable behavior, but behavioral readouts alone may be insufficient for understanding what neural 340 
+
+activity represents unless the latent internal dynamics underlying behavior are also taken into account 341 
+
+[6, 18]. In the present case, these dynamics correspond to insight-like restructuring, including changes 342 
+
+in the relative weighting of competing internal world models and the confidence associated with them. 343 
+
+Relating such latent variables to neural activity may make it possible to identify neural processes that 344 
+
+mediate or reflect the emergence of insight-like change. 345 
+
+A key methodological feature of the present study is that it treats behavior as arising from time-346 
+
+varying internal states rather than from fixed latent parameters [19, 20]. Computational modeling has 347 
+
+provided powerful tools for inferring hidden cognitive variables from behavioral data, from trial-by-trial 348 
+
+models of decision-making to Bayesian and active-inference frameworks for learning under uncertainty 349 
+
+[8, 21–23]. Within this broader context, the distinctive aim of IID is not simply to estimate latent 350 
+
+variables within a predefined task model, but to infer how the internal model space itself changes over 351 
+
+time. This inverse perspective builds on our previous efforts to infer hidden computational variables from 352 
+
+observable behavior. Earlier studies estimated relatively fixed latent quantities, such as reward-based 353 
+
+behavioral strategies from animal behavioral time-series data [24] and participant-specific trust-related 354 
+
+decision-making parameters from human trust-game behavior [25]. We later extended this inverse 355 
+
+approach to time-varying internal states, including curiosity or internally weighted information seeking 356 
+
+in two-choice behavior [13], and optimism-pessimism bias in monkey risk-taking behavior [26]. The 357 
+
+present study shares this inverse perspective, but differs in one crucial respect: these previous studies 358 
+
+assumed a single world model, whereas here we explicitly assume multiple competing world models and 359 
+
+infer transitions between them. Thus, the main conceptual advance of IID is not only that it infers 360 
+
+time-varying internal states, but that it decodes restructuring at the level of the internal model space 361 
+
+itself. This makes IID particularly suited to studying abrupt representational change. 362 
+
+A major limitation of the present study is that the framework assumes behavior to arise from 363 
+
+competition between only two candidate world models. This simplification was useful for the tasks 364 
+
+studied here and allowed the latent restructuring process to be inferred in an interpretable manner, but 365 
+
+the true internal hypothesis space of the animal may be richer than the binary alternatives considered 366 
+
+here [6, 27]. Related to this, the specific forms of the candidate world models were also assumed 367 
+
+rather than exhaustively derived from the data. For example, in the indirect-rule task, we considered 368 
+
+a side-dependent model and a cue-dependent model, but other possible internal hypotheses may also 369 
+
+have contributed to behavior. In particular, one could imagine alternative models in which reward is 370 
+
+associated trial by trial with the randomly presented cue, rather than with the abstract category of 371 
+
+”specific cue versus others.” Such possibilities were not explicitly modeled here, in part to maintain 372 
+
+interpretability and computational tractability. The present results should therefore be understood as 373 
+
+conditional on the candidate model set considered here. 374 
+
+In summary, this study introduces IID as a framework for inferring latent insight dynamics from 375 
+
+behavior and shows that abrupt behavioral transitions can be understood as internal restructuring of 376 
+
+competing world models. Our results further reveal that the computational form of this restructuring 377 
+
+depends on task structure, with gating learning mechanisms dominating in a indirect-rule task and 378 
+
+parallel learning mechanisms dominating in a more direct-rule task. By making latent restructuring 379 
+
+quantitatively inferable from behavior alone, IID opens a new avenue for studying a central yet pre-380 
+
+viously inaccessible aspect of flexible cognition. We hope that this framework will help establish a 381 
+
+more quantitative understanding of insight-like change and, ultimately, provide a foundation for linking 382 
+
+13 
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint
+
+behavior, internal computation, and brain dynamics in the study of adaptive intelligence. 383 
+
+# Methods 384 
+
+Behavioral tasks 385 
+
+Behavioral data analyzed in this study were derived from trial-level data underlying the previously 386 
+
+published mouse visual discrimination study by Nishioka et al.[12]. The data were provided by the 387 
+
+original investigators through collaboration for the purpose of the present secondary analysis. No new 388 
+
+behavioral experiments were performed in this study. 389 
+
+The analyzed dataset consisted of male C57BL/6J mice that performed either the VD-Inhibit task 390 
+
+or the VD-Attend task during behavioral learning. Mice were 8-10 weeks old at the beginning of the 391 
+
+original behavioral experiments. The present analysis included 10 mice in the VD-Inhibit condition and 392 
+
+12 mice in the VD-Attend condition. In the dataset analyzed here, VD-Inhibit and VD-Attend were 393 
+
+performed by separate cohorts of mice, and no animal contributed data to both tasks. The present 394 
+
+study focused exclusively on trial-by-trial sequences of choices and reward outcomes during behavioral 395 
+
+acquisition and did not analyze neural recordings or intervention data reported in the original study. 396 
+
+Mice were tested in touchscreen-based two-choice visual discrimination tasks, termed VD-Attend and 397 
+
+VD-Inhibit. The task procedures are briefly summarized here, with full experimental details reported 398 
+
+in the original study [12]. In each trial, animals initiated the trial by nose-poking the reward magazine, 399 
+
+after which two visual cues were presented on the touchscreen until a response was made. A touch 400 
+
+response to one of the two response windows determined the trial outcome. Correct responses were 401 
+
+rewarded, whereas incorrect responses resulted in a timeout penalty. Training sessions consisted of up 402 
+
+to 60 trials or 60 min per day, and mice were trained until they reached the criterion of more than 403 
+
+80% correct responses for two consecutive days. In the VD-Attend task, a fixed visual cue (the marble 404 
+
+image) served as the rewarded target, whereas responses to the alternative image, randomly selected 405 
+
+from a predefined image set, were unrewarded and punished by a timeout. In the VD-Inhibit task, by 406 
+
+contrast, responses to a fixed visual cue (the flag image) were designated as incorrect, whereas responses 407 
+
+to the alternative image were rewarded. Thus, the VD-Attend task involved learning a direct cue-reward 408 
+
+association, whereas the VD-Inhibit task required animals to suppress responses to a fixed non-rewarded 409 
+
+cue and instead select the alternative image. 410 
+
+Behavioral data and preprocessing 411 
+
+Behavioral data were analyzed on a trial-by-trial basis for each mouse. For each trial, we extracted the 412 
+
+animal’s choice and the corresponding binary reward outcome. Raw image identities were not used as 413 
+
+model inputs. Instead, cue-related information was reduced to the task-relevant category, specific cue 414 
+
+versus other cue, according to the fixed task rule and the recorded choice–outcome relation. Because 415 
+
+each trial contained one fixed cue and one alternative cue, this mapping allowed the chosen and unchosen 416 
+
+options to be assigned to the corresponding cue-dependent components used in the model. Specifically, 417 
+
+we tracked whether the chosen option corresponded to the task-relevant target or non-target category, as 418 
+
+determined by the reward contingency of each task. Rewarded trials were coded as 1 and unrewarded 419 
+
+trials as 0. These trial-wise action and reward sequences were used both for descriptive behavioral 420 
+
+analyses and as inputs to the inside insight dynamics (IID) method. 421 
+
+The analysis focused on the initial learning period of each task, from the first training session to 422 
+
+the session in which the animal reached the learning criterion. Sessions after criterion acquisition were 423 
+
+not included in the main IID analysis. Trials with missing action or reward records were excluded 424 
+
+from analysis. Animals were included if trial-level choice and reward-outcome records were available 425 
+
+throughout the learning period required for IID inference. No additional animals were excluded after 426 
+
+applying these criteria. 427 
+
+For visualization purposes, reward sequences were smoothed by an exponentially weighted moving 428 
+
+average, 429 
+
+14 
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint
+
+¯rt = (1 − λEWMA )rt + λEWMA ¯rt−1, (3) 430 
+
+where rt denotes the binary trial outcome and λEWMA is reported in Supplementary Table S1. Choice 431 
+
+probabilities were computed using a causal sliding 30-trial window, 432 
+
+ˆPt(left ) = 1
+
+|B t|
+
+∑
+
+> i∈Bt
+
+I{ai = left }, Bt = {max (1 , t − 29) , . . . , t }. (4) 433 
+
+The corresponding right-choice probability was defined as 1 − ˆPt(left ). These smoothing procedures 434 
+
+were used only for visualization and descriptive behavioral summaries. All IID analyses were performed 435 
+
+on the original unsmoothed trial-by-trial action–reward sequences and the corresponding task-defined 436 
+
+category mappings. 437 
+
+Behavioral change-point analysis 438 
+
+As a conventional behavioral reference, we estimated behavioral change points from cumulative reward 439 
+
+dynamics for comparison with the latent transition times inferred by IID. For each animal, cumulative 440 
+
+reward was defined as the cumulative sum of binary reward outcomes across trials, 441 
+
+Cr t =
+
+> t
+
+∑
+
+> i=1
+
+ri, (5) 442 
+
+where ri ∈ {0, 1} denotes the reward outcome at trial i, and t = 1 , . . . , T . We fitted the cumulative 443 
+
+reward trajectory with a continuous two-segment piecewise-linear regression model, also known as a 444 
+
+broken-line or segmented regression model [28]. Using trial number t, the fitted curve was written as 445 ̂
+
+Cr t = β0 + β1t + β2(t − τ )+, (6) 446 
+
+where (u)+ = max (u, 0) , and τ denotes the internal breakpoint. This parameterization enforces conti-447 
+
+nuity at the breakpoint, with the slope changing from β1 before τ to β1 + β2 after τ . The breakpoint 448 
+
+and regression coefficients were estimated by minimizing the residual sum of squares, 449 
+
+( ˆβ0, ˆβ1, ˆβ2, ˆτ ) = arg min 
+
+> β0,β1,β2,τ
+> T
+
+∑
+
+> t=1
+
+[Cr t − {β0 + β1t + β2(t − τ )+}]2. (7) 450 
+
+In the implementation, this fit was performed using the Python package pwlf with two line segments, 451 
+
+corresponding to one internal breakpoint (version 2.0.0; https://github.com/cjekel/piecewise_linear_fit_py). 452 
+
+The estimated internal breakpoint was taken as a descriptive behavioral change point, reflecting the trial 453 
+
+at which the rate of reward acquisition changed in the cumulative reward trajectory. This behavioral 454 
+
+change point was used only for comparison with IID-inferred transition times and not as an independent 455 
+
+inferential test of a discrete latent state transition. 456 
+
+Multi-world-model decision-making model 457 
+
+To model abrupt behavioral transitions, we assumed that the agent’s behavior was generated by compe-458 
+
+tition between multiple internal world models. We considered two candidate models: a side-dependent 459 
+
+model and a cue-dependent model. Insight-like change was defined as a transition in the relative domi-460 
+
+nance of these models. 461 
+
+15 
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint
+
+Agent-SSM for each world model 462 
+
+Let m ∈ {side , cue } denote the world model, and let s denote the component index within each model. 463 
+
+For the side-dependent model, s ∈ {left , right }. For the cue-dependent model, s ∈ {specific , other }.464 
+
+For each world model, we assumed a latent reward state z(m) 
+
+> t,s
+
+that evolved across trials according to 465 
+
+a random-walk process, 466 
+
+z(m) 
+
+> t,s
+
+= z(m) 
+
+> t−1,s
+
++ &(m) 
+
+> t
+
+(8) 467 
+
+where &(m) 
+
+> t
+
+∼ N (0 , σ2 
+
+> z
+
+) is Gaussian noise with variance σ2 
+
+> z
+
+.468 
+
+Reward probability was expressed as 469 
+
+P (rt = 1 | z(m) 
+
+> t,s
+
+) = σ(z(m) 
+
+> t,s
+
+) (9) 470 
+
+where σ(x) = 1/(1 + e−x), and rt denotes the reward outcome at trial t.471 
+
+Approximate belief updating in the agent-SSM 472 
+
+Following our previous free-energy-based formulation, the agent’s belief about the latent reward state 473 
+
+was approximated by a Gaussian distribution, 474 
+
+Q(z(m) 
+
+> t,s
+
+) = N
+
+(
+
+z(m) 
+
+> t,s
+
+| μ(m) 
+
+> t,s
+
+, [p(m) 
+
+> t,s
+
+]−1)
+
+, (10) 475 
+
+where μ(m) 
+
+> t,s
+
+is the posterior mean and p(m) 
+
+> t,s
+
+is the precision. Here, the latent variables at trial t denote 476 
+
+the agent’s pre-choice belief state after incorporating the action and reward outcome from the preceding 477 
+
+trial. Because reward feedback was obtained only for the chosen option, belief updating was component-478 
+
+specific. We introduced an indicator I(m) 
+
+> t−1,s
+
+that equals 1 when component s of world model m was 479 
+
+sampled on trial t − 1, and 0 otherwise. The posterior mean and precision were updated sequentially as 480 
+
+μ(m) 
+
+> t,s
+
+= μ(m) 
+
+> t−1,s
+
++ α · g(m) 
+
+> t
+
+I(m)
+
+> t−1,s
+
+K(m)
+
+> t,s
+
+[
+
+rt−1 − σ
+
+(
+
+μ(m)
+
+> t−1,s
+
+)] 
+
+, (11) 481 
+
+p(m) 
+
+> t,s
+
+=
+
+(
+
+K(m)
+
+> t,s
+
+)−1
+
++ I(m)
+
+> t−1,s
+
+σ
+
+(
+
+μ(m)
+
+> t,s
+
+) [ 
+
+1 − σ
+
+(
+
+μ(m)
+
+> t,s
+
+)] 
+
+, (12) 482 
+
+where α is the learning rate, g(m) 
+
+> t
+
+is the gating coefficient for the posterior-mean update by the current 483 
+
+model reliance, and K(m) 
+
+> t,s
+
+is the Kalman-gain-like coefficient defined as 484 
+
+K(m) 
+
+> t,s
+
+=
+
+(
+
+p(m)
+
+> t−1,s
+
+)−1
+
++ σ2 
+
+> z
+
+, (13) 485 
+
+with σ2 
+
+> z
+
+denoting the variance of the latent-state random walk. The gating term directly modulated 486 
+
+only the reward-prediction-error update of the posterior mean. However, because the precision update 487 
+
+for sampled components was evaluated using the updated posterior mean, gating can influence precision 488 
+
+indirectly through its effect on μ(m) 
+
+> t,s
+
+. These updates followed the same free-energy-based approximation 489 
+
+as in our previous work [13]. 490 
+
+Gated and parallel learning formulations 491 
+
+In the gating formulation, the posterior-mean update within each world model depended on the current 492 
+
+reliance: 493 
+
+g(side ) 
+
+> t
+
+= 1 − σ(wt), g(cue ) 
+
+> t
+
+= σ(wt). (14) 494 
+
+In the parallel learning formulation, the posterior means in both world models were updated indepen-495 
+
+dently of the current model reliance. This was implemented as a non-gated update rule: 496 
+
+g(m) 
+
+> t
+
+= 1 . (15) 497 
+
+16 
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint
+
+Thus, the key difference between the two formulations was whether reward-prediction-error updates of 498 
+
+the posterior means were scaled by the agent’s current reliance on each world model. In the gated 499 
+
+learning formulation, model reliance controlled the magnitude of the update, whereas in the parallel 500 
+
+learning formulation, both world models were updated whenever their corresponding components were 501 
+
+sampled, regardless of their current contribution to action selection. 502 
+
+Action selection under competing world models 503 
+
+We introduced an internal weighting variable wt to represent the relative dominance of the two world 504 
+
+models. The side-dependent and cue-dependent models were weighted by 1 − σ(wt) and σ(wt), respec-505 
+
+tively. 506 
+
+For the side-dependent model, U side  
+
+> t, left
+
+and U side  
+
+> t, right
+
+denote the agent’s estimated reward probabilities for 507 
+
+choosing the left and right options, respectively. For the cue-dependent model, U cue  
+
+> t, left
+
+and U cue  
+
+> t, right
+
+denote 508 
+
+the estimated reward probabilities for the left and right options under the cue-dependent interpretation. 509 
+
+Because the cue-dependent model is defined over s ∈ {specific , other }, these quantities depend on which 510 
+
+cue category is presented on each side at trial t. The integrated utilities for the left and right choices 511 
+
+were defined as 512 
+
+Ut, left = (1 − σ(wt)) U side  
+
+> t, left
+
++ σ(wt)U cue  
+
+> t, left
+
+(16) 513 
+
+Ut, right = (1 − σ(wt)) U side  
+
+> t, right
+
++ σ(wt)U cue  
+
+> t, right
+
+(17) 514 
+
+Here, 515 
+
+U side  
+
+> t, left
+
+= σ(μ(side ) 
+
+> t, left
+
+) (18) 516 
+
+U side  
+
+> t, right
+
+= σ(μ(side )
+
+> t, right
+
+) (19) 517 
+
+and, depending on cue placement, 518 
+
+U cue  
+
+> t, left
+
+= σ(μ(cue ) 
+
+> t,s t, left
+
+) (20) 519 
+
+U cue  
+
+> t, right
+
+= σ(μ(cue ) 
+
+> t,s t, right
+
+) (21) 520 
+
+where st, left , s t, right ∈ {specific , other }. Assuming at ∈ {0, 1} where 0 and 1 denote the left and right 521 
+
+choices respectively, the action selection probability was then given by 522 
+
+P (at = 1) = exp (βUt, right )
+
+exp (βUt, right ) + exp (βUt, left ) (22) 523 
+
+where β is the inverse-temperature parameter, which was consistently set to 1.0 in our model. 524 
+
+Inside insight dynamics (IID) method 525 
+
+IID adopts the observer’s perspective to infer the hidden internal states of the agent under the multi-526 
+
+world-model decision-making framework described above. 527 
+
+Observer-SSM 528 
+
+From the observer’s perspective, the latent state at trial t was defined as 529 
+
+xt =
+
+(
+
+wt, {μ(side ) 
+
+> t,s
+
+, p (side ) 
+
+> t,s
+
+}s, {μ(cue ) 
+
+> t,s
+
+, p (cue ) 
+
+> t,s
+
+}s
+
+)
+
+. (23) 530 
+
+17 
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint
+
+where wt denotes the relative weighting of the competing world models, and μ(m) 
+
+> t,s
+
+and p(m) 
+
+> t,s
+
+denote the 531 
+
+posterior mean and precision of the latent reward belief in world model m, which are updated according 532 
+
+to (Eqs. (11) and (12)), respectively. Here, xt denotes the agent’s pre-choice internal state at trial t,533 
+
+after incorporating the action and reward outcome from trial t − 1. Thus, the current action at was 534 
+
+generated from xt, whereas the reward outcome rt was used to update the belief state for the next trial. 535 
+
+The hidden-state dynamics were assumed to follow 536 
+
+wt = wt−1 + ηt, ηt ∼ N (0 , σ2
+
+> w
+
+) (24) 537 
+
+where σ2 
+
+> w
+
+denotes the variance of the system noise. The belief variables μ(m) 
+
+> t,s
+
+and p(m) 
+
+> t,s
+
+evolved according 538 
+
+to the agent-side belief updating equations described above. Thus, the observer-SSM combined stochas-539 
+
+tic dynamics of the world-model weighting variable with deterministic, component-specific updates of 540 
+
+the latent reward beliefs. Additional details on trial timing and component-specific belief updating are 541 
+
+provided in Supplementary Note 1 . The observable variables at trial t were the agent’s action at542 
+
+and reward outcome rt. The action likelihood was given by Eq. (22), while the reward outcome entered 543 
+
+the state transition from trial t to trial t + 1 .544 
+
+Sequential inference by particle filtering 545 
+
+Using the observer-SSM, the posterior distribution of the agent’s latent internal state xt was estimated 546 
+
+sequentially from the observed behavioral data (at, r t). The latent state at trial t was inferred in a 547 
+
+Bayesian manner as 548 
+
+P (xt | a1: t, r 1: t−1) ∝ P (at | xt)P (xt | a1: t−1, r 1: t−1) (25) 549 
+
+where a1: t denotes the action history up to trial t, and r1: t−1 denotes the reward history up to the 550 
+
+preceding trial. The predictive distribution was given by 551 
+
+P (xt | a1: t−1, r 1: t−1) = 
+
+∫
+
+P (xt | xt−1, a t−1, r t−1)P (xt−1 | a1: t−1, r 1: t−1) dxt−1 (26) 552 
+
+where P (xt | xt−1) is the latent-state transition model defined by the observer-SSM. The predictive 553 
+
+prior incorporated the state transition induced by the previous trial’s action and reward, whereas the 554 
+
+current action likelihood provided the evidence for the latent state at the time of choice. 555 
+
+Because this posterior cannot be obtained analytically owing to the nonlinear and non-Gaussian 556 
+
+structure of the model, we approximated it using a particle filter[29–31]. Specifically, the posterior 557 
+
+distribution was represented by a set of weighted particles, 558 
+
+P (xt | a1: t, r 1: t−1) ≈
+
+> N
+
+∑
+
+> i=1
+
+W (i) 
+
+> t
+
+δ(xt − x(i) 
+
+> t
+
+) (27) 559 
+
+where x(i) 
+
+> t
+
+is the i-th particle, W (i) 
+
+> t
+
+is its normalized importance weight, N is the number of particles, 560 
+
+and δ(·) denotes the Dirac delta function. Within each particle, the components of the latent state 561 
+
+were updated according to the observer-SSM, including the random-walk dynamics of the world-model 562 
+
+weighting variable wt (Eq. (24)) and the belief-updating equations for μ(m) 
+
+> t,s
+
+and p(m) 
+
+> t,s
+
+(Eqs. (11) and (12)). 563 
+
+At each trial, particles were propagated according to the latent-state dynamics and reweighted by 564 
+
+the likelihood of the observed action. Because resampling was performed adaptively, the normalized 565 
+
+weights carried by the particle system immediately before the update at trial t were denoted by W (i)
+
+> t−1,cur
+
+.566 
+
+If resampling had been performed after the previous update, then W (i) 
+
+> t−1,cur
+
+= 1/ N for all particles; 567 
+
+otherwise, W (i) 
+
+> t−1,cur
+
+= W (i)
+
+> t−1
+
+.568 
+
+For the bootstrap particle filter used here, particles were sampled from the latent-state transition 569 
+
+model, 570 
+
+18 
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint
+
+x(i) 
+
+> t
+
+∼ P (xt | x(i)
+
+> t−1
+
+, a t−1, r t−1, M ), (28) 571 
+
+so that the incremental log weight was given by the current action likelihood, 572 
+
+)(i) 
+
+> t
+
+= log P (at | x(i) 
+
+> t
+
+, M ). (29) 573 
+
+The unnormalized importance weight was therefore computed as 574 
+
+˜W (i) 
+
+> t
+
+= W (i) 
+
+> t−1,cur
+
+exp 
+
+(
+
+)(i)
+
+> t
+
+)
+
+. (30) 575 
+
+Equivalently, in log space, 576 
+
+log ˜W (i) 
+
+> t
+
+= log W (i) 
+
+> t−1,cur
+
++ )(i) 
+
+> t
+
+. (31) 577 
+
+The incremental predictive log-likelihood at trial t was computed from the normalizing constant of this 578 
+
+weight update, 579 
+
+LL Mt = log 
+
+( N∑
+
+> i=1
+
+˜W (i)
+
+> t
+
+)
+
+= log 
+
+( N∑
+
+> i=1
+
+W (i)
+
+> t−1,cur
+
+P (at | x(i) 
+
+> t
+
+, M )
+
+)
+
+. (32) 580 
+
+For numerical stability, this quantity was evaluated in log space as 581 
+
+LL Mt = logsumexp Ni=1 
+
+[
+
+log W (i) 
+
+> t−1,cur
+
++ )(i)
+
+> t
+
+]
+
+. (33) 582 
+
+The accumulated predictive evidence of the observed action sequence was tracked separately as the sum 583 
+
+of the incremental predictive log-likelihoods, 584 
+
+log ̂ P (a1: T | r1: T −1, M ) = 
+
+> T
+
+∑
+
+> t=1
+
+LL Mt . (34) 585 
+
+The normalized importance weights were then updated as 586 
+
+W (i) 
+
+> t
+
+= ˜W (i)
+
+> t
+
+∑Nj=1 ˜W (j)
+
+> t
+
+. (35) 587 
+
+Particle degeneracy was monitored using the effective sample size[32, 33], 588 
+
+ESS t = 1
+
+∑Ni=1 
+
+(
+
+W (i)
+
+> t
+
+)2 . (36) 589 
+
+Adaptive resampling was performed when ESS t/N fell below the prespecified threshold. After resam-590 
+
+pling, all particles were assigned equal normalized weights, W (i) 
+
+> t
+
+= 1/ N , and their ancestral indices 591 
+
+were stored. If the threshold was not crossed, resampling was skipped and the nonuniform normalized 592 
+
+weights were carried forward to the next trial. Thus, when resampling was skipped, the previous nor-593 
+
+malized weights contributed explicitly to the next trial’s unnormalized weights; when resampling was 594 
+
+performed, this contribution was already represented by the ancestor-selection probabilities. 595 
+
+To summarize path-space latent trajectories, we reconstructed ancestral paths for terminal particles 596 
+
+by tracing the stored ancestral indices backward over the full trial sequence. For each terminal particle 597 
+
+i, we computed an additive observation-fit score 598 
+
+S(i) =
+
+> T
+
+∑
+
+> t=1
+
+log P (at | xat(i) 
+
+> t
+
+, M ), (37) 599 
+
+19 
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint
+
+where at(i) denotes the particle index at trial t along the ancestral lineage of terminal particle i. This 600 
+
+score can be viewed as an additive path functional of the latent trajectory, a class of quantities widely 601 
+
+studied in particle smoothing and online smoothing methods.[34, 35] Representative paths were then 602 
+
+selected from a prespecified empirical quantile band of this score. The displayed latent dynamics were 603 
+
+summarized across the retained ancestral paths using normalized within-band selection weights, 604 
+
+¯xrep  
+
+> t
+
+= ∑
+
+> i∈Irep
+
+ρ(i)xat(i) 
+
+> t
+
+, ∑
+
+> i∈Irep
+
+ρ(i) = 1 , (38) 605 
+
+where Irep denotes the set of retained terminal-particle indices and ρ(i) denotes the normalized aggrega-606 
+
+tion weight assigned to retained path i. In the implementation used for visualization, path stratification 607 
+
+was based on the cumulative observation-fit score, and the displayed trajectories were given by weighted 608 
+
+within-band expectations of the latent states and their sigmoidal transforms. 609 
+
+This path-selection procedure was used to obtain representative latent trajectories for visualiza-610 
+
+tion and for defining transition-defined analysis epochs. The trial-wise predictive log-likelihood was 611 
+
+estimated from the full weighted particle system produced by the particle filter rather than from the 612 
+
+representative trajectories. In the model-comparison analysis, the threshold-crossing times used to de-613 
+
+fine the analysis epoch were computed from the representative model-reliance trajectories obtained by 614 
+
+this path-selection procedure. Accordingly, path selection contributed to the model-comparison analy-615 
+
+sis through the definition of the temporal window over which predictive log-likelihood differences were 616 
+
+summarized. 617 
+
+Simulation-based validation of IID 618 
+
+To validate the ability of IID to recover latent internal dynamics, we performed simulation-based analyses 619 
+
+using the forward model described above. Specifically, we first prescribed trial-by-trial trajectories of 620 
+
+the latent weighting variable wt, and then generated behavioral sequences from the multi-world-model 621 
+
+decision-making model. Under this process, actions were generated trial by trial, while the latent 622 
+
+beliefs within each world model, represented by μ(m) 
+
+> t,s
+
+and p(m) 
+
+> t,s
+
+, were sequentially updated according 623 
+
+to the resulting action–reward history. We then applied IID to the simulated behavioral data alone, 624 
+
+without access to the ground-truth trajectories of wt, μ(m) 
+
+> t,s
+
+, or p(m) 
+
+> t,s
+
+. This procedure allowed us to test 625 
+
+whether the observer-SSM could recover the latent internal dynamics that had generated the behavior. 626 
+
+Model comparison between gated and parallel learning models 627 
+
+Model comparison consisted of two related but distinct steps. First, for each animal, model, and 628 
+
+random seed, we estimated the trial-wise predictive log-likelihood of the observed actions using the 629 
+
+full particle-filtering procedure described above. Second, to summarize model preference during early 630 
+
+learning and the immediate post-transition period, we averaged the trial-wise predictive log-likelihood 631 
+
+difference within a transition-defined analysis epoch. This epoch was defined using a threshold-crossing 632 
+
+rule applied to the representative model-reliance trajectories obtained by the path-selection procedure 633 
+
+described above. 634 
+
+Let LL M,b j,t denote the trial-wise predictive log-likelihood for animal j, model M ∈ gated , parallel, 635 
+
+and random seed b. The trial-wise predictive advantage of the gated model over the parallel model was 636 
+
+defined as 637 
+
+∆LL bj,t = LL gated ,b j,t − LL parallel ,b j,t . (39) 638 
+
+For each animal, model, and random seed, the representative model-reliance trajectory was obtained 639 
+
+from the retained ancestral paths selected by the cumulative observation-fit score. The inferred transi-640 
+
+tion time was then defined as the first trial at which this representative reliance on the cue-dependent 641 
+
+20 
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint
+
+world model exceeded 0.8. Let ˆτ M,b j denote this threshold-crossing trial. In all analyzed runs, the in-642 
+
+ferred reliance exceeded the threshold within the session, so a threshold-crossing trial was obtained for 643 
+
+every seed and model. 644 
+
+To define a single analysis epoch for each animal, we first summarized the seed-dependent transition 645 
+
+times within each model by their median: 646 
+
+˜τ Mj = median b=1 ,..., 15 
+
+(
+
+ˆτ M,b j
+
+)
+
+. (40) 647 
+
+The analysis epoch was then defined from the beginning of the session to 30 trials after the later of the 648 
+
+median transition times under the gated and parallel learning models: 649 
+
+Wj =
+
+{
+
+t
+
+∣∣∣ 1 ≤ t ≤ min 
+
+[
+
+Tj , max 
+
+(˜τ gated  
+
+> j
+
+, ˜τ parallel 
+
+> j
+
+)
+
++ 30 
+
+]} 
+
+, (41) 650 
+
+where Tj is the total number of analyzed trials for animal j. We used the later of the two model-specific 651 
+
+transition times to ensure that the analysis epoch covered the inferred transition period under both 652 
+
+candidate models. 653 
+
+For each seed, model preference was quantified as the average predictive log-likelihood difference 654 
+
+within this window: 655 
+
+∆LL bj = 1
+
+|W j |
+
+∑
+
+> t∈Wj
+
+∆LL bj,t . (42) 656 
+
+Positive and negative values indicate better predictive performance of the gated and parallel learning 657 
+
+models, respectively. For visualization and summary statistics, the point estimate for each animal was 658 
+
+defined as the median of ∆LL bj across seeds, and across-seed variability was summarized by the 5th and 659 
+
+95th percentiles. 660 
+
+Because the per-animal model-preference summary was evaluated within an analysis epoch defined 661 
+
+from path-selected model-reliance trajectories, it should be interpreted as a transition-defined predictive-662 
+
+performance comparison rather than as an epoch-independent comparison over the entire behavioral 663 
+
+sequence. 664 
+
+Analysis parameters and implementation settings 665 
+
+All numerical parameters used for behavioral preprocessing, IID inference, particle filtering, simulation-666 
+
+based validation, and model comparison are summarized in Supplementary Table S1. Unless otherwise 667 
+
+stated, the same parameter settings were used for the VD-Inhibit and VD-Attend analyses. Parameters 668 
+
+that were fixed rather than fitted were chosen before the final model comparison and were kept identical 669 
+
+across animals and across the gated and parallel learning formulations. 670 
+
+# Data availability 671 
+
+The behavioral data analyzed in this study were derived from the trial-level data of the previously 672 
+
+published study by Nishioka et al. [12]. The processed trial-by-trial datasets used for IID analysis, 673 
+
+including action and reward-outcome sequences for each animal, will be made publicly available at 674 
+
+[repository/DOI] upon publication. 675 
+
+# Code availability 676 
+
+The code used for behavioral preprocessing, IID inference, simulation-based validation, model compari-677 
+
+son, and figure generation was implemented in Python (v3.12). The analysis code, parameter files, and 678 
+
+instructions required to reproduce the main figures and supplementary analyses will be made publicly 679 
+
+available at [repository/DOI] upon publication. 680 
+
+21 
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint
+
+# Ethics statement 681 
+
+No new animal experiments were performed in this study. This study involved secondary analysis of 682 
+
+mouse behavioral data that had been collected for, and used in, a previously published study by [12]. 683 
+
+The original animal experiments were conducted in accordance with the guidelines of the National 684 
+
+Institutes of Health and were approved by the Animal Experimental Committee of the Institute for 685 
+
+Protein Research, The University of Osaka (approval IDs: 29-02-1 and R04-01-0). The present study 686 
+
+reanalyzed these existing data provided by the original investigators through collaboration, and no 687 
+
+additional animal procedures were conducted. 688 
+
+# Acknowledgements 689 
+
+This work was supported in part by the Japan Science and Technology Agency (JST) Moonshot R&D 690 
+
+Program (JPMJMS2024-9 to H.N.), JST CREST (JPMJCR25Q2 to H.N.), JST BOOST (JPMJBS2424 691 
+
+to K.I.), Japan Agency for Medical Research and Development (AMED) Multidisciplinary Frontier Brain 692 
+
+and Neuroscience Discoveries (Brain/MINDS 2.0) (JP25wm0625322 to T.H. and JP25wm0625210 to 693 
+
+H.N.), AMED Grant Numbers JP21wm0425010 and JP21gm1510006 (to T.H.), MEXT/JSPS KAK-694 
+
+ENHI Grant Numbers JP21K15209 (to T.N.), JP21K15210 (to T.M.), JP16H06568, JP18H02542, 695 
+
+JP21H05694, JP22H02944, JP22H00494, and JP25K02547 (to T.H.), JSPS, Overseas Research Fel-696 
+
+lowships (to T.N.), Takeda Life Science Research Foundation (to T.H.), and the Collaborative Research 697 
+
+Program of the Institute for Protein Research, the University of Osaka, CR-26-03 (to T.H.). 698 
+
+# Author contributions 699 
+
+K.I., T.H., and H.N. conceived the project. K.I. and H.N. developed the computational framework. 700 
+
+K.I. performed the computational analyses with assistance from M.F. in data preparation. T.N. and 701 
+
+T.M. conducted the mouse experiments and acquired the behavioral data. K.I. and H.N. wrote the 702 
+
+manuscript and prepared the figures, with input from all authors. H.N. supervised the computational 703 
+
+study. All authors reviewed and approved the manuscript. 704 
+
+# Competing interests 705 
+
+The authors declare no competing interests. 706 
+
+# References 707 
+
+[1] Stellan Ohlsson. “Information-processing explanations of insight and related phenomena”. In: 708 
+
+vol. 1. 1992, pp. 1–44. 709 
+
+[2] Jennifer Wiley and Amory H. Danek. “Restructuring processes and Aha! experiences in insight 710 
+
+problem solving”. In: Nature Reviews Psychology 3 (2024), pp. 42–55. 711 
+
+[3] John Kounios and Mark Beeman. “The cognitive neuroscience of insight”. In: Annual Review of 712 
+
+Psychology 65 (2014), pp. 71–93. 713 
+
+[4] Thomas S. Kuhn. The Structure of Scientific Revolutions . University of Chicago Press, 1997. 714 
+
+[5] Edward C. Tolman. “Cognitive maps in rats and men”. In: Psychological Review 55 (1948), pp. 189– 715 
+
+208. 716 
+
+[6] Yael Niv. “Learning task-state representations”. In: Nature Neuroscience 22 (2019), pp. 1544–1553. 717 
+
+[7] David C. Knill and Alexandre Pouget. “The Bayesian brain: the role of uncertainty in neural 718 
+
+coding and computation”. In: Trends in Neurosciences 27 (2004), pp. 712–719. 719 
+
+[8] Karl Friston. “The free-energy principle: a unified brain theory?” In: Nature Reviews Neuroscience 720 
+
+11 (2010), pp. 127–138. 721 
+
+22 
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint
+
+[9] Nathaniel D. Daw, Yael Niv, and Peter Dayan. “Uncertainty-based competition between pre-722 
+
+frontal and dorsolateral striatal systems for behavioral control”. In: Nature Neuroscience 8 (2005), 723 
+
+pp. 1704–1711. 724 
+
+[10] Robert A. Jacobs, Michael I. Jordan, Steven J. Nowlan, and Geoffrey E. Hinton. “Adaptive mix-725 
+
+tures of local experts”. In: Neural Computation 3 (1991), pp. 79–87. 726 
+
+[11] Mark Jung-Beeman, Edward M. Bowden, Jason Haberman, Jennifer L. Frymiare, Stella Arambel-727 
+
+Liu, Richard Greenblatt, Paul J. Reber, and John Kounios. “Neural activity when people solve 728 
+
+verbal problems with insight”. In: PLoS Biology 2 (2004). 729 
+
+[12] Tadaaki Nishioka, Suthinee Attachaipanich, Kosuke Hamaguchi, Michael Lazarus, Alban de Ker-730 
+
+chove d’Exaerde, Tom Macpherson, and Takatoshi Hikida. “Error-related signaling in nucleus 731 
+
+accumbens D2 receptor-expressing neurons guides inhibition-based choice behavior in mice”. In: 732 
+
+Nature Communications 14, 2284 (2023). doi : 10.1038/s41467-023-38025-3 .733 
+
+[13] Yuki Konaka and Naoki Honda. “Decoding reward-curiosity conflict in decision-making from irra-734 
+
+tional behaviors”. In: Nature Computational Science 3 (2023), pp. 418–432. doi : 10.1038/s43588-735 
+
+023-00439-w .736 
+
+[14] Sara J. Shettleworth. “Do animals have insight, and what is insight anyway?” In: Canadian Journal 737 
+
+of Experimental Psychology/Revue canadienne de psychologie expérimentale 66 4 (2012), pp. 217– 738 
+
+226. 739 
+
+[15] Eli Shupe. “The irreconcilability of insight”. In: Animal Cognition 27, 16 (2024). 740 
+
+[16] Janet Metcalfe and David Wiebe. “Intuition in insight and noninsight problem solving”. In: Mem-741 
+
+ory & Cognition 15 (1987), pp. 238–246. 742 
+
+[17] Amory H. Danek, Thomas Fraps, Albrecht von Müller, Benedikt Grothe, and Michael Öllinger. 743 
+
+“It’s a kind of magic–what self-reports can reveal about the phenomenology of insight problem 744 
+
+solving”. In: Frontiers in Psychology 5, 1408 (2014). 745 
+
+[18] John W. Krakauer, Asif A. Ghazanfar, Alex Gomez-Marin, Malcolm A. MacIver, and David 746 
+
+Poeppel. “Neuroscience needs behavior: correcting a reductionist bias”. In: Neuron 93 (2017), 747 
+
+pp. 480–490. 748 
+
+[19] Anne C. Smith, Loren M. Frank, Sylvia Wirth, Marianna Yanike, Dan Hu, Yasuo Kubota, Ann M. 749 
+
+Graybiel, Wendy A. Suzuki, and Emery N. Brown. “Dynamic analysis of learning in behavioral 750 
+
+experiments”. In: Journal of Neuroscience 24 (2004), pp. 447–461. 751 
+
+[20] Wendy A. Suzuki and Emery N. Brown. “Behavioral and neurophysiological analyses of dynamic 752 
+
+learning processes”. In: Behavioral and Cognitive Neuroscience Reviews 4 (2005), pp. 67–95. 753 
+
+[21] Nathaniel D. Daw. “Trial-by-trial data analysis using computational models: (Tutorial Review)”. 754 
+
+In: Decision Making, Affect, and Learning: Attention and Performance XXIII . Oxford University 755 
+
+Press, Mar. 2011. doi : 10.1093/acprof:oso/9780199600434.003.0001 .756 
+
+[22] Robert C. Wilson and Anne G. E. Collins. “Ten simple rules for the computational modeling of 757 
+
+behavioral data”. In: eLife 8 (2019). 758 
+
+[23] Christoph Mathys, Jean Daunizeau, Karl J. Friston, and Klaas E. Stephan. “A Bayesian founda-759 
+
+tion for individual learning under uncertainty”. In: Frontiers in Human Neuroscience 5, 39 (2011). 760 
+
+doi : 10.3389/fnhum.2011.00039 .761 
+
+[24] Shoichiro Yamaguchi, Naoki Honda, Muneki Ikeda, Yuki Tsukada, Shunji Nakano, Ikue Mori, and 762 
+
+Shin Ishii. “Identification of animal behavioral strategies by inverse reinforcement learning”. In: 763 
+
+PLoS Computational Biology 14 (2018), e1006122. 764 
+
+23 
+
+> .CC-BY-NC-ND 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted June 23, 2026. ;https://doi.org/10.64898/2026.05.21.726889 doi: bioRxiv preprint
+
+[25] Zimu Cao, Daiki Setoyama, Monica Natsumi Daudelin, Toshio Matsushima, Yuichiro Yada, Mo-765 
+
+toki Watabe, Takatoshi Hikida, Takahiro A. Kato, and Naoki Honda. “Leveraging machine learn-766 
+
+ing to uncover the hidden links between trusting behavior and biological markers”. In: Dialogues 767 
+
+in Clinical Neuroscience 27 (2025), pp. 201–215. doi : 10.1080/19585969.2025.2513697 .768 
+
+[26] Iori Higashino, Ryo Ito, Yasushi Okochi, Kengo Inutsuka, Hiroshi Yokoyama, Rikako Kato, Yuichiro 769 
+
+Yada, Ken-ichi Amemori, and Naoki Honda. “The mental conflict in risk-taking behavior: Decod-770 
+
+ing bias between optimism and pessimism”. In: bioRxiv (2026). doi : 10 . 64898 / 2026 . 05 . 01 . 771 
+
+722186 .772 
+
+[27] Samuel J. Gershman and Yael Niv. “Learning latent structure: carving nature at its joints”. In: 773 
+
+Current Opinion in Neurobiology 20 (2010), pp. 251–256. 774 
+
+[28] Vito M. R. Muggeo. “Estimating regression models with unknown break-points”. In: Statistics in 775 
+
+Medicine 22 (2003), pp. 3055–3071. doi : 10.1002/sim.1545 .776 
+
+[29] N.J. Gordon, D.J. Salmond, and A.F.M. Smith. “Novel approach to nonlinear/non-Gaussian 777 
+
+Bayesian state estimation”. In: IEE Proceedings F (Radar and Signal Processing) 140 (1993), 778 
+
+pp. 107–113. doi : 10.1049/ip-f-2.1993.0015 .779 
+
+[30] Genshiro Kitagawa. “Monte Carlo Filter and Smoother for Non-Gaussian Nonlinear State Space 780 
+
+Models”. In: Journal of Computational and Graphical Statistics 5 (1996), pp. 1–25. doi : 10.1080/ 781 
+
+10618600.1996.10474692 .782 
+
+[31] Simo Särkkä and Lennart Svensson. Bayesian filtering and smoothing . 2nd ed. Vol. 17. Cambridge 783 
+
+University Press, 2023. 784 
+
+[32] Jun S Liu and Rong Chen. “Blind deconvolution via sequential imputations”. In: Journal of the 785 
+
+american statistical association 90 (1995), pp. 567–576. doi : 10.1080/01621459.1995.10476549 .786 
+
+[33] Nicolas Chopin and Omiros Papaspiliopoulos. An Introduction to Sequential Monte Carlo . Springer, 787 
+
+2020. 788 
+
+[34] Randal Douc, Aurélien Garivier, Eric Moulines, and Jimmy Olsson. “Sequential Monte Carlo 789 
+
+smoothing for general state space hidden Markov models”. In: The Annals of Applied Probability 790 
+
+21 (2011), pp. 2109–2145. doi : 10.1214/10-AAP735 .791 
+
+[35] Jimmy Olsson and Johan Westerborn. “Efficient particle-based online smoothing in general hidden 792 
+
+Markov models: The PaRIS algorithm”. In: Bernoulli 23 (2017), pp. 1951–1996. doi : 10.3150/16-793 
+
+BEJ801 .794 
+
+24
