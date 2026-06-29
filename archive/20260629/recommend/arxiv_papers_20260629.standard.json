@@ -1,0 +1,480 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-29T21:34:53.528597+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 6,
+    "deep_cap": 7,
+    "deep_selected": 6,
+    "quick_candidates": 4,
+    "quick_skim_target": 12,
+    "quick_selected": 4
+  },
+  "deep_dive": [
+    {
+      "id": "2606.26859v2",
+      "source": "arxiv",
+      "title": "AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems",
+      "abstract": "Recommendation algorithm iteration is moving from an artisanal, engineer-bound process toward an industrialized research loop, but this transition remains blocked by a structural execution bottleneck: the idea-to-launch cycle still depends on human engineers to generate hypotheses, modify production code, launch A/B experiments, and attribute online results. Innovation therefore scales linearly with headcount rather than compounding with evidence, compute, and accumulated experimental knowledge. We present AgentX, a production-deployed multi-agent system that fundamentally restructures this production function. AgentX operates as a self-evolving development engine: it autonomously generates, implements, evaluates, and learns from recommendation experiments at a scale and pace that no manual workflow can sustain.   The system orchestrates four tightly coupled stages in a closed loop. A Brainstorm Agent synthesizes evidence from historical experiments, system architecture, data analysis, and external research into ranked, executable proposals. A Developing Agent translates each proposal into production-ready code through repository-grounded generation and multi-dimensional reliability verification. An Evaluation Agent conducts safe online rollout with guardrail-vetoed A/B judgment, converting both successes and failures into structured knowledge assets. A Harness Evolution layer (SGPO) then distills execution trajectories into semantic-gradient updates that continuously sharpen the agents themselves -- making the system not merely automated, but self-improving.",
+      "authors": [
+        "Changxin Lao",
+        "Fei Pan",
+        "Guozhuang Ma",
+        "Han Li",
+        "Huihuang Lin",
+        "Jijun Shi",
+        "Kangzhi Zhao",
+        "Kun Gai",
+        "Mo Zhou",
+        "Qinqin Zhou",
+        "Quan Chen",
+        "Ruochen Yang",
+        "Shifu Bie",
+        "Shijie Yi",
+        "Shuang Yang",
+        "Shuo Yang",
+        "Wenhao Li",
+        "Wentao Xie",
+        "Xiao Lv",
+        "Xuming Wang",
+        "Yijun Wang",
+        "Yiming Chen",
+        "Yusheng Huang",
+        "Zhongyuan Wang",
+        "Zibo Zhao",
+        "Zijie Zhuang",
+        "Baoning Xia",
+        "Chao Liu",
+        "Chaoyi Ma",
+        "Chubo He",
+        "Dawei Cong",
+        "Feng Jiang",
+        "Gang Wang",
+        "Guilin Xia",
+        "Hanwen Xu",
+        "Jiahong Xie",
+        "Jiahui Qiao",
+        "Jian Liang",
+        "Jiangfan Yue",
+        "Jing Wang",
+        "Jinghan Yang",
+        "Jinghui Jia",
+        "Kan Qin",
+        "Lei Wang",
+        "Ming Li",
+        "Peilin Song",
+        "Pengbo Xu",
+        "Qiang Luo",
+        "Ruiming Tang",
+        "Shiyang Liu",
+        "Shuxian Jin",
+        "Tao Wang",
+        "Tao Zhang",
+        "Xiang Gao",
+        "Xianghan Li",
+        "Yingsong Luo",
+        "Yiwen Ning",
+        "Yongcheng Liu",
+        "Yueyang Liu",
+        "Yuan Guo",
+        "Zhaojie Liu",
+        "Zhenkai Cui"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.IR"
+      ],
+      "published": "2026-06-25T10:42:28+00:00",
+      "link": "https://arxiv.org/pdf/2606.26859v2",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "AgentX is a self-evolving development engine that autonomously iterates on recommender systems",
+      "llm_evidence_cn": "AgentX是一个自主迭代推荐系统的自演化开发引擎",
+      "llm_evidence": "AgentX是一个自主迭代推荐系统的自演化开发引擎",
+      "canonical_evidence": "AgentX是一个自主迭代推荐系统的自演化开发引擎",
+      "llm_tldr_en": "AgentX is a production-deployed multi-agent system that autonomously generates, implements, evaluates, and learns from recommendation experiments, achieving recursive self-iteration.",
+      "llm_tldr_cn": "针对推荐系统迭代依赖人工工程师、创新规模无法随数据和计算积累的问题，本文提出AgentX，一个在生产环境中部署的多智能体系统，能够自主生成假设、修改代码、运行实验并学习实验结果，实现递归的自我迭代，将研发过程从线性人力扩展转变为复合增长。",
+      "llm_tldr": "针对推荐系统迭代依赖人工工程师、创新规模无法随数据和计算积累的问题，本文提出AgentX，一个在生产环境中部署的多智能体系统，能够自主生成假设、修改代码、运行实验并学习实验结果，实现递归的自我迭代，将研发过程从线性人力扩展转变为复合增长。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "recursive self-improvement methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-06-18-733163-v2",
+      "source": "biorxiv",
+      "title": "CellOS: Learning a World Model of Cellular State through Joint Embedding Prediction",
+      "abstract": "Foundation models learned from single-cell transcriptomes are central to the prospect of AI virtual cell that can represent, query and predict cellular state. However, most current single-cell foundation models learn from a single view of gene expression and are optimized primarily through reconstruction or next-token prediction. As a result, they capture expression abundance but cannot explicitly reconcile complementary views of cellular state. Here we present CellOS, a multi-view foundation model that learns cellular representations from paired expression and perception views. CellOS integrates complementary views through a scalable three-stage training strategy that combines causal cell-sentence language modelling, function-preserving dense-to-mixture-of-experts expansion and latent-space alignment via an LLM-JEPA objective. Using this framework, we trained a 12-billion-parameter model on 390.5 million single-cell transcriptomes. Across diverse benchmarks spanning cell-state annotation, batch integration and perturbation-response prediction, CellOS consistently outperformed state-of-the-art single-cell foundation models. Together, these results suggest that predictive alignment between complementary cellular views provides a scalable path toward representation-centric cellular world models and transferable AI virtual cells.",
+      "authors": [
+        "Zhou, Q.",
+        "Le, Y.",
+        "Qi, X.",
+        "Chang, S.",
+        "Lu, H.",
+        "Wu, Y.",
+        "Wang, H.",
+        "Ran, R.",
+        "li, x."
+      ],
+      "primary_category": "bioinformatics",
+      "categories": [
+        "bioinformatics"
+      ],
+      "published": "2026-06-25T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.06.18.733163v2.full.pdf",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Learning a world model of cellular state with perception views",
+      "llm_evidence_cn": "通过学习带有感知视图的细胞状态世界模型",
+      "llm_evidence": "通过学习带有感知视图的细胞状态世界模型",
+      "canonical_evidence": "通过学习带有感知视图的细胞状态世界模型",
+      "llm_tldr_en": "CellOS learns a multi-view world model of cellular state by integrating expression and perception views, enabling better representation and detection of cellular states.",
+      "llm_tldr_cn": "当前单细胞基础模型只学习基因表达单一视图，无法整合互补的细胞状态信息。CellOS提出多视图世界模型，通过配对表达和感知视图，采用三阶段训练策略联合学习。该模型能更全面地表示细胞状态，提升了对细胞状态的感知与检测能力，为AI虚拟细胞提供了基础。",
+      "llm_tldr": "当前单细胞基础模型只学习基因表达单一视图，无法整合互补的细胞状态信息。CellOS提出多视图世界模型，通过配对表达和感知视图，采用三阶段训练策略联合学习。该模型能更全面地表示细胞状态，提升了对细胞状态的感知与检测能力，为AI虚拟细胞提供了基础。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for world model",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.28270v1",
+      "source": "arxiv",
+      "title": "Agent-Native Immune System: Architecture, Taxonomy, and Engineering",
+      "abstract": "The transition from static chat bots to autonomous agents--equipped with persistent memory, tool-use protocols, and multi-agent collaboration--has fundamentally expanded the AI threat landscape. Current defense mechanisms, such as perimeter security and training-time alignment, remain external to the agent's active reasoning loop. Consequently, they fall short: a fully aligned agent remains highly vulnerable to runtime hijacking via memory poisoning, tool-chain manipulation, or multi-agent protocol attacks. To address this critical gap, we introduce the Agent-Native Immune System (ANIS), the first biologically inspired, endogenous defense architecture embedded directly within the agent's cognitive loop. Our framework presents four primary contributions. First, we design a six-layer Immune Tower (L0-L5), distinctly incorporating Barrier Immunity (L1) as a non-cognitive, physical-and-logical isolation layer. Second, we establish a unified taxonomy of Agent Viruses and Agent Vaccines, formalizing the critical distinction between superficial non-parametric defenses and robust parametric vaccines. Third, we conceptualize the Harness Triad--Meta, Self, and Auto--a self-monitoring, meta-cognitive automation backbone that drives Continual Immune Learning (CIL), enabling vaccines to dynamically adapt to novel threats. Finally, we establish a rigorous theoretical demarcation between model alignment and agent immunity: while alignment provides a static \"constitutional\" value foundation during training, ANIS serves as the dynamic \"law enforcement\" mechanism during runtime. We conclude by framing open challenges for the field, including immune protocol standardization, novel evaluation metrics such as the Autoimmunity Rate (false-positive intervention rate), and the co-evolutionary dynamics between pathogens and vaccines within collective intelligence ecosystems.",
+      "authors": [
+        "Bo Shen",
+        "Lifeng Chang",
+        "Tianyuan Wei",
+        "Yunpeng Li",
+        "Feng Shi",
+        "Yichen Han",
+        "Peijie Gao",
+        "Shiyi Kuang",
+        "Xin Chang",
+        "Dehui Li"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.MA"
+      ],
+      "published": "2026-06-26T17:08:06+00:00",
+      "link": "https://arxiv.org/pdf/2606.28270v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "endogenous immune architecture embedded in agent's cognitive loop for runtime detection",
+      "llm_evidence_cn": "嵌入智能体认知循环的内生免疫架构，用于运行时检测",
+      "llm_evidence": "嵌入智能体认知循环的内生免疫架构，用于运行时检测",
+      "canonical_evidence": "嵌入智能体认知循环的内生免疫架构，用于运行时检测",
+      "llm_tldr_en": "Introduces Agent-Native Immune System (ANIS), a biologically-inspired endogenous defense architecture embedded directly in the agent's reasoning loop for runtime threat detection.",
+      "llm_tldr_cn": "该论文针对现有外部安全机制无法防御运行时攻击（如记忆中毒、工具链操纵）的问题，提出智能体原生免疫系统（ANIS），受生物免疫系统启发，将防御架构直接嵌入智能体认知循环。ANIS包含多个检测模块，能在运行时识别和响应威胁，显著提升智能体的鲁棒性和安全性。",
+      "llm_tldr": "该论文针对现有外部安全机制无法防御运行时攻击（如记忆中毒、工具链操纵）的问题，提出智能体原生免疫系统（ANIS），受生物免疫系统启发，将防御架构直接嵌入智能体认知循环。ANIS包含多个检测模块，能在运行时识别和响应威胁，显著提升智能体的鲁棒性和安全性。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in agent architectures",
+      "matched_requirement_id": "req-15",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.26327v1",
+      "source": "arxiv",
+      "title": "EVOM: Agentic Meta-Evolution of Actor-Critic Architectures for Reinforcement Learning",
+      "abstract": "In actor-critic reinforcement learning, network architectures are typically manually designed. Automating this design is challenging because each candidate must be trained before evaluation, and the design space is open-ended. To address these challenges, we introduce EVOM, an agentic meta-evolution framework for discovering high-performance actor-critic architectures. We frame architecture search as a bi-level optimization: an inner loop trains weights via the low-fidelity proximal policy optimization (PPO), while an outer loop drives meta-evolution by iteratively refining architecture programs. Crucially, this outer loop is powered by an LLM-based design agent that operates purely as an architecture designer, completely decoupled from policy execution and environment control. Experiments reveal that EVOM outperforms the manually designed baseline, an LLM-guided random search, and the state-of-the-art LLM-guided programmatic policy search method MLES, delivering superior performance on Ant-v4 and HalfCheetah-v4. Ablation studies validate that both the meta-evolution loop and the LLM Design Agent are indispensable for final performance.",
+      "authors": [
+        "Boyun Zhang",
+        "Chao Wang",
+        "Kai Wu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-06-24T19:13:32+00:00",
+      "link": "https://arxiv.org/pdf/2606.26327v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "meta-evolution of actor-critic architectures using LLM-based design agent",
+      "llm_evidence_cn": "使用基于LLM的设计智能体进行演员-评论家架构的元进化",
+      "llm_evidence": "使用基于LLM的设计智能体进行演员-评论家架构的元进化",
+      "canonical_evidence": "使用基于LLM的设计智能体进行演员-评论家架构的元进化",
+      "llm_tldr_en": "EVOM uses an LLM-based agent to drive meta-evolution of actor-critic architectures, automatically discovering high-performance designs without manual tuning.",
+      "llm_tldr_cn": "针对强化学习网络架构手工设计繁琐的问题，本文提出EVOM框架，利用LLM设计智能体驱动演员-评论家架构的元进化。通过内外双层优化，内层低保真PPO训练权重，外层LLM智能体迭代优化架构程序，实现了架构自动化发现，效果优于手动设计。",
+      "llm_tldr": "针对强化学习网络架构手工设计繁琐的问题，本文提出EVOM框架，利用LLM设计智能体驱动演员-评论家架构的元进化。通过内外双层优化，内层低保真PPO训练权重，外层LLM智能体迭代优化架构程序，实现了架构自动化发现，效果优于手动设计。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.28187v1",
+      "source": "arxiv",
+      "title": "GBC: Gradient-Based Connections for Optimizing Multi-Agent Systems",
+      "abstract": "Multi-agent systems (MAS) built on large language models (LLMs) provide a promising framework for solving complex tasks through role specialization and structured interaction. However, their performance is often limited by miscoordination and, more fundamentally, the lack of fine-grained credit assignment across agents. Existing approaches typically rely on coarse-grained feedback, making it difficult to identify which agents or interaction steps are responsible for errors. We propose Gradient-Based Connections (GBC), an approach for fine-grained attribution and optimization of multi-agent systems. GBC models a MAS as a computational graph and introduces gradient-based connection weights to quantify the influence of each agent's output on downstream agents at the token level. By constructing an attribution graph and propagating task-specific loss signals backward, our method enables precise identification of error sources and targeted prompt optimization. We further develop AgentChord, an efficient implementation that leverages prefix-based gradient computation. Experiments on MultiWOZ and τ-bench show that GBC improves multi-agent performance and outperforms strong single-agent and multi-agent baselines, and higher attribution quality is associated with greater optimization effectiveness. Code is available at: https://github.com/yxc-cyber/AgentChord.",
+      "authors": [
+        "Xiaocheng Yang",
+        "Abdulrahman Alrabah",
+        "Dilek Hakkani-Tür",
+        "Gokhan Tur"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-06-26T15:32:33+00:00",
+      "link": "https://arxiv.org/pdf/2606.28187v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Gradient-based credit assignment for optimizing multi-agent systems",
+      "llm_evidence_cn": "基于梯度的多智能体系统优化方法",
+      "llm_evidence": "基于梯度的多智能体系统优化方法",
+      "canonical_evidence": "基于梯度的多智能体系统优化方法",
+      "llm_tldr_en": "GBC introduces gradient-based connection weights to fine-grained credit assignment in LLM-based multi-agent systems, enabling systematic optimization of agent interactions.",
+      "llm_tldr_cn": "针对大型语言模型多智能体系统中协作效率低和信用分配粗粒度的问题，提出基于梯度的连接方法（GBC），将多智能体系统建模为计算图，通过可微的连接权重量化每个智能体输出的影响力。该方法实现了细粒度的归因与优化，为多智能体系统的自我改进提供了新的优化路径。",
+      "llm_tldr": "针对大型语言模型多智能体系统中协作效率低和信用分配粗粒度的问题，提出基于梯度的连接方法（GBC），将多智能体系统建模为计算图，通过可微的连接权重量化每个智能体输出的影响力。该方法实现了细粒度的归因与优化，为多智能体系统的自我改进提供了新的优化路径。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.27814v1",
+      "source": "arxiv",
+      "title": "ATOD: Annealed Turn-aware On-policy Distillation for Multi-turn Autonomous Agents",
+      "abstract": "Training small language-model agents for long-horizon interactive tasks requires both fast imitation and reward-driven improvement. On-policy distillation (OPD) provides dense teacher guidance and typically improves rapidly in the early stage, but its gains saturate once the student approaches the teacher, limiting the final performance ceiling. Reinforcement learning (RL) directly optimizes environment rewards and encourages exploratory improvement toward a higher reward-defined ceiling, but sparse and delayed feedback makes early-stage learning much less efficient than OPD. In this paper, we propose ATOD (Annealed Turn-aware On-policy Distillation), a hybrid online distillation algorithm that explicitly exploits this complementarity. (1) ATOD uses an annealed OPD-RL schedule: OPD dominates early training to approach teacher-level behavior, while RL is gradually strengthened to drive reward-based exploration. (2) ATOD introduces Turn-level Disagreement-Uncertainty Reweighting (T-DUR), which softly amplifies high-utility turns and improves dense supervision in long trajectories. Experiments on ALFWorld, WebShop, and Search-QA show that ATOD consistently outperforms competing post-training baselines: across the three student sizes, ATOD improves average success rate by 3.03 points over OPD and 23.62 points over GRPO, while surpassing the corresponding teacher models by 2.16 points.",
+      "authors": [
+        "Qitai Tan",
+        "Zefang Zong",
+        "Yang Li",
+        "Peng Chen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-26T07:56:32+00:00",
+      "link": "https://arxiv.org/pdf/2606.27814v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "ATOD combines on-policy distillation with RL for self-improving multi-turn agents",
+      "llm_evidence_cn": "ATOD结合在线策略蒸馏和强化学习以自我改进多轮智能体",
+      "llm_evidence": "ATOD结合在线策略蒸馏和强化学习以自我改进多轮智能体",
+      "canonical_evidence": "ATOD结合在线策略蒸馏和强化学习以自我改进多轮智能体",
+      "llm_tldr_en": "ATOD algorithm exploits complementarity of OPD and RL to self-improve small language-model agents for long-horizon tasks, achieving higher performance ceiling.",
+      "llm_tldr_cn": "针对训练小语言模型智能体在长程交互任务中，纯在线策略蒸馏后期饱和而强化学习早期低效的问题，本文提出ATOD算法，通过退火轮次感知的在线策略蒸馏显式利用二者互补性，使智能体在快速模仿后通过强化学习持续自我改进，达到更高性能天花板。",
+      "llm_tldr": "针对训练小语言模型智能体在长程交互任务中，纯在线策略蒸馏后期饱和而强化学习早期低效的问题，本文提出ATOD算法，通过退火轮次感知的在线策略蒸馏显式利用二者互补性，使智能体在快速模仿后通过强化学习持续自我改进，达到更高性能天花板。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.23069v1",
+      "source": "arxiv",
+      "title": "Rethinking Prototype-based Similarity Learning for Few-Shot Object Detection",
+      "abstract": "Few-shot object detection aims to detect novel object categories from only a few labeled examples, avoiding costly large-scale annotation. Recent prototype-based similarity learning approaches enable training-free adaptation by matching query features with class prototypes. However, they suffer from two fundamental limitations: (i) class confusion arising from inter-class similarity margin collapse, and (ii) insufficient visual cues for precise localization, as similarity scores capture only class-level semantic affinity while providing limited spatial information. To address these issues, we introduce two complementary components. Text-Anchored Semantic Mask (TSMa) leverages class-level text features as semantic anchors to identify semantically aligned channels through channel-wise interaction between visual and text features. By suppressing style-induced spurious responses and emphasizing class-intrinsic signals, TSMa enlarges inter-class similarity margins and mitigates class confusion. We further propose Stage-Aligned Hierarchical Autoregressive Regression (SHARe), which reformulates localization as a hierarchical autoregressive process that progressively refines bounding boxes across multiple stages. SHARe leverages the layer-wise characteristics of ViT representations by aligning feature abstraction levels with regression stages: deeper layers guide early coarse localization, while shallower layers rich in edge and texture cues refine spatial details in later stages. Experiments on COCO demonstrate a new state of the art, outperforming the previous best by +10.1 nAP, with extensive analysis validating each component. The code is available at https://github.com/VisualScienceLab-KHU/ReSet.",
+      "authors": [
+        "KunHo Heo",
+        "Seungjae kim",
+        "Wongyu Lee",
+        "SuYeon Kim",
+        "MyeongAh Cho"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-06-22T09:18:00+00:00",
+      "link": "https://arxiv.org/pdf/2606.23069v1",
+      "tags": [
+        "query:agent-detect"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "few-shot object detection method with prototype and text anchors",
+      "llm_evidence_cn": "少样本目标检测方法，使用原型和文本锚点",
+      "llm_evidence": "少样本目标检测方法，使用原型和文本锚点",
+      "canonical_evidence": "少样本目标检测方法，使用原型和文本锚点",
+      "llm_tldr_en": "Proposes Text-Anchored Semantic Mask and Spatial Similarity Weighting to improve few-shot object detection by addressing class confusion and insufficient spatial cues.",
+      "llm_tldr_cn": "少样本目标检测面临类间相似性混淆和空间信息不足的挑战。本文提出两个互补组件：文本锚定语义掩码（TSMa）利用类级文本特征作为语义锚点以区分易混淆类别；空间相似性加权（SSW）提供密集的空间线索用于精确定位。在多个标准基准上，该方法显著优于现有原型方法，为少样本检测提供了简单有效的改进方案。",
+      "llm_tldr": "少样本目标检测面临类间相似性混淆和空间信息不足的挑战。本文提出两个互补组件：文本锚定语义掩码（TSMa）利用类级文本特征作为语义锚点以区分易混淆类别；空间相似性加权（SSW）提供密集的空间线索用于精确定位。在多个标准基准上，该方法显著优于现有原型方法，为少样本检测提供了简单有效的改进方案。",
+      "llm_tags": [
+        "query:agent-detect:composite"
+      ],
+      "matched_query_tag": "query:agent-detect:composite",
+      "matched_query_text": "Papers central to agent/world model领域中的检测相关论文, especially work that connects or combines: p; d; w; a; perception and detection modules in world model; papers on detection techniques for agent; papers on detection techniques for world model; perception and detection modules in agent architectures.",
+      "matched_requirement_id": "req-composite-agent-detect",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.24622v1",
+      "source": "arxiv",
+      "title": "Themis: An explainable AI-enabled framework for Reinforcement Learning with Human Feedback",
+      "abstract": "Training safe Reinforcement Learning (RL) systems is inherently challenging, with no guarantee of avoiding unwanted behaviors. The most effective defenses against this are (i) transparency through explainability and (ii) alignment via human feedback. While both show promising results, no publicly available framework currently combines them. To address this, we introduce Themis, an XAI-enabled testing and evaluation framework for Reinforcement Learning from Human Feedback. Themis supports over 200 widely used environments and is easily configurable for experiments in RL, transparency, and alignment. Our results show that Themis can train reward models that match or outperform the environment's true reward signal using human preferences. We also provide a cloud-based platform for collecting human feedback and managing experiments. It is user-friendly, auto-scalable, and supports large participant groups across multiple experiments without extra development overhead. Tests show Themis can support one thousand users in back-to-back experiments on a modest commercial machine.",
+      "authors": [
+        "Andreas Chouliaras",
+        "Luke Connolly",
+        "Dimitris Chatzpoulos"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.HC"
+      ],
+      "published": "2026-06-23T14:20:42+00:00",
+      "link": "https://arxiv.org/pdf/2606.24622v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "RL from human feedback framework for agent improvement",
+      "llm_evidence_cn": "基于人类反馈的强化学习框架，用于智能体改进",
+      "llm_evidence": "基于人类反馈的强化学习框架，用于智能体改进",
+      "canonical_evidence": "基于人类反馈的强化学习框架，用于智能体改进",
+      "llm_tldr_en": "Themis combines explainability and human feedback to train reward models for safe RL, enabling agent improvement through aligned reward signals.",
+      "llm_tldr_cn": "针对强化学习智能体安全性问题，提出了Themis框架，该框架结合可解释性和人类反馈来训练奖励模型。实验表明，该方法能够匹配或超越环境真实奖励信号，为智能体自我改进提供了一种对齐人类价值观的有效工具。",
+      "llm_tldr": "针对强化学习智能体安全性问题，提出了Themis框架，该框架结合可解释性和人类反馈来训练奖励模型。实验表明，该方法能够匹配或超越环境真实奖励信号，为智能体自我改进提供了一种对齐人类价值观的有效工具。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.27669v1",
+      "source": "arxiv",
+      "title": "When Search Agents Should Ask: DiscoBench for Clarification-Aware Deep Search",
+      "abstract": "Search agents powered by large language models (LLMs) are increasingly used to solve complex information-seeking tasks, requiring multi-step retrieval and reasoning to fulfill user goals. However, existing benchmarks often assume that user queries are complete and explicit, overlooking the fact that real-world search requests are frequently vague, underspecified, or even factually incorrect. In deep search scenarios, such ambiguity can propagate along multi-step reasoning chains and lead agents toward incorrect search trajectories. To address this gap, we introduce DiscoBench, a benchmark for clarification-aware deep search, designed to evaluate whether search agents can proactively identify ambiguity, ask effective clarification questions, and recover correct reasoning paths through user interaction. DiscoBench contains 211 samples and 463 ambiguity instances across 11 real-world domains, covering four ambiguity types. We further design a user simulator for multi-turn interaction and evaluate model performance from four perspectives: task utility, ambiguity detection, interaction strategy, and cost efficiency. Experiments on representative LLMs show that ambiguity detection and effective clarification are distinct capabilities, and that repeatedly searching instead of asking for clarification often performs worse than direct guessing, highlighting a critical gap between retrieval ability and interactive problem-solving in current search agents.",
+      "authors": [
+        "Yiling Tao",
+        "Shihan Deng",
+        "Meiling Tao",
+        "Pengzhi Wei",
+        "Zhichao Hu",
+        "Zhihao Zhu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-26T02:57:15+00:00",
+      "link": "https://arxiv.org/pdf/2606.27669v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "benchmark evaluating agent detection of ambiguity in search",
+      "llm_evidence_cn": "评估搜索智能体模糊检测能力的基准测试",
+      "llm_evidence": "评估搜索智能体模糊检测能力的基准测试",
+      "canonical_evidence": "评估搜索智能体模糊检测能力的基准测试",
+      "llm_tldr_en": "Introduces DiscoBench, a benchmark to evaluate whether search agents can proactively identify ambiguity in user queries and ask effective clarification questions, addressing a gap in deep search evaluation.",
+      "llm_tldr_cn": "针对现有搜索基准假设用户查询完整明确的不足，提出DiscoBench基准，用于评估大语言模型驱动的搜索智能体能否主动识别用户查询中的模糊性并提出有效的澄清问题。通过多步推理链上的模糊传播测试，该基准揭示了当前智能体在深度搜索中因无法检测歧义而走向错误轨迹的问题，为构建更具鲁棒性的搜索代理提供了评估方法。",
+      "llm_tldr": "针对现有搜索基准假设用户查询完整明确的不足，提出DiscoBench基准，用于评估大语言模型驱动的搜索智能体能否主动识别用户查询中的模糊性并提出有效的澄清问题。通过多步推理链上的模糊传播测试，该基准揭示了当前智能体在深度搜索中因无法检测歧义而走向错误轨迹的问题，为构建更具鲁棒性的搜索代理提供了评估方法。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.27609v1",
+      "source": "arxiv",
+      "title": "Training Observable Control Policies to Expose Agent State Through Actions",
+      "abstract": "Physical or operational constraints often impose communications limitations on autonomous agents. Such limitations complicate monitoring or multiagent coordination. Even when strong communications are absent, some information may still be available. The remainder of the relevant agent state may be reconstructed via estimation. The actions taken by an agent are a potential source of information -- as the agent interacts with the environment, these actions may be observed even in the absence of explicit communication. We investigate using actions to estimate the state of an agent, using reinforcement learning to develop policies which make the estimation problem more tractable. Policy observability is encouraged through the training reward and is analyzed using simulation of the trained agent. In an aircraft tracking problem a policy with enhanced observability is found that has minimal impact on nominal task performance.",
+      "authors": [
+        "Andres Enriquez Fernandez",
+        "John J. Bird"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "eess.SY"
+      ],
+      "published": "2026-06-25T23:50:14+00:00",
+      "link": "https://arxiv.org/pdf/2606.27609v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "using actions to estimate agent state via RL policies",
+      "llm_evidence_cn": "通过强化学习策略利用动作估计智能体状态",
+      "llm_evidence": "通过强化学习策略利用动作估计智能体状态",
+      "canonical_evidence": "通过强化学习策略利用动作估计智能体状态",
+      "llm_tldr_en": "Proposes training observable control policies with RL to expose agent state through actions, enabling state estimation from observed behaviors.",
+      "llm_tldr_cn": "该论文针对通信受限下智能体状态难以监测的问题，提出通过强化学习训练可观察控制策略，使智能体的动作暴露其内部状态。实验表明该方法能提高状态估计的准确性，为智能体检测和监控提供了一种新途径。",
+      "llm_tldr": "该论文针对通信受限下智能体状态难以监测的问题，提出通过强化学习训练可观察控制策略，使智能体的动作暴露其内部状态。实验表明该方法能提高状态估计的准确性，为智能体检测和监控提供了一种新途径。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for agent",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
