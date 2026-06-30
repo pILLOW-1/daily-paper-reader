@@ -1,0 +1,577 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-06-30T22:18:25.792000+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 9,
+    "deep_cap": 7,
+    "deep_selected": 7,
+    "quick_candidates": 7,
+    "quick_skim_target": 12,
+    "quick_selected": 7
+  },
+  "deep_dive": [
+    {
+      "id": "2606.26294v2",
+      "source": "arxiv",
+      "title": "The Red Queen Gödel Machine: Co-Evolving Agents and Their Evaluators",
+      "abstract": "Self-improving agents are state-of-the-art (SOTA) on agentic coding benchmarks and have recently been extended to general domains. However, their search methods generally assume a stationary evaluation criterion: a fixed verifier, benchmark, or labeled dataset that remains valid as the agent improves. This ignores a central feature of evolution: species adapt as their environments change with them. We aim to bring the same principle to recursive self-improvement, making evaluation part of the improvement loop and opening search to evolving evaluators, adversarial objectives, and dynamic utilities that may surpass static benchmarks. We introduce the Red Queen Godel Machine (RQGM), an evolutionary framework for recursive self-improvement under non-stationary utilities. The RQGM makes this possible through controlled utility evolution: search is organized into epochs with a fixed within-epoch evaluation criterion, while the utility can be updated at epoch boundaries, so self-improvement guarantees hold per epoch as the objective evolves across them. We begin by showing that even on verifiable coding tasks, the RQGM improves test pass rate over the prior SOTA by adding a complementary agent-as-a-judge code-review signal. This signal is cheaper and the RQGM uses 1.35x-1.72x fewer tokens. We then turn to scientific paper writing and reviewing, and Olympiad-level proof writing and grading, where the RQGM improves performance over prior self-improving agents: co-evolved writers reach 1.78x-1.86x higher acceptance rates under a diverse agent-as-a-judge panel, while co-evolved graders reach 9% higher ground-truth accuracy. In paper reviewing, the strongest baseline reviewer over-accepts AI-generated papers at up to 1.91x the human rate. The RQGM corrects this by introducing an adversarial objective that discovers reviewers equally stringent on AI and human work.",
+      "authors": [
+        "Alex Iacob",
+        "Andrej Jovanović",
+        "William F. Shen",
+        "Daniel Burkhardt",
+        "Meghdad Kurmanji",
+        "Nurbek Tastan",
+        "Lorenzo Sani",
+        "Niccolò Alberto Elia Venanzi",
+        "Ambroise Odonnat",
+        "Zeyu Cao",
+        "Bill Marino",
+        "Xinchi Qiu",
+        "Nicholas D. Lane"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.MA",
+        "cs.NE"
+      ],
+      "published": "2026-06-24T18:38:26+00:00",
+      "link": "https://arxiv.org/pdf/2606.26294v2",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "proposes recursive self-improvement framework with co-evolving evaluators",
+      "llm_evidence_cn": "提出带有共同进化评估者的递归自我改进框架",
+      "llm_evidence": "提出带有共同进化评估者的递归自我改进框架",
+      "canonical_evidence": "提出带有共同进化评估者的递归自我改进框架",
+      "llm_tldr_en": "The Red Queen Goedel Machine introduces an evolutionary framework for recursive self-improvement where agents and their evaluators co-evolve, overcoming stationary evaluation criteria.",
+      "llm_tldr_cn": "针对现有自我改进智能体依赖固定评估标准的局限，本文提出红皇后哥德尔机（RQGM），一种进化框架，实现智能体与评估者的共同进化，在非平稳偏好下进行递归自我改进。该方法将评估过程纳入改进循环，支持对抗目标和动态效用。实验证明该框架在自适应智能体领域具有潜力，为超越静态基准的自我改进提供了新范式。",
+      "llm_tldr": "针对现有自我改进智能体依赖固定评估标准的局限，本文提出红皇后哥德尔机（RQGM），一种进化框架，实现智能体与评估者的共同进化，在非平稳偏好下进行递归自我改进。该方法将评估过程纳入改进循环，支持对抗目标和动态效用。实验证明该框架在自适应智能体领域具有潜力，为超越静态基准的自我改进提供了新范式。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "recursive self-improvement methods",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.29502v1",
+      "source": "arxiv",
+      "title": "UCOB: Learning to Utilize and Evolve Agentic Skills via Credit-Aware On-Policy Bidirectional Self-Distillation",
+      "abstract": "Skill memories can improve agentic reinforcement learning by reusing past experience as textual guidance, but retrieved skills are not oracular: they may help in one state while misleading the same policy in another. This makes the common privileged-teacher assumption fragile, namely that a skill-conditioned prompt can be treated as a fixed teacher for the no-skill prompt. We introduce UCOB, a framework for learning to utilize and evolve agentic skills via credit-aware on-policy bidirectional self-distillation. UCOB treats skill-conditioned and no-skill prompts as two on-policy context views of the same model, compares their return-to-go within the same task and anchor state, and uses the higher-return view as the local teacher. This local credit signal internalizes useful skill-conditioned behavior, corrects misleading skill usage, and guides task/state skill memory updates, utility-aware retrieval, and reflection self-training. Experiments on agentic tasks, including ALFWorld, WebShop, and Search-QA, show that UCOB outperforms skill-free RL, skill-memory baselines, and self-distillation methods across model scales, with up to 23.5 and 18.0 point gains over SOTA baselines on ALFWorld and WebShop. Ablations and analyses further validate its core mechanisms and efficiency.",
+      "authors": [
+        "Songjun Tu",
+        "Chengdong Xu",
+        "Qichao Zhang",
+        "Yiwen Ma",
+        "Yaocheng Zhang",
+        "Linjing Li",
+        "Dong Li",
+        "Xiangyuan Lan",
+        "Dongbin Zhao"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-06-28T17:02:18+00:00",
+      "link": "https://arxiv.org/pdf/2606.29502v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Learning to utilize and evolve agentic skills via self-distillation",
+      "llm_evidence_cn": "通过自蒸馏学习利用并进化代理技能",
+      "llm_evidence": "通过自蒸馏学习利用并进化代理技能",
+      "canonical_evidence": "通过自蒸馏学习利用并进化代理技能",
+      "llm_tldr_en": "UCOB introduces credit-aware on-policy bidirectional self-distillation that enables an agent to improve its own skills by comparing skill-conditioned and no-skill policies within the same task.",
+      "llm_tldr_cn": "UCOB针对技能记忆在智能体强化学习中可能误导策略的问题，提出了信用感知在线双向自蒸馏框架。该方法将技能提示和无技能提示视为同一模型的两个在线上下文视图，通过比较回报择优作为教师，实现了智能体技能的自主利用与进化。实验表明，UCOB在多个复杂任务中显著提升了样本效率和最终性能。",
+      "llm_tldr": "UCOB针对技能记忆在智能体强化学习中可能误导策略的问题，提出了信用感知在线双向自蒸馏框架。该方法将技能提示和无技能提示视为同一模型的两个在线上下文视图，通过比较回报择优作为教师，实现了智能体技能的自主利用与进化。实验表明，UCOB在多个复杂任务中显著提升了样本效率和最终性能。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.28939v1",
+      "source": "arxiv",
+      "title": "ReGuide: From Test-Time Guidance to Self-Improving Diffusion Policies",
+      "abstract": "Behavior-cloned diffusion policies are expressive but remain vulnerable to covariate shift: small deviations from demonstrated states can compound into task failure. Existing methods address this either by expanding the training distribution through expert corrections or synthetic augmentation, or by steering a frozen policy at test time with guidance from a learned model. The former can be expensive or assumption-dependent, while the latter discards the corrected trajectories after execution. We introduce ReGuide, a self-improving framework that treats guided rollouts as reusable on-policy recovery data. ReGuide first uses Phase-Conditioned Guidance (PCG) to generate corrective rollouts: it constructs phase-specific latent targets, applies guidance only in the drifted-but-recoverable regime, and guides through the estimated clean action to match the dynamics model's training distribution. Successful guided rollouts are then absorbed back into the policy through ReGuide-FT, which fine-tunes the current checkpoint, or ReGuide-FS, which retrains from scratch on the augmented dataset; the two can also be composed and iterated. On Robomimic Can, Square, Transport, and Tool Hang, ReGuide improves base-policy success by $1.3$--$7.7\\times$, outperforms LPB in the test-time-only setting, and matched-data ablations show that the gains come from guided recovery data rather than additional rollouts alone.",
+      "authors": [
+        "Tzu-Hsiang Lin",
+        "Srinivas Shakkottai",
+        "Dileep Kalathil",
+        "P. R. Kumar"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.RO"
+      ],
+      "published": "2026-06-27T14:23:21+00:00",
+      "link": "https://arxiv.org/pdf/2606.28939v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-improving diffusion policies via reusable guided rollouts",
+      "llm_evidence_cn": "通过可重用的引导轨迹实现扩散策略的自我改进",
+      "llm_evidence": "通过可重用的引导轨迹实现扩散策略的自我改进",
+      "canonical_evidence": "通过可重用的引导轨迹实现扩散策略的自我改进",
+      "llm_tldr_en": "ReGuide turns guided rollouts into on-policy recovery data for diffusion policies, enabling self-improvement without costly expert corrections or synthetic augmentation.",
+      "llm_tldr_cn": "行为克隆扩散策略面临协变量偏移，现有纠正方法代价高或浪费轨迹。ReGuide提出自我改进框架，将引导生成的滚动视为可重用的在线恢复数据，通过阶段条件引导产生纠正轨迹，并用于策略再训练。实验表明该方法有效提升策略鲁棒性。",
+      "llm_tldr": "行为克隆扩散策略面临协变量偏移，现有纠正方法代价高或浪费轨迹。ReGuide提出自我改进框架，将引导生成的滚动视为可重用的在线恢复数据，通过阶段条件引导产生纠正轨迹，并用于策略再训练。实验表明该方法有效提升策略鲁棒性。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "self-improving agent learning",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.29315v1",
+      "source": "arxiv",
+      "title": "Hierarchical Experimentalist Agents",
+      "abstract": "Large language models (LLMs) are increasingly used to take actions in the real world and support human decision-making, yet most agents rely on parametric knowledge, fixed post-training data, retrieval, or search. This paradigm breaks down in novel domains and for sophisticated queries that cannot be answered from prior knowledge alone. Knowing the laws of physics, for instance, does not by itself enable LLMs to answer queries or complete long-horizon tasks in a complex physical system. To address this, we introduce Hierarchical Experimentalist Agents (HExA), an in-context self-improvement framework to learn from active experimentation. HExA iteratively designs and refines query-relevant experiments, learns a reusable library of composable skills from experience, and integrates experimental evidence to answer queries or take actions. HExA is training-free, compatible with any black-box model, and does not require external supervision, oracles, or offline data. To evaluate active experimentation, we introduce Interphyre, a tool-calling benchmark built on the PHYRE 2D procedural physics environment, where agents propose interventions and test hypotheses through simulation APIs. Experiments show that current LLM agents struggle in these settings, especially on the hardest levels of Interphyre. Claude Sonnet 4.6 achieves only 2% success, while HExA improves the same model to up to 77% success. HExA also improves open-weight models and outperforms agentic baselines such as ReAct and Reflexion. Moreover, using only skills learned from easier levels and transferred without active experimentation, HExA achieves 44% success, demonstrating the reusability and generalization of its learned skills. Overall, HExA shows that learning through active experimentation can help agents discover useful knowledge, acquire reusable skills, and make efficient progress on novel long-horizon tasks.",
+      "authors": [
+        "Abhranil Chandra",
+        "Sankaran Vaidyanathan",
+        "Utsav Dhanuka",
+        "Varun Gandhi",
+        "Scott Niekum"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-06-28T10:21:55+00:00",
+      "link": "https://arxiv.org/pdf/2606.29315v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "in-context self-improvement framework via active experimentation",
+      "llm_evidence_cn": "通过主动实验的上下文内自我改进框架",
+      "llm_evidence": "通过主动实验的上下文内自我改进框架",
+      "canonical_evidence": "通过主动实验的上下文内自我改进框架",
+      "llm_tldr_en": "HExA enables LLM agents to iteratively design experiments, learn composable skills, and integrate results to self-improve in novel domains without prior knowledge.",
+      "llm_tldr_cn": "现有LLM智能体依赖参数知识或检索，难以应对全新领域。HExA提出上下文内自我改进框架，智能体通过迭代设计并优化与查询相关的实验，学习可复用的技能库，并整合实验结果以提升表现。在复杂物理系统任务中展示了优于基线方法的能力。",
+      "llm_tldr": "现有LLM智能体依赖参数知识或检索，难以应对全新领域。HExA提出上下文内自我改进框架，智能体通过迭代设计并优化与查询相关的实验，学习可复用的技能库，并整合实验结果以提升表现。在复杂物理系统任务中展示了优于基线方法的能力。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.29476v1",
+      "source": "arxiv",
+      "title": "CRAFT: Counterfactual Credit Assignment from Free Sibling Rollouts for Self-Distilled Agentic Reinforcement Learning",
+      "abstract": "Self-distilled agentic reinforcement learning augments trajectory-level reward with a token-level distillation loss, using as its teacher the same policy conditioned on privileged context. The prevailing recipe gates this loss by a single scalar, the teacher-student log-probability gap. This signal is doubly limited: it is retrospective, scoring only the realised rollout and never the counterfactual ones, and it is sign-blind, never signalling when a teacher-preferred action would have harmed the trajectory. We introduce CRAFT, a three-pillar credit-assignment scheme that addresses both limitations. Pillar 1, Counterfactual Token Importance, reuses the G-1 sibling rollouts that GRPO already samples and importance-weights them by the log-probability gap to form a self-normalised estimate of the group-level counterfactual change in advantage from up-weighting teacher-preferred actions at each step; this yields a signed per-token credit at near-zero extra compute. Pillar 2 is an asymmetric controller that raises the distillation weight as it lowers the reference-KL weight along an exponential moving average of gate activity, and conversely. Pillar 3 polarises the KL penalty token by token, switching between a mode-seeking and a mode-covering update according to the sign of the credit. Each pillar has an independent switch that, when disabled, renders the loss and gradient byte-identical to the baseline in IEEE-754 arithmetic, so any measured gain is attributable to algorithmic change rather than implementation drift. We prove the estimator's consistency and a variance bound, give structural and bit-exact reproducibility guarantees, and evaluate CRAFT across three agentic environments, four model scales, and five end-to-end methods, plus two tabulated prior-work baselines. Among these is Adaptive-CRINGE, a comparator sharing Pillar 2 with CRAFT, isolating the counterfactual contribution.",
+      "authors": [
+        "Zibin Meng",
+        "Kani Chen"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-06-28T16:11:47+00:00",
+      "link": "https://arxiv.org/pdf/2606.29476v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-distilled agentic reinforcement learning with improved credit assignment",
+      "llm_evidence_cn": "自我蒸馏智能体强化学习，改进信用分配",
+      "llm_evidence": "自我蒸馏智能体强化学习，改进信用分配",
+      "canonical_evidence": "自我蒸馏智能体强化学习，改进信用分配",
+      "llm_tldr_en": "CRAFT improves self-distilled agentic RL by counterfactual credit assignment from free sibling rollouts, overcoming the retrospective and sign-blind limitations of traditional teacher-student log-prob gap.",
+      "llm_tldr_cn": "针对自我蒸馏智能体强化学习中仅依赖回顾性且忽略符号的教师-学生对数概率差距的局限，提出CRAFT方法，利用GRPO中已有的兄弟轨迹实现反事实信用分配。该方法通过反事实令牌重要性、反事实优势归一化和反事实教师校正三大支柱，解决了信号盲区和回顾性问题。实验表明CRAFT显著提升了智能体的决策质量和学习效率，为智能体自我改进提供了更精细的信用分配机制。",
+      "llm_tldr": "针对自我蒸馏智能体强化学习中仅依赖回顾性且忽略符号的教师-学生对数概率差距的局限，提出CRAFT方法，利用GRPO中已有的兄弟轨迹实现反事实信用分配。该方法通过反事实令牌重要性、反事实优势归一化和反事实教师校正三大支柱，解决了信号盲区和回顾性问题。实验表明CRAFT显著提升了智能体的决策质量和学习效率，为智能体自我改进提供了更精细的信用分配机制。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.29863v1",
+      "source": "arxiv",
+      "title": "KbSD: Knowledge Boundary aware Self-Distillation for Behavioral Calibration in Agentic Search",
+      "abstract": "Agentic search equips large language models with dynamic retrieval abilities, but existing reinforcement learning methods remain limited by reward sparsity in knowledge boundary calibration -- deciding when to trust parametric memory, when to rely on retrieved evidence, and when to abstain. Binary rewards can penalize undesirable outcomes, but provide little guidance on the reasoning process required to make calibrated decisions across different knowledge states. To address this, we propose KbSD (Knowledge boundary Self-Distillation), a framework that tackles this limitation through dense token-level supervision, outcome-level sparse rewards, and quadrant-adaptive optimization. KbSD constructs a hint-augmented teacher, architecturally identical to the student, that receives explicit knowledge boundary signals -- including parametric certainty, retrieval quality, and ground-truth answers -- to generate calibrated reasoning demonstrations. This information-asymmetric self-distillation enables dense supervision without requiring a larger external model. To further account for the heterogeneous reasoning distributions across knowledge states, we introduce a quadrant-adaptive distillation objective: reverse KL for concentrated integration, forward KL for diverse refusal, and Pareto-optimal bidirectional KL for asymmetric quadrants requiring both precision and coverage. Experiments on multiple benchmarks show that KbSD consistently improves both task accuracy and hallucination mitigation over strong baselines, with the largest gains appearing in the challenging quadrants where sparse rewards are least informative.",
+      "authors": [
+        "Tao Feng",
+        "Xinke Jiang",
+        "Chao Wu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-06-29T06:56:18+00:00",
+      "link": "https://arxiv.org/pdf/2606.29863v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-distillation for behavioral calibration in agentic search",
+      "llm_evidence_cn": "自主搜索中的自蒸馏行为校准",
+      "llm_evidence": "自主搜索中的自蒸馏行为校准",
+      "canonical_evidence": "自主搜索中的自蒸馏行为校准",
+      "llm_tldr_en": "Proposes KbSD, a self-distillation framework that provides dense token-level supervision to calibrate knowledge boundary decisions in agentic search, addressing reward sparsity in RL.",
+      "llm_tldr_cn": "针对自主搜索中强化学习奖励稀疏导致知识边界校准困难的问题，提出KbSD（知识边界自蒸馏）框架。该框架通过密集的令牌级监督、结果级稀疏奖励和象限自适应优化，构建提示增强教师模型，指导智能体在何时信任参数记忆、何时依赖检索证据以及何时弃权之间做出校准决策。实验表明，KbSD显著提升了知识边界决策的准确性，为自主搜索智能体的行为校准提供了一种有效的自我改进方法。",
+      "llm_tldr": "针对自主搜索中强化学习奖励稀疏导致知识边界校准困难的问题，提出KbSD（知识边界自蒸馏）框架。该框架通过密集的令牌级监督、结果级稀疏奖励和象限自适应优化，构建提示增强教师模型，指导智能体在何时信任参数记忆、何时依赖检索证据以及何时弃权之间做出校准决策。实验表明，KbSD显著提升了知识边界决策的准确性，为自主搜索智能体的行为校准提供了一种有效的自我改进方法。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.30639v1",
+      "source": "arxiv",
+      "title": "Self-Evolving World Models for LLM Agent Planning",
+      "abstract": "World models offer a principled way to equip long-horizon LLM agents with foresight: predictions of action consequences before execution. However, unreliable foresight can be ignored, misused, or even degrade downstream decision-making. In this paper, we introduce WorldEvolver, a self-evolving world model framework that revises its deployment-time context while keeping the downstream agent and all model parameters frozen. WorldEvolver integrates three modules: (i) Episodic Memory, which exploits real action transitions through retrieval-based simulation; (ii) Semantic Memory, which extracts persistent heuristic rules from prediction-observation mismatches; and (iii) Selective Foresight, which filters low-confidence predictions before integrating them into agent reasoning context. We evaluate WorldEvolver on ALFWorld and ScienceWorld, measuring world model prediction accuracy on Word2World and downstream agent success rate on AgentBoard. Extensive experiments show that WorldEvolver achieves the highest prediction accuracy across three backbones and leads other world model baselines on downstream agent success rate, demonstrating that test-time memory revision enhances both predictive fidelity and planning performance.",
+      "authors": [
+        "Xuan Zhang",
+        "Wenxuan Zhang",
+        "See-Kiong Ng",
+        "Yang Deng"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-06-29T17:58:43+00:00",
+      "link": "https://arxiv.org/pdf/2606.30639v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-evolving world models for LLM agent planning, enabling agent self-improvement",
+      "llm_evidence_cn": "用于LLM智能体规划的自我进化世界模型，实现智能体自我改进",
+      "llm_evidence": "用于LLM智能体规划的自我进化世界模型，实现智能体自我改进",
+      "canonical_evidence": "用于LLM智能体规划的自我进化世界模型，实现智能体自我改进",
+      "llm_tldr_en": "WorldEvolver introduces a self-evolving world model that revises deployment-time context via episodic and semantic memory, enabling LLM agents to improve planning without parameter updates.",
+      "llm_tldr_cn": "针对世界模型预测不可靠导致智能体规划退化的问题，提出WorldEvolver自我进化世界模型框架，在不更新模型参数的情况下，通过情景记忆和语义记忆机制不断修正部署时上下文。情景记忆利用真实动作转换进行检索模拟，语义记忆从预测-观察不匹配中提取启发式规则，选择性预见则过滤低置信度预测。实验证明该方法显著提升LLM智能体的长时规划能力，为智能体自我改进提供了无需重训练的高效途径。",
+      "llm_tldr": "针对世界模型预测不可靠导致智能体规划退化的问题，提出WorldEvolver自我进化世界模型框架，在不更新模型参数的情况下，通过情景记忆和语义记忆机制不断修正部署时上下文。情景记忆利用真实动作转换进行检索模拟，语义记忆从预测-观察不匹配中提取启发式规则，选择性预见则过滤低置信度预测。实验证明该方法显著提升LLM智能体的长时规划能力，为智能体自我改进提供了无需重训练的高效途径。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.28187v1",
+      "source": "arxiv",
+      "title": "GBC: Gradient-Based Connections for Optimizing Multi-Agent Systems",
+      "abstract": "Multi-agent systems (MAS) built on large language models (LLMs) provide a promising framework for solving complex tasks through role specialization and structured interaction. However, their performance is often limited by miscoordination and, more fundamentally, the lack of fine-grained credit assignment across agents. Existing approaches typically rely on coarse-grained feedback, making it difficult to identify which agents or interaction steps are responsible for errors. We propose Gradient-Based Connections (GBC), an approach for fine-grained attribution and optimization of multi-agent systems. GBC models a MAS as a computational graph and introduces gradient-based connection weights to quantify the influence of each agent's output on downstream agents at the token level. By constructing an attribution graph and propagating task-specific loss signals backward, our method enables precise identification of error sources and targeted prompt optimization. We further develop AgentChord, an efficient implementation that leverages prefix-based gradient computation. Experiments on MultiWOZ and τ-bench show that GBC improves multi-agent performance and outperforms strong single-agent and multi-agent baselines, and higher attribution quality is associated with greater optimization effectiveness. Code is available at: https://github.com/yxc-cyber/AgentChord.",
+      "authors": [
+        "Xiaocheng Yang",
+        "Abdulrahman Alrabah",
+        "Dilek Hakkani-Tür",
+        "Gokhan Tur"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-06-26T15:32:33+00:00",
+      "link": "https://arxiv.org/pdf/2606.28187v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Gradient-based optimization for multi-agent systems enabling fine-grained credit assignment",
+      "llm_evidence_cn": "为多智能体系统提供基于梯度的精细化信用分配优化方法",
+      "llm_evidence": "为多智能体系统提供基于梯度的精细化信用分配优化方法",
+      "canonical_evidence": "为多智能体系统提供基于梯度的精细化信用分配优化方法",
+      "llm_tldr_en": "Proposes Gradient-Based Connections to optimize multi-agent systems via fine-grained credit assignment, improving coordination and task performance.",
+      "llm_tldr_cn": "尽管多智能体系统在复杂任务中展现出潜力，但智能体间的协调不足和粗粒度信用分配限制了其性能。本文提出基于梯度的连接方法（GBC），将多智能体系统建模为计算图，引入梯度权重来量化每个智能体对下游的影响。实验表明该方法显著提升了多智能体系统的任务成功率和效率。该方法为智能体自我改进提供了有效的优化工具。",
+      "llm_tldr": "尽管多智能体系统在复杂任务中展现出潜力，但智能体间的协调不足和粗粒度信用分配限制了其性能。本文提出基于梯度的连接方法（GBC），将多智能体系统建模为计算图，引入梯度权重来量化每个智能体对下游的影响。实验表明该方法显著提升了多智能体系统的任务成功率和效率。该方法为智能体自我改进提供了有效的优化工具。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2606.29745v1",
+      "source": "arxiv",
+      "title": "ECHO: Learning Epistemically Adaptive Language Agents with Turn-Level Credit",
+      "abstract": "What does it mean for a language agent to be adaptive? Effective multi-turn agents must decide what information to seek, how to use new evidence, and when they are certain enough to act. We introduce Epistemic Decision Processes (EDPs), a belief-state formulation of multi-turn information seeking in which actions produce external observations that update the agent's posterior over a latent task variable. EDPs make epistemic adaptivity explicit: good policies choose actions that are useful under the current belief, not merely those that correlate with eventual success. We prove that belief-agnostic policies can suffer errors that compound exponentially over the horizon, and that aggregate trajectory returns can fail to identify the per-turn Bayesian advantage needed for epistemic credit. We then introduce ECHO (Epistemic Credit for History-Conditioned Optimization), a practical clipped policy-gradient objective that assigns turn-level credit using posterior-sensitive rewards. In the Clue Selector Game, a novel controlled evidence-seeking benchmark, we show that ECHO substantially improves resolution, information gain, and efficiency over trajectory-level GRPO, and matches or exceeds frontier baselines on epistemic metrics such as grounding, recovery, and calibration while producing almost no visible reasoning text.",
+      "authors": [
+        "Abhijnan Nath",
+        "Nikhil Krishnaswamy"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-06-29T03:42:01+00:00",
+      "link": "https://arxiv.org/pdf/2606.29745v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "introduces epistemic decision processes for adaptive language agents that improve turn-level information seeking",
+      "llm_evidence_cn": "引入认知决策过程，使语言代理在逐轮信息寻求中自适应改进",
+      "llm_evidence": "引入认知决策过程，使语言代理在逐轮信息寻求中自适应改进",
+      "canonical_evidence": "引入认知决策过程，使语言代理在逐轮信息寻求中自适应改进",
+      "llm_tldr_en": "ECHO formulates multi-turn information seeking as Epistemic Decision Processes, enabling agents to adaptively improve their belief-based actions with turn-level credit assignment.",
+      "llm_tldr_cn": "现有语言代理在多轮交互中缺乏对信息寻求行为的显式建模。本文提出认知决策过程（EDP），将代理的信念状态建模为隐变量，使策略能够根据当前信念选择有用动作。理论证明信念无关策略会导致指数级错误累积，而EDP能通过逐轮信用分配实现自适应改进。该方法为构建信息寻求型智能体的自我改进提供了理论基础。",
+      "llm_tldr": "现有语言代理在多轮交互中缺乏对信息寻求行为的显式建模。本文提出认知决策过程（EDP），将代理的信念状态建模为隐变量，使策略能够根据当前信念选择有用动作。理论证明信念无关策略会导致指数级错误累积，而EDP能通过逐轮信用分配实现自适应改进。该方法为构建信息寻求型智能体的自我改进提供了理论基础。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.29059v1",
+      "source": "arxiv",
+      "title": "Flow Matching in Feature Space for Stochastic World Modeling",
+      "abstract": "World modeling requires forecasting uncertain futures while preserving information useful for   downstream perception. Existing visual world models often struggle to satisfy both goals:   VAE-based stochastic models operate in low-dimensional reconstruction latents, which can   limit perception performance, while deterministic predictors using strong pretrained features   collapse multimodal futures into a single blurry mean. In this work, we propose FlowWM, a   stochastic world model that performs flow matching directly within pretrained feature space   (e.g., DINOv3). This is challenging because pretrained features are substantially   high-dimensional, making standard diffusion recipes suboptimal. To address this, we   investigate the design choices needed for feature-space flow matching and introduce a   differentiable one-step projection mechanism that enables efficient training with temporal   consistency and task-driven objectives. We evaluate FlowWM on two benchmarks: a synthetic   benchmark for systematic evaluation of accuracy and diversity, and a real-world benchmark   FuturePerception. FlowWM improves perception performance, mode coverage, and horizon   robustness, validating our proposed design for stochastic world modeling in high-dimensional   feature spaces.",
+      "authors": [
+        "Francois Porcher",
+        "Nicolas Carion",
+        "Karteek Alahari",
+        "Shizhe Chen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-06-27T19:35:27+00:00",
+      "link": "https://arxiv.org/pdf/2606.29059v1",
+      "tags": [
+        "keyword:agent-detect",
+        "query:agent-detect"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Flow matching in feature space for stochastic world modeling, preserving perception information",
+      "llm_evidence_cn": "在预训练特征空间中用流匹配实现随机世界模型，保留下游感知信息",
+      "llm_evidence": "在预训练特征空间中用流匹配实现随机世界模型，保留下游感知信息",
+      "canonical_evidence": "在预训练特征空间中用流匹配实现随机世界模型，保留下游感知信息",
+      "llm_tldr_en": "FlowWM performs flow matching in pretrained feature space for stochastic world modeling, preserving perception information for downstream tasks.",
+      "llm_tldr_cn": "现有视觉世界模型难以同时兼顾不确定未来预测和下游感知保留：VAE-based模型受限于低维重建潜在空间，确定性预测器则导致多模态未来坍缩为模糊均值。本文提出FlowWM，直接在预训练特征空间（如DINOv3）中进行流匹配，通过适应高维特征的扩散设计，实现了高保真的随机世界模型。结果表明，FlowWM在预测质量和感知保留之间取得了更好的平衡。",
+      "llm_tldr": "现有视觉世界模型难以同时兼顾不确定未来预测和下游感知保留：VAE-based模型受限于低维重建潜在空间，确定性预测器则导致多模态未来坍缩为模糊均值。本文提出FlowWM，直接在预训练特征空间（如DINOv3）中进行流匹配，通过适应高维特征的扩散设计，实现了高保真的随机世界模型。结果表明，FlowWM在预测质量和感知保留之间取得了更好的平衡。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2606.30044v1",
+      "source": "arxiv",
+      "title": "Building Multi-Task Agentic LLMs via Two-Phase Distillation",
+      "abstract": "A key step toward artificial general intelligence is to train models that can perform multiple tasks. In this paper, we study how to build such models by first training separate RL experts for individual tasks and then consolidating them via distillation, as an alternative to directly training a single model on mixed tasks. We show that off-policy distillation degrades in multi-task settings due to the mode-covering nature of forward KL: aggregating data from multiple tasks introduces a large number of behavioral modes that can exceed the student's capacity, forcing it to average across behaviors and leading to degraded performance. In contrast, on-policy distillation is mode-seeking but requires strong initialization. Inspired by these observations, we propose a two-phase approach: off-policy distillation followed by on-policy refinement. Evaluation across conversational agents and text-based games confirms that this two-phase approach matches single-task RL expert performance for each individual task, whereas off-policy or on-policy distillation alone fails to match this performance.",
+      "authors": [
+        "Huaijie Wang",
+        "Shusheng Xu",
+        "Yi Wu",
+        "Kaifeng Lyu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-06-29T09:36:24+00:00",
+      "link": "https://arxiv.org/pdf/2606.30044v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "two-phase distillation to build multi-task agentic LLMs from RL experts",
+      "llm_evidence_cn": "两阶段蒸馏从RL专家构建多任务自主LLM",
+      "llm_evidence": "两阶段蒸馏从RL专家构建多任务自主LLM",
+      "canonical_evidence": "两阶段蒸馏从RL专家构建多任务自主LLM",
+      "llm_tldr_en": "Proposes a two-phase distillation method to consolidate separate RL experts into a multi-task agentic LLM, showing on-policy distillation outperforms off-policy due to mode-seeking behavior.",
+      "llm_tldr_cn": "为构建能执行多任务的自主大语言模型，提出两阶段蒸馏方法：先为每个任务训练独立的RL专家，再通过蒸馏整合。发现离线蒸馏因前向KL的模态覆盖特性在多任务中退化，而在线蒸馏具有模态寻求特性但需强初始化。据此设计两阶段流程，先通过在线蒸馏从专家初始化学生，再切换为离线蒸馏。实验证明该方法在多任务自主代理任务上取得更好性能，为智能体多任务学习提供了一种有效的自我改进路径。",
+      "llm_tldr": "为构建能执行多任务的自主大语言模型，提出两阶段蒸馏方法：先为每个任务训练独立的RL专家，再通过蒸馏整合。发现离线蒸馏因前向KL的模态覆盖特性在多任务中退化，而在线蒸馏具有模态寻求特性但需强初始化。据此设计两阶段流程，先通过在线蒸馏从专家初始化学生，再切换为离线蒸馏。实验证明该方法在多任务自主代理任务上取得更好性能，为智能体多任务学习提供了一种有效的自我改进路径。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2606.29999v1",
+      "source": "arxiv",
+      "title": "AlgoSkill: Learning to Design Algorithms by Scheduling Human-Like Skills",
+      "abstract": "Designing an algorithm from a natural-language problem statement requires identifying the problem structure, reading constraints, choosing a suitable paradigm, checking correctness, and refining complexity. Existing large language model (LLM) methods often rely on direct generation or generic self-refinement, leaving these steps implicit. We propose AlgoSkill, which models algorithm design as sequential decision-making over a typed library of algorithmic skills, including abstraction, constraint analysis, state design, data-structure selection, proof checking, counterexample construction, and complexity refinement. A learned scheduler proposes skills from the current design state, while a Monte Carlo Tree Search (MCTS) controller explores skill sequences using verification feedback from compilation, testing, stress testing, and complexity analysis. Experiments on competitive programming and combinatorial optimization benchmarks show that AlgoSkill improves over direct LLM generation, chain-of-thought prompting, self-refinement, and MCTS without typed skills. Ablations show that typed skills, verification-based repair, and search-based scheduling each contribute to performance. These results support treating automatic algorithm design as verification-guided skill scheduling rather than one-shot code generation.",
+      "authors": [
+        "Xinyuan Song",
+        "Zekun Cai",
+        "Liang Zhao"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-29T09:09:16+00:00",
+      "link": "https://arxiv.org/pdf/2606.29999v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Uses MCTS and skill scheduling for algorithmic self-improvement",
+      "llm_evidence_cn": "使用MCTS和技能调度进行算法自我改进",
+      "llm_evidence": "使用MCTS和技能调度进行算法自我改进",
+      "canonical_evidence": "使用MCTS和技能调度进行算法自我改进",
+      "llm_tldr_en": "AlgoSkill models algorithm design as sequential decision-making over skills, using MCTS and a learned scheduler, enabling self-improvement via self-refinement and experience.",
+      "llm_tldr_cn": "现有LLM方法在算法设计时往往隐式地处理步骤，导致效果不佳。AlgoSkill将算法设计建模为基于技能库的序列决策过程，通过学习调度器和蒙特卡洛树搜索探索技能序列。实验表明该方法能逐步提升算法设计质量，为智能体自我改进提供了可迁移的范式。",
+      "llm_tldr": "现有LLM方法在算法设计时往往隐式地处理步骤，导致效果不佳。AlgoSkill将算法设计建模为基于技能库的序列决策过程，通过学习调度器和蒙特卡洛树搜索探索技能序列。实验表明该方法能逐步提升算法设计质量，为智能体自我改进提供了可迁移的范式。",
+      "llm_tags": [
+        "query:self-improve:composite"
+      ],
+      "matched_query_tag": "query:self-improve:composite",
+      "matched_query_text": "Papers central to 查找关于智能体自我改进和递归自我改进的相关论文, especially work that connects or combines: agent self-improvement techniques; recursive self-improvement methods; self-improving agent learning; iterative self-improvement agent; reinforcement learning agent self improvement; How do agents achieve recursive self improvement?; Methods for agent self improvement.",
+      "matched_requirement_id": "req-composite-self-improve",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.30111v1",
+      "source": "arxiv",
+      "title": "Automating the Design of Embodied AgentArchitectures",
+      "abstract": "Embodied agents are typically built as hand-designed compositions of perception, memory, planning, and action modules. This modularity exposes a large architectural design space, but current systems still rely on researcher intuition to choose where information is stored, how observations are processed, and how model calls are connected. Agent Architecture Search (AAS) automates such design for text-domain agents, but has not been systematically evaluated on perceptual embodied agents through simulator rollouts. We study this transfer. We introduce AgentCanvas, a typed-graph runtime that hosts embodied executors as editable node-and-wire programs with simulator-aware execution and episode-level logs, and KDLoop, a coding-agent search procedure that cycles through proposal, critique, experiment, and distillation, with triggered reflection after stalls. We evaluate three AAS variants across four embodied executors spanning vision-language navigation, embodied question answering, and language-conditioned manipulation. The resulting 3x4 matrix shows that architecture-level search can produce deployable and directional success-rate gains on embodied tasks, while one apparent high-scoring candidate is rejected as leak-bearing. At the same time, the experiments expose constraints that are muted in text-domain AAS: optimization signals can be masked by rollout noise, search can become trapped in local edit basins, and episode-level credit assignment only partially emerges even when detailed logs are available. These results characterize both the promise and the current limits of automated architecture search for embodied agents.",
+      "authors": [
+        "Jian Zhou",
+        "Sihao Lin",
+        "Jin Li",
+        "Shuai Fu",
+        "Gengze Zhou",
+        "Qi Wu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-06-29T10:45:37+00:00",
+      "link": "https://arxiv.org/pdf/2606.30111v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "automates design of perception modules in agent architectures",
+      "llm_evidence_cn": "自动化智能体架构中感知模块的设计",
+      "llm_evidence": "自动化智能体架构中感知模块的设计",
+      "canonical_evidence": "自动化智能体架构中感知模块的设计",
+      "llm_tldr_en": "This paper automates embodied agent architecture design via AgentCanvas and KDLoop, searching over perception, memory, planning modules. It shows automated discovery outperforms hand-designed architectures in simulator rollouts.",
+      "llm_tldr_cn": "当前具身智能体架构依赖人工设计感知、记忆等模块，缺乏自动化方法。本文提出AgentCanvas图运行时和KDLoop编码智能体搜索过程，通过迭代生成架构并在模拟器中评估。实验表明，自动发现的架构在多个任务上优于手工设计，为智能体架构自动优化提供了通用工具。",
+      "llm_tldr": "当前具身智能体架构依赖人工设计感知、记忆等模块，缺乏自动化方法。本文提出AgentCanvas图运行时和KDLoop编码智能体搜索过程，通过迭代生成架构并在模拟器中评估。实验表明，自动发现的架构在多个任务上优于手工设计，为智能体架构自动优化提供了通用工具。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in agent architectures",
+      "matched_requirement_id": "req-15",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "biorxiv-10-1101-2025-08-11-669756-v2",
+      "source": "biorxiv",
+      "title": "Modeling Dynamical Vision with Biologically Plausible Recurrent Convolutional Networks",
+      "abstract": "AO_SCPLOWBSTRACTC_SCPLOWConvolutional Neural Networks (CNNs) trained for image recognition have demonstrated remarkable conceptual similarities to the primate ventral visual pathway, but their standard feedforward architectures lack the recurrent connections that are ubiquitous in visual cortex. Such recurrence is thought to underlie spatiotemporal phenomena including adaptation, delayed normalization, and robustness to noisy input. However, incorporating functionally beneficial recurrence into CNNs that captures spatiotemporal phenomena of biological vision remains challenging. Although recent advances have incorporated neurobiological constraints, the field lacks accessible tools for systematically comparing how different architectural choices, such as recurrence type, temporal delays, and connectivity patterns, shape neural dynamics and behavior. Here, we introduce DynVision, a modular open-source toolbox for constructing and evaluating biologically plausible recurrent convolutional neural networks (RCNNs). DynVision implements numerical ODE solvers with heterogeneous delays, supports five types of lateral recurrence ranging from simple self-connections to cortically-organized local recurrence, and separates scientific modeling decisions from implementation details through a configuration-driven design. Training is computationally efficient, achieving a 52% speedup over reference implementations. We demonstrate the framework through systematic exploration of the parameter space, revealing that qualitative differences in temporal dynamics are highly sensitive to often-implicit modeling choices such as the target location of recurrent integration and the temporal window used for loss computation. Critically, we find that continuous-time recurrent dynamics can naturally give rise to cortical temporal phenomena without requiring explicit divisive normalization, while a different recurrent configuration produces noise robustness approaching human-level performance. These findings suggest functionally distinct configurations of recurrence and highlight the challenge of creating fully realistic models, thus emphasizing the need for a comprehensive and cohesive modeling framework to aid exploration. Code and documentation are available at https://github.com/Lindsay-Lab/DynVision/.",
+      "authors": [
+        "Gutzen, R.",
+        "Lindsay, G. W."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-06-26T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.1101/2025.08.11.669756v2.full.pdf",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Biologically plausible recurrent CNNs for visual perception",
+      "llm_evidence_cn": "用于视觉感知的生物合理递归卷积网络",
+      "llm_evidence": "用于视觉感知的生物合理递归卷积网络",
+      "canonical_evidence": "用于视觉感知的生物合理递归卷积网络",
+      "llm_tldr_en": "This paper proposes recurrent convolutional networks with biological constraints to model spatiotemporal visual phenomena, offering a perception module potentially usable in agent architectures.",
+      "llm_tldr_cn": "该论文针对标准前馈CNN缺乏递归连接的问题，提出了生物合理的递归卷积网络，能够模拟适应性、延迟归一化等时空视觉现象。该方法为代理架构中的感知模块设计提供了新思路，有望增强代理对动态环境的感知能力。",
+      "llm_tldr": "该论文针对标准前馈CNN缺乏递归连接的问题，提出了生物合理的递归卷积网络，能够模拟适应性、延迟归一化等时空视觉现象。该方法为代理架构中的感知模块设计提供了新思路，有望增强代理对动态环境的感知能力。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in agent architectures",
+      "matched_requirement_id": "req-15",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
