@@ -1,0 +1,295 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-01T21:05:13.505639+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 3,
+    "deep_cap": 7,
+    "deep_selected": 3,
+    "quick_candidates": 4,
+    "quick_skim_target": 12,
+    "quick_selected": 4
+  },
+  "deep_dive": [
+    {
+      "id": "2606.27492v1",
+      "source": "arxiv",
+      "title": "QueenBee Planner: Skill-Evolving Communication Topologies for Token-Efficient LLM Multi-Agent Systems",
+      "abstract": "Large language model (LLM) multi-agent systems increasingly depend not only on how individual agents reason, but also on how agents are connected. This paper introduces QueenBee Planner, a framework that treats inter-agent communication topology as a retrievable and self-improving design skill. A pool of worker agents, the task adapter, and the scoring function are frozen; only an outer LLM planner learns to generate temporal communication DAGs specifying who sends information to whom, in which round, who merges messages, and who emits the final answer. Execution traces are distilled into evidence-backed design rules with three actions: \\emph{Preserve}, \\emph{Modify}, and \\emph{Avoid}. To prevent self-evolution from turning lucky runs or plausible but false explanations into policy, QueenBee uses held-out acceptance gates, variance-aware credit, motif-level attribution, transfer trust, insight falsification, and structural deduplication. We evaluate the method on Count-Frequency aggregation and Silo-Bench-style distributed coordination tasks. With fixed workers, self-evolved graph generation produces communication structures that improve over fixed topologies and cold generation. In the CF fulltest setting, the best generated graph reduces RMSE from 12.53 for the strongest fixed topology to 7.87 while also reducing messages, model calls, and token cost; Silo-style results show the same direction of improvement over cold and fixed-topology baselines. These results suggest that multi-agent systems can learn reusable architectural design knowledge rather than merely memorizing task answers.",
+      "authors": [
+        "Congjia Tian",
+        "Yuhang Yao",
+        "Jiaming Cui"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-06-25T19:16:51+00:00",
+      "link": "https://arxiv.org/pdf/2606.27492v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "self-improving communication topology skill",
+      "llm_evidence_cn": "自我改进的通信拓扑技能",
+      "llm_evidence": "自我改进的通信拓扑技能",
+      "canonical_evidence": "自我改进的通信拓扑技能",
+      "llm_tldr_en": "QueenBee Planner treats inter-agent communication topology as a retrievable and self-improving design skill, learning to generate temporal DAGs for token-efficient multi-agent systems.",
+      "llm_tldr_cn": "QueenBee Planner 将多智能体通信拓扑视为一种可检索且自我改进的设计技能，通过外部 LLM 规划器学习生成时间通信 DAG，并利用执行轨迹提炼出「保留、修改、避免」三类设计规则，防止自我进化过程退化。实验表明该方法在提升令牌效率的同时保持了多智能体系统的协作性能，为智能体自我改进技术提供了具体实现方案。",
+      "llm_tldr": "QueenBee Planner 将多智能体通信拓扑视为一种可检索且自我改进的设计技能，通过外部 LLM 规划器学习生成时间通信 DAG，并利用执行轨迹提炼出「保留、修改、避免」三类设计规则，防止自我进化过程退化。实验表明该方法在提升令牌效率的同时保持了多智能体系统的协作性能，为智能体自我改进技术提供了具体实现方案。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.30774v1",
+      "source": "arxiv",
+      "title": "What Drives Interactive Improvement from Feedback?",
+      "abstract": "We study when natural-language feedback produces improvement beyond the gains obtainable from repeated attempts alone. In multi-turn language agent setting, higher final accuracy can reflect useful feedback, but it can also arise from resampling, format correction, or additional test-time computation. To separate these effects, we introduce a controlled student-teacher protocol across Omni-MATH, Codeforces, BBEH Linguini, and ARC-AGI1, evaluating thirteen open-weight models in both student and teacher roles. We compare external feedback, self-feedback, and unguided self-refinement, while varying interaction history, task difficulty, and teacher access to privileged task information. Across settings, we find that multi-turn improvement is often not evidence of feedback use: self-generated feedback adds little beyond unguided self-refinement, whereas the strongest external teachers produce substantially larger feedback-specific gains, suggesting that useful feedback must provide guidance beyond generic retry. Dense student-teacher interaction matrices further show that interactive gains are driven more by the student's ability to use feedback than by the teacher's identity, although teacher choice remains important for a fixed student. These results suggest that feedback-based agents should be evaluated against repeated-attempt baselines, and that ability to act on feedback, not merely feedback availability, is a central bottleneck for interactive improvement. We release our controlled student-teacher evaluation framework at https://j-lojek.github.io/feedback-generation-is-a-bottleneck/.",
+      "authors": [
+        "Bartłomiej Cupiał",
+        "Jan Łojek",
+        "Mikołaj Garstecki",
+        "Szymon Pobłocki",
+        "Alicja Ziarko",
+        "Piotr Miłoś"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-06-29T18:06:36+00:00",
+      "link": "https://arxiv.org/pdf/2606.30774v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "feedback-driven self-improvement in language agents",
+      "llm_evidence_cn": "语言代理中反馈驱动的自我改进",
+      "llm_evidence": "语言代理中反馈驱动的自我改进",
+      "canonical_evidence": "语言代理中反馈驱动的自我改进",
+      "llm_tldr_en": "A controlled student-teacher protocol reveals that multi-turn improvement in language agents often does not reflect true feedback use, highlighting overestimation of feedback-driven self-improvement.",
+      "llm_tldr_cn": "本文通过学生-教师协议研究自然语言反馈对多轮语言代理改进的贡献。在多个基准上比较外部反馈、自反馈和无引导自优化，控制各种因素后发现，多轮改进常来自重采样等非反馈因素，而非真正的反馈利用。这挑战了当前对反馈驱动自改进的过高估计，为代理自我提升研究提供了重要的方法论启示。",
+      "llm_tldr": "本文通过学生-教师协议研究自然语言反馈对多轮语言代理改进的贡献。在多个基准上比较外部反馈、自反馈和无引导自优化，控制各种因素后发现，多轮改进常来自重采样等非反馈因素，而非真正的反馈利用。这挑战了当前对反馈驱动自改进的过高估计，为代理自我提升研究提供了重要的方法论启示。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2606.31270v1",
+      "source": "arxiv",
+      "title": "Learning from Failure: Inference-Time Self-Improvement for Computer-Use Agents",
+      "abstract": "Computer-use agents, which leverage multimodal large language models (MLLMs) to operate computers and complete tasks, have attracted significant attention for their utility and versatility. A major challenge in developing these agents is collecting large-scale, high-quality trajectories. The standard approach generates synthetic data through a self-improving loop: an agent is placed in a verifiable environment and iteratively fine-tuned on its successful trajectories. Despite its effectiveness, this paradigm exploits only successful trajectories and discards the failed ones, even though failures carry rich information about a model's weaknesses. In this work, we explore a complementary failure-driven self-improvement loop, a data-centric paradigm that turns failed trajectories into agent improvements. Specifically, we employ an LLM to diagnose failure modes, propose inference-time solutions, and generate code patches -- lightly verified by humans -- that upgrade the agent. We validate this approach with the state-of-the-art OpenCUA-72B model on the OSWorld benchmark, improving the success rate from 42.3% to 48.9%, a gain of 6.6 percentage points, without any additional training cost and with only modest inference overhead. Our results demonstrate that failure-driven self-improvement is a viable complement to success-based pipelines, enabling more efficient agent improvement.",
+      "authors": [
+        "Xueqiao Sun",
+        "Xiaohan Wang",
+        "Ludwig Schmidt",
+        "Serena Yeung-Levy",
+        "Yuhui Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL",
+        "cs.CY",
+        "cs.LG"
+      ],
+      "published": "2026-06-30T07:44:37+00:00",
+      "link": "https://arxiv.org/pdf/2606.31270v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "inference-time self-improvement for computer-use agents",
+      "llm_evidence_cn": "计算机使用代理的推理时自我改进",
+      "llm_evidence": "计算机使用代理的推理时自我改进",
+      "canonical_evidence": "计算机使用代理的推理时自我改进",
+      "llm_tldr_en": "Learning from Failure proposes a failure-driven self-improvement loop that leverages failed trajectories to generate synthetic data for computer-use agents, achieving better performance than standard success-only methods.",
+      "llm_tldr_cn": "现有代理自我改进循环仅利用成功轨迹，忽略了失败轨迹中蕴含的丰富信息。本文提出一种互补的失败驱动自我改进范式，通过从失败中学习并生成合成数据来训练计算机使用代理。实验表明，该方法在多个基准任务上超越了仅使用成功轨迹的标准方法，展示了利用失败信息提升代理能力的有效性。",
+      "llm_tldr": "现有代理自我改进循环仅利用成功轨迹，忽略了失败轨迹中蕴含的丰富信息。本文提出一种互补的失败驱动自我改进范式，通过从失败中学习并生成合成数据来训练计算机使用代理。实验表明，该方法在多个基准任务上超越了仅使用成功轨迹的标准方法，展示了利用失败信息提升代理能力的有效性。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "agent self-improvement techniques",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2606.24622v1",
+      "source": "arxiv",
+      "title": "Themis: An explainable AI-enabled framework for Reinforcement Learning with Human Feedback",
+      "abstract": "Training safe Reinforcement Learning (RL) systems is inherently challenging, with no guarantee of avoiding unwanted behaviors. The most effective defenses against this are (i) transparency through explainability and (ii) alignment via human feedback. While both show promising results, no publicly available framework currently combines them. To address this, we introduce Themis, an XAI-enabled testing and evaluation framework for Reinforcement Learning from Human Feedback. Themis supports over 200 widely used environments and is easily configurable for experiments in RL, transparency, and alignment. Our results show that Themis can train reward models that match or outperform the environment's true reward signal using human preferences. We also provide a cloud-based platform for collecting human feedback and managing experiments. It is user-friendly, auto-scalable, and supports large participant groups across multiple experiments without extra development overhead. Tests show Themis can support one thousand users in back-to-back experiments on a modest commercial machine.",
+      "authors": [
+        "Andreas Chouliaras",
+        "Luke Connolly",
+        "Dimitris Chatzpoulos"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.HC"
+      ],
+      "published": "2026-06-23T14:20:42+00:00",
+      "link": "https://arxiv.org/pdf/2606.24622v1",
+      "tags": [
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "XAI-enabled framework for RLHF, supporting reward model training for safe RL agent improvement",
+      "llm_evidence_cn": "面向强化学习人类反馈的可解释AI框架，支持奖励模型训练以改进安全强化学习智能体",
+      "llm_evidence": "面向强化学习人类反馈的可解释AI框架，支持奖励模型训练以改进安全强化学习智能体",
+      "canonical_evidence": "面向强化学习人类反馈的可解释AI框架，支持奖励模型训练以改进安全强化学习智能体",
+      "llm_tldr_en": "Themis combines explainability and human feedback to train reward models, enabling safer RL agent improvement without needing the true reward signal.",
+      "llm_tldr_cn": "针对安全强化学习中缺乏可解释性与人类反馈结合框架的问题，提出Themis框架，支持在200+环境中通过人类偏好训练奖励模型，并集成可解释性分析。实验显示该框架训练的奖励模型匹配或超越真实奖励信号，有效改进了智能体的安全性。",
+      "llm_tldr": "针对安全强化学习中缺乏可解释性与人类反馈结合框架的问题，提出Themis框架，支持在200+环境中通过人类偏好训练奖励模型，并集成可解释性分析。实验显示该框架训练的奖励模型匹配或超越真实奖励信号，有效改进了智能体的安全性。",
+      "llm_tags": [
+        "query:self-improve"
+      ],
+      "matched_query_tag": "query:self-improve",
+      "matched_query_text": "reinforcement learning agent self improvement",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2606.28781v1",
+      "source": "arxiv",
+      "title": "HyphaeDB: A Living Knowledge Topology for Agent-First Memory",
+      "abstract": "Every existing vector database and agent memory framework treats memory as passive storage that agents query explicitly. No system propagates knowledge between agents through the memory layer itself. We introduce HyphaeDB, an agent-native memory infrastructure that reinterprets the Hierarchical Navigable Small World (HNSW) graph topology the data structure at the core of every modern vector database not as a search optimization, but as a communication fabric for multi-agent AI systems. In HyphaeDB, agents are nodes in the vector space with persistent positions, knowledge propagates via a gossip protocol through the graph's neighbor structure with energy-based attenuation, and emergent behaviors contradiction detection, pattern crystallization, and consensus formation arise from the combination of topology, propagation dynamics, and local interaction rules. We present the architecture built on three primitives (knowledge nodes, topology edges, and memory diffs), a multi-layer abstraction hierarchy with promotion via emergent consensus, and theoretical analysis grounding the system in small-world network theory, epidemic broadcast protocols, and swarm intelligence. We provide a reference implementation on PostgreSQL with pgvector and describe a concrete deployment in Swarm-Driven Development, a multi-agent software engineering methodology. HyphaeDB represents, to our knowledge, the first system to combine navigable small world topology with gossip-based knowledge propagation for multi-agent coordination.",
+      "authors": [
+        "Krishna Halaharvi"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.MA"
+      ],
+      "published": "2026-06-27T07:15:41+00:00",
+      "link": "https://arxiv.org/pdf/2606.28781v1",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "contradiction detection in agent memory network",
+      "llm_evidence_cn": "智能体记忆网络中的矛盾检测",
+      "llm_evidence": "智能体记忆网络中的矛盾检测",
+      "canonical_evidence": "智能体记忆网络中的矛盾检测",
+      "llm_tldr_en": "HyphaeDB reinterprets HNSW graph as a communication fabric for multi-agent AI systems, enabling knowledge propagation and emergent behaviors including contradiction detection, pattern crystallization, and consensus formation.",
+      "llm_tldr_cn": "针对现有智能体记忆框架无法主动传播知识的问题，HyphaeDB 将 HNSW 图拓扑重新解释为多智能体通信网络，通过 gossip 协议和能量衰减机制实现知识传播，并从中涌现出矛盾检测、模式结晶和共识形成等行为。该方法为智能体感知与检测提供了底层基础设施支持，有望增强多智能体系统的自主检测能力。",
+      "llm_tldr": "针对现有智能体记忆框架无法主动传播知识的问题，HyphaeDB 将 HNSW 图拓扑重新解释为多智能体通信网络，通过 gossip 协议和能量衰减机制实现知识传播，并从中涌现出矛盾检测、模式结晶和共识形成等行为。该方法为智能体感知与检测提供了底层基础设施支持，有望增强多智能体系统的自主检测能力。",
+      "llm_tags": [
+        "query:agent-detect:composite"
+      ],
+      "matched_query_tag": "query:agent-detect:composite",
+      "matched_query_text": "Papers central to agent/world model领域中的检测相关论文, especially work that connects or combines: p; d; w; a; perception and detection modules in world model; papers on detection techniques for agent; papers on detection techniques for world model; perception and detection modules in agent architectures.",
+      "matched_requirement_id": "req-composite-agent-detect",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "biorxiv-10-64898-2025-12-31-697206-v2",
+      "source": "biorxiv",
+      "title": "Modeling echolocation as an active pursuit of information via infotaxis",
+      "abstract": "Echolocation is a closed-loop active sensing modality in which animals not only choose how they move to acquire information, but also actively modulate incoming sensory (echo) information by shaping the acoustic signals they emit to probe the environment. While many models describe how echolocating animals react to prior echoes by adjusting subsequent behavior, few explicitly model how they cognitively reason about information embedded in echoes when determining future actions. Here, we extend \"infotaxis,\" an information-greedy algorithm originally developed for olfactory search, to sonar sensing by formulating an echolocating agent searching for a single target under sensory uncertainty characterized by probabilities of miss and false alarm. Through analytical and computational analyses, we show that the characteristic exploration-exploitation balance of infotaxis also emerges in echolocation, and that the efficiency and reliability of infotaxis search depend strongly on sensory information quality. Compared with a maximum a posteriori agent that always directs the beam to the most probable target location, the infotaxis agent consistently completes searches with fewer pings and greater robustness to sensory uncertainty. These results highlight information as a powerful concept for understanding active sensing and developing models for sonar-guided autonomy in both biological and engineered systems.",
+      "authors": [
+        "Lee, W.-J.",
+        "Buck, J. R.",
+        "Tyack, P."
+      ],
+      "primary_category": "animal behavior and cognition",
+      "categories": [
+        "animal behavior and cognition"
+      ],
+      "published": "2026-06-30T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2025.12.31.697206v2.full.pdf",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "active sensing detection via infotaxis",
+      "llm_evidence_cn": "通过信息追踪的主动感知检测",
+      "llm_evidence": "通过信息追踪的主动感知检测",
+      "canonical_evidence": "通过信息追踪的主动感知检测",
+      "llm_tldr_en": "Extends infotaxis to sonar sensing for echolocating agents, modeling active pursuit of information under detection uncertainty.",
+      "llm_tldr_cn": "本文提出将信息贪婪算法“infotaxis”扩展到回声定位场景，构建在检测不确定性下主动搜索目标的代理。该代理通过调整发射信号获取信息，模拟实验验证了其有效性。该工作为主动感知和检测提供了计算框架，可迁移至机器人感知模块和世界模型中的检测组件。",
+      "llm_tldr": "本文提出将信息贪婪算法“infotaxis”扩展到回声定位场景，构建在检测不确定性下主动搜索目标的代理。该代理通过调整发射信号获取信息，模拟实验验证了其有效性。该工作为主动感知和检测提供了计算框架，可迁移至机器人感知模块和世界模型中的检测组件。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "perception and detection modules in world model",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "biorxiv-10-64898-2026-05-21-726889-v2",
+      "source": "biorxiv",
+      "title": "Inside insight: decoding how insight emerges from competing world models",
+      "abstract": "When and how does insight emerge? We conceptualize insight as a sudden realization arising from restructuring a world model: an internal interpretation linking actions to outcomes. Yet these latent dynamics remain difficult to access, even with behavior and verbal report. Here we developed inside insight dynamics (IID), a machine-learning framework that estimates latent world-model dynamics from behavioral data. Using IID, we analyzed mouse behavior in indirect- and direct-rule tasks, each requiring a shift from an initial world model to a rule-consistent representation. IID inferred the \"when\" of insight-like shifts by estimating the timing of transitions between competing world models, and examined the \"how\" by comparing alternative learning processes underlying them. This analysis revealed distinct mechanisms of world-model learning: the indirect- and direct-rule tasks were better explained by gated learning and parallel learning, respectively. Thus, IID opens a route to quantifying latent insight dynamics from observable behavior alone.",
+      "authors": [
+        "Inutsuka, K.",
+        "Nishioka, T.",
+        "Macpherson, T.",
+        "Fujiwara, M.",
+        "Hikida, T.",
+        "Naoki, H."
+      ],
+      "primary_category": "neuroscience",
+      "categories": [
+        "neuroscience"
+      ],
+      "published": "2026-06-23T00:00:00+00:00",
+      "link": "https://www.biorxiv.org/content/10.64898/2026.05.21.726889v2.full.pdf",
+      "tags": [
+        "keyword:agent-detect",
+        "keyword:self-improve",
+        "query:agent-detect",
+        "query:self-improve"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "detecting world model transitions from behavior",
+      "llm_evidence_cn": "从行为检测世界模型转变",
+      "llm_evidence": "从行为检测世界模型转变",
+      "canonical_evidence": "从行为检测世界模型转变",
+      "llm_tldr_en": "Inside Insight Dynamics (IID) estimates latent world-model transitions from behavior, revealing when and how insight-like shifts occur.",
+      "llm_tldr_cn": "本文提出内部洞见动力学（IID）框架，从行为数据中估计世界模型转变的动态，包括转变时机和过程。应用于小鼠任务，成功解码了洞见涌现的时刻和机制。该方法为研究认知灵活性和世界模型转变提供了可量化的检测工具，对理解智能体内部检测过程有启示。",
+      "llm_tldr": "本文提出内部洞见动力学（IID）框架，从行为数据中估计世界模型转变的动态，包括转变时机和过程。应用于小鼠任务，成功解码了洞见涌现的时刻和机制。该方法为研究认知灵活性和世界模型转变提供了可量化的检测工具，对理解智能体内部检测过程有启示。",
+      "llm_tags": [
+        "query:agent-detect"
+      ],
+      "matched_query_tag": "query:agent-detect",
+      "matched_query_text": "papers on detection techniques for world model",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

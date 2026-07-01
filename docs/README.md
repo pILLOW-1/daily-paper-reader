@@ -6,66 +6,44 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-06-30
-- 运行时间：2026-06-30 22:28:29 UTC
+- 最新运行日期：2026-07-01
+- 运行时间：2026-07-01 21:09:12 UTC
 - 运行状态：成功
-- 本次总论文数：14
-- 精读区：7
-- 速读区：7
+- 本次总论文数：7
+- 精读区：3
+- 速读区：4
 
 ### 今日简报（AI）
-今日精读两篇满分论文，聚焦智能体与评估者协同进化及技能双向自蒸馏。
-
-最值得关注方向：多智能体系统优化（GBC连接方法）与LLM多任务代理蒸馏（两阶段蒸馏）。
-
-建议深入探索智能体演化机制（Red Queen Gödel Machine）及信用分配与技能进化结合策略（UCOB）。
-- 详情：[/202606/30/README](/202606/30/README)
+- 今日共生成 7 篇推荐（精读 3 篇，速读 4 篇）
+- 精读：《QueenBee Planner: Skill-Evolving Communication Topologies for Token-Efficient LLM Multi-Agent Systems》（9.0/10）, 《What Drives Interactive Improvement from Feedback?》（9.0/10）
+- 速读：《Themis: An explainable AI-enabled framework for Reinforcement Learning with Human Feedback》（7.0/10）, 《HyphaeDB: A Living Knowledge Topology for Agent-First Memory》（7.0/10）, 《Modeling echolocation as an active pursuit of information via infotaxis》（7.0/10）
+- 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
+- 详情：[/202607/01/README](/202607/01/README)
 
 ### 精读区论文标签
-1. [The Red Queen Gödel Machine: Co-Evolving Agents and Their Evaluators](/202606/30/2606.26294v2-the-red-queen-gdel-machine-co-evolving-agents-and-their-evaluators)  
-   标签：评分：10.0/10、query:self-improve
-   evidence：提出带有共同进化评估者的递归自我改进框架
-2. [UCOB: Learning to Utilize and Evolve Agentic Skills via Credit-Aware On-Policy Bidirectional Self-Distillation](/202606/30/2606.29502v1-ucob-learning-to-utilize-and-evolve-agentic-skills-via-credit-aware-on-policy-bidirectional-self-distillation)  
-   标签：评分：10.0/10、query:self-improve
-   evidence：通过自蒸馏学习利用并进化代理技能
-3. [ReGuide: From Test-Time Guidance to Self-Improving Diffusion Policies](/202606/30/2606.28939v1-reguide-from-test-time-guidance-to-self-improving-diffusion-policies)  
+1. [QueenBee Planner: Skill-Evolving Communication Topologies for Token-Efficient LLM Multi-Agent Systems](/202607/01/2606.27492v1-queenbee-planner-skill-evolving-communication-topologies-for-token-efficient-llm-multi-agent-systems)  
    标签：评分：9.0/10、query:self-improve
-   evidence：通过可重用的引导轨迹实现扩散策略的自我改进
-4. [Hierarchical Experimentalist Agents](/202606/30/2606.29315v1-hierarchical-experimentalist-agents)  
+   evidence：自我改进的通信拓扑技能
+2. [What Drives Interactive Improvement from Feedback?](/202607/01/2606.30774v1-what-drives-interactive-improvement-from-feedback)  
    标签：评分：9.0/10、query:self-improve
-   evidence：通过主动实验的上下文内自我改进框架
-5. [CRAFT: Counterfactual Credit Assignment from Free Sibling Rollouts for Self-Distilled Agentic Reinforcement Learning](/202606/30/2606.29476v1-craft-counterfactual-credit-assignment-from-free-sibling-rollouts-for-self-distilled-agentic-reinforcement-learning)  
+   evidence：语言代理中反馈驱动的自我改进
+3. [Learning from Failure: Inference-Time Self-Improvement for Computer-Use Agents](/202607/01/2606.31270v1-learning-from-failure-inference-time-self-improvement-for-computer-use-agents)  
    标签：评分：9.0/10、query:self-improve
-   evidence：自我蒸馏智能体强化学习，改进信用分配
-6. [KbSD: Knowledge Boundary aware Self-Distillation for Behavioral Calibration in Agentic Search](/202606/30/2606.29863v1-kbsd-knowledge-boundary-aware-self-distillation-for-behavioral-calibration-in-agentic-search)  
-   标签：评分：9.0/10、query:self-improve
-   evidence：自主搜索中的自蒸馏行为校准
-7. [Self-Evolving World Models for LLM Agent Planning](/202606/30/2606.30639v1-self-evolving-world-models-for-llm-agent-planning)  
-   标签：评分：9.0/10、query:self-improve
-   evidence：用于LLM智能体规划的自我进化世界模型，实现智能体自我改进
+   evidence：计算机使用代理的推理时自我改进
 
 ### 速读区论文标签
-1. [GBC: Gradient-Based Connections for Optimizing Multi-Agent Systems](/202606/30/2606.28187v1-gbc-gradient-based-connections-for-optimizing-multi-agent-systems)  
-   标签：评分：8.0/10、query:self-improve
-   evidence：为多智能体系统提供基于梯度的精细化信用分配优化方法
-2. [Building Multi-Task Agentic LLMs via Two-Phase Distillation](/202606/30/2606.30044v1-building-multi-task-agentic-llms-via-two-phase-distillation)  
-   标签：评分：8.0/10、query:self-improve
-   evidence：两阶段蒸馏从RL专家构建多任务自主LLM
-3. [ECHO: Learning Epistemically Adaptive Language Agents with Turn-Level Credit](/202606/30/2606.29745v1-echo-learning-epistemically-adaptive-language-agents-with-turn-level-credit)  
+1. [Themis: An explainable AI-enabled framework for Reinforcement Learning with Human Feedback](/202607/01/2606.24622v1-themis-an-explainable-ai-enabled-framework-for-reinforcement-learning-with-human-feedback)  
    标签：评分：7.0/10、query:self-improve
-   evidence：引入认知决策过程，使语言代理在逐轮信息寻求中自适应改进
-4. [AlgoSkill: Learning to Design Algorithms by Scheduling Human-Like Skills](/202606/30/2606.29999v1-algoskill-learning-to-design-algorithms-by-scheduling-human-like-skills)  
-   标签：评分：7.0/10、query:self-improve
-   evidence：使用MCTS和技能调度进行算法自我改进
-5. [Automating the Design of Embodied AgentArchitectures](/202606/30/2606.30111v1-automating-the-design-of-embodied-agentarchitectures)  
+   evidence：面向强化学习人类反馈的可解释AI框架，支持奖励模型训练以改进安全强化学习智能体
+2. [HyphaeDB: A Living Knowledge Topology for Agent-First Memory](/202607/01/2606.28781v1-hyphaedb-a-living-knowledge-topology-for-agent-first-memory)  
    标签：评分：7.0/10、query:agent-detect
-   evidence：自动化智能体架构中感知模块的设计
-6. [Modeling Dynamical Vision with Biologically Plausible Recurrent Convolutional Networks](/202606/30/biorxiv-10-1101-2025-08-11-669756-v2-modeling-dynamical-vision-with-biologically-plausible-recurrent-convolutional-networks)  
+   evidence：智能体记忆网络中的矛盾检测
+3. [Modeling echolocation as an active pursuit of information via infotaxis](/202607/01/biorxiv-10-64898-2025-12-31-697206-v2-modeling-echolocation-as-an-active-pursuit-of-information-via-infotaxis)  
    标签：评分：7.0/10、query:agent-detect
-   evidence：用于视觉感知的生物合理递归卷积网络
-7. [Flow Matching in Feature Space for Stochastic World Modeling](/202606/30/2606.29059v1-flow-matching-in-feature-space-for-stochastic-world-modeling)  
-   标签：评分：6.0/10、query:agent-detect
-   evidence：在预训练特征空间中用流匹配实现随机世界模型，保留下游感知信息
+   evidence：通过信息追踪的主动感知检测
+4. [Inside insight: decoding how insight emerges from competing world models](/202607/01/biorxiv-10-64898-2026-05-21-726889-v2-inside-insight-decoding-how-insight-emerges-from-competing-world-models)  
+   标签：评分：7.0/10、query:agent-detect
+   evidence：从行为检测世界模型转变
 
 
 <div class="dpr-home-promo-card">
