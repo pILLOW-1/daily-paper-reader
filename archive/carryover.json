@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-09-30T22:51:54.398804+00:00",
-  "updated_date": "20260930",
+  "generated_at": "2026-10-01T23:06:49.003097+00:00",
+  "updated_date": "20261001",
   "carryover_days": 9,
   "tag_states": {
     "self-improve": {
-      "updated_date": "20260930",
+      "updated_date": "20261001",
       "carryover_days": 9,
       "items": []
     },
     "agent-detect": {
-      "updated_date": "20260930",
+      "updated_date": "20261001",
       "carryover_days": 9,
       "items": []
     }
